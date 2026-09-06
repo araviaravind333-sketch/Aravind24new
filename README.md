@@ -7,7 +7,7 @@ using GitHub Actions as the free scheduler.
 **What it does each cycle**
 1. Picks the top trending story (last 24h) — India-first 5AM–11PM IST, World-first 11PM–5AM IST
 2. Rewrites the headline + caption in your voice using AI (no plagiarism)
-3. Generates a high-quality image (AI first, free stock fallback)
+3. Searches Pexels/Unsplash for a real, high-quality stock photo matching the headline (no AI-generated images)
 4. Renders a branded post (category pill, condensed headline, accent word, logo, footer)
 5. Publishes to IG + FB with location tag + 4 auto-chosen hashtags
 6. Logs performance so it keeps learning
@@ -34,19 +34,16 @@ You need your IG account to be a **Business/Creator** account linked to your FB 
 > Guide: search "Instagram Content Publishing API get started" on Meta docs.
 
 ### Step 3 — Free API keys
-- **Anthropic** (headline/caption rewrite): console.anthropic.com → API key.
-  Cheap: ~₹0.5–1 per post. Or leave blank to use the free rule-based writer.
-- **Pexels** (stock fallback): pexels.com/api → free key.
-- **Unsplash** (stock fallback): unsplash.com/developers → free key.
-- **HuggingFace** (optional better AI images): huggingface.co → Settings → Access Tokens.
-- AI images via **Pollinations** need NO key (default).
+- **Gemini** (headline/caption rewrite, free tier): aistudio.google.com → API key.
+  Or **Anthropic** (console.anthropic.com), or leave both blank to use the free rule-based writer.
+- **Pexels** (real stock photo search): pexels.com/api → free key.
+- **Unsplash** (real stock photo search): unsplash.com/developers → free key.
 
 ### Step 4 — Add secrets to GitHub
 Repo → Settings → Secrets and variables → Actions → **New repository secret**.
 Add each key from `.env.example`. (These are encrypted; never visible again.)
 
 Then under the **Variables** tab (not secrets), add:
-- `AI_IMAGE_PROVIDER` = `pollinations` (or `hf`)
 - `GH_PAGES_BASE` = `https://raw.githubusercontent.com/<your-github-username>/<repo>/main/public`
   (raw.githubusercontent.com serves a file within seconds of it being pushed —
   no build delay — which is what makes it safe for Instagram/Facebook to fetch
@@ -95,7 +92,7 @@ config/settings.py     <- THE config file (schedule, hashtags, sources)
 src/main.py            <- orchestrator (one post cycle)
 src/news_engine.py     <- fetch + score + de-dupe + geo
 src/ai_writer.py       <- headline/caption rewrite
-src/image_source.py    <- AI image + stock fallback
+src/image_source.py    <- real stock photo search (Pexels/Unsplash)
 src/template.py        <- branded post renderer
 src/publisher.py       <- IG + FB Graph API publishing
 src/analytics.py       <- performance logging

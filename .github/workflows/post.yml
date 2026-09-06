@@ -38,14 +38,12 @@ jobs:
       - name: Install deps
         run: pip install -r requirements.txt
 
-      - name: Render post (news + AI rewrite + image)
+      - name: Render post (news + AI rewrite + stock photo)
         env:
           ANTHROPIC_API_KEY:      ${{ secrets.ANTHROPIC_API_KEY }}
           GEMINI_API_KEY:         ${{ secrets.GEMINI_API_KEY }}
-          HUGGINGFACE_TOKEN:      ${{ secrets.HUGGINGFACE_TOKEN }}
           PEXELS_API_KEY:         ${{ secrets.PEXELS_API_KEY }}
           UNSPLASH_ACCESS_KEY:    ${{ secrets.UNSPLASH_ACCESS_KEY }}
-          AI_IMAGE_PROVIDER:      ${{ vars.AI_IMAGE_PROVIDER }}
         run: python -m src.main render
 
       - name: Push rendered image (so it has a public URL)

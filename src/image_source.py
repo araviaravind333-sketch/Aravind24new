@@ -1,17 +1,16 @@
 """
 Image Source
 ============
-Gets a high-quality, LEGALLY SAFE photo for the story.
-Order:
-  1. AI-generated (Pollinations = free no-key; HuggingFace / Stability if keys set)
-  2. Pexels stock (free key)
-  3. Unsplash stock (free key)
+Gets a high-quality, LEGALLY SAFE photo for the story by searching real
+stock-photo libraries (Pexels, then Unsplash) for keywords pulled straight
+out of the headline — no AI image generation, so what's shown is always an
+actual photograph, never a hallucinated scene.
 All returned images are safe to post commercially. We NEVER scrape
 publisher photos (copyright / account-ban risk).
 """
 
 import os
-import io
+import re
 import urllib.request
 import urllib.parse
 import json
@@ -19,6 +18,14 @@ import json
 from config import settings
 
 TMP = os.path.join(os.path.dirname(__file__), "..", "data", "tmp_image.jpg")
+
+STOPWORDS = {
+    "the", "a", "an", "of", "in", "on", "at", "to", "for", "and", "or",
+    "is", "are", "was", "were", "with", "by", "from", "as", "after",
+    "over", "amid", "amidst", "into", "out", "up", "down", "this", "that",
+    "will", "has", "have", "had", "its", "it's", "says", "said", "not",
+    "new", "latest",
+}
 
 
 def _save(data, path=TMP):
@@ -28,103 +35,77 @@ def _save(data, path=TMP):
     return path
 
 
-def _image_prompt(story):
-    """Build a clean editorial prompt from the story."""
-    t = story["title"]
-    cat = story["category"].replace(" NEWS", "").lower()
-    return (
-        f"photojournalism image that literally depicts this news event: \"{t}\". "
-        f"Show the real subjects, objects, buildings, logos or setting named in the "
-        f"headline — do not invent an unrelated scene or a random unconnected person. "
-        f"{cat} context, realistic, high detail, cinematic lighting, no text, no watermark, "
-        f"documentary news photography style"
-    )
+def _keywords(title, limit=4):
+    """Pull the most meaningful words out of the headline for a photo search."""
+    words = re.findall(r"[A-Za-z][A-Za-z'\-]+", title)
+    seen = []
+    for w in words:
+        lw = w.lower()
+        if lw in STOPWORDS or len(w) < 3:
+            continue
+        if lw not in [s.lower() for s in seen]:
+            seen.append(w)
+        if len(seen) >= limit:
+            break
+    return seen
 
 
-# ---------- 1. AI: Pollinations (free, no key) ----------
-def _ai_pollinations(story):
-    prompt = urllib.parse.quote(_image_prompt(story))
-    url = (f"https://image.pollinations.ai/prompt/{prompt}"
-           f"?width=1080&height=1350&nologo=true&enhance=true")
-    req = urllib.request.Request(url, headers={"User-Agent": "AravindNews24/1.0"})
-    with urllib.request.urlopen(req, timeout=90) as r:
-        data = r.read()
-    if len(data) > 10000:
-        return _save(data)
-    raise RuntimeError("pollinations returned too-small image")
+def _search_query(story):
+    cat = story["category"].replace(" NEWS", "")
+    kws = _keywords(story["title"])
+    return f"{cat} " + " ".join(kws) if kws else cat
 
 
-# ---------- 1b. AI: HuggingFace (free tier, needs token) ----------
-def _ai_huggingface(story):
-    token = settings.HUGGINGFACE_TOKEN
-    if not token:
-        raise RuntimeError("no HF token")
-    model = "black-forest-labs/FLUX.1-schnell"
-    body = json.dumps({"inputs": _image_prompt(story)}).encode()
-    req = urllib.request.Request(
-        f"https://api-inference.huggingface.co/models/{model}",
-        data=body,
-        headers={"Authorization": f"Bearer {token}",
-                 "Content-Type": "application/json"},
-    )
-    with urllib.request.urlopen(req, timeout=120) as r:
-        data = r.read()
-    if data[:3] == b"\xff\xd8\xff" or len(data) > 10000:
-        return _save(data)
-    raise RuntimeError("HF returned non-image")
+def _broad_query(story):
+    """Fallback query when the specific one finds nothing."""
+    return story["category"].replace(" NEWS", "")
 
 
-# ---------- 2. Pexels stock ----------
-def _stock_pexels(story):
+# ---------- Pexels stock ----------
+def _stock_pexels(query):
     key = settings.PEXELS_API_KEY
     if not key:
         raise RuntimeError("no pexels key")
-    q = urllib.parse.quote(story["category"].replace(" NEWS", "") + " " +
-                           " ".join(story["title"].split()[:3]))
+    q = urllib.parse.quote(query)
     url = f"https://api.pexels.com/v1/search?query={q}&per_page=5&orientation=portrait"
     req = urllib.request.Request(url, headers={"Authorization": key})
     with urllib.request.urlopen(req, timeout=30) as r:
         res = json.load(r)
     photos = res.get("photos", [])
     if not photos:
-        raise RuntimeError("no pexels results")
+        raise RuntimeError(f"no pexels results for '{query}'")
     img_url = photos[0]["src"]["large2x"]
     with urllib.request.urlopen(img_url, timeout=30) as r:
         return _save(r.read())
 
 
-# ---------- 3. Unsplash stock ----------
-def _stock_unsplash(story):
+# ---------- Unsplash stock ----------
+def _stock_unsplash(query):
     key = settings.UNSPLASH_ACCESS_KEY
     if not key:
         raise RuntimeError("no unsplash key")
-    q = urllib.parse.quote(story["category"].replace(" NEWS", ""))
+    q = urllib.parse.quote(query)
     url = (f"https://api.unsplash.com/search/photos?query={q}"
            f"&orientation=portrait&per_page=5&client_id={key}")
     with urllib.request.urlopen(url, timeout=30) as r:
         res = json.load(r)
     results = res.get("results", [])
     if not results:
-        raise RuntimeError("no unsplash results")
+        raise RuntimeError(f"no unsplash results for '{query}'")
     img_url = results[0]["urls"]["regular"]
     with urllib.request.urlopen(img_url, timeout=30) as r:
         return _save(r.read())
 
 
 def get_image(story):
-    """Try each source in order; return path to a saved image."""
-    chain = []
-    provider = settings.AI_IMAGE_PROVIDER
-    if provider == "hf":
-        chain = [_ai_huggingface, _ai_pollinations, _stock_pexels, _stock_unsplash]
-    else:
-        chain = [_ai_pollinations, _ai_huggingface, _stock_pexels, _stock_unsplash]
-
-    for fn in chain:
-        try:
-            path = fn(story)
-            print(f"image via {fn.__name__}")
-            return path
-        except Exception as e:
-            print(f"{fn.__name__} failed: {e}")
+    """Search real stock photos for the story; return path to a saved image."""
+    queries = [_search_query(story), _broad_query(story)]
+    for query in queries:
+        for fn in (_stock_pexels, _stock_unsplash):
+            try:
+                path = fn(query)
+                print(f"image via {fn.__name__} (query: '{query}')")
+                return path
+            except Exception as e:
+                print(f"{fn.__name__} failed for '{query}': {e}")
     raise RuntimeError("ALL image sources failed")

@@ -33,12 +33,8 @@ GRAPH_VERSION          = "v21.0"
 # ============================================================
 # 2. IMAGE PIPELINE
 # ============================================================
-# Primary: AI generation. Fallback: free stock.
-# --- AI (choose whichever free-tier you set up; code tries in order) ---
-AI_IMAGE_PROVIDER      = _env("AI_IMAGE_PROVIDER", "pollinations")  # 'pollinations'|'hf'|'stability'
-HUGGINGFACE_TOKEN      = _env("HUGGINGFACE_TOKEN")   # free tier
-STABILITY_API_KEY      = _env("STABILITY_API_KEY")  # optional
-# --- Stock fallback (free) ---
+# Real stock photos only (keyword-searched from the headline) — no AI image
+# generation, so what gets posted is always an actual photograph.
 PEXELS_API_KEY         = _env("PEXELS_API_KEY")     # free, unlimited-ish
 UNSPLASH_ACCESS_KEY    = _env("UNSPLASH_ACCESS_KEY")# free, 50/hr
 
