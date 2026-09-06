@@ -44,6 +44,12 @@ HOT_KEYWORDS = [
     "verdict", "resign", "ban", "crash", "rescue", "historic", "first",
     "biggest", "cr", "crore", "supreme court", "election", "results",
     "cyclone", "earthquake", "budget", "rbi", "isro", "won", "final",
+    # curiosity / shareability signals — these are what actually make
+    # someone stop scrolling and hit follow, not just "news happened"
+    "viral", "shocking", "netizens", "row", "slams", "backlash",
+    "exclusive", "leaked", "outrage", "controversy", "stuns", "stunned",
+    "unprecedented", "never before", "world's first", "warns", "alert",
+    "scam", "fraud", "explosive", "sensational", "massive", "huge",
 ]
 
 # Recurring filler content (job/exam-notification listicles) that RSS feeds
@@ -60,6 +66,37 @@ JUNK_KEYWORDS = [
 def _is_junk(title):
     t = title.lower()
     return any(kw in t for kw in JUNK_KEYWORDS)
+
+
+_SIG_STOPWORDS = {
+    "with", "from", "after", "over", "says", "said", "have", "this", "that",
+    "will", "their", "into", "amid", "amidst", "against", "under", "than",
+    "more", "most", "what", "when", "where", "which", "while", "about",
+}
+
+
+def _signature_words(title):
+    words = re.findall(r"[a-z]{4,}", title.lower())
+    return set(w for w in words if w not in _SIG_STOPWORDS)
+
+
+def _apply_corroboration(candidates):
+    """Same real-world event covered near-identically by 2+ independent
+    RSS sources is a much stronger 'this actually matters' signal than
+    recency or keyword hits alone — boost it, and treat heavy coverage
+    (3+ sources) as equivalent to a hot-keyword hit for BREAKING labeling."""
+    sigs = [_signature_words(c["title"]) for c in candidates]
+    for i, c in enumerate(candidates):
+        others_covering = sum(
+            1 for j, s in enumerate(sigs)
+            if j != i and len(sigs[i] & s) >= 3
+        )
+        if others_covering:
+            c["score"] += min(others_covering, 2) * 15
+            c["corroborated"] = others_covering + 1
+            if others_covering >= 2:
+                c["hot_hit"] = True
+    return candidates
 
 
 def _virality(title, published_dt):
@@ -149,6 +186,7 @@ def fetch_candidates(category):
                 "score": score,
                 "hot_hit": hot_hit,
             })
+    out = _apply_corroboration(out)
     out.sort(key=lambda x: x["score"], reverse=True)
     return out
 

@@ -61,20 +61,32 @@ def _broad_query(story):
     return story["category"].replace(" NEWS", "")
 
 
+# Pexels/Unsplash both prohibit visible brand logos/trademarks/watermarks
+# in contributed photos as part of their own submission guidelines, so we
+# don't need to detect logos ourselves — it's already filtered upstream.
+
+# Relevance ranking (the search API's own ordering) picks WHAT the photo is
+# of; among that relevant set we then pick the visually strongest one, so
+# the post doesn't always default to the plainest/first match.
+RELEVANT_POOL = 8
+
+
 # ---------- Pexels stock ----------
 def _stock_pexels(query):
     key = settings.PEXELS_API_KEY
     if not key:
         raise RuntimeError("no pexels key")
     q = urllib.parse.quote(query)
-    url = f"https://api.pexels.com/v1/search?query={q}&per_page=5&orientation=portrait"
+    url = f"https://api.pexels.com/v1/search?query={q}&per_page={RELEVANT_POOL}&orientation=portrait"
     req = urllib.request.Request(url, headers={"Authorization": key})
     with urllib.request.urlopen(req, timeout=30) as r:
         res = json.load(r)
     photos = res.get("photos", [])
     if not photos:
         raise RuntimeError(f"no pexels results for '{query}'")
-    img_url = photos[0]["src"]["large2x"]
+    # among the relevant matches, prefer the highest-resolution shot
+    best = max(photos, key=lambda p: p.get("width", 0) * p.get("height", 0))
+    img_url = best["src"]["large2x"]
     with urllib.request.urlopen(img_url, timeout=30) as r:
         return _save(r.read())
 
@@ -86,13 +98,16 @@ def _stock_unsplash(query):
         raise RuntimeError("no unsplash key")
     q = urllib.parse.quote(query)
     url = (f"https://api.unsplash.com/search/photos?query={q}"
-           f"&orientation=portrait&per_page=5&client_id={key}")
+           f"&orientation=portrait&per_page={RELEVANT_POOL}&client_id={key}")
     with urllib.request.urlopen(url, timeout=30) as r:
         res = json.load(r)
     results = res.get("results", [])
     if not results:
         raise RuntimeError(f"no unsplash results for '{query}'")
-    img_url = results[0]["urls"]["regular"]
+    # among the relevant matches, prefer the most-liked (proxy for a more
+    # striking, curiosity-grabbing photo rather than the plainest match)
+    best = max(results, key=lambda p: p.get("likes", 0))
+    img_url = best["urls"]["regular"]
     with urllib.request.urlopen(img_url, timeout=30) as r:
         return _save(r.read())
 
