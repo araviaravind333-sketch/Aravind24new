@@ -323,25 +323,28 @@ def get_image(story):
             except Exception as e:
                 print(f"{fn.__name__} failed for '{entity}': {e}")
 
-    # A combined "category + 4 keywords" query is too specific for these
-    # APIs' own search ranking to surface a genuinely matching photo within
-    # a small pool — a single distinctive keyword ("landslide") finds far
-    # better, more literal matches (confirmed live: Pexels' alt-text often
-    # names the exact event) than a garbled multi-word blend does. Try each
-    # significant keyword alone first, then the combined query — every
-    # attempt relevance-checked. No ungated bare-category fallback: that
-    # was exactly what surfaced a Jaipur palace photo for a Sikkim landslide
-    # story. Better to skip a post than post the wrong picture — the caller
-    # treats "no image found" the same as "no story found" and moves on.
+    # The combined query (category + keywords together) usually wins: tested
+    # live, "WORLD Iran warns faster" surfaced genuinely thematic editorial
+    # photos ("toy soldiers surrounding Iran's flag on a map"), while the
+    # solo place-name query "Iran" alone just returned generic tourism shots
+    # of the same country — geographically correct, thematically empty. But
+    # a combined query can also be too specific to match anything at all
+    # (confirmed separately: a Sikkim-landslide combined query found zero
+    # results where the solo word "landslide" found an excellent match) — so
+    # try combined first, then fall back to individual distinctive keywords.
+    # No ungated bare-category fallback: that was exactly what surfaced a
+    # Jaipur palace photo for a Sikkim landslide story. Better to skip a post
+    # than post the wrong picture — the caller treats "no image found" the
+    # same as "no story found" and moves on.
     # A bare short acronym alone ("ICET") is search poison — it collides
     # with whatever else shares that acronym globally (confirmed: Openverse
     # mostly indexes "ICET" as a German train model). No context word to
     # disambiguate a solo acronym, so it doesn't get tried alone — it can
-    # still appear inside the combined query below, with surrounding words.
+    # still appear inside the combined query, with surrounding words.
     relevance_words = _keywords(story["title"])
     solo_words = [kw for kw in relevance_words[:3] if not (kw.isupper() and len(kw) <= 6)]
-    attempts = [(kw, [kw]) for kw in solo_words]
-    attempts.append((_search_query(story), relevance_words))
+    attempts = [(_search_query(story), relevance_words)]
+    attempts += [(kw, [kw]) for kw in solo_words]
 
     for query, words in attempts:
         for fn in (_stock_pexels, _stock_unsplash, _openverse_topical):
