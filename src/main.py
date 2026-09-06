@@ -52,6 +52,17 @@ def current_slot():
     return nearest, ist
 
 
+def choose_variant(category_label):
+    """Pick which of the 3 templates to render with: whichever is actually
+    performing best for this category once there's enough reach data,
+    otherwise rotate evenly (least-used-so-far) so all 3 get a fair shot."""
+    ranked = analytics.best_template(category_label)
+    if ranked:
+        return ranked[0]
+    counts = analytics.template_counts(category_label)
+    return min(counts, key=counts.get)
+
+
 def build_caption(written, geo, photo_credit=None):
     caption = written["caption"].strip()
     tags = " ".join(written["hashtags"])
@@ -112,6 +123,9 @@ def render():
     out_name = f"post-{stamp}.jpg"
     out_path = os.path.join(out_dir, out_name)
 
+    variant = choose_variant(category_label)
+    print("Template variant:", variant)
+
     logo = os.path.join(os.path.dirname(__file__), "..", "assets", "logo", "logo.png")
     template.render_post(
         photo_path=img_path,
@@ -122,6 +136,7 @@ def render():
         footer=settings.BRAND_FOOTER,
         handle=settings.BRAND_HANDLE,
         logo_path=logo if os.path.exists(logo) else None,
+        variant=variant,
     )
     print("Rendered:", out_path)
 
@@ -144,6 +159,7 @@ def render():
         "out_name": out_name,
         "is_reel": is_reel,
         "video_name": video_name,
+        "template": variant,
         "ist": ist.strftime("%Y-%m-%d %H:%M"),
     }
     os.makedirs(os.path.dirname(PENDING_PATH), exist_ok=True)
@@ -187,7 +203,7 @@ def publish():
 
     news_engine.mark_posted(story["id"])
     analytics.log_post(story, written, pending["category_label"], results, ist,
-                        is_reel=bool(video_url))
+                        is_reel=bool(video_url), template=pending.get("template"))
     os.remove(PENDING_PATH)
     print("=== Done ===")
 
