@@ -13,11 +13,11 @@ import datetime as dt
 DATA = os.path.join(os.path.dirname(__file__), "..", "data")
 CSV_PATH = os.path.join(DATA, "performance.csv")
 
-FIELDS = ["timestamp_ist", "category", "headline", "score",
+FIELDS = ["timestamp_ist", "category", "headline", "score", "is_reel",
           "ig_id", "fb_id", "ig_ok", "fb_ok"]
 
 
-def log_post(story, written, category_label, results, ist):
+def log_post(story, written, category_label, results, ist, is_reel=False):
     os.makedirs(DATA, exist_ok=True)
     new = not os.path.exists(CSV_PATH)
     with open(CSV_PATH, "a", newline="") as f:
@@ -29,6 +29,7 @@ def log_post(story, written, category_label, results, ist):
             "category": category_label,
             "headline": written.get("headline", "")[:120],
             "score": story.get("score", 0),
+            "is_reel": is_reel,
             "ig_id": (results.get("instagram") or {}).get("id", ""),
             "fb_id": (results.get("facebook") or {}).get("id", ""),
             "ig_ok": "instagram" in results,

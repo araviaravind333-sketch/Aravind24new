@@ -84,6 +84,44 @@ def publish_instagram(image_url, caption, place=None):
     return pub
 
 
+# ---------- Instagram Reels ----------
+def publish_instagram_reel(video_url, caption, place=None):
+    token = settings.META_PAGE_ACCESS_TOKEN
+    ig_id = settings.IG_USER_ID
+    params = {
+        "media_type": "REELS",
+        "video_url": video_url,
+        "caption": caption,
+        "share_to_feed": "true",
+        "access_token": token,
+    }
+    loc = _find_location_id(place)
+    if loc:
+        params["location_id"] = loc
+
+    container = _post(f"{BASE}/{ig_id}/media", params)
+    cid = container.get("id")
+    if not cid:
+        raise RuntimeError(f"IG reel container failed: {container}")
+
+    # video processing takes longer than a photo container
+    status = {}
+    for _ in range(30):
+        status = _get(f"{BASE}/{cid}", {
+            "fields": "status_code,status", "access_token": token})
+        if status.get("status_code") == "FINISHED":
+            break
+        if status.get("status_code") == "ERROR":
+            raise RuntimeError(f"IG reel processing failed: {status}")
+        time.sleep(10)
+    else:
+        raise RuntimeError(f"IG reel container never finished processing: {status}")
+
+    pub = _post(f"{BASE}/{ig_id}/media_publish", {
+        "creation_id": cid, "access_token": token})
+    return pub
+
+
 # ---------- Facebook Page ----------
 def publish_facebook(image_url, caption, place=None):
     token = settings.META_PAGE_ACCESS_TOKEN
@@ -100,13 +138,16 @@ def publish_facebook(image_url, caption, place=None):
     return _post(f"{BASE}/{page_id}/photos", params)
 
 
-def publish_all(image_url, caption, geo):
+def publish_all(image_url, caption, geo, video_url=None):
     place = None
     if geo:
         place = "India" if geo.get("is_india") else geo.get("place")
     results = {}
     try:
-        results["instagram"] = publish_instagram(image_url, caption, place)
+        if video_url:
+            results["instagram"] = publish_instagram_reel(video_url, caption, place)
+        else:
+            results["instagram"] = publish_instagram(image_url, caption, place)
         print("IG posted:", results["instagram"])
     except Exception as e:
         results["instagram_error"] = str(e)

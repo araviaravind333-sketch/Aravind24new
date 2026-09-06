@@ -100,7 +100,19 @@ BRAND_FOOTER = "For the latest news"
 IG_PROFILE   = "https://www.instagram.com/aravindnews24/"
 
 # ============================================================
-# 8. ANALYTICS / GROWTH
+# 8. REELS
+# ============================================================
+# Reels get 5-10x the reach of a static image post right now — the growth
+# plan recommends a ~70/30 Reels/static mix. This is a Ken Burns zoom on
+# the same branded card, no separate video layout (yet), silent (no audio).
+REEL_RATIO      = 0.7   # fraction of cycles that post as a Reel vs a static image
+REEL_DURATION_SEC = 6
+REEL_FPS        = 30
+REEL_WIDTH      = 1080   # matches the static card exactly (4:5) — no aspect
+REEL_HEIGHT     = 1350   # mismatch/distortion risk from forcing 9:16 here
+
+# ============================================================
+# 9. ANALYTICS / GROWTH
 # ============================================================
 # After each post, we pull insights and log to /data/performance.csv
 # The selector uses this history to prefer high-performing categories/times.

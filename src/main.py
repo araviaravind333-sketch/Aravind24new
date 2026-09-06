@@ -21,6 +21,7 @@ will fail — that's expected locally, not a bug).
 
 import json
 import os
+import random
 import sys
 import time
 import datetime as dt
@@ -30,7 +31,7 @@ import urllib.error
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from config import settings
-from src import news_engine, ai_writer, image_source, template, publisher, analytics
+from src import news_engine, ai_writer, image_source, template, video, publisher, analytics
 
 PENDING_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "_pending.json")
 
@@ -114,11 +115,26 @@ def render():
     )
     print("Rendered:", out_path)
 
+    is_reel = random.random() < settings.REEL_RATIO
+    video_name = None
+    if is_reel:
+        video_name = f"post-{stamp}.mp4"
+        video_path = os.path.join(out_dir, video_name)
+        try:
+            video.render_reel(out_path, video_path)
+            print("Rendered reel:", video_path)
+        except Exception as e:
+            print("Reel render failed, falling back to static image post:", e)
+            is_reel = False
+            video_name = None
+
     pending = {
         "story": {k: v for k, v in story.items() if k != "published"},
         "written": written,
         "category_label": category_label,
         "out_name": out_name,
+        "is_reel": is_reel,
+        "video_name": video_name,
         "ist": ist.strftime("%Y-%m-%d %H:%M"),
     }
     os.makedirs(os.path.dirname(PENDING_PATH), exist_ok=True)
@@ -142,19 +158,27 @@ def publish():
 
     image_base = os.environ.get("GH_PAGES_BASE", "").rstrip("/")
     image_url = f"{image_base}/{out_name}" if image_base else None
+    video_url = None
+    if pending.get("is_reel") and pending.get("video_name") and image_base:
+        video_url = f"{image_base}/{pending['video_name']}"
     caption = build_caption(written, story.get("geo"))
 
     if image_url:
         print("Waiting for image to go public:", image_url)
         if not _wait_until_public(image_url):
             print("WARNING: image never went public in time, publishing anyway (will likely fail).")
-        results = publisher.publish_all(image_url, caption, story.get("geo"))
+        if video_url:
+            print("Waiting for video to go public:", video_url)
+            if not _wait_until_public(video_url, tries=15):
+                print("WARNING: video never went public in time, publishing anyway (will likely fail).")
+        results = publisher.publish_all(image_url, caption, story.get("geo"), video_url=video_url)
     else:
         print("No GH_PAGES_BASE set — skipping publish (dry run).")
         results = {"dry_run": True}
 
     news_engine.mark_posted(story["id"])
-    analytics.log_post(story, written, pending["category_label"], results, ist)
+    analytics.log_post(story, written, pending["category_label"], results, ist,
+                        is_reel=bool(video_url))
     os.remove(PENDING_PATH)
     print("=== Done ===")
 

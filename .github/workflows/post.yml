@@ -38,7 +38,10 @@ jobs:
       - name: Install deps
         run: pip install -r requirements.txt
 
-      - name: Render post (news + AI rewrite + stock photo)
+      - name: Ensure ffmpeg (for Reels rendering)
+        run: command -v ffmpeg || (sudo apt-get update && sudo apt-get install -y ffmpeg)
+
+      - name: Render post (news + AI rewrite + stock photo + reel)
         env:
           ANTHROPIC_API_KEY:      ${{ secrets.ANTHROPIC_API_KEY }}
           GEMINI_API_KEY:         ${{ secrets.GEMINI_API_KEY }}
