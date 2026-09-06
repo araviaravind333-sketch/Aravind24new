@@ -22,20 +22,39 @@ POSTED_LOG = os.path.join(os.path.dirname(__file__), "..", "data", "posted.json"
 
 # ---------- de-dupe: never post the same story twice ----------
 def _load_posted():
+    """Each entry is {"id": <hash>, "title": <original title>}. Older log
+    entries were plain hash strings (no near-duplicate title to compare
+    against) — kept working via the isinstance check below."""
     if os.path.exists(POSTED_LOG):
         with open(POSTED_LOG) as f:
-            return set(json.load(f))
-    return set()
+            raw = json.load(f)
+        return [{"id": e, "title": None} if isinstance(e, str) else e for e in raw]
+    return []
 
 
-def _save_posted(ids):
+def _save_posted(entries):
     os.makedirs(os.path.dirname(POSTED_LOG), exist_ok=True)
     with open(POSTED_LOG, "w") as f:
-        json.dump(list(ids)[-500:], f)   # keep last 500
+        json.dump(entries[-500:], f)   # keep last 500
 
 
 def _story_id(title):
     return hashlib.md5(title.lower().encode()).hexdigest()[:12]
+
+
+def _is_recent_duplicate(title, posted_entries):
+    """Same real event, re-covered with different wording as it develops
+    ("6 rescued" -> "8 rescued, search continues") isn't caught by the
+    exact-title hash check — this compares the same signature-word overlap
+    used for corroboration, against everything posted recently."""
+    sig = _signature_words(title)
+    if not sig:
+        return False
+    for entry in posted_entries:
+        old_title = entry.get("title")
+        if old_title and len(sig & _signature_words(old_title)) >= 3:
+            return True
+    return False
 
 
 # ---------- virality scoring ----------
@@ -169,6 +188,7 @@ def detect_geo(title, category):
 def fetch_candidates(category):
     feeds = settings.RSS_FEEDS.get(category, [])
     posted = _load_posted()
+    posted_ids = {e["id"] for e in posted}
     now = dt.datetime.now(dt.timezone.utc)
     cutoff = now - dt.timedelta(hours=24)
     out = []
@@ -183,7 +203,9 @@ def fetch_candidates(category):
             if not title:
                 continue
             sid = _story_id(title)
-            if sid in posted:
+            if sid in posted_ids:
+                continue
+            if _is_recent_duplicate(title, posted):
                 continue
             if _is_junk(title):
                 continue
@@ -224,7 +246,7 @@ def pick_top_story(primary_category, fallback_categories):
     return best
 
 
-def mark_posted(story_id):
+def mark_posted(story):
     posted = _load_posted()
-    posted.add(story_id)
+    posted.append({"id": story["id"], "title": story["title"]})
     _save_posted(posted)

@@ -200,7 +200,7 @@ def publish():
         print("No GH_PAGES_BASE set — skipping publish (dry run).")
         results = {"dry_run": True}
 
-    news_engine.mark_posted(story["id"])
+    news_engine.mark_posted(story)
     analytics.log_post(story, written, pending["category_label"], results, ist,
                         is_reel=bool(video_url), template=pending.get("template"))
     os.remove(PENDING_PATH)
