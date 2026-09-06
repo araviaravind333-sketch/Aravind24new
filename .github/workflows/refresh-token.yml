@@ -1,0 +1,27 @@
+name: Refresh Meta Token
+
+# Meta long-lived tokens last ~60 days. Refresh every 30 days so it never expires.
+on:
+  schedule:
+    - cron: '0 6 1 * *'   # 1st of each month, 06:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Refresh and update secret
+        env:
+          META_PAGE_ACCESS_TOKEN: ${{ secrets.META_PAGE_ACCESS_TOKEN }}
+          META_APP_ID:            ${{ secrets.META_APP_ID }}
+          META_APP_SECRET:        ${{ secrets.META_APP_SECRET }}
+          GH_PAT:                 ${{ secrets.GH_PAT }}
+          REPO:                   ${{ github.repository }}
+        run: python -m src.refresh_token
