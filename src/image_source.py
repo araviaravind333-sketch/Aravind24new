@@ -102,6 +102,16 @@ _LOGO_HINTS = (
 )
 
 
+def _text_relevance(words, text):
+    """How many of `words` actually appear in `text` — used to reject a
+    result that merely matched the search API's own fuzzy/full-text ranking
+    without actually depicting the subject (e.g. a market-street stock photo
+    surfacing for "Delhi building collapse" because it's tagged "Delhi")."""
+    word_set = {w.lower() for w in words if len(w) >= 3}
+    text_words = set(re.findall(r"[a-zA-Z]+", (text or "").lower()))
+    return len(word_set & text_words)
+
+
 def _title_relevance(entity, file_title):
     """How many of the entity's significant words actually appear in the
     file's title. Commons' full-text search matches on categories/
@@ -109,9 +119,7 @@ def _title_relevance(entity, file_title):
     small neighborhood name) can return something merely keyword-adjacent —
     a violinist for a Delhi building collapse story, say. Requiring the
     title itself to actually mention the subject catches that."""
-    entity_words = {w.lower() for w in entity.split() if len(w) >= 3}
-    title_words = set(re.findall(r"[a-zA-Z]+", file_title.lower()))
-    return len(entity_words & title_words)
+    return _text_relevance(entity.split(), file_title)
 
 
 def _wikimedia_commons(entity):
@@ -173,11 +181,14 @@ def _wikimedia_commons(entity):
     return path, artist
 
 
-def _openverse_search(query, entity=None, pool=8):
+def _openverse_search(query, entity=None, relevance_words=None, pool=8):
     """Shared by both the entity-search and topical-search stages. Filters
     to commercially-usable licenses via the API itself, then applies the
     same logo/relevance/license-preference rules used for Commons, plus a
-    brand-safety check (mature content) Commons doesn't need."""
+    brand-safety check (mature content) Commons doesn't need.
+    `relevance_words`, when given, requires the result's title to actually
+    mention at least one of them — same purpose as `entity`, for the
+    topical (non-named-subject) search path."""
     params = urllib.parse.urlencode({
         "q": query, "license_type": "commercial", "page_size": pool,
     })
@@ -197,6 +208,8 @@ def _openverse_search(query, entity=None, pool=8):
         if any(h in title.lower() for h in _LOGO_HINTS):
             continue
         if entity and _title_relevance(entity, title) < 1:
+            continue
+        if relevance_words and _text_relevance(relevance_words, title) < 1:
             continue
         w, h = item.get("width", 0), item.get("height", 0)
         if w < 700 or h < 500:
@@ -220,8 +233,8 @@ def _openverse_entity(entity):
     return _openverse_search(entity, entity=entity), ""
 
 
-def _openverse_topical(query):
-    return _openverse_search(query)
+def _openverse_topical(query, relevance_words=None):
+    return _openverse_search(query, relevance_words=relevance_words)
 
 
 def _search_query(story):
@@ -246,7 +259,7 @@ RELEVANT_POOL = 8
 
 
 # ---------- Pexels stock ----------
-def _stock_pexels(query):
+def _stock_pexels(query, relevance_words=None):
     key = settings.PEXELS_API_KEY
     if not key:
         raise RuntimeError("no pexels key")
@@ -258,7 +271,13 @@ def _stock_pexels(query):
     photos = res.get("photos", [])
     if not photos:
         raise RuntimeError(f"no pexels results for '{query}'")
-    # among the relevant matches, prefer the highest-resolution shot
+    # the search API's own ranking can drift for niche/sensitive topics —
+    # require the photo's own alt-text to actually mention the story
+    # (when relevance_words given), THEN prefer the highest resolution
+    if relevance_words:
+        photos = [p for p in photos if _text_relevance(relevance_words, p.get("alt", "")) >= 1]
+        if not photos:
+            raise RuntimeError(f"no relevant pexels results for '{query}'")
     best = max(photos, key=lambda p: p.get("width", 0) * p.get("height", 0))
     img_url = best["src"]["large2x"]
     with urllib.request.urlopen(img_url, timeout=30) as r:
@@ -266,7 +285,7 @@ def _stock_pexels(query):
 
 
 # ---------- Unsplash stock ----------
-def _stock_unsplash(query):
+def _stock_unsplash(query, relevance_words=None):
     key = settings.UNSPLASH_ACCESS_KEY
     if not key:
         raise RuntimeError("no unsplash key")
@@ -278,6 +297,12 @@ def _stock_unsplash(query):
     results = res.get("results", [])
     if not results:
         raise RuntimeError(f"no unsplash results for '{query}'")
+    if relevance_words:
+        def _desc(p):
+            return f"{p.get('alt_description') or ''} {p.get('description') or ''}"
+        results = [p for p in results if _text_relevance(relevance_words, _desc(p)) >= 1]
+        if not results:
+            raise RuntimeError(f"no relevant unsplash results for '{query}'")
     # among the relevant matches, prefer the most-liked (proxy for a more
     # striking, curiosity-grabbing photo rather than the plainest match)
     best = max(results, key=lambda p: p.get("likes", 0))
@@ -301,11 +326,16 @@ def get_image(story):
             except Exception as e:
                 print(f"{fn.__name__} failed for '{entity}': {e}")
 
-    queries = [_search_query(story), _broad_query(story)]
-    for query in queries:
+    # specific query: require the result to actually be about the story.
+    # broad (category-only) query: no relevance check — it's already a
+    # generic-but-safe fallback by construction (e.g. "Business" -> office
+    # imagery), better as a last resort than failing outright.
+    relevance_words = _keywords(story["title"])
+    for query, words in ((_search_query(story), relevance_words),
+                         (_broad_query(story), None)):
         for fn in (_stock_pexels, _stock_unsplash, _openverse_topical):
             try:
-                path = fn(query)
+                path = fn(query, words)
                 print(f"image via {fn.__name__} (query: '{query}')")
                 return path
             except Exception as e:
