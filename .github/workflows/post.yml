@@ -1,17 +1,18 @@
 name: AravindNews24 Auto Poster
 
-# Times are UTC. IST = UTC + 5:30
-# India window 05:00-23:00 IST  => 23:30 prev-day..17:30 UTC
-# Every 4 hours at IST 05:00, 09:00, 13:00, 17:00, 21:00  (world: 01:00)
-# UTC equivalents: 23:30, 03:30, 07:30, 11:30, 15:30, 19:30
+# Times are UTC. IST = UTC + 5:30.
+# Fixed daily plan (must match config/settings.py DAILY_SCHEDULE):
+#   India: 4 posts + 2 Reels   World: 1 post + 1 Reel   = 8/day
 on:
   schedule:
-    - cron: '30 23 * * *'   # 05:00 IST
-    - cron: '30 3 * * *'    # 09:00 IST
-    - cron: '30 7 * * *'    # 13:00 IST
-    - cron: '30 11 * * *'   # 17:00 IST
-    - cron: '30 15 * * *'   # 21:00 IST
-    - cron: '30 19 * * *'   # 01:00 IST (world window)
+    - cron: '30 20 * * *'   # 02:00 IST — world, post
+    - cron: '30 23 * * *'   # 05:00 IST — india, post
+    - cron: '30 2 * * *'    # 08:00 IST — india, reel
+    - cron: '30 5 * * *'    # 11:00 IST — india, post
+    - cron: '30 8 * * *'    # 14:00 IST — india, post
+    - cron: '30 11 * * *'   # 17:00 IST — india, reel
+    - cron: '30 14 * * *'   # 20:00 IST — india, post
+    - cron: '30 17 * * *'   # 23:00 IST — world, reel
   workflow_dispatch:          # allow manual "Run now" button
 
 permissions:

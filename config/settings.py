@@ -67,11 +67,20 @@ RSS_FEEDS = {
 # ============================================================
 # 4. SCHEDULE  (all times IST; GitHub cron is UTC — workflow handles offset)
 # ============================================================
-# India window: 05:00–23:00 IST  -> INDIA-first categories
-# World window: 23:00–05:00 IST  -> WORLD-first categories
-INDIA_WINDOW_START_IST = 5      # 5 AM
-INDIA_WINDOW_END_IST   = 23     # 11 PM
-POST_INTERVAL_HOURS    = 4      # phase 1 (later: 0.5 = every 30 min)
+# Fixed daily plan: 6 India slots (4 static posts + 2 Reels) + 2 World slots
+# (1 post + 1 Reel) = 8 posts/day, deterministic (not a random roll).
+# Each entry here needs a matching cron line in .github/workflows/post.yml —
+# keep them in sync if you edit this. (IST hour, window, "post"/"reel")
+DAILY_SCHEDULE = [
+    (2,  "world", "post"),
+    (5,  "india", "post"),
+    (8,  "india", "reel"),
+    (11, "india", "post"),
+    (14, "india", "post"),
+    (17, "india", "reel"),
+    (20, "india", "post"),
+    (23, "world", "reel"),
+]
 
 # ============================================================
 # 5. GEO-TAGGING
@@ -102,10 +111,8 @@ IG_PROFILE   = "https://www.instagram.com/aravindnews24/"
 # ============================================================
 # 8. REELS
 # ============================================================
-# Reels get 5-10x the reach of a static image post right now — the growth
-# plan recommends a ~70/30 Reels/static mix. The card is held still, silent,
-# no zoom/pan/audio (by request).
-REEL_RATIO      = 0.7    # fraction of cycles that post as a Reel vs a static image
+# Reel vs static is now fixed by DAILY_SCHEDULE above, not a random roll.
+# The card is held still, silent, no zoom/pan/audio (by request).
 REEL_DURATION_SEC = 6
 REEL_WIDTH      = 1080   # matches the static card exactly (4:5) — no aspect
 REEL_HEIGHT     = 1350   # mismatch/distortion risk from forcing 9:16 here

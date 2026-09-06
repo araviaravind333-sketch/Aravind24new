@@ -52,6 +52,18 @@ HOT_KEYWORDS = [
     "scam", "fraud", "explosive", "sensational", "massive", "huge",
 ]
 
+# Stories tied to a pan-India institution/event affect literally everyone,
+# not just one state/city — these get priority over regional news, per
+# explicit request, even over other "hot" stories.
+NATIONAL_IMPACT_KEYWORDS = [
+    "rbi", "supreme court", "parliament", "lok sabha", "rajya sabha",
+    "union budget", "prime minister", "pm modi", "union cabinet", "gst",
+    "election commission", "isro", "cbi", "income tax", "indian railways",
+    "aadhaar", "president of india", "union government", "central government",
+    "nationwide", "across india", "all states", "high court", "cji",
+    "national security", "army chief", "defence ministry", "home ministry",
+]
+
 # Recurring filler content (job/exam-notification listicles) that RSS feeds
 # mix in with real news. It's evergreen, not "breaking", and floods the
 # candidate pool with high recency+number scores despite being low-value —
@@ -107,6 +119,12 @@ def _virality(title, published_dt):
         if kw in t:
             score += 12
             hot_hit = True
+    # pan-India impact outranks regional/local stories, even other hot ones
+    for kw in NATIONAL_IMPACT_KEYWORDS:
+        if kw in t:
+            score += 25
+            hot_hit = True
+            break
     # recency bonus (newer = better)
     age_h = (dt.datetime.now(dt.timezone.utc) - published_dt).total_seconds() / 3600
     if age_h < 3:

@@ -21,7 +21,6 @@ will fail — that's expected locally, not a bug).
 
 import json
 import os
-import random
 import sys
 import time
 import datetime as dt
@@ -36,13 +35,21 @@ from src import news_engine, ai_writer, image_source, template, video, publisher
 PENDING_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "_pending.json")
 
 
-def current_window_ist():
+def current_slot():
+    """Look up which of the fixed daily slots this run corresponds to, by
+    IST hour. Exact match for scheduled cron runs; falls back to the
+    nearest slot for a manual "Run workflow" click at an odd time."""
     utc = dt.datetime.now(dt.timezone.utc)
     ist = utc + dt.timedelta(hours=5, minutes=30)
-    h = ist.hour
-    if settings.INDIA_WINDOW_START_IST <= h < settings.INDIA_WINDOW_END_IST:
-        return "india", ist
-    return "world", ist
+    hour = ist.hour
+    exact = [s for s in settings.DAILY_SCHEDULE if s[0] == hour]
+    if exact:
+        return exact[0], ist
+    nearest = min(
+        settings.DAILY_SCHEDULE,
+        key=lambda s: min(abs(s[0] - hour), 24 - abs(s[0] - hour)),
+    )
+    return nearest, ist
 
 
 def build_caption(written, geo, photo_credit=None):
@@ -71,8 +78,10 @@ def _wait_until_public(url, tries=10, delay=5):
 
 
 def render():
-    window, ist = current_window_ist()
-    print(f"=== Render at {ist:%Y-%m-%d %H:%M} IST | window={window} ===")
+    (slot_hour, window, post_type), ist = current_slot()
+    is_reel = post_type == "reel"
+    print(f"=== Render at {ist:%Y-%m-%d %H:%M} IST | slot={slot_hour}:00 "
+          f"window={window} type={post_type} ===")
 
     if window == "india":
         primary = "INDIA NEWS"
@@ -116,7 +125,6 @@ def render():
     )
     print("Rendered:", out_path)
 
-    is_reel = random.random() < settings.REEL_RATIO
     video_name = None
     if is_reel:
         video_name = f"post-{stamp}.mp4"
