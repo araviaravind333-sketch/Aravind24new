@@ -93,6 +93,36 @@ _ENTITY_STOPSTART = {
     "the", "a", "an", "this", "that", "why", "how", "what", "who", "when",
 }
 
+# A photo of a PLACE isn't the same as a photo of the EVENT that happened
+# there — a scenic Sikkim mountain lake doesn't depict a landslide. So a
+# place-name entity gets tried only as a fallback, after topical/thematic
+# search (which encodes the actual event) has had its shot — unlike a
+# person/institution entity (Zelensky, RBI), where a real photo of the
+# subject genuinely IS the right image.
+INDIAN_STATES_UTS = {
+    "andhra pradesh", "arunachal pradesh", "assam", "bihar", "chhattisgarh",
+    "goa", "gujarat", "haryana", "himachal pradesh", "jharkhand",
+    "karnataka", "kerala", "madhya pradesh", "maharashtra", "manipur",
+    "meghalaya", "mizoram", "nagaland", "odisha", "punjab", "rajasthan",
+    "sikkim", "tamil nadu", "telangana", "tripura", "uttar pradesh",
+    "uttarakhand", "west bengal", "andaman and nicobar", "chandigarh",
+    "dadra and nagar haveli", "daman and diu", "delhi", "jammu and kashmir",
+    "ladakh", "lakshadweep", "puducherry",
+}
+WORLD_PLACE_NAMES = {
+    "india", "usa", "united states", "america", "china", "russia",
+    "ukraine", "pakistan", "uk", "britain", "japan", "israel", "gaza",
+    "france", "germany", "canada", "australia", "bangladesh", "sri lanka",
+    "nepal", "iran", "saudi", "kyiv", "moscow", "beijing", "washington",
+    "london", "paris", "berlin", "tokyo", "delhi", "mumbai", "kolkata",
+    "chennai", "bengaluru", "bangalore", "hyderabad", "pune", "ahmedabad",
+}
+PLACE_NAMES = INDIAN_STATES_UTS | WORLD_PLACE_NAMES
+
+
+def _is_place_entity(entity):
+    return entity.lower() in PLACE_NAMES
+
 
 def _proper_noun_phrases(title, limit=3):
     """Pull real named-entity candidates (people/places/institutions) out of
@@ -141,6 +171,26 @@ _LOGO_HINTS = (
     "banner", "poster", "advertisement", "watermark", "letterhead",
     "press release", "screenshot", "infographic",
 )
+
+
+_IMPACT_WORDS = {
+    "person", "people", "man", "men", "woman", "women", "crowd", "protest",
+    "protesters", "protester", "rescue", "rescuers", "rescuer", "victim",
+    "victims", "worker", "workers", "children", "child", "family", "face",
+    "faces", "portrait", "soldier", "soldiers", "police", "firefighter",
+    "firefighters", "survivor", "survivors", "activist", "activists",
+    "leader", "minister", "president", "officer", "officers", "crying",
+    "grief", "hands", "hand", "eyes", "crying", "emotional", "injured",
+}
+
+
+def _impact_score(text):
+    """A photo with real human presence — a face, a crowd, rescuers,
+    grief — reads as far more compelling than an empty landscape or object
+    shot, even when both are equally relevant. Used as a secondary ranking
+    signal among already-relevant candidates, never as a relevance gate."""
+    words = set(re.findall(r"[a-zA-Z]+", (text or "").lower()))
+    return len(words & _IMPACT_WORDS)
 
 
 def _text_relevance(words, text):
@@ -199,18 +249,20 @@ def _wikimedia_commons(entity):
         if not info:
             continue
         w, h = info.get("width", 0), info.get("height", 0)
-        if w < 700 or h < 500:  # filter out icon/thumbnail-sized files
+        if w < 1000 or h < 700:  # high-quality floor, not just non-thumbnail
             continue
         license_name = (info.get("extmetadata", {}).get("LicenseShortName", {})
                          .get("value", "")).lower()
         free_of_attribution = any(k in license_name for k in NO_ATTRIBUTION_NEEDED)
-        candidates.append((relevance, free_of_attribution, w * h, info, title))
+        impact = _impact_score(title)
+        candidates.append((relevance, impact, free_of_attribution, w * h, info, title))
     if not candidates:
         raise RuntimeError(f"no relevant Commons photo for '{entity}'")
 
-    # prefer: most relevant, then no-attribution-required, then highest-res
-    candidates.sort(key=lambda c: (c[0], c[1], c[2]), reverse=True)
-    _, free_of_attribution, _, info, title = candidates[0]
+    # prefer: most relevant, then most visually/emotionally compelling,
+    # then no-attribution-required, then highest-res
+    candidates.sort(key=lambda c: (c[0], c[1], c[2], c[3]), reverse=True)
+    _, _, free_of_attribution, _, info, title = candidates[0]
     img_url = info.get("thumburl") or info["url"]
     meta = info.get("extmetadata", {})
     artist = "" if free_of_attribution else re.sub(
@@ -253,18 +305,19 @@ def _openverse_search(query, entity=None, relevance_words=None, pool=8):
         if relevance_words and _text_relevance(relevance_words, title) < 1:
             continue
         w, h = item.get("width", 0), item.get("height", 0)
-        if w < 700 or h < 500:
+        if w < 1000 or h < 700:  # high-quality floor, not just non-thumbnail
             continue
         img_url = item.get("url")
         if not img_url:
             continue
         free = any(k in (item.get("license") or "").lower() for k in NO_ATTRIBUTION_NEEDED)
-        candidates.append((free, w * h, img_url))
+        impact = _impact_score(title)
+        candidates.append((impact, free, w * h, img_url))
     if not candidates:
         raise RuntimeError(f"no usable Openverse results for '{query}'")
 
-    candidates.sort(key=lambda c: (c[0], c[1]), reverse=True)
-    _, _, img_url = candidates[0]
+    candidates.sort(key=lambda c: (c[0], c[1], c[2]), reverse=True)
+    _, _, _, img_url = candidates[0]
     req2 = urllib.request.Request(img_url, headers={"User-Agent": _COMMONS_UA})
     with urllib.request.urlopen(req2, timeout=30) as r:
         return _save(r.read())
@@ -316,7 +369,12 @@ def _stock_pexels(query, relevance_words=None):
         photos = [p for p in photos if _text_relevance(relevance_words, p.get("alt", "")) >= 1]
         if not photos:
             raise RuntimeError(f"no relevant pexels results for '{query}'")
-    best = max(photos, key=lambda p: p.get("width", 0) * p.get("height", 0))
+    # among the relevant matches: most visually/emotionally compelling
+    # (real human presence reads far stronger than an empty scene), then
+    # highest resolution
+    best = max(photos, key=lambda p: (
+        _impact_score(p.get("alt", "")), p.get("width", 0) * p.get("height", 0)
+    ))
     img_url = best["src"]["large2x"]
     with urllib.request.urlopen(img_url, timeout=30) as r:
         return _save(r.read())
@@ -341,28 +399,47 @@ def _stock_unsplash(query, relevance_words=None):
         results = [p for p in results if _text_relevance(relevance_words, _desc(p)) >= 1]
         if not results:
             raise RuntimeError(f"no relevant unsplash results for '{query}'")
-    # among the relevant matches, prefer the most-liked (proxy for a more
-    # striking, curiosity-grabbing photo rather than the plainest match)
-    best = max(results, key=lambda p: p.get("likes", 0))
+    # among the relevant matches: real human presence first (more
+    # compelling than an empty scene), then most-liked as a popularity/
+    # visual-quality proxy
+    def _desc2(p):
+        return f"{p.get('alt_description') or ''} {p.get('description') or ''}"
+    best = max(results, key=lambda p: (_impact_score(_desc2(p)), p.get("likes", 0)))
     img_url = best["urls"]["regular"]
     with urllib.request.urlopen(img_url, timeout=30) as r:
         return _save(r.read())
+
+
+def _try_entities(entities):
+    for entity in entities:
+        for fn in (_wikimedia_commons, _openverse_entity):
+            try:
+                path, artist = fn(entity)
+                print(f"image via {fn.__name__} (entity: '{entity}')")
+                return path, artist
+            except Exception as e:
+                print(f"{fn.__name__} failed for '{entity}': {e}")
+    return None, None
 
 
 def get_image(story):
     """Find a photo for the story; return path to a saved image.
     story is mutated with story['photo_credit'] when the photo came from
     a source with a known author (CC attribution)."""
-    for entity in _proper_noun_phrases(story["title"]):
-        for fn in (_wikimedia_commons, _openverse_entity):
-            try:
-                path, artist = fn(entity)
-                print(f"image via {fn.__name__} (entity: '{entity}')")
-                if artist:
-                    story["photo_credit"] = artist
-                return path
-            except Exception as e:
-                print(f"{fn.__name__} failed for '{entity}': {e}")
+    entities = _proper_noun_phrases(story["title"])
+    # A person/institution entity (Zelensky, RBI) genuinely IS the right
+    # image — try those first. A place-name entity (Sikkim, Kyiv) only
+    # gives a generic photo of the location, not the event that happened
+    # there, so it's deferred to a last-resort fallback, tried after the
+    # topical/event search below has had its shot.
+    person_entities = [e for e in entities if not _is_place_entity(e)]
+    place_entities = [e for e in entities if _is_place_entity(e)]
+
+    path, artist = _try_entities(person_entities)
+    if path:
+        if artist:
+            story["photo_credit"] = artist
+        return path
 
     # The combined query (category + keywords together) usually wins: tested
     # live, "WORLD Iran warns faster" surfaced genuinely thematic editorial
@@ -395,4 +472,13 @@ def get_image(story):
                 return path
             except Exception as e:
                 print(f"{fn.__name__} failed for '{query}': {e}")
+
+    # Last resort: a real photo of the place, even though it won't show
+    # the specific event — still better than nothing, geographically honest.
+    path, artist = _try_entities(place_entities)
+    if path:
+        if artist:
+            story["photo_credit"] = artist
+        return path
+
     raise RuntimeError("ALL image sources failed")
