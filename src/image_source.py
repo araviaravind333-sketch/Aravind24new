@@ -333,8 +333,14 @@ def get_image(story):
     # was exactly what surfaced a Jaipur palace photo for a Sikkim landslide
     # story. Better to skip a post than post the wrong picture — the caller
     # treats "no image found" the same as "no story found" and moves on.
+    # A bare short acronym alone ("ICET") is search poison — it collides
+    # with whatever else shares that acronym globally (confirmed: Openverse
+    # mostly indexes "ICET" as a German train model). No context word to
+    # disambiguate a solo acronym, so it doesn't get tried alone — it can
+    # still appear inside the combined query below, with surrounding words.
     relevance_words = _keywords(story["title"])
-    attempts = [(kw, [kw]) for kw in relevance_words[:3]]
+    solo_words = [kw for kw in relevance_words[:3] if not (kw.isupper() and len(kw) <= 6)]
+    attempts = [(kw, [kw]) for kw in solo_words]
     attempts.append((_search_query(story), relevance_words))
 
     for query, words in attempts:

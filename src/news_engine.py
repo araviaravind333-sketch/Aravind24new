@@ -83,14 +83,21 @@ NATIONAL_IMPACT_KEYWORDS = [
     "national security", "army chief", "defence ministry", "home ministry",
 ]
 
-# Recurring filler content (job/exam-notification listicles) that RSS feeds
-# mix in with real news. It's evergreen, not "breaking", and floods the
-# candidate pool with high recency+number scores despite being low-value —
-# so it's excluded outright rather than just down-scored.
+# Recurring filler content (job/exam-notification listicles, admission/
+# counseling process updates) that RSS feeds mix in with real news. It's
+# evergreen bureaucratic process content, not "breaking" — and it's also
+# nearly impossible to illustrate well (obscure exam acronyms like "ICET"
+# collide with unrelated things in stock/photo search — Openverse mostly
+# indexes it as a German train model, not the Indian entrance exam). Both
+# problems solved by not posting this class of content at all.
 JUNK_KEYWORDS = [
     "recruitment", "vacancy", "vacancies", "bharti", "sarkari naukri",
     "notification out", "apply online", "how to apply", "eligibility criteria",
     "salary structure", "admit card", "hall ticket", "notification released",
+    "web options", "web counselling", "web counseling", "choice filling",
+    "seat allotment", "spot admission", "certificate verification",
+    "rank card", "mock allotment", "counselling schedule", "counseling schedule",
+    "revise options", "exercise options", "option entry", "allotment result",
 ]
 
 
