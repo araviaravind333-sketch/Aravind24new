@@ -46,13 +46,30 @@ HOT_KEYWORDS = [
     "cyclone", "earthquake", "budget", "rbi", "isro", "won", "final",
 ]
 
+# Recurring filler content (job/exam-notification listicles) that RSS feeds
+# mix in with real news. It's evergreen, not "breaking", and floods the
+# candidate pool with high recency+number scores despite being low-value —
+# so it's excluded outright rather than just down-scored.
+JUNK_KEYWORDS = [
+    "recruitment", "vacancy", "vacancies", "bharti", "sarkari naukri",
+    "notification out", "apply online", "how to apply", "eligibility criteria",
+    "salary structure", "admit card", "hall ticket", "notification released",
+]
+
+
+def _is_junk(title):
+    t = title.lower()
+    return any(kw in t for kw in JUNK_KEYWORDS)
+
 
 def _virality(title, published_dt):
     score = 0
+    hot_hit = False
     t = title.lower()
     for kw in HOT_KEYWORDS:
         if kw in t:
             score += 12
+            hot_hit = True
     # recency bonus (newer = better)
     age_h = (dt.datetime.now(dt.timezone.utc) - published_dt).total_seconds() / 3600
     if age_h < 3:
@@ -67,7 +84,7 @@ def _virality(title, published_dt):
     # ideal headline length
     if 6 <= len(title.split()) <= 14:
         score += 8
-    return score
+    return score, hot_hit
 
 
 # ---------- geo detection ----------
@@ -113,12 +130,15 @@ def fetch_candidates(category):
             sid = _story_id(title)
             if sid in posted:
                 continue
+            if _is_junk(title):
+                continue
             # published time
             pub = None
             if e.get("published_parsed"):
                 pub = dt.datetime(*e.published_parsed[:6], tzinfo=dt.timezone.utc)
             if not pub or pub < cutoff:
                 continue
+            score, hot_hit = _virality(title, pub)
             out.append({
                 "id": sid,
                 "title": title,
@@ -126,7 +146,8 @@ def fetch_candidates(category):
                 "link": e.get("link", ""),
                 "published": pub,
                 "category": category,
-                "score": _virality(title, pub),
+                "score": score,
+                "hot_hit": hot_hit,
             })
     out.sort(key=lambda x: x["score"], reverse=True)
     return out

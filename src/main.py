@@ -90,7 +90,7 @@ def render():
     print("Headline:", written["headline"])
 
     category_label = story["category"]
-    if story["score"] >= 60:
+    if story["score"] >= 60 and story.get("hot_hit"):
         category_label = "BREAKING NEWS"
 
     img_path = image_source.get_image(story)

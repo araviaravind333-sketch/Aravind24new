@@ -32,9 +32,13 @@ def _image_prompt(story):
     """Build a clean editorial prompt from the story."""
     t = story["title"]
     cat = story["category"].replace(" NEWS", "").lower()
-    return (f"professional editorial news photograph representing: {t}. "
-            f"{cat} theme, realistic, high detail, cinematic lighting, "
-            f"no text, no watermark, news documentary style")
+    return (
+        f"photojournalism image that literally depicts this news event: \"{t}\". "
+        f"Show the real subjects, objects, buildings, logos or setting named in the "
+        f"headline — do not invent an unrelated scene or a random unconnected person. "
+        f"{cat} context, realistic, high detail, cinematic lighting, no text, no watermark, "
+        f"documentary news photography style"
+    )
 
 
 # ---------- 1. AI: Pollinations (free, no key) ----------
