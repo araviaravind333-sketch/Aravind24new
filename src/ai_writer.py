@@ -16,6 +16,7 @@ import json
 import os
 import re
 import urllib.request
+import urllib.error
 
 from config import settings
 
@@ -87,8 +88,11 @@ def _call_gemini(story):
     req = urllib.request.Request(
         url, data=body, headers={"content-type": "application/json"},
     )
-    with urllib.request.urlopen(req, timeout=40) as r:
-        data = json.load(r)
+    try:
+        with urllib.request.urlopen(req, timeout=40) as r:
+            data = json.load(r)
+    except urllib.error.HTTPError as e:
+        raise RuntimeError(f"Gemini HTTP {e.code}: {e.read().decode(errors='replace')}") from e
     text = data["candidates"][0]["content"]["parts"][0]["text"]
     text = re.sub(r"```json|```", "", text).strip()
     return _finalize(json.loads(text))

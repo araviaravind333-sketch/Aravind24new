@@ -3,25 +3,36 @@ AravindNews24 — Main Orchestrator
 =================================
 Runs ONE post cycle. GitHub Actions calls this on the cron schedule.
 
-Flow:
-  1. Decide window (India-first 5am-11pm IST, World-first 11pm-5am IST)
-  2. Pick top trending story (last 24h, de-duped)
-  3. AI rewrite -> headline + accent + caption + hashtags
-  4. Get image (AI first, stock fallback)
-  5. Render branded post
-  6. Save to /public (published by GitHub Pages -> gives public URL)
-  7. Publish to IG + FB with geo tag
-  8. Log for analytics
+Split into two phases because Instagram/Facebook's API needs a PUBLIC image
+URL, and the rendered image only becomes public after it's pushed to GitHub
+(raw.githubusercontent.com serves it immediately after a push — no GitHub
+Pages build delay, and no branch/build-type mismatch to worry about):
+
+  render  -> pick story, AI rewrite, generate + render image, save to
+             /public, stash post state in data/_pending.json (git commit +
+             push happens in the workflow between the two phases)
+  publish -> wait for the pushed image to actually be fetchable at its
+             public URL, then publish to IG + FB, log analytics, mark posted
+
+Running with no argument does both phases back-to-back (handy for local
+testing; the image URL won't be reachable yet in that case, so publish
+will fail — that's expected locally, not a bug).
 """
 
+import json
 import os
 import sys
+import time
 import datetime as dt
+import urllib.request
+import urllib.error
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from config import settings
 from src import news_engine, ai_writer, image_source, template, publisher, analytics
+
+PENDING_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "_pending.json")
 
 
 def current_window_ist():
@@ -42,9 +53,24 @@ def build_caption(written, geo):
     return f"{caption}{loc_line}\n\n{tags}\n\n{settings.BRAND_HANDLE}"
 
 
-def run_once():
+def _wait_until_public(url, tries=10, delay=5):
+    for i in range(tries):
+        try:
+            req = urllib.request.Request(url, method="HEAD")
+            with urllib.request.urlopen(req, timeout=15) as r:
+                if r.status == 200:
+                    return True
+        except urllib.error.HTTPError as e:
+            print(f"waiting for {url} to go public ({i+1}/{tries}): HTTP {e.code}")
+        except Exception as e:
+            print(f"waiting for {url} to go public ({i+1}/{tries}): {e}")
+        time.sleep(delay)
+    return False
+
+
+def render():
     window, ist = current_window_ist()
-    print(f"=== Run at {ist:%Y-%m-%d %H:%M} IST | window={window} ===")
+    print(f"=== Render at {ist:%Y-%m-%d %H:%M} IST | window={window} ===")
 
     if window == "india":
         primary = "INDIA NEWS"
@@ -56,14 +82,13 @@ def run_once():
     story = news_engine.pick_top_story(primary, fallback)
     if not story:
         print("No fresh story found. Exiting cleanly.")
-        return
+        return None
 
     print("Selected:", story["title"], "| score:", story["score"])
 
     written = ai_writer.rewrite(story)
     print("Headline:", written["headline"])
 
-    # category label on image: BREAKING if very high score
     category_label = story["category"]
     if story["score"] >= 60:
         category_label = "BREAKING NEWS"
@@ -89,22 +114,57 @@ def run_once():
     )
     print("Rendered:", out_path)
 
-    # public URL via GitHub Pages (set GH_PAGES_BASE in env)
-    pages_base = os.environ.get("GH_PAGES_BASE", "").rstrip("/")
-    image_url = f"{pages_base}/{out_name}" if pages_base else None
+    pending = {
+        "story": {k: v for k, v in story.items() if k != "published"},
+        "written": written,
+        "category_label": category_label,
+        "out_name": out_name,
+        "ist": ist.strftime("%Y-%m-%d %H:%M"),
+    }
+    os.makedirs(os.path.dirname(PENDING_PATH), exist_ok=True)
+    with open(PENDING_PATH, "w") as f:
+        json.dump(pending, f)
+    print("Saved pending state:", PENDING_PATH)
+    return pending
 
+
+def publish():
+    if not os.path.exists(PENDING_PATH):
+        print("No pending render — nothing to publish.")
+        return
+    with open(PENDING_PATH) as f:
+        pending = json.load(f)
+
+    story = pending["story"]
+    written = pending["written"]
+    out_name = pending["out_name"]
+    ist = dt.datetime.strptime(pending["ist"], "%Y-%m-%d %H:%M")
+
+    image_base = os.environ.get("GH_PAGES_BASE", "").rstrip("/")
+    image_url = f"{image_base}/{out_name}" if image_base else None
     caption = build_caption(written, story.get("geo"))
 
     if image_url:
+        print("Waiting for image to go public:", image_url)
+        if not _wait_until_public(image_url):
+            print("WARNING: image never went public in time, publishing anyway (will likely fail).")
         results = publisher.publish_all(image_url, caption, story.get("geo"))
     else:
         print("No GH_PAGES_BASE set — skipping publish (dry run).")
         results = {"dry_run": True}
 
     news_engine.mark_posted(story["id"])
-    analytics.log_post(story, written, category_label, results, ist)
+    analytics.log_post(story, written, pending["category_label"], results, ist)
+    os.remove(PENDING_PATH)
     print("=== Done ===")
 
 
 if __name__ == "__main__":
-    run_once()
+    phase = sys.argv[1] if len(sys.argv) > 1 else "all"
+    if phase == "render":
+        render()
+    elif phase == "publish":
+        publish()
+    else:
+        render()
+        publish()

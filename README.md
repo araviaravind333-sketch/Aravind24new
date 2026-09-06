@@ -47,11 +47,17 @@ Add each key from `.env.example`. (These are encrypted; never visible again.)
 
 Then under the **Variables** tab (not secrets), add:
 - `AI_IMAGE_PROVIDER` = `pollinations` (or `hf`)
-- `GH_PAGES_BASE` = `https://<your-github-username>.github.io/aravindnews24-auto`
+- `GH_PAGES_BASE` = `https://raw.githubusercontent.com/<your-github-username>/<repo>/main/public`
+  (raw.githubusercontent.com serves a file within seconds of it being pushed —
+  no build delay — which is what makes it safe for Instagram/Facebook to fetch
+  right after the "render" step pushes the image. **Requires the repo to be
+  public**: `raw.githubusercontent.com` doesn't serve private-repo files.)
 
-### Step 5 — Enable GitHub Pages (gives images a public URL)
+### Step 5 — Enable GitHub Pages (optional — a browsable image gallery)
 Repo → Settings → Pages → Source: **GitHub Actions**. Save.
-(Instagram's API needs a public image URL; Pages provides it for free.)
+Not required for posting (that uses raw.githubusercontent.com above), but
+gives you a public gallery of every rendered post at
+`https://<your-github-username>.github.io/<repo>/`.
 
 ### Step 6 — Add your logo (optional but recommended)
 Drop a transparent PNG at `assets/logo/logo.png` (max ~300x120).

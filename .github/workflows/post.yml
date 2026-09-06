@@ -38,33 +38,44 @@ jobs:
       - name: Install deps
         run: pip install -r requirements.txt
 
-      - name: Run poster
+      - name: Render post (news + AI rewrite + image)
         env:
-          META_PAGE_ACCESS_TOKEN: ${{ secrets.META_PAGE_ACCESS_TOKEN }}
-          META_APP_ID:            ${{ secrets.META_APP_ID }}
-          META_APP_SECRET:        ${{ secrets.META_APP_SECRET }}
-          FB_PAGE_ID:             ${{ secrets.FB_PAGE_ID }}
-          IG_USER_ID:             ${{ secrets.IG_USER_ID }}
           ANTHROPIC_API_KEY:      ${{ secrets.ANTHROPIC_API_KEY }}
           GEMINI_API_KEY:         ${{ secrets.GEMINI_API_KEY }}
           HUGGINGFACE_TOKEN:      ${{ secrets.HUGGINGFACE_TOKEN }}
           PEXELS_API_KEY:         ${{ secrets.PEXELS_API_KEY }}
           UNSPLASH_ACCESS_KEY:    ${{ secrets.UNSPLASH_ACCESS_KEY }}
           AI_IMAGE_PROVIDER:      ${{ vars.AI_IMAGE_PROVIDER }}
-          GH_PAGES_BASE:          ${{ vars.GH_PAGES_BASE }}
-        run: python -m src.main
+        run: python -m src.main render
 
-      - name: Commit state (posted log + analytics + image)
+      - name: Push rendered image (so it has a public URL)
         run: |
           git config user.name "aravindnews24-bot"
           git config user.email "bot@users.noreply.github.com"
-          git add data/ public/ || true
+          git add public/ || true
+          git commit -m "auto: render $(date -u +%FT%TZ)" || echo "nothing to commit"
+          git push || echo "push skipped"
+
+      - name: Publish to Instagram + Facebook
+        env:
+          META_PAGE_ACCESS_TOKEN: ${{ secrets.META_PAGE_ACCESS_TOKEN }}
+          META_APP_ID:            ${{ secrets.META_APP_ID }}
+          META_APP_SECRET:        ${{ secrets.META_APP_SECRET }}
+          FB_PAGE_ID:             ${{ secrets.FB_PAGE_ID }}
+          IG_USER_ID:             ${{ secrets.IG_USER_ID }}
+          GH_PAGES_BASE:          ${{ vars.GH_PAGES_BASE }}
+        run: python -m src.main publish
+
+      - name: Commit state (posted log + analytics)
+        run: |
+          git add data/ || true
           git commit -m "auto: post cycle $(date -u +%FT%TZ)" || echo "nothing to commit"
           git push || echo "push skipped"
 
-      - name: Deploy image to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Deploy image gallery to GitHub Pages
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
-          keep_files: true
+          path: ./public
+
+      - name: Publish Pages artifact
+        uses: actions/deploy-pages@v4

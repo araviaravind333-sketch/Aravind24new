@@ -13,4 +13,5 @@ venv/
 
 # temp images (only /public rendered posts are kept)
 data/tmp_image.jpg
+data/_pending.json
 demo_output.jpg
