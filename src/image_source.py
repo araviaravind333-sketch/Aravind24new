@@ -35,6 +35,35 @@ STOPWORDS = {
     "over", "amid", "amidst", "into", "out", "up", "down", "this", "that",
     "will", "has", "have", "had", "its", "it's", "says", "said", "not",
     "new", "latest",
+    # Generic news-reporting verbs — these flood headlines ("hold talks",
+    # "meets", "tells reporters") but have no distinctive topical meaning,
+    # and a literal-word search engine can match them against something
+    # totally unrelated (confirmed: "hold" matched a "hold on to your
+    # children" safety-sign stock photo for a diplomatic-talks story).
+    "hold", "holds", "holding", "held", "talk", "talks", "talking",
+    "meet", "meets", "meeting", "met", "tell", "tells", "telling", "told",
+    "give", "gives", "giving", "gave", "given", "plan", "plans", "planning",
+    "planned", "get", "gets", "getting", "got", "today", "announce",
+    "announces", "announcing", "announced", "report", "reports",
+    "reporting", "reported", "claim", "claims", "claiming", "claimed",
+    "urge", "urges", "urging", "urged", "call", "calls", "calling",
+    "called", "seek", "seeks", "seeking", "sought", "vow", "vows",
+    "vowing", "vowed", "eye", "eyes", "eyeing", "eyed", "face", "faces",
+    "facing", "faced", "set", "sets", "setting", "aim", "aims", "aiming",
+    "aimed", "move", "moves", "moving", "moved", "push", "pushes",
+    "pushing", "pushed", "want", "wants", "wanting", "wanted", "ask",
+    "asks", "asking", "asked", "hit", "hits", "hitting", "make", "makes",
+    "making", "made", "take", "takes", "taking", "taken", "keep", "keeps",
+    "keeping", "kept", "come", "comes", "coming", "came", "goes", "going",
+    "went", "gone", "lead", "leads", "leading", "led", "show", "shows",
+    "showing", "shown", "showed", "remain", "remains", "remaining",
+    "remained", "stay", "stays", "staying", "stayed", "continue",
+    "continues", "continuing", "continued", "begin", "begins",
+    "beginning", "began", "begun", "start", "starts", "starting",
+    "started", "end", "ends", "ending", "ended", "find", "finds",
+    "finding", "found", "bring", "brings", "bringing", "brought", "send",
+    "sends", "sending", "sent", "raise", "raises", "raising", "raised",
+    "cut", "cuts", "cutting", "add", "adds", "adding", "added",
 }
 
 
@@ -67,8 +96,10 @@ _ENTITY_STOPSTART = {
 
 def _proper_noun_phrases(title, limit=3):
     """Pull real named-entity candidates (people/places/institutions) out of
-    the headline — runs of capitalized words, plus short ALL-CAPS acronyms
-    (RBI, ISRO, TCS) — most specific (longest) first."""
+    the headline — runs of capitalized words, short ALL-CAPS acronyms
+    (RBI, ISRO, TCS), plus single-word proper nouns like a surname
+    ("Zelensky", "Putin") that Commons/Openverse likely has real photos
+    of — most specific (longest) first."""
     pattern = re.compile(
         r"\b[A-Z][a-zA-Z']*(?:\s+(?:of|and|the|de)\s+[A-Z][a-zA-Z']*|\s+[A-Z][a-zA-Z']*)*\b"
     )
@@ -80,7 +111,17 @@ def _proper_noun_phrases(title, limit=3):
             continue
         is_multi_word = len(words) >= 2
         is_acronym = c.isupper() and 2 <= len(c) <= 6
-        if not (is_multi_word or is_acronym):
+        # a single capitalized word can be a real name too — but only if
+        # it's not the sentence-initial word (every headline capitalizes
+        # its first word regardless of whether it's a proper noun, so that
+        # position carries no signal) and isn't a generic word that just
+        # happens to be capitalized in a Title Case headline (reuses the
+        # same filter that keeps keyword search clean)
+        is_real_name = (
+            len(words) == 1 and m.start() > 0
+            and len(c) >= 4 and c.lower() not in STOPWORDS
+        )
+        if not (is_multi_word or is_acronym or is_real_name):
             continue
         if c.lower() not in seen:
             seen.add(c.lower())
