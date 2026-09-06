@@ -1,0 +1,32 @@
+name: Daily Insights Refresh
+
+# Once/day — pulls real reach/likes/comments/shares for every post logged
+# in data/performance.csv, so the category selector learns from actual
+# audience response instead of just post/fail status.
+on:
+  schedule:
+    - cron: '30 18 * * *'   # 00:00 IST
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Refresh insights
+        env:
+          META_PAGE_ACCESS_TOKEN: ${{ secrets.META_PAGE_ACCESS_TOKEN }}
+        run: python -m src.insights
+      - name: Commit updated performance.csv
+        run: |
+          git config user.name "aravindnews24-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add data/performance.csv || true
+          git commit -m "auto: daily insights refresh $(date -u +%FT%TZ)" || echo "nothing to commit"
+          git push || echo "push skipped"

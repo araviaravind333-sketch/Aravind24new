@@ -1,20 +1,26 @@
 """
 Analytics
 =========
-Logs every post to data/performance.csv and (later) pulls IG/FB insights
-so the selector can learn which categories + times drive the most reach.
+Logs every post to data/performance.csv. The engagement columns (reach,
+likes, etc.) start blank and get filled in later by src/insights.py, which
+runs once/day in a separate workflow — IG doesn't have meaningful numbers
+to report seconds after publish, so this is deliberately a two-step log,
+not a TODO stub.
 """
 
 import os
 import csv
-import json
 import datetime as dt
 
 DATA = os.path.join(os.path.dirname(__file__), "..", "data")
 CSV_PATH = os.path.join(DATA, "performance.csv")
 
+# Keep this list in sync with src/insights.py's METRIC_FIELDS — both write
+# the same CSV and must agree on columns or rows will misalign.
 FIELDS = ["timestamp_ist", "category", "headline", "score", "is_reel",
-          "ig_id", "fb_id", "ig_ok", "fb_ok"]
+          "ig_id", "fb_id", "ig_ok", "fb_ok",
+          "reach", "likes", "comments", "shares", "saved", "views",
+          "total_interactions"]
 
 
 def log_post(story, written, category_label, results, ist, is_reel=False):
@@ -39,12 +45,13 @@ def log_post(story, written, category_label, results, ist, is_reel=False):
 
 
 def best_categories(lookback_days=14):
-    """Return categories ranked by how often they posted successfully.
-    (Extend later to pull real reach via /insights endpoint.)"""
+    """Rank categories by average reach where real insights data exists
+    (filled in daily by src/insights.py); falls back to post-count for
+    categories with no insights yet (e.g. brand new account)."""
     if not os.path.exists(CSV_PATH):
         return []
-    counts = {}
     cutoff = dt.datetime.now() - dt.timedelta(days=lookback_days)
+    counts, reach_totals = {}, {}
     with open(CSV_PATH) as f:
         for row in csv.DictReader(f):
             try:
@@ -53,5 +60,18 @@ def best_categories(lookback_days=14):
                 continue
             if ts < cutoff:
                 continue
-            counts[row["category"]] = counts.get(row["category"], 0) + 1
-    return sorted(counts, key=counts.get, reverse=True)
+            cat = row["category"]
+            counts[cat] = counts.get(cat, 0) + 1
+            try:
+                reach = float(row.get("reach") or 0)
+            except ValueError:
+                reach = 0
+            if reach:
+                reach_totals.setdefault(cat, []).append(reach)
+
+    def _score(cat):
+        reaches = reach_totals.get(cat)
+        avg_reach = sum(reaches) / len(reaches) if reaches else 0
+        return (avg_reach, counts.get(cat, 0))
+
+    return sorted(counts, key=_score, reverse=True)
