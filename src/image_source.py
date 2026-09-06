@@ -1,12 +1,17 @@
 """
 Image Source
 ============
-Gets a high-quality, LEGALLY SAFE photo for the story by searching real
-stock-photo libraries (Pexels, then Unsplash) for keywords pulled straight
-out of the headline — no AI image generation, so what's shown is always an
-actual photograph, never a hallucinated scene.
-All returned images are safe to post commercially. We NEVER scrape
-publisher photos (copyright / account-ban risk).
+Gets a high-quality, LEGALLY SAFE photo for the story. Order:
+  1. Wikimedia Commons — searched for a real named person/place/institution
+     found in the headline (e.g. "Revanth Reddy", "RBI"). Everything on
+     Commons is explicitly free-licensed (CC/public domain) by its own
+     policy, so this is the one source that can show the ACTUAL subject
+     of the story without any copyright risk.
+  2. Pexels, then Unsplash — real stock photography, keyword-matched to
+     the headline, for stories with no specific named subject.
+No AI-generated images (never a hallucinated scene), no publisher/wire
+photos scraped from news sites or search engines (copyright / account-ban
+risk — this is the thing that actually gets pages nuked at scale).
 """
 
 import os
@@ -48,6 +53,88 @@ def _keywords(title, limit=4):
         if len(seen) >= limit:
             break
     return seen
+
+
+_ENTITY_STOPSTART = {
+    "the", "a", "an", "this", "that", "why", "how", "what", "who", "when",
+}
+
+
+def _proper_noun_phrases(title, limit=3):
+    """Pull real named-entity candidates (people/places/institutions) out of
+    the headline — runs of capitalized words, plus short ALL-CAPS acronyms
+    (RBI, ISRO, TCS) — most specific (longest) first."""
+    pattern = re.compile(
+        r"\b[A-Z][a-zA-Z']*(?:\s+(?:of|and|the|de)\s+[A-Z][a-zA-Z']*|\s+[A-Z][a-zA-Z']*)*\b"
+    )
+    seen, out = set(), []
+    for m in pattern.finditer(title):
+        c = m.group().strip()
+        words = c.split()
+        if c.lower() in _ENTITY_STOPSTART:
+            continue
+        is_multi_word = len(words) >= 2
+        is_acronym = c.isupper() and 2 <= len(c) <= 6
+        if not (is_multi_word or is_acronym):
+            continue
+        if c.lower() not in seen:
+            seen.add(c.lower())
+            out.append(c)
+    out.sort(key=len, reverse=True)
+    return out[:limit]
+
+
+_COMMONS_UA = "AravindNews24Bot/1.0 (https://github.com/araviaravind333-sketch/Aravind24new)"
+_LOGO_HINTS = ("logo", "icon", "wordmark", "emblem", "seal", "coat of arms")
+
+
+def _wikimedia_commons(entity):
+    """Search Commons for a real photo of a specific named subject. Every
+    file on Commons is required by its own policy to be free-licensed, so
+    no separate license check is needed — but logos/icons/svg wordmarks are
+    filtered out since those carry separate trademark risk, not copyright."""
+    params = urllib.parse.urlencode({
+        "action": "query",
+        "generator": "search",
+        "gsrsearch": f'{entity} filetype:bitmap',
+        "gsrnamespace": 6,
+        "gsrlimit": 6,
+        "prop": "imageinfo",
+        "iiprop": "url|size|extmetadata",
+        "iiurlwidth": 1600,
+        "format": "json",
+    })
+    url = f"https://commons.wikimedia.org/w/api.php?{params}"
+    req = urllib.request.Request(url, headers={"User-Agent": _COMMONS_UA})
+    with urllib.request.urlopen(req, timeout=20) as r:
+        res = json.load(r)
+
+    pages = (res.get("query") or {}).get("pages") or {}
+    candidates = []
+    for page in pages.values():
+        title = page.get("title", "")
+        if any(h in title.lower() for h in _LOGO_HINTS):
+            continue
+        info = (page.get("imageinfo") or [None])[0]
+        if not info:
+            continue
+        w, h = info.get("width", 0), info.get("height", 0)
+        if w < 700 or h < 500:  # filter out icon/thumbnail-sized files
+            continue
+        candidates.append((w * h, info, title))
+    if not candidates:
+        raise RuntimeError(f"no usable Commons photo for '{entity}'")
+
+    candidates.sort(key=lambda c: c[0], reverse=True)
+    _, info, title = candidates[0]
+    img_url = info.get("thumburl") or info["url"]
+    meta = info.get("extmetadata", {})
+    artist = re.sub("<[^<]+?>", "", meta.get("Artist", {}).get("value", "")).strip()
+
+    req2 = urllib.request.Request(img_url, headers={"User-Agent": _COMMONS_UA})
+    with urllib.request.urlopen(req2, timeout=30) as r:
+        path = _save(r.read())
+    return path, artist
 
 
 def _search_query(story):
@@ -113,7 +200,19 @@ def _stock_unsplash(query):
 
 
 def get_image(story):
-    """Search real stock photos for the story; return path to a saved image."""
+    """Find a photo for the story; return path to a saved image.
+    story is mutated with story['photo_credit'] when the photo came from
+    Wikimedia Commons and has a known author (CC attribution)."""
+    for entity in _proper_noun_phrases(story["title"]):
+        try:
+            path, artist = _wikimedia_commons(entity)
+            print(f"image via wikimedia_commons (entity: '{entity}')")
+            if artist:
+                story["photo_credit"] = artist
+            return path
+        except Exception as e:
+            print(f"wikimedia_commons failed for '{entity}': {e}")
+
     queries = [_search_query(story), _broad_query(story)]
     for query in queries:
         for fn in (_stock_pexels, _stock_unsplash):
