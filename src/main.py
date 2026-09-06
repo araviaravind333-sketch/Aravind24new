@@ -63,14 +63,13 @@ def choose_variant(category_label):
     return min(counts, key=counts.get)
 
 
-def build_caption(written, geo, photo_credit=None):
+def build_caption(written, geo):
     caption = written["caption"].strip()
     tags = " ".join(written["hashtags"])
     loc_line = ""
     if geo and geo.get("place"):
         loc_line = f"\n📍 {geo['place']}"
-    credit_line = f"\n📷 {photo_credit} / Wikimedia Commons" if photo_credit else ""
-    return f"{caption}{loc_line}{credit_line}\n\n{tags}\n\n{settings.BRAND_HANDLE}"
+    return f"{caption}{loc_line}\n\n{tags}\n\n{settings.BRAND_HANDLE}"
 
 
 def _wait_until_public(url, tries=10, delay=5):
@@ -186,7 +185,7 @@ def publish():
     video_url = None
     if pending.get("is_reel") and pending.get("video_name") and image_base:
         video_url = f"{image_base}/{pending['video_name']}"
-    caption = build_caption(written, story.get("geo"), photo_credit=story.get("photo_credit"))
+    caption = build_caption(written, story.get("geo"))
 
     if image_url:
         print("Waiting for image to go public:", image_url)

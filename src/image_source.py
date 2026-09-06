@@ -97,6 +97,18 @@ _LOGO_HINTS = (
 )
 
 
+def _title_relevance(entity, file_title):
+    """How many of the entity's significant words actually appear in the
+    file's title. Commons' full-text search matches on categories/
+    descriptions too, so a query with little dedicated coverage (e.g. a
+    small neighborhood name) can return something merely keyword-adjacent —
+    a violinist for a Delhi building collapse story, say. Requiring the
+    title itself to actually mention the subject catches that."""
+    entity_words = {w.lower() for w in entity.split() if len(w) >= 3}
+    title_words = set(re.findall(r"[a-zA-Z]+", file_title.lower()))
+    return len(entity_words & title_words)
+
+
 def _wikimedia_commons(entity):
     """Search Commons for a real photo of a specific named subject. Every
     file on Commons is required by its own policy to be free-licensed, so
@@ -118,27 +130,37 @@ def _wikimedia_commons(entity):
     with urllib.request.urlopen(req, timeout=20) as r:
         res = json.load(r)
 
+    NO_ATTRIBUTION_NEEDED = ("public domain", "pdm", "cc0", "godl-india")
+
     pages = (res.get("query") or {}).get("pages") or {}
     candidates = []
     for page in pages.values():
         title = page.get("title", "")
         if any(h in title.lower() for h in _LOGO_HINTS):
             continue
+        relevance = _title_relevance(entity, title)
+        if relevance < 1:
+            continue  # title doesn't actually mention the subject — reject
         info = (page.get("imageinfo") or [None])[0]
         if not info:
             continue
         w, h = info.get("width", 0), info.get("height", 0)
         if w < 700 or h < 500:  # filter out icon/thumbnail-sized files
             continue
-        candidates.append((w * h, info, title))
+        license_name = (info.get("extmetadata", {}).get("LicenseShortName", {})
+                         .get("value", "")).lower()
+        free_of_attribution = any(k in license_name for k in NO_ATTRIBUTION_NEEDED)
+        candidates.append((relevance, free_of_attribution, w * h, info, title))
     if not candidates:
-        raise RuntimeError(f"no usable Commons photo for '{entity}'")
+        raise RuntimeError(f"no relevant Commons photo for '{entity}'")
 
-    candidates.sort(key=lambda c: c[0], reverse=True)
-    _, info, title = candidates[0]
+    # prefer: most relevant, then no-attribution-required, then highest-res
+    candidates.sort(key=lambda c: (c[0], c[1], c[2]), reverse=True)
+    _, free_of_attribution, _, info, title = candidates[0]
     img_url = info.get("thumburl") or info["url"]
     meta = info.get("extmetadata", {})
-    artist = re.sub("<[^<]+?>", "", meta.get("Artist", {}).get("value", "")).strip()
+    artist = "" if free_of_attribution else re.sub(
+        "<[^<]+?>", "", meta.get("Artist", {}).get("value", "")).strip()
 
     req2 = urllib.request.Request(img_url, headers={"User-Agent": _COMMONS_UA})
     with urllib.request.urlopen(req2, timeout=30) as r:
