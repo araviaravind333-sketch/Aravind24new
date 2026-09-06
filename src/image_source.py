@@ -85,7 +85,16 @@ def _proper_noun_phrases(title, limit=3):
 
 
 _COMMONS_UA = "AravindNews24Bot/1.0 (https://github.com/araviaravind333-sketch/Aravind24new)"
-_LOGO_HINTS = ("logo", "icon", "wordmark", "emblem", "seal", "coat of arms")
+# Filename-based only — this catches a file literally named "X logo.png",
+# but can't detect a small watermark baked into a real photo's pixels (e.g.
+# some government press-office handouts stamp a corner logo). That needs
+# actual image recognition (paid Vision APIs), which is out of scope for a
+# zero-cost pipeline — a rare watermarked press photo can still slip through.
+_LOGO_HINTS = (
+    "logo", "icon", "wordmark", "emblem", "seal", "coat of arms",
+    "banner", "poster", "advertisement", "watermark", "letterhead",
+    "press release", "screenshot", "infographic",
+)
 
 
 def _wikimedia_commons(entity):
