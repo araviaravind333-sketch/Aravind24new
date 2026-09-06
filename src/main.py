@@ -120,8 +120,9 @@ def render():
     if is_reel:
         video_name = f"post-{stamp}.mp4"
         video_path = os.path.join(out_dir, video_name)
+        narration = f"{written['headline']}. {written['caption']}"
         try:
-            video.render_reel(out_path, video_path)
+            video.render_reel(out_path, video_path, narration_text=narration)
             print("Rendered reel:", video_path)
         except Exception as e:
             print("Reel render failed, falling back to static image post:", e)

@@ -15,10 +15,16 @@ if no key / call fails, so the pipeline NEVER stalls.
 import json
 import os
 import re
+import time
 import urllib.request
 import urllib.error
 
 from config import settings
+
+RETRY_DELAYS = (3, 8)  # seconds — transient 429/503 "model overloaded" errors
+                       # are common on free-tier LLM APIs and clear up fast,
+                       # so retry a couple times before giving up to the
+                       # much weaker rule-based fallback
 
 GEMINI_KEY = os.environ.get("GEMINI_API_KEY")
 GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.6-flash")
@@ -47,16 +53,24 @@ Return ONLY the JSON, nothing else."""
 
 
 def _rule_based(story):
-    """Deterministic fallback so the bot always produces something clean."""
+    """Deterministic fallback so the bot always produces something clean.
+    Uses the RSS summary (a real sentence about what happened), not just
+    boilerplate, so even this fallback actually explains the news."""
     title = story["title"]
     words = title.split()
     accent = " ".join(words[:2])
     cat = story["category"]
     tags = settings.HASHTAG_BANK.get(cat, settings.HASHTAG_BANK["INDIA NEWS"])
-    place = story.get("geo", {}).get("place") or ""
-    touch = "Here's what you need to know." 
     q = "What's your take on this?"
-    caption = f"{title}. {touch} {q}"
+
+    summary = re.sub(r"\s+", " ", story.get("summary", "")).strip()
+    detail = ""
+    if summary:
+        # first real sentence of the summary, not the whole (often long) blob
+        m = re.match(r"(.{20,220}?[.!?])(\s|$)", summary)
+        detail = m.group(1) if m else summary[:200]
+
+    caption = f"{title}. {detail} {q}".strip() if detail else f"{title}. {q}"
     return {
         "headline": title if len(words) <= 10 else " ".join(words[:9]),
         "accent_word": accent,
@@ -130,17 +144,37 @@ def _call_anthropic(story):
     return _finalize(json.loads(text))
 
 
+def _is_transient(err):
+    msg = str(err)
+    return "HTTP 429" in msg or "HTTP 503" in msg or "HTTP 500" in msg
+
+
+def _with_retries(fn, story, label):
+    last_err = None
+    for attempt, delay in enumerate((0,) + RETRY_DELAYS):
+        if delay:
+            print(f"{label} transient error, retrying in {delay}s: {last_err}")
+            time.sleep(delay)
+        try:
+            return fn(story)
+        except Exception as e:
+            last_err = e
+            if not _is_transient(e):
+                break
+    raise last_err
+
+
 def rewrite(story):
     if GEMINI_KEY:
         try:
-            return _call_gemini(story)
+            return _with_retries(_call_gemini, story, "Gemini")
         except Exception as e:
             print("Gemini rewrite failed, using fallback:", e)
             return _rule_based(story)
     if not ANTHROPIC_KEY:
         return _rule_based(story)
     try:
-        return _call_anthropic(story)
+        return _with_retries(_call_anthropic, story, "Anthropic")
     except Exception as e:
         print("AI rewrite failed, using fallback:", e)
         return _rule_based(story)
