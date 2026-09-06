@@ -243,19 +243,16 @@ def _search_query(story):
     return f"{cat} " + " ".join(kws) if kws else cat
 
 
-def _broad_query(story):
-    """Fallback query when the specific one finds nothing."""
-    return story["category"].replace(" NEWS", "")
-
-
 # Pexels/Unsplash both prohibit visible brand logos/trademarks/watermarks
 # in contributed photos as part of their own submission guidelines, so we
 # don't need to detect logos ourselves — it's already filtered upstream.
 
 # Relevance ranking (the search API's own ordering) picks WHAT the photo is
 # of; among that relevant set we then pick the visually strongest one, so
-# the post doesn't always default to the plainest/first match.
-RELEVANT_POOL = 8
+# the post doesn't always default to the plainest/first match. Wider than
+# it used to be — a combined multi-word query needs more candidates for a
+# genuinely relevant one to still be in the pool.
+RELEVANT_POOL = 15
 
 
 # ---------- Pexels stock ----------
@@ -326,13 +323,21 @@ def get_image(story):
             except Exception as e:
                 print(f"{fn.__name__} failed for '{entity}': {e}")
 
-    # specific query: require the result to actually be about the story.
-    # broad (category-only) query: no relevance check — it's already a
-    # generic-but-safe fallback by construction (e.g. "Business" -> office
-    # imagery), better as a last resort than failing outright.
+    # A combined "category + 4 keywords" query is too specific for these
+    # APIs' own search ranking to surface a genuinely matching photo within
+    # a small pool — a single distinctive keyword ("landslide") finds far
+    # better, more literal matches (confirmed live: Pexels' alt-text often
+    # names the exact event) than a garbled multi-word blend does. Try each
+    # significant keyword alone first, all relevance-checked, before the
+    # combined query, before finally giving up to a bare category photo —
+    # that last step is the only ungated one left, and only as a last resort.
     relevance_words = _keywords(story["title"])
-    for query, words in ((_search_query(story), relevance_words),
-                         (_broad_query(story), None)):
+    cat = story["category"].replace(" NEWS", "")
+    attempts = [(kw, [kw]) for kw in relevance_words[:3]]
+    attempts.append((_search_query(story), relevance_words))
+    attempts.append((cat, None))
+
+    for query, words in attempts:
         for fn in (_stock_pexels, _stock_unsplash, _openverse_topical):
             try:
                 path = fn(query, words)
