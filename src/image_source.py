@@ -7,8 +7,13 @@ Gets a high-quality, LEGALLY SAFE photo for the story. Order:
      Commons is explicitly free-licensed (CC/public domain) by its own
      policy, so this is the one source that can show the ACTUAL subject
      of the story without any copyright risk.
-  2. Pexels, then Unsplash — real stock photography, keyword-matched to
+  2. Openverse — a free (no API key) aggregator covering Wikimedia Commons
+     + Flickr Creative Commons + museum archives. Tried after Commons for
+     named subjects Commons's own search doesn't surface well.
+  3. Pexels, then Unsplash — real stock photography, keyword-matched to
      the headline, for stories with no specific named subject.
+  4. Openverse again — broadest net, last resort, for topical queries
+     neither Pexels nor Unsplash matched.
 No AI-generated images (never a hallucinated scene), no publisher/wire
 photos scraped from news sites or search engines (copyright / account-ban
 risk — this is the thing that actually gets pages nuked at scale).
@@ -168,6 +173,57 @@ def _wikimedia_commons(entity):
     return path, artist
 
 
+def _openverse_search(query, entity=None, pool=8):
+    """Shared by both the entity-search and topical-search stages. Filters
+    to commercially-usable licenses via the API itself, then applies the
+    same logo/relevance/license-preference rules used for Commons, plus a
+    brand-safety check (mature content) Commons doesn't need."""
+    params = urllib.parse.urlencode({
+        "q": query, "license_type": "commercial", "page_size": pool,
+    })
+    req = urllib.request.Request(
+        f"https://api.openverse.org/v1/images/?{params}",
+        headers={"User-Agent": _COMMONS_UA},
+    )
+    with urllib.request.urlopen(req, timeout=20) as r:
+        res = json.load(r)
+
+    NO_ATTRIBUTION_NEEDED = ("cc0", "publicdomain", "pdm")
+    candidates = []
+    for item in res.get("results", []):
+        if item.get("mature"):
+            continue
+        title = item.get("title") or ""
+        if any(h in title.lower() for h in _LOGO_HINTS):
+            continue
+        if entity and _title_relevance(entity, title) < 1:
+            continue
+        w, h = item.get("width", 0), item.get("height", 0)
+        if w < 700 or h < 500:
+            continue
+        img_url = item.get("url")
+        if not img_url:
+            continue
+        free = any(k in (item.get("license") or "").lower() for k in NO_ATTRIBUTION_NEEDED)
+        candidates.append((free, w * h, img_url))
+    if not candidates:
+        raise RuntimeError(f"no usable Openverse results for '{query}'")
+
+    candidates.sort(key=lambda c: (c[0], c[1]), reverse=True)
+    _, _, img_url = candidates[0]
+    req2 = urllib.request.Request(img_url, headers={"User-Agent": _COMMONS_UA})
+    with urllib.request.urlopen(req2, timeout=30) as r:
+        return _save(r.read())
+
+
+def _openverse_entity(entity):
+    return _openverse_search(entity, entity=entity), ""
+
+
+def _openverse_topical(query):
+    return _openverse_search(query)
+
+
 def _search_query(story):
     cat = story["category"].replace(" NEWS", "")
     kws = _keywords(story["title"])
@@ -233,20 +289,21 @@ def _stock_unsplash(query):
 def get_image(story):
     """Find a photo for the story; return path to a saved image.
     story is mutated with story['photo_credit'] when the photo came from
-    Wikimedia Commons and has a known author (CC attribution)."""
+    a source with a known author (CC attribution)."""
     for entity in _proper_noun_phrases(story["title"]):
-        try:
-            path, artist = _wikimedia_commons(entity)
-            print(f"image via wikimedia_commons (entity: '{entity}')")
-            if artist:
-                story["photo_credit"] = artist
-            return path
-        except Exception as e:
-            print(f"wikimedia_commons failed for '{entity}': {e}")
+        for fn in (_wikimedia_commons, _openverse_entity):
+            try:
+                path, artist = fn(entity)
+                print(f"image via {fn.__name__} (entity: '{entity}')")
+                if artist:
+                    story["photo_credit"] = artist
+                return path
+            except Exception as e:
+                print(f"{fn.__name__} failed for '{entity}': {e}")
 
     queries = [_search_query(story), _broad_query(story)]
     for query in queries:
-        for fn in (_stock_pexels, _stock_unsplash):
+        for fn in (_stock_pexels, _stock_unsplash, _openverse_topical):
             try:
                 path = fn(query)
                 print(f"image via {fn.__name__} (query: '{query}')")
