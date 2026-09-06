@@ -328,14 +328,14 @@ def get_image(story):
     # a small pool — a single distinctive keyword ("landslide") finds far
     # better, more literal matches (confirmed live: Pexels' alt-text often
     # names the exact event) than a garbled multi-word blend does. Try each
-    # significant keyword alone first, all relevance-checked, before the
-    # combined query, before finally giving up to a bare category photo —
-    # that last step is the only ungated one left, and only as a last resort.
+    # significant keyword alone first, then the combined query — every
+    # attempt relevance-checked. No ungated bare-category fallback: that
+    # was exactly what surfaced a Jaipur palace photo for a Sikkim landslide
+    # story. Better to skip a post than post the wrong picture — the caller
+    # treats "no image found" the same as "no story found" and moves on.
     relevance_words = _keywords(story["title"])
-    cat = story["category"].replace(" NEWS", "")
     attempts = [(kw, [kw]) for kw in relevance_words[:3]]
     attempts.append((_search_query(story), relevance_words))
-    attempts.append((cat, None))
 
     for query, words in attempts:
         for fn in (_stock_pexels, _stock_unsplash, _openverse_topical):

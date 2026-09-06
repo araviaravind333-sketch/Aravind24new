@@ -114,7 +114,14 @@ def render():
     if story["score"] >= 60 and story.get("hot_hit"):
         category_label = "BREAKING NEWS"
 
-    img_path = image_source.get_image(story)
+    try:
+        img_path = image_source.get_image(story)
+    except Exception as e:
+        print(f"No relevant image found ({e}). Skipping this cycle rather than posting a mismatched photo.")
+        # mark it handled anyway, so the next cycle moves on to a different
+        # story instead of re-picking (and re-failing on) this same one
+        news_engine.mark_posted(story)
+        return None
 
     out_dir = os.path.join(os.path.dirname(__file__), "..", "public")
     os.makedirs(out_dir, exist_ok=True)
