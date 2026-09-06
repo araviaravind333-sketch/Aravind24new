@@ -103,13 +103,10 @@ IG_PROFILE   = "https://www.instagram.com/aravindnews24/"
 # 8. REELS
 # ============================================================
 # Reels get 5-10x the reach of a static image post right now — the growth
-# plan recommends a ~70/30 Reels/static mix. The card is held still (no
-# zoom/pan) with a spoken voiceover narrating the story as the audio track —
-# real IG "trending audio" isn't attachable via API (app-only feature), so
-# a real narration of the actual news is the honest substitute.
+# plan recommends a ~70/30 Reels/static mix. The card is held still, silent,
+# no zoom/pan/audio (by request).
 REEL_RATIO      = 0.7    # fraction of cycles that post as a Reel vs a static image
-REEL_MAX_DURATION_SEC = 20  # safety cap — actual length follows the voiceover
-REEL_MIN_DURATION_SEC = 6   # used only for the rare silent (no-voiceover) fallback
+REEL_DURATION_SEC = 6
 REEL_WIDTH      = 1080   # matches the static card exactly (4:5) — no aspect
 REEL_HEIGHT     = 1350   # mismatch/distortion risk from forcing 9:16 here
 
