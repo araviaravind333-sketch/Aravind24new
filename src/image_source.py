@@ -181,7 +181,74 @@ PLACE_NAMES = INDIAN_STATES_UTS | WORLD_PLACE_NAMES
 
 
 def _is_place_entity(entity):
-    return entity.lower() in PLACE_NAMES
+    el = entity.lower()
+    if el in PLACE_NAMES:
+        return True
+    # "India France" — neither word alone is in PLACE_NAMES as this exact
+    # phrase, but both individually are places, not a person/institution
+    words = el.split()
+    return len(words) > 1 and all(w in PLACE_NAMES for w in words)
+
+
+_HONORIFIC_PREFIXES = {
+    "pm", "cm", "president", "dr", "mr", "mrs", "ms", "shri", "smt",
+    "gen", "col", "capt", "prof", "sir",
+}
+
+
+def _strip_honorific(name):
+    """'PM Modi' -> 'Modi'. A bare title (just an honorific, no name after
+    it) is left as-is."""
+    words = name.split()
+    stripped = [w for w in words if w.lower() not in _HONORIFIC_PREFIXES]
+    return " ".join(stripped) if stripped else name
+
+
+def _combined_person_place_queries(person_entities, title):
+    """A person alone often only finds a generic solo portrait; a genuine
+    bilateral story needs the OTHER party too — tested live: "PM Modi"
+    alone found a plain headshot, but "Modi France" found real photos of
+    Modi with the French president at joint events.
+
+    Only fires when 2+ distinct place words appear in the title — a single
+    place mention is usually just "where" (the person's own home turf),
+    not "who with", and combining with it is actively harmful: tested live,
+    "Zelensky Kyiv" (his own capital) returned a photo of a completely
+    different, unrelated politician, and "Teesta Sikkim" (the river's own
+    state) returned a plainer shot than "Teesta" alone already had. Two+
+    distinct places is the actual signal of a bilateral/multi-country story.
+    "India" is additionally excluded from the words tried even then — it's
+    trivially attached to nearly every Indian political figure, so pairing
+    with it can surface the wrong foreign country entirely (confirmed:
+    "Modi India" found Modi with the South Korean president, not France)."""
+    raw_places = _place_words_in_title(title)
+    if len(raw_places) < 2:
+        return []
+    place_words = [w for w in raw_places if w != "india"]
+    queries, seen = [], set()
+    for pe in person_entities:
+        clean = _strip_honorific(pe)
+        for pw in place_words:
+            if pw in clean.lower():
+                continue
+            q = f"{clean} {pw.title()}"
+            if q.lower() not in seen:
+                seen.add(q.lower())
+                queries.append(q)
+    return queries
+
+
+def _place_words_in_title(title):
+    """Single-word country/city mentions anywhere in the title, in
+    original reading order — used to build a person+place combined query
+    (e.g. "Modi France"), which finds a real joint/bilateral photo far
+    more often than either the person alone or the place alone."""
+    found = []
+    for w in re.findall(r"[A-Za-z]+", title):
+        lw = w.lower()
+        if lw in PLACE_NAMES and lw not in found:
+            found.append(lw)
+    return found
 
 
 _ENTITY_CONNECTORS = {"of", "and", "the", "de"}
@@ -523,6 +590,17 @@ def get_image(story):
     # topical/event search below has had its shot.
     person_entities = [e for e in entities if not _is_place_entity(e)]
     place_entities = [e for e in entities if _is_place_entity(e)]
+
+    # A bilateral/joint story needs BOTH parties in the search, not just
+    # one — try person+place combinations first (e.g. "Modi France" finds
+    # real Modi-Macron meeting photos); a solo person portrait is still a
+    # fine fallback, just less specific to this particular story.
+    combined = _combined_person_place_queries(person_entities, story["title"])
+    path, artist = _try_entities(combined)
+    if path:
+        if artist:
+            story["photo_credit"] = artist
+        return path
 
     path, artist = _try_entities(person_entities)
     if path:
