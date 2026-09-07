@@ -57,6 +57,26 @@ def _is_recent_duplicate(title, posted_entries):
     return False
 
 
+# A fresh incident (collapse, crash, disaster) almost never has a real,
+# specific photo available yet through any legitimately-licensed source —
+# forcing a generic stock substitute into that slot is exactly what's been
+# producing mismatches. These stories get flagged so the renderer can use
+# a bold graphic alert card instead of guessing at a photo.
+INCIDENT_KEYWORDS = [
+    "collapse", "collapses", "collapsed", "crash", "crashes", "crashed",
+    "accident", "derail", "derails", "derailed", "earthquake", "landslide",
+    "flood", "floods", "flooding", "cyclone", "fire", "blast", "explosion",
+    "explosions", "rescue", "rescued", "trapped", "stampede", "capsize",
+    "capsized", "drown", "drowned", "gas leak", "building collapse",
+    "wall collapse", "bridge collapse", "avalanche", "tsunami", "wildfire",
+]
+
+
+def is_fresh_incident(title):
+    t = title.lower()
+    return any(kw in t for kw in INCIDENT_KEYWORDS)
+
+
 # ---------- virality scoring ----------
 HOT_KEYWORDS = [
     "breaking", "dies", "death", "wins", "record", "attack", "arrest",
@@ -232,6 +252,7 @@ def fetch_candidates(category):
                 "category": category,
                 "score": score,
                 "hot_hit": hot_hit,
+                "is_incident": is_fresh_incident(title),
             })
     out = _apply_corroboration(out)
     out.sort(key=lambda x: x["score"], reverse=True)

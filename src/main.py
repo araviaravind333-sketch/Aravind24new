@@ -114,14 +114,21 @@ def render():
     if story["score"] >= 60 and story.get("hot_hit"):
         category_label = "BREAKING NEWS"
 
-    try:
-        img_path = image_source.get_image(story)
-    except Exception as e:
-        print(f"No relevant image found ({e}). Skipping this cycle rather than posting a mismatched photo.")
-        # mark it handled anyway, so the next cycle moves on to a different
-        # story instead of re-picking (and re-failing on) this same one
-        news_engine.mark_posted(story)
-        return None
+    # A fresh incident (collapse/crash/disaster) almost never has a real,
+    # legitimately-licensed photo available yet — forcing a generic stock
+    # substitute into that slot is exactly what's been producing mismatches.
+    # Use the honest no-photo alert card instead of guessing at one.
+    is_incident = story.get("is_incident", False)
+    img_path = None
+    if not is_incident:
+        try:
+            img_path = image_source.get_image(story)
+        except Exception as e:
+            print(f"No relevant image found ({e}). Skipping this cycle rather than posting a mismatched photo.")
+            # mark it handled anyway, so the next cycle moves on to a
+            # different story instead of re-picking (and re-failing) this one
+            news_engine.mark_posted(story)
+            return None
 
     out_dir = os.path.join(os.path.dirname(__file__), "..", "public")
     os.makedirs(out_dir, exist_ok=True)
@@ -129,7 +136,7 @@ def render():
     out_name = f"post-{stamp}.jpg"
     out_path = os.path.join(out_dir, out_name)
 
-    variant = choose_variant(category_label)
+    variant = "alert_card" if is_incident else choose_variant(category_label)
     print("Template variant:", variant)
 
     logo = os.path.join(os.path.dirname(__file__), "..", "assets", "logo", "logo.png")

@@ -128,6 +128,60 @@ def _headline_lines(draw, headline, max_w, max_lines=4, start_size=118, min_size
     return lines, f_head, size
 
 
+def _hex_to_rgb(h):
+    h = h.lstrip("#")
+    return tuple(int(h[i:i + 2], 16) for i in (0, 2, 4))
+
+
+def _mix(c1, c2, t):
+    r1, g1, b1 = _hex_to_rgb(c1)
+    r2, g2, b2 = _hex_to_rgb(c2)
+    return (int(r1 + (r2 - r1) * t), int(g1 + (g2 - g1) * t), int(b1 + (b2 - b1) * t))
+
+
+def _vertical_gradient(w, h, top_rgb, bottom_rgb):
+    grad = Image.new("RGB", (1, h))
+    for y in range(h):
+        t = y / h
+        grad.putpixel((0, y), tuple(
+            int(top_rgb[i] + (bottom_rgb[i] - top_rgb[i]) * t) for i in range(3)
+        ))
+    return grad.resize((w, h))
+
+
+def _hazard_stripe_band(width, height, color1, color2, stripe_w=30):
+    """Diagonal caution-tape stripes — reads as "alert" without needing a
+    photo, used on the alert_card variant for fresh incidents."""
+    band = Image.new("RGB", (width, height), color2)
+    d = ImageDraw.Draw(band)
+    step = stripe_w * 2
+    for x in range(-height, width + height, step):
+        d.polygon([
+            (x, height), (x + height, 0),
+            (x + height + stripe_w, 0), (x + stripe_w, height),
+        ], fill=color1)
+    return band
+
+
+def _draw_hazard_icon(draw, cx, cy, size, fg, bg):
+    h = size
+    w = size * 1.15
+    draw.polygon(
+        [(cx, cy - h / 2), (cx - w / 2, cy + h / 2), (cx + w / 2, cy + h / 2)],
+        fill=fg,
+    )
+    bar_w = size * 0.09
+    bar_h = size * 0.36
+    bar_x = cx - bar_w / 2
+    bar_y = cy - h * 0.08
+    draw.rounded_rectangle(
+        [bar_x, bar_y, bar_x + bar_w, bar_y + bar_h], radius=bar_w / 2, fill=bg
+    )
+    dot_r = bar_w * 0.75
+    dot_cy = bar_y + bar_h + bar_w * 1.4
+    draw.ellipse([cx - dot_r, dot_cy - dot_r, cx + dot_r, dot_cy + dot_r], fill=bg)
+
+
 def _draw_headline_block(draw, lines, f_head, size, x, y, accent_up, color=WHITE):
     line_h = int(size * 0.98)
     for line in lines:
@@ -319,6 +373,83 @@ def _render_framed_card(photo_path, category, headline, accent_word, out_path,
     return out_path
 
 
+# ============================================================
+# Variant 4 — alert_card (no photo — a bold graphic card for FRESH
+# incidents where no real, legitimately-licensed photo of the specific
+# event exists yet. Honest about not having "the photo" instead of
+# forcing a stock substitute into that slot, which is what was producing
+# mismatches for building collapses / accidents / disasters.)
+# ============================================================
+def _render_alert_card(category, headline, accent_word, out_path,
+                        footer, handle, logo_path):
+    pill_color = CATEGORY_COLORS.get(category, "#E01E1E")
+    MARGIN = 70
+
+    top_rgb = _hex_to_rgb(NEAR_BLACK)
+    bottom_rgb = _mix(pill_color, NEAR_BLACK, 0.7)
+    canvas = _vertical_gradient(W, H, top_rgb, bottom_rgb).convert("RGBA")
+    draw = ImageDraw.Draw(canvas)
+
+    stripe_dark = _mix(NEAR_BLACK, "#000000", 0.3)
+    band = _hazard_stripe_band(W, 34, pill_color, stripe_dark).convert("RGBA")
+    canvas.alpha_composite(band, (0, 0))
+    canvas.alpha_composite(band, (0, H - 34))
+
+    _draw_logo(canvas, draw, logo_path, MARGIN, 70)
+
+    _draw_hazard_icon(draw, W / 2, 430, 260, pill_color, NEAR_BLACK)
+
+    f_cat = _font(ARCHIVO, 30)
+    cat_text = category
+    tw = draw.textlength(cat_text, font=f_cat)
+    pill_h = 58
+    pill_w = tw + 56
+    pill_y = 640
+    draw.rounded_rectangle(
+        [(W - pill_w) / 2, pill_y, (W + pill_w) / 2, pill_y + pill_h],
+        radius=8, fill=pill_color,
+    )
+    draw.text(((W - tw) / 2, pill_y + 12), cat_text, font=f_cat, fill=WHITE)
+
+    headline_top = pill_y + pill_h + 40
+    lines, f_head, size = _headline_lines(
+        draw, headline, W - MARGIN * 2, max_lines=5, start_size=100, min_size=52)
+    line_h = int(size * 0.98)
+    total_h = line_h * len(lines)
+
+    # center each line (this card has no bottom-anchored photo edge to
+    # respect, so a centered block reads better than left-aligned)
+    y = headline_top
+    for line in lines:
+        line_w = draw.textlength(line, font=f_head)
+        x = (W - line_w) / 2
+        accent_up = accent_word.upper()
+        if accent_up in line:
+            before, _, after = line.partition(accent_up)
+            cx = x
+            if before:
+                draw.text((cx, y), before, font=f_head, fill=WHITE)
+                cx += draw.textlength(before, font=f_head)
+            draw.text((cx, y), accent_up, font=f_head, fill=pill_color)
+            cx += draw.textlength(accent_up, font=f_head)
+            if after:
+                draw.text((cx, y), after, font=f_head, fill=WHITE)
+        else:
+            draw.text((x, y), line, font=f_head, fill=WHITE)
+        y += line_h
+
+    f_foot = _font(ARCHIVO, 32)
+    fy = H - 90
+    foot_w = draw.textlength(footer + "  ", font=f_foot)
+    handle_w = draw.textlength("→  " + handle, font=f_foot)
+    fx = (W - foot_w - handle_w) / 2
+    draw.text((fx, fy), footer, font=f_foot, fill=MUTED)
+    draw.text((fx + foot_w, fy), "→  " + handle, font=f_foot, fill=WHITE)
+
+    canvas.convert("RGB").save(out_path, "JPEG", quality=95, subsampling=0)
+    return out_path
+
+
 _RENDERERS = {
     "full_bleed": _render_full_bleed,
     "split_banner": _render_split_banner,
@@ -330,6 +461,9 @@ def render_post(photo_path, category, headline, accent_word, out_path,
                  footer="For the latest news", handle="@aravindnews24",
                  logo_path=None, variant="full_bleed"):
     category = category.upper()
+    if variant == "alert_card":
+        return _render_alert_card(category, headline, accent_word, out_path,
+                                   footer, handle, logo_path)
     fn = _RENDERERS.get(variant, _render_full_bleed)
     return fn(photo_path, category, headline, accent_word, out_path,
               footer, handle, logo_path)
