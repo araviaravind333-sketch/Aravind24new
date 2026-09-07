@@ -105,6 +105,34 @@ def render():
         print("No fresh story found. Exiting cleanly.")
         return None
 
+    return _render_story(story, ist, is_reel)
+
+
+def render_breaking():
+    """Checked frequently (every 30 min, separate workflow) so a genuinely
+    exceptional story gets posted immediately instead of waiting for the
+    next fixed slot (up to ~3h away) — speed matters for reach on a story
+    that's actually breaking. Deliberately strict and rate-limited so this
+    doesn't quietly turn into extra posting frequency on a young account
+    (the growth plan is explicit that over-posting risks a spam flag)."""
+    gap = news_engine.hours_since_last_post()
+    if gap < settings.BREAKING_MIN_GAP_HOURS:
+        print(f"Only {gap:.1f}h since the last post (need "
+              f"{settings.BREAKING_MIN_GAP_HOURS}h) — skipping breaking check.")
+        return None
+
+    story = news_engine.find_breaking_story()
+    if not story:
+        print("No story clears the breaking-news bar right now. Skipping.")
+        return None
+
+    ist = dt.datetime.now(dt.timezone.utc) + dt.timedelta(hours=5, minutes=30)
+    print(f"=== BREAKING at {ist:%Y-%m-%d %H:%M} IST: {story['title']} "
+          f"(score {story['score']}) ===")
+    return _render_story(story, ist, is_reel=True)  # Reels get more reach
+
+
+def _render_story(story, ist, is_reel):
     print("Selected:", story["title"], "| score:", story["score"])
 
     written = ai_writer.rewrite(story)
@@ -228,6 +256,8 @@ if __name__ == "__main__":
     phase = sys.argv[1] if len(sys.argv) > 1 else "all"
     if phase == "render":
         render()
+    elif phase == "render-breaking":
+        render_breaking()
     elif phase == "publish":
         publish()
     else:

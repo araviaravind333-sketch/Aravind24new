@@ -14,10 +14,12 @@ import re
 import hashlib
 import json
 import os
+import csv
 
 from config import settings
 
 POSTED_LOG = os.path.join(os.path.dirname(__file__), "..", "data", "posted.json")
+PERFORMANCE_LOG = os.path.join(os.path.dirname(__file__), "..", "data", "performance.csv")
 
 
 # ---------- de-dupe: never post the same story twice ----------
@@ -280,3 +282,41 @@ def mark_posted(story):
     posted = _load_posted()
     posted.append({"id": story["id"], "title": story["title"]})
     _save_posted(posted)
+
+
+# ---------- breaking-news fast path ----------
+BREAKING_SCORE_THRESHOLD = 90
+
+
+def find_breaking_story():
+    """Scan every category for a story clearing a strict breaking-news bar
+    — deliberately higher than the normal per-cycle pick, so this only
+    fires for something genuinely exceptional, not just today's best-of-6."""
+    best = None
+    for category in settings.RSS_FEEDS:
+        for story in fetch_candidates(category):
+            if story["score"] < BREAKING_SCORE_THRESHOLD or not story.get("hot_hit"):
+                continue
+            if best is None or story["score"] > best["score"]:
+                best = story
+    if best:
+        best["geo"] = detect_geo(best["title"], best["category"])
+    return best
+
+
+def hours_since_last_post():
+    """How long since the last post (scheduled or breaking) actually went
+    out, read from the real log — not a fixed assumption. Returns a large
+    number if there's no history yet (nothing to rate-limit against)."""
+    if not os.path.exists(PERFORMANCE_LOG):
+        return 999.0
+    with open(PERFORMANCE_LOG) as f:
+        rows = list(csv.DictReader(f))
+    if not rows:
+        return 999.0
+    try:
+        last = dt.datetime.strptime(rows[-1]["timestamp_ist"], "%Y-%m-%d %H:%M")
+    except (KeyError, ValueError):
+        return 999.0
+    now_ist = dt.datetime.now(dt.timezone.utc) + dt.timedelta(hours=5, minutes=30)
+    return (now_ist - last).total_seconds() / 3600

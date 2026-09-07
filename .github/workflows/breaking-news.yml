@@ -1,0 +1,70 @@
+name: AravindNews24 Breaking News Check
+
+# Runs every 30 min and does nothing unless a story clears a strict
+# breaking-news bar (see BREAKING_SCORE_THRESHOLD in src/news_engine.py)
+# AND it's been at least BREAKING_MIN_GAP_HOURS since the last post of any
+# kind — so this adds speed for something genuinely exceptional without
+# turning into extra baseline posting frequency on a young account.
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: auto-poster      # same group as post.yml — never race a git push
+  cancel-in-progress: false
+
+jobs:
+  breaking-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install deps
+        run: pip install -r requirements.txt
+
+      - name: Ensure ffmpeg (for Reels rendering)
+        run: command -v ffmpeg || (sudo apt-get update && sudo apt-get install -y ffmpeg)
+
+      - name: Check for breaking news and render if found
+        env:
+          ANTHROPIC_API_KEY:      ${{ secrets.ANTHROPIC_API_KEY }}
+          GEMINI_API_KEY:         ${{ secrets.GEMINI_API_KEY }}
+          PEXELS_API_KEY:         ${{ secrets.PEXELS_API_KEY }}
+          UNSPLASH_ACCESS_KEY:    ${{ secrets.UNSPLASH_ACCESS_KEY }}
+        run: python -m src.main render-breaking
+
+      - name: Push rendered image (if anything was rendered)
+        run: |
+          git config user.name "aravindnews24-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add public/ || true
+          git commit -m "auto: breaking render $(date -u +%FT%TZ)" || echo "nothing to commit"
+          git push || echo "push skipped"
+
+      - name: Publish to Instagram + Facebook (no-op if nothing pending)
+        env:
+          META_PAGE_ACCESS_TOKEN: ${{ secrets.META_PAGE_ACCESS_TOKEN }}
+          META_APP_ID:            ${{ secrets.META_APP_ID }}
+          META_APP_SECRET:        ${{ secrets.META_APP_SECRET }}
+          FB_PAGE_ID:             ${{ secrets.FB_PAGE_ID }}
+          IG_USER_ID:             ${{ secrets.IG_USER_ID }}
+          GH_PAGES_BASE:          ${{ vars.GH_PAGES_BASE }}
+        run: python -m src.main publish
+
+      - name: Commit state (posted log + analytics, if anything changed)
+        run: |
+          git add data/ || true
+          git commit -m "auto: breaking post cycle $(date -u +%FT%TZ)" || echo "nothing to commit"
+          git push || echo "push skipped"

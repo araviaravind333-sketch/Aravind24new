@@ -82,6 +82,15 @@ DAILY_SCHEDULE = [
     (23, "world", "reel"),
 ]
 
+# Checked every 30 min (separate workflow) for a story so exceptional it's
+# worth posting immediately rather than waiting for the next fixed slot
+# (up to ~3h away) — speed matters for reach on something actually
+# breaking. Rate-limited so this can't quietly turn into extra posting
+# frequency: the growth plan is explicit that over-posting on a young
+# account risks a spam flag, so this only ever ADDS a post when the last
+# one (scheduled or breaking) was genuinely a while ago.
+BREAKING_MIN_GAP_HOURS = 1.5
+
 # ============================================================
 # 5. GEO-TAGGING
 # ============================================================
