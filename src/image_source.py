@@ -124,6 +124,20 @@ STOPWORDS = {
     "concerns", "issue", "issues", "problem", "problems", "challenge",
     "challenges", "crisis", "disaster", "incident", "accident", "event",
     "ceremony",
+    # Military ranks/units — generic terminology, not a proper noun, and
+    # collides with any country's military (confirmed: "Corps Commander"
+    # found a US Marine Corps ceremony photo for an India-China story,
+    # since "Corps" is literally in "Marine Corps").
+    "corps", "commander", "commanders", "general", "generals", "colonel",
+    "colonels", "brigadier", "brigadiers", "major", "majors", "lieutenant",
+    "lieutenants", "sergeant", "sergeants", "captain", "captains",
+    "battalion", "battalions", "division", "divisions", "regiment",
+    "regiments", "army", "navy", "brigade", "brigades",
+    # Crime/justice generic nouns — "Police Arrest" isn't a name either
+    # (confirmed: found an unrelated MP temple photo for a hooch-tragedy
+    # story purely because both happen to be tagged "police"/"MP").
+    "arrest", "arrests", "arresting", "arrested", "police", "custody",
+    "tragedy", "tragedies", "lives",
 }
 
 

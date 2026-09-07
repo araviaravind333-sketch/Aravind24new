@@ -69,6 +69,8 @@ INCIDENT_KEYWORDS = [
     "explosions", "rescue", "rescued", "trapped", "stampede", "capsize",
     "capsized", "drown", "drowned", "gas leak", "building collapse",
     "wall collapse", "bridge collapse", "avalanche", "tsunami", "wildfire",
+    "hooch", "spurious liquor", "toxic liquor", "poisoning", "stabbed",
+    "stabbing", "shooting", "shot dead", "lynched", "lynching",
 ]
 
 
