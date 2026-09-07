@@ -93,6 +93,37 @@ STOPWORDS = {
     "discuss", "discusses", "discussing", "discussed", "debate", "debates",
     "debating", "debated", "question", "questions", "questioning",
     "questioned", "doubt", "doubts", "doubting", "doubted",
+    # Common headline NOUNS — a Title-Case headline capitalizes these too,
+    # and 2+ of them in a row previously passed the "multi-word = entity"
+    # check even though neither is a proper noun (confirmed: "Passengers
+    # Stranded" was searched as a named entity and matched an unrelated
+    # stranded-hikers photo for a Jakarta volcanic-ash story).
+    "passenger", "passengers", "stranded", "official", "officials",
+    "authority", "authorities", "resident", "residents", "worker",
+    "workers", "student", "students", "teacher", "teachers", "doctor",
+    "doctors", "nurse", "nurses", "soldier", "soldiers", "troop", "troops",
+    "force", "forces", "protester", "protesters", "demonstrator",
+    "demonstrators", "activist", "activists", "supporter", "supporters",
+    "opponent", "opponents", "critic", "critics", "expert", "experts",
+    "analyst", "analysts", "survivor", "survivors", "victim", "victims",
+    "witness", "witnesses", "volunteer", "volunteers", "citizen",
+    "citizens", "voter", "voters", "farmer", "farmers", "employee",
+    "employees", "staff", "minister", "ministers", "leader", "leaders",
+    "chief", "chiefs", "member", "members", "delegate", "delegates",
+    "representative", "representatives", "officer", "officers", "agent",
+    "agents", "investigator", "investigators", "rescuer", "rescuers",
+    "firefighter", "firefighters", "operation", "operations", "mission",
+    "missions", "project", "projects", "policy", "policies", "deal",
+    "deals", "agreement", "agreements", "summit", "summits", "visit",
+    "visits", "tour", "tours", "campaign", "campaigns", "result",
+    "results", "survey", "surveys", "figure", "figures", "flight",
+    "flights", "train", "trains", "bus", "buses", "bridge", "bridges",
+    "school", "schools", "hospital", "hospitals", "market", "markets",
+    "price", "prices", "rate", "rates", "tax", "taxes", "bill", "bills",
+    "law", "laws", "rule", "rules", "order", "orders", "concern",
+    "concerns", "issue", "issues", "problem", "problems", "challenge",
+    "challenges", "crisis", "disaster", "incident", "accident", "event",
+    "ceremony",
 }
 
 
