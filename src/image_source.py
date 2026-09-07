@@ -190,6 +190,36 @@ WORLD_PLACE_NAMES = {
     "nepal", "iran", "saudi", "kyiv", "moscow", "beijing", "washington",
     "london", "paris", "berlin", "tokyo", "delhi", "mumbai", "kolkata",
     "chennai", "bengaluru", "bangalore", "hyderabad", "pune", "ahmedabad",
+    # Every world country gets ONE chance at a solo search only as the
+    # last-resort fallback (never a first attempt) — a curated ~20-country
+    # list kept missing real countries (confirmed: "Serbia" wasn't in it,
+    # so it got searched directly instead of deferred, finding a generic
+    # architecture photo instead of anything about the actual story). This
+    # is a bounded, enumerable list, so cover it properly instead of
+    # discovering the gaps one country at a time.
+    "afghanistan", "albania", "algeria", "andorra", "angola", "argentina",
+    "armenia", "austria", "azerbaijan", "bahamas", "bahrain", "barbados",
+    "belarus", "belgium", "belize", "benin", "bhutan", "bolivia", "bosnia",
+    "botswana", "brazil", "brunei", "bulgaria", "burundi", "cambodia",
+    "cameroon", "chad", "chile", "colombia", "comoros", "congo", "croatia",
+    "cuba", "cyprus", "denmark", "djibouti", "dominica", "ecuador", "egypt",
+    "eritrea", "estonia", "ethiopia", "fiji", "finland", "gabon", "gambia",
+    "georgia", "ghana", "greece", "grenada", "guatemala", "guinea",
+    "guyana", "haiti", "honduras", "hungary", "iceland", "indonesia",
+    "iraq", "ireland", "italy", "jamaica", "jordan", "kazakhstan", "kenya",
+    "kosovo", "kuwait", "laos", "latvia", "lebanon", "lesotho", "liberia",
+    "libya", "lithuania", "luxembourg", "madagascar", "malawi", "malaysia",
+    "maldives", "mali", "malta", "mauritania", "mauritius", "mexico",
+    "moldova", "monaco", "mongolia", "montenegro", "morocco", "mozambique",
+    "myanmar", "namibia", "nauru", "netherlands", "nicaragua", "niger",
+    "nigeria", "norway", "oman", "pakistan", "palau", "panama", "paraguay",
+    "peru", "philippines", "poland", "portugal", "qatar", "romania",
+    "rwanda", "samoa", "senegal", "serbia", "seychelles", "singapore",
+    "slovakia", "slovenia", "somalia", "spain", "sudan", "suriname",
+    "sweden", "switzerland", "syria", "taiwan", "tajikistan", "tanzania",
+    "thailand", "togo", "tonga", "tunisia", "turkey", "turkmenistan",
+    "tuvalu", "uganda", "uruguay", "uzbekistan", "vanuatu", "venezuela",
+    "vietnam", "yemen", "zambia", "zimbabwe",
 }
 PLACE_NAMES = INDIAN_STATES_UTS | WORLD_PLACE_NAMES
 
