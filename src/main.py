@@ -117,10 +117,16 @@ def render():
     # A fresh incident (collapse/crash/disaster) almost never has a real,
     # legitimately-licensed photo available yet — forcing a generic stock
     # substitute into that slot is exactly what's been producing mismatches.
-    # Use the honest no-photo alert card instead of guessing at one.
+    # Use the honest no-photo alert card instead of guessing at one. Decide
+    # the variant BEFORE fetching a photo: text_card can also be chosen by
+    # the normal rotation for any story, and needs no photo either — no
+    # point fetching (or risking failure on) one we won't use.
     is_incident = story.get("is_incident", False)
+    variant = "alert_card" if is_incident else choose_variant(category_label)
+    print("Template variant:", variant)
+
     img_path = None
-    if not is_incident:
+    if variant not in ("alert_card", "text_card"):
         try:
             img_path = image_source.get_image(story)
         except Exception as e:
@@ -135,9 +141,6 @@ def render():
     stamp = ist.strftime("%Y%m%d-%H%M")
     out_name = f"post-{stamp}.jpg"
     out_path = os.path.join(out_dir, out_name)
-
-    variant = "alert_card" if is_incident else choose_variant(category_label)
-    print("Template variant:", variant)
 
     logo = os.path.join(os.path.dirname(__file__), "..", "assets", "logo", "logo.png")
     template.render_post(

@@ -1,7 +1,7 @@
 """
 AravindNews24 — Post Template Renderer
 Produces a 1080x1350 (Instagram 4:5) high-quality news post using one of
-3 professional layouts (rotated/selected in src/main.py based on category
+4 professional layouts (rotated/selected in src/main.py based on category
 and — once real data exists — which variant actually gets more reach):
 
   1. full_bleed    — classic breaking-news look: full photo, bottom gradient,
@@ -10,6 +10,14 @@ and — once real data exists — which variant actually gets more reach):
                       cleaner separation, good for business/data stories
   3. framed_card   — photo inset in a colored frame, headline in a boxed
                       card near the bottom — more polished/editorial feel
+  4. text_card     — no photo at all: bold typography on a color-graded
+                      background. Competes in the same rotation/tracking
+                      as the photo templates for EVERY category, so real
+                      reach data (not a guess) decides whether text-only
+                      cards outperform photo cards for this audience.
+                      (alert_card is a separate, hazard-themed no-photo
+                      variant used only for fresh incidents — not part of
+                      this general rotation.)
 """
 
 from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageEnhance
@@ -28,7 +36,7 @@ WHITE = "#FFFFFF"
 NEAR_BLACK = "#0A0A0A"
 MUTED = "#B8B8B8"
 
-VARIANTS = ("full_bleed", "split_banner", "framed_card")
+VARIANTS = ("full_bleed", "split_banner", "framed_card", "text_card")
 
 # category -> pill color
 CATEGORY_COLORS = {
@@ -374,7 +382,56 @@ def _render_framed_card(photo_path, category, headline, accent_word, out_path,
 
 
 # ============================================================
-# Variant 4 — alert_card (no photo — a bold graphic card for FRESH
+# Variant 4 — text_card (no photo — bold typography on a color-graded
+# background. Competes in the normal rotation for EVERY category, unlike
+# alert_card below which is incident-only.)
+# ============================================================
+def _render_text_card(category, headline, accent_word, out_path,
+                       footer, handle, logo_path):
+    pill_color = CATEGORY_COLORS.get(category, ACCENT)
+    MARGIN = 70
+
+    top_rgb = _mix(pill_color, NEAR_BLACK, 0.55)
+    bottom_rgb = _hex_to_rgb(NEAR_BLACK)
+    canvas = _vertical_gradient(W, H, top_rgb, bottom_rgb).convert("RGBA")
+    draw = ImageDraw.Draw(canvas)
+
+    _draw_logo(canvas, draw, logo_path, MARGIN, 55)
+
+    f_cat = _font(ARCHIVO, 30)
+    cat_text = category
+    tw = draw.textlength(cat_text, font=f_cat)
+    pill_h = 58
+    pill_w = tw + 56
+    pill_y = 480
+    draw.rounded_rectangle(
+        [MARGIN, pill_y, MARGIN + pill_w, pill_y + pill_h],
+        radius=8, fill=pill_color,
+    )
+    draw.text((MARGIN + 28, pill_y + 12), cat_text, font=f_cat, fill=WHITE)
+
+    headline_top = pill_y + pill_h + 36
+    lines, f_head, size = _headline_lines(
+        draw, headline, W - MARGIN * 2, max_lines=6, start_size=104, min_size=48)
+    line_h = int(size * 0.98)
+    y_end = _draw_headline_block(draw, lines, f_head, size, MARGIN, headline_top,
+                                  accent_word.upper())
+
+    # accent underline beneath the headline for polish
+    draw.rectangle([MARGIN, y_end + 20, MARGIN + 110, y_end + 28], fill=pill_color)
+
+    f_foot = _font(ARCHIVO, 34)
+    fy = H - 90
+    draw.text((MARGIN, fy), footer, font=f_foot, fill=MUTED)
+    fw = draw.textlength(footer + "  ", font=f_foot)
+    draw.text((MARGIN + fw, fy), "→  " + handle, font=f_foot, fill=WHITE)
+
+    canvas.convert("RGB").save(out_path, "JPEG", quality=95, subsampling=0)
+    return out_path
+
+
+# ============================================================
+# Variant 5 — alert_card (no photo — a bold graphic card for FRESH
 # incidents where no real, legitimately-licensed photo of the specific
 # event exists yet. Honest about not having "the photo" instead of
 # forcing a stock substitute into that slot, which is what was producing
@@ -457,13 +514,19 @@ _RENDERERS = {
 }
 
 
+_NO_PHOTO_RENDERERS = {
+    "text_card": _render_text_card,
+    "alert_card": _render_alert_card,
+}
+
+
 def render_post(photo_path, category, headline, accent_word, out_path,
                  footer="For the latest news", handle="@aravindnews24",
                  logo_path=None, variant="full_bleed"):
     category = category.upper()
-    if variant == "alert_card":
-        return _render_alert_card(category, headline, accent_word, out_path,
-                                   footer, handle, logo_path)
+    if variant in _NO_PHOTO_RENDERERS:
+        return _NO_PHOTO_RENDERERS[variant](category, headline, accent_word,
+                                             out_path, footer, handle, logo_path)
     fn = _RENDERERS.get(variant, _render_full_bleed)
     return fn(photo_path, category, headline, accent_word, out_path,
               footer, handle, logo_path)
