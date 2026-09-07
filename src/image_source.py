@@ -64,6 +64,35 @@ STOPWORDS = {
     "finding", "found", "bring", "brings", "bringing", "brought", "send",
     "sends", "sending", "sent", "raise", "raises", "raising", "raised",
     "cut", "cuts", "cutting", "add", "adds", "adding", "added",
+    "clarify", "clarifies", "clarifying", "clarified", "confirm",
+    "confirms", "confirming", "confirmed", "deny", "denies", "denying",
+    "denied", "admit", "admits", "admitting", "admitted", "reveal",
+    "reveals", "revealing", "revealed", "insist", "insists", "insisting",
+    "insisted", "stress", "stresses", "stressing", "stressed", "assure",
+    "assures", "assuring", "assured", "explain", "explains", "explaining",
+    "explained", "defend", "defends", "defending", "defended", "blame",
+    "blames", "blaming", "blamed", "accuse", "accuses", "accusing",
+    "accused", "respond", "responds", "responding", "responded", "react",
+    "reacts", "reacting", "reacted", "welcome", "welcomes", "welcoming",
+    "welcomed", "praise", "praises", "praising", "praised", "criticise",
+    "criticises", "criticising", "criticised", "criticize", "criticizes",
+    "criticizing", "criticized", "back", "backs", "backing", "backed",
+    "reject", "rejects", "rejecting", "rejected", "support", "supports",
+    "supporting", "supported", "oppose", "opposes", "opposing", "opposed",
+    "demand", "demands", "demanding", "demanded", "appeal", "appeals",
+    "appealing", "appealed", "order", "orders", "ordering", "ordered",
+    "direct", "directs", "directing", "directed", "instruct", "instructs",
+    "instructing", "instructed", "warn", "warns", "warning", "warned",
+    "pledge", "pledges", "pledging", "pledged", "promise", "promises",
+    "promising", "promised", "slam", "slams", "slamming", "slammed",
+    "note", "notes", "noting", "noted", "state", "states", "stating",
+    "stated", "argue", "argues", "arguing", "argued", "express",
+    "expresses", "expressing", "expressed", "highlight", "highlights",
+    "highlighting", "highlighted", "outline", "outlines", "outlining",
+    "outlined", "describe", "describes", "describing", "described",
+    "discuss", "discusses", "discussing", "discussed", "debate", "debates",
+    "debating", "debated", "question", "questions", "questioning",
+    "questioned", "doubt", "doubts", "doubting", "doubted",
 }
 
 
@@ -124,38 +153,61 @@ def _is_place_entity(entity):
     return entity.lower() in PLACE_NAMES
 
 
+_ENTITY_CONNECTORS = {"of", "and", "the", "de"}
+
+
 def _proper_noun_phrases(title, limit=3):
     """Pull real named-entity candidates (people/places/institutions) out of
     the headline — runs of capitalized words, short ALL-CAPS acronyms
     (RBI, ISRO, TCS), plus single-word proper nouns like a surname
-    ("Zelensky", "Putin") that Commons/Openverse likely has real photos
-    of — most specific (longest) first."""
-    pattern = re.compile(
-        r"\b[A-Z][a-zA-Z']*(?:\s+(?:of|and|the|de)\s+[A-Z][a-zA-Z']*|\s+[A-Z][a-zA-Z']*)*\b"
-    )
+    ("Zelensky", "Putin") — most specific (longest) first.
+
+    Built word-by-word (not one regex) specifically so a run BREAKS at a
+    stopword/generic word — a regex that just matches "any run of
+    capitalized words" has no way to know mid-match that a Title-Case
+    headline's "Amid", "Clarifies", "Blocks" etc. aren't part of a name,
+    so a fully Title-Cased headline was being swallowed whole as one giant
+    "entity" (confirmed: "Pawan Goenka Clarifies ISRO's Future Amid
+    Privatisation Concerns" matched as a single phrase and searched
+    verbatim, finding nothing sensible)."""
+    words = re.findall(r"[A-Za-z]+", title)
+    runs, current = [], []
+    for i, w in enumerate(words):
+        lw = w.lower()
+        if w[0].isupper() and lw not in STOPWORDS:
+            current.append((i, w))
+        elif lw in _ENTITY_CONNECTORS and current:
+            current.append((i, w))  # tentative bridge, trimmed below if unused
+        else:
+            if current:
+                runs.append(current)
+            current = []
+    if current:
+        runs.append(current)
+
     seen, out = set(), []
-    for m in pattern.finditer(title):
-        c = m.group().strip()
-        words = c.split()
-        if c.lower() in _ENTITY_STOPSTART:
+    for run in runs:
+        while run and run[-1][1].lower() in _ENTITY_CONNECTORS:
+            run.pop()  # drop a trailing connector that never reached another name
+        if not run:
             continue
-        is_multi_word = len(words) >= 2
-        is_acronym = c.isupper() and 2 <= len(c) <= 6
+        start_idx = run[0][0]
+        ws = [w for _, w in run]
+        phrase = " ".join(ws)
+        if phrase.lower() in _ENTITY_STOPSTART:
+            continue
+        is_multi_word = len(ws) >= 2
+        is_acronym = phrase.isupper() and 2 <= len(phrase) <= 6
         # a single capitalized word can be a real name too — but only if
         # it's not the sentence-initial word (every headline capitalizes
         # its first word regardless of whether it's a proper noun, so that
-        # position carries no signal) and isn't a generic word that just
-        # happens to be capitalized in a Title Case headline (reuses the
-        # same filter that keeps keyword search clean)
-        is_real_name = (
-            len(words) == 1 and m.start() > 0
-            and len(c) >= 4 and c.lower() not in STOPWORDS
-        )
+        # position carries no signal)
+        is_real_name = len(ws) == 1 and start_idx > 0 and len(phrase) >= 4
         if not (is_multi_word or is_acronym or is_real_name):
             continue
-        if c.lower() not in seen:
-            seen.add(c.lower())
-            out.append(c)
+        if phrase.lower() not in seen:
+            seen.add(phrase.lower())
+            out.append(phrase)
     out.sort(key=len, reverse=True)
     return out[:limit]
 
@@ -255,14 +307,18 @@ def _wikimedia_commons(entity):
                          .get("value", "")).lower()
         free_of_attribution = any(k in license_name for k in NO_ATTRIBUTION_NEEDED)
         impact = _impact_score(title)
-        candidates.append((relevance, impact, free_of_attribution, w * h, info, title))
+        candidates.append((relevance, impact, w * h, free_of_attribution, info, title))
     if not candidates:
         raise RuntimeError(f"no relevant Commons photo for '{entity}'")
 
     # prefer: most relevant, then most visually/emotionally compelling,
-    # then no-attribution-required, then highest-res
+    # then highest-res, then no-attribution-required as a final tie-break
+    # only — quality matters more than a caption credit we don't even show
+    # (confirmed live: license-first ranking picked a cluttered 3600x1333
+    # Zoom-grid screenshot over a sharp 5572x3715 press photo of the same
+    # person, purely because the press photo required attribution)
     candidates.sort(key=lambda c: (c[0], c[1], c[2], c[3]), reverse=True)
-    _, _, free_of_attribution, _, info, title = candidates[0]
+    _, _, _, free_of_attribution, info, title = candidates[0]
     img_url = info.get("thumburl") or info["url"]
     meta = info.get("extmetadata", {})
     artist = "" if free_of_attribution else re.sub(
@@ -312,10 +368,12 @@ def _openverse_search(query, entity=None, relevance_words=None, pool=8):
             continue
         free = any(k in (item.get("license") or "").lower() for k in NO_ATTRIBUTION_NEEDED)
         impact = _impact_score(title)
-        candidates.append((impact, free, w * h, img_url))
+        candidates.append((impact, w * h, free, img_url))
     if not candidates:
         raise RuntimeError(f"no usable Openverse results for '{query}'")
 
+    # quality (resolution) beats a bare attribution-license preference —
+    # same reasoning as the Commons ranking above
     candidates.sort(key=lambda c: (c[0], c[1], c[2]), reverse=True)
     _, _, _, img_url = candidates[0]
     req2 = urllib.request.Request(img_url, headers={"User-Agent": _COMMONS_UA})
