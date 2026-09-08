@@ -31,6 +31,19 @@ IG_USER_ID             = _env("IG_USER_ID")               # numeric IG business 
 GRAPH_VERSION          = "v21.0"
 
 # ============================================================
+# 1b. WHATSAPP (candidate-review queue — human picks the photo)
+# ============================================================
+# Every ~30 min, up to WHATSAPP_QUEUE_TARGET candidate stories get sent to
+# your own WhatsApp. Reply to one with a photo and that photo gets used
+# for the post. No reply within WHATSAPP_GRACE_MINUTES -> posts anyway,
+# text-only (no guessed stock photo).
+WHATSAPP_ACCESS_TOKEN       = _env("WHATSAPP_ACCESS_TOKEN")
+WHATSAPP_PHONE_NUMBER_ID    = _env("WHATSAPP_PHONE_NUMBER_ID")
+WHATSAPP_RECIPIENT          = _env("WHATSAPP_RECIPIENT")     # your own number, no '+' (e.g. 918838374404)
+WHATSAPP_GRACE_MINUTES      = 45
+WHATSAPP_QUEUE_TARGET       = 5
+
+# ============================================================
 # 2. IMAGE PIPELINE
 # ============================================================
 # Real stock photos only (keyword-searched from the headline) — no AI image

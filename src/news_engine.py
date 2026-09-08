@@ -278,6 +278,27 @@ def pick_top_story(primary_category, fallback_categories):
     return best
 
 
+def top_candidates(n, exclude_ids=frozenset()):
+    """Top N distinct stories across every category, for the WhatsApp
+    queue — unlike pick_top_story (one category with fallbacks), this
+    scans everything so a handful of genuinely different stories can be
+    sent at once. `exclude_ids` keeps it from re-suggesting something
+    already sitting in the queue from an earlier cycle."""
+    seen, out = set(), []
+    all_candidates = []
+    for category in settings.RSS_FEEDS:
+        all_candidates.extend(fetch_candidates(category))
+    for story in sorted(all_candidates, key=lambda s: s["score"], reverse=True):
+        if story["id"] in exclude_ids or story["id"] in seen:
+            continue
+        seen.add(story["id"])
+        story["geo"] = detect_geo(story["title"], story["category"])
+        out.append(story)
+        if len(out) >= n:
+            break
+    return out
+
+
 def mark_posted(story):
     posted = _load_posted()
     posted.append({"id": story["id"], "title": story["title"]})

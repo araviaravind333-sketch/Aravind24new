@@ -1,0 +1,72 @@
+name: AravindNews24 WhatsApp Candidate Queue
+
+# Every ~30 min: tops up a queue of candidate stories sent to your own
+# WhatsApp (reply with a photo to use it for that post), and resolves at
+# most one queued item per run — either using a photo you've replied
+# with, or posting text-only once the grace period passes with no reply.
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: auto-poster      # same group as post.yml/breaking-news.yml — never race a git push
+  cancel-in-progress: false
+
+jobs:
+  whatsapp-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install deps
+        run: pip install -r requirements.txt
+
+      - name: Ensure ffmpeg (for Reels rendering)
+        run: command -v ffmpeg || (sudo apt-get update && sudo apt-get install -y ffmpeg)
+
+      - name: Check WhatsApp queue, send/resolve candidates
+        env:
+          ANTHROPIC_API_KEY:        ${{ secrets.ANTHROPIC_API_KEY }}
+          GEMINI_API_KEY:           ${{ secrets.GEMINI_API_KEY }}
+          PEXELS_API_KEY:           ${{ secrets.PEXELS_API_KEY }}
+          UNSPLASH_ACCESS_KEY:      ${{ secrets.UNSPLASH_ACCESS_KEY }}
+          WHATSAPP_ACCESS_TOKEN:    ${{ secrets.WHATSAPP_ACCESS_TOKEN }}
+          WHATSAPP_PHONE_NUMBER_ID: ${{ secrets.WHATSAPP_PHONE_NUMBER_ID }}
+          WHATSAPP_RECIPIENT:       ${{ secrets.WHATSAPP_RECIPIENT }}
+        run: python -m src.main whatsapp-check
+
+      - name: Push rendered image + queue state
+        run: |
+          git config user.name "aravindnews24-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add public/ data/whatsapp_pending.json || true
+          git commit -m "auto: whatsapp queue $(date -u +%FT%TZ)" || echo "nothing to commit"
+          git push || echo "push skipped"
+
+      - name: Publish to Instagram + Facebook (no-op if nothing pending)
+        env:
+          META_PAGE_ACCESS_TOKEN: ${{ secrets.META_PAGE_ACCESS_TOKEN }}
+          META_APP_ID:            ${{ secrets.META_APP_ID }}
+          META_APP_SECRET:        ${{ secrets.META_APP_SECRET }}
+          FB_PAGE_ID:             ${{ secrets.FB_PAGE_ID }}
+          IG_USER_ID:             ${{ secrets.IG_USER_ID }}
+          GH_PAGES_BASE:          ${{ vars.GH_PAGES_BASE }}
+        run: python -m src.main publish
+
+      - name: Commit state (posted log + analytics, if anything changed)
+        run: |
+          git add data/ || true
+          git commit -m "auto: whatsapp post cycle $(date -u +%FT%TZ)" || echo "nothing to commit"
+          git push || echo "push skipped"

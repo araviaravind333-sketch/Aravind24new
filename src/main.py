@@ -30,9 +30,11 @@ import urllib.error
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from config import settings
-from src import news_engine, ai_writer, image_source, template, video, publisher, analytics
+from src import news_engine, ai_writer, image_source, template, video, publisher, analytics, whatsapp
 
 PENDING_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "_pending.json")
+WA_QUEUE_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "whatsapp_pending.json")
+WA_INBOX_DIR = os.path.join(os.path.dirname(__file__), "..", "data", "whatsapp_inbox")
 
 
 def current_slot():
@@ -132,7 +134,72 @@ def render_breaking():
     return _render_story(story, ist, is_reel=True)  # Reels get more reach
 
 
-def _render_story(story, ist, is_reel):
+def _load_wa_queue():
+    if os.path.exists(WA_QUEUE_PATH):
+        with open(WA_QUEUE_PATH) as f:
+            return json.load(f)
+    return []
+
+
+def _save_wa_queue(queue):
+    os.makedirs(os.path.dirname(WA_QUEUE_PATH), exist_ok=True)
+    with open(WA_QUEUE_PATH, "w") as f:
+        json.dump(queue, f)
+
+
+def whatsapp_cycle():
+    """Checked every ~30 min. Resolves at most ONE queued candidate per
+    run (an image you've replied with takes priority over a grace-period
+    text-only fallback) — deliberately one-at-a-time, since the render/
+    publish split assumes a single in-flight post, and running this often
+    drains a small queue quickly regardless. Then tops the queue back up
+    to WHATSAPP_QUEUE_TARGET with fresh candidates."""
+    queue = _load_wa_queue()
+    now_ist = dt.datetime.now(dt.timezone.utc) + dt.timedelta(hours=5, minutes=30)
+
+    resolved_idx, resolved_kind, inbox_path = None, None, None
+    for i, entry in enumerate(queue):
+        candidate_path = os.path.join(WA_INBOX_DIR, f"{entry['message_id']}.jpg")
+        if os.path.exists(candidate_path):
+            resolved_idx, resolved_kind, inbox_path = i, "image", candidate_path
+            break
+    if resolved_idx is None:
+        for i, entry in enumerate(queue):
+            sent_at = dt.datetime.strptime(entry["sent_at"], "%Y-%m-%d %H:%M")
+            age_min = (now_ist - sent_at).total_seconds() / 60
+            if age_min >= settings.WHATSAPP_GRACE_MINUTES:
+                resolved_idx, resolved_kind = i, "text_only"
+                break
+
+    if resolved_idx is not None:
+        entry = queue.pop(resolved_idx)
+        story = entry["story"]
+        if resolved_kind == "image":
+            print("Photo received via WhatsApp for:", story["title"])
+            _render_story(story, now_ist, is_reel=True, forced_image_path=inbox_path,
+                          consumed_inbox_file=inbox_path)
+        else:
+            print("No photo within the grace period — posting text-only:", story["title"])
+            _render_story(story, now_ist, is_reel=False, force_no_image=True)
+
+    if len(queue) < settings.WHATSAPP_QUEUE_TARGET:
+        exclude_ids = {e["story"]["id"] for e in queue}
+        needed = settings.WHATSAPP_QUEUE_TARGET - len(queue)
+        for story in news_engine.top_candidates(needed, exclude_ids):
+            message_id = whatsapp.send_candidate(story)
+            if message_id:
+                queue.append({
+                    "message_id": message_id,
+                    "story": {k: v for k, v in story.items() if k != "published"},
+                    "sent_at": now_ist.strftime("%Y-%m-%d %H:%M"),
+                })
+                print("Sent to WhatsApp:", story["title"])
+
+    _save_wa_queue(queue)
+
+
+def _render_story(story, ist, is_reel, forced_image_path=None,
+                   force_no_image=False, consumed_inbox_file=None):
     print("Selected:", story["title"], "| score:", story["score"])
 
     written = ai_writer.rewrite(story)
@@ -149,12 +216,16 @@ def _render_story(story, ist, is_reel):
     # the variant BEFORE fetching a photo: text_card can also be chosen by
     # the normal rotation for any story, and needs no photo either — no
     # point fetching (or risking failure on) one we won't use.
-    is_incident = story.get("is_incident", False)
-    variant = "alert_card" if is_incident else choose_variant(category_label)
+    if force_no_image:
+        variant = "text_card"
+    elif is_incident := story.get("is_incident", False):
+        variant = "alert_card"
+    else:
+        variant = choose_variant(category_label)
     print("Template variant:", variant)
 
-    img_path = None
-    if variant not in ("alert_card", "text_card"):
+    img_path = forced_image_path
+    if img_path is None and variant not in ("alert_card", "text_card"):
         try:
             img_path = image_source.get_image(story)
         except Exception as e:
@@ -205,6 +276,7 @@ def _render_story(story, ist, is_reel):
         "video_name": video_name,
         "template": variant,
         "ist": ist.strftime("%Y-%m-%d %H:%M"),
+        "consumed_inbox_file": consumed_inbox_file,
     }
     os.makedirs(os.path.dirname(PENDING_PATH), exist_ok=True)
     with open(PENDING_PATH, "w") as f:
@@ -249,6 +321,9 @@ def publish():
     analytics.log_post(story, written, pending["category_label"], results, ist,
                         is_reel=bool(video_url), template=pending.get("template"))
     os.remove(PENDING_PATH)
+    inbox_file = pending.get("consumed_inbox_file")
+    if inbox_file and os.path.exists(inbox_file):
+        os.remove(inbox_file)
     print("=== Done ===")
 
 
@@ -258,6 +333,8 @@ if __name__ == "__main__":
         render()
     elif phase == "render-breaking":
         render_breaking()
+    elif phase == "whatsapp-check":
+        whatsapp_cycle()
     elif phase == "publish":
         publish()
     else:
