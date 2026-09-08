@@ -318,5 +318,9 @@ def hours_since_last_post():
         last = dt.datetime.strptime(rows[-1]["timestamp_ist"], "%Y-%m-%d %H:%M")
     except (KeyError, ValueError):
         return 999.0
-    now_ist = dt.datetime.now(dt.timezone.utc) + dt.timedelta(hours=5, minutes=30)
+    # `last` is naive (parsed from plain "YYYY-MM-DD HH:MM" text), so
+    # now_ist must be naive too before subtracting — mixing an aware and
+    # a naive datetime raises TypeError, which is exactly what broke every
+    # single run of this check until now.
+    now_ist = (dt.datetime.now(dt.timezone.utc) + dt.timedelta(hours=5, minutes=30)).replace(tzinfo=None)
     return (now_ist - last).total_seconds() / 3600
