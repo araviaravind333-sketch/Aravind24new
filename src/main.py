@@ -21,6 +21,7 @@ will fail — that's expected locally, not a bug).
 
 import json
 import os
+import re
 import sys
 import time
 import datetime as dt
@@ -35,6 +36,14 @@ from src import news_engine, ai_writer, image_source, template, video, publisher
 PENDING_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "_pending.json")
 WA_QUEUE_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "whatsapp_pending.json")
 WA_INBOX_DIR = os.path.join(os.path.dirname(__file__), "..", "data", "whatsapp_inbox")
+
+
+def _safe_filename(message_id):
+    """WhatsApp message IDs contain '/' and '=' — unsafe as a bare
+    filename. The Cloudflare Worker that drops the received photo into
+    whatsapp_inbox/ must apply this exact same transform so both sides
+    agree on the filename."""
+    return re.sub(r"[^A-Za-z0-9_-]", "_", message_id)
 
 
 def current_slot():
@@ -159,7 +168,7 @@ def whatsapp_cycle():
 
     resolved_idx, resolved_kind, inbox_path = None, None, None
     for i, entry in enumerate(queue):
-        candidate_path = os.path.join(WA_INBOX_DIR, f"{entry['message_id']}.jpg")
+        candidate_path = os.path.join(WA_INBOX_DIR, f"{_safe_filename(entry['message_id'])}.jpg")
         if os.path.exists(candidate_path):
             resolved_idx, resolved_kind, inbox_path = i, "image", candidate_path
             break
