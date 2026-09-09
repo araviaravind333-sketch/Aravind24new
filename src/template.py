@@ -102,9 +102,41 @@ def _bottom_gradient(size, height):
     return black
 
 
-def _load_photo(photo_path, w, h):
+def _fit_contain_blurred(img, w, h):
+    """For a photo whose aspect ratio is far from the target: instead of
+    _fit_cover's hard crop (which for a landscape photo forced into a 4:5
+    canvas cuts off ~40%+ of the width -- exactly what reads as an
+    aggressive zoom), show the WHOLE photo, letterboxed on a blurred,
+    darkened cover-crop of the same photo as background filler. Common
+    technique for fitting mismatched-aspect content into a fixed frame
+    without losing any of it."""
+    bg = _fit_cover(img.copy(), w, h)
+    bg = bg.filter(ImageFilter.GaussianBlur(40))
+    bg = ImageEnhance.Brightness(bg).enhance(0.55)
+
+    src_ratio = img.width / img.height
+    dst_ratio = w / h
+    if src_ratio > dst_ratio:
+        fg_w, fg_h = w, int(w / src_ratio)
+    else:
+        fg_h, fg_w = h, int(h * src_ratio)
+    fg = img.resize((fg_w, fg_h), Image.LANCZOS)
+    bg.paste(fg, ((w - fg_w) // 2, (h - fg_h) // 2))
+    return bg
+
+
+def _load_photo(photo_path, w, h, smart_fit=False):
     photo = Image.open(photo_path).convert("RGB")
-    photo = _fit_cover(photo, w, h)
+    src_ratio = photo.width / photo.height
+    dst_ratio = w / h
+    # Only deviate from the normal cover-crop when the mismatch is large
+    # enough that cover-crop would cut off a large fraction of the frame
+    # -- a photo close to 4:5 already looks fine cropped, and cropping is
+    # simpler/more consistent with the rest of the brand's stock photos.
+    if smart_fit and max(src_ratio, dst_ratio) / min(src_ratio, dst_ratio) > 1.25:
+        photo = _fit_contain_blurred(photo, w, h)
+    else:
+        photo = _fit_cover(photo, w, h)
     photo = ImageEnhance.Contrast(photo).enhance(1.06)
     photo = ImageEnhance.Color(photo).enhance(1.08)
     return photo
@@ -214,9 +246,9 @@ def _draw_headline_block(draw, lines, f_head, size, x, y, accent_up, color=WHITE
 # Variant 1 — full_bleed (original layout)
 # ============================================================
 def _render_full_bleed(photo_path, category, headline, accent_word, out_path,
-                        footer, handle, logo_path):
+                        footer, handle, logo_path, smart_fit=False):
     pill_color = CATEGORY_COLORS.get(category, ACCENT)
-    canvas = _load_photo(photo_path, W, H).convert("RGBA")
+    canvas = _load_photo(photo_path, W, H, smart_fit).convert("RGBA")
 
     grad = _bottom_gradient((W, H), int(H * 0.62))
     canvas = Image.alpha_composite(canvas, grad)
@@ -266,12 +298,12 @@ def _render_full_bleed(photo_path, category, headline, accent_word, out_path,
 # Variant 2 — split_banner (photo top, solid panel bottom)
 # ============================================================
 def _render_split_banner(photo_path, category, headline, accent_word, out_path,
-                          footer, handle, logo_path):
+                          footer, handle, logo_path, smart_fit=False):
     pill_color = CATEGORY_COLORS.get(category, ACCENT)
     PHOTO_H = int(H * 0.58)
     MARGIN = 70
 
-    photo = _load_photo(photo_path, W, PHOTO_H)
+    photo = _load_photo(photo_path, W, PHOTO_H, smart_fit)
     canvas = Image.new("RGB", (W, H), NEAR_BLACK).convert("RGBA")
     canvas.paste(photo, (0, 0))
 
@@ -331,13 +363,13 @@ def _render_split_banner(photo_path, category, headline, accent_word, out_path,
 # headline in a boxed card)
 # ============================================================
 def _render_framed_card(photo_path, category, headline, accent_word, out_path,
-                         footer, handle, logo_path):
+                         footer, handle, logo_path, smart_fit=False):
     pill_color = CATEGORY_COLORS.get(category, ACCENT)
     FRAME = 22
     MARGIN = 70
 
     canvas = Image.new("RGB", (W, H), pill_color).convert("RGBA")
-    photo = _load_photo(photo_path, W - FRAME * 2, H - FRAME * 2)
+    photo = _load_photo(photo_path, W - FRAME * 2, H - FRAME * 2, smart_fit)
     canvas.paste(photo, (FRAME, FRAME))
 
     # dark gradient at the bottom of the inset photo for card legibility
@@ -583,14 +615,14 @@ _NO_PHOTO_RENDERERS = {
 
 def render_post(photo_path, category, headline, accent_word, out_path,
                  footer="For the latest news", handle="@aravindnews24",
-                 logo_path=None, variant="full_bleed"):
+                 logo_path=None, variant="full_bleed", smart_fit=False):
     category = category.upper()
     if variant in _NO_PHOTO_RENDERERS:
         return _NO_PHOTO_RENDERERS[variant](category, headline, accent_word,
                                              out_path, footer, handle, logo_path)
     fn = _RENDERERS.get(variant, _render_full_bleed)
     return fn(photo_path, category, headline, accent_word, out_path,
-              footer, handle, logo_path)
+              footer, handle, logo_path, smart_fit)
 
 
 if __name__ == "__main__":

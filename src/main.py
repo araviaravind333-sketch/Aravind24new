@@ -420,6 +420,14 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
     os.makedirs(out_dir, exist_ok=True)
     stamp = ist.strftime("%Y%m%d-%H%M")
 
+    # A human-submitted photo (or frame from a submitted video) hasn't been
+    # pre-vetted for framing the way a stock photo search result has --
+    # cover-crop can cut off ~40%+ of a landscape photo forced into the 4:5
+    # card, which reads as an aggressive zoom. Blurred-letterbox instead,
+    # but only for these, not for stock photos (template._load_photo only
+    # deviates from cover-crop when the aspect mismatch is large anyway).
+    smart_fit = forced_image_path is not None
+
     video_clip_path = None
     if forced_image_path and os.path.splitext(forced_image_path)[1].lower() in VIDEO_EXTENSIONS:
         video_clip_path = forced_image_path
@@ -461,6 +469,7 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
         handle=settings.BRAND_HANDLE,
         logo_path=logo if os.path.exists(logo) else None,
         variant=variant,
+        smart_fit=smart_fit,
     )
     print("Rendered:", out_path)
 
@@ -519,6 +528,7 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
                     handle=settings.BRAND_HANDLE,
                     logo_path=logo if os.path.exists(logo) else None,
                     variant=reel_variant_used,
+                    smart_fit=smart_fit,
                 )
                 video.render_reel(reel_card_path, video_path)
                 print(f"Rendered reel ({reel_variant_used}):", video_path)

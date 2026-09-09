@@ -42,9 +42,9 @@ VARIANTS = ("reel_full_bleed", "reel_split_banner", "reel_framed_card")
 # Variant 1 — reel_full_bleed
 # ============================================================
 def _render_full_bleed(photo_path, category, headline, accent_word, out_path,
-                        footer, handle, logo_path):
+                        footer, handle, logo_path, smart_fit=False):
     pill_color = CATEGORY_COLORS.get(category, ACCENT)
-    canvas = _load_photo(photo_path, W, H).convert("RGBA")
+    canvas = _load_photo(photo_path, W, H, smart_fit).convert("RGBA")
 
     grad = _bottom_gradient((W, H), int(H * 0.5))
     canvas = Image.alpha_composite(canvas, grad)
@@ -95,12 +95,12 @@ def _render_full_bleed(photo_path, category, headline, accent_word, out_path,
 # Variant 2 — reel_split_banner
 # ============================================================
 def _render_split_banner(photo_path, category, headline, accent_word, out_path,
-                          footer, handle, logo_path):
+                          footer, handle, logo_path, smart_fit=False):
     pill_color = CATEGORY_COLORS.get(category, ACCENT)
     PHOTO_H = int(H * 0.6)
     MARGIN = 70
 
-    photo = _load_photo(photo_path, W, PHOTO_H)
+    photo = _load_photo(photo_path, W, PHOTO_H, smart_fit)
     canvas = Image.new("RGB", (W, H), NEAR_BLACK).convert("RGBA")
     canvas.paste(photo, (0, 0))
 
@@ -155,13 +155,13 @@ def _render_split_banner(photo_path, category, headline, accent_word, out_path,
 # Variant 3 — reel_framed_card
 # ============================================================
 def _render_framed_card(photo_path, category, headline, accent_word, out_path,
-                         footer, handle, logo_path):
+                         footer, handle, logo_path, smart_fit=False):
     pill_color = CATEGORY_COLORS.get(category, ACCENT)
     FRAME = 22
     MARGIN = 70
 
     canvas = Image.new("RGB", (W, H), pill_color).convert("RGBA")
-    photo = _load_photo(photo_path, W - FRAME * 2, H - FRAME * 2)
+    photo = _load_photo(photo_path, W - FRAME * 2, H - FRAME * 2, smart_fit)
     canvas.paste(photo, (FRAME, FRAME))
 
     inset_w, inset_h = W - FRAME * 2, H - FRAME * 2
@@ -271,11 +271,11 @@ _RENDERERS = {
 
 def render_reel_card(photo_path, category, headline, accent_word, out_path,
                       footer="For the latest news", handle="@aravindnews24",
-                      logo_path=None, variant="reel_full_bleed"):
+                      logo_path=None, variant="reel_full_bleed", smart_fit=False):
     category = category.upper()
     fn = _RENDERERS.get(variant, _render_full_bleed)
     return fn(photo_path, category, headline, accent_word, out_path,
-              footer, handle, logo_path)
+              footer, handle, logo_path, smart_fit)
 
 
 if __name__ == "__main__":
