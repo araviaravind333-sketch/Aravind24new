@@ -343,18 +343,29 @@ def telegram_cycle():
                 break
 
     if resolved_idx is not None:
-        entry = queue.pop(resolved_idx)
-        story = entry["story"]
-        if resolved_kind == "media":
-            print("Photo/video received via Telegram for:", story["title"])
-            _render_story(story, now_ist, is_reel=True, forced_image_path=inbox_path,
-                          consumed_inbox_file=inbox_path)
+        # A resolved candidate (media received, or grace period expired)
+        # still waits here for the shared post-gap gate -- without this,
+        # a warm queue resolves on nearly every 30-min run, stacking up
+        # to 48 posts/day against Instagram's 25-posts/24h hard cap. Left
+        # in the queue (not popped) so it's picked up again once the gap
+        # clears, rather than losing the human-provided photo/video.
+        gap_h = news_engine.hours_since_last_post()
+        if gap_h < settings.TELEGRAM_MIN_POST_GAP_HOURS:
+            print(f"Candidate resolved but holding -- last post was {gap_h:.2f}h ago, "
+                  f"pacing to ~{settings.TELEGRAM_MIN_POST_GAP_HOURS}h between posts.")
         else:
-            print("No reply within the grace period — trying an automated image match:", story["title"])
-            result = _render_story(story, now_ist, is_reel=False)
-            if result is None:
-                print("No confident image match either — posting text-only:", story["title"])
-                _render_story(story, now_ist, is_reel=False, force_no_image=True)
+            entry = queue.pop(resolved_idx)
+            story = entry["story"]
+            if resolved_kind == "media":
+                print("Photo/video received via Telegram for:", story["title"])
+                _render_story(story, now_ist, is_reel=True, forced_image_path=inbox_path,
+                              consumed_inbox_file=inbox_path)
+            else:
+                print("No reply within the grace period — trying an automated image match:", story["title"])
+                result = _render_story(story, now_ist, is_reel=False)
+                if result is None:
+                    print("No confident image match either — posting text-only:", story["title"])
+                    _render_story(story, now_ist, is_reel=False, force_no_image=True)
 
     if len(queue) < settings.TELEGRAM_QUEUE_TARGET:
         exclude_ids = {e["story"]["id"] for e in queue}

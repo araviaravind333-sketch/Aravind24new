@@ -58,8 +58,17 @@ WHATSAPP_TEMPLATE_LANGUAGE  = "en_US"
 # ============================================================
 TELEGRAM_BOT_TOKEN    = _env("TELEGRAM_BOT_TOKEN")
 TELEGRAM_CHAT_ID      = _env("TELEGRAM_CHAT_ID")
-TELEGRAM_GRACE_MINUTES = 45
+TELEGRAM_GRACE_MINUTES = 20
 TELEGRAM_QUEUE_TARGET  = 5
+# telegram_cycle() runs every 30 min and (with a short grace period and a
+# warm queue) can resolve -- and therefore post -- on nearly every run.
+# Left unchecked that's up to 48 posts/day stacked on TOP of the old fixed
+# 8/day schedule (post.yml, now retired for this reason) -- Instagram's
+# Graph API hard-caps publishing at 25 posts/24h, so anything past that
+# just fails outright. This makes the Telegram queue self-pace to roughly
+# hourly instead, using the same "time since last post" signal the
+# breaking-news path already shares (news_engine.hours_since_last_post()).
+TELEGRAM_MIN_POST_GAP_HOURS = 1.0
 
 # ============================================================
 # 2. IMAGE PIPELINE
