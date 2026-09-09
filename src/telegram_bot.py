@@ -73,10 +73,18 @@ def send_candidate(story):
     the user reply directly to THIS message, which is how the pipeline
     knows which story a returned photo/video belongs to (message_id ->
     reply_to_message.message_id, mirroring WhatsApp's context.id)."""
+    summary = story.get("summary", "").strip()
+    link = story.get("link", "").strip()
     text = (
         f"\U0001F4F0 {story['category']} (score {story['score']})\n"
-        f"{story['title']}\n\n"
-        f"Reply to this message with a photo or video to use it for this "
+        f"{story['title']}\n"
+    )
+    if summary:
+        text += f"\n{summary}\n"
+    if link:
+        text += f"\nSource: {link}\n"
+    text += (
+        f"\nReply to this message with a photo or video to use it for this "
         f"post — otherwise it posts automatically after "
         f"{settings.TELEGRAM_GRACE_MINUTES} min.\n\n"
         f"For best quality, send it as a FILE, not a photo: attach \U0001F4CE "
