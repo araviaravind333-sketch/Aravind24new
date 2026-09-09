@@ -14,6 +14,25 @@ import subprocess
 from config import settings
 
 
+def probe_duration(video_path):
+    """Real length of a submitted video clip, via ffprobe -- used to decide
+    the trim rule in settings (REEL_CLIP_TRIM_THRESHOLD_SEC /
+    REEL_CLIP_TRIM_TARGET_SEC): keep a clip's own length unless it's over
+    the threshold, in which case trim to the target. Returns None if the
+    file's duration can't be read (caller falls back to a safe default)."""
+    cmd = [
+        "ffprobe", "-v", "error",
+        "-show_entries", "format=duration",
+        "-of", "default=noprint_wrappers=1:nokey=1",
+        video_path,
+    ]
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+    try:
+        return float(result.stdout.strip())
+    except ValueError:
+        return None
+
+
 def render_reel(image_path, out_path, **_ignored):
     w, h = settings.REEL_WIDTH, settings.REEL_HEIGHT
     cmd = [

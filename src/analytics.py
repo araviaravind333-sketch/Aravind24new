@@ -19,13 +19,20 @@ CSV_PATH = os.path.join(DATA, "performance.csv")
 
 # Keep this list in sync with src/insights.py's METRIC_FIELDS — both write
 # the same CSV and must agree on columns or rows will misalign.
+# "template" = the 4:5 feed card variant (always rendered -- Facebook
+# always gets it as a photo, even for a story that's a Reel on Instagram).
+# "reel_template" = the 9:16 reel card variant (src/reel_template.py),
+# only set for a photo-based reel (a video-clip reel has no card variant
+# to rotate -- it's the user's own footage, not one of the 3 designs).
 FIELDS = ["timestamp_ist", "category", "headline", "score", "is_reel", "template",
+          "reel_template",
           "ig_id", "fb_id", "ig_ok", "fb_ok",
           "reach", "likes", "comments", "shares", "saved", "views",
           "total_interactions"]
 
 
-def log_post(story, written, category_label, results, ist, is_reel=False, template=None):
+def log_post(story, written, category_label, results, ist, is_reel=False,
+              template=None, reel_template=None):
     os.makedirs(DATA, exist_ok=True)
     new = not os.path.exists(CSV_PATH)
     with open(CSV_PATH, "a", newline="") as f:
@@ -39,6 +46,7 @@ def log_post(story, written, category_label, results, ist, is_reel=False, templa
             "score": story.get("score", 0),
             "is_reel": is_reel,
             "template": template or "",
+            "reel_template": reel_template or "",
             "ig_id": (results.get("instagram") or {}).get("id", ""),
             "fb_id": (results.get("facebook") or {}).get("id", ""),
             "ig_ok": "instagram" in results,
@@ -80,17 +88,21 @@ def best_categories(lookback_days=14):
     return sorted(counts, key=_score, reverse=True)
 
 
-def best_template(category, lookback_days=14, min_samples=3):
+def best_template(category, lookback_days=14, min_samples=3, column="template"):
     """Rank template variants for a category by average reach. Returns []
     until at least `min_samples` reach-rated posts exist for this category —
-    a preference based on 1-2 data points isn't a real signal yet."""
+    a preference based on 1-2 data points isn't a real signal yet.
+    `column` lets the same ranking logic serve two independent rotations
+    from the same CSV: "template" (4:5 feed card) and "reel_template"
+    (9:16 reel card, src/reel_template.py) — the value sets never overlap
+    so they never contaminate each other's stats."""
     if not os.path.exists(CSV_PATH):
         return []
     cutoff = dt.datetime.now() - dt.timedelta(days=lookback_days)
     reach_by_template = {}
     with open(CSV_PATH) as f:
         for row in csv.DictReader(f):
-            if row.get("category") != category or not row.get("template"):
+            if row.get("category") != category or not row.get(column):
                 continue
             try:
                 ts = dt.datetime.strptime(row["timestamp_ist"], "%Y-%m-%d %H:%M")
@@ -103,7 +115,7 @@ def best_template(category, lookback_days=14, min_samples=3):
             except ValueError:
                 reach = 0
             if reach:
-                reach_by_template.setdefault(row["template"], []).append(reach)
+                reach_by_template.setdefault(row[column], []).append(reach)
 
     total_samples = sum(len(v) for v in reach_by_template.values())
     if total_samples < min_samples:
@@ -113,11 +125,13 @@ def best_template(category, lookback_days=14, min_samples=3):
                   reverse=True)
 
 
-def template_counts(category, lookback_days=30):
+def template_counts(category, lookback_days=30, column="template", variants=VARIANTS):
     """How many times each variant has been used for this category recently
     — used to rotate evenly across templates before there's enough reach
-    data to pick a real winner."""
-    counts = {v: 0 for v in VARIANTS}
+    data to pick a real winner. See best_template for why `column`/`variants`
+    exist: this same function serves both the feed-card and reel-card
+    rotations from one CSV."""
+    counts = {v: 0 for v in variants}
     if not os.path.exists(CSV_PATH):
         return counts
     cutoff = dt.datetime.now() - dt.timedelta(days=lookback_days)
@@ -125,7 +139,7 @@ def template_counts(category, lookback_days=30):
         for row in csv.DictReader(f):
             if row.get("category") != category:
                 continue
-            tmpl = row.get("template")
+            tmpl = row.get(column)
             if tmpl not in counts:
                 continue
             try:

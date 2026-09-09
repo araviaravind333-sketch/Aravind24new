@@ -144,12 +144,19 @@ IG_PROFILE   = "https://www.instagram.com/aravindnews24/"
 # Reel vs static is now fixed by DAILY_SCHEDULE above, not a random roll.
 # The card is held still, silent, no zoom/pan/audio (by request).
 REEL_DURATION_SEC = 6
-REEL_WIDTH      = 1080   # matches the static card exactly (4:5) — no aspect
-REEL_HEIGHT     = 1350   # mismatch/distortion risk from forcing 9:16 here
-# Cap for a reel built from a real submitted video clip (as opposed to a
-# static image held still) -- unlike REEL_DURATION_SEC this doesn't pad
-# short clips, it only trims anything longer than this.
-REEL_CLIP_MAX_SEC = 20
+# True 9:16 Reels aspect ratio -- reels get their own dedicated templates
+# (src/reel_template.py) rendered natively at this size, separate from the
+# 4:5 feed card (src/template.py), which is still used unchanged for the
+# Facebook photo post and for non-reel Instagram posts.
+REEL_WIDTH      = 1080
+REEL_HEIGHT     = 1920
+# A reel built from a real submitted video clip (as opposed to a static
+# image held still) uses the clip's own length as-is UNLESS it exceeds
+# REEL_CLIP_TRIM_THRESHOLD_SEC, in which case it's trimmed down to
+# REEL_CLIP_TRIM_TARGET_SEC -- not simply capped at the target, so a
+# 55-second clip stays at 55s but a 90-second one gets trimmed to 50s.
+REEL_CLIP_TRIM_THRESHOLD_SEC = 60
+REEL_CLIP_TRIM_TARGET_SEC = 50
 
 # ============================================================
 # 9. ANALYTICS / GROWTH

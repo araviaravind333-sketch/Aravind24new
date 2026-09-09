@@ -31,7 +31,8 @@ import urllib.error
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from config import settings
-from src import news_engine, ai_writer, image_source, template, video, publisher, analytics, whatsapp
+from src import (news_engine, ai_writer, image_source, template, reel_template,
+                  video, publisher, analytics, whatsapp)
 
 PENDING_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "_pending.json")
 WA_QUEUE_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "whatsapp_pending.json")
@@ -77,6 +78,20 @@ def choose_variant(category_label):
     if ranked:
         return ranked[0]
     counts = analytics.template_counts(category_label)
+    return min(counts, key=counts.get)
+
+
+def choose_reel_variant(category_label):
+    """Same idea as choose_variant, but for the 3 dedicated 9:16 reel
+    cards (src/reel_template.py) -- a completely separate rotation/ranking
+    from the feed card's, since they're different designs with their own
+    reach performance."""
+    ranked = analytics.best_template(category_label, column="reel_template",
+                                      min_samples=3)
+    if ranked:
+        return ranked[0]
+    counts = analytics.template_counts(category_label, column="reel_template",
+                                        variants=reel_template.VARIANTS)
     return min(counts, key=counts.get)
 
 
@@ -298,14 +313,33 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
     )
     print("Rendered:", out_path)
 
+    if video_clip_path and img_path and os.path.exists(img_path) and img_path != forced_image_path:
+        # the extracted-frame JPG was only ever needed to build out_path
+        # above -- don't let it pile up in public/ forever like the real
+        # published assets (out_name/video_name) are meant to.
+        try:
+            os.remove(img_path)
+        except OSError:
+            pass
+
     video_name = None
+    reel_variant_used = None
     if is_reel:
         video_name = f"post-{stamp}.mp4"
         video_path = os.path.join(out_dir, video_name)
         try:
             if video_clip_path:
+                # keep the clip's own length unless it's over the threshold,
+                # then trim to the target -- NOT a blanket cap (a 90s clip
+                # gets cut to 50s, but a 55s clip stays at 55s).
+                duration = video.probe_duration(video_clip_path)
+                if duration and duration > settings.REEL_CLIP_TRIM_THRESHOLD_SEC:
+                    clip_duration = settings.REEL_CLIP_TRIM_TARGET_SEC
+                else:
+                    clip_duration = duration or settings.REEL_CLIP_TRIM_TARGET_SEC
+
                 overlay_path = os.path.join(out_dir, f"overlay-{stamp}.png")
-                template.render_overlay_png(
+                reel_template.render_overlay_png(
                     category=category_label,
                     headline=written["headline"],
                     accent_word=written["accent_word"],
@@ -315,15 +349,43 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
                     logo_path=logo if os.path.exists(logo) else None,
                 )
                 video.render_reel_from_clip(video_clip_path, overlay_path, video_path,
-                                             settings.REEL_CLIP_MAX_SEC)
-                print("Rendered reel from submitted video clip:", video_path)
+                                             clip_duration)
+                print(f"Rendered reel from submitted video clip ({clip_duration:.0f}s):", video_path)
+                try:
+                    os.remove(overlay_path)
+                except OSError:
+                    pass
+            elif img_path is not None:
+                reel_variant_used = choose_reel_variant(category_label)
+                reel_card_path = os.path.join(out_dir, f"reel-card-{stamp}.jpg")
+                reel_template.render_reel_card(
+                    photo_path=img_path,
+                    category=category_label,
+                    headline=written["headline"],
+                    accent_word=written["accent_word"],
+                    out_path=reel_card_path,
+                    footer=settings.BRAND_FOOTER,
+                    handle=settings.BRAND_HANDLE,
+                    logo_path=logo if os.path.exists(logo) else None,
+                    variant=reel_variant_used,
+                )
+                video.render_reel(reel_card_path, video_path)
+                print(f"Rendered reel ({reel_variant_used}):", video_path)
+                try:
+                    os.remove(reel_card_path)
+                except OSError:
+                    pass
             else:
+                # no-photo variant (text_card/alert_card) -- no dedicated
+                # 9:16 equivalent exists for these, hold the already-
+                # rendered 4:5 card as-is, same as before this feature.
                 video.render_reel(out_path, video_path)
-                print("Rendered reel:", video_path)
+                print("Rendered reel (no-photo card, held as-is):", video_path)
         except Exception as e:
             print("Reel render failed, falling back to static image post:", e)
             is_reel = False
             video_name = None
+            reel_variant_used = None
 
     pending = {
         "story": {k: v for k, v in story.items() if k != "published"},
@@ -333,6 +395,7 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
         "is_reel": is_reel,
         "video_name": video_name,
         "template": variant,
+        "reel_template": reel_variant_used,
         "ist": ist.strftime("%Y-%m-%d %H:%M"),
         "consumed_inbox_file": consumed_inbox_file,
     }
@@ -377,7 +440,8 @@ def publish():
 
     news_engine.mark_posted(story)
     analytics.log_post(story, written, pending["category_label"], results, ist,
-                        is_reel=bool(video_url), template=pending.get("template"))
+                        is_reel=bool(video_url), template=pending.get("template"),
+                        reel_template=pending.get("reel_template"))
     os.remove(PENDING_PATH)
     inbox_file = pending.get("consumed_inbox_file")
     if inbox_file and os.path.exists(inbox_file):
