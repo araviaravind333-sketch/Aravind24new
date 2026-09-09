@@ -1,17 +1,13 @@
-name: AravindNews24 WhatsApp Candidate Queue
+name: AravindNews24 Telegram Candidate Queue
 
-# Superseded by telegram-check.yml -- WhatsApp requires a pre-approved
-# message template for any business-initiated send, and that approval sat
-# PENDING for hours with no ETA, so the review flow moved to Telegram
-# (no approval queue, no webhook/Worker needed). Schedule disabled below;
-# kept as workflow_dispatch only in case the template is ever approved
-# and this gets reactivated later.
-#
-# Every ~30 min: tops up a queue of candidate stories sent to your own
-# WhatsApp (reply with a photo to use it for that post), and resolves at
-# most one queued item per run — either using a photo you've replied
-# with, or posting text-only once the grace period passes with no reply.
+# Every ~30 min: tops up a queue of candidate stories sent to your
+# Telegram bot chat (reply with a photo or video to use it for that
+# post), and resolves at most one queued item per run -- either using
+# whatever you've replied with, an automated image match, or posting
+# text-only once the grace period passes with neither.
 on:
+  schedule:
+    - cron: '*/30 * * * *'
   workflow_dispatch:
 
 permissions:
@@ -20,11 +16,11 @@ permissions:
   id-token: write
 
 concurrency:
-  group: auto-poster      # same group as post.yml/breaking-news.yml — never race a git push
+  group: auto-poster      # same group as post.yml/breaking-news.yml/whatsapp-check.yml -- never race a git push
   cancel-in-progress: false
 
 jobs:
-  whatsapp-check:
+  telegram-check:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -41,23 +37,22 @@ jobs:
       - name: Ensure ffmpeg (for Reels rendering)
         run: command -v ffmpeg || (sudo apt-get update && sudo apt-get install -y ffmpeg)
 
-      - name: Check WhatsApp queue, send/resolve candidates
+      - name: Check Telegram queue, send/resolve candidates
         env:
           ANTHROPIC_API_KEY:        ${{ secrets.ANTHROPIC_API_KEY }}
           GEMINI_API_KEY:           ${{ secrets.GEMINI_API_KEY }}
           PEXELS_API_KEY:           ${{ secrets.PEXELS_API_KEY }}
           UNSPLASH_ACCESS_KEY:      ${{ secrets.UNSPLASH_ACCESS_KEY }}
-          WHATSAPP_ACCESS_TOKEN:    ${{ secrets.WHATSAPP_ACCESS_TOKEN }}
-          WHATSAPP_PHONE_NUMBER_ID: ${{ secrets.WHATSAPP_PHONE_NUMBER_ID }}
-          WHATSAPP_RECIPIENT:       ${{ secrets.WHATSAPP_RECIPIENT }}
-        run: python -m src.main whatsapp-check
+          TELEGRAM_BOT_TOKEN:       ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID:         ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python -m src.main telegram-check
 
       - name: Push rendered image + queue state
         run: |
           git config user.name "aravindnews24-bot"
           git config user.email "bot@users.noreply.github.com"
-          git add public/ data/whatsapp_pending.json || true
-          git commit -m "auto: whatsapp queue $(date -u +%FT%TZ)" || echo "nothing to commit"
+          git add public/ data/telegram_pending.json data/telegram_offset.json || true
+          git commit -m "auto: telegram queue $(date -u +%FT%TZ)" || echo "nothing to commit"
           git push || echo "push skipped"
 
       - name: Publish to Instagram + Facebook (no-op if nothing pending)
@@ -73,5 +68,5 @@ jobs:
       - name: Commit state (posted log + analytics, if anything changed)
         run: |
           git add data/ || true
-          git commit -m "auto: whatsapp post cycle $(date -u +%FT%TZ)" || echo "nothing to commit"
+          git commit -m "auto: telegram post cycle $(date -u +%FT%TZ)" || echo "nothing to commit"
           git push || echo "push skipped"

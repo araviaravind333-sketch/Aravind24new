@@ -19,6 +19,7 @@ testing; the image URL won't be reachable yet in that case, so publish
 will fail — that's expected locally, not a bug).
 """
 
+import glob
 import json
 import os
 import re
@@ -32,11 +33,14 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from config import settings
 from src import (news_engine, ai_writer, image_source, template, reel_template,
-                  video, publisher, analytics, whatsapp)
+                  video, publisher, analytics, whatsapp, telegram_bot)
 
 PENDING_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "_pending.json")
 WA_QUEUE_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "whatsapp_pending.json")
 WA_INBOX_DIR = os.path.join(os.path.dirname(__file__), "..", "data", "whatsapp_inbox")
+TG_QUEUE_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "telegram_pending.json")
+TG_INBOX_DIR = os.path.join(os.path.dirname(__file__), "..", "data", "telegram_inbox")
+TG_OFFSET_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "telegram_offset.json")
 
 # If a candidate reply is a real video clip instead of a photo, the reel
 # is built from the actual footage (src/video.py's render_reel_from_clip)
@@ -244,6 +248,119 @@ def whatsapp_cycle():
                 print("Sent to WhatsApp:", story["title"])
 
     _save_wa_queue(queue)
+
+
+def _load_tg_queue():
+    if os.path.exists(TG_QUEUE_PATH):
+        with open(TG_QUEUE_PATH) as f:
+            return json.load(f)
+    return []
+
+
+def _save_tg_queue(queue):
+    os.makedirs(os.path.dirname(TG_QUEUE_PATH), exist_ok=True)
+    with open(TG_QUEUE_PATH, "w") as f:
+        json.dump(queue, f)
+
+
+def _load_tg_offset():
+    if os.path.exists(TG_OFFSET_PATH):
+        with open(TG_OFFSET_PATH) as f:
+            return json.load(f).get("offset", 0)
+    return 0
+
+
+def _save_tg_offset(offset):
+    os.makedirs(os.path.dirname(TG_OFFSET_PATH), exist_ok=True)
+    with open(TG_OFFSET_PATH, "w") as f:
+        json.dump({"offset": offset}, f)
+
+
+def _poll_telegram_replies(pending_ids):
+    """Pulls any new Telegram updates since the last run and downloads a
+    photo/video for each one that's a reply to a message_id we're still
+    tracking. `pending_ids` are the message_ids of candidates currently
+    sitting in the queue -- anything else (replies to old/already-resolved
+    messages, unrelated chatter) is ignored."""
+    offset = _load_tg_offset()
+    updates = telegram_bot.get_new_updates(offset)
+    for u in updates:
+        offset = max(offset, u["update_id"] + 1)
+        msg = u.get("message")
+        if not msg or str(msg.get("chat", {}).get("id")) != str(settings.TELEGRAM_CHAT_ID):
+            continue
+        reply_to = msg.get("reply_to_message")
+        if not reply_to or reply_to["message_id"] not in pending_ids:
+            continue
+
+        file_id = None
+        if msg.get("video"):
+            file_id = msg["video"]["file_id"]
+        elif msg.get("photo"):
+            file_id = msg["photo"][-1]["file_id"]  # last = highest resolution
+        if not file_id:
+            continue
+
+        dest_no_ext = os.path.join(TG_INBOX_DIR, _safe_filename(str(reply_to["message_id"])))
+        saved = telegram_bot.download_file(file_id, dest_no_ext)
+        if saved:
+            print("Saved Telegram reply media:", saved)
+    _save_tg_offset(offset)
+
+
+def telegram_cycle():
+    """Checked every ~30 min -- same design as whatsapp_cycle() (grace
+    period, one resolution per run, automated-image-fallback before
+    text-only, queue refill), but over the Telegram Bot API: no template-
+    approval queue to wait on, and no webhook/Worker needed since
+    get_new_updates() is a pull -- GitHub Actions polls it directly."""
+    queue = _load_tg_queue()
+    now_ist = (dt.datetime.now(dt.timezone.utc) + dt.timedelta(hours=5, minutes=30)).replace(tzinfo=None)
+
+    _poll_telegram_replies({e["message_id"] for e in queue})
+
+    resolved_idx, resolved_kind, inbox_path = None, None, None
+    for i, entry in enumerate(queue):
+        matches = glob.glob(os.path.join(TG_INBOX_DIR, f"{_safe_filename(str(entry['message_id']))}.*"))
+        if matches:
+            resolved_idx, resolved_kind, inbox_path = i, "media", matches[0]
+            break
+    if resolved_idx is None:
+        for i, entry in enumerate(queue):
+            sent_at = dt.datetime.strptime(entry["sent_at"], "%Y-%m-%d %H:%M")
+            age_min = (now_ist - sent_at).total_seconds() / 60
+            if age_min >= settings.TELEGRAM_GRACE_MINUTES:
+                resolved_idx, resolved_kind = i, "text_only"
+                break
+
+    if resolved_idx is not None:
+        entry = queue.pop(resolved_idx)
+        story = entry["story"]
+        if resolved_kind == "media":
+            print("Photo/video received via Telegram for:", story["title"])
+            _render_story(story, now_ist, is_reel=True, forced_image_path=inbox_path,
+                          consumed_inbox_file=inbox_path)
+        else:
+            print("No reply within the grace period — trying an automated image match:", story["title"])
+            result = _render_story(story, now_ist, is_reel=False)
+            if result is None:
+                print("No confident image match either — posting text-only:", story["title"])
+                _render_story(story, now_ist, is_reel=False, force_no_image=True)
+
+    if len(queue) < settings.TELEGRAM_QUEUE_TARGET:
+        exclude_ids = {e["story"]["id"] for e in queue}
+        needed = settings.TELEGRAM_QUEUE_TARGET - len(queue)
+        for story in news_engine.top_candidates(needed, exclude_ids):
+            message_id = telegram_bot.send_candidate(story)
+            if message_id:
+                queue.append({
+                    "message_id": message_id,
+                    "story": {k: v for k, v in story.items() if k != "published"},
+                    "sent_at": now_ist.strftime("%Y-%m-%d %H:%M"),
+                })
+                print("Sent to Telegram:", story["title"])
+
+    _save_tg_queue(queue)
 
 
 def _render_story(story, ist, is_reel, forced_image_path=None,
@@ -471,6 +588,8 @@ if __name__ == "__main__":
         render_breaking()
     elif phase == "whatsapp-check":
         whatsapp_cycle()
+    elif phase == "telegram-check":
+        telegram_cycle()
     elif phase == "publish":
         publish()
     else:

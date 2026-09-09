@@ -52,6 +52,16 @@ WHATSAPP_TEMPLATE_NAME      = "news_pipeline_status_v1"
 WHATSAPP_TEMPLATE_LANGUAGE  = "en_US"
 
 # ============================================================
+# 1c. TELEGRAM (candidate-review queue — same idea as WhatsApp above,
+#     but no template-approval queue and no webhook/Worker needed: this
+#     is now the primary channel)
+# ============================================================
+TELEGRAM_BOT_TOKEN    = _env("TELEGRAM_BOT_TOKEN")
+TELEGRAM_CHAT_ID      = _env("TELEGRAM_CHAT_ID")
+TELEGRAM_GRACE_MINUTES = 45
+TELEGRAM_QUEUE_TARGET  = 5
+
+# ============================================================
 # 2. IMAGE PIPELINE
 # ============================================================
 # Real stock photos only (keyword-searched from the headline) — no AI image
