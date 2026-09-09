@@ -213,8 +213,22 @@ def whatsapp_cycle():
             _render_story(story, now_ist, is_reel=True, forced_image_path=inbox_path,
                           consumed_inbox_file=inbox_path)
         else:
-            print("No photo within the grace period — posting text-only:", story["title"])
-            _render_story(story, now_ist, is_reel=False, force_no_image=True)
+            # No human reply in time -- try the automated image pipeline
+            # (image_source.py) before giving up to text-only. This was
+            # deliberately NOT the fallback originally (guaranteed
+            # text-only was the whole point of the human-review flow,
+            # after repeated mismatched-photo posts eroded trust) -- but
+            # that image pipeline has since been substantially hardened
+            # (word-boundary entity matching, verified place/person
+            # recognition, Wikimedia/Openverse metadata checks), so a
+            # missed reply no longer has to mean losing the photo entirely.
+            # If it STILL can't find a confident match, text-only remains
+            # the guaranteed-safe fallback -- never a guessed stock photo.
+            print("No photo within the grace period — trying an automated image match:", story["title"])
+            result = _render_story(story, now_ist, is_reel=False)
+            if result is None:
+                print("No confident image match either — posting text-only:", story["title"])
+                _render_story(story, now_ist, is_reel=False, force_no_image=True)
 
     if len(queue) < settings.WHATSAPP_QUEUE_TARGET:
         exclude_ids = {e["story"]["id"] for e in queue}
