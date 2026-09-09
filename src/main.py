@@ -293,11 +293,20 @@ def _poll_telegram_replies(pending_ids):
         if not reply_to or reply_to["message_id"] not in pending_ids:
             continue
 
+        # Telegram RE-COMPRESSES anything sent as a regular Photo (re-
+        # encoded down to ~1280px, lossy) before the bot ever sees it --
+        # that compressed image then has to be scaled UP again to fill the
+        # 1080x1350 card, compounding the quality loss. Sending as a File
+        # (Telegram's "compression off" option) delivers the original,
+        # uncompressed bytes instead, so prefer that whenever it's present.
+        doc = msg.get("document")
         file_id = None
-        if msg.get("video"):
+        if doc and doc.get("mime_type", "").startswith(("image/", "video/")):
+            file_id = doc["file_id"]
+        elif msg.get("video"):
             file_id = msg["video"]["file_id"]
         elif msg.get("photo"):
-            file_id = msg["photo"][-1]["file_id"]  # last = highest resolution
+            file_id = msg["photo"][-1]["file_id"]  # last = highest resolution Telegram kept, still recompressed
         if not file_id:
             continue
 

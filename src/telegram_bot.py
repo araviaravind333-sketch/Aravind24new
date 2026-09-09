@@ -78,7 +78,10 @@ def send_candidate(story):
         f"{story['title']}\n\n"
         f"Reply to this message with a photo or video to use it for this "
         f"post — otherwise it posts automatically after "
-        f"{settings.TELEGRAM_GRACE_MINUTES} min."
+        f"{settings.TELEGRAM_GRACE_MINUTES} min.\n\n"
+        f"For best quality, send it as a FILE, not a photo: attach \U0001F4CE "
+        f"→ File → pick from gallery. A normal photo attachment gets "
+        f"compressed by Telegram before it reaches us."
     )
     result = _call("sendMessage", {
         "chat_id": settings.TELEGRAM_CHAT_ID,
