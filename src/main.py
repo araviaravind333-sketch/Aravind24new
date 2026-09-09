@@ -164,7 +164,11 @@ def whatsapp_cycle():
     drains a small queue quickly regardless. Then tops the queue back up
     to WHATSAPP_QUEUE_TARGET with fresh candidates."""
     queue = _load_wa_queue()
-    now_ist = dt.datetime.now(dt.timezone.utc) + dt.timedelta(hours=5, minutes=30)
+    # entry["sent_at"] is naive (plain "YYYY-MM-DD HH:MM" text), so now_ist
+    # must be naive too before subtracting -- mixing an aware and a naive
+    # datetime raises TypeError (same bug already fixed once in
+    # news_engine.hours_since_last_post()).
+    now_ist = (dt.datetime.now(dt.timezone.utc) + dt.timedelta(hours=5, minutes=30)).replace(tzinfo=None)
 
     resolved_idx, resolved_kind, inbox_path = None, None, None
     for i, entry in enumerate(queue):
