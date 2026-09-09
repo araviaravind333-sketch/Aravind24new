@@ -127,10 +127,10 @@ def render():
 
     if window == "india":
         primary = "INDIA NEWS"
-        fallback = ["BUSINESS NEWS", "SPORTS NEWS", "WORLD NEWS"]
+        fallback = ["HUMAN INTEREST", "BUSINESS NEWS", "SPORTS NEWS", "WORLD NEWS"]
     else:
         primary = "WORLD NEWS"
-        fallback = ["BUSINESS NEWS", "INDIA NEWS", "SPORTS NEWS"]
+        fallback = ["HUMAN INTEREST", "BUSINESS NEWS", "INDIA NEWS", "SPORTS NEWS"]
 
     story = news_engine.pick_top_story(primary, fallback)
     if not story:

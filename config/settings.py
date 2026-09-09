@@ -83,6 +83,16 @@ RSS_FEEDS = {
         "https://www.thehindu.com/sport/feeder/default.rss",
         "https://feeds.bbci.co.uk/sport/rss.xml",
     ],
+    # Added after analyzing 7 competitor accounts: wire-service breaking
+    # news (what the other 4 categories above are) tops out at a modest
+    # reach ceiling -- the highest ENGAGEMENT-RATE posts among competitors
+    # (7-9%, vs ~1-2% on their hard news) were soft human-interest moments
+    # that BBC/CNN/Hindu/NDTV's main feeds structurally don't carry. These
+    # two feeds fill that specific gap.
+    "HUMAN INTEREST": [
+        "https://feeds.feedburner.com/ndtvnews-offbeat-news",
+        "https://thebetterindia.com/rss",
+    ],
 }
 
 # ============================================================
@@ -128,6 +138,7 @@ HASHTAG_BANK = {
     "BREAKING NEWS": ["#BreakingNews", "#news", "#trending", "#AravindNews24"],
     "SPORTS NEWS":   ["#SportsNews", "#sports", "#news", "#AravindNews24"],
     "BUSINESS NEWS": ["#BusinessNews", "#economy", "#news", "#AravindNews24"],
+    "HUMAN INTEREST": ["#GoodNews", "#HumanInterest", "#viral", "#AravindNews24"],
 }
 BRAND_HASHTAG = "#AravindNews24"
 

@@ -204,6 +204,16 @@ def _virality(title, published_dt):
             score += 25
             hot_hit = True
             break
+    # Fresh incidents (collapse/crash/disaster) were the single biggest
+    # reach outlier across every competitor account analyzed -- a building
+    # collapse and an animal-cruelty clip each cleared 2M+ views while
+    # conventional wire-style reporting topped out two orders of magnitude
+    # lower. Many INCIDENT_KEYWORDS don't overlap HOT_KEYWORDS (e.g.
+    # "collapse", "blast", "trapped"), so without this they weren't
+    # contributing to score at all beyond whatever happened to overlap.
+    if is_fresh_incident(title):
+        score += 20
+        hot_hit = True
     # recency bonus (newer = better)
     age_h = (dt.datetime.now(dt.timezone.utc) - published_dt).total_seconds() / 3600
     if age_h < 3:
