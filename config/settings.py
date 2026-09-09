@@ -42,6 +42,14 @@ WHATSAPP_PHONE_NUMBER_ID    = _env("WHATSAPP_PHONE_NUMBER_ID")
 WHATSAPP_RECIPIENT          = _env("WHATSAPP_RECIPIENT")     # your own number, no '+' (e.g. 918838374404)
 WHATSAPP_GRACE_MINUTES      = 45
 WHATSAPP_QUEUE_TARGET       = 5
+# A business-initiated message outside an active 24h customer-service
+# session can ONLY be delivered as a pre-approved template -- free-form
+# text still returns a message id from the API but is silently dropped.
+# This template was submitted for review via the Graph API and must show
+# status APPROVED (check: GET /{template_id}?fields=status) before sends
+# will actually reach WhatsApp.
+WHATSAPP_TEMPLATE_NAME      = "news_pipeline_status_v1"
+WHATSAPP_TEMPLATE_LANGUAGE  = "en_US"
 
 # ============================================================
 # 2. IMAGE PIPELINE
