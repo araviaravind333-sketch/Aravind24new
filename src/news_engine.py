@@ -76,9 +76,18 @@ INCIDENT_KEYWORDS = [
 ]
 
 
+def _any_kw(keywords, text):
+    """Word-boundary keyword match. Plain substring `in` checks (the
+    original implementation) silently match keywords inside unrelated
+    words -- e.g. "row" (a controversy signal) matching inside "Narrows",
+    which is how a routine stock-price update ended up outscoring stories
+    people would actually stop to share. \\b requires the keyword to be a
+    standalone token, not a fragment of a longer word."""
+    return any(re.search(rf"\b{re.escape(kw)}\b", text) for kw in keywords)
+
+
 def is_fresh_incident(title):
-    t = title.lower()
-    return any(kw in t for kw in INCIDENT_KEYWORDS)
+    return _any_kw(INCIDENT_KEYWORDS, title.lower())
 
 
 # ---------- virality scoring ----------
@@ -126,8 +135,28 @@ JUNK_KEYWORDS = [
 
 
 def _is_junk(title):
-    t = title.lower()
-    return any(kw in t for kw in JUNK_KEYWORDS)
+    return _any_kw(JUNK_KEYWORDS, title.lower())
+
+
+# Routine, low-engagement financial-wire content (a stock's daily +/-X%
+# move, quarterly earnings numbers) gets picked up by several market-data
+# feeds simply because they all mirror the same figures off an exchange
+# filing -- that corroboration means "widely syndicated," not "people will
+# comment and share this." Left unpenalized, this class of story can
+# out-rank genuinely engaging news on recency + corroboration alone, which
+# is exactly what happened with a Shiprocket quarterly-earnings headline
+# scoring 86 and beating actually shareable stories into the WhatsApp queue.
+ROUTINE_MARKET_KEYWORDS = [
+    "share price", "stock price", "shares rise", "shares fall", "shares gain",
+    "shares slip", "shares jump", "shares surge", "shares drop", "shares climb",
+    "q1 results", "q2 results", "q3 results", "q4 results", "quarterly results",
+    "net profit", "net loss", "target price", "rating upgrade", "rating downgrade",
+    "brokerage", "bse", "nse", "sensex", "nifty", "m-cap", "market cap",
+]
+
+
+def _is_routine_market_update(title):
+    return _any_kw(ROUTINE_MARKET_KEYWORDS, title.lower())
 
 
 _SIG_STOPWORDS = {
@@ -166,12 +195,12 @@ def _virality(title, published_dt):
     hot_hit = False
     t = title.lower()
     for kw in HOT_KEYWORDS:
-        if kw in t:
+        if re.search(rf"\b{re.escape(kw)}\b", t):
             score += 12
             hot_hit = True
     # pan-India impact outranks regional/local stories, even other hot ones
     for kw in NATIONAL_IMPACT_KEYWORDS:
-        if kw in t:
+        if re.search(rf"\b{re.escape(kw)}\b", t):
             score += 25
             hot_hit = True
             break
@@ -189,6 +218,10 @@ def _virality(title, published_dt):
     # ideal headline length
     if 6 <= len(title.split()) <= 14:
         score += 8
+    # a routine stock move / earnings number is low-engagement even when
+    # multiple market-wire feeds all cover it -- see ROUTINE_MARKET_KEYWORDS
+    if _is_routine_market_update(title):
+        score -= 35
     return score, hot_hit
 
 
