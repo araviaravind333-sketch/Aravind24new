@@ -146,6 +146,10 @@ IG_PROFILE   = "https://www.instagram.com/aravindnews24/"
 REEL_DURATION_SEC = 6
 REEL_WIDTH      = 1080   # matches the static card exactly (4:5) — no aspect
 REEL_HEIGHT     = 1350   # mismatch/distortion risk from forcing 9:16 here
+# Cap for a reel built from a real submitted video clip (as opposed to a
+# static image held still) -- unlike REEL_DURATION_SEC this doesn't pad
+# short clips, it only trims anything longer than this.
+REEL_CLIP_MAX_SEC = 20
 
 # ============================================================
 # 9. ANALYTICS / GROWTH

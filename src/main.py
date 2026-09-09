@@ -37,6 +37,12 @@ PENDING_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "_pending.j
 WA_QUEUE_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "whatsapp_pending.json")
 WA_INBOX_DIR = os.path.join(os.path.dirname(__file__), "..", "data", "whatsapp_inbox")
 
+# If a candidate reply is a real video clip instead of a photo, the reel
+# is built from the actual footage (src/video.py's render_reel_from_clip)
+# instead of holding a still image -- detected purely by file extension
+# since that's all a channel (WhatsApp/Telegram/email) attachment gives us.
+VIDEO_EXTENSIONS = {".mp4", ".mov", ".m4v", ".avi", ".mkv", ".3gp", ".webm"}
+
 
 def _safe_filename(message_id):
     """WhatsApp message IDs contain '/' and '=' — unsafe as a bare
@@ -231,13 +237,40 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
     # point fetching (or risking failure on) one we won't use.
     if force_no_image:
         variant = "text_card"
+    elif forced_image_path:
+        # alert_card exists to route around exactly the case where no real,
+        # legitimately-licensed photo of THIS specific incident exists yet.
+        # Once a human has actually supplied one (via the WhatsApp/Telegram/
+        # email review), that reason no longer applies -- use it like any
+        # other photo story instead of silently discarding it.
+        variant = choose_variant(category_label)
     elif is_incident := story.get("is_incident", False):
         variant = "alert_card"
     else:
         variant = choose_variant(category_label)
     print("Template variant:", variant)
 
-    img_path = forced_image_path
+    out_dir = os.path.join(os.path.dirname(__file__), "..", "public")
+    os.makedirs(out_dir, exist_ok=True)
+    stamp = ist.strftime("%Y%m%d-%H%M")
+
+    video_clip_path = None
+    if forced_image_path and os.path.splitext(forced_image_path)[1].lower() in VIDEO_EXTENSIONS:
+        video_clip_path = forced_image_path
+        # the static post JPG still needs a real image, not the video file
+        # itself -- pull one representative frame from the clip for it.
+        frame_path = os.path.join(out_dir, f"frame-{stamp}.jpg")
+        try:
+            img_path = video.extract_frame(video_clip_path, frame_path)
+        except Exception as e:
+            print(f"Could not extract a frame from the submitted video ({e}). "
+                  f"Falling back to text-only for this story.")
+            video_clip_path = None
+            img_path = None
+            variant = "text_card"
+    else:
+        img_path = forced_image_path
+
     if img_path is None and variant not in ("alert_card", "text_card"):
         try:
             img_path = image_source.get_image(story)
@@ -248,9 +281,6 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
             news_engine.mark_posted(story)
             return None
 
-    out_dir = os.path.join(os.path.dirname(__file__), "..", "public")
-    os.makedirs(out_dir, exist_ok=True)
-    stamp = ist.strftime("%Y%m%d-%H%M")
     out_name = f"post-{stamp}.jpg"
     out_path = os.path.join(out_dir, out_name)
 
@@ -273,8 +303,23 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
         video_name = f"post-{stamp}.mp4"
         video_path = os.path.join(out_dir, video_name)
         try:
-            video.render_reel(out_path, video_path)
-            print("Rendered reel:", video_path)
+            if video_clip_path:
+                overlay_path = os.path.join(out_dir, f"overlay-{stamp}.png")
+                template.render_overlay_png(
+                    category=category_label,
+                    headline=written["headline"],
+                    accent_word=written["accent_word"],
+                    out_path=overlay_path,
+                    footer=settings.BRAND_FOOTER,
+                    handle=settings.BRAND_HANDLE,
+                    logo_path=logo if os.path.exists(logo) else None,
+                )
+                video.render_reel_from_clip(video_clip_path, overlay_path, video_path,
+                                             settings.REEL_CLIP_MAX_SEC)
+                print("Rendered reel from submitted video clip:", video_path)
+            else:
+                video.render_reel(out_path, video_path)
+                print("Rendered reel:", video_path)
         except Exception as e:
             print("Reel render failed, falling back to static image post:", e)
             is_reel = False

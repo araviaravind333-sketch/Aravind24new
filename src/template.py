@@ -507,6 +507,66 @@ def _render_alert_card(category, headline, accent_word, out_path,
     return out_path
 
 
+# ============================================================
+# Overlay PNG — no photo, transparent background. Meant to be composited
+# via ffmpeg on top of a user-submitted VIDEO clip (src/video.py's
+# render_reel_from_clip), so a reel built from real footage still carries
+# the same branded look (category pill, headline, footer) as every other
+# post instead of being raw, unbranded video. Reuses full_bleed's layout
+# since a bottom-anchored gradient + text block is the one style that
+# stays legible sitting on top of arbitrary moving video.
+# ============================================================
+def render_overlay_png(category, headline, accent_word, out_path,
+                        footer="For the latest news", handle="@aravindnews24",
+                        logo_path=None):
+    category = category.upper()
+    pill_color = CATEGORY_COLORS.get(category, ACCENT)
+    canvas = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+
+    grad = _bottom_gradient((W, H), int(H * 0.62))
+    canvas = Image.alpha_composite(canvas, grad)
+
+    top_grad = Image.new("L", (1, H), 0)
+    for y in range(H):
+        top_grad.putpixel((0, y), int(150 * max(0, (1 - y / (H * 0.22)))))
+    top_grad = top_grad.resize((W, H))
+    top_black = Image.new("RGBA", (W, H), (0, 0, 0, 255))
+    top_black.putalpha(top_grad)
+    canvas = Image.alpha_composite(canvas, top_black)
+
+    draw = ImageDraw.Draw(canvas)
+    MARGIN = 70
+    HEADLINE_BOTTOM = H - 150
+
+    _draw_logo(canvas, draw, logo_path, MARGIN, 55)
+
+    lines, f_head, size = _headline_lines(draw, headline, W - MARGIN * 2)
+    line_h = int(size * 0.98)
+    total_h = line_h * len(lines)
+    headline_top = HEADLINE_BOTTOM - total_h
+
+    f_cat = _font(ARCHIVO, 30)
+    cat_text = category
+    tw = draw.textlength(cat_text, font=f_cat)
+    pill_h = 58
+    pill_w = tw + 56
+    pill_y = headline_top - pill_h - 26
+    draw.rounded_rectangle([MARGIN, pill_y, MARGIN + pill_w, pill_y + pill_h],
+                            radius=8, fill=pill_color)
+    draw.text((MARGIN + 28, pill_y + 12), cat_text, font=f_cat, fill=WHITE)
+
+    _draw_headline_block(draw, lines, f_head, size, MARGIN, headline_top, accent_word.upper())
+
+    f_foot = _font(ARCHIVO, 34)
+    fy = H - 90
+    draw.text((MARGIN, fy), footer, font=f_foot, fill=MUTED)
+    fw = draw.textlength(footer + "  ", font=f_foot)
+    draw.text((MARGIN + fw, fy), "→  " + handle, font=f_foot, fill=WHITE)
+
+    canvas.save(out_path, "PNG")
+    return out_path
+
+
 _RENDERERS = {
     "full_bleed": _render_full_bleed,
     "split_banner": _render_split_banner,
