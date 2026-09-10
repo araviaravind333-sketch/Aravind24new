@@ -352,14 +352,36 @@ def mark_posted(story):
 BREAKING_SCORE_THRESHOLD = 90
 
 
+# A story that's genuinely fresh (published very recently) and hits a
+# strong urgency signal is worth breaking on immediately, WITHOUT waiting
+# for the corroboration bonus that _apply_corroboration() adds once 2+
+# outlets cover the same event -- corroboration is an inherently lagging
+# signal (other outlets take time to publish too), so requiring it before
+# something counts as "breaking" means always being late to the exact
+# stories where being first matters most.
+BREAKING_FRESH_MAX_AGE_H = 0.5
+BREAKING_FRESH_MIN_SCORE = 55  # recency+keyword score alone, before any corroboration bonus
+
+
 def find_breaking_story():
     """Scan every category for a story clearing a strict breaking-news bar
     — deliberately higher than the normal per-cycle pick, so this only
-    fires for something genuinely exceptional, not just today's best-of-6."""
+    fires for something genuinely exceptional, not just today's best-of-6.
+    Two ways in: a high total score (BREAKING_SCORE_THRESHOLD, usually
+    reached via corroboration from multiple outlets), OR very fresh +
+    strong signal on its own (BREAKING_FRESH_*), so a real breaking event
+    doesn't have to wait for other outlets to catch up before it counts."""
     best = None
     for category in settings.RSS_FEEDS:
         for story in fetch_candidates(category):
-            if story["score"] < BREAKING_SCORE_THRESHOLD or not story.get("hot_hit"):
+            if not story.get("hot_hit"):
+                continue
+            age_h = (dt.datetime.now(dt.timezone.utc) - story["published"]).total_seconds() / 3600
+            qualifies = (
+                story["score"] >= BREAKING_SCORE_THRESHOLD
+                or (age_h <= BREAKING_FRESH_MAX_AGE_H and story["score"] >= BREAKING_FRESH_MIN_SCORE)
+            )
+            if not qualifies:
                 continue
             if best is None or story["score"] > best["score"]:
                 best = story
@@ -368,14 +390,17 @@ def find_breaking_story():
     return best
 
 
-def hours_since_last_post():
-    """How long since the last post (scheduled or breaking) actually went
-    out, read from the real log — not a fixed assumption. Returns a large
-    number if there's no history yet (nothing to rate-limit against)."""
+def _hours_since(timestamp_filter=None):
+    """Shared helper: hours since the last logged post matching an
+    optional filter on the row (e.g. category == BREAKING NEWS). Returns
+    a large number if there's no matching history (nothing to rate-limit
+    against)."""
     if not os.path.exists(PERFORMANCE_LOG):
         return 999.0
     with open(PERFORMANCE_LOG) as f:
         rows = list(csv.DictReader(f))
+    if timestamp_filter:
+        rows = [r for r in rows if timestamp_filter(r)]
     if not rows:
         return 999.0
     try:
@@ -388,3 +413,41 @@ def hours_since_last_post():
     # single run of this check until now.
     now_ist = (dt.datetime.now(dt.timezone.utc) + dt.timedelta(hours=5, minutes=30)).replace(tzinfo=None)
     return (now_ist - last).total_seconds() / 3600
+
+
+def hours_since_last_post():
+    """How long since the last post of ANY kind actually went out."""
+    return _hours_since()
+
+
+def hours_since_last_breaking_post():
+    """How long since the last BREAKING NEWS-labeled post specifically --
+    kept independent of hours_since_last_post() so the dedicated breaking-
+    news fast path isn't starved by the regular hourly queue sharing the
+    same clock (exactly what was happening: breaking-news.yml checked
+    hours_since_last_post() too, so once the Telegram queue started
+    posting roughly hourly, that check almost never cleared and the
+    'genuinely exceptional story' fast path silently never fired)."""
+    return _hours_since(lambda r: r.get("category") == "BREAKING NEWS")
+
+
+def posts_in_last_24h():
+    """Total posts logged in the trailing 24h, across every path (regular
+    queue + breaking). Instagram's Graph API hard-caps content publishing
+    at 25 posts/24h -- this is the shared safety valve so decoupling
+    breaking-news's own pacing from the regular queue's can't silently
+    stack past that limit."""
+    if not os.path.exists(PERFORMANCE_LOG):
+        return 0
+    now_ist = dt.datetime.now(dt.timezone.utc) + dt.timedelta(hours=5, minutes=30)
+    cutoff = now_ist.replace(tzinfo=None) - dt.timedelta(hours=24)
+    count = 0
+    with open(PERFORMANCE_LOG) as f:
+        for row in csv.DictReader(f):
+            try:
+                ts = dt.datetime.strptime(row["timestamp_ist"], "%Y-%m-%d %H:%M")
+            except (KeyError, ValueError):
+                continue
+            if ts >= cutoff:
+                count += 1
+    return count

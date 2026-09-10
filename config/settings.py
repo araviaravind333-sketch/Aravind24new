@@ -133,13 +133,19 @@ DAILY_SCHEDULE = [
 ]
 
 # Checked every 30 min (separate workflow) for a story so exceptional it's
-# worth posting immediately rather than waiting for the next fixed slot
-# (up to ~3h away) — speed matters for reach on something actually
-# breaking. Rate-limited so this can't quietly turn into extra posting
-# frequency: the growth plan is explicit that over-posting on a young
-# account risks a spam flag, so this only ever ADDS a post when the last
-# one (scheduled or breaking) was genuinely a while ago.
+# worth posting immediately rather than waiting for the Telegram queue's
+# hourly pace -- speed matters for reach on something actually breaking.
+# Rate-limited against hours_since_last_BREAKING_post specifically (its
+# own clock, not the general one -- see news_engine.py), so it can't
+# quietly starve out from sharing a clock with the hourly regular queue,
+# which is exactly what was happening before this was split out.
 BREAKING_MIN_GAP_HOURS = 1.5
+
+# Shared safety valve across every posting path (regular queue + breaking
+# fast path): Instagram's Graph API hard-caps content publishing at 25
+# posts/24h -- past that, posts just fail outright. Kept a little under
+# that hard cap as headroom.
+MAX_POSTS_PER_24H = 22
 
 # ============================================================
 # 5. GEO-TAGGING

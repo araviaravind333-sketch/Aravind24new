@@ -147,13 +147,21 @@ def render():
 def render_breaking():
     """Checked frequently (every 30 min, separate workflow) so a genuinely
     exceptional story gets posted immediately instead of waiting for the
-    next fixed slot (up to ~3h away) — speed matters for reach on a story
-    that's actually breaking. Deliberately strict and rate-limited so this
-    doesn't quietly turn into extra posting frequency on a young account
-    (the growth plan is explicit that over-posting risks a spam flag)."""
-    gap = news_engine.hours_since_last_post()
+    Telegram queue's hourly pace -- speed matters for reach on a story
+    that's actually breaking. Rate-limited against its OWN clock
+    (hours_since_last_breaking_post), not the general posting clock --
+    sharing that with the hourly Telegram queue meant this almost never
+    fired once the queue reached steady hourly cadence (it kept finding
+    well under 1.5h since ANY post and skipping every single check).
+    A shared daily cap still guards against the two paths combining past
+    Instagram's 25-posts/24h API limit."""
+    if news_engine.posts_in_last_24h() >= settings.MAX_POSTS_PER_24H:
+        print(f"Already at the {settings.MAX_POSTS_PER_24H}-post/24h cap — skipping breaking check.")
+        return None
+
+    gap = news_engine.hours_since_last_breaking_post()
     if gap < settings.BREAKING_MIN_GAP_HOURS:
-        print(f"Only {gap:.1f}h since the last post (need "
+        print(f"Only {gap:.1f}h since the last BREAKING post (need "
               f"{settings.BREAKING_MIN_GAP_HOURS}h) — skipping breaking check.")
         return None
 
@@ -350,7 +358,11 @@ def telegram_cycle():
         # in the queue (not popped) so it's picked up again once the gap
         # clears, rather than losing the human-provided photo/video.
         gap_h = news_engine.hours_since_last_post()
-        if gap_h < settings.TELEGRAM_MIN_POST_GAP_HOURS:
+        at_daily_cap = news_engine.posts_in_last_24h() >= settings.MAX_POSTS_PER_24H
+        if at_daily_cap:
+            print(f"Candidate resolved but holding -- already at the "
+                  f"{settings.MAX_POSTS_PER_24H}-post/24h cap.")
+        elif gap_h < settings.TELEGRAM_MIN_POST_GAP_HOURS:
             print(f"Candidate resolved but holding -- last post was {gap_h:.2f}h ago, "
                   f"pacing to ~{settings.TELEGRAM_MIN_POST_GAP_HOURS}h between posts.")
         else:
@@ -361,11 +373,17 @@ def telegram_cycle():
                 _render_story(story, now_ist, is_reel=True, forced_image_path=inbox_path,
                               consumed_inbox_file=inbox_path)
             else:
+                # is_reel=True here too (not just for human-submitted
+                # media) -- Reels get more algorithmic reach than static
+                # posts, and most candidates end up on this path since
+                # replying to every single one isn't realistic, so
+                # defaulting it to static was leaving reach on the table
+                # for the majority of posts.
                 print("No reply within the grace period — trying an automated image match:", story["title"])
-                result = _render_story(story, now_ist, is_reel=False)
+                result = _render_story(story, now_ist, is_reel=True)
                 if result is None:
                     print("No confident image match either — posting text-only:", story["title"])
-                    _render_story(story, now_ist, is_reel=False, force_no_image=True)
+                    _render_story(story, now_ist, is_reel=True, force_no_image=True)
 
     if len(queue) < settings.TELEGRAM_QUEUE_TARGET:
         exclude_ids = {e["story"]["id"] for e in queue}
@@ -391,7 +409,16 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
     print("Headline:", written["headline"])
 
     category_label = story["category"]
-    if story["score"] >= 60 and story.get("hot_hit"):
+    # Was gated at score >= 60, far too low given the scoring changes made
+    # this conversation (incident +20, national-impact +25, corroboration
+    # up to +30 all stack) -- 57 of the last 64 real posts got branded
+    # BREAKING NEWS this way, most of them routine stories (SC hearings,
+    # an IPO listing) that just cleared a low bar. That dilutes the label
+    # to the point it stops meaning anything, and buries the real category
+    # variety (HUMAN INTEREST never once showed up as a result). Aligned
+    # with the actual breaking-news bar (news_engine.BREAKING_SCORE_THRESHOLD)
+    # so only genuinely major stories get branded this way.
+    if story["score"] >= news_engine.BREAKING_SCORE_THRESHOLD and story.get("hot_hit"):
         category_label = "BREAKING NEWS"
 
     # A fresh incident (collapse/crash/disaster) almost never has a real,
