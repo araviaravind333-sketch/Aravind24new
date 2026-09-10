@@ -40,8 +40,13 @@ curiosity gap — make the reader feel they're missing something if they scroll 
 specific real numbers/names/stakes from the story itself, NOT vague teasers ("you won't believe...") \
 and NEVER a claim that isn't true. Curiosity comes from specificity, not exaggeration.
 - "accent_word": the 1-2 word phrase inside the headline that matters most (to highlight).
-- "caption": 2-3 short sentences, simple English, factual, with ONE light personal touch \
-and ONE engagement question at the end (a real question, not "comment X"). \
+- "caption": 2-3 short sentences, simple English, factual, with ONE light personal touch, \
+then ONE real engagement question (not "comment X"). If -- and only if -- the story is \
+genuinely shocking, divisive, or the kind of thing people forward to a friend (not routine \
+news), end with a short natural share nudge instead of the question, e.g. "Tag someone who \
+needs to see this" or "Share this if it surprised you too" -- shares are one of the most \
+heavily-weighted signals in Instagram's distribution algorithm, more than likes, but a share \
+nudge on a routine story reads as desperate, so use real judgment on when it fits. \
 Keep the facts accurate. Do not invent details.
 - "hashtags": array of exactly 4 hashtags, mixing broad + niche + trending + "#AravindNews24".
 
@@ -61,7 +66,16 @@ def _rule_based(story):
     accent = " ".join(words[:2])
     cat = story["category"]
     tags = settings.HASHTAG_BANK.get(cat, settings.HASHTAG_BANK["INDIA NEWS"])
-    q = "What's your take on this?"
+    # Shares are one of the most heavily-weighted signals in Instagram's
+    # distribution algorithm, more than likes -- but a share nudge on a
+    # routine story reads as desperate, so only use it for stories that
+    # already cleared a genuinely high bar (matches the score-65 gate
+    # telegram_cycle() uses to decide what's even worth posting on its
+    # own) or a fresh incident, where it actually fits.
+    if story.get("score", 0) >= 65 or story.get("is_incident"):
+        q = "Tag someone who needs to see this."
+    else:
+        q = "What's your take on this?"
 
     summary = re.sub(r"\s+", " ", story.get("summary", "")).strip()
     detail = ""
