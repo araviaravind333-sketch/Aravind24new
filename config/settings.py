@@ -69,6 +69,17 @@ TELEGRAM_QUEUE_TARGET  = 5
 # hourly instead, using the same "time since last post" signal the
 # breaking-news path already shares (news_engine.hours_since_last_post()).
 TELEGRAM_MIN_POST_GAP_HOURS = 1.0
+# Analyzed a real competitor that reached 1M followers (@worldinlast24hrs):
+# they post ~4x/day, not hourly, and their evidence is that a handful of
+# carefully-selected, genuinely notable stories outperforms frequent-but-
+# average ones -- Instagram's algorithm tracks engagement rate per post,
+# so a pattern of low-value posts can actively suppress reach, not just
+# leave upside on the table. This only gates the AUTOMATED fallback path
+# (no human reply) -- calibrated against a real live batch of candidates
+# (scores clustered 51-79, with the standout stories at 71+); a person
+# choosing to reply with a real photo/video is itself a strong enough
+# signal to trust regardless of this number.
+MIN_AUTO_POST_SCORE = 65
 
 # ============================================================
 # 2. IMAGE PIPELINE

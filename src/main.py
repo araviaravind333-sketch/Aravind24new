@@ -365,6 +365,21 @@ def telegram_cycle():
         elif gap_h < settings.TELEGRAM_MIN_POST_GAP_HOURS:
             print(f"Candidate resolved but holding -- last post was {gap_h:.2f}h ago, "
                   f"pacing to ~{settings.TELEGRAM_MIN_POST_GAP_HOURS}h between posts.")
+        elif resolved_kind == "text_only" and queue[resolved_idx]["story"]["score"] < settings.MIN_AUTO_POST_SCORE:
+            # A real competitor that reached 1M followers posts ~4x/day,
+            # not hourly -- their evidence is that a few carefully-selected,
+            # genuinely notable stories outperform frequent-but-average
+            # ones (Instagram's algorithm tracks engagement rate per post,
+            # so a pattern of low-value posts can suppress reach rather
+            # than just leave upside on the table). This bar only applies
+            # here, not to human-curated media -- someone taking the time
+            # to reply with a real photo/video is itself a strong enough
+            # signal to trust over the automated score.
+            entry = queue.pop(resolved_idx)
+            story = entry["story"]
+            print(f"Skipping (score {story['score']} < {settings.MIN_AUTO_POST_SCORE}, no human "
+                  f"curation to override it) -- not worth a post on its own:", story["title"])
+            news_engine.mark_posted(story)
         else:
             entry = queue.pop(resolved_idx)
             story = entry["story"]
