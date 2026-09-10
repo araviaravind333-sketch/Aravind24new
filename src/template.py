@@ -143,17 +143,13 @@ def _load_photo(photo_path, w, h, smart_fit=False):
 
 
 def _draw_logo(canvas, draw, logo_path, x, y):
-    if logo_path and os.path.exists(logo_path):
-        logo = Image.open(logo_path).convert("RGBA")
-        logo.thumbnail((300, 120), Image.LANCZOS)
-        canvas.alpha_composite(logo, (x, y))
-    else:
-        f_brand1 = _font(ANTON, 46)
-        draw.text((x, y), "ARAVIND", font=f_brand1, fill=WHITE)
-        bw = draw.textlength("ARAVIND", font=f_brand1)
-        draw.text((x + bw + 12, y), "NEWS24", font=f_brand1, fill=ACCENT)
-        draw.text((x + 3, y + 57), "LAST 24 HOURS  •  INDIA & WORLD",
-                  font=_font(ARCHIVO, 20), fill=MUTED)
+    # Removed by request -- this was drawing a text fallback ("ARAVIND
+    # NEWS24 / LAST 24 HOURS - INDIA & WORLD") on every single post since
+    # no real logo image file exists at logo_path. Left as a no-op (rather
+    # than removing every call site) so it disappears from every template
+    # at once, both the 4:5 feed cards and the 9:16 reel cards, which
+    # import this same function.
+    pass
 
 
 def _headline_lines(draw, headline, max_w, max_lines=4, start_size=118, min_size=58):
