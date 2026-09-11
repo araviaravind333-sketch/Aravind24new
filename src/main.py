@@ -141,7 +141,10 @@ def render():
         print("No fresh story found. Exiting cleanly.")
         return None
 
-    return _render_story(story, ist, is_reel)
+    # No automated image search -- this path (the old fixed schedule,
+    # disabled by default, manual-dispatch only) has no human in the loop
+    # either, same rule as every other automated path in this pipeline.
+    return _render_story(story, ist, is_reel=False, force_no_image=True)
 
 
 def render_breaking():
@@ -178,10 +181,16 @@ def render_breaking():
     ist = dt.datetime.now(dt.timezone.utc) + dt.timedelta(hours=5, minutes=30)
     print(f"=== BREAKING at {ist:%Y-%m-%d %H:%M} IST: {story['title']} "
           f"(score {story['score']}) ===")
-    # Static, not a Reel -- by request, Reels are reserved for posts with
-    # a real human-submitted photo/video; this path is automated (no
-    # human involved), same rule as the regular queue's no-reply fallback.
-    return _render_story(story, ist, is_reel=False)
+    # Static, not a Reel, and NO automated image search -- by request,
+    # after a real mismatch reached an actual follower. This was the one
+    # remaining path still calling image_source.get_image() automatically
+    # (the regular Telegram queue's no-reply fallback already had this
+    # removed) -- render_breaking() runs independently every 30 min
+    # scanning RSS directly, with no human ever in the loop, so it's
+    # exactly the same guessing mechanism that caused every mismatch this
+    # whole project has had. Text-only, guaranteed, same rule as
+    # everywhere else with no human-supplied media.
+    return _render_story(story, ist, is_reel=False, force_no_image=True)
 
 
 def _load_wa_queue():
@@ -233,22 +242,15 @@ def whatsapp_cycle():
             _render_story(story, now_ist, is_reel=True, forced_image_path=inbox_path,
                           consumed_inbox_file=inbox_path)
         else:
-            # No human reply in time -- try the automated image pipeline
-            # (image_source.py) before giving up to text-only. This was
-            # deliberately NOT the fallback originally (guaranteed
-            # text-only was the whole point of the human-review flow,
-            # after repeated mismatched-photo posts eroded trust) -- but
-            # that image pipeline has since been substantially hardened
-            # (word-boundary entity matching, verified place/person
-            # recognition, Wikimedia/Openverse metadata checks), so a
-            # missed reply no longer has to mean losing the photo entirely.
-            # If it STILL can't find a confident match, text-only remains
-            # the guaranteed-safe fallback -- never a guessed stock photo.
-            print("No photo within the grace period — trying an automated image match:", story["title"])
-            result = _render_story(story, now_ist, is_reel=False)
-            if result is None:
-                print("No confident image match either — posting text-only:", story["title"])
-                _render_story(story, now_ist, is_reel=False, force_no_image=True)
+            # Guaranteed text-only, no automated image search attempt --
+            # kept consistent with the Telegram path (telegram_cycle()),
+            # where the automated stock-photo fallback was found to be
+            # the actual repeat offender behind real mismatches that
+            # reached real followers. Even though this WhatsApp path is
+            # currently dormant, it shouldn't silently reintroduce that
+            # bug if it's ever reactivated.
+            print("No photo within the grace period — posting text-only:", story["title"])
+            _render_story(story, now_ist, is_reel=False, force_no_image=True)
 
     if len(queue) < settings.WHATSAPP_QUEUE_TARGET:
         exclude_ids = {e["story"]["id"] for e in queue}
