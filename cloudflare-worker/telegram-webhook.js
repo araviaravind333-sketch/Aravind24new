@@ -3,8 +3,9 @@
  * =================================================
  * Fixes a real problem: GitHub Actions' scheduler doesn't reliably honor
  * very frequent (sub-10-minute) cron schedules -- it can silently go 15+
- * minutes between runs of a "*/5 * * * *" workflow, which defeats the
- * whole point of the urgent-breaking-news path (post within minutes).
+ * minutes between runs of a workflow scheduled for every 5 minutes,
+ * which defeats the whole point of the urgent-breaking-news path
+ * (post within minutes).
  *
  * This Worker is a dumb, reliable trigger, nothing more: Telegram calls
  * it the instant ANY message arrives (real-time, no polling), and it
