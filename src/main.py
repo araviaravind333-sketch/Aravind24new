@@ -380,6 +380,12 @@ def _poll_telegram_replies(pending_ids, now_ist=None):
             continue
         if news_engine.posts_in_last_24h() >= settings.MAX_POSTS_PER_24H:
             print("At the daily post cap -- can't post this urgent submission right now.")
+            telegram_bot.reply_to_message(
+                msg["message_id"],
+                f"Can't post this right now -- already at today's "
+                f"{settings.MAX_POSTS_PER_24H}-post limit (Instagram's API hard-caps "
+                f"publishing at 25/24h). Try again once that resets.",
+            )
             continue
 
         url = url_match.group(0)
@@ -388,10 +394,14 @@ def _poll_telegram_replies(pending_ids, now_ist=None):
             meta = news_engine.fetch_article_metadata(url)
         except Exception as e:
             print(f"Could not read the article at {url}: {e}")
+            telegram_bot.reply_to_message(
+                msg["message_id"], f"Couldn't read that article link, so this wasn't posted: {e}")
             continue
         media_path = telegram_bot.download_file(
             file_id, os.path.join(TG_INBOX_DIR, f"urgent-{u['update_id']}"))
         if not media_path:
+            telegram_bot.reply_to_message(
+                msg["message_id"], "Couldn't download your photo/video, so this wasn't posted.")
             continue
         if _no_trim_requested(text):
             _mark_no_trim(media_path)
@@ -411,6 +421,11 @@ def _poll_telegram_replies(pending_ids, now_ist=None):
         print(f"=== URGENT at {now_ist:%Y-%m-%d %H:%M} IST: {title} ===")
         urgent_result = _render_story(story, now_ist, is_reel=True, forced_image_path=media_path,
                                        consumed_inbox_file=media_path)
+        if urgent_result is not None:
+            telegram_bot.reply_to_message(msg["message_id"], f"Posting now: {title}")
+        else:
+            telegram_bot.reply_to_message(
+                msg["message_id"], "Something went wrong rendering this, so it wasn't posted.")
     _save_tg_offset(offset)
     return urgent_result
 

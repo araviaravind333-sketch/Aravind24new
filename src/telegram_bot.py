@@ -110,6 +110,18 @@ def send_candidate(story):
     return result["message_id"] if result else None
 
 
+def reply_to_message(message_id, text):
+    """Replies directly to a specific message the user sent -- used to
+    tell them what happened to an urgent breaking-news submission
+    (rejected by the daily cap, article link couldn't be read, etc.)
+    instead of it silently disappearing with no feedback."""
+    return _call("sendMessage", {
+        "chat_id": settings.TELEGRAM_CHAT_ID,
+        "text": text,
+        "reply_to_message_id": message_id,
+    })
+
+
 def get_new_updates(offset):
     """Long-poll isn't needed here -- this runs once per 30-min cycle, so
     a short timeout just drains whatever has queued up since last time.
