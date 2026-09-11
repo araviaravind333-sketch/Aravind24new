@@ -22,15 +22,19 @@ def _env(key, default=None, required=False):
 # ============================================================
 # 0. GLOBAL MODE
 # ============================================================
-# By explicit request, after repeated real-world image/news mismatches
-# damaged trust with actual followers (friends/relatives specifically
-# flagged it): EVERY post, from every path (scheduled, breaking, human-
-# curated Telegram reply, automated fallback), renders as the text_card
-# variant -- no photo or video ever gets attached to a post, period, even
-# if a human replied with one. Enforced in a single place
-# (main.py's _render_story()) so it can't be bypassed by any caller.
-# Flip back to False to restore normal photo/video behavior.
-TEXT_ONLY_MODE = True
+# Emergency kill-switch: forces EVERY post, from every path, to render as
+# the text_card variant -- no photo or video ever attached, period, even
+# one a human personally supplied. Was turned on after repeated real-
+# world image mismatches damaged trust with actual followers, but the
+# actual repeat offender turned out to be the automated stock-photo
+# search fallback (removed from telegram_cycle() -- a missed reply now
+# always goes text-only, no guessing), not human-curated photos. A photo
+# or video the user personally replies with (or attaches to their own
+# breaking-news link submission) is a fundamentally different, mismatch-
+# free thing: a person looked at it and chose it. Back to False so that
+# path works normally again. Flip back to True only if a real mismatch
+# problem returns.
+TEXT_ONLY_MODE = False
 
 
 # ============================================================

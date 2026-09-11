@@ -284,57 +284,137 @@ def _save_tg_offset(offset):
         json.dump({"offset": offset}, f)
 
 
-def _poll_telegram_replies(pending_ids):
-    """Pulls any new Telegram updates since the last run and downloads a
-    photo/video for each one that's a reply to a message_id we're still
-    tracking. `pending_ids` are the message_ids of candidates currently
-    sitting in the queue -- anything else (replies to old/already-resolved
-    messages, unrelated chatter) is ignored."""
+URGENT_URL_RE = re.compile(r"https?://\S+")
+
+
+def _extract_media_file_id(msg):
+    # Telegram RE-COMPRESSES anything sent as a regular Photo (re-encoded
+    # down to ~1280px, lossy) before the bot ever sees it -- that
+    # compressed image then has to be scaled UP again to fill the card,
+    # compounding the quality loss. Sending as a File (Telegram's
+    # "compression off" option) delivers the original, uncompressed bytes
+    # instead, so prefer that whenever it's present.
+    doc = msg.get("document")
+    if doc and doc.get("mime_type", "").startswith(("image/", "video/")):
+        return doc["file_id"]
+    if msg.get("video"):
+        return msg["video"]["file_id"]
+    if msg.get("photo"):
+        return msg["photo"][-1]["file_id"]  # highest resolution Telegram kept, still recompressed
+    return None
+
+
+def _poll_telegram_replies(pending_ids, now_ist=None):
+    """Pulls any new Telegram updates since the last run. Two things can
+    happen per update:
+      1. A reply to a message_id we're still tracking (`pending_ids`) --
+         downloads its photo/video into the inbox for telegram_cycle()'s
+         normal resolve step, same as before.
+      2. A NEW message (not a reply) that has BOTH media AND a link in its
+         text/caption -- treated as the user personally flagging a
+         breaking story they found themselves, with their own photo/video
+         attached. Rendered and posted immediately, right here, rather
+         than going through the review queue -- this is the "I'm telling
+         you this is happening right now" path, so it bypasses the
+         regular queue's hourly pacing entirely (still respects the hard
+         daily API cap). Returns the render result if this happened (or
+         None), so a caller that needs to publish right away can tell.
+    Called from both telegram_cycle() (every 30 min) and the fast
+    telegram_urgent_check() (every 5 min) -- unified into one function so
+    whichever happens to poll first still handles both cases correctly,
+    rather than one poller silently consuming an update the other one
+    would have known what to do with."""
+    if now_ist is None:
+        now_ist = (dt.datetime.now(dt.timezone.utc) + dt.timedelta(hours=5, minutes=30)).replace(tzinfo=None)
     offset = _load_tg_offset()
     updates = telegram_bot.get_new_updates(offset)
+    urgent_result = None
     for u in updates:
         offset = max(offset, u["update_id"] + 1)
         msg = u.get("message")
         if not msg or str(msg.get("chat", {}).get("id")) != str(settings.TELEGRAM_CHAT_ID):
             continue
         reply_to = msg.get("reply_to_message")
-        if not reply_to or reply_to["message_id"] not in pending_ids:
+
+        if reply_to:
+            if reply_to["message_id"] not in pending_ids:
+                continue
+            file_id = _extract_media_file_id(msg)
+            if not file_id:
+                continue
+            dest_no_ext = os.path.join(TG_INBOX_DIR, _safe_filename(str(reply_to["message_id"])))
+            saved = telegram_bot.download_file(file_id, dest_no_ext)
+            if saved:
+                print("Saved Telegram reply media:", saved)
             continue
 
-        # Telegram RE-COMPRESSES anything sent as a regular Photo (re-
-        # encoded down to ~1280px, lossy) before the bot ever sees it --
-        # that compressed image then has to be scaled UP again to fill the
-        # 1080x1350 card, compounding the quality loss. Sending as a File
-        # (Telegram's "compression off" option) delivers the original,
-        # uncompressed bytes instead, so prefer that whenever it's present.
-        doc = msg.get("document")
-        file_id = None
-        if doc and doc.get("mime_type", "").startswith(("image/", "video/")):
-            file_id = doc["file_id"]
-        elif msg.get("video"):
-            file_id = msg["video"]["file_id"]
-        elif msg.get("photo"):
-            file_id = msg["photo"][-1]["file_id"]  # last = highest resolution Telegram kept, still recompressed
-        if not file_id:
+        # Not a reply -- only treated as an urgent breaking submission if
+        # it has BOTH media and a link; a stray text message or a photo
+        # with no link is just ignored here. At most one urgent item
+        # handled per poll, same "one thing at a time" pattern as the
+        # rest of this pipeline.
+        if urgent_result is not None:
+            continue
+        file_id = _extract_media_file_id(msg)
+        text = msg.get("caption") or msg.get("text") or ""
+        url_match = URGENT_URL_RE.search(text)
+        if not (file_id and url_match):
+            continue
+        if news_engine.posts_in_last_24h() >= settings.MAX_POSTS_PER_24H:
+            print("At the daily post cap -- can't post this urgent submission right now.")
             continue
 
-        dest_no_ext = os.path.join(TG_INBOX_DIR, _safe_filename(str(reply_to["message_id"])))
-        saved = telegram_bot.download_file(file_id, dest_no_ext)
-        if saved:
-            print("Saved Telegram reply media:", saved)
+        url = url_match.group(0)
+        print("Urgent breaking submission via Telegram, link:", url)
+        try:
+            meta = news_engine.fetch_article_metadata(url)
+        except Exception as e:
+            print(f"Could not read the article at {url}: {e}")
+            continue
+        media_path = telegram_bot.download_file(
+            file_id, os.path.join(TG_INBOX_DIR, f"urgent-{u['update_id']}"))
+        if not media_path:
+            continue
+        title = meta.get("title") or "Breaking news"
+        story = {
+            "id": news_engine._story_id(title),
+            "title": title,
+            "summary": meta.get("summary", ""),
+            "link": url,
+            "category": "BREAKING NEWS",
+            "score": 95,
+            "hot_hit": True,
+            "is_incident": news_engine.is_fresh_incident(title),
+        }
+        story["geo"] = news_engine.detect_geo(story["title"], story["category"])
+        print(f"=== URGENT at {now_ist:%Y-%m-%d %H:%M} IST: {title} ===")
+        urgent_result = _render_story(story, now_ist, is_reel=True, forced_image_path=media_path,
+                                       consumed_inbox_file=media_path)
     _save_tg_offset(offset)
+    return urgent_result
+
+
+def telegram_urgent_check():
+    """Checked every ~5 min (separate, fast workflow, GitHub Actions'
+    practical minimum reliable schedule interval) -- exists so a breaking
+    story the user personally spots and flags (link + their own photo/
+    video, not a reply to a regular candidate) gets posted in minutes,
+    not whenever the 30-min regular queue next happens to run."""
+    queue = _load_tg_queue()
+    pending_ids = {e["message_id"] for e in queue}
+    return _poll_telegram_replies(pending_ids)
 
 
 def telegram_cycle():
     """Checked every ~30 min -- same design as whatsapp_cycle() (grace
-    period, one resolution per run, automated-image-fallback before
-    text-only, queue refill), but over the Telegram Bot API: no template-
-    approval queue to wait on, and no webhook/Worker needed since
-    get_new_updates() is a pull -- GitHub Actions polls it directly."""
+    period, one resolution per run, guaranteed text-only with no reply --
+    never a guessed image, queue refill), but over the Telegram Bot API:
+    no template-approval queue to wait on, and no webhook/Worker needed
+    since get_new_updates() is a pull -- GitHub Actions polls it directly."""
     queue = _load_tg_queue()
     now_ist = (dt.datetime.now(dt.timezone.utc) + dt.timedelta(hours=5, minutes=30)).replace(tzinfo=None)
 
-    _poll_telegram_replies({e["message_id"] for e in queue})
+    _poll_telegram_replies({e["message_id"] for e in queue}, now_ist)
 
     resolved_idx, resolved_kind, inbox_path = None, None, None
     for i, entry in enumerate(queue):
@@ -388,17 +468,20 @@ def telegram_cycle():
                 _render_story(story, now_ist, is_reel=True, forced_image_path=inbox_path,
                               consumed_inbox_file=inbox_path)
             else:
-                # is_reel=True here too (not just for human-submitted
-                # media) -- Reels get more algorithmic reach than static
-                # posts, and most candidates end up on this path since
-                # replying to every single one isn't realistic, so
-                # defaulting it to static was leaving reach on the table
-                # for the majority of posts.
-                print("No reply within the grace period — trying an automated image match:", story["title"])
-                result = _render_story(story, now_ist, is_reel=True)
-                if result is None:
-                    print("No confident image match either — posting text-only:", story["title"])
-                    _render_story(story, now_ist, is_reel=True, force_no_image=True)
+                # Guaranteed text-only, no automated image search attempt.
+                # That automated fallback (added earlier, then removed
+                # here) was the actual repeat offender behind the real
+                # mismatches that damaged trust with real people --
+                # keyword-guessing a stock photo is the exact mechanism
+                # that caused every mismatch this whole project has had.
+                # A human-supplied photo (the "media" branch above) is a
+                # completely different, mismatch-free thing: someone
+                # looked at it and chose it. is_reel=True still applies --
+                # Reels get more algorithmic reach even for a text card
+                # held as video, and most candidates end up on this path
+                # since replying to every single one isn't realistic.
+                print("No reply within the grace period — posting text-only:", story["title"])
+                _render_story(story, now_ist, is_reel=True, force_no_image=True)
 
     if len(queue) < settings.TELEGRAM_QUEUE_TARGET:
         exclude_ids = {e["story"]["id"] for e in queue}
@@ -669,6 +752,8 @@ if __name__ == "__main__":
         whatsapp_cycle()
     elif phase == "telegram-check":
         telegram_cycle()
+    elif phase == "telegram-urgent":
+        telegram_urgent_check()
     elif phase == "publish":
         publish()
     else:

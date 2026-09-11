@@ -12,9 +12,11 @@ import feedparser
 import datetime as dt
 import re
 import hashlib
+import html
 import json
 import os
 import csv
+import urllib.request
 
 from config import settings
 
@@ -233,6 +235,39 @@ def _virality(title, published_dt):
     if _is_routine_market_update(title):
         score -= 35
     return score, hot_hit
+
+
+# ---------- user-submitted breaking news (a link the user found themselves) ----------
+def fetch_article_metadata(url):
+    """Lightweight, dependency-free extraction of a news article's title
+    and description from its public URL -- used when the user personally
+    sends a breaking-news link + their own photo/video via Telegram
+    (src/main.py's _poll_telegram_replies()), rather than going through
+    the RSS pipeline. Prefers Open Graph tags (og:title/og:description),
+    which virtually every news publisher sets for their own social-share
+    previews, falling back to the plain <title> tag if those are missing."""
+    req = urllib.request.Request(url, headers={
+        "User-Agent": "Mozilla/5.0 (compatible; AravindNews24Bot/1.0)"
+    })
+    with urllib.request.urlopen(req, timeout=20) as r:
+        page = r.read().decode("utf-8", errors="replace")
+
+    def _meta(key, attr="property"):
+        pattern = (
+            rf'<meta[^>]+{attr}=["\']{re.escape(key)}["\'][^>]+content=["\']([^"\']+)["\']'
+            rf'|<meta[^>]+content=["\']([^"\']+)["\'][^>]+{attr}=["\']{re.escape(key)}["\']'
+        )
+        m = re.search(pattern, page, re.I)
+        if not m:
+            return None
+        return html.unescape((m.group(1) or m.group(2)).strip())
+
+    title = _meta("og:title") or _meta("twitter:title", "name")
+    if not title:
+        m = re.search(r"<title[^>]*>([^<]+)</title>", page, re.I)
+        title = html.unescape(m.group(1).strip()) if m else url
+    summary = _meta("og:description") or _meta("description", "name") or ""
+    return {"title": title, "summary": summary}
 
 
 # ---------- geo detection ----------
