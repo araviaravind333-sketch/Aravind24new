@@ -154,9 +154,14 @@ def render_breaking():
     fired once the queue reached steady hourly cadence (it kept finding
     well under 1.5h since ANY post and skipping every single check).
     A shared daily cap still guards against the two paths combining past
-    Instagram's 25-posts/24h API limit."""
-    if news_engine.posts_in_last_24h() >= settings.MAX_POSTS_PER_24H:
-        print(f"Already at the {settings.MAX_POSTS_PER_24H}-post/24h cap — skipping breaking check.")
+    Instagram's 25-posts/24h API limit -- stopping MAX_URGENT_RESERVED_SLOTS
+    short of it, same as the regular queue, so the user's own urgent
+    submissions (the only path allowed to use the full ceiling) never get
+    crowded out by automated posts."""
+    reg_cap = settings.MAX_POSTS_PER_24H - settings.MAX_URGENT_RESERVED_SLOTS
+    if news_engine.posts_in_last_24h() >= reg_cap:
+        print(f"Already at the {reg_cap}-post/24h cap (reserving "
+              f"{settings.MAX_URGENT_RESERVED_SLOTS} for urgent submissions) — skipping breaking check.")
         return None
 
     gap = news_engine.hours_since_last_breaking_post()
@@ -474,10 +479,16 @@ def telegram_cycle():
         # in the queue (not popped) so it's picked up again once the gap
         # clears, rather than losing the human-provided photo/video.
         gap_h = news_engine.hours_since_last_post()
-        at_daily_cap = news_engine.posts_in_last_24h() >= settings.MAX_POSTS_PER_24H
+        # Stops MAX_URGENT_RESERVED_SLOTS short of the full daily ceiling
+        # -- those last few slots are reserved for the user's own urgent
+        # breaking-news submissions (see _poll_telegram_replies), which
+        # check against the full ceiling instead, so routine automated
+        # posts here can never crowd out something the user hand-picked.
+        reg_cap = settings.MAX_POSTS_PER_24H - settings.MAX_URGENT_RESERVED_SLOTS
+        at_daily_cap = news_engine.posts_in_last_24h() >= reg_cap
         if at_daily_cap:
-            print(f"Candidate resolved but holding -- already at the "
-                  f"{settings.MAX_POSTS_PER_24H}-post/24h cap.")
+            print(f"Candidate resolved but holding -- already at the {reg_cap}-post/24h "
+                  f"cap (reserving {settings.MAX_URGENT_RESERVED_SLOTS} for urgent submissions).")
         elif gap_h < settings.TELEGRAM_MIN_POST_GAP_HOURS:
             print(f"Candidate resolved but holding -- last post was {gap_h:.2f}h ago, "
                   f"pacing to ~{settings.TELEGRAM_MIN_POST_GAP_HOURS}h between posts.")

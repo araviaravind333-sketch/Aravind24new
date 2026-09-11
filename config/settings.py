@@ -93,11 +93,15 @@ TELEGRAM_MIN_POST_GAP_HOURS = 1.0
 # average ones -- Instagram's algorithm tracks engagement rate per post,
 # so a pattern of low-value posts can actively suppress reach, not just
 # leave upside on the table. This only gates the AUTOMATED fallback path
-# (no human reply) -- calibrated against a real live batch of candidates
-# (scores clustered 51-79, with the standout stories at 71+); a person
-# choosing to reply with a real photo/video is itself a strong enough
-# signal to trust regardless of this number.
-MIN_AUTO_POST_SCORE = 65
+# (no human reply) -- a person choosing to reply with a real photo/video
+# is itself a strong enough signal to trust regardless of this number.
+#
+# Raised from 65 -> 75: real usage showed 65 wasn't actually selective --
+# the account was hitting MAX_POSTS_PER_24H's ceiling nearly every single
+# day (~22-24 posts/day), about triple the cadence of the account that
+# actually reached 1M. 75 is calibrated to only let through the clear
+# standouts in a normal candidate batch, not just "pretty good."
+MIN_AUTO_POST_SCORE = 75
 
 # ============================================================
 # 2. IMAGE PIPELINE
@@ -172,9 +176,22 @@ BREAKING_MIN_GAP_HOURS = 1.5
 
 # Shared safety valve across every posting path (regular queue + breaking
 # fast path): Instagram's Graph API hard-caps content publishing at 25
-# posts/24h -- past that, posts just fail outright. Kept a little under
-# that hard cap as headroom.
-MAX_POSTS_PER_24H = 22
+# posts/24h -- past that, posts just fail outright.
+#
+# Lowered from 22 -> 12: the account was hitting 22 nearly every single
+# day, roughly triple the ~4x/day cadence of the account that actually
+# reached 1M followers -- that's routine automated posts crowding out
+# quality, not a technical ceiling worth maxing out.
+MAX_POSTS_PER_24H = 12
+# Reserved specifically for the user's OWN urgent breaking-news
+# submissions (a link + their own photo/video, sent via Telegram).
+# Without this, routine automated posts earlier in the day can use up
+# the whole daily budget before the user's hand-picked urgent post even
+# gets a chance -- exactly what happened twice in real testing. The
+# regular queue and the automated breaking-news path stop this many
+# short of the full ceiling; only the user's own urgent-submission path
+# can use the full ceiling, including this reserve.
+MAX_URGENT_RESERVED_SLOTS = 3
 
 # ============================================================
 # 5. GEO-TAGGING
