@@ -97,7 +97,11 @@ def send_candidate(story):
             f"{settings.TELEGRAM_GRACE_MINUTES} min.\n\n"
             f"For best quality, send it as a FILE, not a photo: attach \U0001F4CE "
             f"→ File → pick from gallery. A normal photo attachment gets "
-            f"compressed by Telegram before it reaches us."
+            f"compressed by Telegram before it reaches us.\n\n"
+            f"For a video: it's trimmed to 50s if it's over 60s, otherwise "
+            f"posted at its own length. Add \"no trim\" / \"full length\" "
+            f"anywhere in the caption to post it exactly as sent regardless "
+            f"of length."
         )
     result = _call("sendMessage", {
         "chat_id": settings.TELEGRAM_CHAT_ID,

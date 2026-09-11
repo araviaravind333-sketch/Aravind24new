@@ -285,6 +285,20 @@ def _save_tg_offset(offset):
 
 
 URGENT_URL_RE = re.compile(r"https?://\S+")
+NO_TRIM_RE = re.compile(r"\bno\s*-?\s*trim\b|\bdon'?t\s*trim\b|\bfull\s*length\b|\bfull\s*video\b", re.I)
+
+
+def _no_trim_requested(text):
+    """Say 'no trim' / 'don't trim' / 'full length' / 'full video' anywhere
+    in the caption of a video you send (reply or urgent submission) to post
+    it at its real length untouched, skipping the normal 60s-trim rule
+    (settings.REEL_CLIP_TRIM_THRESHOLD_SEC/TARGET_SEC)."""
+    return bool(NO_TRIM_RE.search(text or ""))
+
+
+def _mark_no_trim(media_path):
+    if media_path:
+        open(media_path + ".notrim", "w").close()
 
 
 def _extract_media_file_id(msg):
@@ -346,6 +360,10 @@ def _poll_telegram_replies(pending_ids, now_ist=None):
             saved = telegram_bot.download_file(file_id, dest_no_ext)
             if saved:
                 print("Saved Telegram reply media:", saved)
+                reply_text = msg.get("caption") or msg.get("text") or ""
+                if _no_trim_requested(reply_text):
+                    _mark_no_trim(saved)
+                    print("No-trim requested -- will post this video at its full length.")
             continue
 
         # Not a reply -- only treated as an urgent breaking submission if
@@ -375,6 +393,9 @@ def _poll_telegram_replies(pending_ids, now_ist=None):
             file_id, os.path.join(TG_INBOX_DIR, f"urgent-{u['update_id']}"))
         if not media_path:
             continue
+        if _no_trim_requested(text):
+            _mark_no_trim(media_path)
+            print("No-trim requested -- will post this video at its full length.")
         title = meta.get("title") or "Breaking news"
         story = {
             "id": news_engine._story_id(title),
@@ -621,11 +642,16 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
         video_path = os.path.join(out_dir, video_name)
         try:
             if video_clip_path:
-                # keep the clip's own length unless it's over the threshold,
-                # then trim to the target -- NOT a blanket cap (a 90s clip
-                # gets cut to 50s, but a 55s clip stays at 55s).
                 duration = video.probe_duration(video_clip_path)
-                if duration and duration > settings.REEL_CLIP_TRIM_THRESHOLD_SEC:
+                if os.path.exists(video_clip_path + ".notrim"):
+                    # explicit "no trim" / "full length" in the caption --
+                    # post it exactly as sent, however long that is.
+                    clip_duration = duration or settings.REEL_CLIP_TRIM_TARGET_SEC
+                    print(f"No-trim requested -- using the full {clip_duration:.0f}s as sent.")
+                elif duration and duration > settings.REEL_CLIP_TRIM_THRESHOLD_SEC:
+                    # keep the clip's own length unless it's over the
+                    # threshold, then trim to the target -- NOT a blanket
+                    # cap (a 90s clip gets cut to 50s, a 55s clip stays 55s).
                     clip_duration = settings.REEL_CLIP_TRIM_TARGET_SEC
                 else:
                     clip_duration = duration or settings.REEL_CLIP_TRIM_TARGET_SEC
@@ -739,6 +765,8 @@ def publish():
     inbox_file = pending.get("consumed_inbox_file")
     if inbox_file and os.path.exists(inbox_file):
         os.remove(inbox_file)
+    if inbox_file and os.path.exists(inbox_file + ".notrim"):
+        os.remove(inbox_file + ".notrim")
     print("=== Done ===")
 
 
