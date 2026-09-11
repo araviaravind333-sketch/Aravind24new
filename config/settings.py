@@ -96,12 +96,11 @@ TELEGRAM_MIN_POST_GAP_HOURS = 1.0
 # (no human reply) -- a person choosing to reply with a real photo/video
 # is itself a strong enough signal to trust regardless of this number.
 #
-# Raised from 65 -> 75: real usage showed 65 wasn't actually selective --
-# the account was hitting MAX_POSTS_PER_24H's ceiling nearly every single
-# day (~22-24 posts/day), about triple the cadence of the account that
-# actually reached 1M. 75 is calibrated to only let through the clear
-# standouts in a normal candidate batch, not just "pretty good."
-MIN_AUTO_POST_SCORE = 75
+# Raised 65 -> 75 -> 80 by explicit request: 65 wasn't actually selective
+# (the account was hitting MAX_POSTS_PER_24H's ceiling nearly every day,
+# ~22-24 posts/day, about triple the cadence of the account that actually
+# reached 1M); 80 tightens further still, closer to only the standouts.
+MIN_AUTO_POST_SCORE = 80
 
 # ============================================================
 # 2. IMAGE PIPELINE
