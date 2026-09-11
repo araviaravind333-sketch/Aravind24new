@@ -34,36 +34,19 @@ def probe_duration(video_path):
 
 
 def render_reel(image_path, out_path, **_ignored):
-    """Holds the branded card as a Reel with a very subtle slow zoom (a
-    classic Ken Burns effect), not a frozen frame -- by explicit request,
-    reversing an earlier removal, because a completely static hold likely
-    doesn't earn Instagram's actual Reels distribution boost: the
-    algorithm weighs watch-time/rewatch heavily, and there's nothing for
-    a viewer's eye to track in a frozen frame. Kept deliberately subtle
-    (~6% zoom over the whole clip) and slow -- a heavy zoom on a card
-    with text baked in near the margins risks clipping the headline or
-    footer as the frame tightens.
+    """Holds the branded card as a Reel, completely still, silent -- the
+    Ken Burns zoom effect tried here was reverted by request; it didn't
+    look good in practice regardless of the algorithmic theory behind it.
 
-    Also fixes a real pre-existing distortion found while making this
-    change: this is sometimes called with the 4:5 (1080x1350) static
-    feed card as the source (the no-photo text_card/alert_card fallback,
-    which has no dedicated 9:16 reel design) -- the previous plain
-    scale=w:h stretched that 4:5 image vertically to fit the 9:16 reel
-    frame instead of fitting it properly. Cover-fit (scale + center-crop)
-    first, matching how every photo elsewhere in this pipeline is fit
-    into its frame, THEN apply the zoom on top of that correctly-fit
-    frame -- this is the standard ffmpeg recipe for smooth zoompan
-    (pre-scale 2x before zoompan, which needs headroom above the output
-    resolution to avoid visible jitter)."""
+    Keeps one real fix made alongside that experiment: this is sometimes
+    called with the 4:5 (1080x1350) static feed card as the source (the
+    no-photo text_card/alert_card fallback, which has no dedicated 9:16
+    reel design) -- a plain scale=w:h used to stretch that 4:5 image
+    vertically to fit the 9:16 reel frame instead of fitting it properly.
+    Cover-fit (scale + center-crop) first, matching how every photo
+    elsewhere in this pipeline is fit into its frame."""
     w, h = settings.REEL_WIDTH, settings.REEL_HEIGHT
-    fps = 25
-    frames = fps * settings.REEL_DURATION_SEC
-    zoom_per_frame = 0.06 / frames  # ~6% total zoom across the whole clip
-    vf = (
-        f"scale={w}:{h}:force_original_aspect_ratio=increase,crop={w}:{h},"
-        f"scale={w * 2}:{h * 2},"
-        f"zoompan=z='min(zoom+{zoom_per_frame:.6f},1.06)':d={frames}:s={w}x{h}:fps={fps}"
-    )
+    vf = f"scale={w}:{h}:force_original_aspect_ratio=increase,crop={w}:{h}"
     cmd = [
         "ffmpeg", "-y",
         "-loop", "1", "-i", image_path,
