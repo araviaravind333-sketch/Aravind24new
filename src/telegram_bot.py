@@ -83,14 +83,22 @@ def send_candidate(story):
         text += f"\n{summary}\n"
     if link:
         text += f"\nSource: {link}\n"
-    text += (
-        f"\nReply to this message with a photo or video to use it for this "
-        f"post — otherwise it posts automatically after "
-        f"{settings.TELEGRAM_GRACE_MINUTES} min.\n\n"
-        f"For best quality, send it as a FILE, not a photo: attach \U0001F4CE "
-        f"→ File → pick from gallery. A normal photo attachment gets "
-        f"compressed by Telegram before it reaches us."
-    )
+    if settings.TEXT_ONLY_MODE:
+        # Photos are off entirely right now -- don't ask for one that
+        # would just be ignored at render time.
+        text += (
+            f"\nPosts text-only automatically after "
+            f"{settings.TELEGRAM_GRACE_MINUTES} min (no image attached)."
+        )
+    else:
+        text += (
+            f"\nReply to this message with a photo or video to use it for this "
+            f"post — otherwise it posts automatically after "
+            f"{settings.TELEGRAM_GRACE_MINUTES} min.\n\n"
+            f"For best quality, send it as a FILE, not a photo: attach \U0001F4CE "
+            f"→ File → pick from gallery. A normal photo attachment gets "
+            f"compressed by Telegram before it reaches us."
+        )
     result = _call("sendMessage", {
         "chat_id": settings.TELEGRAM_CHAT_ID,
         "text": text,

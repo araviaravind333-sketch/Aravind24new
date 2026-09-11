@@ -20,6 +20,20 @@ def _env(key, default=None, required=False):
 
 
 # ============================================================
+# 0. GLOBAL MODE
+# ============================================================
+# By explicit request, after repeated real-world image/news mismatches
+# damaged trust with actual followers (friends/relatives specifically
+# flagged it): EVERY post, from every path (scheduled, breaking, human-
+# curated Telegram reply, automated fallback), renders as the text_card
+# variant -- no photo or video ever gets attached to a post, period, even
+# if a human replied with one. Enforced in a single place
+# (main.py's _render_story()) so it can't be bypassed by any caller.
+# Flip back to False to restore normal photo/video behavior.
+TEXT_ONLY_MODE = True
+
+
+# ============================================================
 # 1. META / GRAPH API CREDENTIALS  (Instagram + Facebook Page)
 # ============================================================
 # One long-lived Page token covers BOTH the FB Page and the linked IG account.

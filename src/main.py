@@ -418,6 +418,13 @@ def telegram_cycle():
 
 def _render_story(story, ist, is_reel, forced_image_path=None,
                    force_no_image=False, consumed_inbox_file=None):
+    if settings.TEXT_ONLY_MODE:
+        # Single enforcement point -- overrides every caller (scheduled,
+        # breaking, human-curated Telegram reply, automated fallback), so
+        # no image/video ever gets attached to a post while this is on,
+        # even one a human specifically supplied.
+        forced_image_path = None
+        force_no_image = True
     print("Selected:", story["title"], "| score:", story["score"])
 
     written = ai_writer.rewrite(story)
