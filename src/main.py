@@ -178,7 +178,10 @@ def render_breaking():
     ist = dt.datetime.now(dt.timezone.utc) + dt.timedelta(hours=5, minutes=30)
     print(f"=== BREAKING at {ist:%Y-%m-%d %H:%M} IST: {story['title']} "
           f"(score {story['score']}) ===")
-    return _render_story(story, ist, is_reel=True)  # Reels get more reach
+    # Static, not a Reel -- by request, Reels are reserved for posts with
+    # a real human-submitted photo/video; this path is automated (no
+    # human involved), same rule as the regular queue's no-reply fallback.
+    return _render_story(story, ist, is_reel=False)
 
 
 def _load_wa_queue():
@@ -523,12 +526,12 @@ def telegram_cycle():
                 # that caused every mismatch this whole project has had.
                 # A human-supplied photo (the "media" branch above) is a
                 # completely different, mismatch-free thing: someone
-                # looked at it and chose it. is_reel=True still applies --
-                # Reels get more algorithmic reach even for a text card
-                # held as video, and most candidates end up on this path
-                # since replying to every single one isn't realistic.
+                # looked at it and chose it. Static, not a Reel, here --
+                # by request, Reels are reserved for posts with a real
+                # human-submitted photo/video, giving the feed visual
+                # variety instead of every single post being a Reel.
                 print("No reply within the grace period — posting text-only:", story["title"])
-                _render_story(story, now_ist, is_reel=True, force_no_image=True)
+                _render_story(story, now_ist, is_reel=False, force_no_image=True)
 
     if len(queue) < settings.TELEGRAM_QUEUE_TARGET:
         exclude_ids = {e["story"]["id"] for e in queue}
