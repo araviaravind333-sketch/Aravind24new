@@ -2,12 +2,21 @@ name: AravindNews24 Telegram Urgent Breaking
 
 # For a breaking story the USER personally spots and sends to the bot
 # themselves (a link + their own photo/video, sent as a new message, not
-# a reply to a regular candidate) -- checked every 5 minutes (GitHub
-# Actions' practical minimum reliable schedule interval) so it posts
-# within minutes instead of waiting for the 30-min regular queue.
+# a reply to a regular candidate) -- posts within minutes instead of
+# waiting for the 30-min regular queue.
+#
+# Was */5 (every 5 min); observed GitHub's scheduler silently skipping
+# 15+ minutes between runs at that interval while every 30-min workflow
+# in this repo fired right on schedule -- GitHub doesn't reliably honor
+# sub-10-minute cron. 10 min is close to the practical floor where it
+# actually fires consistently. (A proper fix -- a webhook so Telegram
+# pushes the message instead of us polling -- was attempted and reverted:
+# Telegram only allows EITHER polling (what the rest of this pipeline
+# runs on) OR a webhook, never both, so a real webhook needs migrating
+# everything off polling at once, not just this one workflow.)
 on:
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '*/10 * * * *'
   workflow_dispatch:
 
 permissions:
