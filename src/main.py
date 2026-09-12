@@ -578,24 +578,14 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
     if story["score"] >= news_engine.BREAKING_SCORE_THRESHOLD and story.get("hot_hit"):
         category_label = "BREAKING NEWS"
 
-    # A fresh incident (collapse/crash/disaster) almost never has a real,
-    # legitimately-licensed photo available yet — forcing a generic stock
-    # substitute into that slot is exactly what's been producing mismatches.
-    # Use the honest no-photo alert card instead of guessing at one. Decide
-    # the variant BEFORE fetching a photo: text_card can also be chosen by
-    # the normal rotation for any story, and needs no photo either — no
-    # point fetching (or risking failure on) one we won't use.
+    # alert_card (a hazard-triangle graphic for incident stories with no
+    # photo) is retired by request -- didn't look good in practice. Every
+    # no-photo case (force_no_image, guaranteed on every automated path)
+    # now just uses the plain text_card, same as any other no-photo story;
+    # a human-supplied photo uses the normal rotation regardless of
+    # whether the story is a fresh incident.
     if force_no_image:
         variant = "text_card"
-    elif forced_image_path:
-        # alert_card exists to route around exactly the case where no real,
-        # legitimately-licensed photo of THIS specific incident exists yet.
-        # Once a human has actually supplied one (via the WhatsApp/Telegram/
-        # email review), that reason no longer applies -- use it like any
-        # other photo story instead of silently discarding it.
-        variant = choose_variant(category_label)
-    elif is_incident := story.get("is_incident", False):
-        variant = "alert_card"
     else:
         variant = choose_variant(category_label)
     print("Template variant:", variant)
