@@ -446,9 +446,6 @@ def _render_text_card(category, headline, accent_word, out_path,
     y_end = _draw_headline_block(draw, lines, f_head, size, MARGIN, headline_top,
                                   accent_word.upper())
 
-    # accent underline beneath the headline for polish
-    draw.rectangle([MARGIN, y_end + 20, MARGIN + 110, y_end + 28], fill=pill_color)
-
     f_foot = _font(ARCHIVO, 34)
     fy = H - 90
     draw.text((MARGIN, fy), footer, font=f_foot, fill=MUTED)

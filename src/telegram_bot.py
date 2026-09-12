@@ -106,6 +106,13 @@ def send_candidate(story):
     result = _call("sendMessage", {
         "chat_id": settings.TELEGRAM_CHAT_ID,
         "text": text,
+        # Without this, Telegram auto-generates a rich preview (title/
+        # description/photo pulled from the article) for the "Source:"
+        # link -- that preview card visually splits the message when
+        # scrolling, which can make it look like a candidate has no
+        # "reply with a photo" instructions when it's really just been
+        # pushed out of view by the link card above/below it.
+        "disable_web_page_preview": True,
     })
     return result["message_id"] if result else None
 
