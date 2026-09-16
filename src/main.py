@@ -311,6 +311,47 @@ def _mark_no_trim(media_path):
         open(media_path + ".notrim", "w").close()
 
 
+# Telegram's Bot API can only download files up to 20 MB (documented hard
+# limit on getFile) -- nothing we can do our side about anything larger.
+TELEGRAM_MAX_DOWNLOAD_BYTES = 20 * 1024 * 1024
+
+
+def _media_quality_note(msg):
+    """Warn about quality problems the user can actually still fix, at the
+    moment they send the media, instead of them finding out after a
+    low-quality post is already live. Real measured example: three videos
+    sent as normal attachments all arrived at 848x538 or smaller, because
+    Telegram re-encodes anything sent as a Photo/Video client-side BEFORE
+    the bot ever receives it. Sending as a File skips that entirely."""
+    media = msg.get("video") or msg.get("document") or None
+    as_file = msg.get("document") is not None
+    size = (media or {}).get("file_size") or 0
+    if size > TELEGRAM_MAX_DOWNLOAD_BYTES:
+        return (f"That file is {size / 1048576:.0f}MB. Telegram only lets bots download "
+                f"up to 20MB, so I can't fetch it. Please send a shorter clip, or export "
+                f"it at a smaller size, and keep it under 20MB.")
+
+    if msg.get("photo") and not as_file:
+        return ("Heads up: that came through as a compressed photo, so it's lower "
+                "resolution than your original. For full quality send it as a FILE "
+                "instead: attach \U0001F4CE -> File -> pick from gallery.")
+
+    if msg.get("video") and not as_file:
+        w = msg["video"].get("width", 0)
+        h = msg["video"].get("height", 0)
+        return (f"Heads up: that video arrived at {w}x{h} because Telegram compresses "
+                f"videos sent as normal attachments. For full quality send it as a FILE: "
+                f"attach \U0001F4CE -> File -> pick from gallery (keep it under 20MB).")
+
+    if as_file:
+        w = (media or {}).get("width") or 0
+        h = (media or {}).get("height") or 0
+        if w and h and max(w, h) < 1080:
+            return (f"Note: that file is {w}x{h}, which is below 1080p, so the post "
+                    f"won't look sharp. A higher-resolution original would look better.")
+    return None
+
+
 def _extract_media_file_id(msg):
     # Telegram RE-COMPRESSES anything sent as a regular Photo (re-encoded
     # down to ~1280px, lossy) before the bot ever sees it -- that
@@ -366,10 +407,18 @@ def _poll_telegram_replies(pending_ids, now_ist=None):
             file_id = _extract_media_file_id(msg)
             if not file_id:
                 continue
+            note = _media_quality_note(msg)
+            if note and note.startswith("That file is"):
+                # over Telegram's 20MB bot-download ceiling -- can't fetch
+                # it at all, so say so rather than failing silently.
+                telegram_bot.reply_to_message(msg["message_id"], note)
+                continue
             dest_no_ext = os.path.join(TG_INBOX_DIR, _safe_filename(str(reply_to["message_id"])))
             saved = telegram_bot.download_file(file_id, dest_no_ext)
             if saved:
                 print("Saved Telegram reply media:", saved)
+                if note:
+                    telegram_bot.reply_to_message(msg["message_id"], note)
                 reply_text = msg.get("caption") or msg.get("text") or ""
                 if _no_trim_requested(reply_text):
                     _mark_no_trim(saved)
@@ -400,6 +449,10 @@ def _poll_telegram_replies(pending_ids, now_ist=None):
 
         url = url_match.group(0)
         print("Urgent breaking submission via Telegram, link:", url)
+        quality_note = _media_quality_note(msg)
+        if quality_note and quality_note.startswith("That file is"):
+            telegram_bot.reply_to_message(msg["message_id"], quality_note)
+            continue
         try:
             meta = news_engine.fetch_article_metadata(url)
         except Exception as e:
@@ -432,7 +485,10 @@ def _poll_telegram_replies(pending_ids, now_ist=None):
         urgent_result = _render_story(story, now_ist, is_reel=True, forced_image_path=media_path,
                                        consumed_inbox_file=media_path)
         if urgent_result is not None:
-            telegram_bot.reply_to_message(msg["message_id"], f"Posting now: {title}")
+            confirm = f"Posting now: {title}"
+            if quality_note:
+                confirm += f"\n\n{quality_note}"
+            telegram_bot.reply_to_message(msg["message_id"], confirm)
         else:
             telegram_bot.reply_to_message(
                 msg["message_id"], "Something went wrong rendering this, so it wasn't posted.")
