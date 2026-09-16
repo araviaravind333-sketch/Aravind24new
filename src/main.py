@@ -32,7 +32,7 @@ import urllib.error
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from config import settings
-from src import (news_engine, ai_writer, image_source, template, reel_template,
+from src import (news_engine, ai_writer, image_source, incident_photos, template, reel_template,
                   video, publisher, analytics, whatsapp, telegram_bot)
 
 PENDING_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "_pending.json")
@@ -496,6 +496,41 @@ def _poll_telegram_replies(pending_ids, now_ist=None):
     return urgent_result
 
 
+def _preview_incident_photo(message_id, story):
+    """Runs incident-photo discovery for a candidate and, if a REAL photo of
+    that exact event is found, previews it in Telegram for the reviewer.
+
+    Deliberately a preview only. Measured on live stories, 64% of candidates
+    do have a findable real incident photo, but every single one belonged to
+    a news publisher -- so none can lawfully be auto-published. Showing it
+    here puts the decision where it legally belongs: with a human, who can
+    recognise the event, license it, shoot their own, or skip it. Nothing
+    from this path ever reaches Instagram or Facebook by itself."""
+    try:
+        result = incident_photos.find_incident_photo(story)
+    except Exception as e:
+        print("incident photo discovery failed:", e)
+        return
+    if not result.get("image_url") or result["image_status"] != "VERIFIED_REAL_IMAGE":
+        return
+
+    tag = "FILE PHOTO" if result["is_file_photo"] else "incident photo"
+    caption = (
+        f"Found a real {tag} for this story ({int(result['authenticity_confidence'] * 100)}% confidence)\n"
+        f"Source: {result['source_name']}\n"
+        f"Rights: {result['license_status']} -- {result['license']}\n\n"
+    )
+    if result["decision"] == "AUTO_PUBLISH":
+        caption += "Free to reuse. Reply with it (or your own) to post it."
+    else:
+        caption += ("NOT cleared to republish. Use it as a lead: get permission, "
+                    "find the same moment from a source you can use, or send your own.")
+    try:
+        telegram_bot.send_photo_reply(message_id, result["image_url"], caption)
+    except Exception as e:
+        print("photo preview failed:", e)
+
+
 def telegram_urgent_check():
     """Checked every ~5 min (separate, fast workflow, GitHub Actions'
     practical minimum reliable schedule interval) -- exists so a breaking
@@ -614,6 +649,7 @@ def telegram_cycle():
                     "sent_at": now_ist.strftime("%Y-%m-%d %H:%M"),
                 })
                 print("Sent to Telegram:", story["title"])
+                _preview_incident_photo(message_id, story)
 
     _save_tg_queue(queue)
 

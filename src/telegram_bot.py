@@ -117,6 +117,19 @@ def send_candidate(story):
     return result["message_id"] if result else None
 
 
+def send_photo_reply(message_id, photo_url, caption):
+    """Shows a DISCOVERED incident photo to the reviewer as a reply to its
+    candidate message. This is a private preview so a human can judge it --
+    it is not publishing. Nothing reaches Instagram/Facebook from here;
+    that only happens after the reviewer sends the media back themselves."""
+    return _call("sendPhoto", {
+        "chat_id": settings.TELEGRAM_CHAT_ID,
+        "photo": photo_url,
+        "caption": caption[:1000],
+        "reply_to_message_id": message_id,
+    })
+
+
 def reply_to_message(message_id, text):
     """Replies directly to a specific message the user sent -- used to
     tell them what happened to an urgent breaking-news submission
