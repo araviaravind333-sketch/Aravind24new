@@ -102,6 +102,14 @@ TELEGRAM_MIN_POST_GAP_HOURS = 1.0
 # reached 1M); 80 tightens further still, closer to only the standouts.
 MIN_AUTO_POST_SCORE = 80
 
+# By request: during India's waking hours only India news goes out; world/
+# sports/business are allowed overnight, when the Indian audience is
+# asleep anyway. Window is inclusive of the start hour and exclusive of
+# the end hour, in IST (05:00-22:59 -> India only; 23:00-04:59 -> all).
+INDIA_ONLY_START_HOUR_IST = 5
+INDIA_ONLY_END_HOUR_IST   = 23
+INDIA_ONLY_CATEGORIES     = ("INDIA NEWS",)
+
 # ============================================================
 # 2. IMAGE PIPELINE
 # ============================================================

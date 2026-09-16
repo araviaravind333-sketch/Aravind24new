@@ -35,19 +35,25 @@ PROMPT = """You are the editor of AravindNews24, a fast-growing India + world ne
 on Instagram and Facebook. Your audience is pan-India, mostly men 25-34.
 
 Rewrite the raw news below into JSON with these keys:
-- "headline": max 9 words, simple English, present tense, stop-the-scroll. Create a genuine \
-curiosity gap — make the reader feel they're missing something if they scroll past — using \
-specific real numbers/names/stakes from the story itself, NOT vague teasers ("you won't believe...") \
-and NEVER a claim that isn't true. Curiosity comes from specificity, not exaggeration.
-- "accent_word": the 1-2 word phrase inside the headline that matters most (to highlight).
-- "caption": 2-3 short sentences, simple English, factual, with ONE light personal touch, \
-then ONE real engagement question (not "comment X"). If -- and only if -- the story is \
-genuinely shocking, divisive, or the kind of thing people forward to a friend (not routine \
-news), end with a short natural share nudge instead of the question, e.g. "Tag someone who \
-needs to see this" or "Share this if it surprised you too" -- shares are one of the most \
-heavily-weighted signals in Instagram's distribution algorithm, more than likes, but a share \
-nudge on a routine story reads as desperate, so use real judgment on when it fits. \
-Keep the facts accurate. Do not invent details.
+- "headline": 7-12 words, simple English, present tense, stop-the-scroll. It MUST be a \
+COMPLETE, self-contained sentence that a reader with zero background understands on its own. \
+Hard rules: never end on a dangling word (to / after / with / and / says / over / against); \
+never cut a thought short; never use an abbreviation or insider name the average reader \
+wouldn't know (write "child-safety body" not "NCMEC", "central agency" not "ED", unless the \
+abbreviation is genuinely household-level like BJP, RBI, ISRO, SC). Say plainly WHO did WHAT. \
+Create curiosity through specific real numbers/names/stakes from the story itself, NOT vague \
+teasers ("you won't believe..."), and NEVER a claim that isn't true.
+- "accent_word": the 1-2 word phrase inside the headline that matters most (to highlight). \
+It must appear in the headline EXACTLY as written there.
+- "caption": 3-4 short sentences in simple English that actually EXPLAIN the story to someone \
+who knows nothing about it. Sentence 1: what happened, plainly. Sentence 2: the key specifics \
+— who is involved, where, when, how many, how much. Sentence 3: why it matters or what happens \
+next. Spell out any abbreviation the first time. Then ONE real engagement question (not \
+"comment X"). If -- and only if -- the story is genuinely shocking, divisive, or the kind of \
+thing people forward to a friend (not routine news), end with a short natural share nudge \
+instead of the question, e.g. "Tag someone who needs to see this" -- shares are weighted \
+heavily by Instagram's algorithm, but a share nudge on a routine story reads as desperate, so \
+use real judgment. Keep every fact accurate. Do not invent details that aren't in the source.
 - "hashtags": array of exactly 4 hashtags, mixing broad + niche + trending + "#AravindNews24".
 
 Raw category: {category}
@@ -55,6 +61,50 @@ Raw headline: {title}
 Raw summary: {summary}
 
 Return ONLY the JSON, nothing else."""
+
+
+# Words a headline must never end on -- chopping right before/after one of
+# these is what produced real posted headlines like "Meta says will report
+# child safety cases directly to" and "...after Supreme Court cancels",
+# which read as broken fragments because the object of the sentence got
+# cut off.
+_DANGLING_TAIL = {
+    "a", "an", "the", "and", "or", "but", "to", "of", "for", "with", "from",
+    "in", "on", "at", "by", "as", "after", "before", "over", "under", "into",
+    "that", "this", "these", "those", "its", "their", "his", "her", "our",
+    "is", "are", "was", "were", "be", "been", "will", "says", "said", "amid",
+    "against", "about", "up", "off", "out", "per", "via", "not",
+}
+
+
+def _trim_headline(title, max_words=13):
+    """Shorten a raw RSS title WITHOUT leaving a dangling fragment. The
+    template already shrinks the font to fit, so a slightly longer but
+    complete headline always beats a short broken one. Prefers cutting at
+    a real clause boundary (comma/colon/dash); otherwise drops trailing
+    connector words so the headline still ends on a complete thought."""
+    title = title.strip().rstrip(" ,;:-–—")
+    words = title.split()
+    if len(words) <= max_words:
+        return title
+
+    # 1. a clause boundary inside the limit is the cleanest cut
+    head = " ".join(words[:max_words])
+    m = re.match(r"^(.*[^\s])\s*[,;:–—-]\s", head + " ")
+    if m and len(m.group(1).split()) >= 5:
+        return m.group(1).rstrip(" ,;:-–—")
+
+    # 2. otherwise cut at the limit, then walk back past any trailing
+    #    connector -- including one sitting a word or two from the end
+    #    ("...directly to NCMEC and law" -> drop "and law", not just "law").
+    cut = words[:max_words]
+    while len(cut) > 4:
+        tail = [w.lower().strip(",;:.") for w in cut[-3:]]
+        hit = next((i for i in range(len(tail) - 1, -1, -1) if tail[i] in _DANGLING_TAIL), None)
+        if hit is None:
+            break
+        cut = cut[: len(cut) - (len(tail) - hit)]
+    return " ".join(cut).rstrip(" ,;:-–—") if len(cut) >= 4 else " ".join(words[:max_words])
 
 
 def _rule_based(story):
@@ -86,7 +136,7 @@ def _rule_based(story):
 
     caption = f"{title}. {detail} {q}".strip() if detail else f"{title}. {q}"
     return {
-        "headline": title if len(words) <= 10 else " ".join(words[:9]),
+        "headline": _trim_headline(title),
         "accent_word": accent,
         "caption": caption,
         "hashtags": tags,

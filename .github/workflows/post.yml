@@ -55,7 +55,12 @@ jobs:
           git config user.email "bot@users.noreply.github.com"
           git add public/ || true
           git commit -m "auto: render $(date -u +%FT%TZ)" || echo "nothing to commit"
-          git push || echo "push skipped"
+          for i in 1 2 3 4 5; do
+            git push && break
+            echo "push failed (attempt $i) -- rebasing on remote, retrying"
+            git pull --rebase --autostash origin main || true
+            sleep 3
+          done
 
       - name: Publish to Instagram + Facebook
         env:
@@ -71,7 +76,12 @@ jobs:
         run: |
           git add data/ || true
           git commit -m "auto: post cycle $(date -u +%FT%TZ)" || echo "nothing to commit"
-          git push || echo "push skipped"
+          for i in 1 2 3 4 5; do
+            git push && break
+            echo "push failed (attempt $i) -- rebasing on remote, retrying"
+            git pull --rebase --autostash origin main || true
+            sleep 3
+          done
 
       - name: Deploy image gallery to GitHub Pages
         uses: actions/upload-pages-artifact@v3

@@ -512,6 +512,17 @@ def telegram_cycle():
             print(f"Skipping (score {story['score']} < {settings.MIN_AUTO_POST_SCORE}, no human "
                   f"curation to override it) -- not worth a post on its own:", story["title"])
             news_engine.mark_posted(story)
+        elif news_engine.already_covered(queue[resolved_idx]["story"]):
+            # Last-line duplicate guard, checked at POST time rather than
+            # only when the candidate was first fetched. A candidate sits
+            # in the queue for a while, and the same event keeps getting
+            # re-reported with fresh wording -- the real posted log had the
+            # identical Goa nightclub fire headline go out twice, plus a
+            # third reworded version of the same event, because nothing
+            # re-checked once a story was already queued.
+            entry = queue.pop(resolved_idx)
+            story = entry["story"]
+            print("Already covered this story -- dropping duplicate:", story["title"])
         else:
             entry = queue.pop(resolved_idx)
             story = entry["story"]

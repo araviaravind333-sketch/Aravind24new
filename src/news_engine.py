@@ -356,6 +356,21 @@ def pick_top_story(primary_category, fallback_categories):
     return best
 
 
+def allowed_categories(now_ist=None):
+    """Which RSS categories may be posted right now. By request, India's
+    waking hours (settings.INDIA_ONLY_*) are India-news only -- world,
+    sports and business are held for overnight, when the Indian audience
+    is asleep anyway. Returns every category outside that window."""
+    if now_ist is None:
+        now_ist = dt.datetime.now(dt.timezone.utc) + dt.timedelta(hours=5, minutes=30)
+    hour = now_ist.hour
+    start, end = settings.INDIA_ONLY_START_HOUR_IST, settings.INDIA_ONLY_END_HOUR_IST
+    india_only = start <= hour < end if start < end else (hour >= start or hour < end)
+    if india_only:
+        return [c for c in settings.RSS_FEEDS if c in settings.INDIA_ONLY_CATEGORIES]
+    return list(settings.RSS_FEEDS)
+
+
 def top_candidates(n, exclude_ids=frozenset()):
     """Top N distinct stories across every category, for the WhatsApp
     queue — unlike pick_top_story (one category with fallbacks), this
@@ -364,7 +379,7 @@ def top_candidates(n, exclude_ids=frozenset()):
     already sitting in the queue from an earlier cycle."""
     seen, out = set(), []
     all_candidates = []
-    for category in settings.RSS_FEEDS:
+    for category in allowed_categories():
         all_candidates.extend(fetch_candidates(category))
     for story in sorted(all_candidates, key=lambda s: s["score"], reverse=True):
         if story["id"] in exclude_ids or story["id"] in seen:
@@ -375,6 +390,19 @@ def top_candidates(n, exclude_ids=frozenset()):
         if len(out) >= n:
             break
     return out
+
+
+def already_covered(story):
+    """Has this exact story -- or the same real event under different
+    wording -- already gone out? fetch_candidates() screens for this when
+    a story is first picked up, but a candidate can sit in the review
+    queue for a long time afterwards, during which the same event gets
+    posted (or re-reported by another outlet with fresh wording). Callers
+    use this as a final check immediately before publishing."""
+    posted = _load_posted()
+    if any(e.get("id") == story.get("id") for e in posted):
+        return True
+    return _is_recent_duplicate(story.get("title", ""), posted)
 
 
 def mark_posted(story):
@@ -407,7 +435,7 @@ def find_breaking_story():
     strong signal on its own (BREAKING_FRESH_*), so a real breaking event
     doesn't have to wait for other outlets to catch up before it counts."""
     best = None
-    for category in settings.RSS_FEEDS:
+    for category in allowed_categories():
         for story in fetch_candidates(category):
             if not story.get("hot_hit"):
                 continue
