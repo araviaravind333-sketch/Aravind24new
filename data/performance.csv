@@ -1,4 +1,4 @@
-timestamp_ist,category,headline,score,is_reel,template,ig_id,fb_id,ig_ok,fb_ok,reach,likes,comments,shares,saved,views,total_interactions
+timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id,ig_ok,fb_ok,reach,likes,comments,shares,saved,views,total_interactions
 2026-09-06 13:28,BREAKING NEWS,Every fourth Jan Dhan account inoperative; 5.72 crore have,68,False,full_bleed,,,False,False,,,,,,,
 2026-09-06 13:36,BREAKING NEWS,"Bank of Baroda Recruitment 2026: Apply For 1,100 Officer",68,False,full_bleed,18049581110657648,,True,False,0,0,0,0,0,,0
 2026-09-06 15:00,BREAKING NEWS,"Telangana CM Revanth and TCS announce ₹70,000 crore AI",68,False,full_bleed,18107445707586207,,True,False,0,0,0,0,0,,0
