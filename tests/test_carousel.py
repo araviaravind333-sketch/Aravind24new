@@ -97,6 +97,61 @@ def accent_phrase_tests():
           carousel._pick_accent_phrase("a quiet day for markets") == "")
 
 
+def cover_regeneration_tests(tmp):
+    """Found from a live review: the cover started as a plain gradient
+    because no rights-cleared photo existed at build time, and stayed
+    that way even after the reviewer supplied real photos for other
+    slides -- it should rebuild from those photos instead."""
+    print("\nCOVER REGENERATION")
+    from src import carousel_review as cr
+    demo = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "assets", "demo.jpg")
+
+    def _slide(index, is_cover=False, raw_photo_path=None, status="pending", media_source="text_only"):
+        return {
+            "index": index, "is_cover": is_cover, "status": status,
+            "media_source": media_source, "media_kind": "image",
+            "raw_photo_path": raw_photo_path,
+            "rendered_image_path": os.path.join(tmp, f"slide_{index:02d}.jpg"),
+        }
+
+    cover = _slide(0, is_cover=True)
+    cover["rendered_image_path"] = os.path.join(tmp, "cover.jpg")
+    carousel.render_cover_slide("BREAKING", "sub", "18 SEP", [], cover["rendered_image_path"],
+                                 footer="f", handle="h")
+    before_size = os.path.getsize(cover["rendered_image_path"])
+
+    state = {"slides": [cover, _slide(1, raw_photo_path=demo, media_source="owner"),
+                         _slide(2)]}
+    cr._regenerate_cover(state)
+    after_size = os.path.getsize(cover["rendered_image_path"])
+    check("cover file changes once a real photo becomes available",
+          after_size != before_size)
+
+    # A cover the reviewer explicitly replaced themselves must never be
+    # silently overwritten by an automatic regeneration afterwards.
+    owner_cover = _slide(0, is_cover=True, media_source="owner")
+    owner_cover["rendered_image_path"] = os.path.join(tmp, "owner_cover.jpg")
+    carousel.render_cover_slide("BREAKING", "sub", "18 SEP", [demo], owner_cover["rendered_image_path"],
+                                 footer="f", handle="h")
+    locked_size = os.path.getsize(owner_cover["rendered_image_path"])
+    state2 = {"slides": [owner_cover, _slide(1, raw_photo_path=demo, media_source="owner")]}
+    cr._regenerate_cover(state2)
+    check("a reviewer-replaced cover is never auto-overwritten",
+          os.path.getsize(owner_cover["rendered_image_path"]) == locked_size)
+
+    # A rejected slide's photo should not appear in the cover collage.
+    rejected = _slide(3, raw_photo_path=demo, media_source="owner", status="rejected")
+    cover2 = _slide(0, is_cover=True)
+    cover2["rendered_image_path"] = os.path.join(tmp, "cover2.jpg")
+    carousel.render_cover_slide("BREAKING", "sub", "18 SEP", [], cover2["rendered_image_path"],
+                                 footer="f", handle="h")
+    unchanged_size = os.path.getsize(cover2["rendered_image_path"])
+    state3 = {"slides": [cover2, rejected]}
+    cr._regenerate_cover(state3)
+    check("a dropped slide's photo is never pulled into the cover collage",
+          os.path.getsize(cover2["rendered_image_path"]) == unchanged_size)
+
+
 def _fake_slide(index, status="pending", kind="image", is_cover=False):
     return {
         "index": index, "status": status, "media_kind": kind,
@@ -251,6 +306,8 @@ if __name__ == "__main__":
     with tempfile.TemporaryDirectory() as tmp:
         rendering_tests(tmp)
         cover_slide_tests(tmp)
+    with tempfile.TemporaryDirectory() as tmp:
+        cover_regeneration_tests(tmp)
     accent_phrase_tests()
     dedup_tests()
     selection_scope_tests()

@@ -185,6 +185,7 @@ def build_carousel(now_ist):
             "video_path": None,
             "status": "pending",
             "is_cover": False,
+            "raw_photo_path": photo_path,
         })
 
     cover_path = os.path.join(slides_dir, "cover.jpg")
@@ -199,7 +200,7 @@ def build_carousel(now_ist):
         "headline": "", "subhead": "", "category": "",
         "message_id": None, "media_kind": "image", "media_source": "auto",
         "rendered_image_path": cover_path, "video_path": None,
-        "status": "pending", "is_cover": True,
+        "status": "pending", "is_cover": True, "raw_photo_path": None,
     }
     slides.insert(0, cover_slide)
 
@@ -304,7 +305,7 @@ def handle_reply(msg, state):
 
     file_id = _extract_media_file_id(msg)
     if file_id:
-        _apply_owner_media(slide, file_id, msg)
+        _apply_owner_media(slide, file_id, msg, state)
         telegram_bot.reply_to_message(msg["message_id"],
                                        f"Updated slide {slide['index']:02d} with your media.")
         _save_state(state)
@@ -350,7 +351,28 @@ def _extract_media_file_id(msg):
     return None
 
 
-def _apply_owner_media(slide, file_id, msg):
+def _regenerate_cover(state):
+    """Rebuilds the cover's collage from whatever real photos actually
+    exist right now (yours, since discovery found none at build time --
+    that's why the cover started as a plain gradient). Skips it if you've
+    already replied to the cover itself with your own photo -- that
+    explicit choice is never overwritten by an automatic rebuild."""
+    cover = next((s for s in state["slides"] if s.get("is_cover")), None)
+    if not cover or cover.get("media_source") == "owner":
+        return
+    photos = [s["raw_photo_path"] for s in state["slides"]
+              if not s.get("is_cover") and s.get("raw_photo_path")
+              and s.get("status") != "rejected"][:4]
+    if not photos:
+        return
+    carousel.render_cover_slide(
+        "BREAKING", "Have a look at what happened in the world in the last 24 hours",
+        dt.datetime.now().strftime("%d %b").upper(), photos,
+        cover["rendered_image_path"],
+        footer=settings.BRAND_FOOTER, handle=settings.BRAND_HANDLE)
+
+
+def _apply_owner_media(slide, file_id, msg, state):
     os.makedirs(INBOX_DIR, exist_ok=True)
     dest_no_ext = os.path.join(INBOX_DIR, f"slide_{slide['index']:02d}")
     saved = telegram_bot.download_file(file_id, dest_no_ext)
@@ -379,6 +401,7 @@ def _apply_owner_media(slide, file_id, msg):
             footer=settings.BRAND_FOOTER, handle=settings.BRAND_HANDLE)
         slide["media_kind"] = "image"
         slide["video_path"] = None
+        slide["raw_photo_path"] = photo_for_cover
         slide["media_source"] = "owner"
         slide["status"] = "pending"
         return
@@ -410,12 +433,27 @@ def _apply_owner_media(slide, file_id, msg):
             saved, slide["category"], slide["headline"], slide["subhead"],
             slide["index"], slide["index"], out_path,
             footer=settings.BRAND_FOOTER, handle=settings.BRAND_HANDLE,
-            smart_fit=True)
+            # A full crop, not the blurred-letterbox fit -- found from a
+            # live review that smart_fit's letterbox produces a visibly
+            # ugly, flat blurred band for a real supplied photo whose
+            # aspect ratio doesn't match the 4:5 frame (a portrait phone
+            # photo, for instance). A clean crop is the standard look for
+            # this format (matches the reference post too) and never
+            # produces that artefact.
+            smart_fit=False)
         slide["media_kind"] = "image"
         slide["video_path"] = None
+        slide["raw_photo_path"] = saved
 
     slide["media_source"] = "owner"
     slide["status"] = "pending"
+    if not slide.get("is_cover") and not is_video:
+        # The cover started as a plain gradient because no rights-cleared
+        # photo existed at build time -- now that a real photo exists
+        # (yours), rebuild the cover's collage from it rather than leaving
+        # it blank. Skipped for the cover's OWN reply (already handled
+        # above) and for video slides (no still frame worth collaging).
+        _regenerate_cover(state)
 
 
 def ready_to_publish(state, now_ist):
