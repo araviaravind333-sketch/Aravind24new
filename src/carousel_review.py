@@ -508,12 +508,22 @@ def finalize_and_publish(state, now_ist):
             children.append({"type": "IMAGE", "url": image_url, "fb_image_url": image_url})
 
     results = publisher.publish_carousel_all(children, state["caption"], geo=None)
-    state["status"] = "published"
+    any_succeeded = "instagram" in results or "facebook" in results
+    # A total failure (both platforms errored) must NOT be marked
+    # "published" -- that would permanently block retrying and misreport
+    # what actually happened. Only advance status once at least one
+    # platform genuinely posted; a full failure leaves review state
+    # intact so the exact same reviewed slides can be retried.
+    state["status"] = "published" if any_succeeded else "preview_sent"
     state["publish_results"] = dict(results)
     _save_state(state)
 
-    ok = "instagram" in results and "facebook" in results
-    telegram_bot.send_message(
-        f"Daily carousel published — {len(kept)} slide(s)."
-        if ok else f"Daily carousel publish had errors: {results}")
+    both_ok = "instagram" in results and "facebook" in results
+    if both_ok:
+        telegram_bot.send_message(f"Daily carousel published — {len(kept)} slide(s).")
+    elif any_succeeded:
+        telegram_bot.send_message(f"Daily carousel posted to one platform only: {results}")
+    else:
+        telegram_bot.send_message(
+            f"Daily carousel publish FAILED on both platforms, nothing went live: {results}")
     return results
