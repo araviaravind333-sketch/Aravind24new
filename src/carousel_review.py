@@ -69,12 +69,46 @@ def due_for_preview(now_ist):
     return now_ist >= target
 
 
+def _select_distinct_stories(n):
+    """news_engine.top_candidates() only dedupes by exact story id, which
+    is fine for a single-story post (only the top one gets used) but not
+    for a multi-slide roundup: measured on the first live test of this
+    feature, 3 of 8 slides turned out to be the same real event (a TMC
+    symbol/name dispute) from three different RSS sources, each of which
+    independently cleared the score bar and got its own corroboration
+    bonus. Overfetches and skips anything that's the same real-world
+    event as one already picked, using the same keyword-overlap matcher
+    incident_photos.py uses for photo event-clustering -- reused here for
+    exactly the same underlying question: are these two headlines about
+    the same thing?
+
+    Compares each candidate against every keyword set SEEN so far
+    (picked or skipped), not just the picked ones -- same_event() isn't
+    transitive (two outlets can each phrase a story close enough to a
+    third's wording to match it, without matching each other directly),
+    so comparing only against survivors let a third near-duplicate slip
+    through in testing when the second had already been dropped."""
+    candidates = news_engine.top_candidates(n * 3)
+    picked, seen_kw = [], []
+    for story in candidates:
+        if len(picked) >= n:
+            break
+        entities = incident_photos.extract_entities(story.get("title", ""), story.get("summary", ""))
+        kw = incident_photos.event_keywords(entities)
+        if any(incident_photos.same_event(kw, sk) for sk in seen_kw):
+            seen_kw.append(kw)
+            continue
+        picked.append(story)
+        seen_kw.append(kw)
+    return picked
+
+
 def build_carousel(now_ist):
     """Selects stories, discovers/renders each slide, persists state, and
     returns it. Does not send anything to Telegram -- see send_preview."""
     date_str = now_ist.strftime("%Y-%m-%d")
     slides_dir = os.path.join(SLIDES_DIR_ROOT, date_str)
-    stories = news_engine.top_candidates(settings.CAROUSEL_SLIDE_COUNT)
+    stories = _select_distinct_stories(settings.CAROUSEL_SLIDE_COUNT)
 
     slides = []
     for i, story in enumerate(stories, start=1):

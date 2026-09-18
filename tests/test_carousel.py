@@ -81,6 +81,43 @@ def _fake_slide(index, status="pending", kind="image"):
     }
 
 
+def dedup_tests():
+    """Regression test for a real bug found on the first live test of
+    this feature: 3 of 8 slides turned out to be the same TMC symbol/name
+    dispute from three different RSS sources, since news_engine's own
+    top_candidates() only dedupes by exact story id, not by real-world
+    event."""
+    print("\nSTORY SELECTION DEDUPLICATION")
+    from src import carousel_review as cr, news_engine as ne
+
+    def _story(id_, title):
+        return {"id": id_, "title": title, "summary": "", "score": 90,
+                "category": "INDIA NEWS", "link": "", "hot_hit": True}
+
+    fake_pool = [
+        _story("a1", "Mamata Banerjee faction seeks new name after Election Commission move"),
+        _story("a2", "Mamata Banerjee Protests After Election Commission Freezes TMC Symbol"),
+        _story("a3", "Election Commission freezes TMC name and symbol ahead of polls"),
+        _story("b1", "Massive fire guts Chennai godown, three dead"),
+        _story("c1", "Supreme Court reserves verdict in electoral bonds case"),
+    ]
+
+    real_top_candidates = ne.top_candidates
+    ne.top_candidates = lambda n, exclude_ids=frozenset(): fake_pool[:n]
+    try:
+        picked = cr._select_distinct_stories(3)
+    finally:
+        ne.top_candidates = real_top_candidates
+
+    check("same-event duplicates collapse to a single slide",
+          len(picked) == 3, f"got {len(picked)}: {[p['id'] for p in picked]}")
+    check("only one of the three TMC stories survives",
+          sum(1 for p in picked if p["id"] in ("a1", "a2", "a3")) == 1,
+          [p["id"] for p in picked])
+    check("genuinely distinct stories are both kept",
+          {"b1", "c1"} <= {p["id"] for p in picked})
+
+
 def review_state_tests():
     print("\nREVIEW STATE MACHINE")
     from src import carousel_review as cr
@@ -147,6 +184,7 @@ if __name__ == "__main__":
     with tempfile.TemporaryDirectory() as tmp:
         rendering_tests(tmp)
     accent_phrase_tests()
+    dedup_tests()
     review_state_tests()
     caption_tests()
     print(f"\n{'='*52}\n{len(PASS)} passed, {len(FAIL)} failed")
