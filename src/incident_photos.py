@@ -619,13 +619,28 @@ def age_bucket(published_at, now=None):
 # SAME-EVENT IDENTITY  (clustering)
 # ============================================================================
 
+def _stem(word):
+    """Minimal, deliberately conservative stemmer -- strips one trailing
+    's' when the result is still a real-looking word. Found necessary
+    from a live carousel test: 'ECI freezes the symbol' and 'Mamata
+    Protests EC Freeze' are obviously the same event, but 'freezes' and
+    'freeze' shared no keyword at all without this, and the pair fell
+    just under the same_event() threshold. This intentionally does not
+    attempt '-ing'/'-ed'/full stemming -- a single trailing-'s' strip
+    covers plural/third-person-verb mismatches (the actual failure seen)
+    without the false-collision risk of a more aggressive stemmer."""
+    if word.endswith("s") and len(word) > 5:
+        return word[:-1]
+    return word
+
+
 def event_keywords(entities):
     """The distinctive words that identify an event, with filler and
     generic news vocabulary stripped out. Two outlets rarely use the same
     sentence for the same fire, but they almost always use the same
     handful of concrete nouns."""
     return frozenset(
-        w for w in re.findall(r"[a-z]{5,}", (entities.get("event_name") or "").lower())
+        _stem(w) for w in re.findall(r"[a-z]{5,}", (entities.get("event_name") or "").lower())
         if w not in _ENTITY_NOISE and w not in _GENERIC_NEWS_WORDS)
 
 

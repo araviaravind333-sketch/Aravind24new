@@ -174,6 +174,16 @@ def clustering_tests():
           ip.same_event(ip.event_keywords(a), ip.event_keywords(b))
           and not ip.same_event(ip.event_keywords(a), ip.event_keywords(c)))
 
+    # Regression: found on a live carousel test -- "ECI freezes the
+    # symbol" and "Mamata Protests EC Freeze" are the same event, but
+    # 'freezes' and 'freeze' shared no keyword at all before event_keywords
+    # applied minimal stemming, so this pair fell just under the
+    # same_event() threshold and both slides survived as if distinct.
+    d = ip.extract_entities("Congress backs Mamata as ECI freezes name and symbol ahead of polls", "", NOW)
+    e = ip.extract_entities("TMC Symbol Row: Mamata Banerjee Protests EC Freeze", "", NOW)
+    check("plural/verb-conjugation mismatch ('freezes' vs 'freeze') still matches as the same event",
+          ip.same_event(ip.event_keywords(d), ip.event_keywords(e)))
+
 
 # ============================================================
 # RIGHTS-TARGETED ALTERNATIVE SEARCH
