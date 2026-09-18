@@ -1,0 +1,242 @@
+{
+  "date": "2026-09-18",
+  "status": "preview_sent",
+  "caption": "What happened today \u2014 18 Sep 2026\n\n01. Season\u2019s first cyclone may form over Andaman Sea\n02. Punjab Cop Gets Shot Dead On Duty, CM Mann Announces Rs 1 Crore\n03. Thousands of Apple fans queue outside Bengaluru store as iPhone sales begin\n04. Asian Games 2026: Six sporting events that make their debut\u00a0in Aichi-Nagoya\n05. Congress supports Mamata Banerjee as Election Commission freezes her party symbol\n06. Shapoorji Pallonji Group Proposes \u20b925,000 Crore Stake Sale In Tata Sons\n07. UGC-NET results for re-exam of English, commerce, sociology announced\n08. Sikh truck driver survives after being stabbed 17 times in US\n\nSwipe for the full roundup \u2192\n@aravindnews24",
+  "preview_sent_at": "2026-09-18 12:55",
+  "slides": [
+    {
+      "index": 0,
+      "story": null,
+      "headline": "",
+      "subhead": "",
+      "category": "",
+      "message_id": 155,
+      "media_kind": "image",
+      "media_source": "auto",
+      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-18/cover.jpg",
+      "video_path": null,
+      "status": "pending",
+      "is_cover": true
+    },
+    {
+      "index": 1,
+      "story": {
+        "id": "1768a494b8cd",
+        "title": "Season\u2019s first cyclone may form over Andaman Sea; heavy rain in Andhra Pradesh from September 19",
+        "summary": "IMD says the system is likely to move towards the south Odisha-north Andhra Pradesh coasts; weather models point to a landfall near Odisha around September 21",
+        "link": "https://www.thehindu.com/news/national/andhra-pradesh/seasons-first-cyclone-may-form-over-andaman-sea-heavy-rain-in-andhra-pradesh-from-september-19/article71476625.ece",
+        "category": "INDIA NEWS",
+        "score": 80,
+        "hot_hit": true,
+        "is_incident": true,
+        "geo": {
+          "is_india": true,
+          "place": "India"
+        }
+      },
+      "headline": "Season\u2019s first cyclone may form over Andaman Sea",
+      "subhead": "IMD says the system is likely to move towards the south Odisha-north Andhra Pradesh coasts; wea\u2026",
+      "category": "INDIA NEWS",
+      "message_id": 156,
+      "media_kind": "image",
+      "media_source": "text_only",
+      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-18/slide_01.jpg",
+      "video_path": null,
+      "status": "pending",
+      "is_cover": false
+    },
+    {
+      "index": 2,
+      "story": {
+        "id": "c03c30e28095",
+        "title": "Punjab cop shot dead on duty, CM Mann announces Rs 1 crore for family",
+        "summary": "   Punjab cop shot dead on duty, CM Mann announces Rs 1 crore for family",
+        "link": "https://www.indiatoday.in/india/story/punjab-govt-rs-1-crore-harjeet-singh-family-amritsar-cop-killed-2997409-2026-09-18?utm_source=rss",
+        "category": "INDIA NEWS",
+        "score": 76,
+        "hot_hit": true,
+        "is_incident": true,
+        "geo": {
+          "is_india": true,
+          "place": "India"
+        }
+      },
+      "headline": "Punjab Cop Gets Shot Dead On Duty, CM Mann Announces Rs 1 Crore",
+      "subhead": "Punjab cop shot dead on duty, CM Mann announces Rs 1 crore for family",
+      "category": "INDIA NEWS",
+      "message_id": 157,
+      "media_kind": "image",
+      "media_source": "text_only",
+      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-18/slide_02.jpg",
+      "video_path": null,
+      "status": "pending",
+      "is_cover": false
+    },
+    {
+      "index": 3,
+      "story": {
+        "id": "702de13b848e",
+        "title": "\"First Day Matters\": iPhone Lovers Queue Up Across India",
+        "summary": "Customers buying the new iPhone at Apple Store in Bengaluru",
+        "link": "https://www.ndtv.com/india-news/iphone-18-launch-apple-iphone-sale-first-day-matters-iphone-lovers-queue-up-across-india-12063097#publisher=newsstand",
+        "category": "INDIA NEWS",
+        "score": 75,
+        "hot_hit": true,
+        "is_incident": false,
+        "geo": {
+          "is_india": true,
+          "place": "India"
+        }
+      },
+      "headline": "Thousands of Apple fans queue outside Bengaluru store as iPhone sales begin",
+      "subhead": "Customers buying the new iPhone at Apple Store in Bengaluru",
+      "category": "INDIA NEWS",
+      "message_id": 158,
+      "media_kind": "image",
+      "media_source": "text_only",
+      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-18/slide_03.jpg",
+      "video_path": null,
+      "status": "pending",
+      "is_cover": false
+    },
+    {
+      "index": 4,
+      "story": {
+        "id": "1cbb7ab31a92",
+        "title": "Asian Games 2026: Six sporting events that make their debut\u00a0in Aichi-Nagoya",
+        "summary": "From teqball to virtual taekwondo, here\u2018s a look at the new sporting competitions, that promise a more dynamic and spectacular Asian Games",
+        "link": "https://www.thehindu.com/sport/asian-games-2026-sporting-events-marking-debut-aichi-nagoya/article71475858.ece",
+        "category": "SPORTS NEWS",
+        "score": 74,
+        "hot_hit": true,
+        "is_incident": false,
+        "corroborated": 3,
+        "geo": {
+          "is_india": false,
+          "place": null
+        }
+      },
+      "headline": "Asian Games 2026: Six sporting events that make their debut\u00a0in Aichi-Nagoya",
+      "subhead": "From teqball to virtual taekwondo, here\u2018s a look at the new sporting competitions, that promise\u2026",
+      "category": "SPORTS NEWS",
+      "message_id": 159,
+      "media_kind": "image",
+      "media_source": "text_only",
+      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-18/slide_04.jpg",
+      "video_path": null,
+      "status": "pending",
+      "is_cover": false
+    },
+    {
+      "index": 5,
+      "story": {
+        "id": "546a9c0cfd13",
+        "title": "Congress backs Mamata as ECI freezes name and symbol of Trinamool Congress",
+        "summary": "LoP Rahul Gandhi and Congress general secretary K.C. Venugopal criticised the ECI for freezing the name and symbol of the Trinamool Congress which was set up by Mamata Banerjee 28 years ago",
+        "link": "https://www.thehindu.com/news/cities/kolkata/congress-backs-mamata-as-eci-freezes-name-and-symbol-of-trinamool-congress/article71479542.ece",
+        "category": "INDIA NEWS",
+        "score": 68,
+        "hot_hit": true,
+        "is_incident": false,
+        "corroborated": 3,
+        "geo": {
+          "is_india": true,
+          "place": "India"
+        }
+      },
+      "headline": "Congress supports Mamata Banerjee as Election Commission freezes her party symbol",
+      "subhead": "LoP Rahul Gandhi and Congress general secretary K.C. Venugopal criticised the ECI for freezing\u2026",
+      "category": "INDIA NEWS",
+      "message_id": 160,
+      "media_kind": "image",
+      "media_source": "text_only",
+      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-18/slide_05.jpg",
+      "video_path": null,
+      "status": "pending",
+      "is_cover": false
+    },
+    {
+      "index": 6,
+      "story": {
+        "id": "f0d35cdd8f9d",
+        "title": "Shapoorji Pallonji Group backs Tata Sons listing; Tata Group stocks fall",
+        "summary": "The SP Group proposed selling a portion of its stake in the holding company, Tata Sons, for at least \u20b925,000 crore",
+        "link": "https://www.thehindu.com/business/Industry/shapoorji-pallonji-group-backs-tata-sons-listing-tata-group-stocks-fall/article71479468.ece",
+        "category": "BUSINESS NEWS",
+        "score": 68,
+        "hot_hit": true,
+        "is_incident": false,
+        "corroborated": 3,
+        "geo": {
+          "is_india": false,
+          "place": null
+        }
+      },
+      "headline": "Shapoorji Pallonji Group Proposes \u20b925,000 Crore Stake Sale In Tata Sons",
+      "subhead": "The SP Group proposed selling a portion of its stake in the holding company, Tata Sons, for at\u2026",
+      "category": "BUSINESS NEWS",
+      "message_id": 161,
+      "media_kind": "image",
+      "media_source": "text_only",
+      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-18/slide_06.jpg",
+      "video_path": null,
+      "status": "pending",
+      "is_cover": false
+    },
+    {
+      "index": 7,
+      "story": {
+        "id": "99eaae0187db",
+        "title": "UGC-NET results for re-exam of English, commerce, sociology announced",
+        "summary": "The NTA had last month announced the retest for the three papers of the UGC-NET June 2026 examination following complaints about several errors in these papers",
+        "link": "https://www.thehindu.com/news/national/ugc-net-results-for-re-exam-of-english-commerce-sociology-announced/article71479671.ece",
+        "category": "INDIA NEWS",
+        "score": 65,
+        "hot_hit": true,
+        "is_incident": false,
+        "corroborated": 2,
+        "geo": {
+          "is_india": true,
+          "place": "India"
+        }
+      },
+      "headline": "UGC-NET results for re-exam of English, commerce, sociology announced",
+      "subhead": "The NTA had last month announced the retest for the three papers of the UGC-NET June 2026 exami\u2026",
+      "category": "INDIA NEWS",
+      "message_id": 162,
+      "media_kind": "image",
+      "media_source": "text_only",
+      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-18/slide_07.jpg",
+      "video_path": null,
+      "status": "pending",
+      "is_cover": false
+    },
+    {
+      "index": 8,
+      "story": {
+        "id": "e36a0402ba3b",
+        "title": "Sikh truck driver stabbed 17 times in U.S., recovering",
+        "summary": "According to the Cowboy State Daily, Mr. Singh had to be airlifted to Wyoming Medical Centre in Casper, where he is recovering from the injuries suffered in the attack.",
+        "link": "https://www.thehindu.com/news/international/sikh-truck-driver-stabbed-17-times-in-us-recovering/article71479715.ece",
+        "category": "WORLD NEWS",
+        "score": 64,
+        "hot_hit": true,
+        "is_incident": true,
+        "geo": {
+          "is_india": false,
+          "place": null
+        }
+      },
+      "headline": "Sikh truck driver survives after being stabbed 17 times in US",
+      "subhead": "According to the Cowboy State Daily, Mr. Singh had to be airlifted to Wyoming Medical Centre in\u2026",
+      "category": "WORLD NEWS",
+      "message_id": 163,
+      "media_kind": "image",
+      "media_source": "text_only",
+      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-18/slide_08.jpg",
+      "video_path": null,
+      "status": "pending",
+      "is_cover": false
+    }
+  ]
+}
