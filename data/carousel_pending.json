@@ -1,0 +1,245 @@
+{
+  "date": "2026-09-18",
+  "status": "preview_sent",
+  "caption": "What happened today \u2014 18 Sep 2026\n\n01. Bengaluru GST officer gets arrested while taking eight lakh bribe\n02. Punjab cop shot dead on duty\n03. Massive crowds queue outside Apple stores across India to buy new iPhone\n04. Congress backs Mamata as ECI freezes name and symbol of Trinamool Congress\n05. Shapoorji Pallonji Group backs Tata Sons listing; Tata Group stocks fall\n06. Asian Games 2026 | Japan embracing\n07. Teen Gang-Raped, Killed By 4, Including 3 Minors In Delhi\n08. Moody's raises India fiscal 2027 GDP growth forecast\n\nSwipe for the full roundup \u2192\n@aravindnews24",
+  "preview_sent_at": "2026-09-18 12:13",
+  "slides": [
+    {
+      "index": 0,
+      "story": null,
+      "headline": "",
+      "subhead": "",
+      "category": "",
+      "message_id": 134,
+      "media_kind": "image",
+      "media_source": "auto",
+      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-18/cover.jpg",
+      "video_path": null,
+      "status": "pending",
+      "is_cover": true
+    },
+    {
+      "index": 1,
+      "story": {
+        "id": "05729fb7e3a9",
+        "title": "Central GST Superintendent caught taking \u20b98 lakh bribe in Bengaluru",
+        "summary": "A mediator was also arrested",
+        "link": "https://www.thehindu.com/news/cities/bangalore/cgst-superintendent-mediator-held-in-8-lakh-bribe-trap/article71477349.ece",
+        "category": "INDIA NEWS",
+        "score": 84,
+        "hot_hit": true,
+        "is_incident": false,
+        "corroborated": 2,
+        "geo": {
+          "is_india": true,
+          "place": "India"
+        }
+      },
+      "headline": "Bengaluru GST officer gets arrested while taking eight lakh bribe",
+      "subhead": "A mediator was also arrested",
+      "category": "INDIA NEWS",
+      "message_id": 135,
+      "media_kind": "image",
+      "media_source": "text_only",
+      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-18/slide_01.jpg",
+      "video_path": null,
+      "status": "pending",
+      "is_cover": false
+    },
+    {
+      "index": 2,
+      "story": {
+        "id": "c03c30e28095",
+        "title": "Punjab cop shot dead on duty, CM Mann announces Rs 1 crore for family",
+        "summary": "   Punjab cop shot dead on duty, CM Mann announces Rs 1 crore for family",
+        "link": "https://www.indiatoday.in/india/story/punjab-govt-rs-1-crore-harjeet-singh-family-amritsar-cop-killed-2997409-2026-09-18?utm_source=rss",
+        "category": "INDIA NEWS",
+        "score": 76,
+        "hot_hit": true,
+        "is_incident": true,
+        "geo": {
+          "is_india": true,
+          "place": "India"
+        }
+      },
+      "headline": "Punjab cop shot dead on duty",
+      "subhead": "Punjab cop shot dead on duty, CM Mann announces Rs 1 crore for family",
+      "category": "INDIA NEWS",
+      "message_id": 136,
+      "media_kind": "image",
+      "media_source": "text_only",
+      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-18/slide_02.jpg",
+      "video_path": null,
+      "status": "pending",
+      "is_cover": false
+    },
+    {
+      "index": 3,
+      "story": {
+        "id": "702de13b848e",
+        "title": "\"First Day Matters\": iPhone Lovers Queue Up Across India",
+        "summary": "Customers buying the new iPhone at Apple Store in Bengaluru",
+        "link": "https://www.ndtv.com/india-news/iphone-18-launch-apple-iphone-sale-first-day-matters-iphone-lovers-queue-up-across-india-12063097#publisher=newsstand",
+        "category": "INDIA NEWS",
+        "score": 75,
+        "hot_hit": true,
+        "is_incident": false,
+        "geo": {
+          "is_india": true,
+          "place": "India"
+        }
+      },
+      "headline": "Massive crowds queue outside Apple stores across India to buy new iPhone",
+      "subhead": "Customers buying the new iPhone at Apple Store in Bengaluru",
+      "category": "INDIA NEWS",
+      "message_id": 137,
+      "media_kind": "image",
+      "media_source": "text_only",
+      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-18/slide_03.jpg",
+      "video_path": null,
+      "status": "pending",
+      "is_cover": false
+    },
+    {
+      "index": 4,
+      "story": {
+        "id": "546a9c0cfd13",
+        "title": "Congress backs Mamata as ECI freezes name and symbol of Trinamool Congress",
+        "summary": "LoP Rahul Gandhi and Congress general secretary K.C. Venugopal criticised the ECI for freezing the name and symbol of the Trinamool Congress which was set up by Mamata Banerjee 28 years ago",
+        "link": "https://www.thehindu.com/news/cities/kolkata/congress-backs-mamata-as-eci-freezes-name-and-symbol-of-trinamool-congress/article71479542.ece",
+        "category": "INDIA NEWS",
+        "score": 68,
+        "hot_hit": true,
+        "is_incident": false,
+        "corroborated": 3,
+        "geo": {
+          "is_india": true,
+          "place": "India"
+        }
+      },
+      "headline": "Congress backs Mamata as ECI freezes name and symbol of Trinamool Congress",
+      "subhead": "LoP Rahul Gandhi and Congress general secretary K.C. Venugopal criticised the ECI for freezing\u2026",
+      "category": "INDIA NEWS",
+      "message_id": 138,
+      "media_kind": "image",
+      "media_source": "text_only",
+      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-18/slide_04.jpg",
+      "video_path": null,
+      "status": "pending",
+      "is_cover": false
+    },
+    {
+      "index": 5,
+      "story": {
+        "id": "f0d35cdd8f9d",
+        "title": "Shapoorji Pallonji Group backs Tata Sons listing; Tata Group stocks fall",
+        "summary": "The SP Group proposed selling a portion of its stake in the holding company, Tata Sons, for at least \u20b925,000 crore",
+        "link": "https://www.thehindu.com/business/Industry/shapoorji-pallonji-group-backs-tata-sons-listing-tata-group-stocks-fall/article71479468.ece",
+        "category": "BUSINESS NEWS",
+        "score": 68,
+        "hot_hit": true,
+        "is_incident": false,
+        "corroborated": 3,
+        "geo": {
+          "is_india": false,
+          "place": null
+        }
+      },
+      "headline": "Shapoorji Pallonji Group backs Tata Sons listing; Tata Group stocks fall",
+      "subhead": "The SP Group proposed selling a portion of its stake in the holding company, Tata Sons, for at\u2026",
+      "category": "BUSINESS NEWS",
+      "message_id": 139,
+      "media_kind": "image",
+      "media_source": "text_only",
+      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-18/slide_05.jpg",
+      "video_path": null,
+      "status": "pending",
+      "is_cover": false
+    },
+    {
+      "index": 6,
+      "story": {
+        "id": "524b92e18919",
+        "title": "Asian Games 2026 | Japan embracing the occasion of facing India in cricket rather than fearing it",
+        "summary": "India Women begin their Asian Games campaign against the host on September 18 at Korogi Sports Park in Nisshin",
+        "link": "https://www.thehindu.com/sport/cricket/asian-games-2026-japan-embracing-the-occasion-of-facing-india-in-cricket-rather-than-fearing-it/article71476717.ece",
+        "category": "SPORTS NEWS",
+        "score": 66,
+        "hot_hit": true,
+        "is_incident": false,
+        "corroborated": 5,
+        "geo": {
+          "is_india": false,
+          "place": "Tokyo",
+          "country": "japan"
+        }
+      },
+      "headline": "Asian Games 2026 | Japan embracing",
+      "subhead": "India Women begin their Asian Games campaign against the host on September 18 at Korogi Sports\u2026",
+      "category": "SPORTS NEWS",
+      "message_id": 140,
+      "media_kind": "image",
+      "media_source": "text_only",
+      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-18/slide_06.jpg",
+      "video_path": null,
+      "status": "pending",
+      "is_cover": false
+    },
+    {
+      "index": 7,
+      "story": {
+        "id": "4f42554ff4a6",
+        "title": "Teen Gang-Raped, Killed By 4, Including 3 Minors In Delhi, Body Eaten By Dogs",
+        "summary": "The body of the victim was found days after the crime, say police. File Photo",
+        "link": "https://www.ndtv.com/india-news/girl-gangraped-killed-by-4-including-3-minors-in-delhi-body-eaten-by-dogs-12062563#publisher=newsstand",
+        "category": "INDIA NEWS",
+        "score": 59,
+        "hot_hit": false,
+        "is_incident": false,
+        "corroborated": 2,
+        "geo": {
+          "is_india": true,
+          "place": "India"
+        }
+      },
+      "headline": "Teen Gang-Raped, Killed By 4, Including 3 Minors In Delhi",
+      "subhead": "The body of the victim was found days after the crime, say police. File Photo",
+      "category": "INDIA NEWS",
+      "message_id": 141,
+      "media_kind": "image",
+      "media_source": "text_only",
+      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-18/slide_07.jpg",
+      "video_path": null,
+      "status": "pending",
+      "is_cover": false
+    },
+    {
+      "index": 8,
+      "story": {
+        "id": "45416ba08b61",
+        "title": "Moody's raises India fiscal 2027 GDP growth forecast to 7% on West Asia resilience",
+        "summary": "The agency said elevated energy prices and El Ni\u00f1o-related food price pressures pose risks \u200cto inflation, consumption \u200band growth",
+        "link": "https://www.thehindu.com/business/Economy/moodys-raises-india-fiscal-2027-gdp-growth-forecast-to-7-on-west-asia-resilience/article71479416.ece",
+        "category": "BUSINESS NEWS",
+        "score": 59,
+        "hot_hit": false,
+        "is_incident": false,
+        "corroborated": 2,
+        "geo": {
+          "is_india": false,
+          "place": null
+        }
+      },
+      "headline": "Moody's raises India fiscal 2027 GDP growth forecast",
+      "subhead": "The agency said elevated energy prices and El Ni\u00f1o-related food price pressures pose risks \u200cto\u2026",
+      "category": "BUSINESS NEWS",
+      "message_id": 142,
+      "media_kind": "image",
+      "media_source": "text_only",
+      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-18/slide_08.jpg",
+      "video_path": null,
+      "status": "pending",
+      "is_cover": false
+    }
+  ]
+}
