@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AravindNews24 &middot; Photo Review</title>
+<style>
+:root{--bg:#0f1115;--card:#181b22;--line:#252a34;--fg:#e8eaf0;--mute:#8b93a7;
+--free:#2ea043;--copy:#d29922;--none:#6e7681;--file:#a371f7;--bad:#f85149;--accent:#2f81f7}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+header{padding:24px 20px;border-bottom:1px solid var(--line)}
+h1{margin:0;font-size:20px;letter-spacing:.3px}
+.sub{color:var(--mute);font-size:13px;margin-top:4px}
+.wrap{padding:20px;max-width:1200px;margin:0 auto}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:28px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px}
+.card .n{font-size:28px;font-weight:600}
+.card .l{color:var(--mute);font-size:12px;text-transform:uppercase;letter-spacing:.6px;margin-top:2px}
+.rule{color:var(--mute);font-size:13px;background:var(--card);border:1px solid var(--line);
+border-left:3px solid var(--accent);border-radius:8px;padding:12px 14px;margin-bottom:24px}
+h2{font-size:14px;text-transform:uppercase;letter-spacing:.8px;color:var(--mute);margin:28px 0 10px}
+table{width:100%;border-collapse:collapse;background:var(--card);
+border:1px solid var(--line);border-radius:10px;overflow:hidden}
+th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.7px;
+color:var(--mute);padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top;font-size:13px}
+tr:last-child td{border-bottom:none}
+img.thumb{width:92px;height:62px;object-fit:cover;border-radius:6px;background:#222;display:block}
+.tag{display:inline-block;padding:2px 8px;border-radius:99px;font-size:11px;font-weight:600;
+letter-spacing:.4px;white-space:nowrap}
+.tag.free{background:rgba(46,160,67,.15);color:var(--free)}
+.tag.copy{background:rgba(210,153,34,.15);color:var(--copy)}
+.tag.none{background:rgba(110,118,129,.18);color:var(--none)}
+.tag.file{background:rgba(163,113,247,.15);color:var(--file)}
+.tag.unsure{background:rgba(248,81,73,.13);color:var(--bad)}
+.tag.own{background:rgba(47,129,247,.15);color:var(--accent)}
+.mute{color:var(--mute)}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.filters{margin:0 0 12px}
+.filters button{background:var(--card);color:var(--mute);border:1px solid var(--line);
+border-radius:99px;padding:6px 14px;font-size:12px;margin-right:6px;cursor:pointer}
+.filters button.on{color:var(--fg);border-color:var(--accent)}
+.hl{font-weight:500;max-width:380px}
+.why{color:var(--mute);font-size:11px;margin-top:4px;max-width:380px}
+@media(max-width:720px){img.thumb{width:64px;height:44px}td,th{padding:8px}.hl{max-width:180px}}
+</style>
+</head><body>
+<header>
+  <h1>AravindNews24 &middot; Incident Photo Review</h1>
+  <div class="sub">2026-09-18 &middot; 0 candidates stored (rejects kept)
+  &middot; generated 2026-09-18T06:26:13+00:00</div>
+</header>
+<div class="wrap">
+  <div class="cards"><div class="card"><div class="n">0</div><div class="l">News today</div></div><div class="card"><div class="n">0</div><div class="l">Real images found</div></div><div class="card"><div class="n">0</div><div class="l">Free / reusable</div></div><div class="card"><div class="n">0</div><div class="l">Copyrighted</div></div><div class="card"><div class="n">0</div><div class="l">No image</div></div><div class="card"><div class="n">0</div><div class="l">Manual review</div></div><div class="card"><div class="n">0</div><div class="l">File photos</div></div><div class="card"><div class="n">0</div><div class="l">Wrong images</div></div></div>
+  <div class="rule">
+    <strong>Real incident photo &gt; generic photo. No photo &gt; wrong photo.</strong><br>
+    Authenticity ("is this that event?") and copyright ("may we republish it?") are
+    decided separately. A photo only auto-publishes when both pass.
+    &ldquo;Wrong images&rdquo; counts photos <em>you</em> rejected after seeing them &mdash;
+    the engine does not grade its own work.
+  </div>
+  <h2>Stories</h2>
+  <div class="filters">
+    <button class="on" onclick="filt('all',this)">All</button>
+    <button onclick="filt('free',this)">Reusable</button>
+    <button onclick="filt('copy',this)">Copyrighted</button>
+    <button onclick="filt('file',this)">File photo</button>
+    <button onclick="filt('none',this)">No image</button>
+  </div>
+  <table>
+    <thead><tr>
+      <th>News</th><th>Image</th><th>Status</th><th>Source</th>
+      <th>Checked</th><th>Authenticity</th><th>Rights</th><th>Action</th>
+    </tr></thead>
+    <tbody><tr><td colspan="8" class="mute">No stories reviewed yet.</td></tr></tbody>
+  </table>
+</div>
+<script>
+function filt(k,btn){
+  document.querySelectorAll('.filters button').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  document.querySelectorAll('tbody tr').forEach(r=>{
+    r.style.display = (k==='all'||r.dataset.k===k) ? '' : 'none';
+  });
+}
+</script>
+</body></html>
