@@ -1,0 +1,79 @@
+name: AravindNews24 Photo Retry + Dashboard
+
+# Hourly. Two jobs in one:
+#
+#   1. RETRY. A story that had no usable incident photograph when it was
+#      first seen is not a permanent verdict -- a flood is reported in
+#      text within minutes and photographed within hours. Unresolved
+#      stories sit on a retry ladder (10m/30m/1h/3h/6h/12h) and get
+#      re-checked when their next rung comes due. A story drops off the
+#      ladder the moment a genuinely reusable photo is found, so this
+#      never keeps spending requests on a question already answered.
+#
+#   2. DASHBOARD. Recomputes the day's metrics from the database and
+#      regenerates public/dashboard/index.html. Counted, never estimated.
+#
+# Hourly rather than every 5 minutes on purpose: the ladder's own timing
+# decides what is due, and GitHub Actions does not reliably honour
+# sub-10-minute schedules anyway (this project measured 14+ minute gaps
+# on a */5 cron). The fast path for something you personally spot is
+# still telegram-urgent.yml.
+
+on:
+  schedule:
+    - cron: '7 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: auto-poster      # shared with the posting workflows -- never race a git push
+  cancel-in-progress: false
+
+jobs:
+  photo-intel:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install deps
+        run: pip install -r requirements.txt
+
+      - name: Run photo-engine self-tests
+        # The 6 critical failure tests guard against publishing a wrong
+        # photograph of a real event to a real audience. If they ever
+        # fail, stop here rather than letting the pipeline carry on.
+        run: python -m tests.test_incident_photos
+
+      - name: Run news-selection scoring tests
+        # Guards against the political-reaction / routine-procedural
+        # keyword lists regressing back to rewarding "X slams Y" and
+        # "court seeks status report" headlines over real incidents --
+        # exactly the failure a live run of this pipeline showed.
+        run: python -m tests.test_news_scoring
+
+      - name: Retry unresolved stories, recompute metrics, rebuild dashboard
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID:   ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python -m src.main photo-retry
+
+      - name: Commit candidate history + dashboard
+        run: |
+          git config user.name "aravindnews24-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add data/photo_log.jsonl public/dashboard/ || true
+          git commit -m "auto: photo intel $(date -u +%FT%TZ)" || echo "nothing to commit"
+          for i in 1 2 3 4 5; do
+            git push && break
+            echo "push failed (attempt $i) -- rebasing on remote, retrying"
+            git pull --rebase --autostash origin main || true
+            sleep 3
+          done

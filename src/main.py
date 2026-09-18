@@ -28,12 +28,15 @@ import time
 import datetime as dt
 import urllib.request
 import urllib.error
+import urllib.parse
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from config import settings
-from src import (news_engine, ai_writer, image_source, incident_photos, template, reel_template,
-                  video, publisher, analytics, whatsapp, telegram_bot)
+from src import (news_engine, ai_writer, image_source, incident_photos, photo_review,
+                  photo_db, dashboard, template, reel_template,
+                  video, publisher, analytics, whatsapp, telegram_bot,
+                  carousel_review)
 
 PENDING_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "_pending.json")
 WA_QUEUE_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "whatsapp_pending.json")
@@ -281,6 +284,81 @@ def _save_tg_queue(queue):
         json.dump(queue, f)
 
 
+def _download_url(url, dest_path):
+    """Plain HTTP download for a photo whose rights a human has JUST
+    confirmed by pressing MARK LICENSED -- this is the one place in the
+    whole pipeline that fetches someone else's photo file, and it only
+    runs after that explicit human confirmation, never on discovery or
+    preview alone."""
+    req = urllib.request.Request(url, headers={
+        "User-Agent": ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                       "(KHTML, like Gecko) Chrome/125.0 Safari/537.36")})
+    with urllib.request.urlopen(req, timeout=30) as r:
+        data = r.read()
+    os.makedirs(os.path.dirname(dest_path), exist_ok=True)
+    with open(dest_path, "wb") as f:
+        f.write(data)
+    return dest_path
+
+
+def _act_on_photo_decision(label, info, now_ist):
+    """Turns a photo-review button press into an actual post outcome.
+
+    LICENSED: a human just told this system, by tapping the button, that
+    they personally obtained rights to that specific photo from the
+    agency. That confirmation is the ONLY thing that authorises this
+    system to fetch the file at all -- so it downloads it now, into the
+    exact inbox slot a manually-sent photo reply would have used, which
+    means the existing "human supplied media" post path (unchanged,
+    already trusted, already skips the automated score gate) picks it up
+    on its next pass through telegram_cycle()'s queue-resolution loop.
+    This never bypasses the two-phase render -> push -> publish flow --
+    it just supplies the image the same way a Telegram reply would.
+
+    REJECTED / TEXT_ONLY: the reviewer has ruled the photo out (wrong
+    rights, or just doesn't want it) -- post the headline immediately,
+    without waiting out the remaining grace period, exactly the same way
+    an unanswered candidate eventually goes out on its own."""
+    article_id = info.get("article_id")
+    if not article_id:
+        return
+    queue = _load_tg_queue()
+    idx = next((i for i, e in enumerate(queue) if e["story"]["id"] == article_id), None)
+    if idx is None:
+        return  # already resolved or dropped from the queue elsewhere
+
+    if label == "LICENSED":
+        image_url = info.get("image_url")
+        if not image_url:
+            telegram_bot.send_message(
+                "Marked licensed, but no image URL was on record for this "
+                "candidate -- please reply to the original candidate "
+                "message with the photo file instead.")
+            return
+        entry = queue[idx]
+        dest_no_ext = os.path.join(TG_INBOX_DIR, _safe_filename(str(entry["message_id"])))
+        ext = os.path.splitext(urllib.parse.urlparse(image_url).path)[1] or ".jpg"
+        try:
+            saved = _download_url(image_url, dest_no_ext + ext)
+            print("Downloaded licensed photo for:", entry["story"]["title"])
+            telegram_bot.send_message(
+                f"Downloaded the licensed photo for \"{entry['story']['title'][:80]}\" "
+                f"-- it will be used for this post on the next cycle.")
+        except Exception as e:
+            print("licensed-photo download failed:", e)
+            telegram_bot.send_message(
+                f"Marked licensed, but couldn't download the file automatically ({e}). "
+                f"Reply to the original candidate message with the photo instead.")
+        return  # queue entry stays; the normal resolution loop finds the file
+
+    if label in ("REJECTED", "TEXT_ONLY"):
+        entry = queue.pop(idx)
+        _save_tg_queue(queue)
+        story = entry["story"]
+        print(f"Photo {label.lower()} via button -- posting text-only now:", story["title"])
+        _render_story(story, now_ist, is_reel=False, force_no_image=True)
+
+
 def _load_tg_offset():
     if os.path.exists(TG_OFFSET_PATH):
         with open(TG_OFFSET_PATH) as f:
@@ -396,12 +474,55 @@ def _poll_telegram_replies(pending_ids, now_ist=None):
     urgent_result = None
     for u in updates:
         offset = max(offset, u["update_id"] + 1)
+        cb = u.get("callback_query")
+        if cb:
+            data = cb.get("data") or ""
+            if data.startswith("CDROP|"):
+                # A "drop this slide" button on the daily carousel's
+                # preview -- handled here rather than in a separate
+                # poller so it shares this one offset file and can never
+                # race with the regular candidate queue for the same
+                # updates. See src/carousel_review.py.
+                try:
+                    carousel_state = carousel_review._load_state()
+                    if carousel_state:
+                        carousel_review.handle_callback(cb, carousel_state)
+                except Exception as e:
+                    print("carousel callback handling failed:", e)
+                continue
+            # An inline button on a photo-review card (MARK LICENSED /
+            # REJECT / TEXT ONLY / ASKED PERMISSION). Always recorded
+            # against the candidate in the DB first; LICENSED additionally
+            # acts on it -- see _act_on_photo_decision below. None of these
+            # ever download-then-republish on their own; LICENSED only
+            # fetches the file after a human has told this system, by
+            # pressing the button, that they personally cleared the rights.
+            try:
+                label, info = photo_review.handle_callback(cb)
+                if label:
+                    _act_on_photo_decision(label, info, now_ist)
+            except Exception as e:
+                print("callback handling failed:", e)
+            continue
+
         msg = u.get("message")
         if not msg or str(msg.get("chat", {}).get("id")) != str(settings.TELEGRAM_CHAT_ID):
             continue
         reply_to = msg.get("reply_to_message")
 
         if reply_to:
+            carousel_state = carousel_review._load_state()
+            if carousel_state and any(s["message_id"] == reply_to["message_id"]
+                                       for s in carousel_state["slides"]):
+                # A reply to one of the carousel's own slide previews
+                # (a photo/video to use, or "not good" to drop it) --
+                # same reasoning as the callback branch above: handled
+                # here so it shares the one offset file.
+                try:
+                    carousel_review.handle_reply(msg, carousel_state)
+                except Exception as e:
+                    print("carousel reply handling failed:", e)
+                continue
             if reply_to["message_id"] not in pending_ids:
                 continue
             file_id = _extract_media_file_id(msg)
@@ -482,6 +603,7 @@ def _poll_telegram_replies(pending_ids, now_ist=None):
         }
         story["geo"] = news_engine.detect_geo(story["title"], story["category"])
         print(f"=== URGENT at {now_ist:%Y-%m-%d %H:%M} IST: {title} ===")
+        _record_owner_media(story, media_path)
         urgent_result = _render_story(story, now_ist, is_reel=True, forced_image_path=media_path,
                                        consumed_inbox_file=media_path)
         if urgent_result is not None:
@@ -496,39 +618,40 @@ def _poll_telegram_replies(pending_ids, now_ist=None):
     return urgent_result
 
 
+def _record_owner_media(story, media_path):
+    """Logs a photo/video the user supplied themselves as an OWN_MEDIA
+    candidate. This is the one source whose rights are settled by
+    construction -- they own it -- and whose authenticity is established
+    the strongest way anything in this system ever is: a human looked at
+    it and chose it. Logged so the dashboard and the daily metrics count
+    it alongside everything the engine found on its own."""
+    try:
+        photo_review.persist(
+            incident_photos.owner_media_result(story, media_path), story)
+    except Exception as e:
+        print("could not log owner media:", e)
+
+
 def _preview_incident_photo(message_id, story):
-    """Runs incident-photo discovery for a candidate and, if a REAL photo of
-    that exact event is found, previews it in Telegram for the reviewer.
+    """Runs incident-photo discovery for a candidate and shows the reviewer
+    what was found, as a reply to that candidate's message.
 
-    Deliberately a preview only. Measured on live stories, 64% of candidates
-    do have a findable real incident photo, but every single one belonged to
-    a news publisher -- so none can lawfully be auto-published. Showing it
-    here puts the decision where it legally belongs: with a human, who can
-    recognise the event, license it, shoot their own, or skip it. Nothing
-    from this path ever reaches Instagram or Facebook by itself."""
-    try:
-        result = incident_photos.find_incident_photo(story)
-    except Exception as e:
-        print("incident photo discovery failed:", e)
-        return
-    if not result.get("image_url") or result["image_status"] != "VERIFIED_REAL_IMAGE":
-        return
+    Deliberately a preview only. Measured on live stories, 64% of
+    candidates do have a findable real incident photo, but every single
+    one belonged to a news publisher -- so none can lawfully be
+    auto-published. Showing it here puts the decision where it legally
+    belongs: with a human, who can recognise the event, license it, shoot
+    their own, or skip it. Nothing from this path ever reaches Instagram
+    or Facebook by itself, and no button on the card republishes anything.
 
-    tag = "FILE PHOTO" if result["is_file_photo"] else "incident photo"
-    caption = (
-        f"Found a real {tag} for this story ({int(result['authenticity_confidence'] * 100)}% confidence)\n"
-        f"Source: {result['source_name']}\n"
-        f"Rights: {result['license_status']} -- {result['license']}\n\n"
-    )
-    if result["decision"] == "AUTO_PUBLISH":
-        caption += "Free to reuse. Reply with it (or your own) to post it."
-    else:
-        caption += ("NOT cleared to republish. Use it as a lead: get permission, "
-                    "find the same moment from a source you can use, or send your own.")
+    src/photo_review.py does the work: it also stores every candidate it
+    considered (including rejects) and puts a story with no usable photo
+    on the retry ladder, since incident photographs are routinely
+    published hours after the first text report."""
     try:
-        telegram_bot.send_photo_reply(message_id, result["image_url"], caption)
+        photo_review.review_story(story, message_id=message_id)
     except Exception as e:
-        print("photo preview failed:", e)
+        print("incident photo review failed:", e)
 
 
 def telegram_urgent_check():
@@ -540,6 +663,47 @@ def telegram_urgent_check():
     queue = _load_tg_queue()
     pending_ids = {e["message_id"] for e in queue}
     return _poll_telegram_replies(pending_ids)
+
+
+def carousel_cycle():
+    """Checked every ~15 min during the evening window (see
+    .github/workflows/daily-carousel.yml), BEFORE that workflow's git-push
+    step. Two things, in order:
+      1. If it's at/after the configured preview time and nothing's been
+         built for today yet, build + send the carousel for review.
+      2. Poll Telegram for replies/button-presses on it -- shares
+         _poll_telegram_replies with every other Telegram path so it can
+         never race the regular candidate queue for the same offset.
+    Deliberately does NOT publish here -- see carousel_publish_cycle().
+    Publishing needs every slide's image/video to already be reachable at
+    its public GitHub Pages URL, which is only true AFTER this same
+    workflow's push step has run. Calling both from one function (or
+    calling this twice around the push) would let a publish attempt fire
+    against not-yet-public URLs on its first pass -- exactly the
+    render -> push -> publish split every other post in this pipeline
+    already uses, applied here too."""
+    now_ist = (dt.datetime.now(dt.timezone.utc) + dt.timedelta(hours=5, minutes=30)).replace(tzinfo=None)
+
+    if carousel_review.due_for_preview(now_ist):
+        print("Building today's carousel...")
+        state = carousel_review.build_carousel(now_ist)
+        carousel_review.send_preview(state, now_ist)
+        print(f"Carousel preview sent -- {len(state['slides'])} slides.")
+
+    _poll_telegram_replies(set(), now_ist)
+
+
+def carousel_publish_cycle():
+    """Run AFTER the workflow's git-push step, so anything this publishes
+    is already live at its public URL. No-ops if the review grace period
+    hasn't elapsed yet, or nothing has been built today."""
+    now_ist = (dt.datetime.now(dt.timezone.utc) + dt.timedelta(hours=5, minutes=30)).replace(tzinfo=None)
+    state = carousel_review._load_state()
+    if state and carousel_review.ready_to_publish(state, now_ist):
+        print("Carousel review window elapsed -- publishing.")
+        carousel_review.finalize_and_publish(state, now_ist)
+    else:
+        print("Carousel not ready to publish yet (or none built today).")
 
 
 def telegram_cycle():
@@ -619,6 +783,7 @@ def telegram_cycle():
             story = entry["story"]
             if resolved_kind == "media":
                 print("Photo/video received via Telegram for:", story["title"])
+                _record_owner_media(story, inbox_path)
                 _render_story(story, now_ist, is_reel=True, forced_image_path=inbox_path,
                               consumed_inbox_file=inbox_path)
             else:
@@ -906,6 +1071,20 @@ if __name__ == "__main__":
         telegram_cycle()
     elif phase == "telegram-urgent":
         telegram_urgent_check()
+    elif phase == "carousel-cycle":
+        carousel_cycle()
+    elif phase == "carousel-publish":
+        carousel_publish_cycle()
+    elif phase == "photo-retry":
+        # Re-checks stories that had no usable photo when first seen, then
+        # refreshes the metrics and the static dashboard from the DB.
+        changed = photo_review.run_retries()
+        print(f"{len(changed)} story status(es) changed on retry")
+        print("metrics:", photo_review.compute_daily_metrics())
+        dashboard.build()
+    elif phase == "dashboard":
+        print("metrics:", photo_review.compute_daily_metrics())
+        dashboard.build()
     elif phase == "publish":
         publish()
     else:

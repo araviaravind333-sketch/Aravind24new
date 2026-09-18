@@ -86,7 +86,7 @@ TELEGRAM_QUEUE_TARGET  = 5
 # just fails outright. This makes the Telegram queue self-pace to roughly
 # hourly instead, using the same "time since last post" signal the
 # breaking-news path already shares (news_engine.hours_since_last_post()).
-TELEGRAM_MIN_POST_GAP_HOURS = 1.0
+TELEGRAM_MIN_POST_GAP_HOURS = 3.0
 # Analyzed a real competitor that reached 1M followers (@worldinlast24hrs):
 # they post ~4x/day, not hourly, and their evidence is that a handful of
 # carefully-selected, genuinely notable stories outperforms frequent-but-
@@ -100,7 +100,7 @@ TELEGRAM_MIN_POST_GAP_HOURS = 1.0
 # (the account was hitting MAX_POSTS_PER_24H's ceiling nearly every day,
 # ~22-24 posts/day, about triple the cadence of the account that actually
 # reached 1M); 80 tightens further still, closer to only the standouts.
-MIN_AUTO_POST_SCORE = 80
+MIN_AUTO_POST_SCORE = 95
 
 # By request: during India's waking hours only India news goes out; world/
 # sports/business are allowed overnight, when the Indian audience is
@@ -189,7 +189,7 @@ BREAKING_MIN_GAP_HOURS = 1.5
 # day, roughly triple the ~4x/day cadence of the account that actually
 # reached 1M followers -- that's routine automated posts crowding out
 # quality, not a technical ceiling worth maxing out.
-MAX_POSTS_PER_24H = 12
+MAX_POSTS_PER_24H = 8
 # Reserved specifically for the user's OWN urgent breaking-news
 # submissions (a link + their own photo/video, sent via Telegram).
 # Without this, routine automated posts earlier in the day can use up
@@ -198,7 +198,7 @@ MAX_POSTS_PER_24H = 12
 # regular queue and the automated breaking-news path stop this many
 # short of the full ceiling; only the user's own urgent-submission path
 # can use the full ceiling, including this reserve.
-MAX_URGENT_RESERVED_SLOTS = 3
+MAX_URGENT_RESERVED_SLOTS = 2
 
 # ============================================================
 # 5. GEO-TAGGING
@@ -253,3 +253,76 @@ REEL_CLIP_TRIM_TARGET_SEC = 50
 # After each post, we pull insights and log to /data/performance.csv
 # The selector uses this history to prefer high-performing categories/times.
 ANALYTICS_LOOKBACK_DAYS = 14
+# ============================================================
+# 10. INCIDENT PHOTO INTELLIGENCE
+#     (src/incident_photos.py + src/photo_review.py + src/dashboard.py)
+# ============================================================
+# The rule this whole subsystem exists to enforce:
+#     REAL INCIDENT PHOTO  >  GENERIC PHOTO
+#     NO PHOTO             >  WRONG PHOTO
+# and, kept strictly separate from both of those:
+#     "is this really that event?"  !=  "may we republish it?"
+#
+# Measured on 14 live stories from this project's own feeds: 9 exact
+# incident photos found, 0 wrong photos selected, 0 auto-publishable
+# (every hit was publisher-copyrighted). Discovery is solved; rights are
+# the wall. Everything below is aimed at that wall -- finding a DIFFERENT,
+# legitimately reusable photograph of the SAME event.
+
+# How many candidates to evaluate per story before giving up. Each one
+# costs an HTTP request or two against free, keyless APIs, so this is a
+# politeness/runtime budget, not a billing one. Search stops early the
+# moment a genuinely reusable photo is verified -- no point spending the
+# rest of the budget once the question is answered.
+PHOTO_SEARCH_BUDGET = 12
+# Deep alternative search (Step 7-10) only runs when the first verified
+# photo turns out to be rights-restricted. If the first hit is already
+# free to reuse there is nothing to look for.
+PHOTO_DEEP_SEARCH = True
+
+# Retry ladder, in minutes from first discovery, for stories that came
+# back NO_VERIFIED_IMAGE. Incident photographs are very often published
+# hours after the first text report -- a 10:00 "no image" is not a
+# permanent verdict. Retries stop immediately once a verified REUSABLE
+# photo is found (a verified copyrighted one keeps retrying, since the
+# whole point is to find a usable alternative).
+PHOTO_RETRY_LADDER_MIN = (10, 30, 60, 180, 360, 720)
+
+# Default MUST stay True. False would allow a clearly-labelled generic
+# illustration when nothing real exists -- off unless deliberately
+# enabled, and never AI-generated imagery of a real incident under any
+# setting. There is no setting that turns that on.
+PHOTO_REAL_IMAGES_ONLY = True
+
+# Where the candidate history lives. The .db is DERIVED and gitignored;
+# photo_log.jsonl is the durable, git-mergeable record it is rebuilt
+# from (see src/photo_db.py for why a committed binary would break the
+# workflows' rebase-and-retry push loop).
+PHOTO_DB_PATH  = "data/photos.db"
+PHOTO_LOG_PATH = "data/photo_log.jsonl"
+DASHBOARD_PATH = "public/dashboard/index.html"
+
+
+# ============================================================
+# 11. DAILY CAROUSEL  (one flagship multi-slide post, competitor-style)
+# ============================================================
+# By explicit request: the account posts far fewer automated pieces per
+# day (see MIN_AUTO_POST_SCORE / MAX_POSTS_PER_24H above), but one of
+# those slots is now a single multi-slide carousel -- several of the
+# day's strongest stories as numbered slides within ONE post, matching
+# the format of the reference competitor account (@worldinlast24hrs)
+# rather than several separate single-story posts.
+CAROUSEL_SLIDE_COUNT = 8
+# Sent to Telegram for review at this IST time. Not a hard cron minute --
+# the workflow polls every 15 min in the evening window and builds the
+# carousel on the first run at/after this time each day.
+CAROUSEL_PREVIEW_HOUR_IST = 20
+CAROUSEL_PREVIEW_MINUTE_IST = 30
+# How long the reviewer has to reject/replace slides in Telegram before
+# whatever's left (un-rejected) auto-publishes. Same "guaranteed outcome,
+# no reply needed" principle as the regular candidate queue.
+CAROUSEL_REVIEW_GRACE_MINUTES = 75
+# Counts as ONE of the automated slots in MAX_POSTS_PER_24H / the 6
+# non-reserved automated slots -- it replaces one single-story post that
+# day, it doesn't add on top of the daily ceiling.
+CAROUSEL_COUNTS_AS_AUTOMATED_SLOT = True

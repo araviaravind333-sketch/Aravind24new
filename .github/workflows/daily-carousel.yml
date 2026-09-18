@@ -1,0 +1,101 @@
+name: AravindNews24 Daily Carousel
+
+# One flagship multi-slide post per day, competitor-style (several of the
+# day's strongest stories as numbered slides in ONE Instagram/Facebook
+# post, instead of separate single-story posts). Counts as one of the
+# automated daily slots -- see config/settings.py
+# CAROUSEL_COUNTS_AS_AUTOMATED_SLOT.
+#
+# Runs every 15 min in the evening window only:
+#   - first run at/after CAROUSEL_PREVIEW_HOUR_IST builds it and sends
+#     every slide to Telegram for review (reply with a photo/video to
+#     replace a slide, or "not good" to drop it)
+#   - later runs poll for those replies
+#   - once CAROUSEL_REVIEW_GRACE_MINUTES has elapsed since the preview,
+#     whatever survived gets published
+#
+# 20:30-22:30 IST = 15:00-17:00 UTC.
+on:
+  schedule:
+    - cron: '0,15,30,45 15-17 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: auto-poster      # shared with every other posting workflow -- never race a git push
+  cancel-in-progress: false
+
+jobs:
+  carousel:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install deps
+        run: pip install -r requirements.txt
+
+      - name: Ensure ffmpeg (for video-slide compositing)
+        run: command -v ffmpeg || (sudo apt-get update && sudo apt-get install -y ffmpeg)
+
+      - name: Run carousel self-tests
+        run: python -m tests.test_carousel
+
+      - name: Build / review / publish today's carousel
+        env:
+          ANTHROPIC_API_KEY:   ${{ secrets.ANTHROPIC_API_KEY }}
+          GEMINI_API_KEY:      ${{ secrets.GEMINI_API_KEY }}
+          PEXELS_API_KEY:      ${{ secrets.PEXELS_API_KEY }}
+          UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
+          TELEGRAM_BOT_TOKEN:  ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID:    ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python -m src.main carousel-cycle
+
+      - name: Push rendered slides + carousel state (makes them public)
+        run: |
+          git config user.name "aravindnews24-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add public/carousel/ data/carousel_pending.json data/carousel_inbox/ data/telegram_offset.json || true
+          git commit -m "auto: carousel cycle $(date -u +%FT%TZ)" || echo "nothing to commit"
+          for i in 1 2 3 4 5; do
+            git push && break
+            echo "push failed (attempt $i) -- rebasing on remote, retrying"
+            git pull --rebase --autostash origin main || true
+            sleep 3
+          done
+
+      - name: Publish carousel to Instagram + Facebook (no-op unless ready)
+        # Separate command, run only after the push above -- this is the
+        # render -> push -> publish split every other post in this
+        # pipeline uses, so anything published here is already reachable
+        # at its public GitHub Pages URL, never a not-yet-live one.
+        env:
+          META_PAGE_ACCESS_TOKEN: ${{ secrets.META_PAGE_ACCESS_TOKEN }}
+          META_APP_ID:            ${{ secrets.META_APP_ID }}
+          META_APP_SECRET:        ${{ secrets.META_APP_SECRET }}
+          FB_PAGE_ID:             ${{ secrets.FB_PAGE_ID }}
+          IG_USER_ID:             ${{ secrets.IG_USER_ID }}
+          GH_PAGES_BASE:          ${{ vars.GH_PAGES_BASE }}
+          TELEGRAM_BOT_TOKEN:     ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID:       ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python -m src.main carousel-publish
+
+      - name: Commit publish state
+        run: |
+          git add data/carousel_pending.json || true
+          git commit -m "auto: carousel publish $(date -u +%FT%TZ)" || echo "nothing to commit"
+          for i in 1 2 3 4 5; do
+            git push && break
+            echo "push failed (attempt $i) -- rebasing on remote, retrying"
+            git pull --rebase --autostash origin main || true
+            sleep 3
+          done

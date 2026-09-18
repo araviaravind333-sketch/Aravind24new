@@ -117,17 +117,92 @@ def send_candidate(story):
     return result["message_id"] if result else None
 
 
-def send_photo_reply(message_id, photo_url, caption):
+def send_photo_reply(message_id, photo_url, caption, buttons=None):
     """Shows a DISCOVERED incident photo to the reviewer as a reply to its
     candidate message. This is a private preview so a human can judge it --
     it is not publishing. Nothing reaches Instagram/Facebook from here;
-    that only happens after the reviewer sends the media back themselves."""
-    return _call("sendPhoto", {
+    that only happens after the reviewer sends the media back themselves.
+
+    `buttons` attaches an inline keyboard (see build_keyboard). Note what
+    is deliberately NOT offered there: any button that would download and
+    republish someone else's copyrighted photograph. The buttons open the
+    original, or record a decision -- they never reuse the file."""
+    payload = {
         "chat_id": settings.TELEGRAM_CHAT_ID,
         "photo": photo_url,
         "caption": caption[:1000],
         "reply_to_message_id": message_id,
+    }
+    if buttons:
+        payload["reply_markup"] = {"inline_keyboard": buttons}
+    result = _call("sendPhoto", payload)
+    if result is None and buttons:
+        # Telegram refuses a photo URL it cannot fetch itself (hotlink
+        # protection, redirects, oversized files). The rights information
+        # is the useful part, so fall back to sending it as text with the
+        # image as a link rather than losing the whole review card.
+        return _call("sendMessage", {
+            "chat_id": settings.TELEGRAM_CHAT_ID,
+            "text": caption[:4000],
+            "reply_to_message_id": message_id,
+            "disable_web_page_preview": False,
+            "reply_markup": {"inline_keyboard": buttons},
+        })
+    return result
+
+
+def build_keyboard(rows):
+    """rows: list of lists of (label, kind, value) where kind is "url" or
+    "cb". Telegram caps callback_data at 64 bytes, which is why the
+    callback values in photo_review are short codes rather than URLs."""
+    keyboard = []
+    for row in rows:
+        built = []
+        for label, kind, value in row:
+            if kind == "url":
+                if not value or not str(value).startswith("http"):
+                    continue
+                built.append({"text": label, "url": value})
+            else:
+                built.append({"text": label, "callback_data": str(value)[:64]})
+        if built:
+            keyboard.append(built)
+    return keyboard
+
+
+def answer_callback(callback_query_id, text=""):
+    """Clears the spinner on a tapped inline button and shows a short
+    toast. Telegram keeps re-delivering a callback that is never answered,
+    so this is not optional."""
+    return _call("answerCallbackQuery", {
+        "callback_query_id": callback_query_id,
+        "text": text[:200],
     })
+
+
+def edit_caption(chat_id, message_id, caption):
+    """Rewrites the review card in place after a button is pressed, so the
+    message itself shows the decision instead of the reviewer having to
+    remember which ones they already handled."""
+    return _call("editMessageCaption", {
+        "chat_id": chat_id,
+        "message_id": message_id,
+        "caption": caption[:1000],
+    })
+
+
+def send_message(text, buttons=None, reply_to=None):
+    payload = {
+        "chat_id": settings.TELEGRAM_CHAT_ID,
+        "text": text[:4000],
+        "disable_web_page_preview": True,
+    }
+    if reply_to:
+        payload["reply_to_message_id"] = reply_to
+    if buttons:
+        payload["reply_markup"] = {"inline_keyboard": buttons}
+    result = _call("sendMessage", payload)
+    return result["message_id"] if result else None
 
 
 def reply_to_message(message_id, text):
@@ -149,6 +224,65 @@ def get_new_updates(offset):
     already processed rather than us tracking a separate seen-set."""
     result = _call("getUpdates", {"offset": offset, "timeout": 5})
     return result or []
+
+
+def _multipart_post(method, fields, file_field, file_path):
+    """Stdlib-only multipart/form-data upload -- this project has no HTTP
+    client dependency beyond urllib (see requirements.txt), and Telegram's
+    sendPhoto/sendDocument need a real file upload here since the carousel
+    slides aren't pushed to a public URL until later in the pipeline."""
+    boundary = "----AravindNews24Boundary7f3a9c"
+    body = bytearray()
+
+    def _field(name, value):
+        body.extend(f"--{boundary}\r\n".encode())
+        body.extend(f'Content-Disposition: form-data; name="{name}"\r\n\r\n'.encode())
+        body.extend(f"{value}\r\n".encode())
+
+    for name, value in fields.items():
+        if value is None:
+            continue
+        _field(name, value if isinstance(value, str) else json.dumps(value))
+
+    filename = os.path.basename(file_path)
+    body.extend(f"--{boundary}\r\n".encode())
+    body.extend(
+        f'Content-Disposition: form-data; name="{file_field}"; filename="{filename}"\r\n'.encode())
+    body.extend(b"Content-Type: application/octet-stream\r\n\r\n")
+    with open(file_path, "rb") as f:
+        body.extend(f.read())
+    body.extend(f"\r\n--{boundary}--\r\n".encode())
+
+    req = urllib.request.Request(
+        f"{API}/{method}", data=bytes(body), method="POST",
+        headers={"Content-Type": f"multipart/form-data; boundary={boundary}"})
+    try:
+        with urllib.request.urlopen(req, timeout=60) as r:
+            data = json.load(r)
+    except urllib.error.HTTPError as e:
+        print(f"Telegram {method} (upload) failed:", e, "-", e.read().decode(errors="replace"))
+        return None
+    except Exception as e:
+        print(f"Telegram {method} (upload) failed:", e)
+        return None
+    if not data.get("ok"):
+        print(f"Telegram {method} (upload) error:", data)
+        return None
+    return data["result"]
+
+
+def send_photo_file(file_path, caption, buttons=None, reply_to=None):
+    """Uploads a LOCAL image file directly (as opposed to send_photo_reply,
+    which points Telegram at a URL) -- used for the daily carousel, whose
+    slides are only rendered locally at review time, before the workflow's
+    git-push step has made anything public yet."""
+    fields = {"chat_id": settings.TELEGRAM_CHAT_ID, "caption": caption[:1000]}
+    if reply_to:
+        fields["reply_to_message_id"] = reply_to
+    if buttons:
+        fields["reply_markup"] = {"inline_keyboard": buttons}
+    result = _multipart_post("sendPhoto", fields, "photo", file_path)
+    return result["message_id"] if result else None
 
 
 def download_file(file_id, dest_path_no_ext):

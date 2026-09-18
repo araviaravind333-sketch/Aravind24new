@@ -81,7 +81,7 @@ jobs:
 
       - name: Commit state (posted log + analytics, if anything changed)
         run: |
-          git add data/ || true
+          git add data/ public/dashboard/ || true
           git commit -m "auto: telegram urgent post cycle $(date -u +%FT%TZ)" || echo "nothing to commit"
           for i in 1 2 3 4 5; do
             git push && break

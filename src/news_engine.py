@@ -99,9 +99,17 @@ HOT_KEYWORDS = [
     "biggest", "cr", "crore", "supreme court", "election", "results",
     "cyclone", "earthquake", "budget", "rbi", "isro", "won", "final",
     # curiosity / shareability signals — these are what actually make
-    # someone stop scrolling and hit follow, not just "news happened"
-    "viral", "shocking", "netizens", "row", "slams", "backlash",
-    "exclusive", "leaked", "outrage", "controversy", "stuns", "stunned",
+    # someone stop scrolling and hit follow, not just "news happened".
+    # "row"/"slams"/"backlash"/"controversy" used to be here and were
+    # removed: measured against a week of actual selections, they were
+    # firing almost entirely on party-vs-party political sniping ("AIADMK
+    # Slams Tamil Nadu CM Over Secretariat Plans") rather than on anything
+    # that actually spreads. Those headlines cleared the score bar on
+    # keyword presence alone and crowded out real incidents -- see
+    # POLITICAL_REACTION_KEYWORDS below, which penalises that pattern
+    # instead of rewarding it.
+    "viral", "shocking", "netizens",
+    "exclusive", "leaked", "outrage", "stuns", "stunned",
     "unprecedented", "never before", "world's first", "warns", "alert",
     "scam", "fraud", "explosive", "sensational", "massive", "huge",
 ]
@@ -159,6 +167,46 @@ ROUTINE_MARKET_KEYWORDS = [
 
 def _is_routine_market_update(title):
     return _any_kw(ROUTINE_MARKET_KEYWORDS, title.lower())
+
+
+# Party-vs-party political point-scoring: one leader/party reacting to
+# another, with no actual event underneath it. Measured against a live
+# run of this pipeline's own selections, headlines matching this pattern
+# ("AIADMK Slams Tamil Nadu CM Over Secretariat Plans", "Narendra's
+# Ongoing Trump Appeasement: Congress's swipe") made up the majority of a
+# day's queue -- they clear the score bar on "attack"/"slams"-style
+# keyword presence and multi-outlet corroboration (every outlet quotes
+# the same press statement) without any of the actual shareability that
+# corroboration is meant to signal. This is a genuinely different content
+# type from a real incident, and is scored as one.
+POLITICAL_REACTION_KEYWORDS = [
+    "slams", "hits back", "swipe at", "takes a dig", "war of words",
+    "trades barbs", "counters", "reacts to criticism", "responds to",
+    "backlash", "row over", "controversy over", "row erupts",
+    "appeasement", "targets", "lashes out",
+]
+
+
+def _is_political_reaction(title):
+    return _any_kw(POLITICAL_REACTION_KEYWORDS, title.lower())
+
+
+# A court/legislative PROCESS update -- a hearing adjourned, a status
+# report sought, a notice issued -- is not the underlying story; it is
+# procedural noise about a story, usually with no new information and no
+# resolution. These were scoring well purely from NATIONAL_IMPACT_KEYWORDS
+# ("high court", "cbi") plus recency, the same failure mode as the routine
+# market-update case above.
+ROUTINE_PROCEDURAL_KEYWORDS = [
+    "seeks status report", "status report sought", "posts matter for",
+    "adjourns hearing", "hearing adjourned", "issues notice",
+    "next hearing", "case listed", "matter listed", "matter posted",
+    "seeks response", "seeks reply", "notice issued to",
+]
+
+
+def _is_routine_procedural(title):
+    return _any_kw(ROUTINE_PROCEDURAL_KEYWORDS, title.lower())
 
 
 _SIG_STOPWORDS = {
@@ -234,6 +282,19 @@ def _virality(title, published_dt):
     # multiple market-wire feeds all cover it -- see ROUTINE_MARKET_KEYWORDS
     if _is_routine_market_update(title):
         score -= 35
+    # party-vs-party political point-scoring with no event underneath it
+    # -- see POLITICAL_REACTION_KEYWORDS. Strong enough to override the
+    # NATIONAL_IMPACT_KEYWORDS bonus above, since "High Court" or "CBI"
+    # appearing in a reaction headline doesn't make the reaction itself
+    # newsworthy.
+    if _is_political_reaction(title):
+        score -= 40
+        hot_hit = False
+    # a procedural court/legislative update (hearing adjourned, notice
+    # issued) -- see ROUTINE_PROCEDURAL_KEYWORDS.
+    if _is_routine_procedural(title):
+        score -= 35
+        hot_hit = False
     return score, hot_hit
 
 

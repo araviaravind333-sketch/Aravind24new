@@ -138,6 +138,121 @@ def publish_facebook(image_url, caption, place=None):
     return _post(f"{BASE}/{page_id}/photos", params)
 
 
+# ---------- Instagram carousel (daily flagship multi-slide post) ----------
+def publish_instagram_carousel(children, caption, place=None):
+    """children: list of {"type": "IMAGE"|"VIDEO", "url": <public url>},
+    in the order they should appear as slides. Each becomes its own
+    'carousel item' child container first; those ids then get bundled
+    into one parent container and published as a single post -- this is
+    a genuinely different Graph API flow from a normal single-media post
+    (publish_instagram/publish_instagram_reel above), not an extension of
+    it, per Meta's own carousel documentation."""
+    token = settings.META_PAGE_ACCESS_TOKEN
+    ig_id = settings.IG_USER_ID
+    child_ids = []
+    for child in children:
+        params = {"is_carousel_item": "true", "access_token": token}
+        if child["type"] == "VIDEO":
+            params["media_type"] = "VIDEO"
+            params["video_url"] = child["url"]
+        else:
+            params["image_url"] = child["url"]
+        container = _post(f"{BASE}/{ig_id}/media", params)
+        cid = container.get("id")
+        if not cid:
+            raise RuntimeError(f"IG carousel child container failed: {container}")
+        if child["type"] == "VIDEO":
+            status = {}
+            for _ in range(30):
+                status = _get(f"{BASE}/{cid}", {"fields": "status_code,status", "access_token": token})
+                if status.get("status_code") == "FINISHED":
+                    break
+                if status.get("status_code") == "ERROR":
+                    raise RuntimeError(f"IG carousel video child failed: {status}")
+                time.sleep(10)
+            else:
+                raise RuntimeError(f"IG carousel video child never finished: {status}")
+        child_ids.append(cid)
+
+    parent = _post(f"{BASE}/{ig_id}/media", {
+        "media_type": "CAROUSEL",
+        "children": ",".join(child_ids),
+        "caption": caption,
+        "access_token": token,
+    })
+    pcid = parent.get("id")
+    if not pcid:
+        raise RuntimeError(f"IG carousel parent container failed: {parent}")
+
+    for _ in range(10):
+        status = _get(f"{BASE}/{pcid}", {"fields": "status_code", "access_token": token})
+        if status.get("status_code") == "FINISHED":
+            break
+        time.sleep(5)
+
+    return _post(f"{BASE}/{ig_id}/media_publish", {"creation_id": pcid, "access_token": token})
+
+
+# ---------- Facebook multi-photo post (Facebook's nearest equivalent) ----------
+def publish_facebook_carousel(image_urls, caption, place=None):
+    """Facebook's Graph API has no true 'carousel' concept for organic
+    Page posts, and its multi-photo flow (attached_media) only accepts
+    IMAGES, not video children -- unlike Instagram. So this always
+    receives plain image URLs: for any slide whose real content is a
+    video, the caller passes that slide's static branded poster image
+    instead (the same overlay graphic, just not the playing clip). This
+    is a genuine, disclosed platform gap, not a bug -- Facebook viewers
+    see a still frame for a video slide; Instagram viewers see the real
+    video. Each photo is uploaded unpublished first, then attached
+    together to one feed post."""
+    token = settings.META_PAGE_ACCESS_TOKEN
+    page_id = settings.FB_PAGE_ID
+    photo_ids = []
+    for url in image_urls:
+        res = _post(f"{BASE}/{page_id}/photos", {
+            "url": url, "published": "false", "access_token": token,
+        })
+        pid = res.get("id")
+        if not pid:
+            raise RuntimeError(f"FB unpublished photo upload failed: {res}")
+        photo_ids.append(pid)
+
+    attached = json.dumps([{"media_fbid": pid} for pid in photo_ids])
+    params = {
+        "message": caption,
+        "attached_media": attached,
+        "access_token": token,
+    }
+    loc = _find_location_id(place)
+    if loc:
+        params["place"] = loc
+    return _post(f"{BASE}/{page_id}/feed", params)
+
+
+def publish_carousel_all(children, caption, geo):
+    """children: list of {"type": "IMAGE"|"VIDEO", "url": <ig url>,
+    "fb_image_url": <always-a-static-image url for the FB fallback>}."""
+    place = None
+    if geo:
+        place = "India" if geo.get("is_india") else geo.get("place")
+    results = {}
+    try:
+        ig_children = [{"type": c["type"], "url": c["url"]} for c in children]
+        results["instagram"] = publish_instagram_carousel(ig_children, caption, place)
+        print("IG carousel posted:", results["instagram"])
+    except Exception as e:
+        results["instagram_error"] = str(e)
+        print("IG carousel error:", e)
+    try:
+        fb_images = [c["fb_image_url"] for c in children]
+        results["facebook"] = publish_facebook_carousel(fb_images, caption, place)
+        print("FB carousel posted:", results["facebook"])
+    except Exception as e:
+        results["facebook_error"] = str(e)
+        print("FB carousel error:", e)
+    return results
+
+
 def publish_all(image_url, caption, geo, video_url=None):
     place = None
     if geo:

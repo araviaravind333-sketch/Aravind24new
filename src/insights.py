@@ -83,11 +83,26 @@ def refresh():
         print(f"updated insights for {ig_id}: {data}")
 
     with open(CSV_PATH, "w", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=fieldnames)
+        # extrasaction="ignore" + restval="" -- a historical row picking up
+        # a stray column (an unescaped comma in a headline, say) used to
+        # raise ValueError here and take the whole daily job down with it.
+        # Insights are a nice-to-have refresh; one malformed row must never
+        # block every other post's numbers from updating.
+        w = csv.DictWriter(f, fieldnames=fieldnames, extrasaction="ignore", restval="")
         w.writeheader()
         w.writerows(rows)
     print(f"performance.csv refreshed ({updated}/{len(rows)} posts had insights)")
 
 
 if __name__ == "__main__":
-    refresh()
+    try:
+        refresh()
+    except Exception as e:
+        # This job updates analytics, nothing user-facing -- it must never
+        # take down the workflow with an unhandled traceback over a single
+        # bad row or a transient API hiccup that per-post handling didn't
+        # already absorb.
+        import traceback
+        traceback.print_exc()
+        print(f"insights refresh failed: {e}")
+        raise SystemExit(0)
