@@ -72,7 +72,19 @@ jobs:
 
       - name: Commit state (posted log + analytics, if anything changed)
         run: |
-          git add data/ public/dashboard/ || true
+          # Separate `git add` calls, not one combined pathspec list: git
+          # add fails ATOMICALLY if any single pathspec matches nothing
+          # (verified -- exit 128, nothing staged at all, not even the
+          # paths that did exist). public/dashboard/ only exists once
+          # photo-intel.yml's hourly job has run and pushed it at least
+          # once, so a single "git add data/ public/dashboard/" here
+          # silently dropped EVERY change under data/ -- including a real
+          # carousel review (dropped/replaced slides) -- whenever that
+          # dashboard folder happened not to exist yet. Caught via a live
+          # carousel test: the review appeared to work (no error), the
+          # workflow committed something, but the actual edit vanished.
+          git add data/ || true
+          git add public/dashboard/ || true
           git commit -m "auto: telegram post cycle $(date -u +%FT%TZ)" || echo "nothing to commit"
           for i in 1 2 3 4 5; do
             git push && break

@@ -81,7 +81,15 @@ jobs:
 
       - name: Commit state (posted log + analytics, if anything changed)
         run: |
-          git add data/ public/dashboard/ || true
+          # Separate `git add` calls -- see telegram-check.yml for why:
+          # a single "git add data/ public/dashboard/" fails atomically
+          # (nothing staged at all) whenever public/dashboard/ doesn't
+          # exist yet, silently dropping every pending change under
+          # data/. This is exactly the run that swallowed a live carousel
+          # review (drops/replacements processed correctly in memory,
+          # then discarded on commit) that this fix was found from.
+          git add data/ || true
+          git add public/dashboard/ || true
           git commit -m "auto: telegram urgent post cycle $(date -u +%FT%TZ)" || echo "nothing to commit"
           for i in 1 2 3 4 5; do
             git push && break

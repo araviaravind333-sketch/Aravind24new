@@ -69,7 +69,15 @@ jobs:
         run: |
           git config user.name "aravindnews24-bot"
           git config user.email "bot@users.noreply.github.com"
-          git add data/photo_log.jsonl public/dashboard/ || true
+          # Separate calls, not one combined pathspec -- git add fails
+          # atomically (nothing staged at all) if any single pathspec
+          # matches nothing. Currently safe either way since photo-retry
+          # creates public/dashboard/ earlier in this same job, but kept
+          # split for the same reason it's required in telegram-check.yml
+          # and telegram-urgent.yml -- one silent data-loss bug from this
+          # exact pattern is one too many.
+          git add data/photo_log.jsonl || true
+          git add public/dashboard/ || true
           git commit -m "auto: photo intel $(date -u +%FT%TZ)" || echo "nothing to commit"
           for i in 1 2 3 4 5; do
             git push && break
