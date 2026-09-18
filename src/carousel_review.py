@@ -53,10 +53,16 @@ def _one_line(text, max_chars=95):
 
 def due_for_preview(now_ist):
     """True once, on the first poll at/after the configured preview time,
-    for a day that hasn't been built yet."""
+    for a day that hasn't been built yet. CAROUSEL_FORCE_BUILD=true (set
+    by the workflow's force_build manual-dispatch input) bypasses the
+    time gate for testing/manual re-runs -- it still won't rebuild a day
+    that's already been sent, so it can't clobber a real preview
+    mid-review."""
     state = _load_state()
     if state and state.get("date") == now_ist.strftime("%Y-%m-%d"):
         return False
+    if os.environ.get("CAROUSEL_FORCE_BUILD", "").lower() == "true":
+        return True
     target = now_ist.replace(hour=settings.CAROUSEL_PREVIEW_HOUR_IST,
                               minute=settings.CAROUSEL_PREVIEW_MINUTE_IST,
                               second=0, microsecond=0)
@@ -287,8 +293,15 @@ def _apply_owner_media(slide, file_id, msg):
 
 
 def ready_to_publish(state, now_ist):
+    """CAROUSEL_FORCE_PUBLISH=true (the workflow's force_publish
+    manual-dispatch input) bypasses the grace-period wait -- this is a
+    REAL publish to Instagram + Facebook the moment it returns True, so
+    the workflow only ever sets that input on an explicit human action,
+    never automatically."""
     if state["status"] != "preview_sent":
         return False
+    if os.environ.get("CAROUSEL_FORCE_PUBLISH", "").lower() == "true":
+        return True
     sent_at = dt.datetime.strptime(state["preview_sent_at"], "%Y-%m-%d %H:%M")
     age_min = (now_ist - sent_at).total_seconds() / 60
     return age_min >= settings.CAROUSEL_REVIEW_GRACE_MINUTES

@@ -19,6 +19,15 @@ on:
   schedule:
     - cron: '0,15,30,45 15-17 * * *'
   workflow_dispatch:
+    inputs:
+      force_build:
+        description: 'Build + send today''s carousel to Telegram right now, ignoring the 8:30 PM gate (for testing/manual re-runs)'
+        type: boolean
+        default: false
+      force_publish:
+        description: 'Publish immediately, ignoring the review grace period. REAL POST to Instagram + Facebook -- only tick this once you have reviewed the Telegram preview.'
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -58,6 +67,7 @@ jobs:
           UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
           TELEGRAM_BOT_TOKEN:  ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID:    ${{ secrets.TELEGRAM_CHAT_ID }}
+          CAROUSEL_FORCE_BUILD: ${{ github.event.inputs.force_build }}
         run: python -m src.main carousel-cycle
 
       - name: Push rendered slides + carousel state (makes them public)
@@ -87,6 +97,7 @@ jobs:
           GH_PAGES_BASE:          ${{ vars.GH_PAGES_BASE }}
           TELEGRAM_BOT_TOKEN:     ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID:       ${{ secrets.TELEGRAM_CHAT_ID }}
+          CAROUSEL_FORCE_PUBLISH: ${{ github.event.inputs.force_publish }}
         run: python -m src.main carousel-publish
 
       - name: Commit publish state
