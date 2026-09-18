@@ -16,6 +16,7 @@ import json
 import time
 import urllib.request
 import urllib.parse
+import urllib.error
 
 from config import settings
 
@@ -23,16 +24,36 @@ V = settings.GRAPH_VERSION
 BASE = f"https://graph.facebook.com/{V}"
 
 
+def _raise_with_body(e, url):
+    """Bare urllib.error.HTTPError str()s down to 'HTTP Error 400: Bad
+    Request' -- the actual reason (Meta's Graph API always explains what
+    was wrong in the response body) was being thrown away everywhere this
+    was called, which is how a real publish failure surfaced as nothing
+    more useful than 'HTTP Error 400: Bad Request' with no way to
+    diagnose it. Re-raises with the body attached."""
+    try:
+        body = e.read().decode("utf-8", errors="replace")
+    except Exception:
+        body = "<no response body>"
+    raise RuntimeError(f"{e} for {url} -- {body}") from e
+
+
 def _post(url, params):
     data = urllib.parse.urlencode(params).encode()
-    with urllib.request.urlopen(urllib.request.Request(url, data=data), timeout=60) as r:
-        return json.load(r)
+    try:
+        with urllib.request.urlopen(urllib.request.Request(url, data=data), timeout=60) as r:
+            return json.load(r)
+    except urllib.error.HTTPError as e:
+        _raise_with_body(e, url)
 
 
 def _get(url, params):
     full = url + "?" + urllib.parse.urlencode(params)
-    with urllib.request.urlopen(full, timeout=60) as r:
-        return json.load(r)
+    try:
+        with urllib.request.urlopen(full, timeout=60) as r:
+            return json.load(r)
+    except urllib.error.HTTPError as e:
+        _raise_with_body(e, url)
 
 
 # ---------- location search (IG requires a location page id) ----------
