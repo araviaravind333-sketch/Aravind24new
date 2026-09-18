@@ -94,7 +94,7 @@
       "category": "INDIA NEWS",
       "message_id": 137,
       "media_kind": "image",
-      "media_source": "text_only",
+      "media_source": "owner",
       "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-18/slide_03.jpg",
       "video_path": null,
       "status": "pending",
@@ -122,7 +122,7 @@
       "category": "INDIA NEWS",
       "message_id": 138,
       "media_kind": "image",
-      "media_source": "text_only",
+      "media_source": "owner",
       "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-18/slide_04.jpg",
       "video_path": null,
       "status": "pending",
@@ -182,7 +182,7 @@
       "media_source": "text_only",
       "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-18/slide_06.jpg",
       "video_path": null,
-      "status": "pending",
+      "status": "rejected",
       "is_cover": false
     },
     {
