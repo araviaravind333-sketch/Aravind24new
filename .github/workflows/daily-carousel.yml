@@ -74,7 +74,23 @@ jobs:
         run: |
           git config user.name "aravindnews24-bot"
           git config user.email "bot@users.noreply.github.com"
-          git add public/carousel/ data/carousel_pending.json data/carousel_inbox/ data/telegram_offset.json || true
+          # Separate calls, not one combined pathspec -- verified live
+          # (public/carousel/2026-09-18/ ended up with only 2 of 9 slide
+          # images ever committed): git add fails ATOMICALLY if any
+          # single pathspec matches nothing. data/carousel_inbox/ only
+          # exists once a reviewer has replied with a photo/video at
+          # least once, so on the very first build of the day (before
+          # any reply) this line silently staged NOTHING AT ALL --
+          # not even the freshly rendered cover + slide images -- and
+          # the failure was invisible because carousel_pending.json is
+          # ALSO committed separately later in this same job (line ~105
+          # below), so the state looked completely correct while the
+          # actual image files were missing. That is exactly what made
+          # Instagram/Facebook's fetch of cover.jpg 404 on publish.
+          git add public/carousel/ || true
+          git add data/carousel_pending.json || true
+          git add data/carousel_inbox/ || true
+          git add data/telegram_offset.json || true
           git commit -m "auto: carousel cycle $(date -u +%FT%TZ)" || echo "nothing to commit"
           for i in 1 2 3 4 5; do
             git push && break

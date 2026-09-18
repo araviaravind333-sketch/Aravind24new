@@ -491,21 +491,38 @@ def finalize_and_publish(state, now_ist):
         return None
 
     children = []
+    missing = []
     public_root = os.path.join(_ROOT, "public")
     for s in kept:
         # rendered paths are already under public/carousel/<date>/... --
         # build the public URL relative to the repo's public/ root.
         image_rel = os.path.relpath(s["rendered_image_path"], public_root).replace("\\", "/")
         image_url = f"{image_base}/{image_rel}"
-        _wait_until_public(image_url)
+        if not _wait_until_public(image_url):
+            # Found live: a slide's file can go missing from GitHub
+            # entirely (a git-add step that silently failed to stage it)
+            # while carousel_pending.json still claims it's ready --
+            # sending that URL to Meta anyway just produces a confusing
+            # 400 from their fetcher. Fail this slide loudly and skip
+            # publishing rather than let that happen again.
+            missing.append(image_rel)
+            continue
 
         if s["media_kind"] == "video" and s.get("video_path"):
             video_rel = os.path.relpath(s["video_path"], public_root).replace("\\", "/")
             video_url = f"{image_base}/{video_rel}"
-            _wait_until_public(video_url, tries=15)
+            if not _wait_until_public(video_url, tries=15):
+                missing.append(video_rel)
+                continue
             children.append({"type": "VIDEO", "url": video_url, "fb_image_url": image_url})
         else:
             children.append({"type": "IMAGE", "url": image_url, "fb_image_url": image_url})
+
+    if missing:
+        telegram_bot.send_message(
+            "Carousel publish stopped -- these files never became public, "
+            f"so nothing was sent to Instagram/Facebook: {', '.join(missing)}")
+        return None
 
     results = publisher.publish_carousel_all(children, state["caption"], geo=None)
     any_succeeded = "instagram" in results or "facebook" in results
