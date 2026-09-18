@@ -57,6 +57,32 @@ def rendering_tests(tmp):
     check("overlay PNG actually has an alpha channel", im.mode == "RGBA")
 
 
+def cover_slide_tests(tmp):
+    print("\nCOVER SLIDE")
+    demo = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "assets", "demo.jpg")
+
+    p = carousel.render_cover_slide(
+        "BREAKING", "Have a look at what happened in the world in the last 24 hours",
+        "18 SEP", [], os.path.join(tmp, "cover_gradient.jpg"),
+        footer="For the latest news", handle="@aravindnews24")
+    check("cover with no real photos falls back to a gradient, still renders",
+          os.path.exists(p) and os.path.getsize(p) > 1000)
+
+    for n in (1, 2, 3, 4):
+        p = carousel.render_cover_slide(
+            "BREAKING", "Have a look at what happened in the world in the last 24 hours",
+            "18 SEP", [demo] * n, os.path.join(tmp, f"cover_{n}.jpg"),
+            footer="For the latest news", handle="@aravindnews24")
+        check(f"cover collage with {n} photo(s) renders", os.path.exists(p) and os.path.getsize(p) > 1000)
+
+    from PIL import Image
+    collage = carousel._build_collage([demo, demo, demo], 1080, 800)
+    check("3-photo collage has no unfilled (solid black) region",
+          collage.getpixel((1080 - 5, 800 - 5)) != (0, 0, 0))
+    check("collage returns None (not a blank canvas) when given no photos at all",
+          carousel._build_collage([], 1080, 800) is None)
+
+
 def accent_phrase_tests():
     print("\nACCENT PHRASE HEURISTIC")
     check("picks a proper-noun run over nothing",
@@ -71,14 +97,19 @@ def accent_phrase_tests():
           carousel._pick_accent_phrase("a quiet day for markets") == "")
 
 
-def _fake_slide(index, status="pending", kind="image"):
+def _fake_slide(index, status="pending", kind="image", is_cover=False):
     return {
         "index": index, "status": status, "media_kind": kind,
         "message_id": 1000 + index, "video_path": None,
         "rendered_image_path": f"public/carousel/2026-09-18/slide_{index:02d}.jpg",
         "category": "INDIA NEWS", "headline": f"Story {index}", "subhead": "sub",
-        "story": {"id": f"s{index}"}, "media_source": "auto",
+        "story": {"id": f"s{index}"}, "media_source": "auto", "is_cover": is_cover,
     }
+
+
+def _story(id_, title, category="INDIA NEWS", score=90):
+    return {"id": id_, "title": title, "summary": "", "score": score,
+            "category": category, "link": "", "hot_hit": True}
 
 
 def dedup_tests():
@@ -88,11 +119,7 @@ def dedup_tests():
     top_candidates() only dedupes by exact story id, not by real-world
     event."""
     print("\nSTORY SELECTION DEDUPLICATION")
-    from src import carousel_review as cr, news_engine as ne
-
-    def _story(id_, title):
-        return {"id": id_, "title": title, "summary": "", "score": 90,
-                "category": "INDIA NEWS", "link": "", "hot_hit": True}
+    from src import carousel_review as cr
 
     fake_pool = [
         _story("a1", "Mamata Banerjee faction seeks new name after Election Commission move"),
@@ -101,13 +128,7 @@ def dedup_tests():
         _story("b1", "Massive fire guts Chennai godown, three dead"),
         _story("c1", "Supreme Court reserves verdict in electoral bonds case"),
     ]
-
-    real_top_candidates = ne.top_candidates
-    ne.top_candidates = lambda n, exclude_ids=frozenset(): fake_pool[:n]
-    try:
-        picked = cr._select_distinct_stories(3)
-    finally:
-        ne.top_candidates = real_top_candidates
+    picked = cr._dedupe_by_event(fake_pool, 3)
 
     check("same-event duplicates collapse to a single slide",
           len(picked) == 3, f"got {len(picked)}: {[p['id'] for p in picked]}")
@@ -116,6 +137,39 @@ def dedup_tests():
           [p["id"] for p in picked])
     check("genuinely distinct stories are both kept",
           {"b1", "c1"} <= {p["id"] for p in picked})
+
+
+def selection_scope_tests():
+    """The carousel is a 'last 24 hours, world + India' roundup by
+    request -- it must NOT be limited to news_engine's India-only
+    daytime window like the regular single-story posts, but it must
+    always include at least one India story regardless of what the
+    world-news mix looks like on merit."""
+    print("\nSELECTION SCOPE (all categories + India guaranteed)")
+    from src import carousel_review as cr, news_engine as ne
+
+    all_world = {
+        "WORLD NEWS": [_story("w1", "Train derails in France, 44 injured", "WORLD NEWS", 95),
+                        _story("w2", "Fuel tanker explodes outside Baltimore", "WORLD NEWS", 92)],
+        "INDIA NEWS": [_story("i1", "Massive fire guts Chennai godown, three dead", "INDIA NEWS", 60)],
+        "BUSINESS NEWS": [], "SPORTS NEWS": [], "HUMAN INTEREST": [],
+    }
+    real_fetch = ne.fetch_candidates
+    ne.fetch_candidates = lambda category: list(all_world.get(category, []))
+    try:
+        picked = cr._select_distinct_stories(2)
+        check("world stories are eligible even though India's score is lower",
+              any(p["category"] == "WORLD NEWS" for p in picked), picked)
+        check("at least one India story is guaranteed even when it scores lowest",
+              any(p["category"] == "INDIA NEWS" for p in picked), picked)
+
+        # And the reverse: if India already made it on merit, nothing is
+        # force-swapped in on top of it.
+        picked2 = cr._select_distinct_stories(3)
+        check("does not duplicate India once it's already included on merit",
+              sum(1 for p in picked2 if p["category"] == "INDIA NEWS") == 1, picked2)
+    finally:
+        ne.fetch_candidates = real_fetch
 
 
 def review_state_tests():
@@ -133,6 +187,18 @@ def review_state_tests():
 
     all_rejected = {"slides": [_fake_slide(i, status="rejected") for i in range(1, 4)]}
     check("every slide rejected -> zero survivors", cr.surviving_slides(all_rejected) == [])
+
+    with_cover = {"slides": [_fake_slide(0, is_cover=True)] + [_fake_slide(i) for i in range(1, 4)]}
+    with_cover["slides"][2]["status"] = "rejected"  # drop story slide 2 of 3
+    kept_wc = cr.surviving_slides(with_cover)
+    check("cover slide is always first among survivors", kept_wc[0]["is_cover"] is True)
+    check("cover slide keeps final_index 0 (no number badge)", kept_wc[0]["final_index"] == 0)
+    check("story slides after the cover are still renumbered with no gaps",
+          [s["final_index"] for s in kept_wc[1:]] == [1, 2])
+
+    cover_reject_attempt = {"slides": [_fake_slide(0, is_cover=True, status="rejected")]}
+    check("a cover slide marked rejected some other way still survives (belt and braces)",
+          len(cr.surviving_slides(cover_reject_attempt)) == 1)
 
     now = dt.datetime(2026, 9, 18, 21, 30)
     fresh = {"status": "preview_sent", "preview_sent_at": "2026-09-18 21:00"}
@@ -170,21 +236,24 @@ def review_state_tests():
 def caption_tests():
     print("\nCAPTION BUILDING")
     from src import carousel_review as cr
-    slides = [_fake_slide(1), _fake_slide(2), _fake_slide(3)]
-    for i, s in enumerate(slides, start=1):
+    slides = [_fake_slide(0, is_cover=True)] + [_fake_slide(1), _fake_slide(2), _fake_slide(3)]
+    for i, s in enumerate(slides[1:], start=1):
         s["headline"] = f"Headline number {i}"
     now = dt.datetime(2026, 9, 18, 20, 30)
     caption = cr._build_carousel_caption(slides, now)
-    check("caption numbers every slide", all(f"{i:02d}." in caption for i in range(1, 4)))
-    check("caption includes every headline", all(s["headline"] in caption for s in slides))
+    check("caption numbers every story slide", all(f"{i:02d}." in caption for i in range(1, 4)))
+    check("caption includes every story headline", all(s["headline"] in caption for s in slides[1:]))
+    check("caption does not list a fake entry for the cover slide", "00." not in caption)
     check("caption ends with the brand handle", caption.strip().endswith("@aravindnews24"))
 
 
 if __name__ == "__main__":
     with tempfile.TemporaryDirectory() as tmp:
         rendering_tests(tmp)
+        cover_slide_tests(tmp)
     accent_phrase_tests()
     dedup_tests()
+    selection_scope_tests()
     review_state_tests()
     caption_tests()
     print(f"\n{'='*52}\n{len(PASS)} passed, {len(FAIL)} failed")

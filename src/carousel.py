@@ -220,3 +220,98 @@ def render_carousel_video_slide(clip_path, overlay_png_path, out_path, max_durat
     if result.returncode != 0 or not os.path.exists(out_path):
         raise RuntimeError(f"ffmpeg failed ({result.returncode}): {result.stderr[-2000:]}")
     return out_path
+
+
+# ============================================================
+# Cover slide -- the un-numbered first slide, matching the reference
+# post's own opening card ("BREAKING -- have a look at what happened in
+# the world in the last 24 hours").
+# ============================================================
+
+def _build_collage(paths, w, h):
+    """Fills a w x h area with up to 4 of the day's own real photos in a
+    grid, each cover-cropped to its cell -- these are photographs this
+    pipeline already legitimately has (rights-cleared discoveries or your
+    own submitted media), never a stock or celebrity photo pulled in just
+    for this slide. That is a deliberate limit, not an oversight: a
+    composite of well-known public figures (as the reference post uses)
+    is someone else's copyrighted photography arranged into a new image,
+    which does not make it any more reusable than using one of those
+    photos alone -- the same rule this whole project runs on. If none of
+    today's slides has a real photo, the caller falls back to a plain
+    gradient instead of inventing one."""
+    canvas = Image.new("RGB", (w, h))
+    n = min(len(paths), 4)
+    if n == 0:
+        return None
+    if n == 1:
+        canvas.paste(_load_photo(paths[0], w, h, False).convert("RGB"), (0, 0))
+        return canvas
+    if n == 2:
+        cw = w // 2
+        canvas.paste(_load_photo(paths[0], cw, h, False).convert("RGB"), (0, 0))
+        canvas.paste(_load_photo(paths[1], w - cw, h, False).convert("RGB"), (cw, 0))
+        return canvas
+    if n == 3:
+        # One large cell + two stacked -- a plain 2x2 grid with only 3
+        # photos leaves the 4th cell blank, so 3 gets its own layout
+        # rather than falling through the 4-cell one.
+        cw, ch = w // 2, h // 2
+        canvas.paste(_load_photo(paths[0], cw, h, False).convert("RGB"), (0, 0))
+        canvas.paste(_load_photo(paths[1], w - cw, ch, False).convert("RGB"), (cw, 0))
+        canvas.paste(_load_photo(paths[2], w - cw, h - ch, False).convert("RGB"), (cw, ch))
+        return canvas
+    cw, ch = w // 2, h // 2
+    cells = [(0, 0, cw, ch), (cw, 0, w - cw, ch), (0, ch, cw, h - ch), (cw, ch, w - cw, h - ch)]
+    for i in range(4):
+        x, y, cell_w, cell_h = cells[i]
+        canvas.paste(_load_photo(paths[i], cell_w, cell_h, False).convert("RGB"), (x, y))
+    return canvas
+
+
+def render_cover_slide(top_word, subheadline, date_label, collage_paths, out_path,
+                        footer, handle):
+    """The un-numbered opening slide: bold top word + wrapped subheadline
+    on a white band (matching the reference's own layout -- text block
+    up top, photo below, not text-over-photo like the numbered story
+    slides), a real-photo collage (or a gradient if none exist yet) below
+    it to give the viewer something worth swiping past, and a red date
+    tag. This is the one slide in the carousel meant to work as a
+    thumbnail on its own -- it is what a viewer sees before deciding to
+    swipe at all."""
+    canvas = Image.new("RGB", (SLIDE_W, SLIDE_H), WHITE)
+    draw = ImageDraw.Draw(canvas)
+    MARGIN = 70
+
+    f_top = _font(ANTON, 140)
+    draw.text((MARGIN, 70), top_word.upper(), font=f_top, fill=NEAR_BLACK)
+
+    f_sub = _font(ANTON, 52)
+    sub_lines = _wrap(draw, subheadline, f_sub, SLIDE_W - MARGIN * 2)[:3]
+    y = 70 + 150
+    for line in sub_lines:
+        draw.text((MARGIN, y), line, font=f_sub, fill=NEAR_BLACK)
+        y += 62
+
+    photo_top = y + 30
+    photo_h = SLIDE_H - photo_top
+    collage = _build_collage(collage_paths, SLIDE_W, photo_h)
+    if collage is None:
+        collage = _vertical_gradient(SLIDE_W, photo_h, _hex_to_rgb(ACCENT), _hex_to_rgb(NEAR_BLACK))
+    canvas.paste(collage, (0, photo_top))
+
+    f_date = _font(ANTON, 38)
+    dtw = draw.textlength(date_label, font=f_date)
+    pad = 20
+    draw.rounded_rectangle([MARGIN, SLIDE_H - 100, MARGIN + dtw + pad * 2, SLIDE_H - 32],
+                           radius=8, fill=BADGE_COLOR)
+    draw.text((MARGIN + pad, SLIDE_H - 90), date_label, font=f_date, fill=WHITE)
+
+    f_foot = _font(ARCHIVO, 28)
+    ftxt = f"{footer}  →  {handle}"
+    fw = draw.textlength(ftxt, font=f_foot)
+    draw.text((SLIDE_W - MARGIN - fw, SLIDE_H - 68), ftxt, font=f_foot, fill=WHITE)
+
+    os.makedirs(os.path.dirname(out_path), exist_ok=True)
+    canvas.save(out_path, "JPEG", quality=95, subsampling=0)
+    return out_path

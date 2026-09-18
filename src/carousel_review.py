@@ -23,7 +23,7 @@ import json
 import os
 
 from config import settings
-from src import ai_writer, carousel, incident_photos, news_engine, telegram_bot
+from src import ai_writer, carousel, incident_photos, news_engine, telegram_bot, video
 
 _ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATE_PATH = os.path.join(_ROOT, "data", "carousel_pending.json")
@@ -69,6 +69,41 @@ def due_for_preview(now_ist):
     return now_ist >= target
 
 
+def _all_category_candidates():
+    """Every RSS category, unfiltered by time of day -- deliberately NOT
+    news_engine.top_candidates()/allowed_categories(), which restrict to
+    India-only during India's waking hours for the regular single-story
+    posts. The carousel is a "last 24 hours, world + India" roundup by
+    request, closer to the reference competitor's own format, so it
+    always scans every category regardless of what hour it runs at."""
+    out = []
+    for category in settings.RSS_FEEDS:
+        out.extend(news_engine.fetch_candidates(category))
+    return sorted(out, key=lambda s: s["score"], reverse=True)
+
+
+def _dedupe_by_event(candidates, n):
+    """Same event-clustering used for a normal India-hours pull -- see
+    the module-level note on why this compares against every keyword set
+    SEEN so far, not just survivors (same_event() isn't transitive)."""
+    picked, seen_kw, seen_ids = [], [], set()
+    for story in candidates:
+        if len(picked) >= n:
+            break
+        if story["id"] in seen_ids:
+            continue
+        entities = incident_photos.extract_entities(story.get("title", ""), story.get("summary", ""))
+        kw = incident_photos.event_keywords(entities)
+        if any(incident_photos.same_event(kw, sk) for sk in seen_kw):
+            seen_kw.append(kw)
+            continue
+        seen_ids.add(story["id"])
+        story["geo"] = news_engine.detect_geo(story["title"], story["category"])
+        picked.append(story)
+        seen_kw.append(kw)
+    return picked
+
+
 def _select_distinct_stories(n):
     """news_engine.top_candidates() only dedupes by exact story id, which
     is fine for a single-story post (only the top one gets used) but not
@@ -76,30 +111,29 @@ def _select_distinct_stories(n):
     feature, 3 of 8 slides turned out to be the same real event (a TMC
     symbol/name dispute) from three different RSS sources, each of which
     independently cleared the score bar and got its own corroboration
-    bonus. Overfetches and skips anything that's the same real-world
-    event as one already picked, using the same keyword-overlap matcher
-    incident_photos.py uses for photo event-clustering -- reused here for
-    exactly the same underlying question: are these two headlines about
-    the same thing?
+    bonus. Overfetches and dedupes by real-world event -- see
+    _dedupe_by_event.
 
-    Compares each candidate against every keyword set SEEN so far
-    (picked or skipped), not just the picked ones -- same_event() isn't
-    transitive (two outlets can each phrase a story close enough to a
-    third's wording to match it, without matching each other directly),
-    so comparing only against survivors let a third near-duplicate slip
-    through in testing when the second had already been dropped."""
-    candidates = news_engine.top_candidates(n * 3)
-    picked, seen_kw = [], []
-    for story in candidates:
-        if len(picked) >= n:
-            break
-        entities = incident_photos.extract_entities(story.get("title", ""), story.get("summary", ""))
-        kw = incident_photos.event_keywords(entities)
-        if any(incident_photos.same_event(kw, sk) for sk in seen_kw):
-            seen_kw.append(kw)
-            continue
-        picked.append(story)
-        seen_kw.append(kw)
+    Also guarantees at least one INDIA NEWS story: pulling from every
+    category by score alone can produce an all-world (or, as originally
+    built, an accidentally all-India) mix -- the account's core audience
+    is India-based, so a pure world roundup with zero India content isn't
+    actually the ask. If nothing India-related survived on merit, the
+    single best India story bumps out the weakest pick rather than being
+    silently absent."""
+    candidates = _all_category_candidates()
+    picked = _dedupe_by_event(candidates, n)
+
+    if not any(s["category"] == "INDIA NEWS" for s in picked):
+        india = sorted(news_engine.fetch_candidates("INDIA NEWS"),
+                        key=lambda s: s["score"], reverse=True)
+        if india:
+            top_india = india[0]
+            top_india["geo"] = news_engine.detect_geo(top_india["title"], top_india["category"])
+            if picked:
+                picked[-1] = top_india   # weakest slot gives way, not a random one
+            else:
+                picked.append(top_india)
     return picked
 
 
@@ -111,6 +145,7 @@ def build_carousel(now_ist):
     stories = _select_distinct_stories(settings.CAROUSEL_SLIDE_COUNT)
 
     slides = []
+    collage_source_photos = []
     for i, story in enumerate(stories, start=1):
         written = ai_writer.rewrite(story)
         subhead = _one_line(story.get("summary") or written.get("caption", ""))
@@ -127,6 +162,7 @@ def build_carousel(now_ist):
                 dl_path = os.path.join(slides_dir, f"src_{i:02d}.jpg")
                 os.makedirs(slides_dir, exist_ok=True)
                 photo_path = _download(result["image_url"], dl_path)
+                collage_source_photos.append(dl_path)
         except Exception as e:
             print(f"carousel slide {i}: image discovery failed, going text-only: {e}")
 
@@ -148,7 +184,24 @@ def build_carousel(now_ist):
             "rendered_image_path": out_path,
             "video_path": None,
             "status": "pending",
+            "is_cover": False,
         })
+
+    cover_path = os.path.join(slides_dir, "cover.jpg")
+    carousel.render_cover_slide(
+        "BREAKING", "Have a look at what happened in the world in the last 24 hours",
+        now_ist.strftime("%d %b").upper(), collage_source_photos[:4], cover_path,
+        footer=settings.BRAND_FOOTER, handle=settings.BRAND_HANDLE,
+    )
+    cover_slide = {
+        "index": 0,
+        "story": None,
+        "headline": "", "subhead": "", "category": "",
+        "message_id": None, "media_kind": "image", "media_source": "auto",
+        "rendered_image_path": cover_path, "video_path": None,
+        "status": "pending", "is_cover": True,
+    }
+    slides.insert(0, cover_slide)
 
     caption = _build_carousel_caption(slides, now_ist)
     state = {
@@ -165,6 +218,8 @@ def build_carousel(now_ist):
 def _build_carousel_caption(slides, now_ist):
     lines = [f"What happened today — {now_ist.strftime('%d %b %Y')}", ""]
     for s in slides:
+        if s.get("is_cover"):
+            continue
         lines.append(f"{s['index']:02d}. {s['headline']}")
     lines += ["", "Swipe for the full roundup →", settings.BRAND_HANDLE]
     return "\n".join(lines)
@@ -197,6 +252,15 @@ def send_preview(state, now_ist):
     telegram_bot.send_message(summary)
 
     for slide in state["slides"]:
+        if slide.get("is_cover"):
+            # The cover always runs -- no drop button, since a carousel
+            # with a numbered story slide 03 but no opening slide would
+            # look broken, not curated. Still replaceable with your own
+            # image the same way as any other slide.
+            caption = "Cover slide (opens the carousel — reply with a photo to replace it)"
+            message_id = telegram_bot.send_photo_file(slide["rendered_image_path"], caption)
+            slide["message_id"] = message_id
+            continue
         caption = (
             f"{slide['index']:02d}/{n} — {slide['category']}\n{slide['headline']}\n\n"
             + ("(no real photo found — text-only unless you add one)"
@@ -258,6 +322,11 @@ def handle_callback(cb, state):
     if not slide:
         telegram_bot.answer_callback(cb["id"], "Slide not found.")
         return False
+    if slide.get("is_cover"):
+        # No drop button is ever sent for the cover, but refuse it here
+        # too rather than trust that alone.
+        telegram_bot.answer_callback(cb["id"], "The cover slide can't be dropped -- reply with a photo to replace it instead.")
+        return False
     slide["status"] = "rejected"
     _save_state(state)
     telegram_bot.answer_callback(cb["id"], f"Dropped slide {idx:02d}.")
@@ -290,6 +359,29 @@ def _apply_owner_media(slide, file_id, msg):
     ext = os.path.splitext(saved)[1].lower()
     is_video = ext in (".mp4", ".mov", ".m4v", ".avi", ".mkv", ".3gp", ".webm")
     slides_dir = os.path.dirname(slide["rendered_image_path"])
+
+    if slide.get("is_cover"):
+        # The cover is a graphic (title text + photo band), not a
+        # numbered story card -- it has no headline/category to render,
+        # and it's a still image by design, so a video reply becomes its
+        # single collage photo via a frame grab rather than a playable
+        # clip. Re-uses render_cover_slide with the same wording as build,
+        # single-photo collage.
+        photo_for_cover = saved
+        if is_video:
+            frame_path = os.path.join(slides_dir, "cover_frame.jpg")
+            video.extract_frame(saved, frame_path)
+            photo_for_cover = frame_path
+        carousel.render_cover_slide(
+            "BREAKING", "Have a look at what happened in the world in the last 24 hours",
+            dt.datetime.now().strftime("%d %b").upper(), [photo_for_cover],
+            slide["rendered_image_path"],
+            footer=settings.BRAND_FOOTER, handle=settings.BRAND_HANDLE)
+        slide["media_kind"] = "image"
+        slide["video_path"] = None
+        slide["media_source"] = "owner"
+        slide["status"] = "pending"
+        return
 
     if is_video:
         overlay_path = os.path.join(slides_dir, f"overlay_{slide['index']:02d}.png")
@@ -342,12 +434,18 @@ def ready_to_publish(state, now_ist):
 
 
 def surviving_slides(state):
-    """Kept in original order, renumbered 1..N after drops so the posted
-    carousel has no gaps in its badge numbers."""
-    kept = [s for s in state["slides"] if s["status"] != "rejected"]
-    for i, s in enumerate(kept, start=1):
+    """Kept in original order, cover always first and always kept
+    (never rejectable, see handle_callback), story slides renumbered
+    1..N after drops so the posted carousel has no gaps in its badge
+    numbers. The cover itself keeps final_index 0 -- it was never
+    rendered with a number badge, so it needs none."""
+    cover = [s for s in state["slides"] if s.get("is_cover")]
+    stories = [s for s in state["slides"] if not s.get("is_cover") and s["status"] != "rejected"]
+    for s in cover:
+        s["final_index"] = 0
+    for i, s in enumerate(stories, start=1):
         s["final_index"] = i
-    return kept
+    return cover + stories
 
 
 def _wait_until_public(url, tries=10, delay=5):
