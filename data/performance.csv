@@ -1,157 +1,157 @@
 timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id,ig_ok,fb_ok,reach,likes,comments,shares,saved,views,total_interactions
-2026-09-06 13:28,BREAKING NEWS,Every fourth Jan Dhan account inoperative; 5.72 crore have,68,False,full_bleed,,,False,False,,,,,,,
-2026-09-06 13:36,BREAKING NEWS,"Bank of Baroda Recruitment 2026: Apply For 1,100 Officer",68,False,full_bleed,18049581110657648,,True,False,0,0,0,0,0,,0
-2026-09-06 15:00,BREAKING NEWS,"Telangana CM Revanth and TCS announce ₹70,000 crore AI",68,False,full_bleed,18107445707586207,,True,False,0,0,0,0,0,,0
-2026-09-06 15:23,BREAKING NEWS,"Swatantra Bhardwaj remanded for 1 more day, faces fresh",74,True,full_bleed,18174700456447364,,True,False,0,0,0,0,,0,0
-2026-09-06 16:47,BREAKING NEWS,6 Rescued from Rubble in Delhi's Satya Niketan Collapse,78,False,full_bleed,18328199782263866,122114180739424069,True,True,0,0,0,0,0,,0
-2026-09-06 17:07,BREAKING NEWS,Rahul Gandhi plans 28 student interactions in campaign launch,74,True,full_bleed,17980309110083289,122114187231424069,True,True,52,1,0,0,,59,1
-2026-09-06 18:44,BREAKING NEWS,"Delhi Building Collapses: 6 Rescued, Many Still Trapped",80,True,split_banner,18105411898929988,122114201913424069,True,True,16,0,0,0,,19,0
-2026-09-06 18:56,BREAKING NEWS,"Delhi Building Collapse Kills 1, Leaves 8 Rescued",80,True,framed_card,18483564379107850,122114203509424069,True,True,,,,,,,
-2026-09-06 19:15,BREAKING NEWS,"Delhi Building Collapses: 1 Dead, 8 Rescued, Nearby Vacated",80,False,split_banner,18618051040045325,122114205171424069,True,True,,,,,,,
-2026-09-06 19:27,BREAKING NEWS,Massive Landslide In Sikkim Partially Blocks Teesta River Flow,65,False,framed_card,18020960336878639,122114206845424069,True,True,1,0,0,0,0,,0
-2026-09-06 20:06,INDIA NEWS,AP ICET candidates get today to revise web options,59,False,full_bleed,17955137760014521,122114212359424069,True,True,,,,,,,
-2026-09-06 22:36,BREAKING NEWS,"Iran warns US of faster, more painful response",82,True,split_banner,17963610996186943,122114229627424069,True,True,28,0,0,0,,43,0
-2026-09-06 22:42,WORLD NEWS,US envoys hold talks with Zelensky in Kyiv after,53,True,full_bleed,18139614370597964,122114230341424069,True,True,4,0,0,0,,5,0
-2026-09-06 22:55,WORLD NEWS,"170,000 Passengers Stranded as Volcanic Ash Hits Jakarta",44,True,split_banner,17899793658577269,122114231391424069,True,True,,,,,,,
-2026-09-06 23:07,WORLD NEWS,‘How can my press conference damage India-Bangladesh relations? I,42,True,framed_card,18379595587239484,122114232657424069,True,True,0,0,0,0,,5,0
-2026-09-07 02:10,BREAKING NEWS,India-France relations have reached new heights: PM Modi,63,False,full_bleed,18094005908359667,122114257965424069,True,True,0,0,0,0,0,,0
-2026-09-07 05:05,BREAKING NEWS,ABVP Demands MCD Chief Resign After Delhi Collapse,68,False,full_bleed,17894257440405980,122114275527424069,True,True,0,0,0,0,0,,0
-2026-09-07 08:11,INDIA NEWS,Pawan Goenka Clarifies ISRO's Future Amid Privatisation Concerns,53,True,split_banner,18133397017634228,122114293053424069,True,True,4,0,0,0,,4,0
-2026-09-07 09:59,INDIA NEWS,"India, China hold first Corps Commander meeting in Arunachal",50,True,framed_card,18112600358088624,122114305473424069,True,True,21,0,0,0,,41,0
-2026-09-07 11:07,BREAKING NEWS,MP Hooch Tragedy Claims 12 Lives As Police Arrest 14,68,False,full_bleed,18141975991587633,122114312463424069,True,True,0,0,0,0,0,,0
-2026-09-07 14:15,BREAKING NEWS,7 Dead In Delhi's Satya Niketan PG Collapse,98,False,alert_card,18343429108270103,122114337111424069,True,True,0,0,0,0,0,,0
-2026-09-07 17:11,BREAKING NEWS,5 Arrested As TVK Member Is Stabbed In Chennai,92,True,full_bleed,18122378492488770,122114368653424069,True,True,6,0,0,0,,18,0
-2026-09-07 20:10,BREAKING NEWS,"42,000 Waitlisted As PM Modi's BookMyShow Event Sells Out",81,False,full_bleed,18031418168849376,122114404473424069,True,True,0,0,0,0,0,,0
-2026-09-07 22:52,BREAKING NEWS,EU Warns Serbia as Thousands Honor 'Butcher of Bosnia',75,True,full_bleed,18111292289323117,122114428743424069,True,True,1,0,0,0,,2,0
-2026-09-07 23:10,BREAKING NEWS,Germany's AfD wins election but lacks 3 seats,65,True,full_bleed,18105076487223900,122114430909424069,True,True,6,0,0,0,,8,0
-2026-09-08 02:12,WORLD NEWS,Tanzania President Samia's reclusive husband Hafidh Ameir dies,50,False,text_card,17905584471473960,122114456505424069,True,True,0,0,0,0,0,,0
-2026-09-08 05:06,BREAKING NEWS,"Tejashwi demands ₹5,000 crore, blames system for Bihar floods",81,False,alert_card,17958015684197591,122114475945424069,True,True,0,0,0,0,0,,0
-2026-09-08 08:12,BREAKING NEWS,Delhi CM Orders Structural Audits Of Paying Guest Accommodations,80,True,full_bleed,18124074508855892,122114497431424069,True,True,0,0,0,0,,0,0
-2026-09-08 09:45,BREAKING NEWS,"PM Modi unlocks ₹35,000 crore mega projects in Vadodara",123,True,full_bleed,17966675039960130,122114507703424069,True,True,0,0,0,0,,0,0
-2026-09-08 11:07,BREAKING NEWS,Tamil Nadu CM Vijay Mimicry Row; DMK & CPI,84,False,full_bleed,18034829051651293,122114524233424069,True,True,0,0,0,0,0,,0
-2026-09-08 14:15,BREAKING NEWS,PM Modi Targets Rahul Gandhi At Gujarat Youth Rally,93,True,full_bleed,18013522352745369,122114546337424069,True,True,0,0,0,0,,0,0
-2026-09-08 17:10,BREAKING NEWS,Police catch fake PMO official at PM Modi's venue,78,True,full_bleed,18109530922874625,122114576091424069,True,True,3,0,0,0,,5,0
-2026-09-08 20:11,BREAKING NEWS,Supreme Court pulls up Odisha government over Dara Singh’s,90,False,full_bleed,18028900802904790,122114599449424069,True,True,0,0,0,0,0,,0
-2026-09-08 22:45,BREAKING NEWS,RBI Governor Sanjay Malhotra hails fintech's massive banking shift,93,True,full_bleed,18084222737304146,122114616231424069,True,True,0,0,0,0,,0,0
-2026-09-08 23:09,BREAKING NEWS,Five killed in Miami plane crash were in two,62,True,alert_card,17997490481809999,122114618019424069,True,True,0,0,0,0,,0,0
-2026-09-09 01:45,BREAKING NEWS,STF Catches Two Brothers Behind ₹500 Crore Badaun Scam,104,True,split_banner,17945249031295962,122114639709424069,True,True,,,,,,,
-2026-09-09 02:13,BREAKING NEWS,Israel Closes UK Consulate After Britain Alleges Ethnic Cleansing,65,False,split_banner,18065960177775631,122114641929424069,True,True,,,,,,,
-2026-09-09 05:05,BREAKING NEWS,"Kangana Ranaut Calls Himachal Officers 'Lazy', Sparking Big Row",66,False,split_banner,18225033133330679,122114657259424069,True,True,,,,,,,
-2026-09-09 08:11,BREAKING NEWS,Fatehpur Man Faces 8 Fraud Cases But Remains Free,68,True,split_banner,18364514791245814,122114679183424069,True,True,,,,,,,
-2026-09-09 09:46,BREAKING NEWS,Karnataka HC clears Lokayukta probe against Kharge family,90,True,split_banner,17956507122210228,122114690391424069,True,True,,,,,,,
-2026-09-09 10:04,BREAKING NEWS,Shiprocket jumps 6% as Q1 net losses narrow,86,False,text_card,18047675129603523,122114693061424069,True,True,,,,,,,
-2026-09-09 10:41,BREAKING NEWS,Kanohar Electricals IPO opens today: Should you apply?,86,False,text_card,18194955010382068,122114696163424069,True,True,,,,,,,
-2026-09-09 11:07,BREAKING NEWS,ED raids 18 locations linked to Karnataka minister over,74,False,split_banner,18422371192148065,122114699823424069,True,True,,,,,,,
-2026-09-09 11:11,BREAKING NEWS,"Prasol Chemicals IPO Day 1: Check Subscription Status, GMP,",86,False,text_card,18118536073730952,122114700195424069,True,True,,,,,,,
-2026-09-09 11:46,BREAKING NEWS,"Pranav Constructions IPO Day 2: Check Subscription Status, GMP",86,False,text_card,18063094277758805,122114704671424069,True,True,,,,,,,
-2026-09-09 12:15,BREAKING NEWS,Surplus liquidity: RBI mops up ₹6 lakh crore in,83,False,text_card,,17972790168130302,122114708223424069,True,True,,,,,,,
-2026-09-09 12:42,BREAKING NEWS,US slaps import ban on Canadian alcohol and motorbikes,87,False,split_banner,,17913839148451218,122114712021424069,True,True,,,,,,,
+2026-09-06 13:28,BREAKING NEWS,Every fourth Jan Dhan account inoperative; 5.72 crore have,68,False,full_bleed,,,False,False,,,,,,,,
+2026-09-06 13:36,BREAKING NEWS,"Bank of Baroda Recruitment 2026: Apply For 1,100 Officer",68,False,full_bleed,18049581110657648,,True,False,0,0,0,0,0,,0,
+2026-09-06 15:00,BREAKING NEWS,"Telangana CM Revanth and TCS announce ₹70,000 crore AI",68,False,full_bleed,18107445707586207,,True,False,0,0,0,0,0,,0,
+2026-09-06 15:23,BREAKING NEWS,"Swatantra Bhardwaj remanded for 1 more day, faces fresh",74,True,full_bleed,18174700456447364,,True,False,0,0,0,0,,0,0,
+2026-09-06 16:47,BREAKING NEWS,6 Rescued from Rubble in Delhi's Satya Niketan Collapse,78,False,full_bleed,18328199782263866,122114180739424069,True,True,0,0,0,0,0,,0,
+2026-09-06 17:07,BREAKING NEWS,Rahul Gandhi plans 28 student interactions in campaign launch,74,True,full_bleed,17980309110083289,122114187231424069,True,True,52,1,0,0,,59,1,
+2026-09-06 18:44,BREAKING NEWS,"Delhi Building Collapses: 6 Rescued, Many Still Trapped",80,True,split_banner,18105411898929988,122114201913424069,True,True,16,0,0,0,,19,0,
+2026-09-06 18:56,BREAKING NEWS,"Delhi Building Collapse Kills 1, Leaves 8 Rescued",80,True,framed_card,18483564379107850,122114203509424069,True,True,,,,,,,,
+2026-09-06 19:15,BREAKING NEWS,"Delhi Building Collapses: 1 Dead, 8 Rescued, Nearby Vacated",80,False,split_banner,18618051040045325,122114205171424069,True,True,,,,,,,,
+2026-09-06 19:27,BREAKING NEWS,Massive Landslide In Sikkim Partially Blocks Teesta River Flow,65,False,framed_card,18020960336878639,122114206845424069,True,True,1,0,0,0,0,,0,
+2026-09-06 20:06,INDIA NEWS,AP ICET candidates get today to revise web options,59,False,full_bleed,17955137760014521,122114212359424069,True,True,,,,,,,,
+2026-09-06 22:36,BREAKING NEWS,"Iran warns US of faster, more painful response",82,True,split_banner,17963610996186943,122114229627424069,True,True,28,0,0,0,,43,0,
+2026-09-06 22:42,WORLD NEWS,US envoys hold talks with Zelensky in Kyiv after,53,True,full_bleed,18139614370597964,122114230341424069,True,True,4,0,0,0,,5,0,
+2026-09-06 22:55,WORLD NEWS,"170,000 Passengers Stranded as Volcanic Ash Hits Jakarta",44,True,split_banner,17899793658577269,122114231391424069,True,True,,,,,,,,
+2026-09-06 23:07,WORLD NEWS,‘How can my press conference damage India-Bangladesh relations? I,42,True,framed_card,18379595587239484,122114232657424069,True,True,0,0,0,0,,5,0,
+2026-09-07 02:10,BREAKING NEWS,India-France relations have reached new heights: PM Modi,63,False,full_bleed,18094005908359667,122114257965424069,True,True,0,0,0,0,0,,0,
+2026-09-07 05:05,BREAKING NEWS,ABVP Demands MCD Chief Resign After Delhi Collapse,68,False,full_bleed,17894257440405980,122114275527424069,True,True,0,0,0,0,0,,0,
+2026-09-07 08:11,INDIA NEWS,Pawan Goenka Clarifies ISRO's Future Amid Privatisation Concerns,53,True,split_banner,18133397017634228,122114293053424069,True,True,4,0,0,0,,4,0,
+2026-09-07 09:59,INDIA NEWS,"India, China hold first Corps Commander meeting in Arunachal",50,True,framed_card,18112600358088624,122114305473424069,True,True,21,0,0,0,,41,0,
+2026-09-07 11:07,BREAKING NEWS,MP Hooch Tragedy Claims 12 Lives As Police Arrest 14,68,False,full_bleed,18141975991587633,122114312463424069,True,True,0,0,0,0,0,,0,
+2026-09-07 14:15,BREAKING NEWS,7 Dead In Delhi's Satya Niketan PG Collapse,98,False,alert_card,18343429108270103,122114337111424069,True,True,0,0,0,0,0,,0,
+2026-09-07 17:11,BREAKING NEWS,5 Arrested As TVK Member Is Stabbed In Chennai,92,True,full_bleed,18122378492488770,122114368653424069,True,True,6,0,0,0,,18,0,
+2026-09-07 20:10,BREAKING NEWS,"42,000 Waitlisted As PM Modi's BookMyShow Event Sells Out",81,False,full_bleed,18031418168849376,122114404473424069,True,True,0,0,0,0,0,,0,
+2026-09-07 22:52,BREAKING NEWS,EU Warns Serbia as Thousands Honor 'Butcher of Bosnia',75,True,full_bleed,18111292289323117,122114428743424069,True,True,1,0,0,0,,2,0,
+2026-09-07 23:10,BREAKING NEWS,Germany's AfD wins election but lacks 3 seats,65,True,full_bleed,18105076487223900,122114430909424069,True,True,6,0,0,0,,8,0,
+2026-09-08 02:12,WORLD NEWS,Tanzania President Samia's reclusive husband Hafidh Ameir dies,50,False,text_card,17905584471473960,122114456505424069,True,True,0,0,0,0,0,,0,
+2026-09-08 05:06,BREAKING NEWS,"Tejashwi demands ₹5,000 crore, blames system for Bihar floods",81,False,alert_card,17958015684197591,122114475945424069,True,True,0,0,0,0,0,,0,
+2026-09-08 08:12,BREAKING NEWS,Delhi CM Orders Structural Audits Of Paying Guest Accommodations,80,True,full_bleed,18124074508855892,122114497431424069,True,True,0,0,0,0,,0,0,
+2026-09-08 09:45,BREAKING NEWS,"PM Modi unlocks ₹35,000 crore mega projects in Vadodara",123,True,full_bleed,17966675039960130,122114507703424069,True,True,0,0,0,0,,0,0,
+2026-09-08 11:07,BREAKING NEWS,Tamil Nadu CM Vijay Mimicry Row; DMK & CPI,84,False,full_bleed,18034829051651293,122114524233424069,True,True,0,0,0,0,0,,0,
+2026-09-08 14:15,BREAKING NEWS,PM Modi Targets Rahul Gandhi At Gujarat Youth Rally,93,True,full_bleed,18013522352745369,122114546337424069,True,True,0,0,0,0,,0,0,
+2026-09-08 17:10,BREAKING NEWS,Police catch fake PMO official at PM Modi's venue,78,True,full_bleed,18109530922874625,122114576091424069,True,True,3,0,0,0,,5,0,
+2026-09-08 20:11,BREAKING NEWS,Supreme Court pulls up Odisha government over Dara Singh’s,90,False,full_bleed,18028900802904790,122114599449424069,True,True,0,0,0,0,0,,0,
+2026-09-08 22:45,BREAKING NEWS,RBI Governor Sanjay Malhotra hails fintech's massive banking shift,93,True,full_bleed,18084222737304146,122114616231424069,True,True,0,0,0,0,,0,0,
+2026-09-08 23:09,BREAKING NEWS,Five killed in Miami plane crash were in two,62,True,alert_card,17997490481809999,122114618019424069,True,True,0,0,0,0,,0,0,
+2026-09-09 01:45,BREAKING NEWS,STF Catches Two Brothers Behind ₹500 Crore Badaun Scam,104,True,split_banner,17945249031295962,122114639709424069,True,True,,,,,,,,
+2026-09-09 02:13,BREAKING NEWS,Israel Closes UK Consulate After Britain Alleges Ethnic Cleansing,65,False,split_banner,18065960177775631,122114641929424069,True,True,,,,,,,,
+2026-09-09 05:05,BREAKING NEWS,"Kangana Ranaut Calls Himachal Officers 'Lazy', Sparking Big Row",66,False,split_banner,18225033133330679,122114657259424069,True,True,,,,,,,,
+2026-09-09 08:11,BREAKING NEWS,Fatehpur Man Faces 8 Fraud Cases But Remains Free,68,True,split_banner,18364514791245814,122114679183424069,True,True,,,,,,,,
+2026-09-09 09:46,BREAKING NEWS,Karnataka HC clears Lokayukta probe against Kharge family,90,True,split_banner,17956507122210228,122114690391424069,True,True,,,,,,,,
+2026-09-09 10:04,BREAKING NEWS,Shiprocket jumps 6% as Q1 net losses narrow,86,False,text_card,18047675129603523,122114693061424069,True,True,,,,,,,,
+2026-09-09 10:41,BREAKING NEWS,Kanohar Electricals IPO opens today: Should you apply?,86,False,text_card,18194955010382068,122114696163424069,True,True,,,,,,,,
+2026-09-09 11:07,BREAKING NEWS,ED raids 18 locations linked to Karnataka minister over,74,False,split_banner,18422371192148065,122114699823424069,True,True,,,,,,,,
+2026-09-09 11:11,BREAKING NEWS,"Prasol Chemicals IPO Day 1: Check Subscription Status, GMP,",86,False,text_card,18118536073730952,122114700195424069,True,True,,,,,,,,
+2026-09-09 11:46,BREAKING NEWS,"Pranav Constructions IPO Day 2: Check Subscription Status, GMP",86,False,text_card,18063094277758805,122114704671424069,True,True,,,,,,,,
+2026-09-09 12:15,BREAKING NEWS,Surplus liquidity: RBI mops up ₹6 lakh crore in,83,False,text_card,,17972790168130302,122114708223424069,True,True,1,0,0,0,0,,0
+2026-09-09 12:42,BREAKING NEWS,US slaps import ban on Canadian alcohol and motorbikes,87,False,split_banner,,17913839148451218,122114712021424069,True,True,1,0,0,0,0,,0
 2026-09-09 13:16,BREAKING NEWS,Pranav IPO Final Day Sees 36.29% Expected Gain,86,True,split_banner,reel_full_bleed,18113827673281772,122114715381424069,True,True,,,,,,,
-2026-09-09 14:41,BREAKING NEWS,Hong Kong's first post-colonial leader Tung Chee-hwa dies,83,False,split_banner,,18185670172414408,122114728215424069,True,True,,,,,,,
-2026-09-09 15:41,BREAKING NEWS,Rahul Gandhi flags 'dangerous pattern' after Punjab suicide,77,False,split_banner,,18005813978995775,122114740107424069,True,True,,,,,,,
-2026-09-09 16:41,BREAKING NEWS,BJP Launches Nationwide Drive to Mark Modi's 25 Years,76,False,split_banner,,17972116172942633,122114748363424069,True,True,,,,,,,
+2026-09-09 14:41,BREAKING NEWS,Hong Kong's first post-colonial leader Tung Chee-hwa dies,83,False,split_banner,,18185670172414408,122114728215424069,True,True,2,0,0,0,0,,0
+2026-09-09 15:41,BREAKING NEWS,Rahul Gandhi flags 'dangerous pattern' after Punjab suicide,77,False,split_banner,,18005813978995775,122114740107424069,True,True,1,0,0,0,0,,0
+2026-09-09 16:41,BREAKING NEWS,BJP Launches Nationwide Drive to Mark Modi's 25 Years,76,False,split_banner,,17972116172942633,122114748363424069,True,True,1,0,0,0,0,,0
 2026-09-09 17:44,BREAKING NEWS,SC questions UP notice calling NEET student anti-government,75,False,split_banner,,,122114763441424069,False,True,,,,,,,
-2026-09-09 19:14,BREAKING NEWS,Pranav Constructions IPO GMP Today: 36.29% Expected Listing Gain,86,False,text_card,,18163326817478237,122114785821424069,True,True,,,,,,,
-2026-09-09 20:14,BREAKING NEWS,How dare you? CJI blasts Greater Noida magistrate over,78,False,split_banner,,18390526546206794,122114797275424069,True,True,,,,,,,
-2026-09-09 21:42,BREAKING NEWS,Justice Mahesh Chandra Tripathi sworn in as Bombay High,93,True,split_banner,reel_full_bleed,18096734585071219,122114809875424069,True,True,,,,,,,
-2026-09-09 23:44,BREAKING NEWS,"Tilak Varma scores 99, values trophy over century milestone",80,True,split_banner,reel_full_bleed,18427287382151872,122114827269424069,True,True,,,,,,,
-2026-09-10 01:08,BREAKING NEWS,Supreme Court asks if BCCI should come under Sports,90,False,split_banner,,18028983296889835,122114838093424069,True,True,,,,,,,
-2026-09-10 02:10,BREAKING NEWS,Judiciary not averse to criticism but uninformed assertion: Supreme,75,False,split_banner,,18068584841493353,122114844315424069,True,True,,,,,,,
-2026-09-10 03:40,BREAKING NEWS,SC Slams Yatharth Hospital Over Free EWS Care Orders,79,False,split_banner,,18624740506043547,122114852739424069,True,True,,,,,,,
-2026-09-10 05:09,BREAKING NEWS,NIA chargesheet exposes doctor module behind Red Fort plot,94,False,alert_card,,18197207077381313,122114861379424069,True,True,,,,,,,
-2026-09-10 06:14,BREAKING NEWS,Apple's first foldable phone named iPhone Duo leaks,80,False,split_banner,,18088742279446785,122114872467424069,True,True,,,,,,,
-2026-09-10 07:41,BREAKING NEWS,Slab Collapse In Gujarat Traps 10 Workers,94,False,alert_card,,18092973809378131,122114891367424069,True,True,,,,,,,
-2026-09-10 08:41,BREAKING NEWS,15 workers trapped as iron slab collapses in Gandhinagar,94,False,alert_card,,18018134645947079,122114897517424069,True,True,,,,,,,
-2026-09-10 09:41,BREAKING NEWS,"Gandhinagar crane collapse traps workers, 4 rescued so far",76,False,alert_card,,17853511665697178,122114907543424069,True,True,,,,,,,
-2026-09-10 11:10,INDIA NEWS,"Slab collapses at Gandhinagar site, trapping several workers",76,True,alert_card,,17860147185697067,122114917743424069,True,True,,,,,,,
-2026-09-10 11:12,INDIA NEWS,Kolkata shuts 919 hotels over safety after 9 deaths,64,True,alert_card,,18137390983719030,122114918583424069,True,True,,,,,,,
-2026-09-10 11:50,INDIA NEWS,"Trump May Misread BRICS As Anti-West, Ex-Diplomat Warns",65,True,text_card,,18089272724648612,122114921775424069,True,True,,,,,,,
-2026-09-10 12:18,WORLD NEWS,Philippines Ferry Fire Near Tourist Spot Leaves 86 Missing,79,True,alert_card,,18013982132745415,122114924427424069,True,True,,,,,,,
-2026-09-10 12:47,BREAKING NEWS,"Karnataka drags Centre to Supreme Court over ₹2,186 crore",93,True,split_banner,reel_full_bleed,17987472954049706,122114929065424069,True,True,,,,,,,
-2026-09-10 14:12,BUSINESS NEWS,"Apple unveils first foldable iPhone Duo for $1,999",74,True,full_bleed,reel_full_bleed,18064973762765475,122114943171424069,True,True,,,,,,,
-2026-09-10 14:46,INDIA NEWS,Gulzar Singh family alleges forced cremation by police,62,True,full_bleed,reel_full_bleed,18092747426133991,122114948157424069,True,True,,,,,,,
-2026-09-10 15:46,INDIA NEWS,Supreme Court pushes clear warning labels on packaged food,82,True,split_banner,reel_full_bleed,17983229070098965,122114955711424069,True,True,,,,,,,
-2026-09-10 16:45,BREAKING NEWS,"BRICS Summit: Chinese President Xi Jinping To Visit India,",93,True,split_banner,reel_full_bleed,18060181592526268,122114963331424069,True,True,,,,,,,
-2026-09-10 18:15,WORLD NEWS,Ferry fire near tourist hotspot Coron leaves 86 missing,79,True,full_bleed,reel_full_bleed,18391755103161108,122114972901424069,True,True,,,,,,,
-2026-09-10 19:40,INDIA NEWS,Supreme Court demands warning labels for high-sugar packaged foods,82,True,framed_card,reel_full_bleed,18014756717955781,122114983173424069,True,True,,,,,,,
-2026-09-10 20:41,SPORTS NEWS,Xabi Alonso takes blame as star subs save Chelsea,70,True,alert_card,,18141635887510882,122114989047424069,True,True,,,,,,,
-2026-09-10 21:45,HUMAN INTEREST,"At -20°C, Ladakh’s first female gynaecologist delivers babies door-to-door",56,True,full_bleed,reel_full_bleed,18088368212391263,122114998317424069,True,True,,,,,,,
-2026-09-10 23:47,WORLD NEWS,Sri Lanka Court Revokes Monk's Pardon Over Disappeared Cartoonist,75,True,split_banner,reel_full_bleed,18087592256417196,122115010191424069,True,True,,,,,,,
-2026-09-11 01:08,HUMAN INTEREST,Get an iPhone 18 photo using 5 AI prompts,74,True,split_banner,reel_full_bleed,18160332547484804,122115018585424069,True,True,,,,,,,
-2026-09-11 02:12,BREAKING NEWS,"Only 1,071 TN police stations store 18-month CCTV footage",91,True,split_banner,reel_full_bleed,18117694753987771,122115023919424069,True,True,,,,,,,
-2026-09-11 03:40,INDIA NEWS,SC calls officer Dilip Ghumare's outburst gross indiscipline,75,True,text_card,,17873476134576475,122115032373424069,True,True,,,,,,,
-2026-09-11 05:45,BUSINESS NEWS,SEBI and RBI launch Demat 2.0 for your investments,81,True,split_banner,reel_full_bleed,18143387326571753,122115041151424069,True,True,,,,,,,
-2026-09-11 06:43,WORLD NEWS,Bus Carrying Dozens Of Dutch Tourists Overturns In Alps,70,True,alert_card,,18184775791411613,122115046083424069,True,True,,,,,,,
-2026-09-11 07:45,INDIA NEWS,Putin meets Modi in Delhi amid fortress security,63,True,full_bleed,reel_full_bleed,18120931879901269,122115051351424069,True,True,,,,,,,
-2026-09-11 08:45,INDIA NEWS,8-year-old accident victim walks again after complex reconstructive surgery,64,True,alert_card,,18110792686841244,122115059259424069,True,True,,,,,,,
-2026-09-11 10:11,INDIA NEWS,Supreme Court orders immediate action against anti-social elements threatening,81,True,text_card,,18069325703495292,122115068121424069,True,True,,,,,,,
+2026-09-09 19:14,BREAKING NEWS,Pranav Constructions IPO GMP Today: 36.29% Expected Listing Gain,86,False,text_card,,18163326817478237,122114785821424069,True,True,2,0,0,0,0,,0
+2026-09-09 20:14,BREAKING NEWS,How dare you? CJI blasts Greater Noida magistrate over,78,False,split_banner,,18390526546206794,122114797275424069,True,True,2,0,0,0,0,,0
+2026-09-09 21:42,BREAKING NEWS,Justice Mahesh Chandra Tripathi sworn in as Bombay High,93,True,split_banner,reel_full_bleed,18096734585071219,122114809875424069,True,True,8,0,0,0,,15,0
+2026-09-09 23:44,BREAKING NEWS,"Tilak Varma scores 99, values trophy over century milestone",80,True,split_banner,reel_full_bleed,18427287382151872,122114827269424069,True,True,10,0,0,0,,16,0
+2026-09-10 01:08,BREAKING NEWS,Supreme Court asks if BCCI should come under Sports,90,False,split_banner,,18028983296889835,122114838093424069,True,True,1,0,0,0,0,,0
+2026-09-10 02:10,BREAKING NEWS,Judiciary not averse to criticism but uninformed assertion: Supreme,75,False,split_banner,,18068584841493353,122114844315424069,True,True,2,0,0,0,0,,0
+2026-09-10 03:40,BREAKING NEWS,SC Slams Yatharth Hospital Over Free EWS Care Orders,79,False,split_banner,,18624740506043547,122114852739424069,True,True,2,0,0,0,0,,0
+2026-09-10 05:09,BREAKING NEWS,NIA chargesheet exposes doctor module behind Red Fort plot,94,False,alert_card,,18197207077381313,122114861379424069,True,True,2,0,0,0,0,,0
+2026-09-10 06:14,BREAKING NEWS,Apple's first foldable phone named iPhone Duo leaks,80,False,split_banner,,18088742279446785,122114872467424069,True,True,3,0,0,0,0,,0
+2026-09-10 07:41,BREAKING NEWS,Slab Collapse In Gujarat Traps 10 Workers,94,False,alert_card,,18092973809378131,122114891367424069,True,True,2,0,0,0,0,,0
+2026-09-10 08:41,BREAKING NEWS,15 workers trapped as iron slab collapses in Gandhinagar,94,False,alert_card,,18018134645947079,122114897517424069,True,True,2,0,0,1,0,,1
+2026-09-10 09:41,BREAKING NEWS,"Gandhinagar crane collapse traps workers, 4 rescued so far",76,False,alert_card,,17853511665697178,122114907543424069,True,True,2,0,0,0,0,,0
+2026-09-10 11:10,INDIA NEWS,"Slab collapses at Gandhinagar site, trapping several workers",76,True,alert_card,,17860147185697067,122114917743424069,True,True,17,0,0,0,,19,0
+2026-09-10 11:12,INDIA NEWS,Kolkata shuts 919 hotels over safety after 9 deaths,64,True,alert_card,,18137390983719030,122114918583424069,True,True,4,0,0,0,,6,0
+2026-09-10 11:50,INDIA NEWS,"Trump May Misread BRICS As Anti-West, Ex-Diplomat Warns",65,True,text_card,,18089272724648612,122114921775424069,True,True,2,0,0,0,,4,0
+2026-09-10 12:18,WORLD NEWS,Philippines Ferry Fire Near Tourist Spot Leaves 86 Missing,79,True,alert_card,,18013982132745415,122114924427424069,True,True,3,0,0,0,,8,0
+2026-09-10 12:47,BREAKING NEWS,"Karnataka drags Centre to Supreme Court over ₹2,186 crore",93,True,split_banner,reel_full_bleed,17987472954049706,122114929065424069,True,True,5,0,0,0,,6,0
+2026-09-10 14:12,BUSINESS NEWS,"Apple unveils first foldable iPhone Duo for $1,999",74,True,full_bleed,reel_full_bleed,18064973762765475,122114943171424069,True,True,4,0,0,0,,3,0
+2026-09-10 14:46,INDIA NEWS,Gulzar Singh family alleges forced cremation by police,62,True,full_bleed,reel_full_bleed,18092747426133991,122114948157424069,True,True,2,0,0,0,,3,0
+2026-09-10 15:46,INDIA NEWS,Supreme Court pushes clear warning labels on packaged food,82,True,split_banner,reel_full_bleed,17983229070098965,122114955711424069,True,True,2,0,0,0,,2,0
+2026-09-10 16:45,BREAKING NEWS,"BRICS Summit: Chinese President Xi Jinping To Visit India,",93,True,split_banner,reel_full_bleed,18060181592526268,122114963331424069,True,True,4,0,0,0,,4,0
+2026-09-10 18:15,WORLD NEWS,Ferry fire near tourist hotspot Coron leaves 86 missing,79,True,full_bleed,reel_full_bleed,18391755103161108,122114972901424069,True,True,2,0,0,0,,4,0
+2026-09-10 19:40,INDIA NEWS,Supreme Court demands warning labels for high-sugar packaged foods,82,True,framed_card,reel_full_bleed,18014756717955781,122114983173424069,True,True,2,0,0,0,,3,0
+2026-09-10 20:41,SPORTS NEWS,Xabi Alonso takes blame as star subs save Chelsea,70,True,alert_card,,18141635887510882,122114989047424069,True,True,1,0,0,0,,1,0
+2026-09-10 21:45,HUMAN INTEREST,"At -20°C, Ladakh’s first female gynaecologist delivers babies door-to-door",56,True,full_bleed,reel_full_bleed,18088368212391263,122114998317424069,True,True,5,0,0,0,,13,0
+2026-09-10 23:47,WORLD NEWS,Sri Lanka Court Revokes Monk's Pardon Over Disappeared Cartoonist,75,True,split_banner,reel_full_bleed,18087592256417196,122115010191424069,True,True,2,0,0,0,,5,0
+2026-09-11 01:08,HUMAN INTEREST,Get an iPhone 18 photo using 5 AI prompts,74,True,split_banner,reel_full_bleed,18160332547484804,122115018585424069,True,True,3,0,0,0,,11,0
+2026-09-11 02:12,BREAKING NEWS,"Only 1,071 TN police stations store 18-month CCTV footage",91,True,split_banner,reel_full_bleed,18117694753987771,122115023919424069,True,True,11,0,0,1,,21,1
+2026-09-11 03:40,INDIA NEWS,SC calls officer Dilip Ghumare's outburst gross indiscipline,75,True,text_card,,17873476134576475,122115032373424069,True,True,8,0,0,0,,15,0
+2026-09-11 05:45,BUSINESS NEWS,SEBI and RBI launch Demat 2.0 for your investments,81,True,split_banner,reel_full_bleed,18143387326571753,122115041151424069,True,True,2,0,0,0,,4,0
+2026-09-11 06:43,WORLD NEWS,Bus Carrying Dozens Of Dutch Tourists Overturns In Alps,70,True,alert_card,,18184775791411613,122115046083424069,True,True,2,0,0,0,,3,0
+2026-09-11 07:45,INDIA NEWS,Putin meets Modi in Delhi amid fortress security,63,True,full_bleed,reel_full_bleed,18120931879901269,122115051351424069,True,True,8,0,0,0,,10,0
+2026-09-11 08:45,INDIA NEWS,8-year-old accident victim walks again after complex reconstructive surgery,64,True,alert_card,,18110792686841244,122115059259424069,True,True,3,1,0,0,,9,1
+2026-09-11 10:11,INDIA NEWS,Supreme Court orders immediate action against anti-social elements threatening,81,True,text_card,,18069325703495292,122115068121424069,True,True,2,0,0,0,,6,0
 2026-09-11 11:12,SPORTS NEWS,"Rybakina tops Gauff, sets up U.S. Open final with Sabalenka",80,True,full_bleed,reel_full_bleed,18102405935255683,122115076773424069,True,True,,,,,,,
-2026-09-11 12:14,INDIA NEWS,Supreme Court Recommends 15 Judges Across 4 High Courts,81,True,text_card,,18422630494151861,122115082797424069,True,True,,,,,,,
-2026-09-11 12:17,WORLD NEWS,Hong Kong Jails 3 Tiananmen Organisers For 7 Years,69,True,framed_card,reel_full_bleed,18559229080074370,122115083283424069,True,True,,,,,,,
-2026-09-11 12:49,INDIA NEWS,Police rescue Class 11 student kidnapped in SUV,64,True,alert_card,,18151661890471344,122115086427424069,True,True,,,,,,,
-2026-09-11 13:13,INDIA NEWS,HC sets 60-day deadline after JPSC chairman's arrest,63,True,split_banner,reel_full_bleed,17955079371246591,122115088869424069,True,True,,,,,,,
-2026-09-11 14:15,INDIA NEWS,46.88 lakh people hit as Bihar rivers breach danger mark,64,True,alert_card,,18485510359109235,122115095607424069,True,True,,,,,,,
-2026-09-11 15:13,INDIA NEWS,Devasish Sharma gets BJP ticket days after retiring,78,True,framed_card,reel_full_bleed,18136115311623849,122115102765424069,True,True,,,,,,,
-2026-09-11 15:46,INDIA NEWS,"1,857 medical seats lie vacant: Stalin seeks PM's intervention",69,True,full_bleed,reel_full_bleed,18129542173760160,122115107055424069,True,True,,,,,,,
+2026-09-11 12:14,INDIA NEWS,Supreme Court Recommends 15 Judges Across 4 High Courts,81,True,text_card,,18422630494151861,122115082797424069,True,True,2,0,0,0,,6,0
+2026-09-11 12:17,WORLD NEWS,Hong Kong Jails 3 Tiananmen Organisers For 7 Years,69,True,framed_card,reel_full_bleed,18559229080074370,122115083283424069,True,True,7,0,0,0,,13,0
+2026-09-11 12:49,INDIA NEWS,Police rescue Class 11 student kidnapped in SUV,64,True,alert_card,,18151661890471344,122115086427424069,True,True,6,0,0,0,,8,0
+2026-09-11 13:13,INDIA NEWS,HC sets 60-day deadline after JPSC chairman's arrest,63,True,split_banner,reel_full_bleed,17955079371246591,122115088869424069,True,True,3,0,0,0,,7,0
+2026-09-11 14:15,INDIA NEWS,46.88 lakh people hit as Bihar rivers breach danger mark,64,True,alert_card,,18485510359109235,122115095607424069,True,True,6,0,0,0,,9,0
+2026-09-11 15:13,INDIA NEWS,Devasish Sharma gets BJP ticket days after retiring,78,True,framed_card,reel_full_bleed,18136115311623849,122115102765424069,True,True,2,0,0,0,,4,0
+2026-09-11 15:46,INDIA NEWS,"1,857 medical seats lie vacant: Stalin seeks PM's intervention",69,True,full_bleed,reel_full_bleed,18129542173760160,122115107055424069,True,True,2,0,0,0,,2,0
 2026-09-11 16:45,INDIA NEWS,High Court questions why only Pune faces Ganeshotsav ban,62,True,split_banner,reel_full_bleed,17901051372578023,122115114693424069,True,True,,,,,,,
-2026-09-12 09:03,BREAKING NEWS,Modi Gifts Russian Translation Of Thirukkural To Putin,95,True,split_banner,,17991658722044443,122115226383424069,True,True,,,,,,,
-2026-09-12 12:15,INDIA NEWS,Punjab Police Secures First European Extradition From Moldova,80,False,text_card,,18104525024609492,122115254031424069,True,True,,,,,,,
-2026-09-12 12:43,INDIA NEWS,Harish Rawat Quits After ED Finds ₹32L With PA,68,False,text_card,,17915848689448531,122115257037424069,True,True,,,,,,,
-2026-09-12 13:10,INDIA NEWS,"Mumbai Police Bust ₹24 Crore Scam Using 2,898 SIMs",80,False,text_card,,17947189392288830,122115261423424069,True,True,,,,,,,
-2026-09-12 14:10,BREAKING NEWS,"1,071 out of 2,100 police stations in Tamil Nadu",91,False,text_card,,18026184623692210,122115274209424069,True,True,,,,,,,
-2026-09-12 15:44,INDIA NEWS,India resolves Iran-UAE deadlock to finalize BRICS statement,68,False,text_card,,18108500312332737,122115285237424069,True,True,,,,,,,
-2026-09-12 16:43,WORLD NEWS,Saudi shuts key oil pipeline after Iraq drone attack,65,False,text_card,,17975689445918481,122115292239424069,True,True,,,,,,,
-2026-09-12 17:10,INDIA NEWS,BRICS Demands Structural Update To UN Security Council,68,False,text_card,,17962217625190914,122115294861424069,True,True,,,,,,,
-2026-09-12 17:48,BUSINESS NEWS,HDFC Bank sends 2 candidates to RBI for CEO,75,False,text_card,,17906272497483834,122115301785424069,True,True,,,,,,,
-2026-09-12 21:01,BREAKING NEWS,Vijay runs to hug Ajith at UK's Silverstone,95,True,split_banner,,17880239406527091,122115330669424069,True,True,,,,,,,
-2026-09-13 13:11,INDIA NEWS,Iran's Pezeshkian speaks on Modi photo and Mojtaba rumours,87,True,framed_card,reel_full_bleed,17907780753520766,122115457407424069,True,True,,,,,,,
-2026-09-13 13:45,INDIA NEWS,India Rushes 130 Tonnes Relief to Flood-Hit Nepal,70,False,text_card,,18105832610264480,122115466113424069,True,True,,,,,,,
-2026-09-13 15:10,BREAKING NEWS,Kapil Sibal calls himself 'Dimagi Naxal' answering PM Modi,93,False,text_card,,17906040327517110,122115483231424069,True,True,,,,,,,
-2026-09-13 16:44,INDIA NEWS,Sibal Demands 10-Year Ban On Party-Switching Politicians,56,False,text_card,,17946348744293992,122115493953424069,True,True,,,,,,,
-2026-09-13 17:10,INDIA NEWS,3 Gunmen Fire 6 Rounds At Lyricist Gulab Sidhu,79,False,text_card,,18126448945774262,122115497193424069,True,True,,,,,,,
-2026-09-13 17:48,BUSINESS NEWS,Ravi Teja’s Irumudi Sees 66.7% Jump On Day 23,74,False,text_card,,18103787726049383,122115500925424069,True,True,,,,,,,
-2026-09-13 19:10,BREAKING NEWS,Amit Shah unveils PM Modi's nationwide birthday service drive,90,False,text_card,,18053351219800178,122115511251424069,True,True,,,,,,,
-2026-09-13 20:40,SPORTS NEWS,Ben Shelton Beats Tiafoe to Reach US Open Final,80,False,text_card,,18074127338440095,122115523083424069,True,True,,,,,,,
-2026-09-13 21:11,INDIA NEWS,"YSRCP accuses Narayana of ₹1,200 crore waste scam",68,False,text_card,,18074704094721626,122115529395424069,True,True,,,,,,,
-2026-09-14 10:22,BREAKING NEWS,600 Rescuers Search Java Sea for 129 Missing Passengers,95,True,split_banner,,18434706265179974,122115617157424069,True,True,,,,,,,
-2026-09-14 13:47,BREAKING NEWS,CBI files FIR in Disha Salian case after 6 years,90,False,text_card,,18323948572263054,122115638151424069,True,True,,,,,,,
-2026-09-14 15:41,BREAKING NEWS,Congress Slams PM Modi Over Border Stance With Xi,90,False,text_card,,18118727084514492,122115651771424069,True,True,,,,,,,
-2026-09-14 17:14,BREAKING NEWS,Goa nightclub fire accused surrender after Supreme Court cancels,110,False,text_card,,18127938130704765,122115663081424069,True,True,,,,,,,
-2026-09-14 18:16,BREAKING NEWS,Amit Shah launches special Sewa Sankalp for PM Modi,90,False,text_card,,18054029129795477,122115669789424069,True,True,,,,,,,
-2026-09-14 19:43,INDIA NEWS,"Row Over BRICS Gala Dinner: Congress Questions Vegetarian Menu,",80,False,text_card,,18071047001723579,122115689337424069,True,True,,,,,,,
-2026-09-14 19:48,INDIA NEWS,"JD(U) Backs UCC in Parliament, Rejects It in Bihar",63,False,text_card,,18125674726804450,122115691353424069,True,True,,,,,,,
-2026-09-14 20:47,INDIA NEWS,Cyrus Broacha blames male ego for Gurugram road rage,68,False,text_card,,18187504066408485,122115708249424069,True,True,,,,,,,
-2026-09-14 21:16,BUSINESS NEWS,Jet Airways fails to get ₹500 crore refund from Boeing,56,False,text_card,,18085465955697199,122115710613424069,True,True,,,,,,,
-2026-09-15 10:40,BREAKING NEWS,"Rape Convict Tarun Tejpal Surrenders, Moves Supreme Court Next",105,False,text_card,,17870307684600204,122115799827424069,True,True,,,,,,,
-2026-09-15 13:48,INDIA NEWS,Meta says will report child safety cases directly to,68,False,text_card,,18126065432508316,122115816243424069,True,True,,,,,,,
-2026-09-15 15:42,BREAKING NEWS,Goa Fire Accused Surrender As Supreme Court Cancels Bail,110,False,text_card,,18148745866526720,122115831705424069,True,True,,,,,,,
-2026-09-15 17:44,INDIA NEWS,3 Key Accused In Fatal Goa Fire Finally Surrender,80,False,text_card,,17907392385537883,122115847071424069,True,True,,,,,,,
-2026-09-15 18:17,SPORTS NEWS,Archer Dhiraj ends 17-year wait for World Championship gold,72,False,text_card,,18085703252687945,122115851211424069,True,True,,,,,,,
-2026-09-15 19:46,INDIA NEWS,"Drunk driving crash claims 16-year-old's life, injures 7",76,False,text_card,,18471891016112910,122115863925424069,True,True,,,,,,,
-2026-09-15 20:13,BREAKING NEWS,"RBI considers 0.4% fee on UPI above ₹2,000",96,False,text_card,,18147353140548820,122115867507424069,True,True,,,,,,,
-2026-09-15 21:41,BUSINESS NEWS,Market crash erases Rs 1 crore when you panic,80,False,text_card,,17994774081032577,122115875379424069,True,True,,,,,,,
-2026-09-15 21:45,INDIA NEWS,Kerala govt sanctions Rs 25.64 crore for flood-hit homes,76,False,text_card,,17877667428548196,122115876051424069,True,True,,,,,,,
-2026-09-16 10:44,INDIA NEWS,US bill threatens India with 100 percent tariffs over Russia trade,74,False,text_card,,18103387928214991,122115960837424069,True,True,,,,,,,
-2026-09-16 14:13,BREAKING NEWS,"In loss for Trump, U.S. Supreme Court won't let Postal Service restrict mail",90,False,text_card,,18025543304878697,122115984687424069,True,True,,,,,,,
-2026-09-16 15:42,WORLD NEWS,Indian and Nepali teams enter final stage of Chilime tunnel rescue.,82,False,text_card,,18020340341719206,122115996225424069,True,True,,,,,,,
-2026-09-16 17:44,BUSINESS NEWS,"Canara Bank gets RBI approval to redeem Rs 1,500 crore bonds.",85,False,text_card,,18337724143262311,122116011213424069,True,True,,,,,,,
-2026-09-16 18:18,INDIA NEWS,Chhattisgarh court hands death sentence to ten convicts over 2013 Maoist attack.,68,False,text_card,,18166543870464611,122116016685424069,True,True,,,,,,,
-2026-09-16 19:47,INDIA NEWS,Election Commission decides Trinamool Congress party symbol dispute before bypolls.,75,False,text_card,,17928187224410930,122116027335424069,True,True,,,,,,,
-2026-09-16 20:46,INDIA NEWS,Assam's biggest drug haul: Yaba tablets worth Rs 327 crore seized in Hailakandi,68,False,text_card,,18628297024037991,122116032843424069,True,True,,,,,,,
-2026-09-16 21:46,INDIA NEWS,PM Modi urges global tech leaders to invest in India's semiconductor sector,63,False,text_card,,18128146267805602,122116038285424069,True,True,,,,,,,
-2026-09-16 22:13,INDIA NEWS,Nine children drown in Telangana and Odisha during Ganesha idol immersion,79,False,text_card,,18102477722624605,122116041843424069,True,True,,,,,,,
-2026-09-17 10:45,INDIA NEWS,Tamil Nadu Leaders Send Warm Birthday Wishes To Prime Minister Modi,69,False,text_card,,18107065628225297,122116124991424069,True,True,,,,,,,
-2026-09-17 15:11,INDIA NEWS,Disha Salian's father sends ₹500 crore defamation notice to Aaditya Thackeray.,71,True,full_bleed,reel_full_bleed,18126523798781343,122116156893424069,True,True,,,,,,,
-2026-09-17 15:13,INDIA NEWS,"Vijay claims Rs 15,000 crore investment deals after BJP mocks UK trip.",56,False,text_card,,17910211836470586,122116157229424069,True,True,,,,,,,
-2026-09-17 17:49,INDIA NEWS,DMK pushes for non-Congress alliance ahead of 2029 elections,69,False,text_card,,18089420297664741,122116178649424069,True,True,,,,,,,
-2026-09-17 19:14,INDIA NEWS,"Anti-corruption team catches forest officer accepting ₹30,000 bribe in Karnataka.",74,False,text_card,,18115685896779916,122116193109424069,True,True,,,,,,,
-2026-09-17 19:47,BREAKING NEWS,"PM Modi Birthday Celebrations At Kartavya Path, 1.25 Lakh Diyas To Be Lit",91,False,text_card,,18105559310459947,122116196643424069,True,True,,,,,,,
-2026-09-17 21:46,INDIA NEWS,Maharashtra CM Fadnavis calls PM Modi a university on his birthday,61,False,text_card,,17866243953660563,122116209489424069,True,True,,,,,,,
-2026-09-17 22:12,INDIA NEWS,Kerala High Court orders Indian Railways to shift hazardous electrical lines.,63,False,text_card,,18074548469433595,122116212207424069,True,True,,,,,,,
-2026-09-17 22:43,BREAKING NEWS,Supreme Court questions Manipur government over 25 unnatural deaths in relief camps.,96,False,text_card,,17931628764142128,122116215675424069,True,True,,,,,,,
-2026-09-18 18:16,INDIA NEWS,Trinamool Congress backs Congress in Nandigram as its candidate withdraws nomination,68,False,text_card,,18405711583093678,122116377525424069,True,True,,,,,,,
-2026-09-18 19:45,INDIA NEWS,"Andhra Pradesh approves huge investment proposals worth 22,178 crore rupees",56,False,text_card,,18115240265515422,122116387773424069,True,True,,,,,,,
-2026-09-18 20:13,INDIA NEWS,Vazhakode quarry blast case: four sentenced to six and half years in jail,56,False,text_card,,18003642752791319,122116399383424069,True,True,,,,,,,
-2026-09-18 22:12,INDIA NEWS,"UAE President calls PM Modi on birthday, discusses West Asia and bilateral ties",63,False,text_card,,18069222476749001,122116417101424069,True,True,,,,,,,
-2026-09-18 22:43,INDIA NEWS,"SC sets aside Telangana court order, restores minor's custody to adoptive parents",68,False,text_card,,18367107196215265,122116421127424069,True,True,,,,,,,
-2026-09-18 23:09,BREAKING NEWS,Trinamool Symbol War Moves To Supreme Court As Mamata Banerjee Challenges Poll Body,105,False,text_card,,18140240779717116,122116424337424069,True,True,,,,,,,
+2026-09-12 09:03,BREAKING NEWS,Modi Gifts Russian Translation Of Thirukkural To Putin,95,True,split_banner,,17991658722044443,122115226383424069,True,True,17,1,0,0,,24,1
+2026-09-12 12:15,INDIA NEWS,Punjab Police Secures First European Extradition From Moldova,80,False,text_card,,18104525024609492,122115254031424069,True,True,2,0,0,0,0,,0
+2026-09-12 12:43,INDIA NEWS,Harish Rawat Quits After ED Finds ₹32L With PA,68,False,text_card,,17915848689448531,122115257037424069,True,True,2,0,0,0,0,,0
+2026-09-12 13:10,INDIA NEWS,"Mumbai Police Bust ₹24 Crore Scam Using 2,898 SIMs",80,False,text_card,,17947189392288830,122115261423424069,True,True,3,0,0,0,0,,0
+2026-09-12 14:10,BREAKING NEWS,"1,071 out of 2,100 police stations in Tamil Nadu",91,False,text_card,,18026184623692210,122115274209424069,True,True,4,0,0,0,0,,0
+2026-09-12 15:44,INDIA NEWS,India resolves Iran-UAE deadlock to finalize BRICS statement,68,False,text_card,,18108500312332737,122115285237424069,True,True,2,0,0,0,0,,0
+2026-09-12 16:43,WORLD NEWS,Saudi shuts key oil pipeline after Iraq drone attack,65,False,text_card,,17975689445918481,122115292239424069,True,True,3,0,0,0,0,,0
+2026-09-12 17:10,INDIA NEWS,BRICS Demands Structural Update To UN Security Council,68,False,text_card,,17962217625190914,122115294861424069,True,True,2,0,0,0,0,,0
+2026-09-12 17:48,BUSINESS NEWS,HDFC Bank sends 2 candidates to RBI for CEO,75,False,text_card,,17906272497483834,122115301785424069,True,True,2,0,0,0,0,,0
+2026-09-12 21:01,BREAKING NEWS,Vijay runs to hug Ajith at UK's Silverstone,95,True,split_banner,,17880239406527091,122115330669424069,True,True,71,5,0,0,,95,5
+2026-09-13 13:11,INDIA NEWS,Iran's Pezeshkian speaks on Modi photo and Mojtaba rumours,87,True,framed_card,reel_full_bleed,17907780753520766,122115457407424069,True,True,8,0,0,0,,16,0
+2026-09-13 13:45,INDIA NEWS,India Rushes 130 Tonnes Relief to Flood-Hit Nepal,70,False,text_card,,18105832610264480,122115466113424069,True,True,3,0,0,0,0,,0
+2026-09-13 15:10,BREAKING NEWS,Kapil Sibal calls himself 'Dimagi Naxal' answering PM Modi,93,False,text_card,,17906040327517110,122115483231424069,True,True,3,0,0,0,0,,0
+2026-09-13 16:44,INDIA NEWS,Sibal Demands 10-Year Ban On Party-Switching Politicians,56,False,text_card,,17946348744293992,122115493953424069,True,True,3,0,0,0,0,,0
+2026-09-13 17:10,INDIA NEWS,3 Gunmen Fire 6 Rounds At Lyricist Gulab Sidhu,79,False,text_card,,18126448945774262,122115497193424069,True,True,3,0,0,0,0,,0
+2026-09-13 17:48,BUSINESS NEWS,Ravi Teja’s Irumudi Sees 66.7% Jump On Day 23,74,False,text_card,,18103787726049383,122115500925424069,True,True,4,0,0,0,0,,0
+2026-09-13 19:10,BREAKING NEWS,Amit Shah unveils PM Modi's nationwide birthday service drive,90,False,text_card,,18053351219800178,122115511251424069,True,True,3,0,0,0,0,,0
+2026-09-13 20:40,SPORTS NEWS,Ben Shelton Beats Tiafoe to Reach US Open Final,80,False,text_card,,18074127338440095,122115523083424069,True,True,4,0,0,0,0,,0
+2026-09-13 21:11,INDIA NEWS,"YSRCP accuses Narayana of ₹1,200 crore waste scam",68,False,text_card,,18074704094721626,122115529395424069,True,True,4,0,0,0,0,,0
+2026-09-14 10:22,BREAKING NEWS,600 Rescuers Search Java Sea for 129 Missing Passengers,95,True,split_banner,,18434706265179974,122115617157424069,True,True,31,1,0,1,,48,2
+2026-09-14 13:47,BREAKING NEWS,CBI files FIR in Disha Salian case after 6 years,90,False,text_card,,18323948572263054,122115638151424069,True,True,5,0,0,0,0,,0
+2026-09-14 15:41,BREAKING NEWS,Congress Slams PM Modi Over Border Stance With Xi,90,False,text_card,,18118727084514492,122115651771424069,True,True,4,0,0,0,0,,0
+2026-09-14 17:14,BREAKING NEWS,Goa nightclub fire accused surrender after Supreme Court cancels,110,False,text_card,,18127938130704765,122115663081424069,True,True,4,0,0,0,0,,0
+2026-09-14 18:16,BREAKING NEWS,Amit Shah launches special Sewa Sankalp for PM Modi,90,False,text_card,,18054029129795477,122115669789424069,True,True,5,0,0,0,0,,0
+2026-09-14 19:43,INDIA NEWS,"Row Over BRICS Gala Dinner: Congress Questions Vegetarian Menu,",80,False,text_card,,18071047001723579,122115689337424069,True,True,5,0,0,0,0,,0
+2026-09-14 19:48,INDIA NEWS,"JD(U) Backs UCC in Parliament, Rejects It in Bihar",63,False,text_card,,18125674726804450,122115691353424069,True,True,4,0,0,0,0,,0
+2026-09-14 20:47,INDIA NEWS,Cyrus Broacha blames male ego for Gurugram road rage,68,False,text_card,,18187504066408485,122115708249424069,True,True,3,0,0,0,0,,0
+2026-09-14 21:16,BUSINESS NEWS,Jet Airways fails to get ₹500 crore refund from Boeing,56,False,text_card,,18085465955697199,122115710613424069,True,True,4,0,0,0,0,,0
+2026-09-15 10:40,BREAKING NEWS,"Rape Convict Tarun Tejpal Surrenders, Moves Supreme Court Next",105,False,text_card,,17870307684600204,122115799827424069,True,True,4,0,0,0,0,,0
+2026-09-15 13:48,INDIA NEWS,Meta says will report child safety cases directly to,68,False,text_card,,18126065432508316,122115816243424069,True,True,4,0,0,0,0,,0
+2026-09-15 15:42,BREAKING NEWS,Goa Fire Accused Surrender As Supreme Court Cancels Bail,110,False,text_card,,18148745866526720,122115831705424069,True,True,4,0,0,0,0,,0
+2026-09-15 17:44,INDIA NEWS,3 Key Accused In Fatal Goa Fire Finally Surrender,80,False,text_card,,17907392385537883,122115847071424069,True,True,3,0,0,0,0,,0
+2026-09-15 18:17,SPORTS NEWS,Archer Dhiraj ends 17-year wait for World Championship gold,72,False,text_card,,18085703252687945,122115851211424069,True,True,4,0,0,0,0,,0
+2026-09-15 19:46,INDIA NEWS,"Drunk driving crash claims 16-year-old's life, injures 7",76,False,text_card,,18471891016112910,122115863925424069,True,True,4,0,0,0,0,,0
+2026-09-15 20:13,BREAKING NEWS,"RBI considers 0.4% fee on UPI above ₹2,000",96,False,text_card,,18147353140548820,122115867507424069,True,True,5971,1,0,33,2,,36
+2026-09-15 21:41,BUSINESS NEWS,Market crash erases Rs 1 crore when you panic,80,False,text_card,,17994774081032577,122115875379424069,True,True,5,0,0,0,0,,0
+2026-09-15 21:45,INDIA NEWS,Kerala govt sanctions Rs 25.64 crore for flood-hit homes,76,False,text_card,,17877667428548196,122115876051424069,True,True,6,0,0,0,0,,0
+2026-09-16 10:44,INDIA NEWS,US bill threatens India with 100 percent tariffs over Russia trade,74,False,text_card,,18103387928214991,122115960837424069,True,True,4,0,0,0,0,,0
+2026-09-16 14:13,BREAKING NEWS,"In loss for Trump, U.S. Supreme Court won't let Postal Service restrict mail",90,False,text_card,,18025543304878697,122115984687424069,True,True,3,0,0,0,0,,0
+2026-09-16 15:42,WORLD NEWS,Indian and Nepali teams enter final stage of Chilime tunnel rescue.,82,False,text_card,,18020340341719206,122115996225424069,True,True,3,0,0,0,0,,0
+2026-09-16 17:44,BUSINESS NEWS,"Canara Bank gets RBI approval to redeem Rs 1,500 crore bonds.",85,False,text_card,,18337724143262311,122116011213424069,True,True,4,0,0,0,0,,0
+2026-09-16 18:18,INDIA NEWS,Chhattisgarh court hands death sentence to ten convicts over 2013 Maoist attack.,68,False,text_card,,18166543870464611,122116016685424069,True,True,3,0,0,0,0,,0
+2026-09-16 19:47,INDIA NEWS,Election Commission decides Trinamool Congress party symbol dispute before bypolls.,75,False,text_card,,17928187224410930,122116027335424069,True,True,4,0,0,0,0,,0
+2026-09-16 20:46,INDIA NEWS,Assam's biggest drug haul: Yaba tablets worth Rs 327 crore seized in Hailakandi,68,False,text_card,,18628297024037991,122116032843424069,True,True,5,0,0,0,0,,0
+2026-09-16 21:46,INDIA NEWS,PM Modi urges global tech leaders to invest in India's semiconductor sector,63,False,text_card,,18128146267805602,122116038285424069,True,True,4,0,0,0,0,,0
+2026-09-16 22:13,INDIA NEWS,Nine children drown in Telangana and Odisha during Ganesha idol immersion,79,False,text_card,,18102477722624605,122116041843424069,True,True,4,0,0,1,0,,1
+2026-09-17 10:45,INDIA NEWS,Tamil Nadu Leaders Send Warm Birthday Wishes To Prime Minister Modi,69,False,text_card,,18107065628225297,122116124991424069,True,True,5,0,0,0,0,,0
+2026-09-17 15:11,INDIA NEWS,Disha Salian's father sends ₹500 crore defamation notice to Aaditya Thackeray.,71,True,full_bleed,reel_full_bleed,18126523798781343,122116156893424069,True,True,55,0,0,0,,103,0
+2026-09-17 15:13,INDIA NEWS,"Vijay claims Rs 15,000 crore investment deals after BJP mocks UK trip.",56,False,text_card,,17910211836470586,122116157229424069,True,True,5,0,0,0,0,,0
+2026-09-17 17:49,INDIA NEWS,DMK pushes for non-Congress alliance ahead of 2029 elections,69,False,text_card,,18089420297664741,122116178649424069,True,True,4,0,0,0,0,,0
+2026-09-17 19:14,INDIA NEWS,"Anti-corruption team catches forest officer accepting ₹30,000 bribe in Karnataka.",74,False,text_card,,18115685896779916,122116193109424069,True,True,4,1,0,0,0,,1
+2026-09-17 19:47,BREAKING NEWS,"PM Modi Birthday Celebrations At Kartavya Path, 1.25 Lakh Diyas To Be Lit",91,False,text_card,,18105559310459947,122116196643424069,True,True,4,0,0,0,0,,0
+2026-09-17 21:46,INDIA NEWS,Maharashtra CM Fadnavis calls PM Modi a university on his birthday,61,False,text_card,,17866243953660563,122116209489424069,True,True,4,0,0,0,0,,0
+2026-09-17 22:12,INDIA NEWS,Kerala High Court orders Indian Railways to shift hazardous electrical lines.,63,False,text_card,,18074548469433595,122116212207424069,True,True,4,0,0,0,0,,0
+2026-09-17 22:43,BREAKING NEWS,Supreme Court questions Manipur government over 25 unnatural deaths in relief camps.,96,False,text_card,,17931628764142128,122116215675424069,True,True,4,0,0,0,0,,0
+2026-09-18 18:16,INDIA NEWS,Trinamool Congress backs Congress in Nandigram as its candidate withdraws nomination,68,False,text_card,,18405711583093678,122116377525424069,True,True,1,0,0,0,0,,0
+2026-09-18 19:45,INDIA NEWS,"Andhra Pradesh approves huge investment proposals worth 22,178 crore rupees",56,False,text_card,,18115240265515422,122116387773424069,True,True,3,0,0,0,0,,0
+2026-09-18 20:13,INDIA NEWS,Vazhakode quarry blast case: four sentenced to six and half years in jail,56,False,text_card,,18003642752791319,122116399383424069,True,True,3,0,0,0,0,,0
+2026-09-18 22:12,INDIA NEWS,"UAE President calls PM Modi on birthday, discusses West Asia and bilateral ties",63,False,text_card,,18069222476749001,122116417101424069,True,True,2,0,0,0,0,,0
+2026-09-18 22:43,INDIA NEWS,"SC sets aside Telangana court order, restores minor's custody to adoptive parents",68,False,text_card,,18367107196215265,122116421127424069,True,True,1,0,0,0,0,,0
+2026-09-18 23:09,BREAKING NEWS,Trinamool Symbol War Moves To Supreme Court As Mamata Banerjee Challenges Poll Body,105,False,text_card,,18140240779717116,122116424337424069,True,True,1,0,0,0,0,,0
