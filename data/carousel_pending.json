@@ -1,6 +1,6 @@
 {
   "date": "2026-09-18",
-  "status": "preview_sent",
+  "status": "published",
   "caption": "What happened today \u2014 18 Sep 2026\n\n01. Bengaluru GST officer gets arrested while taking eight lakh bribe\n02. Punjab cop shot dead on duty\n03. Massive crowds queue outside Apple stores across India to buy new iPhone\n04. Congress backs Mamata as ECI freezes name and symbol of Trinamool Congress\n05. Shapoorji Pallonji Group backs Tata Sons listing; Tata Group stocks fall\n06. Asian Games 2026 | Japan embracing\n07. Teen Gang-Raped, Killed By 4, Including 3 Minors In Delhi\n08. Moody's raises India fiscal 2027 GDP growth forecast\n\nSwipe for the full roundup \u2192\n@aravindnews24",
   "preview_sent_at": "2026-09-18 12:13",
   "slides": [
@@ -16,7 +16,8 @@
       "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-18/cover.jpg",
       "video_path": null,
       "status": "pending",
-      "is_cover": true
+      "is_cover": true,
+      "final_index": 0
     },
     {
       "index": 1,
@@ -44,7 +45,8 @@
       "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-18/slide_01.jpg",
       "video_path": null,
       "status": "pending",
-      "is_cover": false
+      "is_cover": false,
+      "final_index": 1
     },
     {
       "index": 2,
@@ -71,7 +73,8 @@
       "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-18/slide_02.jpg",
       "video_path": null,
       "status": "pending",
-      "is_cover": false
+      "is_cover": false,
+      "final_index": 2
     },
     {
       "index": 3,
@@ -98,7 +101,8 @@
       "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-18/slide_03.jpg",
       "video_path": null,
       "status": "pending",
-      "is_cover": false
+      "is_cover": false,
+      "final_index": 3
     },
     {
       "index": 4,
@@ -126,7 +130,8 @@
       "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-18/slide_04.jpg",
       "video_path": null,
       "status": "pending",
-      "is_cover": false
+      "is_cover": false,
+      "final_index": 4
     },
     {
       "index": 5,
@@ -154,7 +159,8 @@
       "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-18/slide_05.jpg",
       "video_path": null,
       "status": "pending",
-      "is_cover": false
+      "is_cover": false,
+      "final_index": 5
     },
     {
       "index": 6,
@@ -211,7 +217,8 @@
       "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-18/slide_07.jpg",
       "video_path": null,
       "status": "pending",
-      "is_cover": false
+      "is_cover": false,
+      "final_index": 6
     },
     {
       "index": 8,
@@ -239,7 +246,12 @@
       "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-18/slide_08.jpg",
       "video_path": null,
       "status": "pending",
-      "is_cover": false
+      "is_cover": false,
+      "final_index": 7
     }
-  ]
+  ],
+  "publish_results": {
+    "instagram_error": "HTTP Error 400: Bad Request",
+    "facebook_error": "HTTP Error 400: Bad Request"
+  }
 }
