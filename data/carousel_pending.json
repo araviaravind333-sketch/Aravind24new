@@ -1,6 +1,6 @@
 {
   "date": "2026-09-19",
-  "status": "preview_sent",
+  "status": "published",
   "caption": "What happened today \u2014 19 Sep 2026\n\n01. Former Supreme Court judge warns caste and religion still divide Indian society\n02. Delhi Election Commission issues notice to Arvind Kejriwal and his family.\n03. RBI removes minister and seven directors from local cooperative bank\n04. Asian Games 2026 LIVE: Japan's Emperor opens edition in colourful opening ceremony\n05. Police find toddler crying beside mother beaten to death with stone\n06. Killers beat mother to death and leave toddler on her body.\n07. Congress Cries Foul Over DU Polls Verdict, Alleges Rigging And Bogus Voting\n08. Star Racehorse Zuccaro Wins Prestigious President Of India Gold Cup\n\nSwipe for the full roundup \u2192\n@aravindnews24",
   "preview_sent_at": "2026-09-19 20:35",
   "slides": [
@@ -17,7 +17,8 @@
       "video_path": null,
       "status": "pending",
       "is_cover": true,
-      "raw_photo_path": null
+      "raw_photo_path": null,
+      "final_index": 0
     },
     {
       "index": 1,
@@ -45,7 +46,8 @@
       "video_path": null,
       "status": "pending",
       "is_cover": false,
-      "raw_photo_path": null
+      "raw_photo_path": null,
+      "final_index": 1
     },
     {
       "index": 2,
@@ -73,7 +75,8 @@
       "video_path": null,
       "status": "pending",
       "is_cover": false,
-      "raw_photo_path": null
+      "raw_photo_path": null,
+      "final_index": 2
     },
     {
       "index": 3,
@@ -101,7 +104,8 @@
       "video_path": null,
       "status": "pending",
       "is_cover": false,
-      "raw_photo_path": null
+      "raw_photo_path": null,
+      "final_index": 3
     },
     {
       "index": 4,
@@ -131,7 +135,8 @@
       "video_path": null,
       "status": "pending",
       "is_cover": false,
-      "raw_photo_path": null
+      "raw_photo_path": null,
+      "final_index": 4
     },
     {
       "index": 5,
@@ -160,7 +165,8 @@
       "video_path": null,
       "status": "pending",
       "is_cover": false,
-      "raw_photo_path": null
+      "raw_photo_path": null,
+      "final_index": 5
     },
     {
       "index": 6,
@@ -189,7 +195,8 @@
       "video_path": null,
       "status": "pending",
       "is_cover": false,
-      "raw_photo_path": null
+      "raw_photo_path": null,
+      "final_index": 6
     },
     {
       "index": 7,
@@ -218,7 +225,8 @@
       "video_path": null,
       "status": "pending",
       "is_cover": false,
-      "raw_photo_path": null
+      "raw_photo_path": null,
+      "final_index": 7
     },
     {
       "index": 8,
@@ -246,7 +254,17 @@
       "video_path": null,
       "status": "pending",
       "is_cover": false,
-      "raw_photo_path": null
+      "raw_photo_path": null,
+      "final_index": 8
     }
-  ]
+  ],
+  "publish_results": {
+    "instagram": {
+      "id": "18136585720716892"
+    },
+    "facebook": {
+      "id": "1306579065869792_122116620153424069",
+      "post_supports_client_mutation_id": true
+    }
+  }
 }
