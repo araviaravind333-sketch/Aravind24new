@@ -1,8 +1,8 @@
 {
-  "date": "2026-09-18",
-  "status": "published",
-  "caption": "What happened today \u2014 18 Sep 2026\n\n01. Season\u2019s first cyclone may form over Andaman Sea\n02. Punjab Cop Gets Shot Dead On Duty, CM Mann Announces Rs 1 Crore\n03. Thousands of Apple fans queue outside Bengaluru store as iPhone sales begin\n04. Asian Games 2026: Six sporting events that make their debut\u00a0in Aichi-Nagoya\n05. Congress supports Mamata Banerjee as Election Commission freezes her party symbol\n06. Shapoorji Pallonji Group Proposes \u20b925,000 Crore Stake Sale In Tata Sons\n07. UGC-NET results for re-exam of English, commerce, sociology announced\n08. Sikh truck driver survives after being stabbed 17 times in US\n\nSwipe for the full roundup \u2192\n@aravindnews24",
-  "preview_sent_at": "2026-09-18 12:55",
+  "date": "2026-09-19",
+  "status": "preview_sent",
+  "caption": "What happened today \u2014 19 Sep 2026\n\n01. Former Supreme Court judge warns caste and religion still divide Indian society\n02. Delhi Election Commission issues notice to Arvind Kejriwal and his family.\n03. RBI removes minister and seven directors from local cooperative bank\n04. Asian Games 2026 LIVE: Japan's Emperor opens edition in colourful opening ceremony\n05. Police find toddler crying beside mother beaten to death with stone\n06. Killers beat mother to death and leave toddler on her body.\n07. Congress Cries Foul Over DU Polls Verdict, Alleges Rigging And Bogus Voting\n08. Star Racehorse Zuccaro Wins Prestigious President Of India Gold Cup\n\nSwipe for the full roundup \u2192\n@aravindnews24",
+  "preview_sent_at": "2026-09-19 20:35",
   "slides": [
     {
       "index": 0,
@@ -10,78 +10,22 @@
       "headline": "",
       "subhead": "",
       "category": "",
-      "message_id": 155,
+      "message_id": 188,
       "media_kind": "image",
       "media_source": "auto",
-      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-18/cover.jpg",
+      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-19/cover.jpg",
       "video_path": null,
       "status": "pending",
       "is_cover": true,
-      "final_index": 0
+      "raw_photo_path": null
     },
     {
       "index": 1,
       "story": {
-        "id": "1768a494b8cd",
-        "title": "Season\u2019s first cyclone may form over Andaman Sea; heavy rain in Andhra Pradesh from September 19",
-        "summary": "IMD says the system is likely to move towards the south Odisha-north Andhra Pradesh coasts; weather models point to a landfall near Odisha around September 21",
-        "link": "https://www.thehindu.com/news/national/andhra-pradesh/seasons-first-cyclone-may-form-over-andaman-sea-heavy-rain-in-andhra-pradesh-from-september-19/article71476625.ece",
-        "category": "INDIA NEWS",
-        "score": 80,
-        "hot_hit": true,
-        "is_incident": true,
-        "geo": {
-          "is_india": true,
-          "place": "India"
-        }
-      },
-      "headline": "Season\u2019s first cyclone may form over Andaman Sea",
-      "subhead": "IMD says the system is likely to move towards the south Odisha-north Andhra Pradesh coasts; wea\u2026",
-      "category": "INDIA NEWS",
-      "message_id": 156,
-      "media_kind": "image",
-      "media_source": "owner",
-      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-18/slide_01.jpg",
-      "video_path": null,
-      "status": "pending",
-      "is_cover": false,
-      "final_index": 1
-    },
-    {
-      "index": 2,
-      "story": {
-        "id": "c03c30e28095",
-        "title": "Punjab cop shot dead on duty, CM Mann announces Rs 1 crore for family",
-        "summary": "   Punjab cop shot dead on duty, CM Mann announces Rs 1 crore for family",
-        "link": "https://www.indiatoday.in/india/story/punjab-govt-rs-1-crore-harjeet-singh-family-amritsar-cop-killed-2997409-2026-09-18?utm_source=rss",
-        "category": "INDIA NEWS",
-        "score": 76,
-        "hot_hit": true,
-        "is_incident": true,
-        "geo": {
-          "is_india": true,
-          "place": "India"
-        }
-      },
-      "headline": "Punjab Cop Gets Shot Dead On Duty, CM Mann Announces Rs 1 Crore",
-      "subhead": "Punjab cop shot dead on duty, CM Mann announces Rs 1 crore for family",
-      "category": "INDIA NEWS",
-      "message_id": 157,
-      "media_kind": "image",
-      "media_source": "owner",
-      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-18/slide_02.jpg",
-      "video_path": null,
-      "status": "pending",
-      "is_cover": false,
-      "final_index": 2
-    },
-    {
-      "index": 3,
-      "story": {
-        "id": "702de13b848e",
-        "title": "\"First Day Matters\": iPhone Lovers Queue Up Across India",
-        "summary": "Customers buying the new iPhone at Apple Store in Bengaluru",
-        "link": "https://www.ndtv.com/india-news/iphone-18-launch-apple-iphone-sale-first-day-matters-iphone-lovers-queue-up-across-india-12063097#publisher=newsstand",
+        "id": "0d3e712c7ef0",
+        "title": "Fraternity must be India\u2019s foremost goal, says former Supreme Court judge",
+        "summary": "Justice Lavu Nageswara Rao says caste and religion continue to divide society and stresses the need for social independence alongside political independence",
+        "link": "https://www.thehindu.com/news/national/andhra-pradesh/fraternity-must-be-indias-foremost-goal-says-former-supreme-court-judge/article71485034.ece",
         "category": "INDIA NEWS",
         "score": 75,
         "hot_hit": true,
@@ -91,111 +35,140 @@
           "place": "India"
         }
       },
-      "headline": "Thousands of Apple fans queue outside Bengaluru store as iPhone sales begin",
-      "subhead": "Customers buying the new iPhone at Apple Store in Bengaluru",
+      "headline": "Former Supreme Court judge warns caste and religion still divide Indian society",
+      "subhead": "Justice Lavu Nageswara Rao says caste and religion continue to divide society and stresses the\u2026",
       "category": "INDIA NEWS",
-      "message_id": 158,
+      "message_id": 189,
       "media_kind": "image",
-      "media_source": "owner",
-      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-18/slide_03.jpg",
+      "media_source": "text_only",
+      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-19/slide_01.jpg",
       "video_path": null,
       "status": "pending",
       "is_cover": false,
-      "final_index": 3
+      "raw_photo_path": null
     },
     {
-      "index": 4,
+      "index": 2,
       "story": {
-        "id": "1cbb7ab31a92",
-        "title": "Asian Games 2026: Six sporting events that make their debut\u00a0in Aichi-Nagoya",
-        "summary": "From teqball to virtual taekwondo, here\u2018s a look at the new sporting competitions, that promise a more dynamic and spectacular Asian Games",
-        "link": "https://www.thehindu.com/sport/asian-games-2026-sporting-events-marking-debut-aichi-nagoya/article71475858.ece",
-        "category": "SPORTS NEWS",
-        "score": 74,
-        "hot_hit": true,
-        "is_incident": false,
-        "corroborated": 3,
-        "geo": {
-          "is_india": false,
-          "place": null
-        }
-      },
-      "headline": "Asian Games 2026: Six sporting events that make their debut\u00a0in Aichi-Nagoya",
-      "subhead": "From teqball to virtual taekwondo, here\u2018s a look at the new sporting competitions, that promise\u2026",
-      "category": "SPORTS NEWS",
-      "message_id": 159,
-      "media_kind": "image",
-      "media_source": "text_only",
-      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-18/slide_04.jpg",
-      "video_path": null,
-      "status": "rejected",
-      "is_cover": false
-    },
-    {
-      "index": 5,
-      "story": {
-        "id": "546a9c0cfd13",
-        "title": "Congress backs Mamata as ECI freezes name and symbol of Trinamool Congress",
-        "summary": "LoP Rahul Gandhi and Congress general secretary K.C. Venugopal criticised the ECI for freezing the name and symbol of the Trinamool Congress which was set up by Mamata Banerjee 28 years ago",
-        "link": "https://www.thehindu.com/news/cities/kolkata/congress-backs-mamata-as-eci-freezes-name-and-symbol-of-trinamool-congress/article71479542.ece",
+        "id": "db37dc16b1bb",
+        "title": "Delhi Election Commission Serves Notice to Arvind Kejriwal and Family Under SIR Process",
+        "summary": "   Delhi Election Commission Serves Notice to Arvind Kejriwal and Family Under SIR Process",
+        "link": "https://www.indiatoday.in/india/video/delhi-election-commission-serves-notice-to-arvind-kejriwal-and-family-under-sir-process-ytvd-2998443-2026-09-19?utm_source=rss",
         "category": "INDIA NEWS",
-        "score": 68,
+        "score": 75,
         "hot_hit": true,
         "is_incident": false,
-        "corroborated": 3,
         "geo": {
           "is_india": true,
           "place": "India"
         }
       },
-      "headline": "Congress supports Mamata Banerjee as Election Commission freezes her party symbol",
-      "subhead": "LoP Rahul Gandhi and Congress general secretary K.C. Venugopal criticised the ECI for freezing\u2026",
+      "headline": "Delhi Election Commission issues notice to Arvind Kejriwal and his family.",
+      "subhead": "Delhi Election Commission Serves Notice to Arvind Kejriwal and Family Under SIR Process",
       "category": "INDIA NEWS",
-      "message_id": 160,
+      "message_id": 190,
       "media_kind": "image",
-      "media_source": "owner",
-      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-18/slide_05.jpg",
+      "media_source": "text_only",
+      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-19/slide_02.jpg",
       "video_path": null,
       "status": "pending",
       "is_cover": false,
-      "final_index": 4
+      "raw_photo_path": null
     },
     {
-      "index": 6,
+      "index": 3,
       "story": {
-        "id": "f0d35cdd8f9d",
-        "title": "Shapoorji Pallonji Group backs Tata Sons listing; Tata Group stocks fall",
-        "summary": "The SP Group proposed selling a portion of its stake in the holding company, Tata Sons, for at least \u20b925,000 crore",
-        "link": "https://www.thehindu.com/business/Industry/shapoorji-pallonji-group-backs-tata-sons-listing-tata-group-stocks-fall/article71479468.ece",
+        "id": "aa93cf753bb3",
+        "title": "RBI Orders Removal Of Maharashtra Minister, Seven Others From Latur DCC Bank",
+        "summary": "The central bank's order followed directions passed by the Aurangabad bench of the Bombay High Court in response to a petition filed by bank member Satish Sheshrao Jadhav.",
+        "link": "https://www.ndtvprofit.com/business/rbi-orders-removal-of-maharashtra-minister-seven-others-from-latur-dcc-bank-12069250#publisher=newsstand",
         "category": "BUSINESS NEWS",
-        "score": 68,
+        "score": 75,
         "hot_hit": true,
         "is_incident": false,
-        "corroborated": 3,
         "geo": {
           "is_india": false,
           "place": null
         }
       },
-      "headline": "Shapoorji Pallonji Group Proposes \u20b925,000 Crore Stake Sale In Tata Sons",
-      "subhead": "The SP Group proposed selling a portion of its stake in the holding company, Tata Sons, for at\u2026",
+      "headline": "RBI removes minister and seven directors from local cooperative bank",
+      "subhead": "The central bank's order followed directions passed by the Aurangabad bench of the Bombay High\u2026",
       "category": "BUSINESS NEWS",
-      "message_id": 161,
+      "message_id": 191,
       "media_kind": "image",
       "media_source": "text_only",
-      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-18/slide_06.jpg",
+      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-19/slide_03.jpg",
       "video_path": null,
       "status": "pending",
       "is_cover": false,
-      "final_index": 5
+      "raw_photo_path": null
     },
     {
-      "index": 7,
+      "index": 4,
       "story": {
-        "id": "99eaae0187db",
-        "title": "UGC-NET results for re-exam of English, commerce, sociology announced",
-        "summary": "The NTA had last month announced the retest for the three papers of the UGC-NET June 2026 examination following complaints about several errors in these papers",
-        "link": "https://www.thehindu.com/news/national/ugc-net-results-for-re-exam-of-english-commerce-sociology-announced/article71479671.ece",
+        "id": "4ad686d3c1c1",
+        "title": "Asian Games 2026 LIVE: Japan's Emperor opens edition in colourful opening ceremony",
+        "summary": "The 20th Asian Games opened in Nagoya after a troubled build-up; Manu Bhaker and Pawan Sehrawat lead the Indian contingent",
+        "link": "https://www.thehindu.com/sport/asian-games-2026-live-updates-opening-ceremony-september-19-2026/article71483852.ece",
+        "category": "SPORTS NEWS",
+        "score": 74,
+        "hot_hit": true,
+        "is_incident": false,
+        "corroborated": 5,
+        "geo": {
+          "is_india": false,
+          "place": "Tokyo",
+          "country": "japan"
+        }
+      },
+      "headline": "Asian Games 2026 LIVE: Japan's Emperor opens edition in colourful opening ceremony",
+      "subhead": "The 20th Asian Games opened in Nagoya after a troubled build-up; Manu Bhaker and Pawan Sehrawat\u2026",
+      "category": "SPORTS NEWS",
+      "message_id": 192,
+      "media_kind": "image",
+      "media_source": "text_only",
+      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-19/slide_04.jpg",
+      "video_path": null,
+      "status": "pending",
+      "is_cover": false,
+      "raw_photo_path": null
+    },
+    {
+      "index": 5,
+      "story": {
+        "id": "732f400410bc",
+        "title": "Woman beaten to death with stone, her 2-year-old daughter found weeping on her body",
+        "summary": "   Woman beaten to death with stone, her 2-year-old daughter found weeping on her body",
+        "link": "https://www.indiatoday.in/india/karnataka/story/karnataka-woman-found-murdered-in-raichur-field-husband-and-alleged-lover-detained-2998489-2026-09-19?utm_source=rss",
+        "category": "INDIA NEWS",
+        "score": 71,
+        "hot_hit": true,
+        "is_incident": false,
+        "corroborated": 2,
+        "geo": {
+          "is_india": true,
+          "place": "India"
+        }
+      },
+      "headline": "Police find toddler crying beside mother beaten to death with stone",
+      "subhead": "Woman beaten to death with stone, her 2-year-old daughter found weeping on her body",
+      "category": "INDIA NEWS",
+      "message_id": 193,
+      "media_kind": "image",
+      "media_source": "text_only",
+      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-19/slide_05.jpg",
+      "video_path": null,
+      "status": "pending",
+      "is_cover": false,
+      "raw_photo_path": null
+    },
+    {
+      "index": 6,
+      "story": {
+        "id": "78dc001c4ac7",
+        "title": "Mother Beaten To Death With Stone, Killers Place Crying Toddler On Her Body",
+        "summary": "Sneha's daughter was seen helplessly clutching onto her mother",
+        "link": "https://www.ndtv.com/india-news/mother-beaten-to-death-with-stone-killers-place-crying-toddler-on-her-body-12068956#publisher=newsstand",
         "category": "INDIA NEWS",
         "score": 65,
         "hot_hit": true,
@@ -206,54 +179,74 @@
           "place": "India"
         }
       },
-      "headline": "UGC-NET results for re-exam of English, commerce, sociology announced",
-      "subhead": "The NTA had last month announced the retest for the three papers of the UGC-NET June 2026 exami\u2026",
+      "headline": "Killers beat mother to death and leave toddler on her body.",
+      "subhead": "Sneha's daughter was seen helplessly clutching onto her mother",
       "category": "INDIA NEWS",
-      "message_id": 162,
+      "message_id": 194,
       "media_kind": "image",
       "media_source": "text_only",
-      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-18/slide_07.jpg",
+      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-19/slide_06.jpg",
       "video_path": null,
       "status": "pending",
       "is_cover": false,
-      "final_index": 6
+      "raw_photo_path": null
+    },
+    {
+      "index": 7,
+      "story": {
+        "id": "6fafb9a069e6",
+        "title": "Congress Cries Foul Over DU Polls Verdict, Alleges Rigging And Bogus Voting",
+        "summary": "   Congress Cries Foul Over DU Polls Verdict, Alleges Rigging And Bogus Voting",
+        "link": "https://www.indiatoday.in/india/video/congress-cries-foul-over-du-polls-verdict-alleges-rigging-and-bogus-voting-ytvd-2998449-2026-09-19?utm_source=rss",
+        "category": "INDIA NEWS",
+        "score": 65,
+        "hot_hit": true,
+        "is_incident": false,
+        "corroborated": 2,
+        "geo": {
+          "is_india": true,
+          "place": "India"
+        }
+      },
+      "headline": "Congress Cries Foul Over DU Polls Verdict, Alleges Rigging And Bogus Voting",
+      "subhead": "Congress Cries Foul Over DU Polls Verdict, Alleges Rigging And Bogus Voting",
+      "category": "INDIA NEWS",
+      "message_id": 195,
+      "media_kind": "image",
+      "media_source": "text_only",
+      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-19/slide_07.jpg",
+      "video_path": null,
+      "status": "pending",
+      "is_cover": false,
+      "raw_photo_path": null
     },
     {
       "index": 8,
       "story": {
-        "id": "e36a0402ba3b",
-        "title": "Sikh truck driver stabbed 17 times in U.S., recovering",
-        "summary": "According to the Cowboy State Daily, Mr. Singh had to be airlifted to Wyoming Medical Centre in Casper, where he is recovering from the injuries suffered in the attack.",
-        "link": "https://www.thehindu.com/news/international/sikh-truck-driver-stabbed-17-times-in-us-recovering/article71479715.ece",
-        "category": "WORLD NEWS",
-        "score": 64,
+        "id": "fbab1fa061ba",
+        "title": "Zuccaro bags the President Of India Gold Cup",
+        "summary": "",
+        "link": "https://www.thehindu.com/sport/races/zuccaro-bags-the-president-of-india-gold-cup/article71484808.ece",
+        "category": "SPORTS NEWS",
+        "score": 63,
         "hot_hit": true,
-        "is_incident": true,
+        "is_incident": false,
         "geo": {
           "is_india": false,
           "place": null
         }
       },
-      "headline": "Sikh truck driver survives after being stabbed 17 times in US",
-      "subhead": "According to the Cowboy State Daily, Mr. Singh had to be airlifted to Wyoming Medical Centre in\u2026",
-      "category": "WORLD NEWS",
-      "message_id": 163,
+      "headline": "Star Racehorse Zuccaro Wins Prestigious President Of India Gold Cup",
+      "subhead": "Star racehorse Zuccaro secured a memorable victory by winning the President Of India Gold Cup.\u2026",
+      "category": "SPORTS NEWS",
+      "message_id": 196,
       "media_kind": "image",
-      "media_source": "owner",
-      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-18/slide_08.jpg",
+      "media_source": "text_only",
+      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-19/slide_08.jpg",
       "video_path": null,
       "status": "pending",
       "is_cover": false,
-      "final_index": 7
+      "raw_photo_path": null
     }
-  ],
-  "publish_results": {
-    "instagram": {
-      "id": "18105626882052786"
-    },
-    "facebook": {
-      "id": "1306579065869792_122116358577424069",
-      "post_supports_client_mutation_id": true
-    }
-  }
+  ]
 }
