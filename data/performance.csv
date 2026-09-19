@@ -99,7 +99,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-09-12 12:43,INDIA NEWS,Harish Rawat Quits After ED Finds ₹32L With PA,68,False,text_card,,17915848689448531,122115257037424069,True,True,2,0,0,0,0,,0
 2026-09-12 13:10,INDIA NEWS,"Mumbai Police Bust ₹24 Crore Scam Using 2,898 SIMs",80,False,text_card,,17947189392288830,122115261423424069,True,True,3,0,0,0,0,,0
 2026-09-12 14:10,BREAKING NEWS,"1,071 out of 2,100 police stations in Tamil Nadu",91,False,text_card,,18026184623692210,122115274209424069,True,True,4,0,0,0,0,,0
-2026-09-12 15:44,INDIA NEWS,India resolves Iran-UAE deadlock to finalize BRICS statement,68,False,text_card,,18108500312332737,122115285237424069,True,True,2,0,0,0,0,,0
+2026-09-12 15:44,INDIA NEWS,India resolves Iran-UAE deadlock to finalize BRICS statement,68,False,text_card,,18108500312332737,122115285237424069,True,True,3,0,0,0,0,,0
 2026-09-12 16:43,WORLD NEWS,Saudi shuts key oil pipeline after Iraq drone attack,65,False,text_card,,17975689445918481,122115292239424069,True,True,3,0,0,0,0,,0
 2026-09-12 17:10,INDIA NEWS,BRICS Demands Structural Update To UN Security Council,68,False,text_card,,17962217625190914,122115294861424069,True,True,2,0,0,0,0,,0
 2026-09-12 17:48,BUSINESS NEWS,HDFC Bank sends 2 candidates to RBI for CEO,75,False,text_card,,17906272497483834,122115301785424069,True,True,2,0,0,0,0,,0
@@ -149,13 +149,13 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-09-17 21:46,INDIA NEWS,Maharashtra CM Fadnavis calls PM Modi a university on his birthday,61,False,text_card,,17866243953660563,122116209489424069,True,True,4,0,0,0,0,,0
 2026-09-17 22:12,INDIA NEWS,Kerala High Court orders Indian Railways to shift hazardous electrical lines.,63,False,text_card,,18074548469433595,122116212207424069,True,True,4,0,0,0,0,,0
 2026-09-17 22:43,BREAKING NEWS,Supreme Court questions Manipur government over 25 unnatural deaths in relief camps.,96,False,text_card,,17931628764142128,122116215675424069,True,True,4,0,0,0,0,,0
-2026-09-18 18:16,INDIA NEWS,Trinamool Congress backs Congress in Nandigram as its candidate withdraws nomination,68,False,text_card,,18405711583093678,122116377525424069,True,True,1,0,0,0,0,,0
-2026-09-18 19:45,INDIA NEWS,"Andhra Pradesh approves huge investment proposals worth 22,178 crore rupees",56,False,text_card,,18115240265515422,122116387773424069,True,True,3,0,0,0,0,,0
+2026-09-18 18:16,INDIA NEWS,Trinamool Congress backs Congress in Nandigram as its candidate withdraws nomination,68,False,text_card,,18405711583093678,122116377525424069,True,True,2,0,0,0,0,,0
+2026-09-18 19:45,INDIA NEWS,"Andhra Pradesh approves huge investment proposals worth 22,178 crore rupees",56,False,text_card,,18115240265515422,122116387773424069,True,True,4,0,0,0,0,,0
 2026-09-18 20:13,INDIA NEWS,Vazhakode quarry blast case: four sentenced to six and half years in jail,56,False,text_card,,18003642752791319,122116399383424069,True,True,3,0,0,0,0,,0
 2026-09-18 22:12,INDIA NEWS,"UAE President calls PM Modi on birthday, discusses West Asia and bilateral ties",63,False,text_card,,18069222476749001,122116417101424069,True,True,2,0,0,0,0,,0
-2026-09-18 22:43,INDIA NEWS,"SC sets aside Telangana court order, restores minor's custody to adoptive parents",68,False,text_card,,18367107196215265,122116421127424069,True,True,1,0,0,0,0,,0
-2026-09-18 23:09,BREAKING NEWS,Trinamool Symbol War Moves To Supreme Court As Mamata Banerjee Challenges Poll Body,105,False,text_card,,18140240779717116,122116424337424069,True,True,1,0,0,0,0,,0
-2026-09-19 18:40,INDIA NEWS,Hangman was ready in jail,74,True,full_bleed,reel_full_bleed,17988777540024249,122116594371424069,True,True,,,,,,,
-2026-09-19 20:10,BREAKING NEWS,ABVP Wins Delhi University Student Union Elections Amid High Court Rally Ban,102,False,text_card,,17909484264499324,122116605801424069,True,True,,,,,,,
-2026-09-19 22:43,INDIA NEWS,BJP student wing ABVP wins key Delhi University union elections,65,False,text_card,,18460588867190134,122116626285424069,True,True,,,,,,,
-2026-09-19 23:46,INDIA NEWS,Home Minister Amit Shah cancels key Karnataka events due to food poisoning,73,False,text_card,,18337146217279231,122116634001424069,True,True,,,,,,,
+2026-09-18 22:43,INDIA NEWS,"SC sets aside Telangana court order, restores minor's custody to adoptive parents",68,False,text_card,,18367107196215265,122116421127424069,True,True,3,0,0,0,0,,0
+2026-09-18 23:09,BREAKING NEWS,Trinamool Symbol War Moves To Supreme Court As Mamata Banerjee Challenges Poll Body,105,False,text_card,,18140240779717116,122116424337424069,True,True,3,0,0,0,0,,0
+2026-09-19 18:40,INDIA NEWS,Hangman was ready in jail,74,True,full_bleed,reel_full_bleed,17988777540024249,122116594371424069,True,True,3,0,0,0,,3,0
+2026-09-19 20:10,BREAKING NEWS,ABVP Wins Delhi University Student Union Elections Amid High Court Rally Ban,102,False,text_card,,17909484264499324,122116605801424069,True,True,2,0,0,0,0,,0
+2026-09-19 22:43,INDIA NEWS,BJP student wing ABVP wins key Delhi University union elections,65,False,text_card,,18460588867190134,122116626285424069,True,True,2,0,0,0,0,,0
+2026-09-19 23:46,INDIA NEWS,Home Minister Amit Shah cancels key Karnataka events due to food poisoning,73,False,text_card,,18337146217279231,122116634001424069,True,True,0,0,0,0,0,,0
