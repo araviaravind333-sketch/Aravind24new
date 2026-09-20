@@ -31,7 +31,9 @@ PROFILE_PATH = os.path.join(_ROOT, "data", "voice", "owner_voice.pt")
 # Chosen by the owner from listening tests (variant "D"): more expressive
 # than the defaults (0.5) and cfg_weight 0 so the pacing is not tied to the
 # reference clip -- the default settings sounded robotic.
-GEN_KWARGS = dict(exaggeration=0.7, cfg_weight=0.0, temperature=0.8)
+# cfg_weight is 0.02, not 0: an exact 0 crashes chatterbox 0.1.7 in t3.inference
+# (batch-size mismatch), so the "free pacing" variant is approximated with ~0.
+GEN_KWARGS = dict(exaggeration=0.7, cfg_weight=0.02, temperature=0.8)
 
 
 def profile_exists(path=None):

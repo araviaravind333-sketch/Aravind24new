@@ -373,4 +373,4 @@ REEL_REQUIRE_OWNER_VOICE = True
 # Narrate the Reel in a clone of the owner's voice (data/voice/owner_voice.pt,
 # made once from a recorded sample -- see src/voice_clone.py). Used when the
 # profile exists; per-slide voice notes still take priority over it.
-REEL_CLONE_ENABLED = True
+REEL_CLONE_ENABLED = False   # paused until the owner has approved a generation setting (see GEN_KWARGS)
