@@ -20,13 +20,15 @@ each slide to its position, matching the reference competitor post.
 import os
 import re
 
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageEnhance
 
 from src.template import (
     W, H, ANTON, ARCHIVO, ACCENT, WHITE, NEAR_BLACK, MUTED,
     CATEGORY_COLORS, _font, _load_photo, _bottom_gradient,
     _headline_lines, _wrap, _vertical_gradient, _mix, _hex_to_rgb,
 )
+
+from src.subject_photos import cover_crop_biased
 
 _ACCENT_NOISE = {"The", "This", "That", "After", "Over", "With", "From",
                  "Amid", "For", "And", "Says", "Will"}
@@ -149,29 +151,161 @@ def _draw_slide_foreground(canvas, category, headline, subhead, index, total, fo
     return canvas
 
 
+PHOTO_H = 790          # photo band height on a photo slide (of 1350)
+_PANEL = _hex_to_rgb(NEAR_BLACK)
+
+
+def _fit_headline(draw, headline, max_w, max_lines, start, minimum, avail_h):
+    """Largest headline size whose wrapped lines fit BOTH the width and
+    the vertical space actually available -- _headline_lines alone only
+    guarantees the width/line-count, which is how a long headline used to
+    run into the footer."""
+    size = start
+    while True:
+        lines, font, sz = _headline_lines(draw, headline, max_w, max_lines=max_lines,
+                                           start_size=size, min_size=minimum)
+        h = len(lines) * int(sz * 0.98)
+        if h <= avail_h or size <= minimum:
+            return lines, font, sz, h
+        size -= 6
+
+
+def _pill_and_badge(canvas, draw, category, index):
+    MARGIN = 70
+    pill_color = CATEGORY_COLORS.get(category, ACCENT)
+    f_cat = _font(ARCHIVO, 28)
+    tw = draw.textlength(category, font=f_cat)
+    draw.rounded_rectangle([MARGIN, 50, MARGIN + tw + 50, 104], radius=8, fill=pill_color)
+    draw.text((MARGIN + 25, 61), category, font=f_cat, fill=WHITE)
+    _draw_slide_badge(canvas, draw, index, 0)
+
+
+def _footer(draw, footer, handle):
+    f_foot = _font(ARCHIVO, 30)
+    top = SLIDE_H - 90
+    draw.text((70, top), footer, font=f_foot, fill=MUTED)
+    fw = draw.textlength(footer + "  ", font=f_foot)
+    draw.text((70 + fw, top), "→  " + handle, font=f_foot, fill=WHITE)
+
+
+def _render_split_slide(photo_path, category, headline, subhead, index, footer, handle,
+                         file_photo=False):
+    """Photo band on top, headline in a solid panel underneath -- the text
+    never sits on the subject (the old full-bleed layout put the headline
+    across whatever the photo showed, and the blurred-letterbox fallback
+    produced flat grey bands). The crop keeps the top of portrait photos
+    so faces are not sliced."""
+    W, H = SLIDE_W, SLIDE_H
+    pill_color = CATEGORY_COLORS.get(category, ACCENT)
+    photo = Image.open(photo_path).convert("RGB")
+    is_portrait = photo.height >= photo.width * 0.9
+    photo = cover_crop_biased(photo, W, PHOTO_H, 0.18 if is_portrait else 0.4)
+    photo = ImageEnhance.Contrast(photo).enhance(1.05)
+    photo = ImageEnhance.Color(photo).enhance(1.05)
+
+    canvas = Image.new("RGB", (W, H), _PANEL)
+    canvas.paste(photo, (0, 0))
+    canvas = canvas.convert("RGBA")
+
+    # soft fade from the photo into the panel, and a light scrim behind
+    # the pill/badge so they stay legible on any photo
+    fade = Image.new("RGBA", (W, 170), (0, 0, 0, 0))
+    fd = ImageDraw.Draw(fade)
+    for y in range(170):
+        fd.line([(0, y), (W, y)], fill=_PANEL + (int(255 * (y / 170) ** 1.7),))
+    canvas.alpha_composite(fade, (0, PHOTO_H - 170))
+    scrim = Image.new("RGBA", (W, 150), (0, 0, 0, 0))
+    sd = ImageDraw.Draw(scrim)
+    for y in range(150):
+        sd.line([(0, y), (W, y)], fill=(0, 0, 0, int(140 * (1 - y / 150))))
+    canvas.alpha_composite(scrim, (0, 0))
+
+    draw = ImageDraw.Draw(canvas)
+    draw.rectangle([0, PHOTO_H, W, PHOTO_H + 8], fill=pill_color)
+    _pill_and_badge(canvas, draw, category, index)
+
+    if file_photo:
+        f_tag = _font(ARCHIVO, 24)
+        tw = draw.textlength("FILE PHOTO", font=f_tag)
+        draw.rounded_rectangle([70, PHOTO_H - 84, 70 + tw + 30, PHOTO_H - 36], radius=6,
+                               fill=(0, 0, 0, 175))
+        draw.text((85, PHOTO_H - 74), "FILE PHOTO", font=f_tag, fill=WHITE)
+
+    MARGIN = 70
+    f_sub = _font(ARCHIVO, 30)
+    sub_lines = _wrap(draw, subhead, f_sub, W - MARGIN * 2)[:2] if subhead else []
+    sub_h = len(sub_lines) * 38
+    top = PHOTO_H + 38
+    footer_top = H - 90
+    avail = footer_top - 22 - (sub_h + 32 if sub_lines else 0) - top
+    lines, f_head, size, h = _fit_headline(draw, headline, W - MARGIN * 2, 4, 78, 44, avail)
+    _draw_highlighted_headline(draw, lines, f_head, size, MARGIN, top, _pick_accent_phrase(headline))
+    y = top + h + 32
+    for line in sub_lines:
+        draw.text((MARGIN, y), line, font=f_sub, fill=MUTED)
+        y += 38
+    _footer(draw, footer, handle)
+    return canvas
+
+
+def _render_text_slide(category, headline, subhead, index, footer, handle):
+    """No photo exists (or is allowed): a typographic card. The headline
+    block is centred in the frame rather than pinned to the bottom, which
+    left the whole top half empty, and a large ghost numeral gives the
+    slide a visual anchor without pretending to be a picture of anything."""
+    W, H = SLIDE_W, SLIDE_H
+    pill_color = CATEGORY_COLORS.get(category, ACCENT)
+    top_c = _mix(pill_color, "#000000", 0.55)
+    canvas = _vertical_gradient(W, H, top_c, _PANEL).convert("RGBA")
+
+    ghost = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    gd = ImageDraw.Draw(ghost)
+    f_ghost = _font(ANTON, 640)
+    txt = f"{index:02d}"
+    gd.text((W - gd.textlength(txt, font=f_ghost) - 20, 70), txt, font=f_ghost,
+            fill=(255, 255, 255, 24))
+    canvas = Image.alpha_composite(canvas, ghost)
+
+    draw = ImageDraw.Draw(canvas)
+    _pill_and_badge(canvas, draw, category, index)
+
+    MARGIN = 70
+    f_sub = _font(ARCHIVO, 32)
+    sub_lines = _wrap(draw, subhead, f_sub, W - MARGIN * 2)[:3] if subhead else []
+    sub_h = len(sub_lines) * 42
+    region_top, region_bottom = 210, H - 130
+    avail_head = (region_bottom - region_top) - (sub_h + 44 if sub_lines else 0) - 40
+    lines, f_head, size, h = _fit_headline(draw, headline, W - MARGIN * 2, 5, 100, 52, avail_head)
+    block_h = 24 + h + (44 + sub_h if sub_lines else 0)
+    y0 = region_top + int(((region_bottom - region_top) - block_h) * 0.42)
+    draw.rectangle([MARGIN, y0, MARGIN + 120, y0 + 10], fill=pill_color)
+    y = y0 + 34
+    _draw_highlighted_headline(draw, lines, f_head, size, MARGIN, y, _pick_accent_phrase(headline))
+    y += h + 44
+    for line in sub_lines:
+        draw.text((MARGIN, y), line, font=f_sub, fill=MUTED)
+        y += 42
+    _footer(draw, footer, handle)
+    return canvas
+
+
 def render_carousel_slide(photo_path, category, headline, subhead, index, total,
-                            out_path, footer, handle, smart_fit=False):
-    """One slide: full-bleed photo, bottom gradient, category pill,
-    numbered badge, headline, one-line subhead, brand footer.
+                            out_path, footer, handle, smart_fit=False, file_photo=False):
+    """One slide. With a photo: photo band + headline panel. Without one:
+    a centred typographic card. `smart_fit` is accepted for backward
+    compatibility and ignored -- the blurred-letterbox fit is gone (it
+    read as a rendering glitch); every photo is now cover-cropped with a
+    face-safe bias. `file_photo=True` stamps the FILE PHOTO label.
 
-    `smart_fit` should be True for a human-supplied photo (blurred
-    letterbox rather than a crop that might cut off the actual subject --
-    same reasoning as the main feed cards) and False for a discovered
-    incident photo the publisher already framed correctly.
-
-    `photo_path=None` renders a text-only slide (colour-graded gradient
-    background, same as this project's existing text_card variant) --
-    used when no authentic, rights-cleared photo was found for this
-    story. Same "no image beats wrong image" rule as the rest of this
-    pipeline: a carousel slide never gets a guessed or copyrighted photo,
-    it just goes photo-less until you optionally reply with your own.
-    """
+    Same rule as everywhere else in this pipeline: a slide never gets a
+    guessed or copyrighted photo. It gets a verified one (yours, a
+    rights-cleared discovery, or a licensed portrait of the person named)
+    or it stays a text card."""
     if photo_path is None:
-        top = _mix(CATEGORY_COLORS.get(category, ACCENT), "#000000", 0.55)
-        canvas = _vertical_gradient(SLIDE_W, SLIDE_H, top, _hex_to_rgb(NEAR_BLACK)).convert("RGBA")
+        canvas = _render_text_slide(category, headline, subhead, index, footer, handle)
     else:
-        canvas = _load_photo(photo_path, SLIDE_W, SLIDE_H, smart_fit).convert("RGBA")
-    canvas = _draw_slide_foreground(canvas, category, headline, subhead, index, total, footer, handle)
+        canvas = _render_split_slide(photo_path, category, headline, subhead, index,
+                                     footer, handle, file_photo=file_photo)
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
     canvas.convert("RGB").save(out_path, "JPEG", quality=95, subsampling=0)
     return out_path

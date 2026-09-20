@@ -57,7 +57,9 @@ jobs:
         run: command -v ffmpeg || (sudo apt-get update && sudo apt-get install -y ffmpeg)
 
       - name: Run carousel self-tests
-        run: python -m tests.test_carousel
+        run: |
+          python -m tests.test_carousel
+          python -m tests.test_subject_photos
 
       - name: Build / review / publish today's carousel
         env:

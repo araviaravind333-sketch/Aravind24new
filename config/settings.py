@@ -326,3 +326,21 @@ CAROUSEL_REVIEW_GRACE_MINUTES = 75
 # non-reserved automated slots -- it replaces one single-story post that
 # day, it doesn't add on top of the daily ceiling.
 CAROUSEL_COUNTS_AS_AUTOMATED_SLOT = True
+
+
+# ============================================================
+# 12. SUBJECT PORTRAITS  (src/subject_photos.py)
+# ============================================================
+# When a headline names a real, notable person and the story has no
+# photo, fetch that person's lead portrait from Wikimedia Commons --
+# labelled FILE PHOTO on the image and credited in the caption.
+# Event photographs are NOT touched by this (see incident_photos.py).
+SUBJECT_PHOTOS_ENABLED = True
+# Wikipedia-language-page count a person needs to count as notable enough
+# to resolve by name alone. Higher = fewer wrong-namesake risks, fewer
+# matches. Tuned on live headlines; see tests/test_subject_photos.py.
+SUBJECT_PHOTO_MIN_SITELINKS = 25
+# CC BY-SA requires that adaptations (a crop + text overlay arguably is
+# one) be shared under the same licence. Off by default; only CC0, public
+# domain, CC BY and GODL-India are used unless this is switched on.
+SUBJECT_PHOTO_ALLOW_SHARE_ALIKE = False

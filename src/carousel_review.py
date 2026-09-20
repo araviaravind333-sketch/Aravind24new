@@ -23,7 +23,8 @@ import json
 import os
 
 from config import settings
-from src import ai_writer, carousel, incident_photos, news_engine, telegram_bot, video
+from src import (ai_writer, carousel, incident_photos, news_engine, subject_photos,
+                 telegram_bot, video)
 
 _ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATE_PATH = os.path.join(_ROOT, "data", "carousel_pending.json")
@@ -168,11 +169,26 @@ def build_carousel(now_ist):
         except Exception as e:
             print(f"carousel slide {i}: image discovery failed, going text-only: {e}")
 
+        # No rights-cleared photo of the event -- if the headline names a
+        # real, notable person, use their licensed Wikimedia Commons
+        # portrait, labelled FILE PHOTO. Otherwise the slide stays a text
+        # card. See src/subject_photos.py for the checks that gate this.
+        portrait = None
+        if photo_path is None:
+            try:
+                portrait = subject_photos.find_subject_photo(
+                    story["title"], story.get("summary", ""), dest_dir=slides_dir)
+            except Exception as e:
+                print(f"carousel slide {i}: subject portrait lookup failed: {e}")
+            if portrait:
+                photo_path = portrait["path"]
+                collage_source_photos.append(photo_path)
+
         out_path = os.path.join(slides_dir, f"slide_{i:02d}.jpg")
         carousel.render_carousel_slide(
             photo_path, category, headline, subhead, i, len(stories), out_path,
             footer=settings.BRAND_FOOTER, handle=settings.BRAND_HANDLE,
-            smart_fit=False,
+            file_photo=bool(portrait),
         )
         slides.append({
             "index": i,
@@ -182,12 +198,16 @@ def build_carousel(now_ist):
             "category": category,
             "message_id": None,
             "media_kind": "image",
-            "media_source": "auto" if photo_path else "text_only",
+            "media_source": ("subject_portrait" if portrait
+                             else "auto" if photo_path else "text_only"),
             "rendered_image_path": out_path,
             "video_path": None,
             "status": "pending",
             "is_cover": False,
             "raw_photo_path": photo_path,
+            "photo_credit": portrait["attribution"] if portrait else None,
+            "photo_subject": portrait["subject"] if portrait else None,
+            "rendered_number": i,
         })
 
     cover_path = os.path.join(slides_dir, "cover.jpg")
@@ -220,13 +240,33 @@ def build_carousel(now_ist):
     return state
 
 
+CAROUSEL_HASHTAGS = "#IndiaNews #WorldNews #NewsUpdate #Trending #AravindNews24"
+
+
 def _build_carousel_caption(slides, now_ist):
-    lines = [f"What happened today — {now_ist.strftime('%d %b %Y')}", ""]
-    for s in slides:
-        if s.get("is_cover"):
-            continue
-        lines.append(f"{s['index']:02d}. {s['headline']}")
-    lines += ["", "Swipe for the full roundup →", settings.BRAND_HANDLE]
+    """Built from the slides that will actually be posted, numbered the way
+    they are numbered on the images. The first line is the hook -- it is
+    all a viewer sees before tapping 'more' -- and the follow / comment /
+    share asks are explicit because a page this small gets almost no
+    algorithmic reach without engagement signals, and people rarely act
+    without being asked."""
+    story_slides = [s for s in slides if not s.get("is_cover")
+                    and s.get("status") != "rejected"]
+    n = len(story_slides)
+    lines = [f"\U0001F4F0 {n} stories the world woke up to today \u2014 {now_ist.strftime('%d %b %Y')}", ""]
+    for s in story_slides:
+        lines.append(f"{s.get('final_index', s['index']):02d}. {s['headline']}")
+    lines += [
+        "",
+        f"\U0001F449 Follow {settings.BRAND_HANDLE} \u2014 the daily roundup lands every evening at 8:30 PM IST",
+        "\U0001F4AC Which story matters most to you? Tell us below",
+        "\U0001F501 Send this to someone who misses the news",
+    ]
+    credits = [f"{s.get('final_index', s['index']):02d} {s['photo_subject']}: {s['photo_credit']}"
+               for s in story_slides if s.get("photo_credit")]
+    if credits:
+        lines += ["", "\U0001F4F7 File photos \u2014 " + " | ".join(credits)]
+    lines += ["", CAROUSEL_HASHTAGS]
     return "\n".join(lines)
 
 
@@ -269,7 +309,10 @@ def send_preview(state, now_ist):
         caption = (
             f"{slide['index']:02d}/{n} — {slide['category']}\n{slide['headline']}\n\n"
             + ("(no real photo found — text-only unless you add one)"
-               if slide["media_source"] == "text_only" else "")
+               if slide["media_source"] == "text_only" else
+               f"(File photo of {slide.get('photo_subject')} — {slide.get('photo_credit')}. "
+               f"Reply with your own photo to replace it, or Not good to drop.)"
+               if slide["media_source"] == "subject_portrait" else "")
         )
         # Telegram's sendPhoto needs either a public URL or a direct file
         # upload -- the render is only local at this point (not yet
@@ -302,6 +345,7 @@ def handle_reply(msg, state):
     text = (msg.get("caption") or msg.get("text") or "").lower()
     if any(w in text for w in REJECT_WORDS):
         slide["status"] = "rejected"
+        renumber_survivors(state)
         telegram_bot.reply_to_message(msg["message_id"],
                                        f"Dropped slide {slide['index']:02d} from today's carousel.")
         _save_state(state)
@@ -333,6 +377,7 @@ def handle_callback(cb, state):
         telegram_bot.answer_callback(cb["id"], "The cover slide can't be dropped -- reply with a photo to replace it instead.")
         return False
     slide["status"] = "rejected"
+    renumber_survivors(state)
     _save_state(state)
     telegram_bot.answer_callback(cb["id"], f"Dropped slide {idx:02d}.")
     msg = cb.get("message") or {}
@@ -430,6 +475,7 @@ def _apply_owner_media(slide, file_id, msg, state):
             footer=settings.BRAND_FOOTER, handle=settings.BRAND_HANDLE)
         slide["media_kind"] = "video"
         slide["video_path"] = video_out
+        slide["raw_video_path"] = saved
         slide["rendered_image_path"] = poster_out
     else:
         out_path = slide["rendered_image_path"]
@@ -451,6 +497,8 @@ def _apply_owner_media(slide, file_id, msg, state):
 
     slide["media_source"] = "owner"
     slide["status"] = "pending"
+    slide["photo_credit"] = None
+    slide["photo_subject"] = None
     if not slide.get("is_cover") and not is_video:
         # The cover started as a plain gradient because no rights-cleared
         # photo existed at build time -- now that a real photo exists
@@ -473,6 +521,46 @@ def ready_to_publish(state, now_ist):
     sent_at = dt.datetime.strptime(state["preview_sent_at"], "%Y-%m-%d %H:%M")
     age_min = (now_ist - sent_at).total_seconds() / 60
     return age_min >= settings.CAROUSEL_REVIEW_GRACE_MINUTES
+
+
+def _rerender_slide(slide, number):
+    """Redraws one slide with a new badge number, from the inputs it was
+    built from (its raw photo, or none for a text card; the original
+    video for a video slide)."""
+    out = slide["rendered_image_path"]
+    photo = slide.get("raw_photo_path")
+    if slide.get("media_kind") == "video" and slide.get("raw_video_path"):
+        slides_dir = os.path.dirname(out)
+        overlay = os.path.join(slides_dir, f"overlay_{slide['index']:02d}.png")
+        carousel.render_carousel_overlay_png(
+            slide["category"], slide["headline"], slide["subhead"], number, number, overlay,
+            footer=settings.BRAND_FOOTER, handle=settings.BRAND_HANDLE)
+        carousel.render_carousel_video_slide(slide["raw_video_path"], overlay, slide["video_path"])
+        photo = None   # the poster for a video slide is always a text card
+    carousel.render_carousel_slide(
+        photo, slide["category"], slide["headline"], slide["subhead"], number, number, out,
+        footer=settings.BRAND_FOOTER, handle=settings.BRAND_HANDLE,
+        file_photo=slide.get("media_source") == "subject_portrait")
+
+
+def renumber_survivors(state):
+    """After slides are dropped, the badge numbers baked into the images
+    must close the gap (01, 02, 03, 05 -> 01, 02, 03, 04) and match the
+    caption. Only slides whose number actually changed are redrawn. This
+    runs in the same poll that handled the drop, i.e. BEFORE the
+    workflow's push step, so the redrawn files are public by publish."""
+    kept = surviving_slides(state)
+    for s in kept:
+        if s.get("is_cover"):
+            continue
+        n = s["final_index"]
+        if s.get("rendered_number") == n:
+            continue
+        try:
+            _rerender_slide(s, n)
+            s["rendered_number"] = n
+        except Exception as e:
+            print(f"could not renumber slide {s['index']} to {n}: {e}")
 
 
 def surviving_slides(state):
@@ -566,7 +654,12 @@ def finalize_and_publish(state, now_ist):
             f"so nothing was sent to Instagram/Facebook: {', '.join(missing)}")
         return None
 
-    results = publisher.publish_carousel_all(children, state["caption"], geo=None)
+    # Rebuilt from what is actually being posted -- the caption written at
+    # build time still listed slides dropped during review (seen on the
+    # first live post: a dropped story's headline was in the caption).
+    caption = _build_carousel_caption(kept, now_ist)
+    state["caption"] = caption
+    results = publisher.publish_carousel_all(children, caption, geo=None)
     any_succeeded = "instagram" in results or "facebook" in results
     # A total failure (both platforms errored) must NOT be marked
     # "published" -- that would permanently block retrying and misreport

@@ -36,7 +36,7 @@ from config import settings
 from src import (news_engine, ai_writer, image_source, incident_photos, photo_review,
                   photo_db, dashboard, template, reel_template,
                   video, publisher, analytics, whatsapp, telegram_bot,
-                  carousel_review)
+                  carousel_review, subject_photos)
 
 PENDING_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "_pending.json")
 WA_QUEUE_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "whatsapp_pending.json")
@@ -830,6 +830,25 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
         force_no_image = True
     print("Selected:", story["title"], "| score:", story["score"])
 
+    # A story that would otherwise go out text-only can still get a photo
+    # if -- and only if -- its headline names a real, notable person we can
+    # verify and license: their Wikimedia Commons portrait, labelled FILE
+    # PHOTO and credited in the caption. See src/subject_photos.py for the
+    # eight checks that must all pass. Anything else stays text-only.
+    portrait = None
+    if force_no_image and forced_image_path is None and not is_reel and not settings.TEXT_ONLY_MODE:
+        try:
+            portrait = subject_photos.find_subject_photo(story["title"], story.get("summary", ""))
+        except Exception as e:
+            print("subject portrait lookup failed, staying text-only:", e)
+        if portrait:
+            forced_image_path = subject_photos.crop_portrait(
+                portrait["path"],
+                os.path.join(os.path.dirname(__file__), "..", "public",
+                             f"portrait-{ist.strftime('%Y%m%d-%H%M')}.jpg"))
+            force_no_image = False
+            print(f"Using verified file photo of {portrait['subject']} ({portrait['license']})")
+
     written = ai_writer.rewrite(story)
     print("Headline:", written["headline"])
 
@@ -854,6 +873,10 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
     # whether the story is a fresh incident.
     if force_no_image:
         variant = "text_card"
+    elif portrait:
+        # pre-cropped 4:5 with the face in the top third; full_bleed puts
+        # the headline over the lower part, clear of the face
+        variant = "full_bleed"
     else:
         variant = choose_variant(category_label)
     print("Template variant:", variant)
@@ -868,7 +891,7 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
     # card, which reads as an aggressive zoom. Blurred-letterbox instead,
     # but only for these, not for stock photos (template._load_photo only
     # deviates from cover-crop when the aspect mismatch is large anyway).
-    smart_fit = forced_image_path is not None
+    smart_fit = forced_image_path is not None and portrait is None
 
     video_clip_path = None
     if forced_image_path and os.path.splitext(forced_image_path)[1].lower() in VIDEO_EXTENSIONS:
@@ -1006,6 +1029,8 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
         "reel_template": reel_variant_used,
         "ist": ist.strftime("%Y-%m-%d %H:%M"),
         "consumed_inbox_file": consumed_inbox_file,
+        "photo_credit": portrait["attribution"] if portrait else None,
+        "photo_subject": portrait["subject"] if portrait else None,
     }
     os.makedirs(os.path.dirname(PENDING_PATH), exist_ok=True)
     with open(PENDING_PATH, "w") as f:
@@ -1032,6 +1057,11 @@ def publish():
     if pending.get("is_reel") and pending.get("video_name") and image_base:
         video_url = f"{image_base}/{pending['video_name']}"
     caption = build_caption(written, story.get("geo"))
+    if pending.get("photo_credit"):
+        # CC BY / GODL require the author be credited; this is also the
+        # honest label for what the picture is.
+        caption += (f"\n\n\U0001F4F7 File photo of {pending.get('photo_subject')}: "
+                    f"{pending['photo_credit']}")
 
     if image_url:
         print("Waiting for image to go public:", image_url)

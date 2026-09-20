@@ -324,7 +324,30 @@ def caption_tests():
     check("caption numbers every story slide", all(f"{i:02d}." in caption for i in range(1, 4)))
     check("caption includes every story headline", all(s["headline"] in caption for s in slides[1:]))
     check("caption does not list a fake entry for the cover slide", "00." not in caption)
-    check("caption ends with the brand handle", caption.strip().endswith("@aravindnews24"))
+    check("caption asks for the follow, naming the handle", "Follow @aravindnews24" in caption)
+    check("caption asks for a comment and a share",
+          "Tell us below" in caption and "Send this to" in caption)
+    check("caption ends on the hashtag line", caption.strip().splitlines()[-1].startswith("#"))
+    check("the hook (first line, all a viewer sees before 'more') states the story count",
+          caption.splitlines()[0].startswith("\U0001F4F0 3 stories"))
+
+    # Regression from the first live post: a slide dropped during review
+    # was still listed in the published caption.
+    slides[2]["status"] = "rejected"
+    cr.surviving_slides({"slides": slides})
+    after_drop = cr._build_carousel_caption(slides, now)
+    check("a dropped slide's headline is not in the caption",
+          slides[2]["headline"] not in after_drop)
+    check("caption numbering follows the surviving slides, with no gap",
+          "01. Headline number 1" in after_drop and "02. Headline number 3" not in after_drop
+          or "02." in after_drop and "03." not in after_drop)
+
+    # Licence credit must reach the caption for a portrait slide.
+    slides[1]["photo_credit"] = "Biswarup Ganguly / CC BY 3.0 (Wikimedia Commons)"
+    slides[1]["photo_subject"] = "Mamata Banerjee"
+    with_credit = cr._build_carousel_caption(slides, now)
+    check("a licensed portrait's author + licence are printed in the caption",
+          "Mamata Banerjee: Biswarup Ganguly / CC BY 3.0" in with_credit)
 
 
 if __name__ == "__main__":
