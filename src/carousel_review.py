@@ -291,8 +291,11 @@ def send_preview(state, now_ist):
     summary = (
         f"\U0001F4F0 Daily carousel ready — {n} slides for {state['date']}\n\n"
         f"Reply to any slide below with a photo/video to use it for that slide, "
-        f"or reply \"not good\" to drop it.\n\n"
-        f"Auto-publishes in {settings.CAROUSEL_REVIEW_GRACE_MINUTES} min if you don't touch it."
+        f"or press Drop.\n\n"
+        f"Optional: reply to each story slide with a VOICE NOTE reading its headline and the "
+        f"Reel will use your own voice (needs every story slide; the cover's note is the intro).\n\n"
+        f"Slides marked NO IMAGE are never published -- attach a photo to include them. "
+        f"After {settings.CAROUSEL_REVIEW_GRACE_MINUTES} min the slides that have an image go out."
     )
     telegram_bot.send_message(summary)
 
@@ -308,7 +311,7 @@ def send_preview(state, now_ist):
             continue
         caption = (
             f"{slide['index']:02d}/{n} — {slide['category']}\n{slide['headline']}\n\n"
-            + ("(no real photo found — text-only unless you add one)"
+            + ("⚠️ NO IMAGE — this slide will NOT be published unless you reply with a photo"
                if slide["media_source"] == "text_only" else
                f"(File photo of {slide.get('photo_subject')} — {slide.get('photo_credit')}. "
                f"Reply with your own photo to replace it, or Not good to drop.)"
@@ -351,6 +354,24 @@ def handle_reply(msg, state):
         _save_state(state)
         return True
 
+    voice_id = _voice_file_id(msg)
+    if voice_id:
+        saved = _apply_owner_voice(slide, voice_id)
+        if not saved:
+            telegram_bot.reply_to_message(msg["message_id"], "Could not download that voice note -- please send it again.")
+            return True
+        _save_state(state)
+        have = sum(1 for s in _story_slides(state) if s.get("voice_path"))
+        total = len(_story_slides(state))
+        what = "the intro" if slide.get("is_cover") else f"slide {slide['index']:02d}"
+        if have == total:
+            status = "All story slides have your voice -- the Reel will use YOUR voice."
+        else:
+            status = (f"{have} of {total} story slides recorded. The Reel uses your voice only when every "
+                      f"story slide has a recording; otherwise it uses the standard voice.")
+        telegram_bot.reply_to_message(msg["message_id"], f"Saved your voice for {what}. {status}")
+        return True
+
     file_id = _extract_media_file_id(msg)
     if file_id:
         _apply_owner_media(slide, file_id, msg, state)
@@ -388,6 +409,37 @@ def handle_callback(cb, state):
         except Exception:
             pass
     return True
+
+
+def _voice_file_id(msg):
+    v = msg.get("voice") or msg.get("audio")
+    return v.get("file_id") if v else None
+
+
+def _apply_owner_voice(slide, file_id):
+    """Your own recording for one slide (Telegram voice note, replied to that
+    slide). Stored as-is; converted when the Reel is built."""
+    os.makedirs(INBOX_DIR, exist_ok=True)
+    saved = telegram_bot.download_file(file_id, os.path.join(INBOX_DIR, f"voice_{slide['index']:02d}"))
+    if saved:
+        slide["voice_path"] = saved
+    return saved
+
+
+def voice_plan(state):
+    """Your voice is used only if EVERY surviving story slide has a
+    recording -- half in your voice and half in a synthetic one would sound
+    broken. The cover's recording (optional) is the intro. None -> the
+    standard voice is used for the whole Reel."""
+    kept = surviving_slides(state)
+    stories = [s for s in kept if not s.get("is_cover")]
+    if not stories:
+        return None
+    if not all(s.get("voice_path") and os.path.exists(s["voice_path"]) for s in stories):
+        return None
+    cover = next((s for s in kept if s.get("is_cover")), None)
+    intro = cover.get("voice_path") if cover and cover.get("voice_path") and os.path.exists(cover["voice_path"]) else None
+    return {"intro": intro, "stories": [s["voice_path"] for s in stories]}
 
 
 def _extract_media_file_id(msg):
@@ -516,11 +568,76 @@ def ready_to_publish(state, now_ist):
     never automatically."""
     if state["status"] != "preview_sent":
         return False
+    if not _grace_elapsed(state, now_ist):
+        return False
+    if settings.REQUIRE_IMAGE_TO_PUBLISH and state.get("image_gate") != "clear":
+        return False
+    return True
+
+
+def _grace_elapsed(state, now_ist):
     if os.environ.get("CAROUSEL_FORCE_PUBLISH", "").lower() == "true":
         return True
     sent_at = dt.datetime.strptime(state["preview_sent_at"], "%Y-%m-%d %H:%M")
     age_min = (now_ist - sent_at).total_seconds() / 60
     return age_min >= settings.CAROUSEL_REVIEW_GRACE_MINUTES
+
+
+def slide_has_image(slide):
+    """A story slide has an image if it carries a real photo (yours, a
+    rights-cleared event photo, a verified file portrait) or your video."""
+    return slide.get("media_kind") == "video" or bool(slide.get("raw_photo_path"))
+
+
+def _story_slides(state):
+    return [s for s in state["slides"] if not s.get("is_cover") and s.get("status") != "rejected"]
+
+
+def apply_image_gate(state, now_ist):
+    """Runs every cycle BEFORE the workflow's push step, once the review
+    window has ended. Never lets an image-less slide out:
+      - every surviving slide has an image  -> gate clear;
+      - some don't, but >= CAROUSEL_MIN_IMAGE_SLIDES do -> the image-less
+        ones are left out (renumbered, so their files are re-pushed) and
+        the gate clears;
+      - too few images -> the carousel is HELD, with a Telegram reminder
+        every CAROUSEL_HOLD_REMINDER_HOURS, until you attach more.
+    Recomputed each cycle, so a photo you attach while held releases it."""
+    if state.get("status") != "preview_sent" or not settings.REQUIRE_IMAGE_TO_PUBLISH:
+        return state.get("image_gate")
+    if not _grace_elapsed(state, now_ist):
+        return None
+    stories = _story_slides(state)
+    missing = [s for s in stories if not slide_has_image(s)]
+    have = len(stories) - len(missing)
+    if not missing:
+        state["image_gate"] = "clear"
+    elif have >= settings.CAROUSEL_MIN_IMAGE_SLIDES:
+        nums = ", ".join(f"{s['index']:02d}" for s in missing)
+        for s in missing:
+            s["status"] = "rejected"
+            s["drop_reason"] = "no_image"
+        renumber_survivors(state)
+        state["image_gate"] = "clear"
+        telegram_bot.send_message(
+            f"Publishing the carousel with the {have} slides that have an image. "
+            f"Left out (no image): {nums}.")
+    else:
+        state["image_gate"] = "hold"
+        last = state.get("hold_notice_at")
+        due = True
+        if last:
+            hrs = (now_ist - dt.datetime.strptime(last, "%Y-%m-%d %H:%M")).total_seconds() / 3600
+            due = hrs >= settings.CAROUSEL_HOLD_REMINDER_HOURS
+        if due:
+            nums = ", ".join(f"{s['index']:02d}" for s in missing)
+            telegram_bot.send_message(
+                f"Carousel ON HOLD -- nothing is published without an image. "
+                f"Only {have} of {len(stories)} slides have one (need {settings.CAROUSEL_MIN_IMAGE_SLIDES}). "
+                f"Reply to slide(s) {nums} with a photo, or press Drop on the ones you don't want.")
+            state["hold_notice_at"] = now_ist.strftime("%Y-%m-%d %H:%M")
+    _save_state(state)
+    return state["image_gate"]
 
 
 def _rerender_slide(slide, number):
@@ -602,8 +719,32 @@ def reel_due(state, now_ist=None):
     if os.environ.get("CAROUSEL_FORCE_REEL", "").lower() == "true":
         return True
     if now_ist is not None and state.get("date") != now_ist.strftime("%Y-%m-%d"):
-        return False
+        # A Reel that has to wait for your voice notes may be finished after
+        # midnight: accept last night's carousel until noon. From noon on it
+        # is stale (and the 20:00 ticks must never post yesterday's roundup).
+        yesterday = (now_ist - dt.timedelta(days=1)).strftime("%Y-%m-%d")
+        if not (state.get("date") == yesterday and now_ist.hour < 12):
+            return False
     return True
+
+
+def _remind_for_voice(state, stories, now_ist):
+    """The Reel is held until every surviving story slide has your voice
+    note. Reminded at most every 3 hours."""
+    last = state.get("reel_voice_notice_at")
+    if last:
+        hrs = (now_ist - dt.datetime.strptime(last, "%Y-%m-%d %H:%M")).total_seconds() / 3600
+        if hrs < 3:
+            print("roundup reel: still waiting for the owner's voice notes")
+            return
+    missing = [s for s in stories if not (s.get("voice_path") and os.path.exists(s["voice_path"]))]
+    nums = ", ".join(f"{s.get('final_index', s['index']):02d}" for s in missing)
+    telegram_bot.send_message(
+        f"Today's roundup Reel is waiting for your voice. Reply to slide(s) {nums} with a voice note "
+        f"reading the headline (reply to the cover for an optional intro). "
+        f"The Reel is built as soon as every story slide has one.")
+    state["reel_voice_notice_at"] = now_ist.strftime("%Y-%m-%d %H:%M")
+    _save_state(state)
 
 
 def build_roundup_reel(state, now_ist, synth=None, dry_run=False):
@@ -624,9 +765,14 @@ def build_roundup_reel(state, now_ist, synth=None, dry_run=False):
         out = os.path.join(tempfile.mkdtemp(prefix="reel_dry_"), "roundup.mp4")
     else:
         out = os.path.join(os.path.dirname(cover["rendered_image_path"]), "roundup.mp4")
+    voices = voice_plan(state)
+    if settings.REEL_REQUIRE_OWNER_VOICE and not voices and not dry_run:
+        _remind_for_voice(state, stories, now_ist)
+        return None
+    print("roundup reel narration:", "owner's own voice" if voices else "standard voice")
     res = roundup_reel.build_reel(
         slide_paths, [s["headline"] for s in stories], out,
-        now_ist.strftime("%d %b").upper(), synth=synth)
+        now_ist.strftime("%d %b").upper(), synth=synth, voice_clips=voices)
     size_mb = os.path.getsize(out) / 1e6
     print(f"roundup reel built: {res['duration']:.1f}s, {size_mb:.2f} MB, {len(stories)} stories")
     if dry_run:
@@ -707,6 +853,10 @@ def finalize_and_publish(state, now_ist):
 
     image_base = os.environ.get("GH_PAGES_BASE", "").rstrip("/")
     kept = surviving_slides(state)
+    if settings.REQUIRE_IMAGE_TO_PUBLISH and any(
+            not s.get("is_cover") and not slide_has_image(s) for s in kept):
+        print("Refusing to publish: an image-less story slide survived (image gate bypassed).")
+        return None
     if not kept:
         state["status"] = "published"
         state["publish_note"] = "no slides survived review -- nothing posted"

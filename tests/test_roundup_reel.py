@@ -133,6 +133,145 @@ def assembly_tests(tmp):
         check("mismatched slides/headlines are rejected", True)
 
 
+def voice_tests(tmp):
+    print("\nOWNER'S VOICE")
+    import math
+    from src import carousel_review as cr
+
+    def tone(path, secs, rate=44100):
+        with wave.open(path, "wb") as w:
+            w.setnchannels(2)
+            w.setsampwidth(2)
+            w.setframerate(rate)
+            frames = bytearray()
+            import struct
+            for n in range(int(rate * secs)):
+                v = int(12000 * math.sin(2 * math.pi * 440 * n / rate))
+                frames += struct.pack("<hh", v, v)
+            w.writeframes(bytes(frames))
+        return path
+
+    def slide(i, **kw):
+        s = {"index": i, "status": "pending", "is_cover": False}
+        s.update(kw)
+        return s
+
+    a = tone(os.path.join(tmp, "a.wav"), 2.0)
+    b = tone(os.path.join(tmp, "b.wav"), 3.0)
+    state = {"slides": [slide(0, is_cover=True), slide(1, voice_path=a), slide(2, voice_path=b)]}
+    plan = cr.voice_plan(state)
+    check("every story has a recording -> your voice is used", plan and plan["stories"] == [a, b])
+    check("the cover recording is optional (no intro)", plan and plan["intro"] is None)
+    state["slides"][0]["voice_path"] = a
+    check("a cover recording becomes the intro", cr.voice_plan(state)["intro"] == a)
+
+    state["slides"][2].pop("voice_path")
+    check("one story missing a recording -> standard voice for the WHOLE reel (no mixing)",
+          cr.voice_plan(state) is None)
+    state["slides"][2]["status"] = "rejected"
+    check("a dropped slide's missing recording does not matter", cr.voice_plan(state) is not None)
+    state["slides"][1]["voice_path"] = os.path.join(tmp, "gone.wav")
+    check("a recording whose file is missing counts as missing", cr.voice_plan(state) is None)
+
+    if not rr.ffmpeg_exe():
+        SKIP.append("voice assembly")
+        print("  SKIP  ffmpeg not available here")
+        return
+    from PIL import Image
+    slides = []
+    for i in range(3):
+        sp = os.path.join(tmp, f"vslide{i}.jpg")
+        Image.new("RGB", (1080, 1350), (20 * i, 60, 90)).save(sp)
+        slides.append(sp)
+    out = os.path.join(tmp, "voice_reel.mp4")
+    res = rr.build_reel(slides, ["One", "Two"], out, "20 SEP",
+                        voice_clips={"intro": None, "stories": [a, b]}, work_dir=os.path.join(tmp, "vw"))
+    dur, has_v, has_a, right_size = _probe(out)
+    check("a reel is built from the owner's recordings", os.path.exists(out) and has_v and has_a and right_size)
+    check("it is marked as using the owner's voice", res["voice"] == "owner")
+    check("segments = intro + stories + end card", res["segments"] == 1 + 2 + 1)
+    check("length covers both recordings plus intro/outro padding", 5.0 < dur < 20.0, f"{dur:.1f}s")
+    try:
+        rr.build_reel(slides, ["One", "Two"], os.path.join(tmp, "x.mp4"), "20 SEP",
+                      voice_clips={"intro": None, "stories": [a]})
+        check("wrong number of recordings is rejected", False)
+    except AssertionError:
+        check("wrong number of recordings is rejected", True)
+
+    # the Telegram side: a voice note replied to a slide is saved on that slide
+    saved = {}
+    real_dl, real_reply, real_save = cr.telegram_bot.download_file, cr.telegram_bot.reply_to_message, cr._save_state
+    cr.telegram_bot.download_file = lambda fid, dest: saved.setdefault("p", dest + ".oga")
+    replies = []
+    cr.telegram_bot.reply_to_message = lambda mid, text, *a_, **k: replies.append(text)
+    cr._save_state = lambda s: None
+    try:
+        st = {"slides": [slide(0, is_cover=True, message_id=10), slide(1, message_id=11), slide(2, message_id=12)]}
+        msg = {"message_id": 99, "reply_to_message": {"message_id": 11}, "voice": {"file_id": "F1"}}
+        ok = cr.handle_reply(msg, st)
+        check("a voice note replied to a slide is stored on that slide",
+              ok and st["slides"][1].get("voice_path", "").endswith("voice_01.oga"))
+        check("owner is told how many slides are recorded", replies and "1 of 2" in replies[-1], replies)
+    finally:
+        cr.telegram_bot.download_file, cr.telegram_bot.reply_to_message, cr._save_state = real_dl, real_reply, real_save
+
+
+def voice_hold_tests(tmp):
+    print("\nREEL WAITS FOR YOUR VOICE")
+    from config import settings
+    from src import carousel_review as cr, roundup_reel
+
+    sent = []
+    real = (cr.telegram_bot.send_message, cr._save_state, roundup_reel.build_reel)
+    cr.telegram_bot.send_message = lambda text, *a, **k: sent.append(text)
+    cr._save_state = lambda s: None
+    built = []
+    def fake_build(slides, heads, out, label, **k):
+        built.append(k.get("voice_clips"))
+        open(out, "wb").write(b"x" * 100)
+        return {"duration": 30.0, "voice": "x"}
+    roundup_reel.build_reel = fake_build
+    old_flag = settings.REEL_REQUIRE_OWNER_VOICE
+    now = dt.datetime(2026, 9, 20, 21, 0)
+
+    def st():
+        slides = []
+        for i in range(3):
+            path = os.path.join(tmp, f"s{i}.jpg")
+            open(path, "wb").write(b"x")
+            slides.append({"index": i, "final_index": i, "status": "pending", "is_cover": i == 0,
+                           "rendered_image_path": path, "headline": f"H{i}", "media_kind": "image"})
+        return {"date": "2026-09-20", "status": "published", "slides": slides}
+
+    try:
+        settings.REEL_REQUIRE_OWNER_VOICE = True
+        state = st()
+        res = cr.build_roundup_reel(state, now)
+        check("no voice notes -> no reel is built", res is None and not built and state.get("reel_status") is None)
+        check("owner is asked for voice notes, naming the slides", len(sent) == 1 and "voice" in sent[0].lower() and "01, 02" in sent[0], sent)
+        cr.build_roundup_reel(state, now + dt.timedelta(minutes=30))
+        check("no reminder spam inside 3 hours", len(sent) == 1)
+        cr.build_roundup_reel(state, now + dt.timedelta(hours=3, minutes=1))
+        check("reminded again after 3 hours", len(sent) == 2)
+
+        for s in state["slides"][1:]:
+            v = os.path.join(tmp, f"v{s['index']}.wav")
+            open(v, "wb").write(b"x")
+            s["voice_path"] = v
+        cr.build_roundup_reel(state, now + dt.timedelta(hours=4), synth=None)
+        check("once every story has a voice note, the reel is built from them",
+              built and built[-1] and len(built[-1]["stories"]) == 2 and state.get("reel_status") == "built")
+
+        settings.REEL_REQUIRE_OWNER_VOICE = False
+        built.clear()
+        state2 = st()
+        cr.build_roundup_reel(state2, now, synth=lambda *a: None)
+        check("with the requirement off it falls back to the standard voice", built and built[-1] is None)
+    finally:
+        settings.REEL_REQUIRE_OWNER_VOICE = old_flag
+        cr.telegram_bot.send_message, cr._save_state, roundup_reel.build_reel = real
+
+
 def caption_tests():
     print("\nREEL CAPTION")
     c = rr.reel_caption(8, 54.3)
@@ -160,6 +299,9 @@ def state_tests(tmp):
           not cr.reel_due(yday, today))
     check("today's published carousel is due",
           cr.reel_due(dict(yday, date="2026-09-20"), today))
+    check("last night's carousel is still due the next morning (waiting for voice notes)",
+          cr.reel_due(yday, dt.datetime(2026, 9, 20, 9, 0)))
+    check("...but not from noon on", not cr.reel_due(yday, dt.datetime(2026, 9, 20, 12, 0)))
     os.environ["CAROUSEL_FORCE_REEL"] = "true"
     try:
         check("force_reel deliberately waives the date check", cr.reel_due(yday, today))
@@ -242,6 +384,10 @@ if __name__ == "__main__":
         timing_tests(t)
     with tempfile.TemporaryDirectory() as t:
         assembly_tests(t)
+    with tempfile.TemporaryDirectory() as t:
+        voice_tests(t)
+    with tempfile.TemporaryDirectory() as t:
+        voice_hold_tests(t)
     caption_tests()
     with tempfile.TemporaryDirectory() as t:
         state_tests(t)

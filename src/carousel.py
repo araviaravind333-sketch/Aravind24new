@@ -88,7 +88,9 @@ def _draw_highlighted_headline(draw, lines, f_head, size, x, y, accent_phrase):
                 draw.text((cx, y), before, font=f_head, fill=WHITE)
                 cx += draw.textlength(before, font=f_head)
             aw = draw.textlength(accent_phrase, font=f_head)
-            draw.rectangle([cx - 8, y - pad_y, cx + aw + 8, y + size + pad_y],
+            # box stays inside this line's own band: a taller one overlaps
+            # the bottom of the line above (seen on the cover headline)
+            draw.rectangle([cx - 8, y + int(size * 0.20), cx + aw + 8, y + int(size * 1.12)],
                            fill=BADGE_COLOR)
             draw.text((cx, y), accent_phrase, font=f_head, fill=WHITE)
             cx += aw
@@ -181,25 +183,52 @@ def _pill_and_badge(canvas, draw, category, index):
 
 
 def _footer(draw, footer, handle):
+    """Brand line. The handle is picked out in white; when the footer text
+    already contains it (it does by default) it is not printed twice."""
     f_foot = _font(ARCHIVO, 30)
     top = SLIDE_H - 90
+    if handle and handle in footer:
+        pre, _, post = footer.partition(handle)
+        x = 70
+        draw.text((x, top), pre, font=f_foot, fill=MUTED)
+        x += draw.textlength(pre, font=f_foot)
+        draw.text((x, top), handle, font=f_foot, fill=WHITE)
+        x += draw.textlength(handle, font=f_foot)
+        draw.text((x, top), post, font=f_foot, fill=MUTED)
+        return
     draw.text((70, top), footer, font=f_foot, fill=MUTED)
     fw = draw.textlength(footer + "  ", font=f_foot)
-    draw.text((70 + fw, top), "→  " + handle, font=f_foot, fill=WHITE)
+    draw.text((70 + fw, top), "\u2192  " + handle, font=f_foot, fill=WHITE)
+
+
+PHOTO_H_MIN, PHOTO_H_MAX = 700, 900
 
 
 def _render_split_slide(photo_path, category, headline, subhead, index, footer, handle,
                          file_photo=False):
-    """Photo band on top, headline in a solid panel underneath -- the text
-    never sits on the subject (the old full-bleed layout put the headline
-    across whatever the photo showed, and the blurred-letterbox fallback
-    produced flat grey bands). The crop keeps the top of portrait photos
-    so faces are not sliced."""
+    """Photo on top, headline in a solid panel underneath -- the text never
+    sits on the subject. The photo band is sized to the text: a short
+    headline gives the picture more room, a long one gives the words more,
+    so the panel never has a dead gap in it (the old fixed split left ~200px
+    of empty black under short headlines). The crop keeps the top of
+    portrait photos so faces are not sliced."""
     W, H = SLIDE_W, SLIDE_H
+    MARGIN = 70
     pill_color = CATEGORY_COLORS.get(category, ACCENT)
+
+    probe = ImageDraw.Draw(Image.new("RGB", (W, H)))
+    f_sub = _font(ARCHIVO, 30)
+    sub_lines = _wrap(probe, subhead, f_sub, W - MARGIN * 2)[:2] if subhead else []
+    sub_h = len(sub_lines) * 38
+    # panel = top pad + headline + gap + subhead + gap above footer
+    avail = (H - PHOTO_H_MIN) - 170 - (sub_h + 30 if sub_lines else 0)
+    lines, f_head, size, h = _fit_headline(probe, headline, W - MARGIN * 2, 4, 84, 44, max(avail, 200))
+    panel_h = 40 + h + (30 + sub_h if sub_lines else 0) + 30 + 100
+    photo_h = max(PHOTO_H_MIN, min(PHOTO_H_MAX, H - panel_h))
+
     photo = Image.open(photo_path).convert("RGB")
     is_portrait = photo.height >= photo.width * 0.9
-    photo = cover_crop_biased(photo, W, PHOTO_H, 0.18 if is_portrait else 0.4)
+    photo = cover_crop_biased(photo, W, photo_h, 0.18 if is_portrait else 0.4)
     photo = ImageEnhance.Contrast(photo).enhance(1.05)
     photo = ImageEnhance.Color(photo).enhance(1.05)
 
@@ -207,13 +236,11 @@ def _render_split_slide(photo_path, category, headline, subhead, index, footer, 
     canvas.paste(photo, (0, 0))
     canvas = canvas.convert("RGBA")
 
-    # soft fade from the photo into the panel, and a light scrim behind
-    # the pill/badge so they stay legible on any photo
     fade = Image.new("RGBA", (W, 170), (0, 0, 0, 0))
     fd = ImageDraw.Draw(fade)
     for y in range(170):
         fd.line([(0, y), (W, y)], fill=_PANEL + (int(255 * (y / 170) ** 1.7),))
-    canvas.alpha_composite(fade, (0, PHOTO_H - 170))
+    canvas.alpha_composite(fade, (0, photo_h - 170))
     scrim = Image.new("RGBA", (W, 150), (0, 0, 0, 0))
     sd = ImageDraw.Draw(scrim)
     for y in range(150):
@@ -221,26 +248,19 @@ def _render_split_slide(photo_path, category, headline, subhead, index, footer, 
     canvas.alpha_composite(scrim, (0, 0))
 
     draw = ImageDraw.Draw(canvas)
-    draw.rectangle([0, PHOTO_H, W, PHOTO_H + 8], fill=pill_color)
+    draw.rectangle([0, photo_h, W, photo_h + 8], fill=pill_color)
     _pill_and_badge(canvas, draw, category, index)
 
     if file_photo:
         f_tag = _font(ARCHIVO, 24)
         tw = draw.textlength("FILE PHOTO", font=f_tag)
-        draw.rounded_rectangle([70, PHOTO_H - 84, 70 + tw + 30, PHOTO_H - 36], radius=6,
+        draw.rounded_rectangle([70, photo_h - 84, 70 + tw + 30, photo_h - 36], radius=6,
                                fill=(0, 0, 0, 175))
-        draw.text((85, PHOTO_H - 74), "FILE PHOTO", font=f_tag, fill=WHITE)
+        draw.text((85, photo_h - 74), "FILE PHOTO", font=f_tag, fill=WHITE)
 
-    MARGIN = 70
-    f_sub = _font(ARCHIVO, 30)
-    sub_lines = _wrap(draw, subhead, f_sub, W - MARGIN * 2)[:2] if subhead else []
-    sub_h = len(sub_lines) * 38
-    top = PHOTO_H + 38
-    footer_top = H - 90
-    avail = footer_top - 22 - (sub_h + 32 if sub_lines else 0) - top
-    lines, f_head, size, h = _fit_headline(draw, headline, W - MARGIN * 2, 4, 78, 44, avail)
+    top = photo_h + 40
     _draw_highlighted_headline(draw, lines, f_head, size, MARGIN, top, _pick_accent_phrase(headline))
-    y = top + h + 32
+    y = top + h + 30
     for line in sub_lines:
         draw.text((MARGIN, y), line, font=f_sub, fill=MUTED)
         y += 38
@@ -432,48 +452,78 @@ def _build_color_mosaic(colors, w, h):
     return canvas
 
 
+COVER_PHOTO_H = 800
+
+
 def render_cover_slide(top_word, subheadline, date_label, collage_paths, out_path,
                         footer, handle, fallback_colors=None):
-    """The un-numbered opening slide: bold top word + wrapped subheadline
-    on a white band (matching the reference's own layout -- text block
-    up top, photo below, not text-over-photo like the numbered story
-    slides), a real-photo collage (or a gradient if none exist yet) below
-    it to give the viewer something worth swiping past, and a red date
-    tag. This is the one slide in the carousel meant to work as a
-    thumbnail on its own -- it is what a viewer sees before deciding to
-    swipe at all."""
-    canvas = Image.new("RGB", (SLIDE_W, SLIDE_H), WHITE)
-    draw = ImageDraw.Draw(canvas)
+    """The un-numbered opening slide, and the one that has to work as a
+    thumbnail on its own. Layout matches the story slides so the carousel
+    reads as one design: a photo collage of the day's own stories on top,
+    fading into the dark panel, then a red tag + date, the big headline
+    and the brand line. Nothing overlaps: every element has its own band."""
+    W, H = SLIDE_W, SLIDE_H
     MARGIN = 70
+    canvas = Image.new("RGB", (W, H), _PANEL)
 
-    f_top = _font(ANTON, 140)
-    draw.text((MARGIN, 70), top_word.upper(), font=f_top, fill=NEAR_BLACK)
-
-    f_sub = _font(ANTON, 52)
-    sub_lines = _wrap(draw, subheadline, f_sub, SLIDE_W - MARGIN * 2)[:3]
-    y = 70 + 150
-    for line in sub_lines:
-        draw.text((MARGIN, y), line, font=f_sub, fill=NEAR_BLACK)
-        y += 62
-
-    photo_top = y + 30
-    photo_h = SLIDE_H - photo_top
-    collage = _build_collage(collage_paths, SLIDE_W, photo_h)
+    collage = _build_collage(collage_paths, W, COVER_PHOTO_H)
     if collage is None:
-        collage = _build_color_mosaic(fallback_colors, SLIDE_W, photo_h)
-    canvas.paste(collage, (0, photo_top))
+        collage = _build_color_mosaic(fallback_colors, W, COVER_PHOTO_H)
+    canvas.paste(collage, (0, 0))
+    canvas = canvas.convert("RGBA")
 
-    f_date = _font(ANTON, 38)
+    # hairline gaps between collage cells so photos read as separate stories
+    gd = ImageDraw.Draw(canvas)
+    n = min(len(collage_paths or []), 4)
+    if n >= 2:
+        gd.rectangle([W // 2 - 3, 0, W // 2 + 3, COVER_PHOTO_H], fill=_PANEL)
+    if n >= 3:
+        gd.rectangle([W // 2 if n == 3 else 0, COVER_PHOTO_H // 2 - 3, W, COVER_PHOTO_H // 2 + 3], fill=_PANEL)
+
+    fade = Image.new("RGBA", (W, 200), (0, 0, 0, 0))
+    fd = ImageDraw.Draw(fade)
+    for y in range(200):
+        fd.line([(0, y), (W, y)], fill=_PANEL + (int(255 * (y / 200) ** 1.6),))
+    canvas.alpha_composite(fade, (0, COVER_PHOTO_H - 200))
+    scrim = Image.new("RGBA", (W, 150), (0, 0, 0, 0))
+    sd = ImageDraw.Draw(scrim)
+    for y in range(150):
+        sd.line([(0, y), (W, y)], fill=(0, 0, 0, int(150 * (1 - y / 150))))
+    canvas.alpha_composite(scrim, (0, 0))
+
+    draw = ImageDraw.Draw(canvas)
+    draw.rectangle([0, COVER_PHOTO_H, W, COVER_PHOTO_H + 8], fill=BADGE_COLOR)
+
+    # brand chip over the photos, top-left
+    f_brand = _font(ARCHIVO, 30)
+    brand = (handle or "").upper() or "ARAVIND NEWS 24"
+    bw = draw.textlength(brand, font=f_brand)
+    draw.rounded_rectangle([MARGIN, 50, MARGIN + bw + 44, 104], radius=8, fill=(0, 0, 0, 190))
+    draw.text((MARGIN + 22, 61), brand, font=f_brand, fill=WHITE)
+
+    # red tag + date on one line
+    y = COVER_PHOTO_H + 44
+    f_tag = _font(ANTON, 46)
+    tag = top_word.upper()
+    tw = draw.textlength(tag, font=f_tag)
+    draw.rounded_rectangle([MARGIN, y, MARGIN + tw + 44, y + 68], radius=8, fill=BADGE_COLOR)
+    draw.text((MARGIN + 22, y + 8), tag, font=f_tag, fill=WHITE)
+    f_date = _font(ANTON, 46)
     dtw = draw.textlength(date_label, font=f_date)
-    pad = 20
-    draw.rounded_rectangle([MARGIN, SLIDE_H - 100, MARGIN + dtw + pad * 2, SLIDE_H - 32],
-                           radius=8, fill=BADGE_COLOR)
-    draw.text((MARGIN + pad, SLIDE_H - 90), date_label, font=f_date, fill=WHITE)
+    dx = MARGIN + tw + 44 + 24
+    draw.rounded_rectangle([dx, y, dx + dtw + 44, y + 68], radius=8, outline=WHITE, width=3)
+    draw.text((dx + 22, y + 8), date_label, font=f_date, fill=WHITE)
 
-    f_foot = _font(ARCHIVO, 28)
-    ftxt = f"{footer}  →  {handle}"
-    fw = draw.textlength(ftxt, font=f_foot)
-    draw.text((SLIDE_W - MARGIN - fw, SLIDE_H - 68), ftxt, font=f_foot, fill=WHITE)
+    # headline: what the whole post is
+    head_top = y + 68 + 26
+    footer_top = H - 90
+    lines, f_head, size, h = _fit_headline(draw, subheadline.upper(), W - MARGIN * 2, 4, 84, 48,
+                                           footer_top - 20 - head_top)
+    _draw_highlighted_headline(draw, lines, f_head, size, MARGIN, head_top,
+                               "LAST 24 HOURS" if any("LAST 24 HOURS" in ln for ln in lines) else None)
+
+    _footer(draw, footer, handle)
+    canvas = canvas.convert("RGB")
 
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
     canvas.save(out_path, "JPEG", quality=95, subsampling=0)

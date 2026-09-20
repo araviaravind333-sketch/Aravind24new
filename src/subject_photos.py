@@ -96,6 +96,7 @@ _NOT_NAME_WORDS = {
 }
 
 _CACHE = {}
+_UNUSABLE = object()   # cache marker: a real person whose photo can't be used
 
 
 def _get_json(base, params, tries=3):
@@ -275,24 +276,29 @@ def find_subject_photo(headline, summary="", dest_dir=None, allow_share_alike=No
         key = _norm(name)
         if key in _CACHE:
             hit = _CACHE[key]
+            if hit is _UNUSABLE:
+                return None
             if hit is not None:
                 return hit
             continue
         qid, p18, desc, reason = resolve_person(name)
         if not qid:
-            _CACHE[key] = None
+            _CACHE[key] = None      # not a (notable) person -- try the next name
             continue
+        # From here the name IS a real person. If their photo can't be used,
+        # stop: falling through to the NEXT person named in the headline
+        # would put someone else's face under this person's story.
         info = commons_file_info(p18)
         if not info or not info.get("url"):
-            _CACHE[key] = None
-            continue
+            _CACHE[key] = _UNUSABLE
+            return None
         if not licence_allowed(info["license"], allow_share_alike):
             print(f"subject_photos: {name}: licence {info['license']!r} not allowed -- skipped")
-            _CACHE[key] = None
-            continue
+            _CACHE[key] = _UNUSABLE
+            return None
         if min(info["width"], info["height"]) < 500 or not info["mime"].startswith("image/"):
-            _CACHE[key] = None
-            continue
+            _CACHE[key] = _UNUSABLE
+            return None
         dest_dir = dest_dir or os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
                                              "data", "subject_photos")
         ext = ".png" if info["mime"] == "image/png" else ".jpg"
@@ -301,8 +307,8 @@ def find_subject_photo(headline, summary="", dest_dir=None, allow_share_alike=No
             _download(info["url"], path)
         except Exception as e:
             print("subject_photos: download failed:", e)
-            _CACHE[key] = None
-            continue
+            _CACHE[key] = _UNUSABLE
+            return None
         who = info["artist"] or "Wikimedia Commons contributor"
         result = {
             "path": path, "subject": name, "wikidata_id": qid, "description": desc,

@@ -282,11 +282,14 @@ def review_state_tests():
 
     now = dt.datetime(2026, 9, 18, 21, 30)
     fresh = {"status": "preview_sent", "preview_sent_at": "2026-09-18 21:00"}
-    stale = {"status": "preview_sent", "preview_sent_at": "2026-09-18 19:00"}
+    stale = {"status": "preview_sent", "preview_sent_at": "2026-09-18 19:00", "image_gate": "clear"}
     unsent = {"status": "collecting", "preview_sent_at": None}
     check("not ready before the grace period elapses", cr.ready_to_publish(fresh, now) is False)
     check("ready once the grace period has elapsed", cr.ready_to_publish(stale, now) is True)
     check("never ready before a preview has even been sent", cr.ready_to_publish(unsent, now) is False)
+    stale_ungated = {"status": "preview_sent", "preview_sent_at": "2026-09-18 19:00"}
+    check("grace elapsed but image gate not cleared -> NOT ready",
+          cr.ready_to_publish(stale_ungated, now) is False)
 
     # due_for_preview reads STATE_PATH off disk -- redirect it to an
     # isolated temp file so this is deterministic and doesn't depend on
@@ -350,6 +353,106 @@ def caption_tests():
           "Mamata Banerjee: Biswarup Ganguly / CC BY 3.0" in with_credit)
 
 
+def image_gate_tests():
+    """The owner's rule: an image-less story is never published."""
+    print("\nIMAGE GATE")
+    from src import carousel_review as cr
+    sent = []
+    real_send = cr.telegram_bot.send_message
+    cr.telegram_bot.send_message = lambda text, *a, **k: sent.append(text)
+    real_path = cr.STATE_PATH
+    real_render = cr._rerender_slide
+    cr._rerender_slide = lambda s, n: None
+    now = dt.datetime(2026, 9, 18, 22, 0)
+
+    def st(with_image, without_image):
+        slides = [_fake_slide(0, is_cover=True)]
+        i = 1
+        for _ in range(with_image):
+            s = _fake_slide(i); s["raw_photo_path"] = f"p{i}.jpg"; slides.append(s); i += 1
+        for _ in range(without_image):
+            s = _fake_slide(i); s["media_source"] = "text_only"; s["raw_photo_path"] = None; slides.append(s); i += 1
+        return {"status": "preview_sent", "preview_sent_at": "2026-09-18 20:30", "slides": slides}
+
+    with tempfile.TemporaryDirectory() as tmp:
+        cr.STATE_PATH = os.path.join(tmp, "carousel_pending.json")
+        try:
+            s = st(6, 0)
+            cr.apply_image_gate(s, now)
+            check("all slides have images -> gate clear, ready", s["image_gate"] == "clear"
+                  and cr.ready_to_publish(s, now))
+
+            s = st(5, 3)
+            sent.clear()
+            cr.apply_image_gate(s, now)
+            dropped = [x for x in s["slides"] if x.get("drop_reason") == "no_image"]
+            check(">=4 with images -> image-less ones left out, gate clear",
+                  s["image_gate"] == "clear" and len(dropped) == 3)
+            check("the left-out slides are all the image-less ones",
+                  all(not cr.slide_has_image(x) for x in dropped))
+            check("survivors are renumbered 1..5",
+                  [x["final_index"] for x in cr.surviving_slides(s)[1:]] == [1, 2, 3, 4, 5])
+            check("owner is told which slides were left out", len(sent) == 1 and "no image" in sent[0])
+            check("nothing image-less can survive to publish",
+                  all(cr.slide_has_image(x) for x in cr.surviving_slides(s) if not x.get("is_cover")))
+
+            s = st(2, 6)
+            sent.clear()
+            cr.apply_image_gate(s, now)
+            check("<4 images -> HELD", s["image_gate"] == "hold" and not cr.ready_to_publish(s, now))
+            check("held carousel drops nothing", not any(x.get("drop_reason") for x in s["slides"]))
+            check("owner gets a hold reminder", len(sent) == 1 and "ON HOLD" in sent[0])
+            cr.apply_image_gate(s, now + dt.timedelta(minutes=30))
+            check("no reminder spam within the reminder interval", len(sent) == 1)
+            cr.apply_image_gate(s, now + dt.timedelta(hours=3))
+            check("reminder again after the interval", len(sent) == 2)
+
+            for x in s["slides"][3:5]:
+                x["raw_photo_path"] = "attached.jpg"
+            cr.apply_image_gate(s, now + dt.timedelta(hours=3, minutes=5))
+            check("attaching photos while held releases it (4 have images, 4 left out)",
+                  s["image_gate"] == "clear" and cr.ready_to_publish(s, now + dt.timedelta(hours=4)))
+
+            s = st(6, 0)
+            check("gate does nothing before the review window ends",
+                  cr.apply_image_gate(s, dt.datetime(2026, 9, 18, 20, 40)) is None
+                  and "image_gate" not in s)
+
+            s = st(2, 1)
+            s["slides"][3]["video_path"] = "v.mp4"; s["slides"][3]["media_kind"] = "video"
+            check("a video slide counts as having an image", cr.slide_has_image(s["slides"][3]))
+
+            s = st(3, 2)
+            s["status"] = "preview_sent"
+            check("finalize refuses to publish an image-less slide even if the gate was bypassed",
+                  cr.finalize_and_publish(s, now) is None and s["status"] == "preview_sent")
+        finally:
+            cr.STATE_PATH = real_path
+            cr.telegram_bot.send_message = real_send
+            cr._rerender_slide = real_render
+
+    # single posts: no verified image -> held, never rendered/published
+    import datetime as _dt
+    from src import main
+    held = []
+    real = (main.subject_photos.find_subject_photo, main._hold_for_image, main.ai_writer.rewrite)
+    main.subject_photos.find_subject_photo = lambda *a, **k: None
+    main._hold_for_image = lambda story, ist: held.append(story["id"])
+    def _no_render(*a, **k):
+        raise AssertionError("rendered an image-less post")
+    main.ai_writer.rewrite = _no_render
+    try:
+        story = {"id": "z1", "title": "Delhi rain floods roads", "summary": "", "score": 99,
+                 "category": "INDIA NEWS", "link": ""}
+        r = main._render_story(story, _dt.datetime(2026, 9, 20, 21, 0), is_reel=False, force_no_image=True)
+        check("a single post with no verified image is held, not rendered", r is None and held == ["z1"])
+        entry = {"story": story}
+        check("portrait availability is cached on the queue entry",
+              main._portrait_available(entry) is False and entry.get("portrait_ok") is False)
+    finally:
+        main.subject_photos.find_subject_photo, main._hold_for_image, main.ai_writer.rewrite = real
+
+
 if __name__ == "__main__":
     with tempfile.TemporaryDirectory() as tmp:
         rendering_tests(tmp)
@@ -361,6 +464,7 @@ if __name__ == "__main__":
     selection_scope_tests()
     review_state_tests()
     caption_tests()
+    image_gate_tests()
     print(f"\n{'='*52}\n{len(PASS)} passed, {len(FAIL)} failed")
     if FAIL:
         print("FAILED:")

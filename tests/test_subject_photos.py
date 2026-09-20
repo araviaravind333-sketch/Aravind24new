@@ -140,6 +140,34 @@ def framing_tests():
           f"{mean(a):.1f} vs {mean(b):.1f}")
 
 
+def substitution_tests():
+    print("\nNEVER ANOTHER PERSON'S FACE")
+    people = {
+        "Narendra Modi": ("Q1", "modi.jpg"),
+        "Vladimir Putin": ("Q2", "putin.jpg"),
+    }
+    files = {
+        "modi.jpg": {"url": "u", "license": "CC BY-NC 4.0", "license_url": "", "artist": "A",
+                     "page": "p", "width": 2000, "height": 2000, "mime": "image/jpeg"},
+        "putin.jpg": {"url": "u", "license": "CC BY 4.0", "license_url": "", "artist": "B",
+                      "page": "p", "width": 2000, "height": 2000, "mime": "image/jpeg"},
+    }
+    saved = (sp.resolve_person, sp.commons_file_info, sp._download, dict(sp._CACHE))
+    sp._CACHE.clear()
+    sp.resolve_person = lambda name, *a, **k: (*people[name], "d", "ok") if name in people else (None, None, None, "no")
+    sp.commons_file_info = lambda f: files.get(f)
+    sp._download = lambda url, path: None
+    try:
+        r = sp.find_subject_photo("Narendra Modi meets Putin in Moscow", dest_dir=tempfile.mkdtemp())
+        check("first-named person's photo unusable -> NO photo (not the second person's)", r is None, r)
+        sp._CACHE.clear()
+        r = sp.find_subject_photo("Vladimir Putin meets Narendra Modi", dest_dir=tempfile.mkdtemp())
+        check("first-named person usable -> that person's photo", r and r["subject"] == "Vladimir Putin", r)
+    finally:
+        sp.resolve_person, sp.commons_file_info, sp._download = saved[:3]
+        sp._CACHE.clear(); sp._CACHE.update(saved[3])
+
+
 def disabled_tests():
     print("\nSWITCH")
     from config import settings
@@ -157,6 +185,7 @@ if __name__ == "__main__":
     resolve_tests()
     safety_tests()
     framing_tests()
+    substitution_tests()
     disabled_tests()
     print(f"\n{'=' * 52}\n{len(PASS)} passed, {len(FAIL)} failed")
     if FAIL:

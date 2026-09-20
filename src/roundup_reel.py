@@ -208,29 +208,34 @@ def _bar(draw, current, total, y=200):
         draw.rounded_rectangle([x0, y, x0 + w, y + 8], radius=4, fill=fill)
 
 
-def render_frame(slide_path, current, total, date_label):
-    """A 1080x1920 frame: brand header + progress bar (which story we are
-    on), the reviewed 4:5 slide unchanged in the middle, and a follow line.
-    Everything important stays inside Instagram's Reels safe area."""
-    canvas = _vertical_gradient(REEL_W, REEL_H, (16, 16, 18), (6, 6, 8)).convert("RGB")
-    draw = ImageDraw.Draw(canvas)
-    f_brand = _font(ANTON, 58)
-    draw.rectangle([70, 108, 90, 156], fill=(224, 30, 30))
-    draw.text((108, 100), "ARAVIND NEWS 24", font=f_brand, fill=WHITE)
-    f_date = _font(ARCHIVO, 34)
-    dw = draw.textlength(date_label, font=f_date)
-    draw.text((REEL_W - 70 - dw, 116), date_label, font=f_date, fill=MUTED)
-    _bar(draw, current, total)
+SLIDE_TOP = 230
 
+
+def _blurred_backdrop(slide):
+    """Full-frame backdrop made from the slide itself (scaled to fill,
+    heavily blurred and darkened), so the strips above and below the 4:5
+    slide carry the slide's own colours instead of a flat empty band."""
+    from PIL import ImageEnhance, ImageFilter
+    scale = max(REEL_W / slide.width, REEL_H / slide.height)
+    bg = slide.resize((int(slide.width * scale) + 1, int(slide.height * scale) + 1), Image.BILINEAR)
+    left, top = (bg.width - REEL_W) // 2, (bg.height - REEL_H) // 2
+    bg = bg.crop((left, top, left + REEL_W, top + REEL_H)).filter(ImageFilter.GaussianBlur(45))
+    return ImageEnhance.Brightness(bg).enhance(0.42)
+
+
+def render_frame(slide_path, current, total, date_label):
+    """A 1080x1920 frame: the reviewed 4:5 slide, full width, on a blurred
+    backdrop of itself, with a segmented progress bar above it (which story
+    we are on). Nothing is placed in Instagram's top ~200px or bottom ~330px,
+    where the app draws its own controls, caption and username -- the slide
+    (which carries the brand line) sits between them."""
     slide = Image.open(slide_path).convert("RGB")
+    canvas = _blurred_backdrop(slide)
+    draw = ImageDraw.Draw(canvas)
+    _bar(draw, current, total, y=SLIDE_TOP - 34)
     if slide.width != REEL_W:
         slide = slide.resize((REEL_W, int(slide.height * REEL_W / slide.width)), Image.LANCZOS)
-    canvas.paste(slide, (0, 270))
-
-    f_cta = _font(ANTON, 44)
-    cta = f"FOLLOW {settings.BRAND_HANDLE.upper()} FOR DAILY NEWS"
-    cw = draw.textlength(cta, font=f_cta)
-    draw.text(((REEL_W - cw) / 2, 1660), cta, font=f_cta, fill=_hex_to_rgb(ACCENT))
+    canvas.paste(slide, (0, SLIDE_TOP))
     return canvas
 
 
@@ -238,7 +243,7 @@ def render_end_frame(total, date_label):
     """Last card: a plain, unmissable follow ask (spoken over it too)."""
     canvas = _vertical_gradient(REEL_W, REEL_H, (22, 22, 26), (6, 6, 8)).convert("RGB")
     draw = ImageDraw.Draw(canvas)
-    _bar(draw, total, total)
+    _bar(draw, total, total, y=SLIDE_TOP - 34)
     f_big = _font(ANTON, 150)
     for i, line in enumerate(["FOLLOW", "FOR THE", "DAILY", "ROUNDUP"]):
         w = draw.textlength(line, font=f_big)
@@ -254,9 +259,9 @@ def render_end_frame(total, date_label):
     sub = "Every evening · 8:30 PM IST · India + world"
     sw_ = draw.textlength(sub, font=f_s)
     draw.text(((REEL_W - sw_) / 2, 1290), sub, font=f_s, fill=MUTED)
-    f_d = _font(ARCHIVO, 34)
+    f_d = _font(ARCHIVO, 38)
     dw = draw.textlength(date_label, font=f_d)
-    draw.text((REEL_W - 70 - dw, 116), date_label, font=f_d, fill=MUTED)
+    draw.text(((REEL_W - dw) / 2, 1360), date_label, font=f_d, fill=MUTED)
     return canvas
 
 
@@ -273,7 +278,44 @@ def ffmpeg_exe():
         return None
 
 
-def build_reel(slide_paths, headlines, out_path, date_label, synth=None, work_dir=None):
+VOICE_RATE = 22050
+
+
+def prepare_voice_clip(exe, src, out_wav):
+    """Any recording (Telegram voice notes are Opus/.oga) -> mono 22.05 kHz
+    wav with leading/trailing silence trimmed, then loudness levelled so
+    every slide's clip sits at the same volume. Two separate ffmpeg passes:
+    trim + loudnorm in ONE filter graph crashed ffmpeg (an assertion in
+    ffmpeg_filter.c) on some clip lengths. If levelling fails the trimmed
+    clip is used as-is -- an unlevelled clip beats no clip."""
+    trim = "silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.05"
+    trimmed = out_wav + ".trim.wav"
+    res = subprocess.run([exe, "-y", "-i", src, "-vn", "-af", f"{trim},areverse,{trim},areverse",
+                          "-ac", "1", "-ar", str(VOICE_RATE), "-c:a", "pcm_s16le", trimmed],
+                         capture_output=True, text=True, timeout=120)
+    if res.returncode != 0 or not os.path.exists(trimmed):
+        raise RuntimeError(f"could not process voice clip {os.path.basename(src)}: {res.stderr[-400:]}")
+    lev = subprocess.run([exe, "-y", "-i", trimmed, "-af", "loudnorm=I=-16:TP=-1.5:LRA=11",
+                          "-ar", str(VOICE_RATE), "-ac", "1", "-c:a", "pcm_s16le", out_wav],
+                         capture_output=True, text=True, timeout=120)
+    if lev.returncode != 0 or not os.path.exists(out_wav):
+        print("voice levelling failed, using the trimmed clip:", lev.stderr[-200:])
+        shutil.copyfile(trimmed, out_wav)
+    os.remove(trimmed)
+    return out_wav
+
+
+def _silence_wav(path, seconds, rate=VOICE_RATE):
+    with wave.open(path, "wb") as w:
+        w.setnchannels(1)
+        w.setsampwidth(2)
+        w.setframerate(rate)
+        w.writeframes(b"\x00\x00" * int(rate * seconds))
+    return path
+
+
+def build_reel(slide_paths, headlines, out_path, date_label, synth=None, work_dir=None,
+               voice_clips=None):
     """slide_paths[0] is the cover; slide_paths[1:] are the story slides in
     order, and `headlines` holds one headline per story slide. `synth` is
     injectable so the assembly can be tested without the real voice.
@@ -282,18 +324,32 @@ def build_reel(slide_paths, headlines, out_path, date_label, synth=None, work_di
     if not exe:
         raise RuntimeError("ffmpeg not available")
     assert len(slide_paths) == len(headlines) + 1, "one headline per story slide, cover excluded"
-    synth = synth or make_piper_synth()
     work = work_dir or tempfile.mkdtemp(prefix="reel_")
     os.makedirs(work, exist_ok=True)
 
-    intro, stories, outro = script_for(headlines)
-    lines = [intro] + stories + [outro]
+    if voice_clips:
+        # the owner's own recordings: intro (optional), one per story, and a
+        # silent end card -- the follow ask is on screen, not synthesised
+        assert len(voice_clips["stories"]) == len(headlines), "one recording per story slide"
+        sources = [voice_clips.get("intro")] + list(voice_clips["stories"]) + [None]
+        lines = [None] * len(sources)
+    else:
+        synth = synth or make_piper_synth()
+        intro, stories, outro = script_for(headlines)
+        lines = [intro] + stories + [outro]
     total = len(slide_paths)                 # cover + stories (end card sits after the bar)
 
     parts, frames = [], []
     for i, text in enumerate(lines):
         wav = os.path.join(work, f"line_{i:02d}.wav")
-        synth(text, wav)
+        if voice_clips:
+            src = sources[i]
+            if src:
+                prepare_voice_clip(exe, src, wav)
+            else:
+                _silence_wav(wav, 1.6 if i == 0 else 2.6)
+        else:
+            synth(text, wav)
         parts.append((wav, GAP_SEC))
         png = os.path.join(work, f"frame_{i:02d}.png")
         if i < len(slide_paths):
@@ -319,7 +375,8 @@ def build_reel(slide_paths, headlines, out_path, date_label, synth=None, work_di
     res = subprocess.run(cmd, capture_output=True, text=True, timeout=600)
     if res.returncode != 0 or not os.path.exists(out_path):
         raise RuntimeError(f"ffmpeg failed ({res.returncode}): {res.stderr[-1500:]}")
-    return {"path": out_path, "duration": sum(durations), "segments": len(lines)}
+    return {"path": out_path, "duration": sum(durations), "segments": len(lines),
+            "voice": "owner" if voice_clips else "standard"}
 
 
 def reel_caption(n_stories, seconds, now_ist=None):

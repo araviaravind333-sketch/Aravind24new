@@ -6,7 +6,9 @@ name: AravindNews24 Daily Carousel
 # automated daily slots -- see config/settings.py
 # CAROUSEL_COUNTS_AS_AUTOMATED_SLOT.
 #
-# Runs every 15 min in the evening window only:
+# Runs every 15 min in the evening window, and every 30 min the rest of the
+# day so a carousel/Reel that is HELD (waiting for your photos / voice notes)
+# is released soon after you send them:
 #   - first run at/after CAROUSEL_PREVIEW_HOUR_IST builds it and sends
 #     every slide to Telegram for review (reply with a photo/video to
 #     replace a slide, or "not good" to drop it)
@@ -18,6 +20,7 @@ name: AravindNews24 Daily Carousel
 on:
   schedule:
     - cron: '0,15,30,45 15-17 * * *'
+    - cron: '15,45 0-14,18-23 * * *'
   workflow_dispatch:
     inputs:
       force_build:

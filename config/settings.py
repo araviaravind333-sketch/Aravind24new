@@ -344,3 +344,27 @@ SUBJECT_PHOTO_MIN_SITELINKS = 25
 # one) be shared under the same licence. Off by default; only CC0, public
 # domain, CC BY and GODL-India are used unless this is switched on.
 SUBJECT_PHOTO_ALLOW_SHARE_ALIKE = False
+
+
+# ============================================================
+# 13. IMAGE REQUIRED  (owner's rule: never publish an image-less news post)
+# ============================================================
+# A story with no photo -- yours from Telegram, a rights-cleared event photo,
+# or a verified file portrait -- is held instead of being posted as a text
+# card. Nothing is guessed or generated to fill the gap.
+REQUIRE_IMAGE_TO_PUBLISH = True
+# Regular Telegram candidates: how long an image-less one waits for your photo
+# before it is dropped from the queue.
+IMAGE_WAIT_HOURS = 12
+# Daily carousel: once the review window ends, slides that still have no image
+# are left out and the rest are published -- but only if at least this many
+# slides have one. Fewer than that and the whole carousel is held (with a
+# reminder) until you attach more.
+CAROUSEL_MIN_IMAGE_SLIDES = 4
+CAROUSEL_HOLD_REMINDER_HOURS = 2
+
+
+# The daily roundup Reel is narrated in YOUR voice (reply to each story slide
+# with a Telegram voice note). True = the Reel waits for those recordings and
+# is not built with the synthetic Piper voice; False = falls back to Piper.
+REEL_REQUIRE_OWNER_VOICE = True

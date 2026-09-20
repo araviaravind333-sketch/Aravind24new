@@ -351,12 +351,18 @@ def _act_on_photo_decision(label, info, now_ist):
                 f"Reply to the original candidate message with the photo instead.")
         return  # queue entry stays; the normal resolution loop finds the file
 
+    if label == "REJECTED" and settings.REQUIRE_IMAGE_TO_PUBLISH:
+        telegram_bot.send_message(
+            f"Photo rejected for \"{queue[idx]['story']['title'][:80]}\" -- it stays in the "
+            f"queue and will not be posted without an image. Reply to its message with your own photo.")
+        return
+
     if label in ("REJECTED", "TEXT_ONLY"):
         entry = queue.pop(idx)
         _save_tg_queue(queue)
         story = entry["story"]
         print(f"Photo {label.lower()} via button -- posting text-only now:", story["title"])
-        _render_story(story, now_ist, is_reel=False, force_no_image=True)
+        _render_story(story, now_ist, is_reel=False, force_no_image=True, allow_text_only=True)
 
 
 def _load_tg_offset():
@@ -685,12 +691,21 @@ def carousel_cycle():
     now_ist = (dt.datetime.now(dt.timezone.utc) + dt.timedelta(hours=5, minutes=30)).replace(tzinfo=None)
 
     if carousel_review.due_for_preview(now_ist):
+        old_state = carousel_review._load_state()
+        if old_state and old_state.get("status") == "preview_sent":
+            telegram_bot.send_message(
+                f"The carousel for {old_state.get('date')} was never published (still waiting for images) "
+                f"and has expired. Building today's.")
         print("Building today's carousel...")
         state = carousel_review.build_carousel(now_ist)
         carousel_review.send_preview(state, now_ist)
         print(f"Carousel preview sent -- {len(state['slides'])} slides.")
 
     _poll_telegram_replies(set(), now_ist)
+
+    state = carousel_review._load_state()
+    if state:
+        carousel_review.apply_image_gate(state, now_ist)
 
 
 def carousel_reel_build():
@@ -751,12 +766,27 @@ def telegram_cycle():
             resolved_idx, resolved_kind, inbox_path = i, "media", matches[0]
             break
     if resolved_idx is None:
+        expired = []
         for i, entry in enumerate(queue):
             sent_at = dt.datetime.strptime(entry["sent_at"], "%Y-%m-%d %H:%M")
             age_min = (now_ist - sent_at).total_seconds() / 60
-            if age_min >= settings.TELEGRAM_GRACE_MINUTES:
+            if age_min < settings.TELEGRAM_GRACE_MINUTES:
+                continue
+            if not settings.REQUIRE_IMAGE_TO_PUBLISH:
                 resolved_idx, resolved_kind = i, "text_only"
                 break
+            # Image required: after the grace period a story only goes out
+            # if a verified, licensed file portrait exists for it; otherwise
+            # it keeps waiting for your photo, then is dropped.
+            if _portrait_available(entry):
+                resolved_idx, resolved_kind = i, "text_only"
+                break
+            if age_min >= settings.IMAGE_WAIT_HOURS * 60:
+                expired.append(i)
+        for i in reversed(expired):
+            entry = queue.pop(i)
+            print("No image supplied in time -- dropping without posting:", entry["story"]["title"])
+            news_engine.mark_posted(entry["story"])
 
     if resolved_idx is not None:
         # A resolved candidate (media received, or grace period expired)
@@ -826,7 +856,7 @@ def telegram_cycle():
                 # by request, Reels are reserved for posts with a real
                 # human-submitted photo/video, giving the feed visual
                 # variety instead of every single post being a Reel.
-                print("No reply within the grace period — posting text-only:", story["title"])
+                print("No reply within the grace period — posting with verified file photo:", story["title"])
                 _render_story(story, now_ist, is_reel=False, force_no_image=True)
 
     if len(queue) < settings.TELEGRAM_QUEUE_TARGET:
@@ -846,8 +876,41 @@ def telegram_cycle():
     _save_tg_queue(queue)
 
 
+def _portrait_available(entry):
+    """Cached on the queue entry so the Wikidata/Commons lookups run once
+    per candidate, not every 30-minute cycle."""
+    if "portrait_ok" not in entry:
+        story = entry["story"]
+        try:
+            entry["portrait_ok"] = bool(
+                subject_photos.find_subject_photo(story["title"], story.get("summary", "")))
+        except Exception as e:
+            print("portrait check failed:", e)
+            entry["portrait_ok"] = False
+    return entry["portrait_ok"]
+
+
+def _hold_for_image(story, now_ist):
+    """A story that would go out without any image (e.g. a breaking story
+    found by the automated scanner) is put in the Telegram queue instead,
+    so you can reply to it with a photo. Never re-sent if already queued."""
+    queue = _load_tg_queue()
+    if any(e["story"]["id"] == story["id"] for e in queue):
+        return
+    message_id = telegram_bot.send_candidate(story)
+    if message_id:
+        queue.append({
+            "message_id": message_id,
+            "story": {k: v for k, v in story.items() if k != "published"},
+            "sent_at": now_ist.strftime("%Y-%m-%d %H:%M"),
+        })
+        _save_tg_queue(queue)
+        print("Held for an image -- sent to Telegram:", story["title"])
+
+
 def _render_story(story, ist, is_reel, forced_image_path=None,
-                   force_no_image=False, consumed_inbox_file=None):
+                   force_no_image=False, consumed_inbox_file=None,
+                   allow_text_only=False):
     if settings.TEXT_ONLY_MODE:
         # Single enforcement point -- overrides every caller (scheduled,
         # breaking, human-curated Telegram reply, automated fallback), so
@@ -875,6 +938,12 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
                              f"portrait-{ist.strftime('%Y%m%d-%H%M')}.jpg"))
             force_no_image = False
             print(f"Using verified file photo of {portrait['subject']} ({portrait['license']})")
+
+    if (force_no_image and forced_image_path is None and not allow_text_only
+            and settings.REQUIRE_IMAGE_TO_PUBLISH and not settings.TEXT_ONLY_MODE):
+        print("No image for this story -- not publishing without one:", story["title"])
+        _hold_for_image(story, ist)
+        return None
 
     written = ai_writer.rewrite(story)
     print("Headline:", written["headline"])
