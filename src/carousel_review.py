@@ -146,11 +146,13 @@ def build_carousel(now_ist):
 
     slides = []
     collage_source_photos = []
+    story_categories = []
     for i, story in enumerate(stories, start=1):
         written = ai_writer.rewrite(story)
         subhead = _one_line(story.get("summary") or written.get("caption", ""))
         headline = written["headline"]
         category = story["category"]
+        story_categories.append(category)
 
         photo_path = None
         try:
@@ -189,10 +191,12 @@ def build_carousel(now_ist):
         })
 
     cover_path = os.path.join(slides_dir, "cover.jpg")
+    fallback_colors = [carousel.CATEGORY_COLORS.get(c, carousel.ACCENT) for c in story_categories]
     carousel.render_cover_slide(
         "BREAKING", "Have a look at what happened in the world in the last 24 hours",
         now_ist.strftime("%d %b").upper(), collage_source_photos[:4], cover_path,
         footer=settings.BRAND_FOOTER, handle=settings.BRAND_HANDLE,
+        fallback_colors=fallback_colors,
     )
     cover_slide = {
         "index": 0,

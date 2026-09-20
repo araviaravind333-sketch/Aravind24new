@@ -269,8 +269,37 @@ def _build_collage(paths, w, h):
     return canvas
 
 
+def _build_color_mosaic(colors, w, h):
+    """Fallback for the day nothing has a real, rights-cleared photo at
+    all (measured: a real live run where all 8 stories came back
+    text_only) -- a grid of that day's actual category colours instead
+    of one flat gradient. Still entirely abstract graphic design, never
+    pretending to be a photo of anything -- this is NOT a substitute for
+    a real incident photo, it is only meant to look more like "several
+    stories combined" than a single block of colour does, which is what
+    was there before. If there is only one colour available, a vertical
+    gradient of it is used instead of a pointless single-colour block."""
+    colors = colors or [ACCENT]
+    if len(colors) == 1:
+        return _vertical_gradient(w, h, _mix(colors[0], "#000000", 0.15), _hex_to_rgb(NEAR_BLACK))
+    n = min(len(colors), 6)
+    cols = 3 if n > 4 else 2
+    rows = (n + cols - 1) // cols
+    cell_w, cell_h = w // cols, h // rows
+    canvas = Image.new("RGB", (w, h), _hex_to_rgb(NEAR_BLACK))
+    for i in range(n):
+        r, c = divmod(i, cols)
+        x0, y0 = c * cell_w, r * cell_h
+        cw = w - x0 if c == cols - 1 else cell_w
+        ch = h - y0 if r == rows - 1 else cell_h
+        top = _mix(colors[i], "#000000", 0.1)
+        block = _vertical_gradient(cw, ch, top, _hex_to_rgb(NEAR_BLACK))
+        canvas.paste(block, (x0, y0))
+    return canvas
+
+
 def render_cover_slide(top_word, subheadline, date_label, collage_paths, out_path,
-                        footer, handle):
+                        footer, handle, fallback_colors=None):
     """The un-numbered opening slide: bold top word + wrapped subheadline
     on a white band (matching the reference's own layout -- text block
     up top, photo below, not text-over-photo like the numbered story
@@ -297,7 +326,7 @@ def render_cover_slide(top_word, subheadline, date_label, collage_paths, out_pat
     photo_h = SLIDE_H - photo_top
     collage = _build_collage(collage_paths, SLIDE_W, photo_h)
     if collage is None:
-        collage = _vertical_gradient(SLIDE_W, photo_h, _hex_to_rgb(ACCENT), _hex_to_rgb(NEAR_BLACK))
+        collage = _build_color_mosaic(fallback_colors, SLIDE_W, photo_h)
     canvas.paste(collage, (0, photo_top))
 
     f_date = _font(ANTON, 38)

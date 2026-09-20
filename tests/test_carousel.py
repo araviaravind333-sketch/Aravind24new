@@ -82,6 +82,31 @@ def cover_slide_tests(tmp):
     check("collage returns None (not a blank canvas) when given no photos at all",
           carousel._build_collage([], 1080, 800) is None)
 
+    # Regression: a real live run had zero rights-cleared photos across
+    # all 8 stories that day, so the cover fell back to one flat colour
+    # block -- not a bug (there was genuinely no real photo to show), but
+    # a worse-looking fallback than necessary. A multi-category mosaic
+    # replaces the single block without ever pretending to be a photo.
+    mosaic = carousel._build_color_mosaic(
+        ["#F5871F", "#1E6FE0", "#12A150", "#8B5CF6", "#E01E1E"], 1080, 800)
+    check("mosaic has distinct colours across the frame, not one flat block",
+          len({mosaic.getpixel((x, 400)) for x in (50, 400, 750, 1000)}) > 1)
+    check("mosaic has no unfilled region either",
+          mosaic.getpixel((1080 - 5, 800 - 5)) != (0, 0, 0))
+    single = carousel._build_color_mosaic(["#F5871F"], 1080, 800)
+    check("a single category still renders (as a gradient, not a crash)",
+          single.size == (1080, 800))
+    empty = carousel._build_color_mosaic([], 1080, 800)
+    check("no categories at all still renders something rather than crashing",
+          empty.size == (1080, 800))
+
+    p_no_photo = carousel.render_cover_slide(
+        "BREAKING", "sub", "18 SEP", [], os.path.join(tmp, "cover_mosaic.jpg"),
+        footer="For the latest news", handle="@aravindnews24",
+        fallback_colors=["#F5871F", "#1E6FE0", "#12A150"])
+    check("cover slide actually uses the mosaic fallback end-to-end",
+          os.path.exists(p_no_photo) and os.path.getsize(p_no_photo) > 1000)
+
 
 def accent_phrase_tests():
     print("\nACCENT PHRASE HEURISTIC")
