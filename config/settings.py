@@ -368,3 +368,9 @@ CAROUSEL_HOLD_REMINDER_HOURS = 2
 # with a Telegram voice note). True = the Reel waits for those recordings and
 # is not built with the synthetic Piper voice; False = falls back to Piper.
 REEL_REQUIRE_OWNER_VOICE = True
+
+
+# Narrate the Reel in a clone of the owner's voice (data/voice/owner_voice.pt,
+# made once from a recorded sample -- see src/voice_clone.py). Used when the
+# profile exists; per-slide voice notes still take priority over it.
+REEL_CLONE_ENABLED = True

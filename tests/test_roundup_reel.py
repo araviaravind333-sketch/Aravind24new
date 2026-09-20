@@ -272,6 +272,80 @@ def voice_hold_tests(tmp):
         cr.telegram_bot.send_message, cr._save_state, roundup_reel.build_reel = real
 
 
+def clone_tests(tmp):
+    print("\nCLONED VOICE SELECTION")
+    from config import settings
+    from src import carousel_review as cr, roundup_reel, voice_clone
+
+    sent = []
+    real = (cr.telegram_bot.send_message, cr._save_state, roundup_reel.build_reel,
+            voice_clone.make_clone_synth, voice_clone.PROFILE_PATH, settings.REEL_CLONE_ENABLED,
+            settings.REEL_REQUIRE_OWNER_VOICE)
+    cr.telegram_bot.send_message = lambda text, *a, **k: sent.append(text)
+    cr._save_state = lambda s: None
+    got = {}
+
+    def fake_build(slides, heads, out, label, **k):
+        got.update(k)
+        open(out, "wb").write(b"x" * 100)
+        return {"duration": 30.0, "voice": "x"}
+    roundup_reel.build_reel = fake_build
+    marker = lambda text, path: None
+    voice_clone.make_clone_synth = lambda *a, **k: marker
+    settings.REEL_REQUIRE_OWNER_VOICE = True
+
+    def st():
+        slides = []
+        for i in range(3):
+            path = os.path.join(tmp, f"c{i}.jpg")
+            open(path, "wb").write(b"x")
+            slides.append({"index": i, "final_index": i, "status": "pending", "is_cover": i == 0,
+                           "rendered_image_path": path, "headline": f"H{i}", "media_kind": "image"})
+        return {"date": "2026-09-20", "status": "published", "slides": slides,
+                "publish_results": {"instagram": {"id": "1"}}}
+
+    now = dt.datetime(2026, 9, 20, 21, 0)
+    try:
+        profile = os.path.join(tmp, "owner_voice.pt")
+        voice_clone.PROFILE_PATH = profile
+        settings.REEL_CLONE_ENABLED = True
+        check("no profile -> clone not available", not voice_clone.clone_available())
+        check("no profile, no notes -> reel waits (not needs_clone)", not cr.reel_needs_clone(st(), now))
+
+        open(profile, "wb").write(b"profile")
+        check("profile present -> clone available", voice_clone.clone_available())
+        check("a due reel with a profile needs the clone model", cr.reel_needs_clone(st(), now))
+        check("a reel that is not due does not install the model",
+              not cr.reel_needs_clone(dict(st(), reel_status="published"), now))
+
+        s = st()
+        cr.build_roundup_reel(s, now)
+        check("the reel is narrated with the cloned voice", got.get("synth") is marker and not got.get("voice_clips"),
+              got)
+        check("no 'send me your voice' nag when a profile exists", not sent)
+
+        settings.REEL_CLONE_ENABLED = False
+        got.clear()
+        s = st()
+        res = cr.build_roundup_reel(s, now)
+        check("clone switched off + no notes -> waits instead of using the standard voice",
+              res is None and not got)
+
+        settings.REEL_CLONE_ENABLED = True
+        s = st()
+        for sl in s["slides"][1:]:
+            v = os.path.join(tmp, f"vv{sl['index']}.wav")
+            open(v, "wb").write(b"x")
+            sl["voice_path"] = v
+        got.clear()
+        cr.build_roundup_reel(s, now)
+        check("the owner's own recordings beat the clone", got.get("voice_clips") and got.get("synth") is None, got)
+    finally:
+        (cr.telegram_bot.send_message, cr._save_state, roundup_reel.build_reel,
+         voice_clone.make_clone_synth, voice_clone.PROFILE_PATH, settings.REEL_CLONE_ENABLED,
+         settings.REEL_REQUIRE_OWNER_VOICE) = real
+
+
 def caption_tests():
     print("\nREEL CAPTION")
     c = rr.reel_caption(8, 54.3)
@@ -388,6 +462,8 @@ if __name__ == "__main__":
         voice_tests(t)
     with tempfile.TemporaryDirectory() as t:
         voice_hold_tests(t)
+    with tempfile.TemporaryDirectory() as t:
+        clone_tests(t)
     caption_tests()
     with tempfile.TemporaryDirectory() as t:
         state_tests(t)

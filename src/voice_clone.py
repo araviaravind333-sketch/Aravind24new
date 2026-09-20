@@ -1,0 +1,107 @@
+"""
+Owner Voice Clone (Reel narration)
+==================================
+Narrates the daily roundup Reel in the OWNER'S OWN voice, from one recorded
+sample, using Chatterbox (Resemble AI, MIT licence, runs on CPU).
+
+  * One-time: `python -m src.main make-voice-profile <sample audio>` turns the
+    sample into a small voice profile (data/voice/owner_voice.pt). Only the
+    profile is committed -- never the raw recording.
+  * Every day: the Reel's lines are synthesised from that profile.
+
+Consent: this clones the account owner's own voice from their own recording,
+and is used only for this account's narration.
+
+Speed: roughly 12x slower than real time on a CPU, so a ~1 minute Reel takes
+~12-15 minutes to synthesise. The model (~3 GB) and the `chatterbox-tts`
+package are installed/downloaded on first use only, never for a run that
+does not build a Reel.
+"""
+
+import os
+import subprocess
+import sys
+import wave
+
+from config import settings
+
+_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PROFILE_PATH = os.path.join(_ROOT, "data", "voice", "owner_voice.pt")
+
+
+def profile_exists(path=None):
+    return os.path.exists(path or PROFILE_PATH)
+
+
+def clone_available():
+    return bool(settings.REEL_CLONE_ENABLED and profile_exists())
+
+
+def ensure_deps():
+    try:
+        import chatterbox  # noqa: F401
+    except ImportError:
+        print("voice_clone: installing chatterbox-tts (first use)...")
+        subprocess.run([sys.executable, "-m", "pip", "install", "-q", "chatterbox-tts"], check=True)
+
+
+def _load_model():
+    ensure_deps()
+    from chatterbox.tts import ChatterboxTTS
+    return ChatterboxTTS.from_pretrained(device="cpu")
+
+
+def _write_wav(tensor, sr, path):
+    import numpy as np
+    pcm = (tensor.squeeze(0).clamp(-1, 1).numpy() * 32767).astype(np.int16)
+    with wave.open(path, "wb") as w:
+        w.setnchannels(1)
+        w.setsampwidth(2)
+        w.setframerate(sr)
+        w.writeframes(pcm.tobytes())
+
+
+def _clean_sample(sample_path, out_wav):
+    """Any recording (m4a / mp3 / wav / ogg) -> mono 24 kHz wav, silence
+    trimmed from both ends."""
+    from src import roundup_reel
+    exe = roundup_reel.ffmpeg_exe()
+    if not exe:
+        raise RuntimeError("ffmpeg not available")
+    trim = "silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.1"
+    res = subprocess.run([exe, "-y", "-i", sample_path, "-vn", "-af", f"{trim},areverse,{trim},areverse",
+                          "-ac", "1", "-ar", "24000", "-c:a", "pcm_s16le", out_wav],
+                         capture_output=True, text=True, timeout=180)
+    if res.returncode != 0 or not os.path.exists(out_wav):
+        raise RuntimeError("could not read the voice sample: " + res.stderr[-300:])
+    with wave.open(out_wav, "rb") as w:
+        seconds = w.getnframes() / w.getframerate()
+    if seconds < 5:
+        raise RuntimeError(f"the sample is only {seconds:.1f}s of speech -- record at least 15-20 seconds")
+    return seconds
+
+
+def make_profile(sample_path, out_path=None):
+    import tempfile
+    out_path = out_path or PROFILE_PATH
+    os.makedirs(os.path.dirname(out_path), exist_ok=True)
+    clean = os.path.join(tempfile.mkdtemp(prefix="voice_"), "sample.wav")
+    seconds = _clean_sample(sample_path, clean)
+    print(f"voice_clone: sample is {seconds:.1f}s of speech")
+    model = _load_model()
+    model.prepare_conditionals(clean)
+    model.conds.save(out_path)
+    print("voice_clone: profile saved to", out_path)
+    return out_path
+
+
+def make_clone_synth(profile_path=None):
+    """Returns synth(text, wav_path), the same interface as the Piper synth."""
+    from chatterbox.tts import Conditionals
+    model = _load_model()
+    model.conds = Conditionals.load(profile_path or PROFILE_PATH, map_location="cpu").to("cpu")
+
+    def synth(text, wav_path):
+        _write_wav(model.generate(text), model.sr, wav_path)
+
+    return synth

@@ -149,6 +149,30 @@ jobs:
       # this run, and none of them can fail the job: a reel problem must
       # never affect the carousel that already went out.
       # ------------------------------------------------------------------
+      # The cloned-voice model (~3 GB, plus the chatterbox-tts package) is only
+      # fetched on a run that will actually synthesise a Reel with it.
+      - name: Does the reel need the cloned-voice model?
+        id: reelvoice
+        continue-on-error: true
+        env:
+          CAROUSEL_REEL_DRYRUN: ${{ github.event.inputs.reel_dry_run }}
+        run: python -m src.main reel-needs-clone
+
+      - name: Cache the voice model
+        if: steps.reelvoice.outputs.needs_clone == 'true'
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: chatterbox-model-v1
+
+      - name: Install the voice model package
+        if: steps.reelvoice.outputs.needs_clone == 'true'
+        continue-on-error: true
+        run: |
+          # CPU-only torch first: the default Linux wheel is the multi-GB CUDA build
+          pip install -q torch==2.6.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cpu
+          pip install -q chatterbox-tts
+
       - name: Build roundup reel (voice-over) -- no-op unless a carousel was just published
         continue-on-error: true
         env:

@@ -726,6 +726,36 @@ def carousel_reel_build():
         print("No roundup reel due (carousel not published yet, or reel already handled).")
 
 
+def carousel_reel_needs_clone():
+    """Prints needs_clone=true|false (and appends it to $GITHUB_OUTPUT) so the
+    workflow only installs the ~3 GB voice model on a run that will use it."""
+    now_ist = (dt.datetime.now(dt.timezone.utc) + dt.timedelta(hours=5, minutes=30)).replace(tzinfo=None)
+    state = carousel_review._load_state()
+    if os.environ.get("CAROUSEL_REEL_DRYRUN", "").lower() == "true":
+        from src import voice_clone
+        needs = voice_clone.clone_available()      # a dry run proves the clone toolchain too
+    else:
+        needs = bool(state and carousel_review.reel_needs_clone(state, now_ist))
+    print(f"needs_clone={'true' if needs else 'false'}")
+    out = os.environ.get("GITHUB_OUTPUT")
+    if out:
+        with open(out, "a") as f:
+            f.write(f"needs_clone={'true' if needs else 'false'}\n")
+
+
+def voice_preview(lines):
+    """Local check of the cloned voice: synthesises the given lines (or two
+    sample headlines) to voice_preview_N.wav in the current folder."""
+    from src import voice_clone
+    lines = lines or ["Number one. The Prime Minister held talks on energy and defence deals.",
+                      "Number two. The central bank removed seven directors from a cooperative bank."]
+    synth = voice_clone.make_clone_synth()
+    for i, text in enumerate(lines, start=1):
+        path = f"voice_preview_{i}.wav"
+        synth(text, path)
+        print("wrote", path)
+
+
 def carousel_reel_publish():
     """After the reel file has been pushed (so it is publicly fetchable)."""
     state = carousel_review._load_state()
@@ -1203,6 +1233,13 @@ if __name__ == "__main__":
         carousel_publish_cycle()
     elif phase == "carousel-reel-build":
         carousel_reel_build()
+    elif phase == "reel-needs-clone":
+        carousel_reel_needs_clone()
+    elif phase == "make-voice-profile":
+        from src import voice_clone
+        voice_clone.make_profile(sys.argv[2])
+    elif phase == "voice-preview":
+        voice_preview(sys.argv[2:])
     elif phase == "carousel-reel-publish":
         carousel_reel_publish()
     elif phase == "photo-retry":

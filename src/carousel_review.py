@@ -728,6 +728,15 @@ def reel_due(state, now_ist=None):
     return True
 
 
+def reel_needs_clone(state, now_ist):
+    """True when a Reel is due AND it will be narrated by the cloned voice
+    (so the workflow must install the model). Cheap: no heavy imports."""
+    from src import voice_clone
+    if not reel_due(state, now_ist) or voice_plan(state):
+        return False
+    return voice_clone.clone_available()
+
+
 def _remind_for_voice(state, stories, now_ist):
     """The Reel is held until every surviving story slide has your voice
     note. Reminded at most every 3 hours."""
@@ -766,10 +775,15 @@ def build_roundup_reel(state, now_ist, synth=None, dry_run=False):
     else:
         out = os.path.join(os.path.dirname(cover["rendered_image_path"]), "roundup.mp4")
     voices = voice_plan(state)
-    if settings.REEL_REQUIRE_OWNER_VOICE and not voices and not dry_run:
+    from src import voice_clone
+    if not synth and not voices and voice_clone.clone_available():
+        synth = voice_clone.make_clone_synth()
+        print("roundup reel narration: clone of the owner's voice")
+    elif settings.REEL_REQUIRE_OWNER_VOICE and not voices and not dry_run and not synth:
         _remind_for_voice(state, stories, now_ist)
         return None
-    print("roundup reel narration:", "owner's own voice" if voices else "standard voice")
+    else:
+        print("roundup reel narration:", "owner's own recordings" if voices else "standard voice")
     res = roundup_reel.build_reel(
         slide_paths, [s["headline"] for s in stories], out,
         now_ist.strftime("%d %b").upper(), synth=synth, voice_clips=voices)
