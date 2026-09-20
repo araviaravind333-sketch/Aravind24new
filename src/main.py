@@ -705,7 +705,7 @@ def carousel_reel_build():
         return
     if os.environ.get("CAROUSEL_REEL_DRYRUN", "").lower() == "true":
         carousel_review.build_roundup_reel(state, now_ist, dry_run=True)
-    elif carousel_review.reel_due(state):
+    elif carousel_review.reel_due(state, now_ist):
         carousel_review.build_roundup_reel(state, now_ist)
     else:
         print("No roundup reel due (carousel not published yet, or reel already handled).")

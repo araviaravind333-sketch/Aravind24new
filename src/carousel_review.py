@@ -587,11 +587,23 @@ def surviving_slides(state):
 REEL_MAX_ATTEMPTS = 3
 
 
-def reel_due(state):
-    return bool(state
-                and state.get("status") == "published"
-                and state.get("publish_results")            # something really posted
-                and state.get("reel_status") is None)
+def reel_due(state, now_ist=None):
+    """A reel is due only for a carousel that (a) really posted, (b) has not
+    had a reel yet, and (c) is TODAY's. Without (c), the 20:00 and 20:15
+    cron ticks -- which run before tonight's carousel is built at 20:30 --
+    would find yesterday's already-published carousel and post a reel of
+    yesterday's stories. CAROUSEL_FORCE_REEL=true (the workflow's
+    force_reel input) waives (c) for a deliberate manual run."""
+    if not (state
+            and state.get("status") == "published"
+            and state.get("publish_results")            # something really posted
+            and state.get("reel_status") is None):
+        return False
+    if os.environ.get("CAROUSEL_FORCE_REEL", "").lower() == "true":
+        return True
+    if now_ist is not None and state.get("date") != now_ist.strftime("%Y-%m-%d"):
+        return False
+    return True
 
 
 def build_roundup_reel(state, now_ist, synth=None, dry_run=False):

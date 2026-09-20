@@ -151,6 +151,20 @@ def state_tests(tmp):
           not cr.reel_due({"status": "preview_sent", "publish_results": {}}))
     check("not due when nothing actually posted (all slides dropped)",
           not cr.reel_due({"status": "published", "publish_results": None}))
+    # Regression: the gating shipped without a date check, so the 20:00 and
+    # 20:15 ticks (before tonight's carousel exists) would have found
+    # YESTERDAY's published carousel and posted a reel of yesterday's news.
+    yday = {"status": "published", "date": "2026-09-19", "publish_results": {"instagram": {"id": "1"}}}
+    today = dt.datetime(2026, 9, 20, 20, 15)
+    check("yesterday's published carousel is NOT due for a reel today",
+          not cr.reel_due(yday, today))
+    check("today's published carousel is due",
+          cr.reel_due(dict(yday, date="2026-09-20"), today))
+    os.environ["CAROUSEL_FORCE_REEL"] = "true"
+    try:
+        check("force_reel deliberately waives the date check", cr.reel_due(yday, today))
+    finally:
+        os.environ.pop("CAROUSEL_FORCE_REEL", None)
     check("never built twice",
           not cr.reel_due({"status": "published", "publish_results": {"instagram": {}}, "reel_status": "built"}))
     check("a failed reel is not retried forever",

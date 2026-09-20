@@ -24,6 +24,10 @@ on:
         description: 'Build + send today''s carousel to Telegram right now, ignoring the 8:30 PM gate (for testing/manual re-runs)'
         type: boolean
         default: false
+      force_reel:
+        description: 'Build AND POST the voice-over roundup Reel for the latest published carousel even if it is not from today. REAL POST to Instagram.'
+        type: boolean
+        default: false
       reel_dry_run:
         description: 'Build the voice-over roundup Reel from the latest carousel on the server and report the result -- posts NOTHING (toolchain check)'
         type: boolean
@@ -148,6 +152,7 @@ jobs:
           TELEGRAM_BOT_TOKEN:   ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID:     ${{ secrets.TELEGRAM_CHAT_ID }}
           CAROUSEL_REEL_DRYRUN: ${{ github.event.inputs.reel_dry_run }}
+          CAROUSEL_FORCE_REEL:  ${{ github.event.inputs.force_reel }}
         run: python -m src.main carousel-reel-build
 
       - name: Push roundup reel (makes it public)
