@@ -1,8 +1,8 @@
 {
-  "date": "2026-09-19",
-  "status": "published",
-  "caption": "What happened today \u2014 19 Sep 2026\n\n01. Former Supreme Court judge warns caste and religion still divide Indian society\n02. Delhi Election Commission issues notice to Arvind Kejriwal and his family.\n03. RBI removes minister and seven directors from local cooperative bank\n04. Asian Games 2026 LIVE: Japan's Emperor opens edition in colourful opening ceremony\n05. Police find toddler crying beside mother beaten to death with stone\n06. Killers beat mother to death and leave toddler on her body.\n07. Congress Cries Foul Over DU Polls Verdict, Alleges Rigging And Bogus Voting\n08. Star Racehorse Zuccaro Wins Prestigious President Of India Gold Cup\n\nSwipe for the full roundup \u2192\n@aravindnews24",
-  "preview_sent_at": "2026-09-19 20:35",
+  "date": "2026-09-20",
+  "status": "preview_sent",
+  "caption": "\ud83d\udcf0 8 stories the world woke up to today \u2014 20 Sep 2026\n\n01. Delhi SIR Row: High-Profile Names, Cabinet Minister & Ex-Army Chief Under EC Scanner\n02. Yu, 13, wins record-breaking first major gold medal\n03. External Affairs Minister Jaishankar and former Army chief receive notices in Delhi.\n04. India thrash Indonesia 13-1 in Asian Games men\u2019s hockey opener\n05. Asian Games 2026 LIVE: India beats Singapore in women's table tennis\n06. Man Enters Karnataka Home\n07. Speeding BMW crashes off Mumbai Coastal Road bridge, killing three.\n08. Nepal flood toll crosses 1,450; over 6,000 still missing\n\n\ud83d\udc49 Follow @aravindnews24 \u2014 the daily roundup lands every evening at 8:30 PM IST\n\ud83d\udcac Which story matters most to you? Tell us below\n\ud83d\udd01 Send this to someone who misses the news\n\n#IndiaNews #WorldNews #NewsUpdate #Trending #AravindNews24",
+  "preview_sent_at": "2026-09-20 20:35",
   "slides": [
     {
       "index": 0,
@@ -10,83 +10,56 @@
       "headline": "",
       "subhead": "",
       "category": "",
-      "message_id": 188,
+      "message_id": 217,
       "media_kind": "image",
       "media_source": "auto",
-      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-19/cover.jpg",
+      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-20/cover.jpg",
       "video_path": null,
       "status": "pending",
       "is_cover": true,
-      "raw_photo_path": null,
-      "final_index": 0
+      "raw_photo_path": null
     },
     {
       "index": 1,
       "story": {
-        "id": "0d3e712c7ef0",
-        "title": "Fraternity must be India\u2019s foremost goal, says former Supreme Court judge",
-        "summary": "Justice Lavu Nageswara Rao says caste and religion continue to divide society and stresses the need for social independence alongside political independence",
-        "link": "https://www.thehindu.com/news/national/andhra-pradesh/fraternity-must-be-indias-foremost-goal-says-former-supreme-court-judge/article71485034.ece",
+        "id": "fd907ef9d0e6",
+        "title": "Delhi SIR Row: High-Profile Names, Cabinet Minister & Ex-Army Chief Under EC Scanner",
+        "summary": "   Delhi SIR Row: High-Profile Names, Cabinet Minister & Ex-Army Chief Under EC Scanner",
+        "link": "https://www.indiatoday.in/india/video/delhi-sir-row-high-profile-names-cabinet-minister-ex-army-chief-under-ec-scanner-ytvd-2998972-2026-09-20?utm_source=rss",
         "category": "INDIA NEWS",
-        "score": 75,
+        "score": 93,
         "hot_hit": true,
         "is_incident": false,
+        "corroborated": 3,
         "geo": {
           "is_india": true,
           "place": "India"
         }
       },
-      "headline": "Former Supreme Court judge warns caste and religion still divide Indian society",
-      "subhead": "Justice Lavu Nageswara Rao says caste and religion continue to divide society and stresses the\u2026",
+      "headline": "Delhi SIR Row: High-Profile Names, Cabinet Minister & Ex-Army Chief Under EC Scanner",
+      "subhead": "Delhi SIR Row: High-Profile Names, Cabinet Minister & Ex-Army Chief Under EC Scanner",
       "category": "INDIA NEWS",
-      "message_id": 189,
+      "message_id": 218,
       "media_kind": "image",
       "media_source": "text_only",
-      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-19/slide_01.jpg",
+      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-20/slide_01.jpg",
       "video_path": null,
       "status": "pending",
       "is_cover": false,
       "raw_photo_path": null,
-      "final_index": 1
+      "photo_credit": null,
+      "photo_subject": null,
+      "rendered_number": 1
     },
     {
       "index": 2,
       "story": {
-        "id": "db37dc16b1bb",
-        "title": "Delhi Election Commission Serves Notice to Arvind Kejriwal and Family Under SIR Process",
-        "summary": "   Delhi Election Commission Serves Notice to Arvind Kejriwal and Family Under SIR Process",
-        "link": "https://www.indiatoday.in/india/video/delhi-election-commission-serves-notice-to-arvind-kejriwal-and-family-under-sir-process-ytvd-2998443-2026-09-19?utm_source=rss",
-        "category": "INDIA NEWS",
-        "score": 75,
-        "hot_hit": true,
-        "is_incident": false,
-        "geo": {
-          "is_india": true,
-          "place": "India"
-        }
-      },
-      "headline": "Delhi Election Commission issues notice to Arvind Kejriwal and his family.",
-      "subhead": "Delhi Election Commission Serves Notice to Arvind Kejriwal and Family Under SIR Process",
-      "category": "INDIA NEWS",
-      "message_id": 190,
-      "media_kind": "image",
-      "media_source": "text_only",
-      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-19/slide_02.jpg",
-      "video_path": null,
-      "status": "pending",
-      "is_cover": false,
-      "raw_photo_path": null,
-      "final_index": 2
-    },
-    {
-      "index": 3,
-      "story": {
-        "id": "aa93cf753bb3",
-        "title": "RBI Orders Removal Of Maharashtra Minister, Seven Others From Latur DCC Bank",
-        "summary": "The central bank's order followed directions passed by the Aurangabad bench of the Bombay High Court in response to a petition filed by bank member Satish Sheshrao Jadhav.",
-        "link": "https://www.ndtvprofit.com/business/rbi-orders-removal-of-maharashtra-minister-seven-others-from-latur-dcc-bank-12069250#publisher=newsstand",
-        "category": "BUSINESS NEWS",
-        "score": 75,
+        "id": "7f94c2d5d59d",
+        "title": "Yu, 13, wins record-breaking first major gold medal",
+        "summary": "China\u2019s Yu Zidi, 13, wins a record\u2011breaking 200m women\u2019s butterfly gold at the Asian Games in Tokyo.",
+        "link": "https://www.bbc.co.uk/sport/swimming/articles/cqx2z1ky4d6lo?at_medium=RSS&at_campaign=rss",
+        "category": "SPORTS NEWS",
+        "score": 92,
         "hot_hit": true,
         "is_incident": false,
         "geo": {
@@ -94,26 +67,60 @@
           "place": null
         }
       },
-      "headline": "RBI removes minister and seven directors from local cooperative bank",
-      "subhead": "The central bank's order followed directions passed by the Aurangabad bench of the Bombay High\u2026",
-      "category": "BUSINESS NEWS",
-      "message_id": 191,
+      "headline": "Yu, 13, wins record-breaking first major gold medal",
+      "subhead": "China\u2019s Yu Zidi, 13, wins a record\u2011breaking 200m women\u2019s butterfly gold at the Asian Games in T\u2026",
+      "category": "SPORTS NEWS",
+      "message_id": 219,
       "media_kind": "image",
       "media_source": "text_only",
-      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-19/slide_03.jpg",
+      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-20/slide_02.jpg",
       "video_path": null,
       "status": "pending",
       "is_cover": false,
       "raw_photo_path": null,
-      "final_index": 3
+      "photo_credit": null,
+      "photo_subject": null,
+      "rendered_number": 2
+    },
+    {
+      "index": 3,
+      "story": {
+        "id": "0ae7755913a8",
+        "title": "S Jaishankar, ex-Army chief, CBI director get SIR notices in Delhi",
+        "summary": "   S Jaishankar, ex-Army chief, CBI director get SIR notices in Delhi",
+        "link": "https://www.indiatoday.in/india/story/election-commission-sir-notice-s-jaishankar-new-delhi-voter-roll-revision-2998945-2026-09-20?utm_source=rss",
+        "category": "INDIA NEWS",
+        "score": 78,
+        "hot_hit": true,
+        "is_incident": false,
+        "corroborated": 2,
+        "geo": {
+          "is_india": true,
+          "place": "India"
+        }
+      },
+      "headline": "External Affairs Minister Jaishankar and former Army chief receive notices in Delhi.",
+      "subhead": "S Jaishankar, ex-Army chief, CBI director get SIR notices in Delhi",
+      "category": "INDIA NEWS",
+      "message_id": 220,
+      "media_kind": "image",
+      "media_source": "text_only",
+      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-20/slide_03.jpg",
+      "video_path": null,
+      "status": "pending",
+      "is_cover": false,
+      "raw_photo_path": null,
+      "photo_credit": null,
+      "photo_subject": null,
+      "rendered_number": 3
     },
     {
       "index": 4,
       "story": {
-        "id": "4ad686d3c1c1",
-        "title": "Asian Games 2026 LIVE: Japan's Emperor opens edition in colourful opening ceremony",
-        "summary": "The 20th Asian Games opened in Nagoya after a troubled build-up; Manu Bhaker and Pawan Sehrawat lead the Indian contingent",
-        "link": "https://www.thehindu.com/sport/asian-games-2026-live-updates-opening-ceremony-september-19-2026/article71483852.ece",
+        "id": "4e6c7c31d8ea",
+        "title": "India thrash Indonesia 13-1 in Asian Games men\u2019s hockey opener",
+        "summary": "India continued to apply relentless pressure on the Indonesian defence, earning a penalty stroke in the 27th minute when Manpreet Singh was fouled inside the 'D' while trying to score on a rebound.",
+        "link": "https://www.thehindu.com/sport/india-thrash-indonesia-13-1-in-asian-games-mens-hockey-opener/article71487805.ece",
         "category": "SPORTS NEWS",
         "score": 74,
         "hot_hit": true,
@@ -121,157 +128,150 @@
         "corroborated": 5,
         "geo": {
           "is_india": false,
-          "place": "Tokyo",
-          "country": "japan"
+          "place": null
         }
       },
-      "headline": "Asian Games 2026 LIVE: Japan's Emperor opens edition in colourful opening ceremony",
-      "subhead": "The 20th Asian Games opened in Nagoya after a troubled build-up; Manu Bhaker and Pawan Sehrawat\u2026",
+      "headline": "India thrash Indonesia 13-1 in Asian Games men\u2019s hockey opener",
+      "subhead": "India continued to apply relentless pressure on the Indonesian defence, earning a penalty strok\u2026",
       "category": "SPORTS NEWS",
-      "message_id": 192,
+      "message_id": 221,
       "media_kind": "image",
       "media_source": "text_only",
-      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-19/slide_04.jpg",
+      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-20/slide_04.jpg",
       "video_path": null,
       "status": "pending",
       "is_cover": false,
       "raw_photo_path": null,
-      "final_index": 4
+      "photo_credit": null,
+      "photo_subject": null,
+      "rendered_number": 4
     },
     {
       "index": 5,
       "story": {
-        "id": "732f400410bc",
-        "title": "Woman beaten to death with stone, her 2-year-old daughter found weeping on her body",
-        "summary": "   Woman beaten to death with stone, her 2-year-old daughter found weeping on her body",
-        "link": "https://www.indiatoday.in/india/karnataka/story/karnataka-woman-found-murdered-in-raichur-field-husband-and-alleged-lover-detained-2998489-2026-09-19?utm_source=rss",
-        "category": "INDIA NEWS",
-        "score": 71,
+        "id": "5f0f976e8c44",
+        "title": "Asian Games 2026 LIVE: India beats Singapore in women's table tennis; men's team suffers defeat against Iran",
+        "summary": "India were staring at defeat after trailing 1-2 before Sreeja Akula and Yashaswini Ghorpade secured crucial wins to clinch the tie",
+        "link": "https://www.thehindu.com/sport/asian-games-2026-live-updates-on-september-20-2026/article71485811.ece",
+        "category": "SPORTS NEWS",
+        "score": 66,
         "hot_hit": true,
         "is_incident": false,
-        "corroborated": 2,
+        "corroborated": 6,
         "geo": {
-          "is_india": true,
-          "place": "India"
+          "is_india": false,
+          "place": "Tehran",
+          "country": "iran"
         }
       },
-      "headline": "Police find toddler crying beside mother beaten to death with stone",
-      "subhead": "Woman beaten to death with stone, her 2-year-old daughter found weeping on her body",
-      "category": "INDIA NEWS",
-      "message_id": 193,
+      "headline": "Asian Games 2026 LIVE: India beats Singapore in women's table tennis",
+      "subhead": "India were staring at defeat after trailing 1-2 before Sreeja Akula and Yashaswini Ghorpade sec\u2026",
+      "category": "SPORTS NEWS",
+      "message_id": 222,
       "media_kind": "image",
       "media_source": "text_only",
-      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-19/slide_05.jpg",
+      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-20/slide_05.jpg",
       "video_path": null,
       "status": "pending",
       "is_cover": false,
       "raw_photo_path": null,
-      "final_index": 5
+      "photo_credit": null,
+      "photo_subject": null,
+      "rendered_number": 5
     },
     {
       "index": 6,
       "story": {
-        "id": "78dc001c4ac7",
-        "title": "Mother Beaten To Death With Stone, Killers Place Crying Toddler On Her Body",
-        "summary": "Sneha's daughter was seen helplessly clutching onto her mother",
-        "link": "https://www.ndtv.com/india-news/mother-beaten-to-death-with-stone-killers-place-crying-toddler-on-her-body-12068956#publisher=newsstand",
+        "id": "fabc5d7b8d3d",
+        "title": "Man Enters Karnataka Home With Bucket. 6 Of Family Die In Fire Minutes Later",
+        "summary": "The case was first registered at Market Police Station.",
+        "link": "https://www.ndtv.com/india-news/man-enters-karnataka-home-with-bucket-6-of-family-die-in-fire-minutes-later-12072451#publisher=newsstand",
         "category": "INDIA NEWS",
-        "score": 65,
+        "score": 64,
         "hot_hit": true,
-        "is_incident": false,
-        "corroborated": 2,
+        "is_incident": true,
         "geo": {
           "is_india": true,
           "place": "India"
         }
       },
-      "headline": "Killers beat mother to death and leave toddler on her body.",
-      "subhead": "Sneha's daughter was seen helplessly clutching onto her mother",
+      "headline": "Man Enters Karnataka Home",
+      "subhead": "The case was first registered at Market Police Station.",
       "category": "INDIA NEWS",
-      "message_id": 194,
+      "message_id": 223,
       "media_kind": "image",
       "media_source": "text_only",
-      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-19/slide_06.jpg",
+      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-20/slide_06.jpg",
       "video_path": null,
       "status": "pending",
       "is_cover": false,
       "raw_photo_path": null,
-      "final_index": 6
+      "photo_credit": null,
+      "photo_subject": null,
+      "rendered_number": 6
     },
     {
       "index": 7,
       "story": {
-        "id": "6fafb9a069e6",
-        "title": "Congress Cries Foul Over DU Polls Verdict, Alleges Rigging And Bogus Voting",
-        "summary": "   Congress Cries Foul Over DU Polls Verdict, Alleges Rigging And Bogus Voting",
-        "link": "https://www.indiatoday.in/india/video/congress-cries-foul-over-du-polls-verdict-alleges-rigging-and-bogus-voting-ytvd-2998449-2026-09-19?utm_source=rss",
+        "id": "08812d26653d",
+        "title": "Speeding BMW Crashes Off Mumbai Coastal Road Bridge, Leaves 3 Dead",
+        "summary": "   Speeding BMW Crashes Off Mumbai Coastal Road Bridge, Leaves 3 Dead",
+        "link": "https://www.indiatoday.in/india/video/speeding-bmw-crashes-off-mumbai-coastal-road-bridge-leaves-3-dead-ytvd-2998975-2026-09-20?utm_source=rss",
         "category": "INDIA NEWS",
-        "score": 65,
+        "score": 64,
         "hot_hit": true,
-        "is_incident": false,
-        "corroborated": 2,
+        "is_incident": true,
         "geo": {
           "is_india": true,
           "place": "India"
         }
       },
-      "headline": "Congress Cries Foul Over DU Polls Verdict, Alleges Rigging And Bogus Voting",
-      "subhead": "Congress Cries Foul Over DU Polls Verdict, Alleges Rigging And Bogus Voting",
+      "headline": "Speeding BMW crashes off Mumbai Coastal Road bridge, killing three.",
+      "subhead": "Speeding BMW Crashes Off Mumbai Coastal Road Bridge, Leaves 3 Dead",
       "category": "INDIA NEWS",
-      "message_id": 195,
+      "message_id": 224,
       "media_kind": "image",
       "media_source": "text_only",
-      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-19/slide_07.jpg",
+      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-20/slide_07.jpg",
       "video_path": null,
       "status": "pending",
       "is_cover": false,
       "raw_photo_path": null,
-      "final_index": 7
+      "photo_credit": null,
+      "photo_subject": null,
+      "rendered_number": 7
     },
     {
       "index": 8,
       "story": {
-        "id": "fbab1fa061ba",
-        "title": "Zuccaro bags the President Of India Gold Cup",
-        "summary": "",
-        "link": "https://www.thehindu.com/sport/races/zuccaro-bags-the-president-of-india-gold-cup/article71484808.ece",
-        "category": "SPORTS NEWS",
-        "score": 63,
+        "id": "467ec0b36cc9",
+        "title": "Nepal flood toll crosses 1,450; over 6,000 still missing",
+        "summary": "The search for those missing in Nepal has continued across river stretches, debris fields and damaged hydropower projects in Rasuwa and neighbouring districts.",
+        "link": "https://www.thehindu.com/news/international/nepal-flash-flood-death-toll-september-20/article71488152.ece",
+        "category": "WORLD NEWS",
+        "score": 64,
         "hot_hit": true,
-        "is_incident": false,
+        "is_incident": true,
         "geo": {
           "is_india": false,
-          "place": null
+          "place": "Kathmandu",
+          "country": "nepal"
         }
       },
-      "headline": "Star Racehorse Zuccaro Wins Prestigious President Of India Gold Cup",
-      "subhead": "Star racehorse Zuccaro secured a memorable victory by winning the President Of India Gold Cup.\u2026",
-      "category": "SPORTS NEWS",
-      "message_id": 196,
+      "headline": "Nepal flood toll crosses 1,450; over 6,000 still missing",
+      "subhead": "The search for those missing in Nepal has continued across river stretches, debris fields and d\u2026",
+      "category": "WORLD NEWS",
+      "message_id": 225,
       "media_kind": "image",
       "media_source": "text_only",
-      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-19/slide_08.jpg",
+      "rendered_image_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-20/slide_08.jpg",
       "video_path": null,
       "status": "pending",
       "is_cover": false,
       "raw_photo_path": null,
-      "final_index": 8
+      "photo_credit": null,
+      "photo_subject": null,
+      "rendered_number": 8
     }
-  ],
-  "publish_results": {
-    "instagram": {
-      "id": "18136585720716892"
-    },
-    "facebook": {
-      "id": "1306579065869792_122116620153424069",
-      "post_supports_client_mutation_id": true
-    }
-  },
-  "reel_status": "published",
-  "reel_path": "/home/runner/work/Aravind24new/Aravind24new/public/carousel/2026-09-19/roundup.mp4",
-  "reel_caption": "\ud83d\udcf0 Everything that happened in the last 24 hours \u2014 8 stories in 52 seconds.\n\n\ud83d\udc49 Follow @aravindnews24 \u2014 daily India + world roundup, every evening at 8:30 PM IST\n\ud83d\udcac Which story matters most to you? Comment below\n\ud83d\udd01 Share with someone who misses the news\n\n#IndiaNews #WorldNews #NewsUpdate #Trending #Reels #AravindNews24",
-  "reel_attempts": 0,
-  "reel_result": {
-    "id": "18411675544084394"
-  }
+  ]
 }
