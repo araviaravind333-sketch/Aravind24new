@@ -28,6 +28,11 @@ from config import settings
 _ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROFILE_PATH = os.path.join(_ROOT, "data", "voice", "owner_voice.pt")
 
+# Chosen by the owner from listening tests (variant "D"): more expressive
+# than the defaults (0.5) and cfg_weight 0 so the pacing is not tied to the
+# reference clip -- the default settings sounded robotic.
+GEN_KWARGS = dict(exaggeration=0.7, cfg_weight=0.0, temperature=0.8)
+
 
 def profile_exists(path=None):
     return os.path.exists(path or PROFILE_PATH)
@@ -46,9 +51,43 @@ def ensure_deps():
 
 
 def _load_model():
+    """Same as ChatterboxTTS.from_pretrained("cpu"), but each weights file is
+    freed as soon as it is loaded. The stock loader keeps the 2 GB text-model
+    weights alive while it builds the next model, which needs ~6 GB peak and
+    crashed (access violation) on a 7 GB PC; this peaks near 4 GB."""
     ensure_deps()
-    from chatterbox.tts import ChatterboxTTS
-    return ChatterboxTTS.from_pretrained(device="cpu")
+    import gc
+    from pathlib import Path
+    from huggingface_hub import hf_hub_download
+    from safetensors.torch import load_file
+    from chatterbox import tts as cb
+
+    for name in ["ve.safetensors", "t3_cfg.safetensors", "s3gen.safetensors", "tokenizer.json", "conds.pt"]:
+        local = hf_hub_download(repo_id=cb.REPO_ID, filename=name)
+    ckpt = Path(local).parent
+
+    ve = cb.VoiceEncoder()
+    ve.load_state_dict(load_file(ckpt / "ve.safetensors"))
+    ve.eval()
+
+    t3 = cb.T3()
+    state = load_file(ckpt / "t3_cfg.safetensors")
+    if "model" in state.keys():
+        state = state["model"][0]
+    t3.load_state_dict(state)
+    del state
+    gc.collect()
+    t3.eval()
+
+    s3gen = cb.S3Gen()
+    state = load_file(ckpt / "s3gen.safetensors")
+    s3gen.load_state_dict(state, strict=False)
+    del state
+    gc.collect()
+    s3gen.eval()
+
+    tokenizer = cb.EnTokenizer(str(ckpt / "tokenizer.json"))
+    return cb.ChatterboxTTS(t3, s3gen, ve, tokenizer, "cpu", conds=None)
 
 
 def _write_wav(tensor, sr, path):
@@ -102,6 +141,6 @@ def make_clone_synth(profile_path=None):
     model.conds = Conditionals.load(profile_path or PROFILE_PATH, map_location="cpu").to("cpu")
 
     def synth(text, wav_path):
-        _write_wav(model.generate(text), model.sr, wav_path)
+        _write_wav(model.generate(text, **GEN_KWARGS), model.sr, wav_path)
 
     return synth
