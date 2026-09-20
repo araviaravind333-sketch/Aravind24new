@@ -232,6 +232,8 @@ def voice_hold_tests(tmp):
         return {"duration": 30.0, "voice": "x"}
     roundup_reel.build_reel = fake_build
     old_flag = settings.REEL_REQUIRE_OWNER_VOICE
+    old_clone = settings.REEL_CLONE_ENABLED
+    settings.REEL_CLONE_ENABLED = False      # the repo now holds a real voice profile; these tests are about its absence
     now = dt.datetime(2026, 9, 20, 21, 0)
 
     def st():
@@ -269,6 +271,7 @@ def voice_hold_tests(tmp):
         check("with the requirement off it falls back to the standard voice", built and built[-1] is None)
     finally:
         settings.REEL_REQUIRE_OWNER_VOICE = old_flag
+        settings.REEL_CLONE_ENABLED = old_clone
         cr.telegram_bot.send_message, cr._save_state, roundup_reel.build_reel = real
 
 
