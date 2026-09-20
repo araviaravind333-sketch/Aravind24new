@@ -693,6 +693,33 @@ def carousel_cycle():
     _poll_telegram_replies(set(), now_ist)
 
 
+def carousel_reel_build():
+    """Runs right after the carousel publish step in the same job. Builds
+    the voice-over roundup Reel from the slides that were just posted.
+    CAROUSEL_REEL_DRYRUN=true builds into a temp dir and reports the
+    result without posting or touching state."""
+    now_ist = (dt.datetime.now(dt.timezone.utc) + dt.timedelta(hours=5, minutes=30)).replace(tzinfo=None)
+    state = carousel_review._load_state()
+    if not state:
+        print("No carousel state -- no roundup reel.")
+        return
+    if os.environ.get("CAROUSEL_REEL_DRYRUN", "").lower() == "true":
+        carousel_review.build_roundup_reel(state, now_ist, dry_run=True)
+    elif carousel_review.reel_due(state):
+        carousel_review.build_roundup_reel(state, now_ist)
+    else:
+        print("No roundup reel due (carousel not published yet, or reel already handled).")
+
+
+def carousel_reel_publish():
+    """After the reel file has been pushed (so it is publicly fetchable)."""
+    state = carousel_review._load_state()
+    if state and state.get("reel_status") == "built":
+        carousel_review.publish_roundup_reel(state)
+    else:
+        print("No built roundup reel waiting to publish.")
+
+
 def carousel_publish_cycle():
     """Run AFTER the workflow's git-push step, so anything this publishes
     is already live at its public URL. No-ops if the review grace period
@@ -1105,6 +1132,10 @@ if __name__ == "__main__":
         carousel_cycle()
     elif phase == "carousel-publish":
         carousel_publish_cycle()
+    elif phase == "carousel-reel-build":
+        carousel_reel_build()
+    elif phase == "carousel-reel-publish":
+        carousel_reel_publish()
     elif phase == "photo-retry":
         # Re-checks stories that had no usable photo when first seen, then
         # refreshes the metrics and the static dashboard from the DB.

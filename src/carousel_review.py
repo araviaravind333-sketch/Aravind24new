@@ -578,6 +578,92 @@ def surviving_slides(state):
     return cover + stories
 
 
+# ----------------------------------------------------------- roundup reel
+# Built AFTER the carousel has actually posted, from the slides that
+# survived review -- so it needs no review of its own -- and kept fully
+# separate from the carousel's state machine: a reel failure can never
+# change whether the carousel counts as published.
+
+REEL_MAX_ATTEMPTS = 3
+
+
+def reel_due(state):
+    return bool(state
+                and state.get("status") == "published"
+                and state.get("publish_results")            # something really posted
+                and state.get("reel_status") is None)
+
+
+def build_roundup_reel(state, now_ist, synth=None, dry_run=False):
+    """Voice-over Reel from the surviving slides. dry_run builds into the
+    system temp dir and changes no state -- used to prove the whole
+    toolchain (voice download, ffmpeg) works on the real runner without
+    posting anything."""
+    from src import roundup_reel
+    kept = surviving_slides(state)
+    cover = next((s for s in kept if s.get("is_cover")), None)
+    stories = [s for s in kept if not s.get("is_cover")]
+    if not cover or len(stories) < 2:
+        print("roundup reel: fewer than 2 story slides survived -- not worth a reel")
+        return None
+    slide_paths = [cover["rendered_image_path"]] + [s["rendered_image_path"] for s in stories]
+    if dry_run:
+        import tempfile
+        out = os.path.join(tempfile.mkdtemp(prefix="reel_dry_"), "roundup.mp4")
+    else:
+        out = os.path.join(os.path.dirname(cover["rendered_image_path"]), "roundup.mp4")
+    res = roundup_reel.build_reel(
+        slide_paths, [s["headline"] for s in stories], out,
+        now_ist.strftime("%d %b").upper(), synth=synth)
+    size_mb = os.path.getsize(out) / 1e6
+    print(f"roundup reel built: {res['duration']:.1f}s, {size_mb:.2f} MB, {len(stories)} stories")
+    if dry_run:
+        telegram_bot.send_message(
+            f"Roundup reel DRY RUN ok on the server: {res['duration']:.0f}s, {size_mb:.1f} MB, "
+            f"{len(stories)} stories. Nothing was posted.")
+        return res
+    state["reel_status"] = "built"
+    state["reel_path"] = out
+    state["reel_caption"] = roundup_reel.reel_caption(len(stories), res["duration"])
+    state["reel_attempts"] = 0
+    _save_state(state)
+    return res
+
+
+def publish_roundup_reel(state):
+    """Publishes the built reel to Instagram. Retried on later ticks up to
+    REEL_MAX_ATTEMPTS, then parked as 'failed' with a message -- never
+    retried forever, never posted twice (status flips on first success)."""
+    from src import publisher
+    image_base = os.environ.get("GH_PAGES_BASE", "").rstrip("/")
+    if not image_base or state.get("reel_status") != "built":
+        return None
+    public_root = os.path.join(_ROOT, "public")
+    rel = os.path.relpath(state["reel_path"], public_root).replace("\\", "/")
+    url = f"{image_base}/{rel}"
+
+    def fail(why):
+        state["reel_attempts"] = state.get("reel_attempts", 0) + 1
+        if state["reel_attempts"] >= REEL_MAX_ATTEMPTS:
+            state["reel_status"] = "failed"
+            telegram_bot.send_message(f"Roundup reel gave up after {REEL_MAX_ATTEMPTS} tries: {why}")
+        _save_state(state)
+        return None
+
+    if not _wait_until_public(url, tries=24):
+        return fail("reel file never became public")
+    try:
+        res = publisher.publish_instagram_reel(url, state["reel_caption"], None)
+    except Exception as e:
+        return fail(str(e)[:400])
+    state["reel_status"] = "published"
+    state["reel_result"] = res
+    _save_state(state)
+    telegram_bot.send_message("Roundup reel published to Instagram.")
+    return res
+
+
+
 def _wait_until_public(url, tries=10, delay=5):
     """Same check as main.py's helper for a regular post -- duplicated
     rather than imported to avoid a circular import (main.py imports this

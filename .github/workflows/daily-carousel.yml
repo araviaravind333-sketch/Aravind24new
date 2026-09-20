@@ -24,6 +24,10 @@ on:
         description: 'Build + send today''s carousel to Telegram right now, ignoring the 8:30 PM gate (for testing/manual re-runs)'
         type: boolean
         default: false
+      reel_dry_run:
+        description: 'Build the voice-over roundup Reel from the latest carousel on the server and report the result -- posts NOTHING (toolchain check)'
+        type: boolean
+        default: false
       force_publish:
         description: 'Publish immediately, ignoring the review grace period. REAL POST to Instagram + Facebook -- only tick this once you have reviewed the Telegram preview.'
         type: boolean
@@ -60,6 +64,7 @@ jobs:
         run: |
           python -m tests.test_carousel
           python -m tests.test_subject_photos
+          python -m tests.test_roundup_reel
 
       - name: Build / review / publish today's carousel
         env:
@@ -122,6 +127,63 @@ jobs:
         run: |
           git add data/carousel_pending.json || true
           git commit -m "auto: carousel publish $(date -u +%FT%TZ)" || echo "nothing to commit"
+          for i in 1 2 3 4 5; do
+            git push && break
+            echo "push failed (attempt $i) -- rebasing on remote, retrying"
+            git pull --rebase --autostash origin main || true
+            sleep 3
+          done
+
+      # ------------------------------------------------------------------
+      # Daily roundup Reel: a voice-over video of the slides that were just
+      # posted. Reels are the one format Instagram shows to non-followers,
+      # which is where a 7-follower page's reach has to come from. Every
+      # step below is a no-op unless a carousel was actually published in
+      # this run, and none of them can fail the job: a reel problem must
+      # never affect the carousel that already went out.
+      # ------------------------------------------------------------------
+      - name: Build roundup reel (voice-over) -- no-op unless a carousel was just published
+        continue-on-error: true
+        env:
+          TELEGRAM_BOT_TOKEN:   ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID:     ${{ secrets.TELEGRAM_CHAT_ID }}
+          CAROUSEL_REEL_DRYRUN: ${{ github.event.inputs.reel_dry_run }}
+        run: python -m src.main carousel-reel-build
+
+      - name: Push roundup reel (makes it public)
+        continue-on-error: true
+        run: |
+          git config user.name "aravindnews24-bot"
+          git config user.email "bot@users.noreply.github.com"
+          # separate calls: git add fails atomically if one pathspec matches nothing
+          git add public/carousel/ || true
+          git add data/carousel_pending.json || true
+          git commit -m "auto: roundup reel $(date -u +%FT%TZ)" || echo "nothing to commit"
+          for i in 1 2 3 4 5; do
+            git push && break
+            echo "push failed (attempt $i) -- rebasing on remote, retrying"
+            git pull --rebase --autostash origin main || true
+            sleep 3
+          done
+
+      - name: Publish roundup reel to Instagram (no-op unless one was built)
+        continue-on-error: true
+        env:
+          META_PAGE_ACCESS_TOKEN: ${{ secrets.META_PAGE_ACCESS_TOKEN }}
+          META_APP_ID:            ${{ secrets.META_APP_ID }}
+          META_APP_SECRET:        ${{ secrets.META_APP_SECRET }}
+          FB_PAGE_ID:             ${{ secrets.FB_PAGE_ID }}
+          IG_USER_ID:             ${{ secrets.IG_USER_ID }}
+          GH_PAGES_BASE:          ${{ vars.GH_PAGES_BASE }}
+          TELEGRAM_BOT_TOKEN:     ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID:       ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python -m src.main carousel-reel-publish
+
+      - name: Commit roundup reel state
+        continue-on-error: true
+        run: |
+          git add data/carousel_pending.json || true
+          git commit -m "auto: roundup reel state $(date -u +%FT%TZ)" || echo "nothing to commit"
           for i in 1 2 3 4 5; do
             git push && break
             echo "push failed (attempt $i) -- rebasing on remote, retrying"

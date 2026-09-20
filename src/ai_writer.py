@@ -74,6 +74,10 @@ _DANGLING_TAIL = {
     "that", "this", "these", "those", "its", "their", "his", "her", "our",
     "is", "are", "was", "were", "be", "been", "will", "says", "said", "amid",
     "against", "about", "up", "off", "out", "per", "via", "not",
+    # verbs that demand an object -- "...Houthi rebels tried" is a broken
+    # headline (seen live in a dry run of the fallback writer)
+    "tried", "tries", "attempted", "attempts", "seeks", "sought", "plans",
+    "wants", "hopes", "likely", "set", "yet", "still", "also",
 }
 
 
