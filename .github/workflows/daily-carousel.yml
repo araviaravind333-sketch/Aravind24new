@@ -73,6 +73,7 @@ jobs:
           python -m tests.test_subject_photos
           python -m tests.test_roundup_reel
           python -m tests.test_clip_reel
+          python -m tests.test_feed_post
 
       - name: Build / review / publish today's carousel
         env:

@@ -36,7 +36,7 @@ from config import settings
 from src import (news_engine, ai_writer, image_source, incident_photos, photo_review,
                   photo_db, dashboard, template, reel_template,
                   video, publisher, analytics, whatsapp, telegram_bot,
-                  carousel_review, subject_photos, clip_reel)
+                  carousel_review, subject_photos, clip_reel, feed_post)
 
 PENDING_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "_pending.json")
 WA_QUEUE_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "whatsapp_pending.json")
@@ -962,10 +962,9 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
         except Exception as e:
             print("subject portrait lookup failed, staying text-only:", e)
         if portrait:
-            forced_image_path = subject_photos.crop_portrait(
-                portrait["path"],
-                os.path.join(os.path.dirname(__file__), "..", "public",
-                             f"portrait-{ist.strftime('%Y%m%d-%H%M')}.jpg"))
+            # the raw portrait: feed_post sizes it to its own layout and
+            # stamps the FILE PHOTO tag itself
+            forced_image_path = portrait["path"]
             force_no_image = False
             print(f"Using verified file photo of {portrait['subject']} ({portrait['license']})")
 
@@ -1050,18 +1049,31 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
     out_path = os.path.join(out_dir, out_name)
 
     logo = os.path.join(os.path.dirname(__file__), "..", "assets", "logo", "logo.png")
-    template.render_post(
-        photo_path=img_path,
-        category=category_label,
-        headline=written["headline"],
-        accent_word=written["accent_word"],
-        out_path=out_path,
-        footer=settings.BRAND_FOOTER,
-        handle=settings.BRAND_HANDLE,
-        logo_path=logo if os.path.exists(logo) else None,
-        variant=variant,
-        smart_fit=smart_fit,
-    )
+    if img_path and variant not in ("alert_card", "text_card"):
+        # every post that has a picture uses the adaptive layout (src/feed_post.py)
+        feed_post.render_post(
+            photo_path=img_path,
+            category=category_label,
+            headline=written["headline"],
+            accent_word=written["accent_word"],
+            out_path=out_path,
+            footer=settings.BRAND_FOOTER,
+            handle=settings.BRAND_HANDLE,
+            file_photo=bool(portrait),
+        )
+    else:
+        template.render_post(
+            photo_path=img_path,
+            category=category_label,
+            headline=written["headline"],
+            accent_word=written["accent_word"],
+            out_path=out_path,
+            footer=settings.BRAND_FOOTER,
+            handle=settings.BRAND_HANDLE,
+            logo_path=logo if os.path.exists(logo) else None,
+            variant=variant,
+            smart_fit=smart_fit,
+        )
     print("Rendered:", out_path)
 
     if video_clip_path and img_path and os.path.exists(img_path) and img_path != forced_image_path:
