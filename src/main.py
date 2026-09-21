@@ -1095,6 +1095,8 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
                     clip_duration = duration or settings.REEL_CLIP_TRIM_TARGET_SEC
 
                 overlay_path = os.path.join(out_dir, f"overlay-{stamp}.png")
+                clip_layout = clip_reel.layout_for(clip_reel.probe_aspect(video_clip_path),
+                                                   written["headline"])
                 clip_reel.render_frame_png(
                     category=category_label,
                     headline=written["headline"],
@@ -1102,9 +1104,10 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
                     out_path=overlay_path,
                     footer=settings.BRAND_FOOTER,
                     handle=settings.BRAND_HANDLE,
+                    layout=clip_layout,
                 )
                 clip_reel.render_reel_from_clip(video_clip_path, overlay_path, video_path,
-                                                clip_duration)
+                                                clip_duration, layout=clip_layout)
                 print(f"Rendered reel from submitted video clip ({clip_duration:.0f}s):", video_path)
                 try:
                     os.remove(overlay_path)
