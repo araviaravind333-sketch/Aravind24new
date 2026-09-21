@@ -88,10 +88,10 @@ def _draw_highlighted_headline(draw, lines, f_head, size, x, y, accent_phrase):
                 draw.text((cx, y), before, font=f_head, fill=WHITE)
                 cx += draw.textlength(before, font=f_head)
             aw = draw.textlength(accent_phrase, font=f_head)
-            # box stays inside this line's own band: a taller one overlaps
-            # the bottom of the line above (seen on the cover headline)
-            draw.rectangle([cx - 8, y + int(size * 0.20), cx + aw + 8, y + int(size * 1.12)],
-                           fill=BADGE_COLOR)
+            # sized from the real glyph bounds, so it hugs the letters and
+            # never reaches into the line above or below
+            bb = draw.textbbox((cx, y), accent_phrase, font=f_head)
+            draw.rectangle([cx - 8, bb[1] - 6, cx + aw + 8, bb[3] + 6], fill=BADGE_COLOR)
             draw.text((cx, y), accent_phrase, font=f_head, fill=WHITE)
             cx += aw
             if after:

@@ -36,7 +36,7 @@ from config import settings
 from src import (news_engine, ai_writer, image_source, incident_photos, photo_review,
                   photo_db, dashboard, template, reel_template,
                   video, publisher, analytics, whatsapp, telegram_bot,
-                  carousel_review, subject_photos)
+                  carousel_review, subject_photos, clip_reel)
 
 PENDING_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "_pending.json")
 WA_QUEUE_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "whatsapp_pending.json")
@@ -1095,26 +1095,25 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
                     clip_duration = duration or settings.REEL_CLIP_TRIM_TARGET_SEC
 
                 overlay_path = os.path.join(out_dir, f"overlay-{stamp}.png")
-                reel_template.render_overlay_png(
+                clip_reel.render_frame_png(
                     category=category_label,
                     headline=written["headline"],
                     accent_word=written["accent_word"],
                     out_path=overlay_path,
                     footer=settings.BRAND_FOOTER,
                     handle=settings.BRAND_HANDLE,
-                    logo_path=logo if os.path.exists(logo) else None,
                 )
-                video.render_reel_from_clip(video_clip_path, overlay_path, video_path,
-                                             clip_duration)
+                clip_reel.render_reel_from_clip(video_clip_path, overlay_path, video_path,
+                                                clip_duration)
                 print(f"Rendered reel from submitted video clip ({clip_duration:.0f}s):", video_path)
                 try:
                     os.remove(overlay_path)
                 except OSError:
                     pass
             elif img_path is not None:
-                reel_variant_used = choose_reel_variant(category_label)
+                reel_variant_used = "reel_window"
                 reel_card_path = os.path.join(out_dir, f"reel-card-{stamp}.jpg")
-                reel_template.render_reel_card(
+                clip_reel.render_photo_card(
                     photo_path=img_path,
                     category=category_label,
                     headline=written["headline"],
@@ -1122,9 +1121,6 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
                     out_path=reel_card_path,
                     footer=settings.BRAND_FOOTER,
                     handle=settings.BRAND_HANDLE,
-                    logo_path=logo if os.path.exists(logo) else None,
-                    variant=reel_variant_used,
-                    smart_fit=smart_fit,
                 )
                 video.render_reel(reel_card_path, video_path)
                 print(f"Rendered reel ({reel_variant_used}):", video_path)
