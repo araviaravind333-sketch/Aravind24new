@@ -107,7 +107,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-09-13 13:11,INDIA NEWS,Iran's Pezeshkian speaks on Modi photo and Mojtaba rumours,87,True,framed_card,reel_full_bleed,17907780753520766,122115457407424069,True,True,8,0,0,0,,16,0
 2026-09-13 13:45,INDIA NEWS,India Rushes 130 Tonnes Relief to Flood-Hit Nepal,70,False,text_card,,18105832610264480,122115466113424069,True,True,3,0,0,0,0,,0
 2026-09-13 15:10,BREAKING NEWS,Kapil Sibal calls himself 'Dimagi Naxal' answering PM Modi,93,False,text_card,,17906040327517110,122115483231424069,True,True,3,0,0,0,0,,0
-2026-09-13 16:44,INDIA NEWS,Sibal Demands 10-Year Ban On Party-Switching Politicians,56,False,text_card,,17946348744293992,122115493953424069,True,True,3,0,0,0,0,,0
+2026-09-13 16:44,INDIA NEWS,Sibal Demands 10-Year Ban On Party-Switching Politicians,56,False,text_card,,17946348744293992,122115493953424069,True,True,4,0,0,0,0,,0
 2026-09-13 17:10,INDIA NEWS,3 Gunmen Fire 6 Rounds At Lyricist Gulab Sidhu,79,False,text_card,,18126448945774262,122115497193424069,True,True,3,0,0,0,0,,0
 2026-09-13 17:48,BUSINESS NEWS,Ravi Teja’s Irumudi Sees 66.7% Jump On Day 23,74,False,text_card,,18103787726049383,122115500925424069,True,True,4,0,0,0,0,,0
 2026-09-13 19:10,BREAKING NEWS,Amit Shah unveils PM Modi's nationwide birthday service drive,90,False,text_card,,18053351219800178,122115511251424069,True,True,3,0,0,0,0,,0
@@ -153,7 +153,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-09-18 19:45,INDIA NEWS,"Andhra Pradesh approves huge investment proposals worth 22,178 crore rupees",56,False,text_card,,18115240265515422,122116387773424069,True,True,5,0,0,0,0,,0
 2026-09-18 20:13,INDIA NEWS,Vazhakode quarry blast case: four sentenced to six and half years in jail,56,False,text_card,,18003642752791319,122116399383424069,True,True,3,0,0,0,0,,0
 2026-09-18 22:12,INDIA NEWS,"UAE President calls PM Modi on birthday, discusses West Asia and bilateral ties",63,False,text_card,,18069222476749001,122116417101424069,True,True,2,0,0,0,0,,0
-2026-09-18 22:43,INDIA NEWS,"SC sets aside Telangana court order, restores minor's custody to adoptive parents",68,False,text_card,,18367107196215265,122116421127424069,True,True,3,0,0,0,0,,0
+2026-09-18 22:43,INDIA NEWS,"SC sets aside Telangana court order, restores minor's custody to adoptive parents",68,False,text_card,,18367107196215265,122116421127424069,True,True,4,0,0,0,0,,0
 2026-09-18 23:09,BREAKING NEWS,Trinamool Symbol War Moves To Supreme Court As Mamata Banerjee Challenges Poll Body,105,False,text_card,,18140240779717116,122116424337424069,True,True,3,0,0,0,0,,0
 2026-09-19 18:40,INDIA NEWS,Hangman was ready in jail,74,True,full_bleed,reel_full_bleed,17988777540024249,122116594371424069,True,True,4,0,0,0,,3,0
 2026-09-19 20:10,BREAKING NEWS,ABVP Wins Delhi University Student Union Elections Amid High Court Rally Ban,102,False,text_card,,17909484264499324,122116605801424069,True,True,4,0,0,0,0,,0
@@ -161,7 +161,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-09-19 23:46,INDIA NEWS,Home Minister Amit Shah cancels key Karnataka events due to food poisoning,73,False,text_card,,18337146217279231,122116634001424069,True,True,4,0,0,0,0,,0
 2026-09-20 00:13,INDIA NEWS,"Railways approves Kavach 4.0, signalling and safety projects worth Rs 736 crore",56,False,text_card,,18125533306859513,122116638711424069,True,True,4,0,0,0,0,,0
 2026-09-20 00:42,WORLD NEWS,Houthis claim attack on Saudi capital after smoke seen rising near Riyadh airport,65,False,text_card,,18103956536353890,122116644501424069,True,True,3,0,0,0,0,,0
-2026-09-20 19:08,INDIA NEWS,Kerala shooter Vidarsha Vinod wins Asian Games silver after parents take loan.,58,True,full_bleed,reel_full_bleed,18635832127046003,122116817205424069,True,True,5,0,0,0,,10,0
-2026-09-21 08:41,INDIA NEWS,Heavy Kerala rains kill five people and trigger widespread landslides,76,True,full_bleed,reel_full_bleed,18097884788620677,122116926051424069,True,True,,,,,,,
-2026-09-21 12:16,INDIA NEWS,Woman entrepreneur accuses Telangana Chief Minister aide of misconduct,68,True,full_bleed,reel_window,18075357710412257,122116953867424069,True,True,,,,,,,
+2026-09-20 19:08,INDIA NEWS,Kerala shooter Vidarsha Vinod wins Asian Games silver after parents take loan.,58,True,full_bleed,reel_full_bleed,18635832127046003,122116817205424069,True,True,7,0,0,0,,13,0
+2026-09-21 08:41,INDIA NEWS,Heavy Kerala rains kill five people and trigger widespread landslides,76,True,full_bleed,reel_full_bleed,18097884788620677,122116926051424069,True,True,43,0,0,0,,58,0
+2026-09-21 12:16,INDIA NEWS,Woman entrepreneur accuses Telangana Chief Minister aide of misconduct,68,True,full_bleed,reel_window,18075357710412257,122116953867424069,True,True,4,0,0,0,,9,0
 2026-09-21 15:40,INDIA NEWS,Sudden flash flood in Kerala kills five riverbed visitors on Sunday,58,True,full_bleed,reel_window,,122116982955424069,False,True,,,,,,,
