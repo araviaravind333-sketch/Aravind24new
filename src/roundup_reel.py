@@ -305,6 +305,52 @@ def prepare_voice_clip(exe, src, out_wav):
     return out_wav
 
 
+def _speech_segments(exe, src, noise_db, min_gap):
+    """[(start, end)] of the speech stretches in a recording, split wherever
+    there is a silence of at least `min_gap` seconds below `noise_db`."""
+    res = subprocess.run([exe, "-i", src, "-vn", "-af", f"silencedetect=noise={noise_db}dB:d={min_gap}",
+                          "-f", "null", "-"], capture_output=True, text=True, timeout=180)
+    log = res.stderr
+    dm = re.search(r"Duration: (\d+):(\d+):([\d.]+)", log)
+    total = int(dm.group(1)) * 3600 + int(dm.group(2)) * 60 + float(dm.group(3)) if dm else 0.0
+    starts = [float(x) for x in re.findall(r"silence_start: (-?[\d.]+)", log)]
+    ends = [float(x) for x in re.findall(r"silence_end: ([\d.]+)", log)]
+    segs, cursor = [], 0.0
+    for i, s in enumerate(starts):
+        if s - cursor > 0.35:
+            segs.append((cursor, s))
+        cursor = ends[i] if i < len(ends) else total
+    if total - cursor > 0.35:
+        segs.append((cursor, total))
+    return segs
+
+
+def split_recording(exe, src, expected_counts, work_dir):
+    """One continuous recording (the owner reading the whole script, pausing
+    ~2 s between lines) -> one wav per line. Tries several silence
+    thresholds/lengths until the number of pieces is one of `expected_counts`
+    (tried in the given order). Returns (paths, count) or (None, found_counts)."""
+    os.makedirs(work_dir, exist_ok=True)
+    seen = []
+    for min_gap in (1.0, 0.8, 1.3, 0.65):
+        for noise_db in (-35, -30, -40, -45, -28):
+            segs = _speech_segments(exe, src, noise_db, min_gap)
+            seen.append(len(segs))
+            for want in expected_counts:
+                if len(segs) == want:
+                    paths = []
+                    for i, (s, e) in enumerate(segs):
+                        raw = os.path.join(work_dir, f"cut_{i:02d}.wav")
+                        r = subprocess.run([exe, "-y", "-i", src, "-ss", f"{max(s - 0.1, 0):.3f}",
+                                            "-to", f"{e + 0.15:.3f}", "-vn", "-ac", "1", "-ar", str(VOICE_RATE),
+                                            "-c:a", "pcm_s16le", raw], capture_output=True, text=True, timeout=120)
+                        if r.returncode != 0:
+                            raise RuntimeError("could not cut the recording: " + r.stderr[-300:])
+                        paths.append(prepare_voice_clip(exe, raw, os.path.join(work_dir, f"line_in_{i:02d}.wav")))
+                    return paths, want
+    return None, sorted(set(seen))
+
+
 def _silence_wav(path, seconds, rate=VOICE_RATE):
     with wave.open(path, "wb") as w:
         w.setnchannels(1)
@@ -331,7 +377,7 @@ def build_reel(slide_paths, headlines, out_path, date_label, synth=None, work_di
         # the owner's own recordings: intro (optional), one per story, and a
         # silent end card -- the follow ask is on screen, not synthesised
         assert len(voice_clips["stories"]) == len(headlines), "one recording per story slide"
-        sources = [voice_clips.get("intro")] + list(voice_clips["stories"]) + [None]
+        sources = [voice_clips.get("intro")] + list(voice_clips["stories"]) + [voice_clips.get("outro")]
         lines = [None] * len(sources)
     else:
         synth = synth or make_piper_synth()

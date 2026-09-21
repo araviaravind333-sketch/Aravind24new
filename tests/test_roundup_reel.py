@@ -250,7 +250,9 @@ def voice_hold_tests(tmp):
         state = st()
         res = cr.build_roundup_reel(state, now)
         check("no voice notes -> no reel is built", res is None and not built and state.get("reel_status") is None)
-        check("owner is asked for voice notes, naming the slides", len(sent) == 1 and "voice" in sent[0].lower() and "01, 02" in sent[0], sent)
+        check("owner is sent the script to read (intro, numbered lines, closing)",
+              len(sent) == 1 and "voice" in sent[0].lower() and "Number one. H1" in sent[0]
+              and "Number two. H2" in sent[0] and "Follow Aravind News" in sent[0], sent)
         cr.build_roundup_reel(state, now + dt.timedelta(minutes=30))
         check("no reminder spam inside 3 hours", len(sent) == 1)
         cr.build_roundup_reel(state, now + dt.timedelta(hours=3, minutes=1))
@@ -347,6 +349,106 @@ def clone_tests(tmp):
         (cr.telegram_bot.send_message, cr._save_state, roundup_reel.build_reel,
          voice_clone.make_clone_synth, voice_clone.PROFILE_PATH, settings.REEL_CLONE_ENABLED,
          settings.REEL_REQUIRE_OWNER_VOICE) = real
+
+
+def one_take_tests(tmp):
+    print("\nONE-TAKE RECORDING")
+    import math, struct
+    from src import carousel_review as cr
+
+    exe = rr.ffmpeg_exe()
+    if not exe:
+        SKIP.append("one-take")
+        print("  SKIP  ffmpeg not available here")
+        return
+
+    def make(path, pieces, gap=1.6, inner=0.25, rate=22050):
+        """pieces: list of lists of phrase lengths (s). Phrases inside a piece
+        are separated by a short `inner` pause, pieces by a long `gap`."""
+        frames = bytearray()
+        def tone(sec, hz=300):
+            for n in range(int(rate * sec)):
+                frames.extend(struct.pack("<h", int(9000 * math.sin(2 * math.pi * hz * n / rate))))
+        def quiet(sec):
+            frames.extend(b"\x00\x00" * int(rate * sec))
+        quiet(0.4)
+        for i, phrases in enumerate(pieces):
+            for j, sec in enumerate(phrases):
+                tone(sec)
+                if j < len(phrases) - 1:
+                    quiet(inner)
+            quiet(gap if i < len(pieces) - 1 else 0.6)
+        with wave.open(path, "wb") as w:
+            w.setnchannels(1); w.setsampwidth(2); w.setframerate(rate)
+            w.writeframes(bytes(frames))
+        return path
+
+    five = make(os.path.join(tmp, "five.wav"), [[1.5], [2.0, 1.2], [1.8], [2.2, 1.0], [1.4]])
+    paths, found = rr.split_recording(exe, five, (5, 3), os.path.join(tmp, "s1"))
+    check("intro + 3 stories + closing line -> 5 clips", paths and found == 5 and len(paths) == 5, (found,))
+    check("a short pause inside a story does not split it", paths and len(paths) == 5)
+    durs = []
+    for pth in paths or []:
+        with wave.open(pth, "rb") as w:
+            durs.append(w.getnframes() / w.getframerate())
+    check("the two-part story keeps both of its phrases (longest clip)",
+          durs and max(durs) > 3.0, [round(d, 1) for d in durs])
+
+    three = make(os.path.join(tmp, "three.wav"), [[1.5], [1.8], [1.4]])
+    paths, found = rr.split_recording(exe, three, (5, 3), os.path.join(tmp, "s2"))
+    check("stories only (no intro/closing) -> 3 clips", paths and found == 3)
+
+    four = make(os.path.join(tmp, "four.wav"), [[1.5], [1.8], [1.4], [1.6]])
+    paths, found = rr.split_recording(exe, four, (5, 3), os.path.join(tmp, "s3"))
+    check("wrong number of pieces -> refused, with what was found", paths is None and 4 in found, found)
+
+    # the state-level flow
+    sent = []
+    real = (cr.telegram_bot.send_message, cr._save_state)
+    cr.telegram_bot.send_message = lambda text, *a, **k: sent.append(text)
+    cr._save_state = lambda s: None
+    try:
+        slides = [{"index": 0, "is_cover": True, "status": "pending", "voice_full_path": five},
+                  {"index": 1, "status": "pending"}, {"index": 2, "status": "pending"},
+                  {"index": 3, "status": "pending"}]
+        state = {"slides": slides}
+        plan = cr.one_take_plan(state)
+        check("a cover with a full recording is a one-take plan", plan == {"full": five, "stories": 3}, plan)
+        clips = cr.resolve_one_take(state, plan)
+        check("it resolves to intro + 3 stories + outro",
+              clips and clips["intro"] and len(clips["stories"]) == 3 and clips["outro"])
+        check("story slides with no per-slide notes are still covered by the one-take",
+              cr.voice_plan(state) is None and cr.one_take_plan(state) is not None)
+
+        slides[0]["voice_full_path"] = four
+        state2 = {"slides": slides}
+        res = cr.resolve_one_take(state2, cr.one_take_plan(state2))
+        check("an unsplittable recording is refused, forgotten, and the owner is told",
+              res is None and "voice_full_path" not in slides[0] and sent and "expected 5" in sent[-1], sent)
+        check("no one-take plan once it was rejected", cr.one_take_plan(state2) is None)
+
+        # long voice note replied to the cover is stored as the one-take
+        real_dl, real_reply = cr.telegram_bot.download_file, cr.telegram_bot.reply_to_message
+        cr.telegram_bot.download_file = lambda fid, dest: dest + ".oga"
+        cr.telegram_bot.reply_to_message = lambda mid, text, *a, **k: sent.append(text)
+        try:
+            st = {"slides": [{"index": 0, "is_cover": True, "message_id": 10, "status": "pending"},
+                             {"index": 1, "message_id": 11, "status": "pending"}]}
+            cr.handle_reply({"message_id": 90, "reply_to_message": {"message_id": 10},
+                             "voice": {"file_id": "F", "duration": 45}}, st)
+            check("a 45s voice note on the cover is the one-take recording",
+                  st["slides"][0].get("voice_full_path", "").endswith(".oga")
+                  and not st["slides"][0].get("voice_path"))
+            st2 = {"slides": [{"index": 0, "is_cover": True, "message_id": 10, "status": "pending"},
+                              {"index": 1, "message_id": 11, "status": "pending"}]}
+            cr.handle_reply({"message_id": 91, "reply_to_message": {"message_id": 10},
+                             "voice": {"file_id": "F", "duration": 6}}, st2)
+            check("a short voice note on the cover is just the optional intro",
+                  st2["slides"][0].get("voice_path") and not st2["slides"][0].get("voice_full_path"))
+        finally:
+            cr.telegram_bot.download_file, cr.telegram_bot.reply_to_message = real_dl, real_reply
+    finally:
+        cr.telegram_bot.send_message, cr._save_state = real
 
 
 def caption_tests():
@@ -467,6 +569,8 @@ if __name__ == "__main__":
         voice_hold_tests(t)
     with tempfile.TemporaryDirectory() as t:
         clone_tests(t)
+    with tempfile.TemporaryDirectory() as t:
+        one_take_tests(t)
     caption_tests()
     with tempfile.TemporaryDirectory() as t:
         state_tests(t)

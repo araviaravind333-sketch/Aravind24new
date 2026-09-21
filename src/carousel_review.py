@@ -360,6 +360,16 @@ def handle_reply(msg, state):
         if not saved:
             telegram_bot.reply_to_message(msg["message_id"], "Could not download that voice note -- please send it again.")
             return True
+        seconds = (msg.get("voice") or msg.get("audio") or {}).get("duration") or 0
+        if slide.get("is_cover") and seconds >= ONE_TAKE_MIN_SECONDS:
+            slide["voice_full_path"] = saved
+            slide.pop("voice_path", None)
+            _save_state(state)
+            telegram_bot.reply_to_message(
+                msg["message_id"],
+                f"Got your full recording ({seconds:.0f}s). The Reel is built from it on the next check "
+                f"-- if I cannot split it into the right number of lines I will tell you.")
+            return True
         _save_state(state)
         have = sum(1 for s in _story_slides(state) if s.get("voice_path"))
         total = len(_story_slides(state))
@@ -424,6 +434,44 @@ def _apply_owner_voice(slide, file_id):
     if saved:
         slide["voice_path"] = saved
     return saved
+
+
+ONE_TAKE_MIN_SECONDS = 20
+
+
+def one_take_plan(state):
+    """{'full': path, 'stories': n} when the owner sent one continuous
+    recording of the whole script (a long voice note replied to the cover)."""
+    kept = surviving_slides(state)
+    cover = next((s for s in kept if s.get("is_cover")), None)
+    stories = [s for s in kept if not s.get("is_cover")]
+    if cover and cover.get("voice_full_path") and os.path.exists(cover["voice_full_path"]) and stories:
+        return {"full": cover["voice_full_path"], "stories": len(stories)}
+    return None
+
+
+def resolve_one_take(state, plan):
+    """Splits the one-take recording into clips. On success returns voice
+    clips ({'intro','stories','outro'}); if the number of pieces is wrong,
+    tells the owner exactly what was found, forgets that recording, and
+    returns None (so they can re-record instead of getting a wrong Reel)."""
+    from src import roundup_reel
+    exe = roundup_reel.ffmpeg_exe()
+    n = plan["stories"]
+    work = os.path.join(os.path.dirname(plan["full"]), "split")
+    paths, found = roundup_reel.split_recording(exe, plan["full"], (n + 2, n), work)
+    if paths:
+        if found == n + 2:
+            return {"intro": paths[0], "stories": paths[1:-1], "outro": paths[-1]}
+        return {"intro": None, "stories": paths, "outro": None}
+    cover = next(s for s in state["slides"] if s.get("is_cover"))
+    cover.pop("voice_full_path", None)
+    _save_state(state)
+    telegram_bot.send_message(
+        f"I could not split your recording into lines: I found {', '.join(str(c) for c in found)} "
+        f"pieces but expected {n + 2} (intro, {n} stories, closing line). Please read it again pausing a "
+        f"clear 2 seconds between lines, and reply to the cover with the new voice note.")
+    return None
 
 
 def voice_plan(state):
@@ -732,7 +780,7 @@ def reel_needs_clone(state, now_ist):
     """True when a Reel is due AND it will be narrated by the cloned voice
     (so the workflow must install the model). Cheap: no heavy imports."""
     from src import voice_clone
-    if not reel_due(state, now_ist) or voice_plan(state):
+    if not reel_due(state, now_ist) or voice_plan(state) or one_take_plan(state):
         return False
     return voice_clone.clone_available()
 
@@ -746,12 +794,18 @@ def _remind_for_voice(state, stories, now_ist):
         if hrs < 3:
             print("roundup reel: still waiting for the owner's voice notes")
             return
-    missing = [s for s in stories if not (s.get("voice_path") and os.path.exists(s["voice_path"]))]
-    nums = ", ".join(f"{s.get('final_index', s['index']):02d}" for s in missing)
-    telegram_bot.send_message(
-        f"Today's roundup Reel is waiting for your voice. Reply to slide(s) {nums} with a voice note "
-        f"reading the headline (reply to the cover for an optional intro). "
-        f"The Reel is built as soon as every story slide has one.")
+    from src import roundup_reel
+    intro, lines, outro = roundup_reel.script_for([s["headline"] for s in stories])
+    script = "\n\n".join([intro] + lines + [outro])
+    text = (f"Today's roundup Reel is waiting for your voice.\n\n"
+            f"Read this script ONCE, pausing a clear 2 seconds between lines, and reply to THIS message "
+            f"(the cover) with the voice note:\n\n{script}\n\n"
+            f"(Or reply to each story slide with its own voice note.)")
+    cover = next((s for s in state["slides"] if s.get("is_cover")), None)
+    if cover and cover.get("message_id"):
+        telegram_bot.reply_to_message(cover["message_id"], text)
+    else:
+        telegram_bot.send_message(text)
     state["reel_voice_notice_at"] = now_ist.strftime("%Y-%m-%d %H:%M")
     _save_state(state)
 
@@ -775,6 +829,9 @@ def build_roundup_reel(state, now_ist, synth=None, dry_run=False):
     else:
         out = os.path.join(os.path.dirname(cover["rendered_image_path"]), "roundup.mp4")
     voices = voice_plan(state)
+    take = None if voices else one_take_plan(state)
+    if take:
+        voices = resolve_one_take(state, take)
     from src import voice_clone
     if not synth and not voices and voice_clone.clone_available():
         synth = voice_clone.make_clone_synth()
