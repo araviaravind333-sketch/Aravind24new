@@ -92,7 +92,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-09-11 13:13,INDIA NEWS,HC sets 60-day deadline after JPSC chairman's arrest,63,True,split_banner,reel_full_bleed,17955079371246591,122115088869424069,True,True,3,0,0,0,,7,0
 2026-09-11 14:15,INDIA NEWS,46.88 lakh people hit as Bihar rivers breach danger mark,64,True,alert_card,,18485510359109235,122115095607424069,True,True,6,0,0,0,,9,0
 2026-09-11 15:13,INDIA NEWS,Devasish Sharma gets BJP ticket days after retiring,78,True,framed_card,reel_full_bleed,18136115311623849,122115102765424069,True,True,2,0,0,0,,4,0
-2026-09-11 15:46,INDIA NEWS,"1,857 medical seats lie vacant: Stalin seeks PM's intervention",69,True,full_bleed,reel_full_bleed,18129542173760160,122115107055424069,True,True,2,0,0,0,,2,0
+2026-09-11 15:46,INDIA NEWS,"1,857 medical seats lie vacant: Stalin seeks PM's intervention",69,True,full_bleed,reel_full_bleed,18129542173760160,122115107055424069,True,True,3,0,0,0,,3,0
 2026-09-11 16:45,INDIA NEWS,High Court questions why only Pune faces Ganeshotsav ban,62,True,split_banner,reel_full_bleed,17901051372578023,122115114693424069,True,True,,,,,,,
 2026-09-12 09:03,BREAKING NEWS,Modi Gifts Russian Translation Of Thirukkural To Putin,95,True,split_banner,,17991658722044443,122115226383424069,True,True,18,1,0,0,,25,1
 2026-09-12 12:15,INDIA NEWS,Punjab Police Secures First European Extradition From Moldova,80,False,text_card,,18104525024609492,122115254031424069,True,True,2,0,0,0,0,,0
@@ -104,7 +104,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-09-12 17:10,INDIA NEWS,BRICS Demands Structural Update To UN Security Council,68,False,text_card,,17962217625190914,122115294861424069,True,True,2,0,0,0,0,,0
 2026-09-12 17:48,BUSINESS NEWS,HDFC Bank sends 2 candidates to RBI for CEO,75,False,text_card,,17906272497483834,122115301785424069,True,True,2,0,0,0,0,,0
 2026-09-12 21:01,BREAKING NEWS,Vijay runs to hug Ajith at UK's Silverstone,95,True,split_banner,,17880239406527091,122115330669424069,True,True,71,5,0,0,,95,5
-2026-09-13 13:11,INDIA NEWS,Iran's Pezeshkian speaks on Modi photo and Mojtaba rumours,87,True,framed_card,reel_full_bleed,17907780753520766,122115457407424069,True,True,9,0,0,0,,18,0
+2026-09-13 13:11,INDIA NEWS,Iran's Pezeshkian speaks on Modi photo and Mojtaba rumours,87,True,framed_card,reel_full_bleed,17907780753520766,122115457407424069,True,True,9,0,0,0,,19,0
 2026-09-13 13:45,INDIA NEWS,India Rushes 130 Tonnes Relief to Flood-Hit Nepal,70,False,text_card,,18105832610264480,122115466113424069,True,True,4,0,0,0,0,,0
 2026-09-13 15:10,BREAKING NEWS,Kapil Sibal calls himself 'Dimagi Naxal' answering PM Modi,93,False,text_card,,17906040327517110,122115483231424069,True,True,3,0,0,0,0,,0
 2026-09-13 16:44,INDIA NEWS,Sibal Demands 10-Year Ban On Party-Switching Politicians,56,False,text_card,,17946348744293992,122115493953424069,True,True,4,0,0,0,0,,0
@@ -166,4 +166,4 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-09-21 12:16,INDIA NEWS,Woman entrepreneur accuses Telangana Chief Minister aide of misconduct,68,True,full_bleed,reel_window,18075357710412257,122116953867424069,True,True,10,0,0,0,,18,0
 2026-09-21 15:40,INDIA NEWS,Sudden flash flood in Kerala kills five riverbed visitors on Sunday,58,True,full_bleed,reel_window,,122116982955424069,False,True,,,,,,,
 2026-09-22 03:44,WORLD NEWS,Major US news outlets sue Donald Trump over White House ban,80,False,full_bleed,,18108092300237996,122117097747424069,True,True,4,0,0,0,0,,0
-2026-09-23 08:10,INDIA NEWS,Police shoot dead UP man who killed four people and took hostages,71,True,full_bleed,reel_window,18126674302869539,122117412345424069,True,True,,,,,,,
+2026-09-23 08:10,INDIA NEWS,Police shoot dead UP man who killed four people and took hostages,71,True,full_bleed,reel_window,18126674302869539,122117412345424069,True,True,64,0,0,0,,144,0
