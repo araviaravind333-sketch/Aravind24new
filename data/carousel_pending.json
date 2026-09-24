@@ -271,5 +271,7 @@
       "photo_subject": null,
       "rendered_number": 8
     }
-  ]
+  ],
+  "image_gate": "hold",
+  "hold_notice_at": "2026-09-24 22:00"
 }
