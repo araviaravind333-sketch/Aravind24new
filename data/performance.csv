@@ -95,7 +95,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-09-11 15:46,INDIA NEWS,"1,857 medical seats lie vacant: Stalin seeks PM's intervention",69,True,full_bleed,reel_full_bleed,18129542173760160,122115107055424069,True,True,3,0,0,0,,3,0
 2026-09-11 16:45,INDIA NEWS,High Court questions why only Pune faces Ganeshotsav ban,62,True,split_banner,reel_full_bleed,17901051372578023,122115114693424069,True,True,,,,,,,
 2026-09-12 09:03,BREAKING NEWS,Modi Gifts Russian Translation Of Thirukkural To Putin,95,True,split_banner,,17991658722044443,122115226383424069,True,True,18,1,0,0,,25,1
-2026-09-12 12:15,INDIA NEWS,Punjab Police Secures First European Extradition From Moldova,80,False,text_card,,18104525024609492,122115254031424069,True,True,2,0,0,0,0,,0
+2026-09-12 12:15,INDIA NEWS,Punjab Police Secures First European Extradition From Moldova,80,False,text_card,,18104525024609492,122115254031424069,True,True,3,0,0,0,0,,0
 2026-09-12 12:43,INDIA NEWS,Harish Rawat Quits After ED Finds ₹32L With PA,68,False,text_card,,17915848689448531,122115257037424069,True,True,2,0,0,0,0,,0
 2026-09-12 13:10,INDIA NEWS,"Mumbai Police Bust ₹24 Crore Scam Using 2,898 SIMs",80,False,text_card,,17947189392288830,122115261423424069,True,True,3,0,0,0,0,,0
 2026-09-12 14:10,BREAKING NEWS,"1,071 out of 2,100 police stations in Tamil Nadu",91,False,text_card,,18026184623692210,122115274209424069,True,True,4,0,0,0,0,,0
@@ -166,5 +166,5 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-09-21 12:16,INDIA NEWS,Woman entrepreneur accuses Telangana Chief Minister aide of misconduct,68,True,full_bleed,reel_window,18075357710412257,122116953867424069,True,True,10,0,0,0,,18,0
 2026-09-21 15:40,INDIA NEWS,Sudden flash flood in Kerala kills five riverbed visitors on Sunday,58,True,full_bleed,reel_window,,122116982955424069,False,True,,,,,,,
 2026-09-22 03:44,WORLD NEWS,Major US news outlets sue Donald Trump over White House ban,80,False,full_bleed,,18108092300237996,122117097747424069,True,True,4,0,0,0,0,,0
-2026-09-23 08:10,INDIA NEWS,Police shoot dead UP man who killed four people and took hostages,71,True,full_bleed,reel_window,18126674302869539,122117412345424069,True,True,64,0,0,0,,144,0
-2026-09-24 17:49,INDIA NEWS,"Vote Chori Leads To Kanoon Chori: Rahul Gandhi Attacks BJP, Poll Body Chief",68,False,full_bleed,,18049712426809697,122117746485424069,True,True,,,,,,,
+2026-09-23 08:10,INDIA NEWS,Police shoot dead UP man who killed four people and took hostages,71,True,full_bleed,reel_window,18126674302869539,122117412345424069,True,True,84,0,0,0,,173,0
+2026-09-24 17:49,INDIA NEWS,"Vote Chori Leads To Kanoon Chori: Rahul Gandhi Attacks BJP, Poll Body Chief",68,False,full_bleed,,18049712426809697,122117746485424069,True,True,2,0,0,0,0,,0
