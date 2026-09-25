@@ -115,13 +115,9 @@ def render_frame_png(category, headline, accent_word, out_path,
     draw.rounded_rectangle([MARGIN, y0, MARGIN + bw + 60, y0 + 54], radius=8, fill=(0, 0, 0, 200))
     draw.rectangle([MARGIN + 16, y0 + 14, MARGIN + 24, y0 + 40], fill=carousel.BADGE_COLOR)
     draw.text((MARGIN + 38, y0 + 10), BRAND, font=f_brand, fill=WHITE)
-    if category:
-        f_cat = _font(ARCHIVO, 28)
-        cw = draw.textlength(category, font=f_cat)
-        x1 = W - MARGIN
-        draw.rounded_rectangle([x1 - cw - 50, y0, x1, y0 + 54], radius=8, fill=color)
-        draw.text((x1 - cw - 25, y0 + 10), category, font=f_cat, fill=WHITE)
-
+    # No boxed category label over the footage, by request -- quieter,
+    # matching src/feed_post.py. The category still shows up as the accent
+    # bar colour above the headline.
     top = panel_y + 40
     lines, f_head, size, h = _fit_head(draw, headline, lay["head_avail"])
     carousel._draw_highlighted_headline(draw, lines, f_head, size, MARGIN, top, _accent(headline, accent_word))

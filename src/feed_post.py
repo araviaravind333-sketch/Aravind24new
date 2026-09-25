@@ -7,7 +7,13 @@ One design that is sized from the picture, so there is no dead space:
                  leaves (640-900px), fading softly into the panel
     panel        near-black; a short category-colour bar, the headline (as large
                  as fits, up to 112px / 5 lines, key phrase highlighted), and a
-                 FOLLOW button anchored to the bottom edge
+                 plain credit line anchored to the bottom edge
+
+Deliberately quiet, by request: no coloured category label, no boxed
+"FOLLOW" button, no tagline -- just the brand chip and a plain text credit
+line, the same understated style a real newsroom account uses. The only
+colour accents left are the category bar above the headline and the
+highlighted key phrase within it.
 
 A picture that suits the window (<= 30% cropped) fills it. A much wider one
 is shown whole -- its window shrinks to its own height and the headline grows
@@ -22,7 +28,7 @@ import os
 from PIL import Image, ImageDraw, ImageEnhance, ImageFilter
 
 from src import carousel
-from src.template import (ANTON, ARCHIVO, ACCENT, CATEGORY_COLORS, MUTED, NEAR_BLACK, WHITE,
+from src.template import (ARCHIVO, ACCENT, CATEGORY_COLORS, MUTED, NEAR_BLACK, WHITE,
                           _font, _hex_to_rgb)
 
 W, H = 1080, 1350
@@ -30,8 +36,8 @@ MARGIN = 70
 CROP_LIMIT = 0.30
 WIN_MIN, WIN_MAX = 640, 900
 BAR_H, BAR_GAP = 10, 24
-CTA_H, BOTTOM_PAD, TOP_PAD, CTA_GAP = 64, 40, 36, 30
-FIXED = TOP_PAD + BAR_H + BAR_GAP + CTA_GAP + CTA_H + BOTTOM_PAD
+FOOT_H, FOOT_GAP, TOP_PAD, BOTTOM_PAD = 40, 30, 36, 44
+FIXED = TOP_PAD + BAR_H + BAR_GAP + FOOT_GAP + FOOT_H + BOTTOM_PAD
 _PANEL = _hex_to_rgb(NEAR_BLACK)
 BRAND = "ARAVIND NEWS 24"
 
@@ -91,7 +97,7 @@ def render_post(photo_path, category, headline, accent_word, out_path,
 
     canvas = _photo_layer(photo, lay).convert("RGBA")
 
-    # soft fade from the picture into the panel + a scrim behind the chips
+    # soft fade from the picture into the panel + a scrim behind the brand chip
     fade_h = 120
     fade = Image.new("RGBA", (W, fade_h), (0, 0, 0, 0))
     fd = ImageDraw.Draw(fade)
@@ -106,25 +112,13 @@ def render_post(photo_path, category, headline, accent_word, out_path,
 
     draw = ImageDraw.Draw(canvas)
 
-    # brand chip (left) + category pill (right)
+    # brand chip, top-left -- the only thing over the picture
     f_brand = _font(ARCHIVO, 28)
     bw = draw.textlength(BRAND, font=f_brand)
     y0 = 44
     draw.rounded_rectangle([MARGIN, y0, MARGIN + bw + 60, y0 + 54], radius=8, fill=(0, 0, 0, 200))
     draw.rectangle([MARGIN + 16, y0 + 14, MARGIN + 24, y0 + 40], fill=carousel.BADGE_COLOR)
     draw.text((MARGIN + 38, y0 + 10), BRAND, font=f_brand, fill=WHITE)
-    if category:
-        cw = draw.textlength(category, font=f_brand)
-        x1 = W - MARGIN
-        draw.rounded_rectangle([x1 - cw - 50, y0, x1, y0 + 54], radius=8, fill=color)
-        draw.text((x1 - cw - 25, y0 + 10), category, font=f_brand, fill=WHITE)
-
-    if file_photo:
-        f_tag = _font(ARCHIVO, 24)
-        tw = draw.textlength("FILE PHOTO", font=f_tag)
-        ty = wh - fade_h + 20 - 54
-        draw.rounded_rectangle([MARGIN, ty, MARGIN + tw + 30, ty + 46], radius=6, fill=(0, 0, 0, 175))
-        draw.text((MARGIN + 15, ty + 10), "FILE PHOTO", font=f_tag, fill=WHITE)
 
     # accent bar + headline
     draw.rectangle([MARGIN, wh + TOP_PAD, MARGIN + 130, wh + TOP_PAD + BAR_H], fill=color)
@@ -134,17 +128,17 @@ def render_post(photo_path, category, headline, accent_word, out_path,
     carousel._draw_highlighted_headline(draw, lines, f_head, size, MARGIN, top,
                                         a if a and a in headline.upper() else "")
 
-    # FOLLOW button, anchored to the bottom edge
-    f_cta = _font(ANTON, 34)
-    label = f"FOLLOW  {handle.upper()}"
-    lw = draw.textlength(label, font=f_cta)
-    cy = H - BOTTOM_PAD - CTA_H
-    draw.rounded_rectangle([MARGIN, cy, MARGIN + lw + 60, cy + CTA_H], radius=12, fill=color)
-    draw.text((MARGIN + 30, cy + 12), label, font=f_cta, fill=WHITE)
-    f_small = _font(ARCHIVO, 26)
-    tag = "Daily India + world news"
-    tw = draw.textlength(tag, font=f_small)
-    draw.text((W - MARGIN - tw, cy + 18), tag, font=f_small, fill=MUTED)
+    # plain credit line, anchored to the bottom edge -- no box, no colour
+    f_foot = _font(ARCHIVO, 30)
+    fy = H - BOTTOM_PAD - FOOT_H
+    if handle and handle in footer:
+        pre, _, post = footer.partition(handle)
+        x = MARGIN
+        for txt, fill in ((pre, MUTED), (handle, WHITE), (post, MUTED)):
+            draw.text((x, fy), txt, font=f_foot, fill=fill)
+            x += draw.textlength(txt, font=f_foot)
+    else:
+        draw.text((MARGIN, fy), f"{footer}  →  {handle}", font=f_foot, fill=MUTED)
 
     os.makedirs(os.path.dirname(out_path) or ".", exist_ok=True)
     canvas.convert("RGB").save(out_path, "JPEG", quality=95, subsampling=0)

@@ -43,39 +43,53 @@ def layout_tests():
 
 
 def render_tests(tmp):
-    print("\nRENDER")
+    print("\nRENDER (plain, no button/pill/tagline/FILE PHOTO tag)")
     for name, size in (("tall", (600, 1000)), ("wide", (1600, 900)), ("sq", (1000, 1000)), ("ultra", (3000, 1000))):
         src = os.path.join(tmp, f"{name}.jpg")
         Image.new("RGB", size, (200, 40, 40)).save(src)
         out = os.path.join(tmp, f"post_{name}.jpg")
-        fp.render_post(src, "INDIA NEWS", HEAD, "KERALA RAINS", out, footer="", handle="@aravindnews24")
+        fp.render_post(src, "INDIA NEWS", HEAD, "KERALA RAINS", out, footer="For the latest news",
+                       handle="@aravindnews24", file_photo=True)
         im = Image.open(out)
         lay = fp.layout_for(size[0] / size[1], HEAD)
         px = im.getpixel((540, lay["win_h"] // 2))
         check(f"{name}: 1080x1350 post with the picture in the window",
               im.size == (1080, 1350) and px[0] > 120 and px[1] < 90, px)
-        # the FOLLOW button (category colour) sits at the bottom edge, below the headline
-        btn = im.getpixel((100, fp.H - fp.BOTTOM_PAD - fp.CTA_H // 2))
-        check(f"{name}: FOLLOW button is drawn in the category colour", btn[0] > 200 and btn[2] < 90, btn)
-        # nothing bright (headline text) in the strip between the button and the bottom edge
-        check(f"{name}: clean margin under the button",
-              all(sum(im.getpixel((x, fp.H - 10))) < 120 for x in range(60, 1020, 60)))
+        # the old FOLLOW button and category pill were solid, sharp-edged
+        # rectangles filled with the exact category colour (245,135,31 for
+        # INDIA NEWS) -- confirm neither is anywhere in the frame any more,
+        # anti-aliased text edges aside (checked at a tolerance).
+        # A small (130x10px) colour-coded accent bar above the headline is
+        # intentional design, not a labelled button/pill -- only flag a
+        # BIG block of the category colour (the button/pill were hundreds
+        # of px wide and tall).
+        cat_color = (245, 135, 31)
+        matches = sum(1 for x in range(0, fp.W, 4) for y in range(0, fp.H, 4)
+                     if all(abs(a - b) < 6 for a, b in zip(im.getpixel((x, y))[:3], cat_color)))
+        check(f"{name}: no big category-colour block (button/pill gone, small accent bar ok)",
+              matches * 16 < 4000, matches * 16)
+        # top-right corner (where the old category pill sat) is just the
+        # (darkened) picture / scrim now, not a boxed label
+        top_right = im.crop((fp.W - fp.MARGIN - 200, 40, fp.W - fp.MARGIN, 100))
+        edges = top_right.filter(__import__("PIL").ImageFilter.FIND_EDGES).convert("L")
+        sharp_px = sum(1 for p in edges.getdata() if p > 200)
+        check(f"{name}: no sharp rectangle edges top-right (no pill outline)",
+              sharp_px < 40, sharp_px)
 
     src = os.path.join(tmp, "sq.jpg")
     a = fp.render_post(src, "WORLD NEWS", "SHORT ONE", "", os.path.join(tmp, "a.jpg"), file_photo=False)
     b = fp.render_post(src, "WORLD NEWS", "SHORT ONE", "", os.path.join(tmp, "b.jpg"), file_photo=True)
-    ia, ib = Image.open(a).convert("L"), Image.open(b).convert("L")
-    wh = fp.layout_for(1.0, "SHORT ONE")["win_h"]
-    strip = (fp.MARGIN, wh - 150, fp.MARGIN + 200, wh - 112)      # where the tag is drawn
-    mean = lambda im: sum(im.crop(strip).getdata()) / max(1, (strip[2] - strip[0]) * (strip[3] - strip[1]))
-    check("the FILE PHOTO tag is drawn only when requested", mean(ib) < mean(ia) - 5, (mean(ia), mean(ib)))
+    check("file_photo=True renders identically to False (the tag is gone)",
+          list(Image.open(a).getdata()) == list(Image.open(b).getdata()))
 
     long_head = ("GOVERNMENT ANNOUNCES A VERY LONG RELIEF PACKAGE FOR FLOOD AFFECTED FAMILIES ACROSS "
                  "SEVERAL DISTRICTS OF ASSAM AND BIHAR TODAY AS WATERS KEEP RISING")
-    o = fp.render_post(src, "INDIA NEWS", long_head, "", os.path.join(tmp, "long.jpg"))
+    o = fp.render_post(src, "INDIA NEWS", long_head, "", os.path.join(tmp, "long.jpg"),
+                       footer="For the latest news", handle="@aravindnews24")
     im = Image.open(o)
-    btn = im.getpixel((100, fp.H - fp.BOTTOM_PAD - fp.CTA_H // 2))
-    check("and the button is still intact under it", btn[0] > 200 and btn[2] < 90, btn)
+    fy = fp.H - fp.BOTTOM_PAD - fp.FOOT_H
+    row_has_text = any(sum(im.getpixel((x, fy + 10))[:3]) > 300 for x in range(fp.MARGIN, fp.W - fp.MARGIN, 4))
+    check("a very long headline still leaves the credit line legible", row_has_text)
 
 
 if __name__ == "__main__":
