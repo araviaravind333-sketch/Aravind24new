@@ -102,7 +102,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-09-12 15:44,INDIA NEWS,India resolves Iran-UAE deadlock to finalize BRICS statement,68,False,text_card,,18108500312332737,122115285237424069,True,True,3,0,0,0,0,,0
 2026-09-12 16:43,WORLD NEWS,Saudi shuts key oil pipeline after Iraq drone attack,65,False,text_card,,17975689445918481,122115292239424069,True,True,3,0,0,0,0,,0
 2026-09-12 17:10,INDIA NEWS,BRICS Demands Structural Update To UN Security Council,68,False,text_card,,17962217625190914,122115294861424069,True,True,2,0,0,0,0,,0
-2026-09-12 17:48,BUSINESS NEWS,HDFC Bank sends 2 candidates to RBI for CEO,75,False,text_card,,17906272497483834,122115301785424069,True,True,2,0,0,0,0,,0
+2026-09-12 17:48,BUSINESS NEWS,HDFC Bank sends 2 candidates to RBI for CEO,75,False,text_card,,17906272497483834,122115301785424069,True,True,3,0,0,0,0,,0
 2026-09-12 21:01,BREAKING NEWS,Vijay runs to hug Ajith at UK's Silverstone,95,True,split_banner,,17880239406527091,122115330669424069,True,True,71,5,0,0,,95,5
 2026-09-13 13:11,INDIA NEWS,Iran's Pezeshkian speaks on Modi photo and Mojtaba rumours,87,True,framed_card,reel_full_bleed,17907780753520766,122115457407424069,True,True,9,0,0,0,,19,0
 2026-09-13 13:45,INDIA NEWS,India Rushes 130 Tonnes Relief to Flood-Hit Nepal,70,False,text_card,,18105832610264480,122115466113424069,True,True,4,0,0,0,0,,0
@@ -168,7 +168,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-09-22 03:44,WORLD NEWS,Major US news outlets sue Donald Trump over White House ban,80,False,full_bleed,,18108092300237996,122117097747424069,True,True,4,0,0,0,0,,0
 2026-09-23 08:10,INDIA NEWS,Police shoot dead UP man who killed four people and took hostages,71,True,full_bleed,reel_window,18126674302869539,122117412345424069,True,True,84,0,0,0,,173,0
 2026-09-24 17:49,INDIA NEWS,"Vote Chori Leads To Kanoon Chori: Rahul Gandhi Attacks BJP, Poll Body Chief",68,False,full_bleed,,18049712426809697,122117746485424069,True,True,2,0,0,0,0,,0
-2026-09-25 22:13,INDIA NEWS,Vijay accuses DMK of covering up POCSO Act case against Veeramani,68,True,full_bleed,reel_window,18379881811234319,122118122031424069,True,True,2,0,0,0,,4,0
-2026-09-25 22:44,INDIA NEWS,"Mamata Banerjee, CPI(M) bridge decades-old divide over Election Commission concerns",75,False,full_bleed,,18113165063020151,122118128187424069,True,True,1,0,0,0,0,,0
-2026-09-26 02:11,INDIA NEWS,Chirag Paswan asks Election Commission to address growing public doubts directly,67,True,full_bleed,reel_window,17981630808111964,122118160761424069,True,True,,,,,,,
-2026-09-26 17:11,INDIA NEWS,Mamata Banerjee accuses BJP of disrupting rallies after TMC leader gets attacked.,68,False,full_bleed,,18148627768553157,122118300867424069,True,True,,,,,,,
+2026-09-25 22:13,INDIA NEWS,Vijay accuses DMK of covering up POCSO Act case against Veeramani,68,True,full_bleed,reel_window,18379881811234319,122118122031424069,True,True,105,1,0,0,,164,1
+2026-09-25 22:44,INDIA NEWS,"Mamata Banerjee, CPI(M) bridge decades-old divide over Election Commission concerns",75,False,full_bleed,,18113165063020151,122118128187424069,True,True,2,0,0,0,0,,0
+2026-09-26 02:11,INDIA NEWS,Chirag Paswan asks Election Commission to address growing public doubts directly,67,True,full_bleed,reel_window,17981630808111964,122118160761424069,True,True,120,2,0,0,,197,2
+2026-09-26 17:11,INDIA NEWS,Mamata Banerjee accuses BJP of disrupting rallies after TMC leader gets attacked.,68,False,full_bleed,,18148627768553157,122118300867424069,True,True,3,0,0,0,0,,0
