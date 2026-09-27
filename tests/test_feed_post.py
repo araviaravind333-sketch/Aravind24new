@@ -24,9 +24,16 @@ def check(name, condition, detail=""):
     return condition
 
 
+SHORT = "ISRO LAUNCHES SATELLITE"
+
+
 def layout_tests():
     print("\nLAYOUT")
-    m = lambda a, h=HEAD: fp.layout_for(a, h)["mode"]
+    # The window is sized from the headline's own real height (computed
+    # first), so cover/contain depends on BOTH the picture's shape and how
+    # much room a given headline actually needs -- with a short headline
+    # the window reaches its max and behaves as pure aspect-ratio logic:
+    m = lambda a, h=SHORT: fp.layout_for(a, h)["mode"]
     check("square and 5:4 pictures fill the window", m(1.0) == "cover" and m(1.25) == "cover")
     check("a 4:5 portrait is shown whole (cropping it would cut heads)", m(0.8) == "contain")
     check("3:2 fills the window (moderate crop)", m(1.5) == "cover")
@@ -36,10 +43,44 @@ def layout_tests():
         lay = fp.layout_for(a, HEAD)
         check(f"aspect {a}: picture window is between 520 and 900px",
               520 <= lay["win_h"] <= 900, lay["win_h"])
-    ultra = fp.layout_for(3.0, HEAD)
-    normal = fp.layout_for(1.5, HEAD)
-    check("a short (ultra-wide) picture leaves more room for the headline",
-          ultra["head_avail"] > normal["head_avail"] + 150, (ultra["head_avail"], normal["head_avail"]))
+
+    # The picture window is sized from the headline's OWN real height,
+    # computed first -- a short headline needs less of the frame, so the
+    # picture gets more of it (a prior version guessed the height with
+    # different parameters than the real fit used, so the leftover became
+    # a gap instead of being given back to the picture).
+    short_win = fp.layout_for(1.5, SHORT)["win_h"]
+    long_win = fp.layout_for(1.5, HEAD)["win_h"]
+    check("a short headline gives the picture a bigger window than a long one",
+          short_win > long_win, (short_win, long_win))
+    check("a short headline's window reaches the configured maximum",
+          short_win == fp.WIN_MAX, short_win)
+
+
+def gap_tests(tmp):
+    """Regression: a live post left ~500px of solid black between the
+    headline/credit line and the frame edge, because the window was sized
+    from a rough estimate of the headline's height made before the real
+    headline was fitted, not from its actual height."""
+    print("\nNO DEAD SPACE (regression)")
+    src = os.path.join(tmp, "gap.jpg")
+    Image.new("RGB", (1500, 1000), (200, 40, 40)).save(src)
+    out = fp.render_post(src, "INDIA NEWS", SHORT, "", os.path.join(tmp, "gap_out.jpg"),
+                         footer="For the latest news", handle="@aravindnews24")
+    im = Image.open(out)
+    lay = fp.layout_for(1.5, SHORT)
+    wh = lay["win_h"]
+    # the credit line must be close to the picture, not stranded near the
+    # bottom of the frame with a large gap of pure background above it
+    credit_y = fp.H - fp.BOTTOM_PAD - fp.FOOT_H // 2
+    is_black_row = [all(im.getpixel((x, y))[:3] == (10, 10, 10) for x in range(fp.MARGIN, fp.W - fp.MARGIN, 40))
+                    for y in range(wh + fp.TOP_PAD, credit_y)]
+    # small gaps between lines/paragraphs are normal; a single CONTINUOUS
+    # run of blank rows is the actual defect (the old bug left one ~500px
+    # run of nothing but background between the content and the frame edge)
+    longest_run = max((sum(1 for _ in g) for k, g in __import__("itertools").groupby(is_black_row) if k), default=0)
+    check("no single continuous void between the headline block and the credit line",
+          longest_run < 120, longest_run)
 
 
 def render_tests(tmp):
@@ -87,9 +128,11 @@ def render_tests(tmp):
     o = fp.render_post(src, "INDIA NEWS", long_head, "", os.path.join(tmp, "long.jpg"),
                        footer="For the latest news", handle="@aravindnews24")
     im = Image.open(o)
-    fy = fp.H - fp.BOTTOM_PAD - fp.FOOT_H
-    row_has_text = any(sum(im.getpixel((x, fy + 10))[:3]) > 300 for x in range(fp.MARGIN, fp.W - fp.MARGIN, 4))
-    check("a very long headline still leaves the credit line legible", row_has_text)
+    # the credit line follows the content now (no fixed y), so just confirm
+    # bright text appears somewhere in the lower portion of the frame
+    found = any(sum(im.getpixel((x, y))[:3]) > 300
+               for y in range(fp.H - 200, fp.H - 10, 4) for x in range(fp.MARGIN, fp.W - fp.MARGIN, 8))
+    check("a very long headline still leaves the credit line legible", found)
 
 
 def highlight_tests():
@@ -110,6 +153,8 @@ if __name__ == "__main__":
     highlight_tests()
     with tempfile.TemporaryDirectory() as t:
         render_tests(t)
+    with tempfile.TemporaryDirectory() as t:
+        gap_tests(t)
     print(f"\n{'=' * 52}\n{len(PASS)} passed, {len(FAIL)} failed")
     if FAIL:
         print("FAILED:")

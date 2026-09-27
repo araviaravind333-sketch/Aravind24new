@@ -26,7 +26,6 @@ from src.template import (ANTON, ARCHIVO, ACCENT, CATEGORY_COLORS, MUTED, NEAR_B
 
 W, H = 1080, 1920
 ZONE_TOP, ZONE_BOTTOM = 210, 1560   # content lives here; Instagram's controls own the rest
-MAX_WIN_H = 1100
 CROP_LIMIT = 0.30                   # fill the window if at most this much of the picture is cropped
 MARGIN = 70
 _PANEL = _hex_to_rgb(NEAR_BLACK)
@@ -46,32 +45,40 @@ def _fit_head(probe, headline, avail):
     return carousel._fit_headline(probe, headline, W - MARGIN * 2, 5, 120, 48, max(avail, 120))
 
 
+MIN_WIN_H = 460   # floor for the picture even under an extremely long headline
+
+
 def layout_for(aspect, headline):
-    """Sized from the picture's shape and the headline, so nothing floats in a
-    gap:
-      * a normal headline is measured first and the picture window takes the
-        rest of the content zone;
+    """Sized from the headline's REAL height, computed first -- not an
+    estimate made before the headline was actually fitted. A prior version
+    guessed the height with a different (max_lines, start_size) than the
+    real fit used, so the real headline routinely needed less room than
+    guessed, and the leftover became a solid black void at the bottom of
+    the panel (a real post left ~500px of empty panel below the footer)
+    instead of being given back to the picture:
+      * the headline is measured first (largest font that fits the width);
+      * the picture window takes ALL the remaining height of the content
+        zone -- a short headline means a bigger picture, never blank panel;
       * a picture that fits that window (<= CROP_LIMIT cropped) fills it;
-      * a much wider/taller one is shown whole, the window shrinks to it, and
-        the headline grows into the space that frees up (up to 120px);
-      * any space still left is split evenly above/below the picture+headline
-        block, and the panel runs to the bottom edge."""
+      * a much wider/taller one is shown whole on a blurred backdrop that
+        also grows to fill the window -- extra room there is a background,
+        never a void;
+      * an extremely long headline that would crush the picture below
+        MIN_WIN_H instead shrinks the headline into whatever room remains,
+        same as before."""
     probe = ImageDraw.Draw(Image.new("RGB", (W, H)))
     zone = ZONE_BOTTOM - ZONE_TOP
-    _, _, _, h0 = carousel._fit_headline(probe, headline, W - MARGIN * 2, 4, 88, 48, 260)
-    target = min(MAX_WIN_H, zone - (h0 + HEAD_PAD))
-    win_aspect = W / target
-    if aspect and _crop_loss(aspect, win_aspect) > CROP_LIMIT:
-        mode = "contain"
-        win_h = max(min(target, round(W / aspect)) if aspect > win_aspect else target, 560)
-    else:
-        mode, win_h = "cover", target
-    head_avail = zone - win_h - HEAD_PAD
-    _, _, _, h = _fit_head(probe, headline, head_avail)
-    block = win_h + h + HEAD_PAD
-    win_y = ZONE_TOP + max(0, (zone - block) // 2)
+    _, _, _, natural_h = _fit_head(probe, headline, zone)
+    win_h = zone - (natural_h + HEAD_PAD)
+    if win_h < MIN_WIN_H:
+        head_avail = zone - MIN_WIN_H - HEAD_PAD
+        _, _, _, natural_h = _fit_head(probe, headline, max(head_avail, 120))
+        win_h = zone - (natural_h + HEAD_PAD)
+    win_aspect = W / win_h
+    mode = "contain" if aspect and _crop_loss(aspect, win_aspect) > CROP_LIMIT else "cover"
+    win_y = ZONE_TOP
     return {"mode": mode, "win_y": win_y, "win_h": win_h, "panel_y": win_y + win_h,
-            "panel_h": H - (win_y + win_h), "head_avail": head_avail, "aspect": aspect}
+            "panel_h": H - (win_y + win_h), "head_avail": zone - win_h - HEAD_PAD, "aspect": aspect}
 
 
 def fit_mode(aspect, headline="HEADLINE"):

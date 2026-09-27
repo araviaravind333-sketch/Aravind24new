@@ -46,22 +46,36 @@ def _crop_loss(aspect, win_aspect):
     return 1 - win_aspect / aspect if aspect >= win_aspect else 1 - aspect / win_aspect
 
 
-def layout_for(aspect, headline):
-    probe = ImageDraw.Draw(Image.new("RGB", (W, H)))
-    _, _, _, h0 = carousel._fit_headline(probe, headline, W - MARGIN * 2, 4, 96, 52, 300)
-    target = max(WIN_MIN, min(WIN_MAX, H - FIXED - h0))
-    win_aspect = W / target
-    if aspect and _crop_loss(aspect, win_aspect) > CROP_LIMIT:
-        mode = "contain"
-        win_h = max(min(target, round(W / aspect)) if aspect > win_aspect else target, 520)
-    else:
-        mode, win_h = "cover", target
-    head_avail = H - win_h - FIXED
-    return {"mode": mode, "win_h": win_h, "head_avail": head_avail, "aspect": aspect}
-
-
 def _fit(draw, headline, avail):
     return carousel._fit_headline(draw, headline, W - MARGIN * 2, 5, 112, 52, max(avail, 120))
+
+
+# Effectively unbounded: passed as `avail` so _fit_headline is never
+# artificially shrunk by a guessed vertical budget. It always returns the
+# largest font that satisfies the WIDTH/line-count limit alone -- the
+# headline's true natural height, which everything else is then sized to.
+_UNBOUNDED = 5000
+
+
+def layout_for(aspect, headline):
+    """The picture window is sized from the headline's REAL height, computed
+    first -- not from an estimate made before the headline was actually
+    fitted. A prior version guessed the height with a different (max_lines,
+    start_size) than the real fit used, so the real headline routinely
+    needed less room than guessed, and the unused room became a gap between
+    the headline and the credit line (which sits at a fixed position)
+    instead of being given back to the picture."""
+    probe = ImageDraw.Draw(Image.new("RGB", (W, H)))
+    _, _, _, natural_h = _fit(probe, headline, _UNBOUNDED)
+    content_h = TOP_PAD + BAR_H + BAR_GAP + natural_h + FOOT_GAP + FOOT_H + BOTTOM_PAD
+    win_h = max(WIN_MIN, min(WIN_MAX, H - content_h))
+    win_aspect = W / win_h
+    if aspect and _crop_loss(aspect, win_aspect) > CROP_LIMIT:
+        mode = "contain"
+        win_h = max(min(win_h, round(W / aspect)) if aspect > win_aspect else win_h, 520)
+    else:
+        mode = "cover"
+    return {"mode": mode, "win_h": win_h, "aspect": aspect}
 
 
 def _photo_layer(photo, lay, plain_bg=False):
@@ -126,36 +140,45 @@ def render_text_post(category, headline, accent_word, out_path, subhead="",
     f_sub = _font(ARCHIVO, 32)
     sub_lines = carousel._wrap(draw, subhead, f_sub, W - MARGIN * 2)[:3] if subhead else []
     sub_h = len(sub_lines) * 44
+    sub_extra = (40 + sub_h) if sub_lines else 0
 
-    # the headline owns the card: as large as fits the whole middle band
-    bar_y = 240
-    foot_y = H - BOTTOM_PAD - FOOT_H
-    avail = foot_y - 40 - (sub_h + 40 if sub_lines else 0) - (bar_y + BAR_H + BAR_GAP)
+    # The whole group (bar + headline + subhead + footer) is sized from the
+    # headline's REAL height and centred as ONE block, so a short headline
+    # gets even, deliberate-looking margins on both sides instead of a
+    # large gap that used to appear only above it (a fixed bar position,
+    # centred within a zone that started well below the true middle, plus
+    # a footer pinned to the very bottom regardless of where the content
+    # actually ended).
+    TOP_CLEAR, BOTTOM_CLEAR = 150, 60
+    zone_h = (H - BOTTOM_CLEAR) - TOP_CLEAR
+    head_avail = zone_h - (BAR_H + BAR_GAP) - sub_extra - (FOOT_GAP + FOOT_H)
     lines, f_head, size, h = carousel._fit_headline(
-        draw, headline, W - MARGIN * 2, 6, 150, 56, max(avail, 200))
+        draw, headline, W - MARGIN * 2, 6, 150, 56, max(head_avail, 200))
 
-    block = BAR_H + BAR_GAP + h + (40 + sub_h if sub_lines else 0)
-    top = bar_y + max(0, ((foot_y - 40 - bar_y) - block) // 2)
+    block = BAR_H + BAR_GAP + h + sub_extra + FOOT_GAP + FOOT_H
+    top = TOP_CLEAR + max(0, (zone_h - block) // 2)
     draw.rectangle([MARGIN, top, MARGIN + 130, top + BAR_H], fill=color)
     y = top + BAR_H + BAR_GAP
     a = (accent_word or "").upper().strip()
     carousel._draw_highlighted_headline(draw, lines, f_head, size, MARGIN, y,
                                         a if a and a in headline.upper() else "")
-    y += h + 40
+    y += h + (40 if sub_lines else 0)
     for line in sub_lines:
         draw.text((MARGIN, y), line, font=f_sub, fill=MUTED)
         y += 44
 
-    _credit_line(draw, footer, handle)
+    _credit_line(draw, footer, handle, y=y + FOOT_GAP)
     os.makedirs(os.path.dirname(out_path) or ".", exist_ok=True)
     canvas.save(out_path, "JPEG", quality=95, subsampling=0)
     return out_path
 
 
-def _credit_line(draw, footer, handle):
-    """Plain credit line at the bottom edge -- no box, no colour."""
+def _credit_line(draw, footer, handle, y=None):
+    """Plain credit line -- no box, no colour. `y` follows the content that
+    was actually drawn above it; the fixed-bottom fallback only applies
+    when a caller has no dynamic position to give it."""
     f_foot = _font(ARCHIVO, 30)
-    fy = H - BOTTOM_PAD - FOOT_H
+    fy = H - BOTTOM_PAD - FOOT_H if y is None else y
     if handle and handle in footer:
         pre, _, post = footer.partition(handle)
         x = MARGIN
@@ -210,15 +233,17 @@ def render_post(photo_path, category, headline, accent_word, out_path,
         f_note = _font(ARCHIVO, 24)
         draw.text((MARGIN, wh - 42), photo_note, font=f_note, fill=(190, 190, 190))
 
-    # accent bar + headline
+    # accent bar + headline, sized to its own natural height (see layout_for)
     draw.rectangle([MARGIN, wh + TOP_PAD, MARGIN + 130, wh + TOP_PAD + BAR_H], fill=color)
     top = wh + TOP_PAD + BAR_H + BAR_GAP
-    lines, f_head, size, h = _fit(draw, headline, lay["head_avail"])
+    lines, f_head, size, h = _fit(draw, headline, _UNBOUNDED)
     a = (accent_word or "").upper().strip()
     carousel._draw_highlighted_headline(draw, lines, f_head, size, MARGIN, top,
                                         a if a and a in headline.upper() else "")
 
-    _credit_line(draw, footer, handle)
+    # the credit line follows directly below the headline, never at a fixed
+    # position that leaves a gap when the headline needed less room
+    _credit_line(draw, footer, handle, y=top + h + FOOT_GAP)
     os.makedirs(os.path.dirname(out_path) or ".", exist_ok=True)
     canvas.convert("RGB").save(out_path, "JPEG", quality=95, subsampling=0)
     return out_path

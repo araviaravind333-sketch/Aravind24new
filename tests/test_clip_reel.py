@@ -26,9 +26,16 @@ def check(name, condition, detail=""):
     return condition
 
 
+SHORT = "ISRO LAUNCHES SATELLITE"
+
+
 def layout_tests(tmp):
     print("\nLAYOUT")
-    m = lambda a: cr.layout_for(a, HEAD)["mode"]
+    # The window is sized from the headline's own real height (computed
+    # first), so cover/contain depends on both the picture's shape and how
+    # much room the headline needs -- with a short headline the window
+    # reaches its natural maximum and behaves as pure aspect-ratio logic:
+    m = lambda a: cr.layout_for(a, SHORT)["mode"]
     check("square footage fills the window", m(1.0) == "cover")
     check("3:2 photo fills the window (moderate crop)", m(1.5) == "cover")
     check("tall phone video is shown whole", m(9 / 16) == "contain")
@@ -40,10 +47,17 @@ def layout_tests(tmp):
               lay["panel_y"] == lay["win_y"] + lay["win_h"] and lay["panel_h"] == cr.H - lay["panel_y"])
         check(f"{name}: picture starts below Instagram's top controls and ends above its bottom controls",
               lay["win_y"] >= cr.ZONE_TOP and lay["panel_y"] < 1300, (lay["win_y"], lay["panel_y"]))
-    wide = cr.layout_for(16 / 9, HEAD)
-    normal = cr.layout_for(1.5, HEAD)
-    check("a picture that needs less height leaves more room for the headline",
-          wide["head_avail"] > normal["head_avail"] + 200, (wide["head_avail"], normal["head_avail"]))
+
+    # Regression: a live post ("PROTESTS ERUPT AT PUNJAB UNIVERSITY...")
+    # left ~500px of solid black panel below the footer, because the
+    # window was sized from a rough estimate of the headline's height made
+    # BEFORE the real headline was fitted (different max_lines/start_size
+    # than the real fit used), so the real headline needed less room and
+    # the leftover became a void instead of being given back to the picture.
+    short_win = cr.layout_for(1.5, SHORT)["win_h"]
+    long_win = cr.layout_for(1.5, HEAD)["win_h"]
+    check("a short headline gives the picture a bigger window than a long one",
+          short_win > long_win, (short_win, long_win))
 
     lay = cr.layout_for(1.5, HEAD)
     f = Image.open(cr.render_frame_png("INDIA NEWS", HEAD, "SILVER", os.path.join(tmp, "f.png"),
@@ -63,6 +77,17 @@ def layout_tests(tmp):
     rows = [y for y in range(lay["panel_y"] + 20, 1600)
             if any(f.getpixel((x, y))[:3] == (255, 255, 255) and f.getpixel((x, y))[3] > 200 for x in range(70, 1000, 4))]
     check("headline and brand line both render inside the content zone", rows and rows[-1] < cr.ZONE_BOTTOM, rows[-3:] if rows else None)
+
+    # Regression: the real "PROTESTS ERUPT..." post had ~500px of solid
+    # black panel between the credit line and ZONE_BOTTOM. A modest margin
+    # (the safe-zone reserve) is expected; one continuous void is not.
+    is_white_text_row = lambda y: any(f.getpixel((x, y))[:3] == (255, 255, 255) and f.getpixel((x, y))[3] > 200
+                                      for x in range(70, 1000, 4))
+    last_text_row = next(y for y in range(cr.ZONE_BOTTOM, lay["panel_y"], -1) if is_white_text_row(y))
+    void_rows = [y for y in range(last_text_row + 5, cr.ZONE_BOTTOM)
+                if all(f.getpixel((x, y))[:3] == PANEL_RGB for x in range(60, 1020, 40))]
+    check("no large continuous void between the credit line and the safe-zone boundary",
+          len(void_rows) < 150, len(void_rows))
 
     long_head = ("GOVERNMENT ANNOUNCES A VERY LONG RELIEF PACKAGE FOR FLOOD AFFECTED FAMILIES ACROSS "
                  "SEVERAL DISTRICTS OF ASSAM AND BIHAR TODAY")
