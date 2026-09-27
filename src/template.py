@@ -28,6 +28,7 @@ BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 FONTS = os.path.join(BASE, "assets", "fonts")
 ANTON = os.path.join(FONTS, "Anton-Regular.ttf")
 ARCHIVO = os.path.join(FONTS, "Archivo.ttf")
+PT_SERIF = os.path.join(FONTS, "PTSerif-Bold.ttf")  # PT Serif (OFL), used by feed_post's overlay style
 
 # ---- brand tokens ----
 W, H = 1080, 1350

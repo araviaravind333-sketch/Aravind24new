@@ -469,6 +469,53 @@ def image_gate_tests():
             except (OSError, TypeError):
                 pass
 
+    # A share-alike photo (src/context_photos.py) must be shown WHOLE and
+    # unmodified -- the owner's preferred full-bleed overlay style
+    # (src/feed_post.render_overlay_post) crops to fill the frame, so it
+    # must never be used for one. An ordinary (non-share-alike) photo
+    # should use the new overlay style, not the older split-panel one.
+    used = {}
+    real2 = (main.subject_photos.find_subject_photo, main.context_photos.find_context_photo,
+            main.feed_post.render_post, main.feed_post.render_overlay_post, main.ai_writer.rewrite)
+    main.ai_writer.rewrite = lambda s: {"headline": s["title"], "caption": "c", "accent_word": ""}
+    main.feed_post.render_post = lambda **k: used.setdefault("plain", True) or k["out_path"]
+    main.feed_post.render_overlay_post = lambda **k: used.setdefault("overlay", True) or k["out_path"]
+    with tempfile.TemporaryDirectory() as tmp2:
+        try:
+            story_a = {"id": "sa1", "title": "Parliament passes new data bill", "summary": "",
+                      "score": 99, "category": "INDIA NEWS", "link": ""}
+            main.subject_photos.find_subject_photo = lambda *a, **k: None
+            ctx_path = os.path.join(tmp2, "ctx.jpg")
+            open(ctx_path, "wb").write(b"x")
+            main.context_photos.find_context_photo = lambda *a, **k: {
+                "path": ctx_path, "subject": "Parliament of India", "share_alike": True,
+                "license": "CC BY-SA 4.0", "attribution": "Someone / CC BY-SA 4.0",
+                "note": "File photo: Parliament of India"}
+            used.clear()
+            main._render_story(story_a, _dt.datetime(2026, 9, 27, 21, 0), is_reel=False, force_no_image=True)
+            check("a share-alike photo uses the plain whole-image layout, never the cropping overlay",
+                  used.get("plain") and not used.get("overlay"), used)
+
+            story_b = {"id": "sb1", "title": "ISRO launches new satellite", "summary": "",
+                      "score": 99, "category": "INDIA NEWS", "link": ""}
+            ctx_path2 = os.path.join(tmp2, "ctx2.jpg")
+            open(ctx_path2, "wb").write(b"x")
+            main.context_photos.find_context_photo = lambda *a, **k: {
+                "path": ctx_path2, "subject": "ISRO", "share_alike": False,
+                "license": "CC0", "attribution": "Someone / CC0",
+                "note": "File photo: ISRO"}
+            used.clear()
+            main._render_story(story_b, _dt.datetime(2026, 9, 27, 21, 0), is_reel=False, force_no_image=True)
+            check("an ordinary (non-share-alike) photo uses the new overlay style",
+                  used.get("overlay") and not used.get("plain"), used)
+        finally:
+            (main.subject_photos.find_subject_photo, main.context_photos.find_context_photo,
+             main.feed_post.render_post, main.feed_post.render_overlay_post, main.ai_writer.rewrite) = real2
+            try:
+                os.remove(main.PENDING_PATH)
+            except (OSError, TypeError):
+                pass
+
 
 if __name__ == "__main__":
     with tempfile.TemporaryDirectory() as tmp:

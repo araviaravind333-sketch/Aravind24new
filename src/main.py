@@ -1068,19 +1068,37 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
             handle=settings.BRAND_HANDLE,
         )
     elif img_path and variant not in ("alert_card", "text_card"):
-        # every post that has a picture uses the adaptive layout (src/feed_post.py)
-        feed_post.render_post(
-            photo_path=img_path,
-            category=category_label,
-            headline=written["headline"],
-            accent_word=written["accent_word"],
-            out_path=out_path,
-            footer=settings.BRAND_FOOTER,
-            handle=settings.BRAND_HANDLE,
-            file_photo=bool(portrait),
-            photo_note=photo_note,
-            share_alike=bool(portrait and portrait.get("share_alike")),
-        )
+        is_share_alike = bool(portrait and portrait.get("share_alike"))
+        if is_share_alike:
+            # a share-alike photo must be shown WHOLE and unmodified (see
+            # src/context_photos.py) -- the full-bleed overlay style crops
+            # to fill the frame, so it can never be used for these.
+            feed_post.render_post(
+                photo_path=img_path,
+                category=category_label,
+                headline=written["headline"],
+                accent_word=written["accent_word"],
+                out_path=out_path,
+                footer=settings.BRAND_FOOTER,
+                handle=settings.BRAND_HANDLE,
+                file_photo=bool(portrait),
+                photo_note=photo_note,
+                share_alike=True,
+            )
+        else:
+            # the owner's preferred look: full-bleed photo, serif headline
+            # set directly on it, sentence case -- src/feed_post.py
+            feed_post.render_overlay_post(
+                photo_path=img_path,
+                category=category_label,
+                headline=written["headline"],
+                accent_word=written["accent_word"],
+                out_path=out_path,
+                footer=settings.BRAND_FOOTER,
+                handle=settings.BRAND_HANDLE,
+                file_photo=bool(portrait),
+                photo_note=photo_note,
+            )
         if portrait and portrait.get("is_context"):
             context_photos.note_subject_used(portrait["subject"])
     else:

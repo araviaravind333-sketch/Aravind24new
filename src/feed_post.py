@@ -28,8 +28,8 @@ import os
 from PIL import Image, ImageDraw, ImageEnhance, ImageFilter
 
 from src import carousel
-from src.template import (ARCHIVO, ACCENT, CATEGORY_COLORS, MUTED, NEAR_BLACK, WHITE,
-                          _font, _hex_to_rgb)
+from src.template import (ARCHIVO, PT_SERIF, ACCENT, CATEGORY_COLORS, MUTED, NEAR_BLACK, WHITE,
+                          _font, _hex_to_rgb, _wrap)
 
 W, H = 1080, 1350
 MARGIN = 70
@@ -187,6 +187,79 @@ def _credit_line(draw, footer, handle, y=None):
             x += draw.textlength(txt, font=f_foot)
     else:
         draw.text((MARGIN, fy), f"{footer}  →  {handle}", font=f_foot, fill=MUTED)
+
+
+def _fit_serif(draw, headline, max_w, max_lines=5, start=76, minimum=40):
+    """Largest PT Serif Bold size that wraps `headline` (its OWN casing --
+    this style is sentence case, not shouted caps) into <= max_lines at
+    max_w. Returns (lines, font, size, total_block_height)."""
+    size = start
+    while size > minimum:
+        f = _font(PT_SERIF, size)
+        lines = _wrap(draw, headline, f, max_w)
+        if len(lines) <= max_lines:
+            break
+        size -= 4
+    f = _font(PT_SERIF, size)
+    lines = _wrap(draw, headline, f, max_w)
+    line_h = int(size * 1.18)
+    return lines, f, size, line_h * len(lines)
+
+
+def render_overlay_post(photo_path, category, headline, accent_word, out_path,
+                        footer="For the latest news", handle="@aravindnews24",
+                        file_photo=False, photo_note="", **_ignored):
+    """Full-bleed photo with the headline set directly on it in serif type,
+    sentence case, with a thin colour-accent bar -- the "premium newsroom"
+    look the owner pointed to as a reference and asked for by name.
+
+    Only usable when the photo may be freely cropped to fill the frame.
+    NEVER for a share-alike photo, which src/context_photos.py's terms
+    require to be shown whole and unmodified -- render_post (whole image,
+    plain background) is what those use instead."""
+    category = (category or "").upper()
+    color = CATEGORY_COLORS.get(category, ACCENT)
+    color_rgb = _hex_to_rgb(color) if isinstance(color, str) else color
+    photo = Image.open(photo_path).convert("RGB")
+    is_portrait = photo.height >= photo.width * 0.9
+    canvas = carousel.cover_crop_biased(photo, W, H, 0.15 if is_portrait else 0.35).convert("RGBA")
+
+    # A tight scrim just above the headline zone, not a long fade -- the
+    # photo should read clearly for most of the frame, darkening only
+    # where the text actually sits (matching the reference).
+    fade_h = int(H * 0.42)
+    grad = Image.new("RGBA", (W, fade_h), (0, 0, 0, 0))
+    gd = ImageDraw.Draw(grad)
+    for y in range(fade_h):
+        t = y / fade_h
+        gd.line([(0, y), (W, y)], fill=(4, 4, 4, int(235 * (t ** 2.2))))
+    canvas.alpha_composite(grad, (0, H - fade_h))
+
+    draw = ImageDraw.Draw(canvas)
+
+    if photo_note:
+        f_note = _font(ARCHIVO, 24)
+        draw.text((MARGIN, 44), photo_note, font=f_note, fill=(215, 215, 215))
+
+    BOTTOM_PAD, BAR_W, TEXT_GAP = 76, 7, 27
+    tx = MARGIN + BAR_W + TEXT_GAP
+    lines, f_head, size, block_h = _fit_serif(draw, headline, W - tx - MARGIN)
+    line_h = int(size * 1.18)
+    top = H - BOTTOM_PAD - block_h
+
+    # the one colour accent: a thin bar spanning the headline block
+    draw.rectangle([MARGIN, top + 6, MARGIN + BAR_W, top + block_h - 6], fill=color_rgb)
+    y = top
+    for line in lines:
+        draw.text((tx, y), line, font=f_head, fill=WHITE)
+        y += line_h
+
+    f_credit = _font(ARCHIVO, 26)
+    draw.text((tx, top + block_h + 16), handle, font=f_credit, fill=_hex_to_rgb(MUTED))
+
+    os.makedirs(os.path.dirname(out_path) or ".", exist_ok=True)
+    canvas.convert("RGB").save(out_path, "JPEG", quality=95, subsampling=0)
+    return out_path
 
 
 def render_post(photo_path, category, headline, accent_word, out_path,

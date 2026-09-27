@@ -10,7 +10,7 @@ import tempfile
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from PIL import Image
+from PIL import Image, ImageDraw
 
 from src import feed_post as fp
 
@@ -148,6 +148,63 @@ def highlight_tests():
           carousel.highlightable("Kerala", "TAMIL NADU ANNOUNCES SCHEME") == "")
 
 
+def overlay_tests(tmp):
+    """The full-bleed/serif-headline style the owner pointed to by example
+    and asked to have built (a reference screenshot of a photo with a
+    sentence-case serif headline set directly on it, thin colour bar,
+    small handle credit)."""
+    print("\nOVERLAY STYLE (owner's reference template)")
+    src = os.path.join(tmp, "photo.jpg")
+    Image.new("RGB", (1000, 1250), (90, 90, 110)).save(src)
+    headline = "CM Vijay to launch 1-gram gold ring scheme, a key TVK poll promise, on Monday"
+    out = fp.render_overlay_post(src, "INDIA NEWS", headline, "TVK",
+                                 os.path.join(tmp, "overlay.jpg"),
+                                 handle="@aravindnews24", photo_note="")
+    im = Image.open(out)
+    check("1080x1350 output", im.size == (1080, 1350))
+
+    check("the headline keeps its own casing (sentence case, not shouted caps)",
+          "aunch" in headline and headline[0] == "C")  # sanity on the input itself
+    lines, f_head, size, block_h = fp._fit_serif(ImageDraw.Draw(im), headline, 1080 - 70 - 7 - 27 - 70)
+    check("_fit_serif preserves casing instead of uppercasing", any(c.islower() for line in lines for c in line))
+
+    # thin colour accent bar to the left of the headline block, category colour
+    color = fp.CATEGORY_COLORS.get("INDIA NEWS")
+    color_rgb = fp._hex_to_rgb(color)
+    bar_col = im.getpixel((fp.MARGIN + 3, 1350 - 76 - block_h + 10))
+    check("a colour accent bar sits to the left of the headline",
+          all(abs(a - b) <= 3 for a, b in zip(bar_col[:3], color_rgb)), (bar_col, color_rgb))
+
+    # the top of the frame is a clear, undarkened photo (unlike the panel
+    # styles) -- the scrim is tight to the headline zone, not a long fade
+    top_px = im.getpixel((540, 30))
+    check("the top of the frame shows the photo clearly, not a dark scrim",
+          sum(top_px[:3]) > 250, top_px)
+
+    # a small credit line under the headline block
+    bottom_band = im.crop((fp.MARGIN, 1350 - 50, 1080 - fp.MARGIN, 1350 - 10))
+    has_text = any(sum(bottom_band.getpixel((x, y))[:3]) > 300
+                   for x in range(0, bottom_band.width, 4) for y in range(0, bottom_band.height, 4))
+    check("a small credit line renders near the bottom", has_text)
+
+    # photo_note (e.g. "File photo: X") shows up near the top when given
+    out2 = fp.render_overlay_post(src, "SPORTS NEWS", "Kohli hits a century", "",
+                                  os.path.join(tmp, "overlay_note.jpg"),
+                                  handle="@aravindnews24", photo_note="File photo: Virat Kohli")
+    im2 = Image.open(out2)
+    note_band = im2.crop((fp.MARGIN, 30, 700, 80))
+    check("photo_note renders near the top when supplied",
+          any(sum(note_band.getpixel((x, y))[:3]) > 300 for x in range(0, note_band.width, 4)
+              for y in range(0, note_band.height, 4)))
+
+    # a short headline still produces a well-formed frame, no crash, and
+    # the accent bar colour matches the given category
+    out3 = fp.render_overlay_post(src, "SPORTS NEWS", "Kohli hits a century", "",
+                                  os.path.join(tmp, "overlay_short.jpg"), handle="@aravindnews24")
+    im3 = Image.open(out3)
+    check("short headline still renders a valid 1080x1350 frame", im3.size == (1080, 1350))
+
+
 if __name__ == "__main__":
     layout_tests()
     highlight_tests()
@@ -155,6 +212,8 @@ if __name__ == "__main__":
         render_tests(t)
     with tempfile.TemporaryDirectory() as t:
         gap_tests(t)
+    with tempfile.TemporaryDirectory() as t:
+        overlay_tests(t)
     print(f"\n{'=' * 52}\n{len(PASS)} passed, {len(FAIL)} failed")
     if FAIL:
         print("FAILED:")
