@@ -281,6 +281,8 @@ def review_state_tests():
           len(cr.surviving_slides(cover_reject_attempt)) == 1)
 
     now = dt.datetime(2026, 9, 18, 21, 30)
+    from config import settings as _s
+    _old_req, _s.REQUIRE_IMAGE_TO_PUBLISH = _s.REQUIRE_IMAGE_TO_PUBLISH, True
     fresh = {"status": "preview_sent", "preview_sent_at": "2026-09-18 21:00"}
     stale = {"status": "preview_sent", "preview_sent_at": "2026-09-18 19:00", "image_gate": "clear"}
     unsent = {"status": "collecting", "preview_sent_at": None}
@@ -290,6 +292,7 @@ def review_state_tests():
     stale_ungated = {"status": "preview_sent", "preview_sent_at": "2026-09-18 19:00"}
     check("grace elapsed but image gate not cleared -> NOT ready",
           cr.ready_to_publish(stale_ungated, now) is False)
+    _s.REQUIRE_IMAGE_TO_PUBLISH = _old_req
 
     # due_for_preview reads STATE_PATH off disk -- redirect it to an
     # isolated temp file so this is deterministic and doesn't depend on
@@ -356,7 +359,10 @@ def caption_tests():
 def image_gate_tests():
     """The owner's rule: an image-less story is never published."""
     print("\nIMAGE GATE")
+    from config import settings
     from src import carousel_review as cr
+    _old_req = settings.REQUIRE_IMAGE_TO_PUBLISH
+    settings.REQUIRE_IMAGE_TO_PUBLISH = True   # this gate is the carousel's own rule
     sent = []
     real_send = cr.telegram_bot.send_message
     cr.telegram_bot.send_message = lambda text, *a, **k: sent.append(text)
@@ -431,26 +437,37 @@ def image_gate_tests():
             cr.telegram_bot.send_message = real_send
             cr._rerender_slide = real_render
 
-    # single posts: no verified image -> held, never rendered/published
+    settings.REQUIRE_IMAGE_TO_PUBLISH = _old_req
+
+    # Single posts: a story with no legitimately usable photo is NOT held
+    # any more (holding is what froze the account for a week) -- it runs as
+    # a designed text card, and never beside a guessed photo.
     import datetime as _dt
     from src import main
-    held = []
-    real = (main.subject_photos.find_subject_photo, main._hold_for_image, main.ai_writer.rewrite)
+    made = {}
+    real = (main.subject_photos.find_subject_photo, main.context_photos.find_context_photo,
+            main.feed_post.render_text_post, main.feed_post.render_post, main.ai_writer.rewrite)
     main.subject_photos.find_subject_photo = lambda *a, **k: None
-    main._hold_for_image = lambda story, ist: held.append(story["id"])
-    def _no_render(*a, **k):
-        raise AssertionError("rendered an image-less post")
-    main.ai_writer.rewrite = _no_render
+    main.context_photos.find_context_photo = lambda *a, **k: None
+    main.ai_writer.rewrite = lambda s: {"headline": s["title"], "caption": "c", "accent_word": ""}
+    main.feed_post.render_text_post = lambda **k: made.setdefault("text_card", k["out_path"])
+    def _no_photo_card(**k):
+        raise AssertionError("used the photo layout for a story with no photo")
+    main.feed_post.render_post = _no_photo_card
     try:
-        story = {"id": "z1", "title": "Delhi rain floods roads", "summary": "", "score": 99,
-                 "category": "INDIA NEWS", "link": ""}
-        r = main._render_story(story, _dt.datetime(2026, 9, 20, 21, 0), is_reel=False, force_no_image=True)
-        check("a single post with no verified image is held, not rendered", r is None and held == ["z1"])
-        entry = {"story": story}
-        check("portrait availability is cached on the queue entry",
-              main._portrait_available(entry) is False and entry.get("portrait_ok") is False)
+        story = {"id": "z1", "title": "Delhi council reviews new parking policy", "summary": "",
+                 "score": 99, "category": "INDIA NEWS", "link": ""}
+        main._render_story(story, _dt.datetime(2026, 9, 27, 21, 0), is_reel=False, force_no_image=True)
+        check("a story with no usable photo renders a text card instead of being held",
+              "text_card" in made, made)
     finally:
-        main.subject_photos.find_subject_photo, main._hold_for_image, main.ai_writer.rewrite = real
+        (main.subject_photos.find_subject_photo, main.context_photos.find_context_photo,
+         main.feed_post.render_text_post, main.feed_post.render_post, main.ai_writer.rewrite) = real
+        for stray in (made.get("text_card"), main.PENDING_PATH):
+            try:
+                os.remove(stray)
+            except (OSError, TypeError):
+                pass
 
 
 if __name__ == "__main__":

@@ -86,9 +86,82 @@ def _photo_layer(photo, lay):
     return canvas
 
 
+def render_text_post(category, headline, accent_word, out_path, subhead="",
+                     footer="For the latest news", handle="@aravindnews24", **_ignored):
+    """No legitimately usable photograph exists for this story, so the card
+    is typographic rather than illustrated. A designed text card is an
+    honest visual -- unlike a stock photo, it never implies it is a picture
+    of the event. Deliberately bold: the headline is the whole design."""
+    color = CATEGORY_COLORS.get((category or "").upper(), ACCENT)
+    canvas = Image.new("RGB", (W, H), _PANEL)
+    draw = ImageDraw.Draw(canvas)
+
+    # a broad, very low-contrast wash of the category colour so the card
+    # still reads as "this brand" rather than a plain black square
+    wash = Image.new("RGB", (W, H), _PANEL)
+    wd = ImageDraw.Draw(wash)
+    color_rgb = _hex_to_rgb(color) if isinstance(color, str) else color
+    for y in range(H):
+        t = (1 - y / H) ** 2
+        wd.line([(0, y), (W, y)], fill=tuple(int(p + (c - p) * 0.13 * t)
+                                             for p, c in zip(_PANEL, color_rgb)))
+    canvas = wash
+    draw = ImageDraw.Draw(canvas)
+
+    # brand chip, top-left -- same as the photo card
+    f_brand = _font(ARCHIVO, 28)
+    bw = draw.textlength(BRAND, font=f_brand)
+    y0 = 52
+    draw.rounded_rectangle([MARGIN, y0, MARGIN + bw + 60, y0 + 54], radius=8, fill=(0, 0, 0))
+    draw.rectangle([MARGIN + 16, y0 + 14, MARGIN + 24, y0 + 40], fill=carousel.BADGE_COLOR)
+    draw.text((MARGIN + 38, y0 + 10), BRAND, font=f_brand, fill=WHITE)
+
+    f_sub = _font(ARCHIVO, 32)
+    sub_lines = carousel._wrap(draw, subhead, f_sub, W - MARGIN * 2)[:3] if subhead else []
+    sub_h = len(sub_lines) * 44
+
+    # the headline owns the card: as large as fits the whole middle band
+    bar_y = 240
+    foot_y = H - BOTTOM_PAD - FOOT_H
+    avail = foot_y - 40 - (sub_h + 40 if sub_lines else 0) - (bar_y + BAR_H + BAR_GAP)
+    lines, f_head, size, h = carousel._fit_headline(
+        draw, headline, W - MARGIN * 2, 6, 150, 56, max(avail, 200))
+
+    block = BAR_H + BAR_GAP + h + (40 + sub_h if sub_lines else 0)
+    top = bar_y + max(0, ((foot_y - 40 - bar_y) - block) // 2)
+    draw.rectangle([MARGIN, top, MARGIN + 130, top + BAR_H], fill=color)
+    y = top + BAR_H + BAR_GAP
+    a = (accent_word or "").upper().strip()
+    carousel._draw_highlighted_headline(draw, lines, f_head, size, MARGIN, y,
+                                        a if a and a in headline.upper() else "")
+    y += h + 40
+    for line in sub_lines:
+        draw.text((MARGIN, y), line, font=f_sub, fill=MUTED)
+        y += 44
+
+    _credit_line(draw, footer, handle)
+    os.makedirs(os.path.dirname(out_path) or ".", exist_ok=True)
+    canvas.save(out_path, "JPEG", quality=95, subsampling=0)
+    return out_path
+
+
+def _credit_line(draw, footer, handle):
+    """Plain credit line at the bottom edge -- no box, no colour."""
+    f_foot = _font(ARCHIVO, 30)
+    fy = H - BOTTOM_PAD - FOOT_H
+    if handle and handle in footer:
+        pre, _, post = footer.partition(handle)
+        x = MARGIN
+        for txt, fill in ((pre, MUTED), (handle, WHITE), (post, MUTED)):
+            draw.text((x, fy), txt, font=f_foot, fill=fill)
+            x += draw.textlength(txt, font=f_foot)
+    else:
+        draw.text((MARGIN, fy), f"{footer}  →  {handle}", font=f_foot, fill=MUTED)
+
+
 def render_post(photo_path, category, headline, accent_word, out_path,
                 footer="For the latest news", handle="@aravindnews24", logo_path=None,
-                file_photo=False, **_ignored):
+                file_photo=False, photo_note="", **_ignored):
     category = (category or "").upper()
     color = CATEGORY_COLORS.get(category, ACCENT)
     photo = Image.open(photo_path).convert("RGB")
@@ -120,6 +193,13 @@ def render_post(photo_path, category, headline, accent_word, out_path,
     draw.rectangle([MARGIN + 16, y0 + 14, MARGIN + 24, y0 + 40], fill=carousel.BADGE_COLOR)
     draw.text((MARGIN + 38, y0 + 10), BRAND, font=f_brand, fill=WHITE)
 
+    # Photo caption, sitting in the fade at the foot of the picture. Small
+    # and quiet, but NOT optional: when the photo is a file shot of a place
+    # rather than a picture of the event, the post has to say so.
+    if photo_note:
+        f_note = _font(ARCHIVO, 24)
+        draw.text((MARGIN, wh - 42), photo_note, font=f_note, fill=(190, 190, 190))
+
     # accent bar + headline
     draw.rectangle([MARGIN, wh + TOP_PAD, MARGIN + 130, wh + TOP_PAD + BAR_H], fill=color)
     top = wh + TOP_PAD + BAR_H + BAR_GAP
@@ -128,18 +208,7 @@ def render_post(photo_path, category, headline, accent_word, out_path,
     carousel._draw_highlighted_headline(draw, lines, f_head, size, MARGIN, top,
                                         a if a and a in headline.upper() else "")
 
-    # plain credit line, anchored to the bottom edge -- no box, no colour
-    f_foot = _font(ARCHIVO, 30)
-    fy = H - BOTTOM_PAD - FOOT_H
-    if handle and handle in footer:
-        pre, _, post = footer.partition(handle)
-        x = MARGIN
-        for txt, fill in ((pre, MUTED), (handle, WHITE), (post, MUTED)):
-            draw.text((x, fy), txt, font=f_foot, fill=fill)
-            x += draw.textlength(txt, font=f_foot)
-    else:
-        draw.text((MARGIN, fy), f"{footer}  →  {handle}", font=f_foot, fill=MUTED)
-
+    _credit_line(draw, footer, handle)
     os.makedirs(os.path.dirname(out_path) or ".", exist_ok=True)
     canvas.convert("RGB").save(out_path, "JPEG", quality=95, subsampling=0)
     return out_path

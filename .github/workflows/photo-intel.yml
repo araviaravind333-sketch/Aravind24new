@@ -59,6 +59,19 @@ jobs:
         # exactly the failure a live run of this pipeline showed.
         run: python -m tests.test_news_scoring
 
+      - name: Run image-chain + template self-tests
+        # These guard the "never a wrong photo" rules for the single-post
+        # pipeline: a context photo must be Indian, never an unvetted
+        # abbreviation (a live run matched "DMK" to Bangkok's airport),
+        # never a scanned document, and never anything on a disaster or
+        # crime story. The daily-carousel workflow used to run the template
+        # tests, but it is disabled, so they run here instead.
+        run: |
+          python -m tests.test_context_photos
+          python -m tests.test_subject_photos
+          python -m tests.test_feed_post
+          python -m tests.test_clip_reel
+
       - name: Retry unresolved stories, recompute metrics, rebuild dashboard
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}

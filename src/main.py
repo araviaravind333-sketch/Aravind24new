@@ -36,7 +36,8 @@ from config import settings
 from src import (news_engine, ai_writer, image_source, incident_photos, photo_review,
                   photo_db, dashboard, template, reel_template,
                   video, publisher, analytics, whatsapp, telegram_bot,
-                  carousel_review, subject_photos, clip_reel, feed_post)
+                  carousel_review, subject_photos, clip_reel, feed_post,
+                  context_photos)
 
 PENDING_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "_pending.json")
 WA_QUEUE_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "whatsapp_pending.json")
@@ -796,27 +797,16 @@ def telegram_cycle():
             resolved_idx, resolved_kind, inbox_path = i, "media", matches[0]
             break
     if resolved_idx is None:
-        expired = []
+        # No reply within the grace period: the story goes out anyway. It
+        # still gets a visual -- _render_story's image chain finds a
+        # licensed photo where one legitimately exists, and falls back to a
+        # designed text card where it does not.
         for i, entry in enumerate(queue):
             sent_at = dt.datetime.strptime(entry["sent_at"], "%Y-%m-%d %H:%M")
             age_min = (now_ist - sent_at).total_seconds() / 60
-            if age_min < settings.TELEGRAM_GRACE_MINUTES:
-                continue
-            if not settings.REQUIRE_IMAGE_TO_PUBLISH:
+            if age_min >= settings.TELEGRAM_GRACE_MINUTES:
                 resolved_idx, resolved_kind = i, "text_only"
                 break
-            # Image required: after the grace period a story only goes out
-            # if a verified, licensed file portrait exists for it; otherwise
-            # it keeps waiting for your photo, then is dropped.
-            if _portrait_available(entry):
-                resolved_idx, resolved_kind = i, "text_only"
-                break
-            if age_min >= settings.IMAGE_WAIT_HOURS * 60:
-                expired.append(i)
-        for i in reversed(expired):
-            entry = queue.pop(i)
-            print("No image supplied in time -- dropping without posting:", entry["story"]["title"])
-            news_engine.mark_posted(entry["story"])
 
     if resolved_idx is not None:
         # A resolved candidate (media received, or grace period expired)
@@ -906,36 +896,11 @@ def telegram_cycle():
     _save_tg_queue(queue)
 
 
-def _portrait_available(entry):
-    """Cached on the queue entry so the Wikidata/Commons lookups run once
-    per candidate, not every 30-minute cycle."""
-    if "portrait_ok" not in entry:
-        story = entry["story"]
-        try:
-            entry["portrait_ok"] = bool(
-                subject_photos.find_subject_photo(story["title"], story.get("summary", "")))
-        except Exception as e:
-            print("portrait check failed:", e)
-            entry["portrait_ok"] = False
-    return entry["portrait_ok"]
 
 
-def _hold_for_image(story, now_ist):
-    """A story that would go out without any image (e.g. a breaking story
-    found by the automated scanner) is put in the Telegram queue instead,
-    so you can reply to it with a photo. Never re-sent if already queued."""
-    queue = _load_tg_queue()
-    if any(e["story"]["id"] == story["id"] for e in queue):
-        return
-    message_id = telegram_bot.send_candidate(story)
-    if message_id:
-        queue.append({
-            "message_id": message_id,
-            "story": {k: v for k, v in story.items() if k != "published"},
-            "sent_at": now_ist.strftime("%Y-%m-%d %H:%M"),
-        })
-        _save_tg_queue(queue)
-        print("Held for an image -- sent to Telegram:", story["title"])
+def _one_line_summary(story, max_chars=120):
+    s = " ".join((story.get("summary") or "").split())
+    return s[:max_chars].rstrip() + ("\u2026" if len(s) > max_chars else "")
 
 
 def _render_story(story, ist, is_reel, forced_image_path=None,
@@ -955,24 +920,36 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
     # verify and license: their Wikimedia Commons portrait, labelled FILE
     # PHOTO and credited in the caption. See src/subject_photos.py for the
     # eight checks that must all pass. Anything else stays text-only.
+    # Image chain, best first. Nothing here is ever guessed: a portrait is
+    # a verified photo of a person the headline names, a context shot is a
+    # licensed photo of a place/institution it names (captioned as such),
+    # and anything sensitive (crime, victims) is refused both -- those run
+    # as a text card rather than beside a photo that implies it depicts the
+    # event. See src/subject_photos.py and src/context_photos.py.
     portrait = None
+    photo_note = ""
     if force_no_image and forced_image_path is None and not is_reel and not settings.TEXT_ONLY_MODE:
         try:
             portrait = subject_photos.find_subject_photo(story["title"], story.get("summary", ""))
         except Exception as e:
-            print("subject portrait lookup failed, staying text-only:", e)
+            print("subject portrait lookup failed:", e)
         if portrait:
-            # the raw portrait: feed_post sizes it to its own layout and
-            # stamps the FILE PHOTO tag itself
             forced_image_path = portrait["path"]
             force_no_image = False
+            photo_note = f"File photo: {portrait['subject']}"
             print(f"Using verified file photo of {portrait['subject']} ({portrait['license']})")
-
-    if (force_no_image and forced_image_path is None and not allow_text_only
-            and settings.REQUIRE_IMAGE_TO_PUBLISH and not settings.TEXT_ONLY_MODE):
-        print("No image for this story -- not publishing without one:", story["title"])
-        _hold_for_image(story, ist)
-        return None
+        else:
+            try:
+                ctx = context_photos.find_context_photo(story["title"], story.get("summary", ""))
+            except Exception as e:
+                print("context photo lookup failed:", e)
+                ctx = None
+            if ctx:
+                portrait = ctx          # same downstream handling (credit in caption)
+                forced_image_path = ctx["path"]
+                force_no_image = False
+                photo_note = ctx["note"]
+                print(f"Using licensed context photo of {ctx['subject']} ({ctx['license']})")
 
     written = ai_writer.rewrite(story)
     print("Headline:", written["headline"])
@@ -1049,7 +1026,19 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
     out_path = os.path.join(out_dir, out_name)
 
     logo = os.path.join(os.path.dirname(__file__), "..", "assets", "logo", "logo.png")
-    if img_path and variant not in ("alert_card", "text_card"):
+    if img_path is None and not is_reel:
+        # No usable photograph exists -- a designed typographic card, which
+        # is honest about having no picture, rather than no post at all.
+        feed_post.render_text_post(
+            category=category_label,
+            headline=written["headline"],
+            accent_word=written["accent_word"],
+            out_path=out_path,
+            subhead=_one_line_summary(story),
+            footer=settings.BRAND_FOOTER,
+            handle=settings.BRAND_HANDLE,
+        )
+    elif img_path and variant not in ("alert_card", "text_card"):
         # every post that has a picture uses the adaptive layout (src/feed_post.py)
         feed_post.render_post(
             photo_path=img_path,
@@ -1060,6 +1049,7 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
             footer=settings.BRAND_FOOTER,
             handle=settings.BRAND_HANDLE,
             file_photo=bool(portrait),
+            photo_note=photo_note,
         )
     else:
         template.render_post(

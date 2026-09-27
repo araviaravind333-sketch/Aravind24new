@@ -77,7 +77,7 @@ WHATSAPP_TEMPLATE_LANGUAGE  = "en_US"
 TELEGRAM_BOT_TOKEN    = _env("TELEGRAM_BOT_TOKEN")
 TELEGRAM_CHAT_ID      = _env("TELEGRAM_CHAT_ID")
 TELEGRAM_GRACE_MINUTES = 20
-TELEGRAM_QUEUE_TARGET  = 5
+TELEGRAM_QUEUE_TARGET  = 8
 # telegram_cycle() runs every 30 min and (with a short grace period and a
 # warm queue) can resolve -- and therefore post -- on nearly every run.
 # Left unchecked that's up to 48 posts/day stacked on TOP of the old fixed
@@ -86,7 +86,7 @@ TELEGRAM_QUEUE_TARGET  = 5
 # just fails outright. This makes the Telegram queue self-pace to roughly
 # hourly instead, using the same "time since last post" signal the
 # breaking-news path already shares (news_engine.hours_since_last_post()).
-TELEGRAM_MIN_POST_GAP_HOURS = 3.0
+TELEGRAM_MIN_POST_GAP_HOURS = 1.0   # ~14 automated posts spread across the day
 # Analyzed a real competitor that reached 1M followers (@worldinlast24hrs):
 # they post ~4x/day, not hourly, and their evidence is that a handful of
 # carefully-selected, genuinely notable stories outperforms frequent-but-
@@ -100,14 +100,15 @@ TELEGRAM_MIN_POST_GAP_HOURS = 3.0
 # (the account was hitting MAX_POSTS_PER_24H's ceiling nearly every day,
 # ~22-24 posts/day, about triple the cadence of the account that actually
 # reached 1M); 80 tightens further still, closer to only the standouts.
-MIN_AUTO_POST_SCORE = 95
+MIN_AUTO_POST_SCORE = 62      # the image chain now illustrates most stories, so good
+                              # stories no longer have to clear a near-impossible bar
 
 # By request: during India's waking hours only India news goes out; world/
 # sports/business are allowed overnight, when the Indian audience is
 # asleep anyway. Window is inclusive of the start hour and exclusive of
 # the end hour, in IST (05:00-22:59 -> India only; 23:00-04:59 -> all).
-INDIA_ONLY_START_HOUR_IST = 5
-INDIA_ONLY_END_HOUR_IST   = 23
+INDIA_ONLY_START_HOUR_IST = 0    # India news only, around the clock (owner's request)
+INDIA_ONLY_END_HOUR_IST   = 24
 INDIA_ONLY_CATEGORIES     = ("INDIA NEWS",)
 
 # ============================================================
@@ -179,7 +180,7 @@ DAILY_SCHEDULE = [
 # own clock, not the general one -- see news_engine.py), so it can't
 # quietly starve out from sharing a clock with the hourly regular queue,
 # which is exactly what was happening before this was split out.
-BREAKING_MIN_GAP_HOURS = 1.5
+BREAKING_MIN_GAP_HOURS = 0.75   # trending stories go out while they are still trending
 
 # Shared safety valve across every posting path (regular queue + breaking
 # fast path): Instagram's Graph API hard-caps content publishing at 25
@@ -189,7 +190,7 @@ BREAKING_MIN_GAP_HOURS = 1.5
 # day, roughly triple the ~4x/day cadence of the account that actually
 # reached 1M followers -- that's routine automated posts crowding out
 # quality, not a technical ceiling worth maxing out.
-MAX_POSTS_PER_24H = 8
+MAX_POSTS_PER_24H = 17        # 14 automated + MAX_URGENT_RESERVED_SLOTS kept free for the owner
 # Reserved specifically for the user's OWN urgent breaking-news
 # submissions (a link + their own photo/video, sent via Telegram).
 # Without this, routine automated posts earlier in the day can use up
@@ -198,7 +199,7 @@ MAX_POSTS_PER_24H = 8
 # regular queue and the automated breaking-news path stop this many
 # short of the full ceiling; only the user's own urgent-submission path
 # can use the full ceiling, including this reserve.
-MAX_URGENT_RESERVED_SLOTS = 2
+MAX_URGENT_RESERVED_SLOTS = 3   # always free for the owner's own photo/video submissions
 
 # ============================================================
 # 5. GEO-TAGGING
@@ -352,7 +353,10 @@ SUBJECT_PHOTO_ALLOW_SHARE_ALIKE = False
 # A story with no photo -- yours from Telegram, a rights-cleared event photo,
 # or a verified file portrait -- is held instead of being posted as a text
 # card. Nothing is guessed or generated to fill the gap.
-REQUIRE_IMAGE_TO_PUBLISH = True
+# Every post carries a visual: a real photo when one legitimately exists,
+# otherwise a designed text card (src/feed_post.render_text_post). Holding
+# stories until the owner sent a photo is what froze the account for a week.
+REQUIRE_IMAGE_TO_PUBLISH = False
 # Regular Telegram candidates: how long an image-less one waits for your photo
 # before it is dropped from the queue.
 IMAGE_WAIT_HOURS = 12
@@ -374,3 +378,20 @@ REEL_REQUIRE_OWNER_VOICE = True
 # made once from a recorded sample -- see src/voice_clone.py). Used when the
 # profile exists; per-slide voice notes still take priority over it.
 REEL_CLONE_ENABLED = False   # paused until the owner has approved a generation setting (see GEN_KWARGS)
+
+
+# ============================================================
+# 14. CONTEXT PHOTOS  (src/context_photos.py)
+# ============================================================
+# Licensed photographs of PLACES and INSTITUTIONS named in a headline
+# (Kerala, the Supreme Court, the Reserve Bank), for the many stories that
+# name no notable person. Always captioned on the post as a file photo of
+# that place -- never presented as a picture of the event. Sensitive
+# headlines (crime, death, victims) are excluded entirely.
+CONTEXT_PHOTOS_ENABLED = True
+# Notability bar: how many Wikipedia language editions the place/institution
+# needs, so an obscure same-named entity is never picked.
+CONTEXT_PHOTO_MIN_SITELINKS = 20
+# A context shot fills the whole picture window, so it must be large enough
+# to still look sharp at 1080px wide.
+CONTEXT_PHOTO_MIN_PIXELS = 800
