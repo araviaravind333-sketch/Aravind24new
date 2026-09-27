@@ -73,11 +73,33 @@ def _draw_slide_badge(canvas, draw, index, total):
     draw.text((x0 + pad, y0 + 10), text, font=f, fill=WHITE)
 
 
+# A red highlighter mark is emphasis. Putting it on a word about death or
+# injury reads as relish for it: a live post highlighted "PILOT BODY" on an
+# air-crash story. Anything matching this is drawn as plain text instead.
+_NEVER_HIGHLIGHT = re.compile(
+    r"\b(body|bodies|dead|death|deaths|died|dies|kill\w*|victim\w*|corpse|"
+    r"crash\w*|blast|explosion|fire|burn\w*|injur\w*|wound\w*|blood\w*|"
+    r"rape\w*|murder\w*|suicide|assault\w*|abuse\w*|funeral|grave|"
+    r"stampede|drown\w*|massacre|terror\w*|hostage\w*)\b", re.I)
+
+
+def highlightable(accent_phrase, headline):
+    """The phrase to highlight, or "" when it must be drawn plain."""
+    a = (accent_phrase or "").strip()
+    if not a or a.upper() not in (headline or "").upper():
+        return ""
+    return "" if _NEVER_HIGHLIGHT.search(a) else a
+
+
 def _draw_highlighted_headline(draw, lines, f_head, size, x, y, accent_phrase):
     """Draws each headline line, and if `accent_phrase` appears in a line,
     paints a solid red block behind just that substring with white text
     on top -- a highlighter mark, matching the reference post's style,
-    rather than this project's other cards which only recolor the text."""
+    rather than this project's other cards which only recolor the text.
+    A phrase about death or injury is never highlighted (see
+    _NEVER_HIGHLIGHT); it is drawn as ordinary headline text."""
+    if accent_phrase and _NEVER_HIGHLIGHT.search(accent_phrase):
+        accent_phrase = ""
     line_h = int(size * 0.98)
     pad_y = 6
     for line in lines:

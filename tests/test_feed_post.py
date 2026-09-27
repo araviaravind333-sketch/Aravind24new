@@ -92,8 +92,22 @@ def render_tests(tmp):
     check("a very long headline still leaves the credit line legible", row_has_text)
 
 
+def highlight_tests():
+    """A live post highlighted "PILOT BODY" in red on an air-crash story."""
+    print("\nHIGHLIGHT RESTRAINT")
+    from src import carousel
+    h = "PILOT BODY SEEKS SCRUTINY OF TECHNICAL RECORDS IN AI-171 CRASH PROBE"
+    for bad in ("Pilot Body", "AI-171 Crash", "Death Toll", "Victims", "Blast"):
+        check(f"never highlights {bad!r}", carousel.highlightable(bad, h + " " + bad.upper()) == "")
+    check("still highlights an ordinary name",
+          carousel.highlightable("Tamil Nadu", "TAMIL NADU ANNOUNCES SCHEME") == "Tamil Nadu")
+    check("a phrase not in the headline is not highlighted",
+          carousel.highlightable("Kerala", "TAMIL NADU ANNOUNCES SCHEME") == "")
+
+
 if __name__ == "__main__":
     layout_tests()
+    highlight_tests()
     with tempfile.TemporaryDirectory() as t:
         render_tests(t)
     print(f"\n{'=' * 52}\n{len(PASS)} passed, {len(FAIL)} failed")
