@@ -64,24 +64,31 @@ def _fit(draw, headline, avail):
     return carousel._fit_headline(draw, headline, W - MARGIN * 2, 5, 112, 52, max(avail, 120))
 
 
-def _photo_layer(photo, lay):
-    """Full-canvas RGB with the picture placed in its window."""
+def _photo_layer(photo, lay, plain_bg=False):
+    """Full-canvas RGB with the picture placed in its window. `plain_bg`
+    fills behind a letterboxed photo with flat panel colour instead of a
+    blurred copy of the photo -- a blurred copy is a derivative, which a
+    share-alike file must not be turned into."""
     canvas = Image.new("RGB", (W, H), _PANEL)
     wh = lay["win_h"]
     if lay["mode"] == "cover":
         is_portrait = photo.height >= photo.width * 0.9
         win = carousel.cover_crop_biased(photo, W, wh, 0.18 if is_portrait else 0.4)
     else:
-        scale = max(W / photo.width, wh / photo.height)
-        bg = photo.resize((int(photo.width * scale) + 1, int(photo.height * scale) + 1), Image.BILINEAR)
-        left, top = (bg.width - W) // 2, (bg.height - wh) // 2
-        bg = bg.crop((left, top, left + W, top + wh)).filter(ImageFilter.GaussianBlur(36))
-        win = ImageEnhance.Brightness(bg).enhance(0.45)
+        if plain_bg:
+            win = Image.new("RGB", (W, wh), _PANEL)
+        else:
+            scale = max(W / photo.width, wh / photo.height)
+            bg = photo.resize((int(photo.width * scale) + 1, int(photo.height * scale) + 1), Image.BILINEAR)
+            left, top = (bg.width - W) // 2, (bg.height - wh) // 2
+            bg = bg.crop((left, top, left + W, top + wh)).filter(ImageFilter.GaussianBlur(36))
+            win = ImageEnhance.Brightness(bg).enhance(0.45)
         s = min(W / photo.width, wh / photo.height)
         w, h = int(photo.width * s), int(photo.height * s)
         win.paste(photo.resize((w, h), Image.LANCZOS), ((W - w) // 2, (wh - h) // 2))
-    win = ImageEnhance.Contrast(win).enhance(1.05)
-    win = ImageEnhance.Color(win).enhance(1.05)
+    if not plain_bg:
+        win = ImageEnhance.Contrast(win).enhance(1.05)
+        win = ImageEnhance.Color(win).enhance(1.05)
     canvas.paste(win, (0, 0))
     return canvas
 
@@ -161,14 +168,17 @@ def _credit_line(draw, footer, handle):
 
 def render_post(photo_path, category, headline, accent_word, out_path,
                 footer="For the latest news", handle="@aravindnews24", logo_path=None,
-                file_photo=False, photo_note="", **_ignored):
+                file_photo=False, photo_note="", share_alike=False, **_ignored):
     category = (category or "").upper()
     color = CATEGORY_COLORS.get(category, ACCENT)
     photo = Image.open(photo_path).convert("RGB")
     lay = layout_for(photo.width / photo.height, headline)
+    if share_alike:
+        # shown whole, never cropped -- see src/context_photos.py
+        lay = dict(lay, mode="contain")
     wh = lay["win_h"]
 
-    canvas = _photo_layer(photo, lay).convert("RGBA")
+    canvas = _photo_layer(photo, lay, plain_bg=share_alike).convert("RGBA")
 
     # soft fade from the picture into the panel + a scrim behind the brand chip
     fade_h = 120

@@ -20,8 +20,13 @@ Two hard limits keep this honest:
     photo. "Police shoot dead man in UP" beside a stock photo of a UP
     landmark reads as a picture of the incident. Those stories wait for
     the owner's own media or run as a text card.
-  * ONLY REUSABLE LICENCES. Same allowlist as subject_photos (CC0, public
-    domain, CC BY, GODL-India). Anything unrecognised is refused.
+  * ONLY REUSABLE LICENCES. CC0, public domain, CC BY and GODL-India are
+    used freely. CC BY-SA is also accepted, but only on terms that keep the
+    post a *collection* rather than an adaptation, so no share-alike
+    obligation attaches to the post: the photograph is shown WHOLE and
+    UNCROPPED on a plain background, never with text over it, and its
+    author and licence are printed on the image. Anything unrecognised, and
+    anything NonCommercial or NoDerivatives, is refused.
 
 Resolution is deliberately conservative: the entity must not be a person,
 must be physically locatable (coordinates, or a headquarters), must clear
@@ -221,6 +226,19 @@ _FILE_BLOCK = re.compile(
 _PHOTO_EXT = re.compile(r"\.(jpe?g|png)$", re.I)
 
 
+def search_photos(query, limit=30):
+    """Photographs on Commons matching a free-text search. An entity's own
+    category is often only a handful of files (the Election Commission's
+    holds three), so the search index is used as well to widen the pool of
+    freely-licensed candidates."""
+    data = sp._get_json(COMMONS, {
+        "action": "query", "list": "search", "srsearch": f'{query} filemime:image',
+        "srnamespace": 6, "srlimit": limit, "format": "json"})
+    names = [m["title"].split(":", 1)[-1]
+             for m in ((data or {}).get("query") or {}).get("search", [])]
+    return [n for n in names if _PHOTO_EXT.search(n) and not _FILE_BLOCK.search(n)]
+
+
 def category_photos(commons_cat, limit=40):
     """Filenames of photographs in an entity's Commons category. Wikidata's
     single lead image (P18) is often share-alike, while the same category
@@ -293,8 +311,15 @@ def _usable_candidates(filenames, label, max_tries=14):
         info = sp.commons_file_info(fn)
         if not info or not info.get("url"):
             continue
-        if not sp.licence_allowed(info["license"]):
+        # Share-alike is accepted only on the terms set out in the module
+        # docstring: shown whole and unmodified, with author + licence
+        # printed on the post. _usable_candidates flags it so the renderer
+        # can enforce that; a plain CC BY / PD file has no such constraint.
+        share_alike = bool(sp._LICENSE_SA.search(info["license"] or ""))
+        allow_sa = settings.CONTEXT_PHOTO_ALLOW_SHARE_ALIKE
+        if not sp.licence_allowed(info["license"], allow_share_alike=allow_sa):
             continue
+        info = dict(info, share_alike=share_alike and allow_sa)
         if not info["mime"].startswith("image/"):
             continue
         if min(info["width"], info["height"]) < settings.CONTEXT_PHOTO_MIN_PIXELS:
@@ -304,6 +329,45 @@ def _usable_candidates(filenames, label, max_tries=14):
         if info["height"] and info["width"] / info["height"] < 0.75:
             continue
         yield info
+
+
+_RECENT_PATH = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "context_recent.json")
+
+
+def _recent_subjects(hours=None):
+    """Subjects used on a post in the last `hours`. Four posts in a row
+    carrying the same photo of the Election Commission reads as a broken
+    feed, so a subject is not reused while it is still fresh."""
+    import datetime as dt
+    import json
+    hours = settings.CONTEXT_PHOTO_REUSE_HOURS if hours is None else hours
+    try:
+        with open(_RECENT_PATH, encoding="utf-8") as f:
+            data = json.load(f)
+    except Exception:
+        return {}
+    now = dt.datetime.utcnow()
+    out = {}
+    for subject, stamp in data.items():
+        try:
+            age = (now - dt.datetime.strptime(stamp, "%Y-%m-%d %H:%M")).total_seconds() / 3600
+        except Exception:
+            continue
+        if age < hours:
+            out[subject] = stamp
+    return out
+
+
+def note_subject_used(subject):
+    """Records that `subject` has just been posted."""
+    import datetime as dt
+    import json
+    data = _recent_subjects()
+    data[subject] = dt.datetime.utcnow().strftime("%Y-%m-%d %H:%M")
+    os.makedirs(os.path.dirname(_RECENT_PATH), exist_ok=True)
+    with open(_RECENT_PATH, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=1, sort_keys=True)
 
 
 def find_context_photo(headline, summary="", dest_dir=None):
@@ -329,6 +393,9 @@ def find_context_photo(headline, summary="", dest_dir=None):
         if not qid:
             _CACHE[key] = None
             continue
+        if label in _recent_subjects():
+            print(f"context_photos: {label} used too recently -- trying another entity")
+            continue
         # The lead image first, then the entity's Commons category -- the
         # lead image is frequently share-alike while the same category holds
         # public-domain / CC BY photographs of the same place. Each
@@ -339,7 +406,8 @@ def find_context_photo(headline, summary="", dest_dir=None):
         dest_dir = dest_dir or os.path.join(
             os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "context_photos")
         info = path = None
-        for cand in _usable_candidates([p18] + category_photos(cat), label):
+        pool = [p18] + category_photos(cat) + search_photos(label)
+        for cand in _usable_candidates(pool, label):
             ext = ".png" if cand["mime"] == "image/png" else ".jpg"
             trial = os.path.join(dest_dir, "ctx_" + hashlib.sha1(
                 (qid + cand["url"]).encode()).hexdigest()[:12] + ext)
@@ -362,11 +430,16 @@ def find_context_photo(headline, summary="", dest_dir=None):
             _CACHE[key] = None
             continue
         who = info["artist"] or "Wikimedia Commons contributor"
+        sa = bool(info.get("share_alike"))
         result = {
             "path": path, "subject": label, "wikidata_id": qid, "description": desc,
             "license": info["license"], "license_url": info["license_url"],
             "artist": who, "source_url": info["page"], "is_context": True,
-            "note": f"File photo: {label}",
+            # a share-alike file must carry its author and licence on the
+            # image itself, and must be shown whole and uncropped
+            "share_alike": sa,
+            "note": (f"File photo: {label} · {who} / {info['license']}"
+                     if sa else f"File photo: {label}"),
             "attribution": f"{who} / {info['license']} (Wikimedia Commons)",
         }
         _CACHE[key] = result

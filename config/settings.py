@@ -254,6 +254,8 @@ REEL_CLIP_TRIM_TARGET_SEC = 50
 # After each post, we pull insights and log to /data/performance.csv
 # The selector uses this history to prefer high-performing categories/times.
 ANALYTICS_LOOKBACK_DAYS = 14
+
+
 # ============================================================
 # 10. INCIDENT PHOTO INTELLIGENCE
 #     (src/incident_photos.py + src/photo_review.py + src/dashboard.py)
@@ -395,3 +397,15 @@ CONTEXT_PHOTO_MIN_SITELINKS = 20
 # A context shot fills the whole picture window, so it must be large enough
 # to still look sharp at 1080px wide.
 CONTEXT_PHOTO_MIN_PIXELS = 800
+
+# CC BY-SA photos are used, but only shown WHOLE and UNCROPPED on a plain
+# background with author + licence printed on the image -- that keeps the
+# post a collection rather than an adaptation, so no share-alike obligation
+# attaches to it. Without this almost every good photograph of an Indian
+# public building on Commons is unusable.
+CONTEXT_PHOTO_ALLOW_SHARE_ALIKE = True
+
+# How long before the same place/institution photo may be used again.
+# Without this a run of stories about one body (the Election Commission)
+# produces several posts carrying the identical photograph.
+CONTEXT_PHOTO_REUSE_HOURS = 10

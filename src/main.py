@@ -882,7 +882,8 @@ def telegram_cycle():
     if len(queue) < settings.TELEGRAM_QUEUE_TARGET:
         exclude_ids = {e["story"]["id"] for e in queue}
         needed = settings.TELEGRAM_QUEUE_TARGET - len(queue)
-        for story in news_engine.top_candidates(needed, exclude_ids):
+        for story in _prefer_illustratable(
+                news_engine.top_candidates(needed * 3, exclude_ids), needed):
             message_id = telegram_bot.send_candidate(story)
             if message_id:
                 queue.append({
@@ -896,6 +897,34 @@ def telegram_cycle():
     _save_tg_queue(queue)
 
 
+
+
+def _can_illustrate(story):
+    """Whether a legitimate photo exists for this story. Results are cached
+    inside the photo modules, so asking here does not re-fetch at post time."""
+    try:
+        if subject_photos.find_subject_photo(story["title"], story.get("summary", "")):
+            return True
+    except Exception:
+        pass
+    try:
+        return bool(context_photos.find_context_photo(story["title"], story.get("summary", "")))
+    except Exception:
+        return False
+
+
+def _prefer_illustratable(stories, needed):
+    """Same stories, but the ones that can carry a real photograph first.
+    A news desk illustrates what it can; this only reorders within an
+    already newsworthy set, so nothing weak gets promoted for having a
+    picture."""
+    stories = list(stories)
+    with_photo, without = [], []
+    for s in stories:
+        (with_photo if _can_illustrate(s) else without).append(s)
+    if with_photo:
+        print(f"queue fill: {len(with_photo)} of {len(stories)} candidates can carry a photo")
+    return (with_photo + without)[:needed]
 
 
 def _one_line_summary(story, max_chars=120):
@@ -1050,7 +1079,10 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
             handle=settings.BRAND_HANDLE,
             file_photo=bool(portrait),
             photo_note=photo_note,
+            share_alike=bool(portrait and portrait.get("share_alike")),
         )
+        if portrait and portrait.get("is_context"):
+            context_photos.note_subject_used(portrait["subject"])
     else:
         template.render_post(
             photo_path=img_path,

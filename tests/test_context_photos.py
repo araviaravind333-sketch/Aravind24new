@@ -186,6 +186,54 @@ def resolution_tests():
         cp._search_entities = real
 
 
+def reuse_tests(tmp):
+    print("\nSUBJECT DIVERSITY")
+    import json, os as _os, datetime as _dt
+    real_path = cp._RECENT_PATH
+    cp._RECENT_PATH = _os.path.join(tmp, "recent.json")
+    try:
+        check("nothing recorded -> nothing is fresh", cp._recent_subjects() == {})
+        cp.note_subject_used("Election Commission of India")
+        check("a used subject is remembered",
+              "Election Commission of India" in cp._recent_subjects())
+        stale = {"Old Place": (_dt.datetime.utcnow() - _dt.timedelta(hours=48)).strftime("%Y-%m-%d %H:%M")}
+        json.dump(stale, open(cp._RECENT_PATH, "w"))
+        check("a subject used long ago is free again", cp._recent_subjects() == {}, cp._recent_subjects())
+        json.dump({"Broken": "not-a-date"}, open(cp._RECENT_PATH, "w"))
+        check("a corrupt timestamp is ignored, not crashed on", cp._recent_subjects() == {})
+    finally:
+        cp._RECENT_PATH = real_path
+
+
+def share_alike_tests(tmp):
+    print("\nSHARE-ALIKE DISPLAY TERMS")
+    from PIL import Image
+    from src import feed_post as fp
+    # 3:1 is much wider than the picture window, so "shown whole" must
+    # letterbox it -- that is what proves it was not cropped to fill
+    src = os.path.join(tmp, "wide.jpg")
+    Image.new("RGB", (3000, 1000), (30, 160, 60)).save(src)
+    head = "PARLIAMENT PASSES NEW BILL ON DIGITAL DATA PROTECTION"
+    plain = fp.render_post(src, "INDIA NEWS", head, "", os.path.join(tmp, "p.jpg"))
+    sa = fp.render_post(src, "INDIA NEWS", head, "", os.path.join(tmp, "sa.jpg"), share_alike=True)
+    sa_im = Image.open(sa)
+    green = lambda px: px[1] > px[0] + 30 and px[1] > px[2] + 30
+    check("share-alike photo is shown whole, letterboxed rather than cropped",
+          not green(sa_im.getpixel((540, 6))), sa_im.getpixel((540, 6)))
+    check("the photo itself is still there, centred",
+          green(sa_im.getpixel((540, fp.layout_for(3.0, head)["win_h"] // 2))))
+    # neutral grey (r==g==b), not a tinted blur of the green photo. The exact
+    # value varies because the brand-chip scrim darkens the top of the frame.
+    corner = sa_im.getpixel((5, 6))[:3]
+    check("share-alike sits on a plain background, not a blurred copy of itself",
+          max(corner) - min(corner) <= 2 and max(corner) < 40, corner)
+    plain_corner = Image.open(plain).getpixel((5, 6))[:3]
+    check("the ordinary (non-share-alike) path may still use a tinted backdrop",
+          plain_corner is not None)
+    check("the two renders genuinely differ",
+          list(Image.open(plain).getdata()) != list(sa_im.getdata()))
+
+
 if __name__ == "__main__":
     entity_tests()
     wrong_match_tests()
@@ -194,6 +242,10 @@ if __name__ == "__main__":
         photo_detection_tests(t)
     filename_filter_tests()
     resolution_tests()
+    with tempfile.TemporaryDirectory() as t:
+        reuse_tests(t)
+    with tempfile.TemporaryDirectory() as t:
+        share_alike_tests(t)
     print(f"\n{'=' * 52}\n{len(PASS)} passed, {len(FAIL)} failed")
     if FAIL:
         print("FAILED:")
