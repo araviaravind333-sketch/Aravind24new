@@ -107,6 +107,30 @@ def safety_tests():
         settings.CONTEXT_PHOTOS_ENABLED = old
 
 
+def rhetoric_tests():
+    """Regression: 'attacks'/'attack' in Indian political headlines almost
+    always means criticises, not violence -- an over-broad block on the
+    word alone refused a context photo to most political news. A prior
+    version of _RHETORIC also silently compiled with literal backspace
+    bytes instead of \\b word-boundary escapes (a string-building bug, not
+    a regex design bug) and matched nothing at all."""
+    print("\nPOLITICAL RHETORIC vs REAL VIOLENCE")
+    for h in ["Congress attacks Maharashtra government for data theft",
+              "Explained: Opposition's Attack On Chief Election Commissioner",
+              "Rahul Gandhi slams BJP over poll remarks",
+              "Parliament passes new data bill"]:
+        check(f"criticism is not treated as violence: {h[:44]!r}", not cp.unsafe_for_context(h))
+    for h in ["Terror attack on Parliament complex",
+              "Attack kills two in Manipur",
+              "Mob attacks temple in Bihar",
+              "Gunmen attack village in Manipur",
+              "2 Naga Civilians Shot Dead In Manipur",
+              "Karur stampede anniversary observed"]:
+        check(f"real violence is still refused: {h[:44]!r}", cp.unsafe_for_context(h))
+    check("_RHETORIC actually contains real backslash-b escapes, not backspace bytes",
+          chr(8) not in cp._RHETORIC.pattern)
+
+
 def photo_detection_tests(tmp):
     print("\nPHOTOGRAPH vs DOCUMENT")
     # a scanned table/report: near-white, colourless, thin dark text
@@ -238,6 +262,7 @@ if __name__ == "__main__":
     entity_tests()
     wrong_match_tests()
     safety_tests()
+    rhetoric_tests()
     with tempfile.TemporaryDirectory() as t:
         photo_detection_tests(t)
     filename_filter_tests()

@@ -170,12 +170,17 @@ def render_photo_card(photo_path, category, headline, accent_word, out_path,
 
 # ---------------------------------------------------------------- video
 def _ffmpeg():
+    """A real ffmpeg executable, or None if one truly cannot be found --
+    never a bare "ffmpeg" placeholder, which looked truthy to callers but
+    crashed with FileNotFoundError the moment it was actually run (this
+    workflow does not install ffmpeg system-wide the way daily-carousel.yml
+    does)."""
     import shutil
     exe = shutil.which("ffmpeg")
     if exe:
         return exe
     from src import roundup_reel
-    return roundup_reel.ffmpeg_exe() or "ffmpeg"
+    return roundup_reel.ffmpeg_exe()
 
 
 def probe_aspect(clip_path):
@@ -226,8 +231,11 @@ def build_filter(lay):
 def render_reel_from_clip(clip_path, frame_png, out_path, max_duration_sec, layout=None):
     """Muted (by the owner's choice) Reel: clip in the window, frame on top.
     `layout` must be the one the frame PNG was rendered with."""
+    exe = _ffmpeg()
+    if not exe:
+        raise RuntimeError("ffmpeg not available")
     lay = layout or layout_for(probe_aspect(clip_path), "")
-    cmd = [_ffmpeg(), "-y", "-i", clip_path, "-loop", "1", "-i", frame_png,
+    cmd = [exe, "-y", "-i", clip_path, "-loop", "1", "-i", frame_png,
            "-t", str(max_duration_sec), "-filter_complex", build_filter(lay), "-map", "[outv]", "-an",
            "-c:v", "libx264", "-pix_fmt", "yuv420p", "-movflags", "+faststart", out_path]
     res = subprocess.run(cmd, capture_output=True, text=True, timeout=300)

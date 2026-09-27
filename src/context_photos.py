@@ -108,8 +108,32 @@ _UNSAFE_EXTRA = re.compile(
     r"outbreak|epidemic|pandemic|infection|disease)\b", re.I)
 
 
+# In Indian political headlines "attacks" almost always means criticises
+# ("Congress attacks Maharashtra government"). Treating that as violence
+# blocked most of the political news the page exists to cover. Real
+# violence is still caught, because a genuinely violent story carries
+# another trigger too ("terror attack", "attack kills two").
+_RHETORIC = re.compile(
+    r"\b(?:attack\w*|slam\w*|hit\s+out|target\w*)\b[^.]{0,40}?"
+    r"\b(?:government|govt|bjp|congress|opposition|minister|ministry|commission|"
+    r"commissioner|party|leader|centre|center|poll\s+body|mp|mla|mlas|cm|pm|"
+    r"parliament|assembly|court|remark\w*|statement\w*|claim\w*)\b", re.I)
+
+
 def unsafe_for_context(text):
-    return bool(sp._SENSITIVE.search(text or "") or _UNSAFE_EXTRA.search(text or ""))
+    """True when a place/institution photo must not be attached to this
+    story -- see the module docstring."""
+    text = text or ""
+    if sp._SENSITIVE.search(text):
+        return True
+    hits = [m.group(0).lower() for m in _UNSAFE_EXTRA.finditer(text)]
+    if not hits:
+        return False
+    # the only triggers are the word "attack" used about a political
+    # target: criticism, not violence
+    if all(h.startswith("attack") for h in hits) and _RHETORIC.search(text):
+        return False
+    return True
 
 
 _CACHE = {}
