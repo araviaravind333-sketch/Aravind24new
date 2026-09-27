@@ -387,6 +387,12 @@ def find_context_photo(headline, summary="", dest_dir=None):
             if hit is _UNUSABLE:
                 return None
             if hit is not None:
+                # the recency check has to happen here too: without it the
+                # cache hands back the same photo for a run of stories about
+                # one institution, which is what it exists to prevent
+                if hit["subject"] in _recent_subjects():
+                    print(f"context_photos: {hit['subject']} used too recently -- trying another entity")
+                    continue
                 return hit
             continue
         qid, p18, label, desc, cat, reason = resolve_entity(name)
