@@ -409,3 +409,14 @@ CONTEXT_PHOTO_ALLOW_SHARE_ALIKE = True
 # Without this a run of stories about one body (the Election Commission)
 # produces several posts carrying the identical photograph.
 CONTEXT_PHOTO_REUSE_HOURS = 10
+
+
+# ============================================================
+# 15. REACH
+# ============================================================
+# Publish every post as a Reel on Instagram (Facebook still gets the square
+# image). Measured on this page: image posts reached a median of 3 accounts,
+# i.e. only existing followers; Reels are what Instagram shows to people who
+# do not follow the page yet. Share-alike photos stay static (they must be
+# shown whole, which a 9:16 frame cannot do).
+ALL_POSTS_AS_REELS = True

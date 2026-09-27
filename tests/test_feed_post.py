@@ -209,6 +209,40 @@ def overlay_tests(tmp):
     check("short headline still renders a valid 1080x1350 frame", im3.size == (1080, 1350))
 
 
+def reel_tests(tmp):
+    """Every post now goes out as a Reel (Instagram shows Reels to
+    non-followers; on this page's data image posts reached a median of 3
+    accounts). The 9:16 frames must keep all text out of Instagram's own
+    top bar (~200px) and bottom caption/buttons (~400px), and inside the
+    profile grid's 3:4 centre crop (y 240-1680)."""
+    print("\nREEL FRAMES (9:16)")
+    src = os.path.join(tmp, "p.jpg")
+    Image.new("RGB", (1000, 1250), (200, 200, 205)).save(src)   # bright photo: worst case for legibility
+    head = "Suvendu Adhikari blames Mamata Banerjee for deleting 27 lakh voter names"
+    out = fp.render_overlay_reel(src, "INDIA NEWS", head, "", os.path.join(tmp, "r.jpg"))
+    im = Image.open(out)
+    check("overlay reel is 1080x1920", im.size == (1080, 1920))
+    lines, f, size, block_h = fp._fit_serif(ImageDraw.Draw(im), head, 1080 - fp.MARGIN - 34 - fp.MARGIN, start=84)
+    top = 1920 - fp.REEL_BOTTOM_PAD - block_h
+    check("headline sits below Instagram's top bar and inside the grid crop", 240 <= top, top)
+    check("headline + credit end above Instagram's caption area", top + block_h + 60 <= 1920 - 380,
+          top + block_h + 60)
+    behind = im.getpixel((fp.W - 40, top + block_h // 2))
+    check("the scrim makes the headline zone dark even on a bright photo", sum(behind[:3]) < 200, behind)
+    clear = im.getpixel((540, 200))
+    check("the photo stays clear well above the headline", sum(clear[:3]) > 500, clear)
+
+    out2 = fp.render_text_reel("INDIA NEWS", "Karur stampede: first accused arrested a year after the tragedy", "",
+                               os.path.join(tmp, "t.jpg"), subhead="Police said the accused was held in Chennai.")
+    im2 = Image.open(out2)
+    check("text reel is 1080x1920", im2.size == (1080, 1920))
+    bright = lambda y0, y1: any(sum(im2.getpixel((x, y))[:3]) > 450
+                                for x in range(fp.MARGIN, 1010, 6) for y in range(y0, y1, 4))
+    check("no text in Instagram's top bar zone", not bright(0, 200))
+    check("no text in Instagram's bottom caption zone", not bright(1920 - 400, 1920))
+    check("the headline does render in the safe middle", bright(400, 1500))
+
+
 if __name__ == "__main__":
     layout_tests()
     highlight_tests()
@@ -218,6 +252,8 @@ if __name__ == "__main__":
         gap_tests(t)
     with tempfile.TemporaryDirectory() as t:
         overlay_tests(t)
+    with tempfile.TemporaryDirectory() as t:
+        reel_tests(t)
     print(f"\n{'=' * 52}\n{len(PASS)} passed, {len(FAIL)} failed")
     if FAIL:
         print("FAILED:")

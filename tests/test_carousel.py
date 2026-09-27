@@ -480,6 +480,11 @@ def image_gate_tests():
     main.ai_writer.rewrite = lambda s: {"headline": s["title"], "caption": "c", "accent_word": ""}
     main.feed_post.render_post = lambda **k: used.setdefault("plain", True) or k["out_path"]
     main.feed_post.render_overlay_post = lambda **k: used.setdefault("overlay", True) or k["out_path"]
+    real3 = (main.feed_post.render_overlay_reel, main.video.render_reel)
+    main.feed_post.render_overlay_reel = lambda **k: k["out_path"]
+    main.video.render_reel = lambda *a, **k: None
+    import json as _json
+    reel_flag = lambda: _json.load(open(main.PENDING_PATH)).get("is_reel")
     with tempfile.TemporaryDirectory() as tmp2:
         try:
             story_a = {"id": "sa1", "title": "Parliament passes new data bill", "summary": "",
@@ -495,6 +500,8 @@ def image_gate_tests():
             main._render_story(story_a, _dt.datetime(2026, 9, 27, 21, 0), is_reel=False, force_no_image=True)
             check("a share-alike photo uses the plain whole-image layout, never the cropping overlay",
                   used.get("plain") and not used.get("overlay"), used)
+            check("a share-alike photo stays a static post (a 9:16 Reel would have to crop it)",
+                  reel_flag() is False, reel_flag())
 
             story_b = {"id": "sb1", "title": "ISRO launches new satellite", "summary": "",
                       "score": 99, "category": "INDIA NEWS", "link": ""}
@@ -508,9 +515,12 @@ def image_gate_tests():
             main._render_story(story_b, _dt.datetime(2026, 9, 27, 21, 0), is_reel=False, force_no_image=True)
             check("an ordinary (non-share-alike) photo uses the new overlay style",
                   used.get("overlay") and not used.get("plain"), used)
+            check("an ordinary photo story goes out as a Reel (Reels reach non-followers)",
+                  reel_flag() is True, reel_flag())
         finally:
             (main.subject_photos.find_subject_photo, main.context_photos.find_context_photo,
              main.feed_post.render_post, main.feed_post.render_overlay_post, main.ai_writer.rewrite) = real2
+            main.feed_post.render_overlay_reel, main.video.render_reel = real3
             try:
                 os.remove(main.PENDING_PATH)
             except (OSError, TypeError):

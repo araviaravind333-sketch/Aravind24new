@@ -107,32 +107,42 @@ def _photo_layer(photo, lay, plain_bg=False):
     return canvas
 
 
-def render_text_post(category, headline, accent_word, out_path, subhead="",
+def render_text_reel(category, headline, accent_word, out_path, subhead="",
                      footer="For the latest news", handle="@aravindnews24", **_ignored):
+    """The text card at Reel size, clear of Instagram's own top bar and
+    bottom caption area (see REEL_TOP_CLEAR / REEL_BOTTOM_PAD)."""
+    return render_text_post(category, headline, accent_word, out_path, subhead=subhead,
+                            footer=footer, handle=handle, size=(REEL_W, REEL_H),
+                            top_clear=REEL_TOP_CLEAR + 130, bottom_clear=REEL_BOTTOM_PAD,
+                            chip_y=REEL_TOP_CLEAR)
+
+
+def render_text_post(category, headline, accent_word, out_path, subhead="",
+                     footer="For the latest news", handle="@aravindnews24", size=None,
+                     top_clear=150, bottom_clear=60, chip_y=52, **_ignored):
     """No legitimately usable photograph exists for this story, so the card
     is typographic rather than illustrated. A designed text card is an
     honest visual -- unlike a stock photo, it never implies it is a picture
     of the event. Deliberately bold: the headline is the whole design."""
+    fw, fh = size or (W, H)
     color = CATEGORY_COLORS.get((category or "").upper(), ACCENT)
-    canvas = Image.new("RGB", (W, H), _PANEL)
-    draw = ImageDraw.Draw(canvas)
 
     # a broad, very low-contrast wash of the category colour so the card
     # still reads as "this brand" rather than a plain black square
-    wash = Image.new("RGB", (W, H), _PANEL)
+    wash = Image.new("RGB", (fw, fh), _PANEL)
     wd = ImageDraw.Draw(wash)
     color_rgb = _hex_to_rgb(color) if isinstance(color, str) else color
-    for y in range(H):
-        t = (1 - y / H) ** 2
-        wd.line([(0, y), (W, y)], fill=tuple(int(p + (c - p) * 0.13 * t)
-                                             for p, c in zip(_PANEL, color_rgb)))
+    for y in range(fh):
+        t = (1 - y / fh) ** 2
+        wd.line([(0, y), (fw, y)], fill=tuple(int(p + (c - p) * 0.13 * t)
+                                              for p, c in zip(_PANEL, color_rgb)))
     canvas = wash
     draw = ImageDraw.Draw(canvas)
 
     # brand chip, top-left -- same as the photo card
     f_brand = _font(ARCHIVO, 28)
     bw = draw.textlength(BRAND, font=f_brand)
-    y0 = 52
+    y0 = chip_y
     draw.rounded_rectangle([MARGIN, y0, MARGIN + bw + 60, y0 + 54], radius=8, fill=(0, 0, 0))
     draw.rectangle([MARGIN + 16, y0 + 14, MARGIN + 24, y0 + 40], fill=carousel.BADGE_COLOR)
     draw.text((MARGIN + 38, y0 + 10), BRAND, font=f_brand, fill=WHITE)
@@ -149,8 +159,8 @@ def render_text_post(category, headline, accent_word, out_path, subhead="",
     # centred within a zone that started well below the true middle, plus
     # a footer pinned to the very bottom regardless of where the content
     # actually ended).
-    TOP_CLEAR, BOTTOM_CLEAR = 150, 60
-    zone_h = (H - BOTTOM_CLEAR) - TOP_CLEAR
+    TOP_CLEAR, BOTTOM_CLEAR = top_clear, bottom_clear
+    zone_h = (fh - BOTTOM_CLEAR) - TOP_CLEAR
     head_avail = zone_h - (BAR_H + BAR_GAP) - sub_extra - (FOOT_GAP + FOOT_H)
     lines, f_head, size, h = carousel._fit_headline(
         draw, headline, W - MARGIN * 2, 6, 150, 56, max(head_avail, 200))
@@ -206,9 +216,28 @@ def _fit_serif(draw, headline, max_w, max_lines=5, start=76, minimum=40):
     return lines, f, size, line_h * len(lines)
 
 
+# Reel frame (9:16). Instagram draws its own controls over roughly the top
+# 200px and the caption/buttons over the bottom ~400px, and the profile
+# grid shows a 3:4 centre crop (y 240-1680) -- so all text sits between
+# REEL_TOP_CLEAR and REEL_H - REEL_BOTTOM_PAD.
+REEL_W, REEL_H = 1080, 1920
+REEL_TOP_CLEAR, REEL_BOTTOM_PAD = 250, 440
+
+
+def render_overlay_reel(photo_path, category, headline, accent_word, out_path,
+                        handle="@aravindnews24", **_ignored):
+    """The same premium overlay design, at Reel size. Reels are the only
+    format Instagram shows to non-followers in volume -- on this page's own
+    data, image posts reached a median of 3 accounts, Reels up to ~200."""
+    return render_overlay_post(photo_path, category, headline, accent_word, out_path,
+                               handle=handle, size=(REEL_W, REEL_H),
+                               bottom_pad=REEL_BOTTOM_PAD, start_size=84)
+
+
 def render_overlay_post(photo_path, category, headline, accent_word, out_path,
                         footer="For the latest news", handle="@aravindnews24",
-                        file_photo=False, photo_note="", **_ignored):
+                        file_photo=False, photo_note="", size=None, bottom_pad=76,
+                        start_size=76, **_ignored):
     """Full-bleed photo with the headline set directly on it in serif type,
     sentence case, with a thin colour-accent bar -- the "premium newsroom"
     look the owner pointed to as a reference and asked for by name.
@@ -222,31 +251,36 @@ def render_overlay_post(photo_path, category, headline, accent_word, out_path,
     image, by request -- the required author/licence credit is already in
     the post's caption text (see main.py's build around `photo_credit`),
     so the on-image label was a purely cosmetic redundancy."""
+    fw, fh = size or (W, H)
     category = (category or "").upper()
     color = CATEGORY_COLORS.get(category, ACCENT)
     color_rgb = _hex_to_rgb(color) if isinstance(color, str) else color
     photo = Image.open(photo_path).convert("RGB")
     is_portrait = photo.height >= photo.width * 0.9
-    canvas = carousel.cover_crop_biased(photo, W, H, 0.15 if is_portrait else 0.35).convert("RGBA")
+    canvas = carousel.cover_crop_biased(photo, fw, fh, 0.15 if is_portrait else 0.35).convert("RGBA")
 
-    # A tight scrim just above the headline zone, not a long fade -- the
-    # photo should read clearly for most of the frame, darkening only
-    # where the text actually sits (matching the reference).
-    fade_h = int(H * 0.42)
-    grad = Image.new("RGBA", (W, fade_h), (0, 0, 0, 0))
+    probe = ImageDraw.Draw(canvas)
+    BAR_W, TEXT_GAP = 7, 27
+    tx = MARGIN + BAR_W + TEXT_GAP
+    lines, f_head, fsize, block_h = _fit_serif(probe, headline, fw - tx - MARGIN, start=start_size)
+    line_h = int(fsize * 1.18)
+    top = fh - bottom_pad - block_h
+
+    # A scrim tied to where the headline actually sits, not a fixed share of
+    # the frame: clear photo above, darkening from ~260px over the headline
+    # and fully dark by its second line, then held to the bottom edge -- so
+    # the text is legible on any photo, bright or dark, at any frame size.
+    scrim_start = max(0, top - 260)
+    ramp_end = top + 120
+    grad = Image.new("RGBA", (fw, fh - scrim_start), (0, 0, 0, 0))
     gd = ImageDraw.Draw(grad)
-    for y in range(fade_h):
-        t = y / fade_h
-        gd.line([(0, y), (W, y)], fill=(4, 4, 4, int(235 * (t ** 2.2))))
-    canvas.alpha_composite(grad, (0, H - fade_h))
+    for y in range(fh - scrim_start):
+        t = min(1.0, y / max(1, ramp_end - scrim_start))
+        gd.line([(0, y), (fw, y)], fill=(4, 4, 4, int(215 * (t ** 1.6))))
+    canvas.alpha_composite(grad, (0, scrim_start))
 
     draw = ImageDraw.Draw(canvas)
-
-    BOTTOM_PAD, BAR_W, TEXT_GAP = 76, 7, 27
-    tx = MARGIN + BAR_W + TEXT_GAP
-    lines, f_head, size, block_h = _fit_serif(draw, headline, W - tx - MARGIN)
-    line_h = int(size * 1.18)
-    top = H - BOTTOM_PAD - block_h
+    size = fsize
 
     # the one colour accent: a thin bar spanning the headline block
     draw.rectangle([MARGIN, top + 6, MARGIN + BAR_W, top + block_h - 6], fill=color_rgb)

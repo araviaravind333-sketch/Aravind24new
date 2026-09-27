@@ -942,6 +942,11 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
         # even one a human specifically supplied.
         forced_image_path = None
         force_no_image = True
+    if settings.ALL_POSTS_AS_REELS:
+        # This page's own data: image posts reached a median of 3 accounts
+        # (its followers), Reels reached up to ~200 -- Instagram shows Reels
+        # to non-followers, and static posts almost only to followers.
+        is_reel = True
     print("Selected:", story["title"], "| score:", story["score"])
 
     # A story that would otherwise go out text-only can still get a photo
@@ -956,7 +961,7 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
     # as a text card rather than beside a photo that implies it depicts the
     # event. See src/subject_photos.py and src/context_photos.py.
     portrait = None
-    if force_no_image and forced_image_path is None and not is_reel and not settings.TEXT_ONLY_MODE:
+    if force_no_image and forced_image_path is None and not settings.TEXT_ONLY_MODE:
         try:
             portrait = subject_photos.find_subject_photo(story["title"], story.get("summary", ""))
         except Exception as e:
@@ -977,6 +982,8 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
                 force_no_image = False
                 print(f"Using licensed context photo of {ctx['subject']} ({ctx['license']})")
 
+    if portrait and portrait.get("share_alike"):
+        is_reel = False
     written = ai_writer.rewrite(story)
     print("Headline:", written["headline"])
 
@@ -1052,7 +1059,7 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
     out_path = os.path.join(out_dir, out_name)
 
     logo = os.path.join(os.path.dirname(__file__), "..", "assets", "logo", "logo.png")
-    if img_path is None and not is_reel:
+    if img_path is None:
         # No usable photograph exists -- a designed typographic card, which
         # is honest about having no picture, rather than no post at all.
         feed_post.render_text_post(
@@ -1161,15 +1168,14 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
                 except OSError:
                     pass
             elif img_path is not None:
-                reel_variant_used = "reel_window"
+                reel_variant_used = "reel_overlay"
                 reel_card_path = os.path.join(out_dir, f"reel-card-{stamp}.jpg")
-                clip_reel.render_photo_card(
+                feed_post.render_overlay_reel(
                     photo_path=img_path,
                     category=category_label,
                     headline=written["headline"],
                     accent_word=written["accent_word"],
                     out_path=reel_card_path,
-                    footer=settings.BRAND_FOOTER,
                     handle=settings.BRAND_HANDLE,
                 )
                 video.render_reel(reel_card_path, video_path)
@@ -1179,11 +1185,23 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
                 except OSError:
                     pass
             else:
-                # no-photo variant (text_card/alert_card) -- no dedicated
-                # 9:16 equivalent exists for these, hold the already-
-                # rendered 4:5 card as-is, same as before this feature.
-                video.render_reel(out_path, video_path)
-                print("Rendered reel (no-photo card, held as-is):", video_path)
+                reel_variant_used = "reel_text"
+                reel_card_path = os.path.join(out_dir, f"reel-card-{stamp}.jpg")
+                feed_post.render_text_reel(
+                    category=category_label,
+                    headline=written["headline"],
+                    accent_word=written["accent_word"],
+                    out_path=reel_card_path,
+                    subhead=_one_line_summary(story),
+                    footer=settings.BRAND_FOOTER,
+                    handle=settings.BRAND_HANDLE,
+                )
+                video.render_reel(reel_card_path, video_path)
+                print("Rendered reel (text card):", video_path)
+                try:
+                    os.remove(reel_card_path)
+                except OSError:
+                    pass
         except Exception as e:
             print("Reel render failed, falling back to static image post:", e)
             is_reel = False
