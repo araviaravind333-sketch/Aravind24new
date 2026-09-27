@@ -956,7 +956,6 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
     # as a text card rather than beside a photo that implies it depicts the
     # event. See src/subject_photos.py and src/context_photos.py.
     portrait = None
-    photo_note = ""
     if force_no_image and forced_image_path is None and not is_reel and not settings.TEXT_ONLY_MODE:
         try:
             portrait = subject_photos.find_subject_photo(story["title"], story.get("summary", ""))
@@ -965,7 +964,6 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
         if portrait:
             forced_image_path = portrait["path"]
             force_no_image = False
-            photo_note = f"File photo: {portrait['subject']}"
             print(f"Using verified file photo of {portrait['subject']} ({portrait['license']})")
         else:
             try:
@@ -977,7 +975,6 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
                 portrait = ctx          # same downstream handling (credit in caption)
                 forced_image_path = ctx["path"]
                 force_no_image = False
-                photo_note = ctx["note"]
                 print(f"Using licensed context photo of {ctx['subject']} ({ctx['license']})")
 
     written = ai_writer.rewrite(story)
@@ -1082,7 +1079,6 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
                 footer=settings.BRAND_FOOTER,
                 handle=settings.BRAND_HANDLE,
                 file_photo=bool(portrait),
-                photo_note=photo_note,
                 share_alike=True,
             )
         else:
@@ -1097,7 +1093,6 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
                 footer=settings.BRAND_FOOTER,
                 handle=settings.BRAND_HANDLE,
                 file_photo=bool(portrait),
-                photo_note=photo_note,
             )
         if portrait and portrait.get("is_context"):
             context_photos.note_subject_used(portrait["subject"])

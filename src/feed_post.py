@@ -216,7 +216,12 @@ def render_overlay_post(photo_path, category, headline, accent_word, out_path,
     Only usable when the photo may be freely cropped to fill the frame.
     NEVER for a share-alike photo, which src/context_photos.py's terms
     require to be shown whole and unmodified -- render_post (whole image,
-    plain background) is what those use instead."""
+    plain background) is what those use instead.
+
+    `photo_note` (e.g. "File photo: X") is accepted but not drawn on the
+    image, by request -- the required author/licence credit is already in
+    the post's caption text (see main.py's build around `photo_credit`),
+    so the on-image label was a purely cosmetic redundancy."""
     category = (category or "").upper()
     color = CATEGORY_COLORS.get(category, ACCENT)
     color_rgb = _hex_to_rgb(color) if isinstance(color, str) else color
@@ -236,10 +241,6 @@ def render_overlay_post(photo_path, category, headline, accent_word, out_path,
     canvas.alpha_composite(grad, (0, H - fade_h))
 
     draw = ImageDraw.Draw(canvas)
-
-    if photo_note:
-        f_note = _font(ARCHIVO, 24)
-        draw.text((MARGIN, 44), photo_note, font=f_note, fill=(215, 215, 215))
 
     BOTTOM_PAD, BAR_W, TEXT_GAP = 76, 7, 27
     tx = MARGIN + BAR_W + TEXT_GAP
@@ -299,12 +300,10 @@ def render_post(photo_path, category, headline, accent_word, out_path,
     draw.rectangle([MARGIN + 16, y0 + 14, MARGIN + 24, y0 + 40], fill=carousel.BADGE_COLOR)
     draw.text((MARGIN + 38, y0 + 10), BRAND, font=f_brand, fill=WHITE)
 
-    # Photo caption, sitting in the fade at the foot of the picture. Small
-    # and quiet, but NOT optional: when the photo is a file shot of a place
-    # rather than a picture of the event, the post has to say so.
-    if photo_note:
-        f_note = _font(ARCHIVO, 24)
-        draw.text((MARGIN, wh - 42), photo_note, font=f_note, fill=(190, 190, 190))
+    # `photo_note` (e.g. "File photo: X") is accepted but not drawn on the
+    # image, by request -- the required author/licence credit is already
+    # in the post's caption text (main.py, around `photo_credit`), so the
+    # on-image label was a purely cosmetic redundancy.
 
     # accent bar + headline, sized to its own natural height (see layout_for)
     draw.rectangle([MARGIN, wh + TOP_PAD, MARGIN + 130, wh + TOP_PAD + BAR_H], fill=color)

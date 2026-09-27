@@ -187,15 +187,19 @@ def overlay_tests(tmp):
                    for x in range(0, bottom_band.width, 4) for y in range(0, bottom_band.height, 4))
     check("a small credit line renders near the bottom", has_text)
 
-    # photo_note (e.g. "File photo: X") shows up near the top when given
-    out2 = fp.render_overlay_post(src, "SPORTS NEWS", "Kohli hits a century", "",
-                                  os.path.join(tmp, "overlay_note.jpg"),
-                                  handle="@aravindnews24", photo_note="File photo: Virat Kohli")
-    im2 = Image.open(out2)
-    note_band = im2.crop((fp.MARGIN, 30, 700, 80))
-    check("photo_note renders near the top when supplied",
-          any(sum(note_band.getpixel((x, y))[:3]) > 300 for x in range(0, note_band.width, 4)
-              for y in range(0, note_band.height, 4)))
+    # photo_note (e.g. "File photo: X") is accepted but NEVER drawn on the
+    # image, by request -- the required author/licence credit already goes
+    # in the post's caption text (main.py, around `photo_credit`), so an
+    # on-image "File photo: X" label was a purely cosmetic redundancy the
+    # owner didn't want. Compare against the identical render with no note
+    # at all: they must be pixel-identical.
+    out_bare = fp.render_overlay_post(src, "SPORTS NEWS", "Kohli hits a century", "",
+                                      os.path.join(tmp, "overlay_bare.jpg"), handle="@aravindnews24")
+    out_noted = fp.render_overlay_post(src, "SPORTS NEWS", "Kohli hits a century", "",
+                                       os.path.join(tmp, "overlay_note.jpg"),
+                                       handle="@aravindnews24", photo_note="File photo: Virat Kohli")
+    check("photo_note is accepted but never drawn on the overlay style",
+          list(Image.open(out_bare).getdata()) == list(Image.open(out_noted).getdata()))
 
     # a short headline still produces a well-formed frame, no crash, and
     # the accent bar colour matches the given category
