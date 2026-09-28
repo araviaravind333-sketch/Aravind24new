@@ -22,5 +22,41 @@
   "credit_mode": "named",
   "video_path": null,
   "article_url": "https://www.newindianexpress.com/amp/story/states/tamil-nadu/2026/Sep/28/tamil-nadu-cop-clings-to-car-roof-for-30km-to-nab-gutkha-gang"
+ },
+ {
+  "id": "1790577941199",
+  "url": "https://x.com/wilson__thomas/status/2104167814877806848/video/1?s=46",
+  "creator": "@wilson__thomas",
+  "status": "awaiting_permission",
+  "requested_at": "2026-09-28 06:45",
+  "prompt_message_id": null,
+  "headline": "",
+  "article_url": null,
+  "credit_mode": "named",
+  "video_path": null
+ },
+ {
+  "id": "1790577942270",
+  "url": "https://x.com/wilson__thomas/status/2104167814877806848/video/1?s=46",
+  "creator": "@wilson__thomas",
+  "status": "awaiting_permission",
+  "requested_at": "2026-09-28 06:45",
+  "prompt_message_id": null,
+  "headline": "Long arm of law: TN cop clings to car roof for 30 km to nab gutkha gang",
+  "article_url": "https://www.newindianexpress.com/amp/story/states/tamil-nadu/2026/Sep/28/tamil-nadu-cop-clings-to-car-roof-for-30km-to-nab-gutkha-gang",
+  "credit_mode": "named",
+  "video_path": null
+ },
+ {
+  "id": "1790577943209",
+  "url": "https://x.com/KeralaBxOffce/status/2104100358104711347/video/1?s=46",
+  "creator": "@KeralaBxOffce",
+  "status": "awaiting_permission",
+  "requested_at": "2026-09-28 06:45",
+  "prompt_message_id": null,
+  "headline": "",
+  "article_url": null,
+  "credit_mode": "named",
+  "video_path": null
  }
 ]
