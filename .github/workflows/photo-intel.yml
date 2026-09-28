@@ -68,6 +68,7 @@ jobs:
         # tests, but it is disabled, so they run here instead.
         run: |
           python -m tests.test_context_photos
+          python -m tests.test_ugc
           python -m tests.test_subject_photos
           python -m tests.test_feed_post
           python -m tests.test_clip_reel
