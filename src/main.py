@@ -472,7 +472,7 @@ def _poll_telegram_replies(pending_ids, now_ist=None):
                 except Exception as e:
                     print("carousel callback handling failed:", e)
                 continue
-            if data.startswith(("UGCOK|", "UGCNO|")):
+            if data.startswith(("UGCOK|", "UGCANON|", "UGCNO|")):
                 # The owner reporting back what the video's creator said.
                 # Only a human pressing this can ever mark a video usable
                 # -- see src/ugc.py.
@@ -513,20 +513,6 @@ def _poll_telegram_replies(pending_ids, now_ist=None):
                     carousel_review.handle_reply(msg, carousel_state)
                 except Exception as e:
                     print("carousel reply handling failed:", e)
-                continue
-            ugc_rec = ugc.by_prompt_message(reply_to["message_id"])
-            if ugc_rec:
-                # The video for a permission the owner already confirmed.
-                # Posted with the agreed credit; refused outright if the
-                # ledger does not show a recorded yes for this exact video.
-                try:
-                    res = _post_permitted_video(ugc_rec, msg, u, now_ist)
-                    if res is not None:
-                        urgent_result = res
-                except Exception as e:
-                    print("permitted-video post failed:", e)
-                    telegram_bot.reply_to_message(
-                        msg["message_id"], f"Couldn't post that video: {e}")
                 continue
             if reply_to["message_id"] not in pending_ids:
                 continue
@@ -638,27 +624,46 @@ def _poll_telegram_replies(pending_ids, now_ist=None):
 
 
 def _open_ugc_request(video_link, msg):
-    """Step 1: record the request and hand the owner the exact message to
-    send the creator. Nothing is downloaded here."""
-    rec = ugc.open_request(video_link)
+    """Step 1: read (not download) the link so the owner can see what it is,
+    record the request, and hand them the message to send the creator.
+    Any text alongside the link is kept as the headline, so approving is
+    then a single button press with nothing else to send."""
+    headline = ugc.VIDEO_HOST_RE.sub("", msg.get("caption") or msg.get("text") or "").strip()
+    info = ugc.probe(video_link)
+    rec = ugc.open_request(video_link, headline=headline,
+                           creator=(("@" + info["uploader_id"]) if info and info.get("uploader_id")
+                                    else None) or ugc.creator_handle(video_link))
     creator = rec.get("creator")
     who = creator or "the person who posted it"
+
+    if info:
+        mins = f"{int(info['duration'] // 60)}m {int(info['duration'] % 60)}s" if info.get("duration") else "?"
+        summary = f"\U0001F3AC {info['title'][:90]}\n\u23F1 {mins}"
+    else:
+        summary = ("\u26A0 I couldn't read that link (it may be private, deleted, or "
+                   "login-only). If it's approved I may not be able to fetch it either.")
+
     buttons = telegram_bot.build_keyboard([
-        [("\u2705 THEY SAID YES", "cb", f"UGCOK|{rec['id']}")],
+        [("\u2705 APPROVED — post with credit", "cb", f"UGCOK|{rec['id']}")],
+        [("\u2705 Approved — no credit wanted", "cb", f"UGCANON|{rec['id']}")],
         [("\U0001F6AB They said no", "cb", f"UGCNO|{rec['id']}")],
     ])
+    head_note = (f"\n\nHeadline I'll use: \"{headline}\"" if headline
+                 else "\n\n\u26A0 No headline given — send one as a reply, or I'll use the video's own title.")
     telegram_bot.send_message(
-        f"To use this video you need {who}'s permission first — a credit line "
-        f"on its own is not permission, and reposting without it is what gets "
-        f"pages struck down.\n\n"
-        f"Send them this:\n\n"
-        f"- - - - -\n{ugc.permission_text(video_link, creator)}\n- - - - -\n\n"
-        f"Then tell me what they said.",
+        f"{summary}\n\n"
+        f"Ask {who} first — a credit line alone is not permission, and reposting "
+        f"without it is what gets pages struck down.\n\n"
+        f"Send them this:\n\n- - - - -\n{ugc.permission_text(video_link, creator)}\n- - - - -"
+        f"{head_note}\n\n"
+        f"Then press a button below. I'll download and post it myself.",
         buttons=buttons)
 
 
 def _handle_ugc_decision(cb, data):
-    """Step 2: the owner reports the creator's answer."""
+    """Step 2: the owner reports the creator's answer -- and that is the
+    last thing they have to do. On a yes this downloads the video and
+    posts it straight away."""
     action, rec_id = data.split("|", 1)
     rec = ugc.get(rec_id)
     if not rec:
@@ -670,60 +675,45 @@ def _handle_ugc_decision(cb, data):
         telegram_bot.send_message(
             f"Noted, {rec.get('creator') or 'the creator'} said no. That video stays unused.")
         return
-    telegram_bot.answer_callback(cb["id"], "Permission recorded.")
-    prompt = telegram_bot.send_message(
-        f"Permission recorded for {rec.get('creator') or 'that creator'}.\n\n"
-        f"Now REPLY TO THIS MESSAGE with:\n"
-        f"1. the video file itself, and\n"
-        f"2. the news article link in the caption.\n\n"
-        f"It will post with the credit \"{ugc.credit_line(rec)}\".")
-    ugc.mark_granted(rec_id, prompt_message_id=prompt)
 
-
-def _post_permitted_video(rec, msg, update, now_ist):
-    """Step 3: the granted video comes back. Refuses anything the ledger
-    does not show a recorded yes for."""
-    if not ugc.releasable(rec):
-        telegram_bot.reply_to_message(
-            msg["message_id"],
-            "That video has no recorded permission, so it can't be posted.")
-        return None
-    file_id = _extract_media_file_id(msg)
-    if not file_id:
-        telegram_bot.reply_to_message(
-            msg["message_id"], "Please reply with the video file itself.")
-        return None
-    text = msg.get("caption") or msg.get("text") or ""
-    url_match = URGENT_URL_RE.search(text)
-    if not url_match:
-        telegram_bot.reply_to_message(
-            msg["message_id"], "Please include the news article link in the caption.")
-        return None
-    if news_engine.posts_in_last_24h() >= settings.MAX_POSTS_PER_24H:
-        telegram_bot.reply_to_message(
-            msg["message_id"],
-            f"Already at today's {settings.MAX_POSTS_PER_24H}-post limit — try again after it resets.")
-        return None
-    url = url_match.group(0)
+    mode = ugc.CREDIT_NONE if action == "UGCANON" else ugc.CREDIT_NAMED
+    rec = ugc.mark_granted(rec_id, credit_mode=mode)
+    telegram_bot.answer_callback(cb["id"], "Permission recorded — fetching it now.")
+    now_ist = (dt.datetime.now(dt.timezone.utc) + dt.timedelta(hours=5, minutes=30)).replace(tzinfo=None)
     try:
-        meta = news_engine.fetch_article_metadata(url)
+        _post_permitted_video(rec, now_ist)
     except Exception as e:
-        telegram_bot.reply_to_message(msg["message_id"], f"Couldn't read that article link: {e}")
+        print("permitted-video post failed:", e)
+        telegram_bot.send_message(f"Couldn't post that video: {e}")
+
+
+def _post_permitted_video(rec, now_ist):
+    """Downloads the approved video and posts it. ugc.download refuses
+    anything without a recorded grant, so this cannot fetch a video the
+    creator did not agree to even if it is called directly."""
+    if news_engine.posts_in_last_24h() >= settings.MAX_POSTS_PER_24H:
+        telegram_bot.send_message(
+            f"Approved, but already at today's {settings.MAX_POSTS_PER_24H}-post limit. "
+            f"Press the button again after it resets.")
         return None
-    media_path = telegram_bot.download_file(
-        file_id, os.path.join(TG_INBOX_DIR, f"ugc-{update['update_id']}"))
-    if not media_path:
-        telegram_bot.reply_to_message(msg["message_id"], "Couldn't download that video.")
+    try:
+        media_path = ugc.download(rec, TG_INBOX_DIR)
+    except Exception as e:
+        telegram_bot.send_message(
+            f"Permission is recorded, but I couldn't download that video ({str(e)[:120]}). "
+            f"Send me the file directly and I'll post it.")
         return None
     ugc.attach_video(rec["id"], media_path)
-    if _no_trim_requested(text):
-        _mark_no_trim(media_path)
-    title = meta.get("title") or "Breaking news"
+
+    title = (rec.get("headline") or "").strip()
+    if not title:
+        info = ugc.probe(rec["url"]) or {}
+        title = (info.get("title") or "Breaking news").strip()
     story = {
         "id": news_engine._story_id(title),
         "title": title,
-        "summary": meta.get("summary", ""),
-        "link": url,
+        "summary": "",
+        "link": rec["url"],
         "category": "BREAKING NEWS",
         "score": 95,
         "hot_hit": True,
@@ -736,9 +726,10 @@ def _post_permitted_video(rec, msg, update, now_ist):
                             consumed_inbox_file=media_path, ugc_credit=ugc.credit_line(rec))
     if result is not None:
         ugc.mark_posted(rec["id"])
-        telegram_bot.reply_to_message(msg["message_id"], f"Posting now, with credit: {title}")
+        credit = ugc.credit_line(rec) or "no credit, as the creator asked"
+        telegram_bot.send_message(f"Posting now: {title}\n{credit}")
     else:
-        telegram_bot.reply_to_message(msg["message_id"], "Something went wrong, so it wasn't posted.")
+        telegram_bot.send_message("Something went wrong rendering that, so it wasn't posted.")
     return result
 
 

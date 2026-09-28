@@ -75,7 +75,7 @@ def gate_tests(tmp):
     check("a video the creator refused is NOT releasable",
           not ugc.releasable(ugc.get(declined["id"])))
 
-    granted = ugc.mark_granted(rec["id"], prompt_message_id=4242)
+    granted = ugc.mark_granted(rec["id"], prompt_message_id=4242, credit_mode=ugc.CREDIT_NAMED)
     check("only after a human records a yes does it become releasable",
           ugc.releasable(granted))
     check("the grant is timestamped", bool(granted.get("granted_at")))
@@ -106,12 +106,69 @@ def credit_tests():
     check("no record -> no credit string", ugc.credit_line(None) == "")
 
 
+def credit_mode_tests(tmp):
+    """Some creators say "use it but don't name me". That is their call."""
+    print("\nCREDIT PREFERENCE")
+    ugc.LEDGER_PATH = os.path.join(tmp, "cm.json")
+    named = ugc.open_request("https://x.com/a/status/1")
+    ugc.mark_granted(named["id"], credit_mode=ugc.CREDIT_NAMED)
+    check("default is to name the creator", "@a" in ugc.credit_line(ugc.get(named["id"])))
+
+    anon = ugc.open_request("https://x.com/shy/status/2")
+    ugc.mark_granted(anon["id"], credit_mode=ugc.CREDIT_NONE)
+    rec = ugc.get(anon["id"])
+    check("a creator who asked for no credit gets none", ugc.credit_line(rec) == "")
+    check("but it is still a granted, postable video", ugc.releasable(rec))
+    check("their handle is not leaked anywhere in the caption line",
+          "shy" not in ugc.credit_line(rec))
+
+
+def download_gate_tests(tmp):
+    """The download itself refuses ungranted videos -- a second gate, so a
+    mistake upstream still cannot pull a file nobody agreed to."""
+    print("\nDOWNLOAD GATE")
+    ugc.LEDGER_PATH = os.path.join(tmp, "dl.json")
+    rec = ugc.open_request("https://x.com/a/status/1")
+    try:
+        ugc.download(rec, tmp)
+        check("downloading an un-granted video is refused", False, "it downloaded!")
+    except PermissionError:
+        check("downloading an un-granted video is refused", True)
+    except Exception as e:
+        check("downloading an un-granted video is refused",
+              isinstance(e, PermissionError), type(e).__name__)
+
+    ugc.mark_declined(rec["id"])
+    try:
+        ugc.download(ugc.get(rec["id"]), tmp)
+        check("downloading a REFUSED video is refused", False, "it downloaded!")
+    except PermissionError:
+        check("downloading a REFUSED video is refused", True)
+
+
+def headline_tests(tmp):
+    print("\nHEADLINE CARRIED FROM THE LINK MESSAGE")
+    ugc.LEDGER_PATH = os.path.join(tmp, "hl.json")
+    rec = ugc.open_request("https://x.com/a/status/1", headline="Bank strike in Chennai today")
+    check("the headline typed with the link is kept",
+          ugc.get(rec["id"])["headline"] == "Bank strike in Chennai today")
+    bare = ugc.open_request("https://x.com/b/status/2")
+    check("no headline is fine (the video's own title is used instead)",
+          ugc.get(bare["id"])["headline"] == "")
+
+
 if __name__ == "__main__":
     link_tests()
     permission_text_tests()
     with tempfile.TemporaryDirectory() as t:
         gate_tests(t)
     credit_tests()
+    with tempfile.TemporaryDirectory() as t:
+        credit_mode_tests(t)
+    with tempfile.TemporaryDirectory() as t:
+        download_gate_tests(t)
+    with tempfile.TemporaryDirectory() as t:
+        headline_tests(t)
     print(f"\n{'=' * 52}\n{len(PASS)} passed, {len(FAIL)} failed")
     if FAIL:
         print("FAILED:")

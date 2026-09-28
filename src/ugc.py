@@ -50,6 +50,17 @@ GRANTED = "granted"
 DECLINED = "declined"
 POSTED = "posted"
 
+# Some creators say "use it, but don't put my name on it" -- usually to
+# avoid attention. That is their call, and it is honoured: CREDIT_NONE
+# posts the video with no credit line at all.
+CREDIT_NAMED = "named"
+CREDIT_NONE = "none"
+
+# Instagram caps Reels at 90s. Anything longer is the wrong shape for the
+# feed anyway, and a very large file wastes the runner's time and disk.
+MAX_DURATION_SEC = 180
+MAX_FILESIZE_MB = 120
+
 
 def _load():
     try:
@@ -91,7 +102,7 @@ def permission_text(url, creator=None):
     )
 
 
-def open_request(url, prompt_message_id=None, creator=None, now=None):
+def open_request(url, prompt_message_id=None, creator=None, now=None, headline=""):
     """Records that permission has been requested for one video."""
     now = now or dt.datetime.utcnow()
     records = _load()
@@ -102,6 +113,8 @@ def open_request(url, prompt_message_id=None, creator=None, now=None):
         "status": AWAITING,
         "requested_at": now.strftime("%Y-%m-%d %H:%M"),
         "prompt_message_id": prompt_message_id,
+        "headline": headline,
+        "credit_mode": CREDIT_NAMED,
         "video_path": None,
     }
     records.append(rec)
@@ -132,11 +145,13 @@ def _update(record_id, **fields):
     return None
 
 
-def mark_granted(record_id, prompt_message_id=None, now=None):
+def mark_granted(record_id, prompt_message_id=None, now=None, credit_mode=None):
     now = now or dt.datetime.utcnow()
     fields = {"status": GRANTED, "granted_at": now.strftime("%Y-%m-%d %H:%M")}
     if prompt_message_id is not None:
         fields["prompt_message_id"] = prompt_message_id
+    if credit_mode is not None:
+        fields["credit_mode"] = credit_mode
     return _update(record_id, **fields)
 
 
@@ -159,8 +174,67 @@ def releasable(record):
 
 
 def credit_line(record):
-    """What must appear in the caption of any post built from this video."""
-    if not record:
+    """What appears in the caption of a post built from this video. Empty
+    when the creator asked NOT to be named -- honouring that is part of
+    the deal that got the yes."""
+    if not record or record.get("credit_mode") == CREDIT_NONE:
         return ""
     who = record.get("creator") or "the original creator"
     return f"\U0001F3A5 Video: {who}, used with permission"
+
+
+# --------------------------------------------------------------- fetching
+# Only ever called for a video whose creator has already said yes (see
+# releasable). Reading the page to show the owner what a link contains is
+# fine before that; pulling the actual file is not.
+
+def probe(url):
+    """Title/duration/uploader for a link, WITHOUT downloading the video --
+    so the owner can see what they are approving. Returns None if the link
+    cannot be read (private, deleted, or login-walled)."""
+    try:
+        import yt_dlp
+    except ImportError:
+        return None
+    try:
+        with yt_dlp.YoutubeDL({"quiet": True, "no_warnings": True, "skip_download": True}) as y:
+            i = y.extract_info(url, download=False)
+    except Exception as e:
+        print("ugc.probe failed:", str(e)[:160])
+        return None
+    return {
+        "title": (i.get("title") or "").strip(),
+        "duration": i.get("duration"),
+        "uploader": i.get("uploader") or i.get("channel"),
+        "uploader_id": i.get("uploader_id"),
+    }
+
+
+def download(record, dest_dir):
+    """Fetches the video for an ALREADY-GRANTED record. Refuses outright
+    for anything else -- this is the second place the gate is enforced, so
+    a coding mistake upstream still cannot pull an unpermitted file."""
+    if not releasable(record):
+        raise PermissionError("no recorded permission for this video -- refusing to download")
+    try:
+        import yt_dlp
+    except ImportError:
+        raise RuntimeError("yt-dlp is not installed on this runner")
+    os.makedirs(dest_dir, exist_ok=True)
+    out = os.path.join(dest_dir, f"ugc-{record['id']}.%(ext)s")
+    opts = {
+        "quiet": True, "no_warnings": True, "outtmpl": out,
+        "format": f"mp4[filesize_approx<{MAX_FILESIZE_MB}M]/best[height<=1080]/best",
+        "max_filesize": MAX_FILESIZE_MB * 1024 * 1024,
+        "noplaylist": True,
+    }
+    with yt_dlp.YoutubeDL(opts) as y:
+        info = y.extract_info(record["url"], download=True)
+    dur = info.get("duration")
+    if dur and dur > MAX_DURATION_SEC:
+        print(f"ugc: {dur:.0f}s video will be trimmed to fit a Reel")
+    import glob
+    hits = sorted(glob.glob(os.path.join(dest_dir, f"ugc-{record['id']}.*")))
+    if not hits:
+        raise RuntimeError("download produced no file")
+    return hits[0]
