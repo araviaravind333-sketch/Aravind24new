@@ -1290,17 +1290,21 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
                 else:
                     clip_duration = duration or settings.REEL_CLIP_TRIM_TARGET_SEC
 
+                # A real submitted clip is the story -- it fills the whole
+                # frame; the headline is a small fixed banner near the top,
+                # not the adaptive growing panel used for photos (which
+                # shrank the video into a small window under a long
+                # headline -- a real post, and a direct owner complaint:
+                # "video not clearly viewable... medium size... upper surface").
                 overlay_path = os.path.join(out_dir, f"overlay-{stamp}.png")
-                clip_layout = clip_reel.layout_for(clip_reel.probe_aspect(video_clip_path),
-                                                   written["headline"])
-                clip_reel.render_frame_png(
+                clip_layout = clip_reel.full_bleed_layout(clip_reel.probe_aspect(video_clip_path))
+                clip_reel.render_video_banner_png(
                     category=category_label,
                     headline=written["headline"],
                     accent_word=written["accent_word"],
                     out_path=overlay_path,
                     footer=settings.BRAND_FOOTER,
                     handle=settings.BRAND_HANDLE,
-                    layout=clip_layout,
                 )
                 clip_reel.render_reel_from_clip(video_clip_path, overlay_path, video_path,
                                                 clip_duration, layout=clip_layout)

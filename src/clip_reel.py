@@ -45,6 +45,80 @@ def _fit_head(probe, headline, avail):
     return carousel._fit_headline(probe, headline, W - MARGIN * 2, 5, 120, 48, max(avail, 120))
 
 
+# ---------------------------------------------------- real submitted clips
+# By request: footage the owner actually submitted (their own clip, or a
+# permitted UGC video) is the whole point of the post, so it must fill
+# virtually the entire frame -- not shrink into a "window" to make room for
+# an adaptive panel that grows for a long headline (that panel design is
+# for stock/portrait PHOTOS, see layout_for above). Here the video is
+# full-bleed and the headline is a small, FIXED-size banner near the top
+# ("upper surface, medium size" -- the owner's own words), never growing
+# past 2 lines regardless of how long the headline is.
+BANNER_TOP = ZONE_TOP           # 210 -- clear of Instagram's own top controls
+BANNER_SIZE = 50                # fixed, not adaptive
+BANNER_MAX_LINES = 2
+
+
+def _fit_banner(probe, headline):
+    """Headline for the compact video banner: a FIXED size, never growing.
+    Shrinks only as far as needed to fit 2 lines at the frame's width --
+    it does not grow to fill available space the way _fit_head does."""
+    return carousel._fit_headline(probe, headline, W - MARGIN * 2 - 34, BANNER_MAX_LINES,
+                                  BANNER_SIZE, 36, 9999)
+
+
+def full_bleed_layout(aspect):
+    """The video fills the whole content zone -- no separate window, no
+    panel eating into it. Only a picture whose shape would need a large
+    crop is shown whole (still full-frame, on a blurred copy of itself)
+    rather than losing the footage that matters."""
+    win_h = ZONE_BOTTOM - ZONE_TOP
+    win_aspect = W / win_h
+    mode = "contain" if aspect and _crop_loss(aspect, win_aspect) > CROP_LIMIT else "cover"
+    return {"mode": mode, "win_y": ZONE_TOP, "win_h": win_h}
+
+
+def render_video_banner_png(category, headline, accent_word, out_path,
+                            footer="For the latest news", handle="@aravindnews24"):
+    """Transparent overlay for a full-bleed video: a short, fixed-height
+    banner near the top (headline + a small credit line), nothing else --
+    everything below stays transparent so the footage is never obscured."""
+    color = CATEGORY_COLORS.get((category or "").upper(), ACCENT)
+    color_rgb = _hex_to_rgb(color) if isinstance(color, str) else color
+    canvas = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(canvas)
+
+    pad, bar_h, bar_gap, foot_gap, foot_h = 36, 7, 22, 22, 34
+    lines, f_head, size, block_h = _fit_banner(draw, headline)
+    banner_h = pad + bar_h + bar_gap + block_h + foot_gap + foot_h + pad
+
+    # solid, but short -- legible without competing with the footage below
+    canvas.alpha_composite(Image.new("RGBA", (W, banner_h), _PANEL + (238,)), (0, BANNER_TOP))
+    draw.rectangle([0, BANNER_TOP + banner_h, W, BANNER_TOP + banner_h + 4], fill=color_rgb)
+
+    tx = MARGIN + bar_h + 27
+    top = BANNER_TOP + pad
+    draw.rectangle([MARGIN, top + 4, MARGIN + bar_h, top + block_h - 4], fill=color_rgb)
+    a = (accent_word or "").upper().strip()
+    carousel._draw_highlighted_headline(draw, lines, f_head, size, tx, top,
+                                        a if a and a in headline.upper() else "")
+
+    f_foot = _font(ARCHIVO, 28)
+    fy = top + block_h + foot_gap
+    if handle and handle in footer:
+        pre, _, post = footer.partition(handle)
+        x = tx
+        for txt, fill in ((pre, MUTED), (handle, WHITE), (post, MUTED)):
+            draw.text((x, fy), txt, font=f_foot, fill=fill)
+            x += draw.textlength(txt, font=f_foot)
+    else:
+        draw.text((tx, fy), f"{footer}  →  {handle}", font=f_foot, fill=MUTED)
+
+    os.makedirs(os.path.dirname(out_path) or ".", exist_ok=True)
+    canvas.save(out_path, "PNG")
+    return out_path
+
+
 MIN_WIN_H = 460   # floor for the picture even under an extremely long headline
 
 

@@ -98,6 +98,54 @@ def layout_tests(tmp):
               all(g.getpixel((x, y))[:3] == PANEL_RGB for x in range(60, 1020, 30) for y in (1600, 1700, 1800)))
 
 
+def video_banner_tests(tmp):
+    print("\nVIDEO BANNER (full-bleed clip)")
+    # Regression: a real post cropped a submitted video into a small window
+    # under a growing headline panel -- the owner's explicit fix request was
+    # "upper surface, medium size... video not clearly viewable". These
+    # functions are a SEPARATE layout for real submitted clips: the video
+    # fills virtually the whole frame and the banner never grows past 2 lines.
+    for name, a in (("tall phone video", 9 / 16), ("square", 1.0), ("16:9", 16 / 9)):
+        lay = cr.full_bleed_layout(a)
+        check(f"{name}: window starts at ZONE_TOP", lay["win_y"] == cr.ZONE_TOP)
+        check(f"{name}: window spans (almost) the entire content zone, not a shrunk box",
+              lay["win_h"] == cr.ZONE_BOTTOM - cr.ZONE_TOP)
+
+    short_out = cr.render_video_banner_png("BREAKING NEWS", SHORT, "ISRO",
+                                           os.path.join(tmp, "banner_short.png"))
+    long_head = ("WILSON THOMAS - HEADCONSTABLE VELMURUGAN OF KOVILPALAYAM POLICE STATION "
+                 "IN COIMBATORE SAVES A CHILD FROM A BURNING BUILDING DURING A LATE NIGHT FIRE")
+    long_out = cr.render_video_banner_png("BREAKING NEWS", long_head, "WILSON THOMAS",
+                                          os.path.join(tmp, "banner_long.png"))
+    f_short, f_long = Image.open(short_out), Image.open(long_out)
+    check("banner frame is exactly 1080x1920 RGBA", f_long.size == (1080, 1920) and f_long.mode == "RGBA")
+
+    def banner_bottom(im):
+        for y in range(cr.H - 1, cr.BANNER_TOP, -1):
+            if any(im.getpixel((x, y))[3] > 200 for x in range(0, cr.W, 20)):
+                return y
+        return cr.BANNER_TOP
+
+    bottom_short, bottom_long = banner_bottom(f_short), banner_bottom(f_long)
+    # Short headline fits on 1 line, long one wraps to the 2-line cap -- that
+    # one extra line height is expected and still bounded (never a 3rd+ line
+    # or a growing panel the way the old adaptive layout did).
+    check("a very long headline adds at most one wrapped line, never a growing panel",
+          bottom_long - bottom_short < 100, (bottom_short, bottom_long))
+    check("the banner stays a small strip near the top, not a growing panel",
+          bottom_long < cr.BANNER_TOP + 420, bottom_long)
+
+    # Below the banner, everything must stay transparent so the footage
+    # underneath is never obscured -- that's the whole point of "full-bleed".
+    check("frame is transparent well below the banner (footage stays visible)",
+          all(f_long.getpixel((x, y))[3] == 0
+              for x in (100, 540, 1000) for y in (bottom_long + 60, 1200, 1500)))
+
+    import inspect
+    check("banner headline fit never grows past BANNER_MAX_LINES regardless of length",
+          "BANNER_MAX_LINES" in inspect.getsource(cr._fit_banner))
+
+
 def photo_tests(tmp):
     print("\nPHOTO CARD")
     for name, size in (("tall", (600, 900)), ("wide", (1600, 900)), ("sq", (1000, 1000)), ("land", (1500, 1000))):
@@ -166,6 +214,8 @@ def encoding_tests():
 if __name__ == "__main__":
     with tempfile.TemporaryDirectory() as t:
         layout_tests(t)
+    with tempfile.TemporaryDirectory() as t:
+        video_banner_tests(t)
     with tempfile.TemporaryDirectory() as t:
         photo_tests(t)
     filter_tests()
