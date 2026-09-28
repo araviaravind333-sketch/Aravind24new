@@ -626,11 +626,37 @@ def _poll_telegram_replies(pending_ids, now_ist=None):
 def _open_ugc_request(video_link, msg):
     """Step 1: read (not download) the link so the owner can see what it is,
     record the request, and hand them the message to send the creator.
-    Any text alongside the link is kept as the headline, so approving is
-    then a single button press with nothing else to send."""
-    headline = ugc.VIDEO_HOST_RE.sub("", msg.get("caption") or msg.get("text") or "").strip()
+
+    Anything typed alongside the video link becomes the headline -- EXCEPT
+    when what's left is itself just a news-article URL (pasting the video
+    link plus the matching article is exactly the right instinct: it tells
+    the bot which story this belongs to). That article's own title is
+    fetched and used as the headline instead of posting the raw URL as if
+    it were one, and the article becomes the post's source link rather
+    than the tweet itself."""
+    text = msg.get("caption") or msg.get("text") or ""
+    remainder = ugc.VIDEO_HOST_RE.sub("", text).strip()
+
+    article_url, headline, from_article = None, remainder, False
+    m = URGENT_URL_RE.search(remainder)
+    if m and not ugc.find_video_link(remainder):
+        # what's left after the video link is itself a link (a news
+        # article, not typed words) -- fetch its real title
+        article_url = m.group(0)
+        typed = (remainder[:m.start()] + remainder[m.end():]).strip()
+        if typed:
+            headline = typed
+        else:
+            try:
+                meta = news_engine.fetch_article_metadata(article_url)
+                headline = meta.get("title") or ""
+                from_article = bool(headline)
+            except Exception as e:
+                print("could not read the article link alongside a UGC video:", e)
+                headline = ""
+
     info = ugc.probe(video_link)
-    rec = ugc.open_request(video_link, headline=headline,
+    rec = ugc.open_request(video_link, headline=headline, article_url=article_url,
                            creator=(("@" + info["uploader_id"]) if info and info.get("uploader_id")
                                     else None) or ugc.creator_handle(video_link))
     creator = rec.get("creator")
@@ -638,18 +664,21 @@ def _open_ugc_request(video_link, msg):
 
     if info:
         mins = f"{int(info['duration'] // 60)}m {int(info['duration'] % 60)}s" if info.get("duration") else "?"
-        summary = f"\U0001F3AC {info['title'][:90]}\n\u23F1 {mins}"
+        summary = f"\U0001F3AC {info['title'][:90]}\n⏱ {mins}"
     else:
-        summary = ("\u26A0 I couldn't read that link (it may be private, deleted, or "
+        summary = ("⚠ I couldn't read that link (it may be private, deleted, or "
                    "login-only). If it's approved I may not be able to fetch it either.")
 
     buttons = telegram_bot.build_keyboard([
-        [("\u2705 APPROVED — post with credit", "cb", f"UGCOK|{rec['id']}")],
-        [("\u2705 Approved — no credit wanted", "cb", f"UGCANON|{rec['id']}")],
+        [("✅ APPROVED — post with credit", "cb", f"UGCOK|{rec['id']}")],
+        [("✅ Approved — no credit wanted", "cb", f"UGCANON|{rec['id']}")],
         [("\U0001F6AB They said no", "cb", f"UGCNO|{rec['id']}")],
     ])
-    head_note = (f"\n\nHeadline I'll use: \"{headline}\"" if headline
-                 else "\n\n\u26A0 No headline given — send one as a reply, or I'll use the video's own title.")
+    if headline:
+        source = " (from the article link)" if from_article else ""
+        head_note = f"\n\nHeadline I'll use{source}: \"{headline}\""
+    else:
+        head_note = "\n\n⚠ No headline given — send one as a reply, or I'll use the video's own title."
     telegram_bot.send_message(
         f"{summary}\n\n"
         f"Ask {who} first — a credit line alone is not permission, and reposting "
@@ -713,7 +742,9 @@ def _post_permitted_video(rec, now_ist):
         "id": news_engine._story_id(title),
         "title": title,
         "summary": "",
-        "link": rec["url"],
+        # the paired news article, when the owner sent one, is the real
+        # source to cite -- not the tweet the video came from
+        "link": rec.get("article_url") or rec["url"],
         "category": "BREAKING NEWS",
         "score": 95,
         "hot_hit": True,

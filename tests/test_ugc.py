@@ -175,6 +175,65 @@ def headline_tests(tmp):
     check("no headline is fine (the video's own title is used instead)",
           ugc.get(bare["id"])["headline"] == "")
 
+    check("open_request stores an article_url when given one",
+          ugc.get(ugc.open_request("https://x.com/c/status/3", article_url="https://news.example/a")["id"])
+              ["article_url"] == "https://news.example/a")
+    check("article_url defaults to None", ugc.get(bare["id"])["article_url"] is None)
+
+
+def article_link_tests(tmp):
+    """Regression: a real report -- the owner pasted the video link AND
+    the matching news article link in one message, and the raw article
+    URL ended up stored as the headline verbatim (it would have posted
+    with a URL as the headline text). The article's own title must be
+    fetched and used instead, and the article kept as the story's real
+    source link."""
+    print("\nVIDEO LINK + ARTICLE LINK TOGETHER")
+    from src import main
+    ugc.LEDGER_PATH = os.path.join(tmp, "al.json")
+    sent = []
+    real = (main.telegram_bot.send_message, main.news_engine.fetch_article_metadata, main.ugc.probe)
+    main.telegram_bot.send_message = lambda text, buttons=None, reply_to=None: (sent.append(text) or 1)
+    main.news_engine.fetch_article_metadata = lambda url: {
+        "title": "Tamil Nadu cop clings to car roof for 30km to nab gutkha gang", "summary": ""}
+    main.ugc.probe = lambda u: {"title": "raw video title", "duration": 42,
+                                "uploader": "Wilson Thomas", "uploader_id": "wilson__thomas"}
+    try:
+        link = "https://x.com/wilson__thomas/status/2104167814877806848/video/1?s=46"
+        article = ("https://www.newindianexpress.com/amp/story/states/tamil-nadu/2026/Sep/28/"
+                   "tamil-nadu-cop-clings-to-car-roof-for-30km-to-nab-gutkha-gang")
+        msg = {"message_id": 1, "text": f"{link}\n\n{article}"}
+        main._open_ugc_request(ugc.find_video_link(msg["text"]), msg)
+        rec = ugc._load()[-1]
+        check("the article's REAL title is stored as the headline, not the raw URL",
+              rec["headline"] == "Tamil Nadu cop clings to car roof for 30km to nab gutkha gang", rec["headline"])
+        check("the raw article URL never ends up as the headline",
+              "http" not in rec["headline"])
+        check("the article link is kept separately as the source link",
+              rec["article_url"] == article)
+        check("the owner is shown the real headline, not a raw link",
+              "Tamil Nadu cop clings" in sent[-1] and "newindianexpress.com" not in sent[-1].split("Headline")[-1])
+
+        # typed words alongside the two links win over the fetched title
+        sent.clear()
+        msg2 = {"message_id": 2, "text": f"{link}\n\nCop drags gutkha gang for 30km\n\n{article}"}
+        main._open_ugc_request(ugc.find_video_link(msg2["text"]), msg2)
+        rec2 = ugc._load()[-1]
+        check("the owner's own typed words win over the article's fetched title",
+              rec2["headline"] == "Cop drags gutkha gang for 30km", rec2["headline"])
+        check("the article link is still captured even when words were typed too",
+              rec2["article_url"] == article)
+
+        # a video link with no companion link at all still behaves as before
+        sent.clear()
+        msg3 = {"message_id": 3, "text": link}
+        main._open_ugc_request(ugc.find_video_link(msg3["text"]), msg3)
+        rec3 = ugc._load()[-1]
+        check("a bare video link with nothing else has no headline or article link",
+              rec3["headline"] == "" and rec3["article_url"] is None)
+    finally:
+        main.telegram_bot.send_message, main.news_engine.fetch_article_metadata, main.ugc.probe = real
+
 
 if __name__ == "__main__":
     link_tests()
@@ -188,6 +247,8 @@ if __name__ == "__main__":
         download_gate_tests(t)
     with tempfile.TemporaryDirectory() as t:
         headline_tests(t)
+    with tempfile.TemporaryDirectory() as t:
+        article_link_tests(t)
     print(f"\n{'=' * 52}\n{len(PASS)} passed, {len(FAIL)} failed")
     if FAIL:
         print("FAILED:")

@@ -116,8 +116,10 @@ def permission_text(url, creator=None):
     )
 
 
-def open_request(url, prompt_message_id=None, creator=None, now=None, headline=""):
-    """Records that permission has been requested for one video."""
+def open_request(url, prompt_message_id=None, creator=None, now=None, headline="", article_url=None):
+    """Records that permission has been requested for one video. `article_url`
+    is the news article the owner paired with it (if any) -- used as the
+    post's actual source link instead of the video platform's own URL."""
     now = now or dt.datetime.utcnow()
     records = _load()
     rec = {
@@ -128,6 +130,7 @@ def open_request(url, prompt_message_id=None, creator=None, now=None, headline="
         "requested_at": now.strftime("%Y-%m-%d %H:%M"),
         "prompt_message_id": prompt_message_id,
         "headline": headline,
+        "article_url": article_url,
         "credit_mode": CREDIT_NAMED,
         "video_path": None,
     }
