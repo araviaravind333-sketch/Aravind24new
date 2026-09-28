@@ -122,8 +122,18 @@ def open_request(url, prompt_message_id=None, creator=None, now=None, headline="
     post's actual source link instead of the video platform's own URL."""
     now = now or dt.datetime.utcnow()
     records = _load()
+    # A millisecond timestamp collides when two requests are opened in the
+    # same millisecond (a real CI test failure caught this: the second
+    # open_request in a tight loop got the same id as the first, so
+    # ugc.get() returned the wrong record). ids are also the callback-button
+    # payload, so a collision could point a tap at the wrong video --
+    # bump past any id already on file rather than risk that.
+    new_id = int(now.timestamp() * 1000)
+    existing_ids = {int(r["id"]) for r in records if r["id"].isdigit()}
+    while new_id in existing_ids:
+        new_id += 1
     rec = {
-        "id": str(int(now.timestamp() * 1000)),
+        "id": str(new_id),
         "url": url,
         "creator": creator if creator is not None else creator_handle(url),
         "status": AWAITING,

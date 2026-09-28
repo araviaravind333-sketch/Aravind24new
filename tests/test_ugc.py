@@ -9,6 +9,7 @@ that reposts without it collects Instagram strikes until it is deleted.
     python -m tests.test_ugc
 """
 
+import datetime as dt
 import os
 import sys
 import tempfile
@@ -235,6 +236,23 @@ def article_link_tests(tmp):
         main.telegram_bot.send_message, main.news_engine.fetch_article_metadata, main.ugc.probe = real
 
 
+def id_collision_tests(tmp):
+    """Regression: a real CI failure -- open_request() ids were a millisecond
+    timestamp, and two calls close enough together got the SAME id, so
+    ugc.get() on the second one silently returned the first record instead
+    (wrong headline, and -- since ids are the callback-button payload --
+    a tap could have targeted the wrong video)."""
+    print("\nID COLLISION")
+    ugc.LEDGER_PATH = os.path.join(tmp, "ids.json")
+    same_moment = dt.datetime.utcnow()
+    a = ugc.open_request("https://x.com/a/status/1", headline="First", now=same_moment)
+    b = ugc.open_request("https://x.com/b/status/2", headline="Second", now=same_moment)
+    check("two requests opened at the exact same moment get different ids", a["id"] != b["id"], (a["id"], b["id"]))
+    check("the first record's headline is unaffected", ugc.get(a["id"])["headline"] == "First")
+    check("the second record's headline is looked up correctly, not the first's",
+          ugc.get(b["id"])["headline"] == "Second")
+
+
 def byline_tests():
     """Regression: yt-dlp's X/Twitter extractor formats a raw title as
     "<display name> - <tweet text>". A real report -- the creator's own
@@ -306,6 +324,8 @@ if __name__ == "__main__":
         headline_tests(t)
     with tempfile.TemporaryDirectory() as t:
         article_link_tests(t)
+    with tempfile.TemporaryDirectory() as t:
+        id_collision_tests(t)
     byline_tests()
     with tempfile.TemporaryDirectory() as t:
         repost_guard_tests(t)
