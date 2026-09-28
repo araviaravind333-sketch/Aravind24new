@@ -244,7 +244,10 @@ def render_reel_from_clip(clip_path, frame_png, out_path, max_duration_sec, layo
     lay = layout or layout_for(probe_aspect(clip_path), "")
     cmd = [exe, "-y", "-i", clip_path, "-loop", "1", "-i", frame_png,
            "-t", str(max_duration_sec), "-filter_complex", build_filter(lay), "-map", "[outv]", "-an",
-           "-c:v", "libx264", "-pix_fmt", "yuv420p", "-movflags", "+faststart", out_path]
+           # explicit CRF: libx264's default (23) with no bitrate target
+           # produced visibly blurry/blocky Reels on real posts
+           "-c:v", "libx264", "-crf", "19", "-preset", "medium",
+           "-pix_fmt", "yuv420p", "-movflags", "+faststart", out_path]
     res = subprocess.run(cmd, capture_output=True, text=True, timeout=300)
     if res.returncode != 0 or not os.path.exists(out_path):
         raise RuntimeError(f"ffmpeg failed ({res.returncode}): {res.stderr[-2000:]}")

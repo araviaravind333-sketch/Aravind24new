@@ -51,7 +51,14 @@ def render_reel(image_path, out_path, **_ignored):
         "ffmpeg", "-y",
         "-loop", "1", "-i", image_path,
         "-vf", vf,
-        "-c:v", "libx264", "-tune", "stillimage",
+        # No -crf here used to mean libx264's default (23), which on a
+        # single still frame held for several seconds produced a visibly
+        # blurry/blocky Reel (~280 kbps for a 1080x1920 frame, a real
+        # posted example) -- a low CRF costs almost nothing in file size
+        # for unchanging content, since every frame after the first is a
+        # near-empty P-frame, so there is no reason not to keep the one
+        # frame that matters sharp.
+        "-c:v", "libx264", "-tune", "stillimage", "-crf", "16",
         "-pix_fmt", "yuv420p", "-movflags", "+faststart",
         "-t", str(settings.REEL_DURATION_SEC),
         out_path,

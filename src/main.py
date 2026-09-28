@@ -34,7 +34,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from config import settings
 from src import (news_engine, ai_writer, image_source, incident_photos, photo_review,
-                  photo_db, dashboard, template, reel_template,
+                  photo_db, dashboard, template,
                   video, publisher, analytics, whatsapp, telegram_bot,
                   carousel_review, subject_photos, clip_reel, feed_post,
                   context_photos)
@@ -76,31 +76,6 @@ def current_slot():
         key=lambda s: min(abs(s[0] - hour), 24 - abs(s[0] - hour)),
     )
     return nearest, ist
-
-
-def choose_variant(category_label):
-    """Pick which of the 3 templates to render with: whichever is actually
-    performing best for this category once there's enough reach data,
-    otherwise rotate evenly (least-used-so-far) so all 3 get a fair shot."""
-    ranked = analytics.best_template(category_label)
-    if ranked:
-        return ranked[0]
-    counts = analytics.template_counts(category_label)
-    return min(counts, key=counts.get)
-
-
-def choose_reel_variant(category_label):
-    """Same idea as choose_variant, but for the 3 dedicated 9:16 reel
-    cards (src/reel_template.py) -- a completely separate rotation/ranking
-    from the feed card's, since they're different designs with their own
-    reach performance."""
-    ranked = analytics.best_template(category_label, column="reel_template",
-                                      min_samples=3)
-    if ranked:
-        return ranked[0]
-    counts = analytics.template_counts(category_label, column="reel_template",
-                                        variants=reel_template.VARIANTS)
-    return min(counts, key=counts.get)
 
 
 def build_caption(written, geo):
@@ -1000,20 +975,16 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
     if story["score"] >= news_engine.BREAKING_SCORE_THRESHOLD and story.get("hot_hit"):
         category_label = "BREAKING NEWS"
 
-    # alert_card (a hazard-triangle graphic for incident stories with no
-    # photo) is retired by request -- didn't look good in practice. Every
-    # no-photo case (force_no_image, guaranteed on every automated path)
-    # now just uses the plain text_card, same as any other no-photo story;
-    # a human-supplied photo uses the normal rotation regardless of
-    # whether the story is a fresh incident.
-    if force_no_image:
-        variant = "text_card"
-    elif portrait:
-        # pre-cropped 4:5 with the face in the top third; full_bleed puts
-        # the headline over the lower part, clear of the face
-        variant = "full_bleed"
-    else:
-        variant = choose_variant(category_label)
+    # A real photo -- the owner's own submission or a verified portrait/
+    # context photo -- is ALWAYS used with the premium overlay design, never
+    # thrown away for a text card. That A/B-testing rotation (choose_variant,
+    # now removed) predates this pipeline's photo-verification work, and a
+    # real posted story once had it silently discard the owner's own
+    # submitted photo for the square post while the reel still used it --
+    # exactly the kind of inconsistency "always use a real photo when one
+    # exists" is meant to prevent. text_card is now used ONLY when there is
+    # genuinely no photo at all (force_no_image).
+    variant = "text_card" if force_no_image else "full_bleed"
     print("Template variant:", variant)
 
     out_dir = os.path.join(os.path.dirname(__file__), "..", "public")
@@ -1058,6 +1029,13 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
     out_name = f"post-{stamp}.jpg"
     out_path = os.path.join(out_dir, out_name)
 
+    # Decided ONCE and reused for both the square post below and the reel
+    # further down, so the two can never disagree about whether a photo
+    # exists -- a real published post once showed template="text_card" for
+    # the square image alongside reel_template="reel_overlay" for the same
+    # story, which should be structurally impossible.
+    has_photo = img_path is not None and variant not in ("alert_card", "text_card")
+
     logo = os.path.join(os.path.dirname(__file__), "..", "assets", "logo", "logo.png")
     if img_path is None:
         # No usable photograph exists -- a designed typographic card, which
@@ -1071,7 +1049,7 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
             footer=settings.BRAND_FOOTER,
             handle=settings.BRAND_HANDLE,
         )
-    elif img_path and variant not in ("alert_card", "text_card"):
+    elif has_photo:
         is_share_alike = bool(portrait and portrait.get("share_alike"))
         if is_share_alike:
             # a share-alike photo must be shown WHOLE and unmodified (see
@@ -1167,7 +1145,7 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
                     os.remove(overlay_path)
                 except OSError:
                     pass
-            elif img_path is not None:
+            elif has_photo:
                 reel_variant_used = "reel_overlay"
                 reel_card_path = os.path.join(out_dir, f"reel-card-{stamp}.jpg")
                 feed_post.render_overlay_reel(

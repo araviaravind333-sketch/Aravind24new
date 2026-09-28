@@ -148,6 +148,21 @@ def render_tests(tmp):
         check(f"{name} clip's aspect is read correctly", abs(a - int(w) / int(h)) < 0.01, a)
 
 
+def encoding_tests():
+    """Regression: no explicit CRF meant libx264's default (23), which
+    produced a visibly blurry/blocky Reel on a real post (~280 kbps for a
+    full 1080x1920 frame)."""
+    print("\nENCODING QUALITY")
+    import inspect
+    src = inspect.getsource(cr.render_reel_from_clip)
+    check("render_reel_from_clip sets an explicit (low) CRF, not libx264's default",
+          "-crf" in src)
+    from src import video
+    src2 = inspect.getsource(video.render_reel)
+    check("video.render_reel sets an explicit (low) CRF, not libx264's default",
+          "-crf" in src2)
+
+
 if __name__ == "__main__":
     with tempfile.TemporaryDirectory() as t:
         layout_tests(t)
@@ -156,6 +171,7 @@ if __name__ == "__main__":
     filter_tests()
     with tempfile.TemporaryDirectory() as t:
         render_tests(t)
+    encoding_tests()
     print(f"\n{'=' * 52}\n{len(PASS)} passed, {len(FAIL)} failed" + (f", {len(SKIP)} skipped" if SKIP else ""))
     if FAIL:
         print("FAILED:")

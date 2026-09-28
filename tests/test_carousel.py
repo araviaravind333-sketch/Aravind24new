@@ -526,6 +526,43 @@ def image_gate_tests():
             except (OSError, TypeError):
                 pass
 
+    # Regression: a real published post showed template="text_card" for the
+    # square image (discarding the owner's own submitted photo) alongside
+    # reel_template="reel_overlay" for the SAME story (using it) -- caused
+    # by an old A/B rotation (choose_variant) that could pick "text_card"
+    # even when a real photo was supplied directly. A real photo -- owner
+    # submission or verified portrait/context photo -- must always be used.
+    used2 = {}
+    real4 = (main.feed_post.render_overlay_post, main.feed_post.render_text_post,
+            main.feed_post.render_overlay_reel, main.feed_post.render_text_reel,
+            main.ai_writer.rewrite, main.video.render_reel)
+    main.ai_writer.rewrite = lambda s: {"headline": s["title"], "caption": "c", "accent_word": ""}
+    main.feed_post.render_overlay_post = lambda **k: used2.setdefault("square", "overlay") or k["out_path"]
+    main.feed_post.render_text_post = lambda **k: used2.setdefault("square", "text") or k["out_path"]
+    main.feed_post.render_overlay_reel = lambda **k: used2.setdefault("reel", "overlay") or k["out_path"]
+    main.feed_post.render_text_reel = lambda **k: used2.setdefault("reel", "text") or k["out_path"]
+    main.video.render_reel = lambda *a, **k: None
+    with tempfile.TemporaryDirectory() as tmp3:
+        try:
+            owner_photo = os.path.join(tmp3, "owner.jpg")
+            open(owner_photo, "wb").write(b"x")
+            story_c = {"id": "sc1", "title": "Bank unions postpone nationwide strike", "summary": "",
+                      "score": 95, "category": "INDIA NEWS", "link": ""}
+            main._render_story(story_c, dt.datetime(2026, 9, 28, 8, 42), is_reel=True,
+                               forced_image_path=owner_photo, force_no_image=False)
+            check("an owner-submitted photo is used for the square post, never discarded",
+                  used2.get("square") == "overlay", used2)
+            check("the square post and the reel agree on whether a photo was used",
+                  used2.get("square") == used2.get("reel"), used2)
+        finally:
+            (main.feed_post.render_overlay_post, main.feed_post.render_text_post,
+             main.feed_post.render_overlay_reel, main.feed_post.render_text_reel,
+             main.ai_writer.rewrite, main.video.render_reel) = real4
+            try:
+                os.remove(main.PENDING_PATH)
+            except (OSError, TypeError):
+                pass
+
 
 if __name__ == "__main__":
     with tempfile.TemporaryDirectory() as tmp:
