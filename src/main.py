@@ -698,6 +698,16 @@ def _handle_ugc_decision(cb, data):
     if not rec:
         telegram_bot.answer_callback(cb["id"], "That request is no longer on file.")
         return
+    # A real report: no visible reply after the first tap led to the same
+    # button being pressed several more times, and each tap re-downloaded
+    # and re-posted the SAME video. Once a decision is on file, later taps
+    # on any of its three buttons just confirm what already happened.
+    if rec.get("status") == ugc.POSTED:
+        telegram_bot.answer_callback(cb["id"], "Already posted — no need to tap again.")
+        return
+    if rec.get("status") == ugc.DECLINED:
+        telegram_bot.answer_callback(cb["id"], "Already recorded as declined.")
+        return
     if action == "UGCNO":
         ugc.mark_declined(rec_id)
         telegram_bot.answer_callback(cb["id"], "Recorded — that video will not be used.")

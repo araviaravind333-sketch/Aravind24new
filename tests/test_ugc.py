@@ -235,6 +235,63 @@ def article_link_tests(tmp):
         main.telegram_bot.send_message, main.news_engine.fetch_article_metadata, main.ugc.probe = real
 
 
+def byline_tests():
+    """Regression: yt-dlp's X/Twitter extractor formats a raw title as
+    "<display name> - <tweet text>". A real report -- the creator's own
+    name ended up in a post's headline this way even though "no credit
+    wanted" had been chosen, because the name was in the TITLE text
+    itself, not the separate credit line that honours anonymity."""
+    print("\nBYLINE STRIPPING")
+    strip = ugc._strip_byline
+    check("a leading display-name byline is stripped",
+          strip("Wilson Thomas - Headconstable Velmurugan of Kovilpalayam police station",
+                "Wilson Thomas", "wilson__thomas")
+          == "Headconstable Velmurugan of Kovilpalayam police station")
+    check("a leading @handle byline is stripped when no display name matches",
+          strip("wilson__thomas - some raw caption", None, "wilson__thomas")
+          == "some raw caption")
+    check("a title with no byline prefix is left untouched",
+          strip("Headconstable Velmurugan saves a child from a fire", "Wilson Thomas", "wilson__thomas")
+          == "Headconstable Velmurugan saves a child from a fire")
+    check("a name that only appears mid-title (not as a byline prefix) is left alone",
+          strip("Report: Wilson Thomas filmed the incident", "Wilson Thomas", "wilson__thomas")
+          == "Report: Wilson Thomas filmed the incident")
+    check("empty title stays empty", strip("", "Wilson Thomas", "wilson__thomas") == "")
+
+
+def repost_guard_tests(tmp):
+    """Regression: no visible reply after the first tap on 'Approved -- no
+    credit wanted' led to the SAME button being pressed several more
+    times, and each tap re-downloaded and re-posted the identical video
+    (five separate posts of one clip on the live page). Once a decision
+    is on file, a later tap on any of its buttons must be a no-op."""
+    print("\nRE-TAP GUARD")
+    from src import main
+    ugc.LEDGER_PATH = os.path.join(tmp, "repost.json")
+    rec = ugc.open_request("https://x.com/a/status/1", headline="Some headline")
+    ugc.mark_posted(rec["id"])
+
+    answers, posts = [], []
+    real_answer, real_post = main.telegram_bot.answer_callback, main._post_permitted_video
+    main.telegram_bot.answer_callback = lambda cb_id, text="": answers.append(text)
+    main._post_permitted_video = lambda r, now: posts.append(r["id"])
+    try:
+        main._handle_ugc_decision({"id": "cb1"}, f"UGCANON|{rec['id']}")
+        check("re-tapping an already-posted request does not post again", posts == [])
+        check("re-tapping an already-posted request tells the owner it's already done",
+              answers and "already" in answers[-1].lower(), answers)
+
+        rec2 = ugc.open_request("https://x.com/a/status/2", headline="Another headline")
+        ugc.mark_declined(rec2["id"])
+        answers.clear()
+        main._handle_ugc_decision({"id": "cb2"}, f"UGCOK|{rec2['id']}")
+        check("re-tapping an already-declined request does not post it after all", posts == [])
+        check("re-tapping an already-declined request tells the owner it's already recorded",
+              answers and "declined" in answers[-1].lower(), answers)
+    finally:
+        main.telegram_bot.answer_callback, main._post_permitted_video = real_answer, real_post
+
+
 if __name__ == "__main__":
     link_tests()
     permission_text_tests()
@@ -249,6 +306,9 @@ if __name__ == "__main__":
         headline_tests(t)
     with tempfile.TemporaryDirectory() as t:
         article_link_tests(t)
+    byline_tests()
+    with tempfile.TemporaryDirectory() as t:
+        repost_guard_tests(t)
     print(f"\n{'=' * 52}\n{len(PASS)} passed, {len(FAIL)} failed")
     if FAIL:
         print("FAILED:")

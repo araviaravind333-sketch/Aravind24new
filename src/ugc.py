@@ -205,6 +205,22 @@ def credit_line(record):
 # releasable). Reading the page to show the owner what a link contains is
 # fine before that; pulling the actual file is not.
 
+def _strip_byline(title, uploader, uploader_id):
+    """yt-dlp's X/Twitter extractor formats a raw title as
+    "<display name> - <tweet text>". A real report: that put the creator's
+    own name in a post's headline even when they had asked to stay
+    anonymous (credit_line() was correctly empty -- the name was leaking in
+    through the raw title instead). Strip that leading byline here so it
+    can never surface downstream, no matter which credit mode is chosen."""
+    if not title:
+        return title
+    for name in filter(None, [uploader, uploader_id, (uploader_id or "").lstrip("@")]):
+        prefix = f"{name} - "
+        if title.startswith(prefix):
+            return title[len(prefix):].strip()
+    return title
+
+
 def probe(url):
     """Title/duration/uploader for a link, WITHOUT downloading the video --
     so the owner can see what they are approving. Returns None if the link
@@ -219,11 +235,14 @@ def probe(url):
     except Exception as e:
         print("ugc.probe failed:", str(e)[:160])
         return None
+    uploader = i.get("uploader") or i.get("channel")
+    uploader_id = i.get("uploader_id")
+    title = _strip_byline((i.get("title") or "").strip(), uploader, uploader_id)
     return {
-        "title": (i.get("title") or "").strip(),
+        "title": title,
         "duration": i.get("duration"),
-        "uploader": i.get("uploader") or i.get("channel"),
-        "uploader_id": i.get("uploader_id"),
+        "uploader": uploader,
+        "uploader_id": uploader_id,
     }
 
 
