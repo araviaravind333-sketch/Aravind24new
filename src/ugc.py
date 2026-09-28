@@ -34,16 +34,23 @@ LEDGER_PATH = os.path.join(_ROOT, "data", "ugc_permissions.json")
 # Only links to platforms where a person publishes their own footage are
 # treated as a permission request. A plain news-article link is left alone
 # (the urgent-submission path already owns those).
+#
+# The scheme (https://) is OPTIONAL -- copying a link from a phone's share
+# sheet very often gives "x.com/name/status/123" with no "https://" at all,
+# and requiring it meant those links were silently ignored (a real
+# report: a shared link produced no response at all). \b before the
+# domain still stops "box.com" etc. from matching mid-word.
 VIDEO_HOST_RE = re.compile(
-    r"https?://(?:www\.|m\.|mobile\.)?"
-    r"(x\.com|twitter\.com|instagram\.com|youtube\.com|youtu\.be|facebook\.com|fb\.watch)/\S+",
+    r"(?:https?://)?(?:www\.|m\.|mobile\.)?"
+    r"\b(x\.com|twitter\.com|vxtwitter\.com|fxtwitter\.com|nitter\.\w+|"
+    r"instagram\.com|youtube\.com|youtu\.be|facebook\.com|fb\.watch)/\S+",
     re.I)
 
 # x.com/NAME/status/123 -> @NAME. Other platforms do not put the author in
 # the URL, so the creator stays unknown and the request text says so
 # rather than inventing a handle.
 _X_HANDLE_RE = re.compile(
-    r"https?://(?:www\.|m\.|mobile\.)?(?:x\.com|twitter\.com)/([A-Za-z0-9_]{1,15})/status/", re.I)
+    r"(?:https?://)?(?:www\.|m\.|mobile\.)?(?:x\.com|twitter\.com)/([A-Za-z0-9_]{1,15})/status/", re.I)
 
 AWAITING = "awaiting_permission"
 GRANTED = "granted"
@@ -77,9 +84,16 @@ def _save(records):
 
 
 def find_video_link(text):
-    """The first social-video link in a message, or None."""
+    """The first social-video link in a message, or None. Always returned
+    with a scheme -- everything downstream (the ledger, yt-dlp) needs a
+    real URL, even when the person pasted it without "https://"."""
     m = VIDEO_HOST_RE.search(text or "")
-    return m.group(0).rstrip(".,)") if m else None
+    if not m:
+        return None
+    url = m.group(0).rstrip(".,)")
+    if not url.lower().startswith(("http://", "https://")):
+        url = "https://" + url
+    return url
 
 
 def creator_handle(url):

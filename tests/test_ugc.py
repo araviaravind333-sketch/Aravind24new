@@ -45,6 +45,25 @@ def link_tests():
     check("no handle is invented when the URL does not contain one",
           ugc.creator_handle("https://www.instagram.com/reel/ABC/") is None)
 
+    # Regression: a real report -- a shared link produced no response at
+    # all. Cause: the link had no "https://" (very common when pasted from
+    # a phone's share sheet), and the old pattern required it.
+    check("a link with NO scheme still works (the #1 real cause of the bug)",
+          f("x.com/someone/status/123") == "https://x.com/someone/status/123")
+    check("a scheme-less link is still detected inside other text",
+          f("look at this x.com/someone/status/123 wow") == "https://x.com/someone/status/123")
+    check("m.twitter.com with no scheme also works",
+          f("m.twitter.com/a/status/9") == "https://m.twitter.com/a/status/9")
+    check("a scheme-less link keeps a query string",
+          f("x.com/a/status/1?s=46&t=xyz") == "https://x.com/a/status/1?s=46&t=xyz")
+    for mirror in ("vxtwitter.com", "fxtwitter.com"):
+        check(f"the {mirror} mirror is recognised",
+              f(f"https://{mirror}/a/status/1") == f"https://{mirror}/a/status/1")
+    check("a domain that merely CONTAINS 'x.com' does not false-positive",
+          f("https://box.com/somefile") is None)
+    check("every find_video_link result carries a real scheme",
+          f("x.com/a/status/1").startswith(("http://", "https://")))
+
 
 def permission_text_tests():
     print("\nREQUEST MESSAGE")
