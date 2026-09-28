@@ -704,9 +704,11 @@ def _handle_ugc_decision(cb, data):
     # on any of its three buttons just confirm what already happened.
     if rec.get("status") == ugc.POSTED:
         telegram_bot.answer_callback(cb["id"], "Already posted — no need to tap again.")
+        telegram_bot.send_message("\U0001F44D Already posted — no need to tap again.")
         return
     if rec.get("status") == ugc.DECLINED:
         telegram_bot.answer_callback(cb["id"], "Already recorded as declined.")
+        telegram_bot.send_message("\U0001F44D Already recorded as declined.")
         return
     if action == "UGCNO":
         ugc.mark_declined(rec_id)
@@ -718,6 +720,11 @@ def _handle_ugc_decision(cb, data):
     mode = ugc.CREDIT_NONE if action == "UGCANON" else ugc.CREDIT_NAMED
     rec = ugc.mark_granted(rec_id, credit_mode=mode)
     telegram_bot.answer_callback(cb["id"], "Permission recorded — fetching it now.")
+    # A toast alone was easy to miss (a real report of a button being
+    # tapped several times because nothing else seemed to happen) -- a
+    # plain chat message is something the owner can always scroll back
+    # and find, distinct from the later "Posting now" once it's actually done.
+    telegram_bot.send_message("\U0001F44D Got it — downloading and posting now.")
     now_ist = (dt.datetime.now(dt.timezone.utc) + dt.timedelta(hours=5, minutes=30)).replace(tzinfo=None)
     try:
         _post_permitted_video(rec, now_ist)

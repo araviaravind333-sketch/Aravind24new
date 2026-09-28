@@ -366,6 +366,12 @@ def handle_callback(cb):
         conn.close()
 
     telegram_bot.answer_callback(cb["id"], toast)
+    # The toast above only shows as a small popup that vanishes in a
+    # couple of seconds and is easy to miss entirely -- a real report was
+    # tapping a button and having no way to tell whether it registered.
+    # A plain chat message is something the reviewer can always scroll
+    # back and find.
+    telegram_bot.send_message(f"\U0001F44D Got it — {toast}")
     msg = cb.get("message") or {}
     if msg.get("message_id") and msg.get("caption"):
         try:

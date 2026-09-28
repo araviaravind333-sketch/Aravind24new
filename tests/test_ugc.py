@@ -289,25 +289,32 @@ def repost_guard_tests(tmp):
     rec = ugc.open_request("https://x.com/a/status/1", headline="Some headline")
     ugc.mark_posted(rec["id"])
 
-    answers, posts = [], []
-    real_answer, real_post = main.telegram_bot.answer_callback, main._post_permitted_video
+    answers, sent, posts = [], [], []
+    real_answer, real_send, real_post = (main.telegram_bot.answer_callback,
+                                         main.telegram_bot.send_message, main._post_permitted_video)
     main.telegram_bot.answer_callback = lambda cb_id, text="": answers.append(text)
+    main.telegram_bot.send_message = lambda text, buttons=None, reply_to=None: (sent.append(text) or 1)
     main._post_permitted_video = lambda r, now: posts.append(r["id"])
     try:
         main._handle_ugc_decision({"id": "cb1"}, f"UGCANON|{rec['id']}")
         check("re-tapping an already-posted request does not post again", posts == [])
         check("re-tapping an already-posted request tells the owner it's already done",
               answers and "already" in answers[-1].lower(), answers)
+        check("...and says so in a real chat message, not just the toast",
+              sent and "already" in sent[-1].lower(), sent)
 
         rec2 = ugc.open_request("https://x.com/a/status/2", headline="Another headline")
         ugc.mark_declined(rec2["id"])
-        answers.clear()
+        answers.clear(); sent.clear()
         main._handle_ugc_decision({"id": "cb2"}, f"UGCOK|{rec2['id']}")
         check("re-tapping an already-declined request does not post it after all", posts == [])
         check("re-tapping an already-declined request tells the owner it's already recorded",
               answers and "declined" in answers[-1].lower(), answers)
+        check("...and says so in a real chat message, not just the toast",
+              sent and "declined" in sent[-1].lower(), sent)
     finally:
-        main.telegram_bot.answer_callback, main._post_permitted_video = real_answer, real_post
+        main.telegram_bot.answer_callback, main.telegram_bot.send_message, main._post_permitted_video = (
+            real_answer, real_send, real_post)
 
 
 if __name__ == "__main__":

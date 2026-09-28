@@ -392,6 +392,25 @@ def storage_tests():
     check("callback data fits Telegram's 64-byte limit",
           all(len(b.get("callback_data", "")) <= 64 for row in buttons for b in row))
 
+    # Regression: a real report -- tapping MARK LICENSED showed only a
+    # toast (a Telegram popup that vanishes in a couple of seconds), and
+    # the reviewer had no way to tell afterwards whether the tap had
+    # registered. Every button press must also land as a plain, scrollable
+    # chat message, not just the toast.
+    from src import telegram_bot
+    sent = []
+    real_send, real_answer = telegram_bot.send_message, telegram_bot.answer_callback
+    telegram_bot.send_message = lambda text, buttons=None, reply_to=None: (sent.append(text) or 1)
+    telegram_bot.answer_callback = lambda cb_id, text="": None
+    try:
+        label, info = photo_review.handle_callback(
+            {"id": "cb1", "data": f"{photo_review.CB_LICENSED}|cand0001", "message": {}})
+        check("MARK LICENSED is recognised and reports its label", label == "LICENSED", label)
+        check("tapping a button sends a real chat message, not just a toast",
+              sent and "licensed" in sent[-1].lower(), sent)
+    finally:
+        telegram_bot.send_message, telegram_bot.answer_callback = real_send, real_answer
+
 
 if __name__ == "__main__":
     critical_tests()
