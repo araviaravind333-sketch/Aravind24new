@@ -59,5 +59,17 @@
   "credit_mode": "none",
   "video_path": "/home/runner/work/Aravind24new/Aravind24new/src/../data/telegram_inbox/ugc-1790577943209.mp4",
   "granted_at": "2026-09-28 07:03"
+ },
+ {
+  "id": "1790595854606",
+  "url": "https://x.com/visegrad24/status/2104523653261983992/video/1",
+  "creator": "@visegrad24",
+  "status": "awaiting_permission",
+  "requested_at": "2026-09-28 11:44",
+  "prompt_message_id": null,
+  "headline": "",
+  "article_url": null,
+  "credit_mode": "named",
+  "video_path": null
  }
 ]
