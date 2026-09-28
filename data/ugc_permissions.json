@@ -51,12 +51,13 @@
   "id": "1790577943209",
   "url": "https://x.com/KeralaBxOffce/status/2104100358104711347/video/1?s=46",
   "creator": "@KeralaBxOffce",
-  "status": "awaiting_permission",
+  "status": "posted",
   "requested_at": "2026-09-28 06:45",
   "prompt_message_id": null,
   "headline": "",
   "article_url": null,
-  "credit_mode": "named",
-  "video_path": null
+  "credit_mode": "none",
+  "video_path": "/home/runner/work/Aravind24new/Aravind24new/src/../data/telegram_inbox/ugc-1790577943209.mp4",
+  "granted_at": "2026-09-28 07:03"
  }
 ]
