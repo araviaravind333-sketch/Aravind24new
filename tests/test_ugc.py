@@ -317,6 +317,40 @@ def repost_guard_tests(tmp):
             real_answer, real_send, real_post)
 
 
+def granted_sweep_tests(tmp):
+    """Regression: a real incident -- two separate button taps never
+    reached Telegram's servers at all (no error anywhere, no callback
+    update ever arrived to poll), leaving an APPROVED request stuck
+    forever with nothing that would ever retry it. granted_pending()
+    finds exactly that stuck class of record, and the sweep in
+    _poll_telegram_replies posts it on the very next cycle regardless of
+    whether that cycle saw any new Telegram updates."""
+    print("\nGRANTED-BUT-UNPOSTED SWEEP")
+    from src import main
+    ugc.LEDGER_PATH = os.path.join(tmp, "sweep.json")
+
+    awaiting = ugc.open_request("https://x.com/a/status/1", headline="Still waiting")
+    granted_not_posted = ugc.open_request("https://x.com/b/status/2", headline="Stuck approval")
+    ugc.mark_granted(granted_not_posted["id"])
+    already_posted = ugc.open_request("https://x.com/c/status/3", headline="Done already")
+    ugc.mark_granted(already_posted["id"])
+    ugc.attach_video(already_posted["id"], "/tmp/whatever.mp4")
+    ugc.mark_posted(already_posted["id"])
+
+    pending = ugc.granted_pending()
+    check("only the granted-but-never-downloaded record is picked up",
+          [r["id"] for r in pending] == [granted_not_posted["id"]], [r["id"] for r in pending])
+
+    posted_ids = []
+    real_post = main._post_permitted_video
+    main._post_permitted_video = lambda r, now: posted_ids.append(r["id"])
+    try:
+        main._sweep_granted_ugc(dt.datetime(2026, 1, 1))
+        check("the sweep retries exactly the stuck record", posted_ids == [granted_not_posted["id"]], posted_ids)
+    finally:
+        main._post_permitted_video = real_post
+
+
 if __name__ == "__main__":
     link_tests()
     permission_text_tests()
@@ -336,6 +370,8 @@ if __name__ == "__main__":
     byline_tests()
     with tempfile.TemporaryDirectory() as t:
         repost_guard_tests(t)
+    with tempfile.TemporaryDirectory() as t:
+        granted_sweep_tests(t)
     print(f"\n{'=' * 52}\n{len(PASS)} passed, {len(FAIL)} failed")
     if FAIL:
         print("FAILED:")

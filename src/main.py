@@ -620,7 +620,24 @@ def _poll_telegram_replies(pending_ids, now_ist=None):
             telegram_bot.reply_to_message(
                 msg["message_id"], "Something went wrong rendering this, so it wasn't posted.")
     _save_tg_offset(offset)
+    _sweep_granted_ugc(now_ist)
     return urgent_result
+
+
+def _sweep_granted_ugc(now_ist):
+    """Catches a request the owner already approved but that never got
+    downloaded and posted -- a real incident: two button taps never
+    reached Telegram's servers at all (no error anywhere in the pipeline,
+    just an update that never arrived), leaving the approval permanently
+    stuck with no way to retry it. Runs every cycle regardless of whether
+    this poll saw any new updates, so a stuck grant heals on its own
+    within one cycle instead of needing a human to notice and re-trigger it."""
+    for rec in ugc.granted_pending():
+        print("Retrying a granted-but-unposted UGC video:", rec["id"])
+        try:
+            _post_permitted_video(rec, now_ist)
+        except Exception as e:
+            print("granted-UGC sweep failed for", rec["id"], ":", e)
 
 
 def _open_ugc_request(video_link, msg):

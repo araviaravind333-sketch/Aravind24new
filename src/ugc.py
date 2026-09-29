@@ -153,6 +153,17 @@ def get(record_id):
     return next((r for r in _load() if r["id"] == str(record_id)), None)
 
 
+def granted_pending():
+    """Records the owner has already approved but that never actually got
+    downloaded and posted. Normally empty -- posting happens immediately
+    when the approval button is tapped. It exists for one real failure
+    mode: a button tap that Telegram's servers never received at all (no
+    error, no callback update -- just silence), which leaves a request
+    stuck here forever with nothing to retry it. A periodic sweep over
+    this list is what makes that self-healing instead of a dead end."""
+    return [r for r in _load() if r.get("status") == GRANTED and not r.get("video_path")]
+
+
 def by_prompt_message(message_id):
     """The record whose 'send me the file' prompt the owner just replied
     to -- this is how a forwarded video is tied to one specific grant,
