@@ -84,5 +84,17 @@
   "credit_mode": "none",
   "video_path": "/home/runner/work/Aravind24new/Aravind24new/src/../data/telegram_inbox/ugc-1790749072109.mp4",
   "granted_at": "2026-09-30 06:18"
+ },
+ {
+  "id": "1790772859321",
+  "url": "https://x.com/beebomco/status/2105224782505742691/video/1",
+  "creator": "@beebomco",
+  "status": "awaiting_permission",
+  "requested_at": "2026-09-30 12:54",
+  "prompt_message_id": null,
+  "headline": "",
+  "article_url": null,
+  "credit_mode": "named",
+  "video_path": null
  }
 ]
