@@ -221,7 +221,18 @@ def get_new_updates(offset):
     """Long-poll isn't needed here -- this runs once per 30-min cycle, so
     a short timeout just drains whatever has queued up since last time.
     `offset` (last seen update_id + 1) tells Telegram to skip anything
-    already processed rather than us tracking a separate seen-set."""
+    already processed rather than us tracking a separate seen-set.
+
+    Real incident: this whole pipeline runs on polling, but a webhook
+    (see cloudflare-worker/telegram-webhook.js) got registered against
+    the same bot token at some point. Telegram then routed EVERY update
+    to that webhook instead of queuing it for getUpdates -- silently: no
+    error, getUpdates just kept returning an empty list, for over a day,
+    while real button taps and messages piled up unseen. deleteWebhook
+    is a no-op when no webhook is set, so calling it before every poll
+    costs nothing and makes this failure mode structurally impossible
+    instead of trusting that no one (or nothing) ever re-registers one."""
+    _call("deleteWebhook", {"drop_pending_updates": False})
     result = _call("getUpdates", {"offset": offset, "timeout": 5})
     return result or []
 
