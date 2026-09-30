@@ -76,12 +76,13 @@
   "id": "1790749072109",
   "url": "https://x.com/MeghUpdates/status/2105137809468326072/video/1?s=46",
   "creator": "@MeghUpdates",
-  "status": "awaiting_permission",
+  "status": "posted",
   "requested_at": "2026-09-30 06:17",
   "prompt_message_id": null,
   "headline": "",
   "article_url": null,
-  "credit_mode": "named",
-  "video_path": null
+  "credit_mode": "none",
+  "video_path": "/home/runner/work/Aravind24new/Aravind24new/src/../data/telegram_inbox/ugc-1790749072109.mp4",
+  "granted_at": "2026-09-30 06:18"
  }
 ]
