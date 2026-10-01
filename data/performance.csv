@@ -147,7 +147,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-09-17 19:14,INDIA NEWS,"Anti-corruption team catches forest officer accepting ₹30,000 bribe in Karnataka.",74,False,text_card,,18115685896779916,122116193109424069,True,True,4,1,0,0,0,,1
 2026-09-17 19:47,BREAKING NEWS,"PM Modi Birthday Celebrations At Kartavya Path, 1.25 Lakh Diyas To Be Lit",91,False,text_card,,18105559310459947,122116196643424069,True,True,4,0,0,0,0,,0
 2026-09-17 21:46,INDIA NEWS,Maharashtra CM Fadnavis calls PM Modi a university on his birthday,61,False,text_card,,17866243953660563,122116209489424069,True,True,4,0,0,0,0,,0
-2026-09-17 22:12,INDIA NEWS,Kerala High Court orders Indian Railways to shift hazardous electrical lines.,63,False,text_card,,18074548469433595,122116212207424069,True,True,4,0,0,0,0,,0
+2026-09-17 22:12,INDIA NEWS,Kerala High Court orders Indian Railways to shift hazardous electrical lines.,63,False,text_card,,18074548469433595,122116212207424069,True,True,5,0,0,0,0,,0
 2026-09-17 22:43,BREAKING NEWS,Supreme Court questions Manipur government over 25 unnatural deaths in relief camps.,96,False,text_card,,17931628764142128,122116215675424069,True,True,4,0,0,0,0,,0
 2026-09-18 18:16,INDIA NEWS,Trinamool Congress backs Congress in Nandigram as its candidate withdraws nomination,68,False,text_card,,18405711583093678,122116377525424069,True,True,4,0,0,0,0,,0
 2026-09-18 19:45,INDIA NEWS,"Andhra Pradesh approves huge investment proposals worth 22,178 crore rupees",56,False,text_card,,18115240265515422,122116387773424069,True,True,5,0,0,0,0,,0
@@ -184,7 +184,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-09-27 17:12,INDIA NEWS,Kapil Sibal demands removal of Election Chief Gyanesh Kumar over voter lists.,63,False,full_bleed,,17967828897187170,122118544863424069,True,True,3,0,0,0,0,,0
 2026-09-27 18:13,INDIA NEWS,Foreign Minister S. Jaishankar calls Pakistan a serial practitioner of terrorism.,68,False,text_card,,18025373027697413,122118555699424069,True,True,3,0,0,0,0,,0
 2026-09-27 19:12,INDIA NEWS,"Arunachal police rescue 51, including 47 children from trafficking racket, 5 arrested",76,True,text_card,reel_text,18113165822026599,122118564327424069,True,True,76,0,0,0,,110,0
-2026-09-27 19:44,INDIA NEWS,CBI conducts searches in 10 States over ₹11.42 crore Gujarat ‘digital arrest’,85,True,text_card,reel_text,17910150831508702,122118569631424069,True,True,106,1,0,0,,169,1
+2026-09-27 19:44,INDIA NEWS,CBI conducts searches in 10 States over ₹11.42 crore Gujarat ‘digital arrest’,85,True,text_card,reel_text,17910150831508702,122118569631424069,True,True,107,1,0,0,,171,1
 2026-09-27 20:12,INDIA NEWS,ED attaches assets worth ₹442 crore in RummyCulture money laundering case,71,True,text_card,reel_text,17878736994629397,122118574083424069,True,True,15,0,0,0,,21,0
 2026-09-28 08:42,BREAKING NEWS,Bank unions postpone nationwide strike after getting management assurance,95,True,text_card,reel_overlay,17910653241533373,122118684357424069,True,True,138,1,0,0,,205,2
 2026-09-28 10:53,BREAKING NEWS,Wilson Thomas - Headconstable Velmurugan of Kovilpalayam police station in #Coimbator...,95,True,full_bleed,,18129605527702009,122118702423424069,True,True,,,,,,,
@@ -193,27 +193,27 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-09-28 13:44,INDIA NEWS,"Mass deletions, internal dissent allegations challenge Supreme Court-backed SIR",75,True,full_bleed,reel_overlay,18351993937222593,122118727977424069,True,True,4,0,0,0,,6,0
 2026-09-28 14:48,INDIA NEWS,Nitish Kumar Reddy becomes first Andhra fast bowler to lead India attack,62,True,text_card,reel_text,17950929543272995,122118738009424069,True,True,8,0,0,0,,13,0
 2026-09-28 15:47,INDIA NEWS,17 tribal habitations under water in Andhra’s Polavaram as Godavari nears first flood,76,True,text_card,reel_text,18333229525278088,122118746589424069,True,True,44,0,0,0,,65,0
-2026-09-28 17:51,INDIA NEWS,Visakhapatnam starts ₹725-crore project to supply 24x7 water to residents,56,False,full_bleed,,17964057650983857,122118767277424069,True,True,3,0,0,0,0,,0
+2026-09-28 17:51,INDIA NEWS,Visakhapatnam starts ₹725-crore project to supply 24x7 water to residents,56,False,full_bleed,,17964057650983857,122118767277424069,True,True,4,0,0,0,0,,0
 2026-09-28 18:20,INDIA NEWS,"Exclusive: Defence Secretary Defends $34 Billion 114-Rafale Deal, Says Tejas On Track",86,True,text_card,reel_text,18234228763321098,122118772215424069,True,True,87,0,0,0,,152,0
 2026-09-28 19:17,INDIA NEWS,Cherian Kurian wins 31st Berchmans Entrepreneur Award,56,True,text_card,reel_text,18119193511790148,122118780939424069,True,True,3,0,0,0,,3,0
 2026-09-28 19:48,INDIA NEWS,T.N. Minister launches ‘Thaimaman gold ring’ scheme for newborns in Cuddalore,68,False,full_bleed,,18112349984136060,122118784797424069,True,True,3,0,0,0,0,,0
 2026-09-28 20:18,INDIA NEWS,Indian Railways approves new tri-weekly train Between Machilipatnam and Kurnool City,78,False,full_bleed,,18116124452069263,122118790287424069,True,True,4,0,0,0,0,,0
 2026-09-28 20:51,INDIA NEWS,Congress seeks transparency in  functioning of Election Commission,75,True,full_bleed,reel_overlay,18629441821030584,122118797043424069,True,True,16,0,0,0,,36,0
-2026-09-28 21:17,INDIA NEWS,Atchannaidu orders speedy enumeration of cyclone-hit crop losses,70,True,text_card,reel_text,18110253041590545,122118800685424069,True,True,7,0,0,0,,9,0
-2026-09-29 10:13,INDIA NEWS,"""Special Place"": US Envoy Sergio Gor Visits Amritsar's Golden Temple",53,True,full_bleed,reel_overlay,18484616731109396,122118905859424069,True,True,5,0,0,0,,9,0
+2026-09-28 21:17,INDIA NEWS,Atchannaidu orders speedy enumeration of cyclone-hit crop losses,70,True,text_card,reel_text,18110253041590545,122118800685424069,True,True,8,0,0,0,,10,0
+2026-09-29 10:13,INDIA NEWS,"""Special Place"": US Envoy Sergio Gor Visits Amritsar's Golden Temple",53,True,full_bleed,reel_overlay,18484616731109396,122118905859424069,True,True,6,0,0,0,,13,0
 2026-09-29 10:17,INDIA NEWS,"Floods damage crops of 71,796 farmers and 2,405 km of roads in Andhra",56,True,text_card,reel_text,17972602242176325,122118906189424069,True,True,10,0,0,0,,16,0
 2026-09-29 13:14,INDIA NEWS,DMK MP Moves Election Commission Against TVK Leaders Over Model Code Violation,75,True,full_bleed,reel_overlay,18095683598559005,122118932895424069,True,True,12,0,0,0,,33,0
 2026-09-29 13:48,INDIA NEWS,PM Modi should resign for ‘pressuring’ CEC: Kharge at CWC meet,75,True,text_card,reel_text,18128480788891791,122118938883424069,True,True,36,0,0,0,,50,0
 2026-09-29 14:16,INDIA NEWS,Keralam local body bypolls results LIVE: UDF,71,True,text_card,reel_text,18167790127462772,122118943485424069,True,True,17,0,0,0,,26,0
 2026-09-29 15:17,INDIA NEWS,"Thar Hits Bike, Then Crashes Into Pole In Chandigarh, 2 Injured",64,True,text_card,reel_text,17948558775285451,122118953337424069,True,True,10,0,0,0,,15,0
-2026-09-29 22:05,INDIA NEWS,NDTV Defence Summit 2026 LIVE Updates: Experts On Building Bharat's Arsenal of Innovation,74,True,text_card,reel_text,18079630517391587,122119024383424069,True,True,10,0,0,0,,11,0
+2026-09-29 22:05,INDIA NEWS,NDTV Defence Summit 2026 LIVE Updates: Experts On Building Bharat's Arsenal of Innovation,74,True,text_card,reel_text,18079630517391587,122119024383424069,True,True,11,0,0,0,,12,0
 2026-09-29 22:10,INDIA NEWS,"CWC demands resignations of PM Modi, Shah over ‘vote chori’",63,True,text_card,reel_text,18596206174067622,122119024863424069,True,True,49,1,0,0,,103,1
 2026-09-30 06:10,INDIA NEWS,Supreme Court agrees to hear thousands of pending Bengal voter list appeals,73,False,full_bleed,,18098939639572225,122119090113424069,True,True,4,0,0,0,0,,0
-2026-09-30 11:48,INDIA NEWS,Supreme Court extends CBSE three-language policy exemption to Class 6 students,81,True,text_card,reel_text,18076600409534109,122119134045424069,True,True,11,0,0,0,,20,0
-2026-09-30 12:00,INDIA NEWS,Police probe violent clash between Kolkata film students and right-wing group,56,True,text_card,reel_text,18149172727542197,122119135491424069,True,True,29,0,0,0,,55,0
-2026-09-30 18:24,INDIA NEWS,LPG customers must complete Aadhaar biometric verification before October 1 deadline,69,True,text_card,reel_text,17948702010337917,122119194765424069,True,True,14,0,0,0,,21,0
-2026-09-30 18:28,INDIA NEWS,"Rajya Sabha panel proposes restraining MPs from undermining constitutional authorities, fellow members",63,True,full_bleed,reel_overlay,17896173696673453,122119195365424069,True,True,4,0,0,0,,5,0
-2026-10-01 07:25,INDIA NEWS,PM Modi praises an Indian pilot for averting a major aviation disaster.,68,True,text_card,reel_text,18143801596627449,122119320255424069,True,True,,,,,,,
-2026-10-01 13:10,INDIA NEWS,"Jawan Opens Fire, Kills 4 Colleagues, Including An Officer In J&K's Kathua",79,True,text_card,reel_text,18110891345142957,122119360851424069,True,True,,,,,,,
-2026-10-01 14:07,INDIA NEWS,Andhra Pradesh extends voter list revision deadline for third time,86,True,full_bleed,reel_overlay,17977296111125004,122119369449424069,True,True,,,,,,,
-2026-10-01 20:38,INDIA NEWS,Major fire engulfs Fort Kochi’s historic Koder House,85,True,text_card,reel_text,17880588819691220,122119425615424069,True,True,,,,,,,
+2026-09-30 11:48,INDIA NEWS,Supreme Court extends CBSE three-language policy exemption to Class 6 students,81,True,text_card,reel_text,18076600409534109,122119134045424069,True,True,13,0,0,0,,24,0
+2026-09-30 12:00,INDIA NEWS,Police probe violent clash between Kolkata film students and right-wing group,56,True,text_card,reel_text,18149172727542197,122119135491424069,True,True,37,0,0,0,,64,0
+2026-09-30 18:24,INDIA NEWS,LPG customers must complete Aadhaar biometric verification before October 1 deadline,69,True,text_card,reel_text,17948702010337917,122119194765424069,True,True,16,0,0,0,,23,0
+2026-09-30 18:28,INDIA NEWS,"Rajya Sabha panel proposes restraining MPs from undermining constitutional authorities, fellow members",63,True,full_bleed,reel_overlay,17896173696673453,122119195365424069,True,True,25,0,0,0,,48,0
+2026-10-01 07:25,INDIA NEWS,PM Modi praises an Indian pilot for averting a major aviation disaster.,68,True,text_card,reel_text,18143801596627449,122119320255424069,True,True,21,0,0,0,,37,0
+2026-10-01 13:10,INDIA NEWS,"Jawan Opens Fire, Kills 4 Colleagues, Including An Officer In J&K's Kathua",79,True,text_card,reel_text,18110891345142957,122119360851424069,True,True,6,0,0,0,,7,0
+2026-10-01 14:07,INDIA NEWS,Andhra Pradesh extends voter list revision deadline for third time,86,True,full_bleed,reel_overlay,17977296111125004,122119369449424069,True,True,13,0,0,0,,28,0
+2026-10-01 20:38,INDIA NEWS,Major fire engulfs Fort Kochi’s historic Koder House,85,True,text_card,reel_text,17880588819691220,122119425615424069,True,True,12,0,0,0,,16,0
