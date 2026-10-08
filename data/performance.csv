@@ -160,7 +160,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-09-19 22:43,INDIA NEWS,BJP student wing ABVP wins key Delhi University union elections,65,False,text_card,,18460588867190134,122116626285424069,True,True,4,0,0,0,0,,0
 2026-09-19 23:46,INDIA NEWS,Home Minister Amit Shah cancels key Karnataka events due to food poisoning,73,False,text_card,,18337146217279231,122116634001424069,True,True,4,0,0,0,0,,0
 2026-09-20 00:13,INDIA NEWS,"Railways approves Kavach 4.0, signalling and safety projects worth Rs 736 crore",56,False,text_card,,18125533306859513,122116638711424069,True,True,4,0,0,0,0,,0
-2026-09-20 00:42,WORLD NEWS,Houthis claim attack on Saudi capital after smoke seen rising near Riyadh airport,65,False,text_card,,18103956536353890,122116644501424069,True,True,3,0,0,0,0,,0
+2026-09-20 00:42,WORLD NEWS,Houthis claim attack on Saudi capital after smoke seen rising near Riyadh airport,65,False,text_card,,18103956536353890,122116644501424069,True,True,4,0,0,0,0,,0
 2026-09-20 19:08,INDIA NEWS,Kerala shooter Vidarsha Vinod wins Asian Games silver after parents take loan.,58,True,full_bleed,reel_full_bleed,18635832127046003,122116817205424069,True,True,8,0,0,0,,14,0
 2026-09-21 08:41,INDIA NEWS,Heavy Kerala rains kill five people and trigger widespread landslides,76,True,full_bleed,reel_full_bleed,18097884788620677,122116926051424069,True,True,55,0,0,0,,75,0
 2026-09-21 12:16,INDIA NEWS,Woman entrepreneur accuses Telangana Chief Minister aide of misconduct,68,True,full_bleed,reel_window,18075357710412257,122116953867424069,True,True,10,0,0,0,,19,0
@@ -189,8 +189,8 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-09-28 08:42,BREAKING NEWS,Bank unions postpone nationwide strike after getting management assurance,95,True,text_card,reel_overlay,17910653241533373,122118684357424069,True,True,139,1,0,0,,206,2
 2026-09-28 10:53,BREAKING NEWS,Wilson Thomas - Headconstable Velmurugan of Kovilpalayam police station in #Coimbator...,95,True,full_bleed,,18129605527702009,122118702423424069,True,True,,,,,,,
 2026-09-28 12:21,INDIA NEWS,"About 1,500 pilgrims stranded along Kedarnath trek route after landslide evacuated",79,True,text_card,reel_text,18007679192778138,122118714159424069,True,True,56,0,0,0,,89,0
-2026-09-28 12:33,BREAKING NEWS,🙏🏻🙂,95,True,full_bleed,,18130238473690666,122118716127424069,True,True,3,0,0,0,,3,0
-2026-09-28 13:44,INDIA NEWS,"Mass deletions, internal dissent allegations challenge Supreme Court-backed SIR",75,True,full_bleed,reel_overlay,18351993937222593,122118727977424069,True,True,4,0,0,0,,6,0
+2026-09-28 12:33,BREAKING NEWS,🙏🏻🙂,95,True,full_bleed,,18130238473690666,122118716127424069,True,True,4,0,0,0,,4,0
+2026-09-28 13:44,INDIA NEWS,"Mass deletions, internal dissent allegations challenge Supreme Court-backed SIR",75,True,full_bleed,reel_overlay,18351993937222593,122118727977424069,True,True,5,0,0,0,,7,0
 2026-09-28 14:48,INDIA NEWS,Nitish Kumar Reddy becomes first Andhra fast bowler to lead India attack,62,True,text_card,reel_text,17950929543272995,122118738009424069,True,True,8,0,0,0,,13,0
 2026-09-28 15:47,INDIA NEWS,17 tribal habitations under water in Andhra’s Polavaram as Godavari nears first flood,76,True,text_card,reel_text,18333229525278088,122118746589424069,True,True,45,0,0,0,,70,0
 2026-09-28 17:51,INDIA NEWS,Visakhapatnam starts ₹725-crore project to supply 24x7 water to residents,56,False,full_bleed,,17964057650983857,122118767277424069,True,True,5,0,0,0,0,,0
@@ -207,7 +207,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-09-29 14:16,INDIA NEWS,Keralam local body bypolls results LIVE: UDF,71,True,text_card,reel_text,18167790127462772,122118943485424069,True,True,17,0,0,0,,26,0
 2026-09-29 15:17,INDIA NEWS,"Thar Hits Bike, Then Crashes Into Pole In Chandigarh, 2 Injured",64,True,text_card,reel_text,17948558775285451,122118953337424069,True,True,10,0,0,0,,15,0
 2026-09-29 22:05,INDIA NEWS,NDTV Defence Summit 2026 LIVE Updates: Experts On Building Bharat's Arsenal of Innovation,74,True,text_card,reel_text,18079630517391587,122119024383424069,True,True,11,0,0,0,,12,0
-2026-09-29 22:10,INDIA NEWS,"CWC demands resignations of PM Modi, Shah over ‘vote chori’",63,True,text_card,reel_text,18596206174067622,122119024863424069,True,True,49,1,0,0,,103,1
+2026-09-29 22:10,INDIA NEWS,"CWC demands resignations of PM Modi, Shah over ‘vote chori’",63,True,text_card,reel_text,18596206174067622,122119024863424069,True,True,50,1,0,0,,104,1
 2026-09-30 06:10,INDIA NEWS,Supreme Court agrees to hear thousands of pending Bengal voter list appeals,73,False,full_bleed,,18098939639572225,122119090113424069,True,True,4,0,0,0,0,,0
 2026-09-30 11:48,INDIA NEWS,Supreme Court extends CBSE three-language policy exemption to Class 6 students,81,True,text_card,reel_text,18076600409534109,122119134045424069,True,True,13,0,0,0,,24,0
 2026-09-30 12:00,INDIA NEWS,Police probe violent clash between Kolkata film students and right-wing group,56,True,text_card,reel_text,18149172727542197,122119135491424069,True,True,38,0,0,0,,67,0
@@ -223,30 +223,30 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-02 19:33,INDIA NEWS,Falling Roof Sheets Injure Students At Kerala State School Swimming Event,58,True,text_card,reel_text,17887525599479873,122119604391424069,True,True,18,0,0,0,,21,0
 2026-10-02 23:28,INDIA NEWS,Drug-Free Punjab By 2029-End: Amit Shah's Big Promise Ahead Of Polls,74,True,text_card,reel_text,18145445530499728,122119639311424069,True,True,14,0,0,0,,25,0
 2026-10-03 03:35,INDIA NEWS,Punjab Congress chief Warring prepares to step down from leadership,68,True,text_card,reel_text,18130990588748481,122119673439424069,True,True,27,0,0,0,,45,0
-2026-10-03 12:22,INDIA NEWS,Delhi ground test reveals zero progress in women safety after Nirbhaya,74,False,full_bleed,,18022008026868731,122119735515424069,True,True,3,0,0,0,0,,0
+2026-10-03 12:22,INDIA NEWS,Delhi ground test reveals zero progress in women safety after Nirbhaya,74,False,full_bleed,,18022008026868731,122119735515424069,True,True,5,0,0,0,0,,0
 2026-10-03 13:59,INDIA NEWS,Rahul Gandhi launches new Satyagraha platform to track protests across India.,78,True,full_bleed,reel_overlay,18212433997357057,122119749801424069,True,True,166,15,0,0,,233,16
 2026-10-03 17:45,INDIA NEWS,Death Count In Nepal's Himlung Himal Peak Avalanche Reaches 15,76,True,text_card,reel_text,18174450199451126,122119785375424069,True,True,19,1,0,0,,27,1
 2026-10-04 04:12,INDIA NEWS,Heroic pilot's father says flying is like a wife to his son,68,True,text_card,reel_text,18281266450292975,122119883343424069,True,True,55,0,0,0,,89,0
 2026-10-04 07:55,INDIA NEWS,Indian political leaders clash fiercely over Election Commission integrity row.,75,True,full_bleed,reel_overlay,18430874440198857,122119909143424069,True,True,14,0,0,0,,18,0
-2026-10-04 14:11,INDIA NEWS,Retired judges panel reviews Election Commission's voter list revision process,63,True,text_card,reel_text,18130746481743144,122119960671424069,True,True,2,0,0,0,,2,0
-2026-10-05 00:02,INDIA NEWS,Turkey deports drug kingpin Navpreet Singh over fake identity fraud,80,True,full_bleed,reel_overlay,18137661244628446,122120053323424069,True,True,120,2,0,0,,200,2
+2026-10-04 14:11,INDIA NEWS,Retired judges panel reviews Election Commission's voter list revision process,63,True,text_card,reel_text,18130746481743144,122119960671424069,True,True,3,0,0,0,,3,0
+2026-10-05 00:02,INDIA NEWS,Turkey deports drug kingpin Navpreet Singh over fake identity fraud,80,True,full_bleed,reel_overlay,18137661244628446,122120053323424069,True,True,121,2,0,0,,201,2
 2026-10-05 01:00,INDIA NEWS,State Chief Minister plans to attend key national GST council meeting,63,True,text_card,reel_text,18126278185842910,122120062557424069,True,True,11,0,0,0,,16,0
 2026-10-05 03:42,BREAKING NEWS,Amit Shah promises complete justice within three years under new criminal laws,96,True,full_bleed,reel_overlay,18098620019429021,122120086371424069,True,True,234,1,0,0,,345,1
 2026-10-05 06:37,INDIA NEWS,Heroic rescuers save a 70-year-old man trapped between narrow house walls.,76,True,text_card,reel_text,18131135743781395,122120120883424069,True,True,56,0,0,0,,94,0
 2026-10-05 12:57,INDIA NEWS,Popular LGBTQ influencer Mad Sandhu is shot dead in Amritsar,73,True,text_card,reel_text,18637788835025332,122120163663424069,True,True,160,0,0,0,,223,0
-2026-10-05 13:04,BREAKING NEWS,Supreme Court agrees to hear petitions against Chief Election Commissioner Gyanesh Kumar,90,False,full_bleed,,18009263006776609,122120164737424069,True,True,2,0,0,0,0,,0
+2026-10-05 13:04,BREAKING NEWS,Supreme Court agrees to hear petitions against Chief Election Commissioner Gyanesh Kumar,90,False,full_bleed,,18009263006776609,122120164737424069,True,True,3,0,0,0,0,,0
 2026-10-05 21:49,INDIA NEWS,"Ex-CBI chief M Nageshwar Rao enters politics, becomes Sarvajana Sanatan Party chief",63,True,full_bleed,reel_overlay,17951237268280021,122120239689424069,True,True,169,0,0,0,,241,0
 2026-10-05 22:30,INDIA NEWS,"Goa High Court flags catch-22 for voters caught in SIR, Form 6 row",69,True,full_bleed,reel_overlay,18107838533351603,122120249661424069,True,True,402,3,0,0,,582,4
 2026-10-06 04:38,INDIA NEWS,Fire breaks out on reality show set at Mumbai Film City,58,True,text_card,reel_text,18155985661509808,122120304939424069,True,True,141,0,0,0,,169,0
-2026-10-06 08:12,INDIA NEWS,Raj And Uddhav Thackeray Lead Joint March In Mumbai Against Election Commission,68,False,full_bleed,,18633388141048443,122120330187424069,True,True,4,0,0,0,0,,0
-2026-10-06 08:46,BREAKING NEWS,"India Bloc Parliament March Today; Gyanesh Kumar Ouster Demanded; AAP, DMK Skip Stir",93,True,full_bleed,reel_overlay,17924028408426102,122120334129424069,True,True,153,0,0,0,,210,0
+2026-10-06 08:12,INDIA NEWS,Raj And Uddhav Thackeray Lead Joint March In Mumbai Against Election Commission,68,False,full_bleed,,18633388141048443,122120330187424069,True,True,5,0,0,0,0,,0
+2026-10-06 08:46,BREAKING NEWS,"India Bloc Parliament March Today; Gyanesh Kumar Ouster Demanded; AAP, DMK Skip Stir",93,True,full_bleed,reel_overlay,17924028408426102,122120334129424069,True,True,154,0,0,0,,211,0
 2026-10-06 16:12,INDIA NEWS,Byelections 2026 LIVE updates: Voters being denied right to vote,63,True,text_card,reel_text,18108691444908987,122120436609424069,True,True,30,0,0,0,,40,0
 2026-10-06 22:37,INDIA NEWS,"Bypolls held in five Assembly seats, one Lok Sabha constituency",78,False,full_bleed,,17914050942467555,122120524341424069,True,True,4,0,0,0,0,,0
 2026-10-07 03:20,BREAKING NEWS,"4.9-Magnitude Earthquake Hits Uttarakhand, Tremors Felt In Delhi",94,True,text_card,reel_text,18091012169674825,122120583141424069,True,True,143,0,0,0,,163,0
-2026-10-07 13:09,BREAKING NEWS,PM Narendra Modi completes 25 years in power and shares crisis lessons,116,True,text_card,reel_text,18109442681598866,122120679411424069,True,True,29,0,0,0,,29,0
-2026-10-07 19:54,INDIA NEWS,Karnataka’s GST collection likely to take a hit: G. Parameshwara,63,False,full_bleed,,17914949292461563,122120797845424069,True,True,3,0,0,0,0,,0
+2026-10-07 13:09,BREAKING NEWS,PM Narendra Modi completes 25 years in power and shares crisis lessons,116,True,text_card,reel_text,18109442681598866,122120679411424069,True,True,43,0,0,0,,45,0
+2026-10-07 19:54,INDIA NEWS,Karnataka’s GST collection likely to take a hit: G. Parameshwara,63,False,full_bleed,,17914949292461563,122120797845424069,True,True,4,0,0,0,0,,0
 2026-10-07 20:58,INDIA NEWS,"GIDA authorised to develop Queen’s Walkway in Kochi, says High Court",63,False,full_bleed,,18099810620564662,122120815635424069,True,True,5,0,0,0,0,,0
-2026-10-08 11:59,INDIA NEWS,Supreme Court refuses to stay proceedings against Nicobar project,75,False,full_bleed,,17906893617572454,122120978967424069,True,True,,,,,,,
-2026-10-08 12:41,INDIA NEWS,"Nana Patekar passes away: Leaders, film fraternity mourn actor's death | LIVE updates",65,True,text_card,reel_text,18077334923409282,122120986029424069,True,True,,,,,,,
-2026-10-08 20:19,INDIA NEWS,RBI removes Paytm Payments Bank from list of scheduled banks,75,False,full_bleed,,18114961289158761,122121082365424069,True,True,,,,,,,
-2026-10-09 01:11,INDIA NEWS,Delhi Police Detain Congress Youth Workers Protesting Outside Akashvani Bhawan,68,False,full_bleed,,18010742399979180,122121143601424069,True,True,,,,,,,
+2026-10-08 11:59,INDIA NEWS,Supreme Court refuses to stay proceedings against Nicobar project,75,False,full_bleed,,17906893617572454,122120978967424069,True,True,3,0,0,1,0,,1
+2026-10-08 12:41,INDIA NEWS,"Nana Patekar passes away: Leaders, film fraternity mourn actor's death | LIVE updates",65,True,text_card,reel_text,18077334923409282,122120986029424069,True,True,130,0,0,0,,150,0
+2026-10-08 20:19,INDIA NEWS,RBI removes Paytm Payments Bank from list of scheduled banks,75,False,full_bleed,,18114961289158761,122121082365424069,True,True,4,0,0,0,0,,0
+2026-10-09 01:11,INDIA NEWS,Delhi Police Detain Congress Youth Workers Protesting Outside Akashvani Bhawan,68,False,full_bleed,,18010742399979180,122121143601424069,True,True,0,0,0,0,0,,0
