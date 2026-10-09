@@ -254,3 +254,4 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-09 13:23,BREAKING NEWS,CBI takes over investigation into 65-crore deposit scam in Kerala,93,True,text_card,reel_text,17972209401171115,122121245919424069,True,True,,,,,,,
 2026-10-09 20:39,INDIA NEWS,"Supreme Court says no gag on live-streaming, warns against clip misuse",87,False,full_bleed,,18022954031928376,122121372807424069,True,True,,,,,,,
 2026-10-10 00:46,BREAKING NEWS,RBI hikes key lending rate to 5.5% as inflation rises,96,False,full_bleed,,18130173019693926,122121426597424069,True,True,,,,,,,
+2026-10-10 01:46,INDIA NEWS,"Railways cite congestion, cancel Delhi-bound trains ahead of Jantar Mantar protest",68,True,full_bleed,reel_overlay,18145767634568918,122121440667424069,True,True,,,,,,,
