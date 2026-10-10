@@ -253,10 +253,10 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-09 05:38,INDIA NEWS,"CBI raids Punjab CM Mann's aide over alleged corruption, 8 locations searched",69,True,full_bleed,reel_overlay,18233442085322016,122121186885424069,True,True,130,0,0,0,,161,0
 2026-10-09 13:23,BREAKING NEWS,CBI takes over investigation into 65-crore deposit scam in Kerala,93,True,text_card,reel_text,17972209401171115,122121245919424069,True,True,115,0,0,0,,160,0
 2026-10-09 20:39,INDIA NEWS,"Supreme Court says no gag on live-streaming, warns against clip misuse",87,False,full_bleed,,18022954031928376,122121372807424069,True,True,3,0,0,0,0,,0
-2026-10-10 00:46,BREAKING NEWS,RBI hikes key lending rate to 5.5% as inflation rises,96,False,full_bleed,,18130173019693926,122121426597424069,True,True,0,0,0,0,0,,0
-2026-10-10 01:46,INDIA NEWS,"Railways cite congestion, cancel Delhi-bound trains ahead of Jantar Mantar protest",68,True,full_bleed,reel_overlay,18145767634568918,122121440667424069,True,True,124,0,0,0,,184,0
-2026-10-10 04:54,INDIA NEWS,BJP shares video claiming Rahul Gandhi pushed a woman cop in Delhi,68,True,full_bleed,reel_overlay,18014982137951475,122121472749424069,True,True,,,,,,,
-2026-10-10 11:46,INDIA NEWS,Delhi Police detain four rights activists before planned peaceful protest,68,True,text_card,reel_text,18186766606373626,122121527199424069,True,True,,,,,,,
-2026-10-10 14:58,INDIA NEWS,GST Council removes tax officers' arrest powers to boost business confidence,75,True,text_card,reel_text,18108752411229101,122121590577424069,True,True,,,,,,,
-2026-10-10 18:27,INDIA NEWS,Mizoram targets becoming the first Indian state to finish Census 2027.,56,False,full_bleed,,18125692072886995,122121659799424069,True,True,,,,,,,
-2026-10-10 21:02,INDIA NEWS,Former election chief OP Rawat calls outside support for poll body unprecedented,87,True,full_bleed,reel_overlay,18108369911228826,122121694341424069,True,True,,,,,,,
+2026-10-10 00:46,BREAKING NEWS,RBI hikes key lending rate to 5.5% as inflation rises,96,False,full_bleed,,18130173019693926,122121426597424069,True,True,5,0,0,0,0,,0
+2026-10-10 01:46,INDIA NEWS,"Railways cite congestion, cancel Delhi-bound trains ahead of Jantar Mantar protest",68,True,full_bleed,reel_overlay,18145767634568918,122121440667424069,True,True,168,0,0,0,,227,0
+2026-10-10 04:54,INDIA NEWS,BJP shares video claiming Rahul Gandhi pushed a woman cop in Delhi,68,True,full_bleed,reel_overlay,18014982137951475,122121472749424069,True,True,525,1,1,0,,676,3
+2026-10-10 11:46,INDIA NEWS,Delhi Police detain four rights activists before planned peaceful protest,68,True,text_card,reel_text,18186766606373626,122121527199424069,True,True,108,0,0,0,,128,0
+2026-10-10 14:58,INDIA NEWS,GST Council removes tax officers' arrest powers to boost business confidence,75,True,text_card,reel_text,18108752411229101,122121590577424069,True,True,37,0,0,0,,38,0
+2026-10-10 18:27,INDIA NEWS,Mizoram targets becoming the first Indian state to finish Census 2027.,56,False,full_bleed,,18125692072886995,122121659799424069,True,True,4,0,0,0,0,,0
+2026-10-10 21:02,INDIA NEWS,Former election chief OP Rawat calls outside support for poll body unprecedented,87,True,full_bleed,reel_overlay,18108369911228826,122121694341424069,True,True,124,0,0,0,,173,0
