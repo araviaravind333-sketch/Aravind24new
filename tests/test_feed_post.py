@@ -243,9 +243,65 @@ def reel_tests(tmp):
     check("the headline does render in the safe middle", bright(400, 1500))
 
 
+def reveal_tests(tmp):
+    """The reveal animation draws the same card with progressively more
+    headline lines. Everything else -- photo, scrim, accent bar, credit --
+    is measured from the FULL headline, so consecutive frames must differ
+    ONLY in how much text is present. If any geometry shifted between
+    frames the headline would visibly jump, which is worse than no
+    animation at all."""
+    print("\nHEADLINE REVEAL FRAMES")
+    head = "Eight BJP and two opposition leaders win Rajya Sabha seats unopposed"
+    photo = os.path.join(tmp, "p.jpg")
+    Image.new("RGB", (1600, 1000), (70, 90, 120)).save(photo)
+
+    n = fp.reel_line_count(head, photo=True)
+    check("a long headline wraps to several lines, so there is something to reveal", n >= 2, n)
+
+    frames = []
+    for k in list(range(1, n)) + [None]:
+        p = os.path.join(tmp, f"r{k}.jpg")
+        fp.render_overlay_reel(photo_path=photo, category="INDIA NEWS", headline=head,
+                               accent_word="", out_path=p, reveal_lines=k)
+        frames.append(Image.open(p).convert("RGB"))
+
+    check("every frame is the same Reel size",
+          all(f.size == (fp.REEL_W, fp.REEL_H) for f in frames))
+    # Ink grows monotonically: each frame has strictly more bright text
+    # pixels than the last, which is exactly "one more line appeared".
+    ink = [sum(1 for px in f.getdata() if px[0] > 200 and px[1] > 200 and px[2] > 200)
+           for f in frames]
+    check("each frame reveals strictly more text than the one before",
+          all(b > a for a, b in zip(ink, ink[1:])), ink)
+    check("the last frame carries the complete headline", ink[-1] == max(ink))
+    # The photo area above the headline must be byte-identical -- this is
+    # what makes it a text reveal and not the Ken Burns zoom that was
+    # tried here before and rejected on sight.
+    tops = [f.crop((0, 0, fp.REEL_W, 700)).tobytes() for f in frames]
+    check("the photo area is identical in every frame (nothing pans or zooms)",
+          all(t == tops[0] for t in tops))
+
+
+def reveal_line_count_tests():
+    """reel_line_count decides how many frames get rendered, so it has to
+    agree with what the renderer actually draws."""
+    print("\nREVEAL LINE COUNT")
+    short_n = fp.reel_line_count("ISRO launches satellite", photo=True)
+    long_n = fp.reel_line_count(
+        "Eight BJP and two opposition leaders win Rajya Sabha seats unopposed", photo=True)
+    check("a short headline still reports at least one line", short_n >= 1, short_n)
+    check("a longer headline needs more frames than a short one", long_n > short_n,
+          (short_n, long_n))
+    check("the text-card variant also reports a usable count",
+          fp.reel_line_count("ISRO launches satellite", photo=False) >= 1)
+
+
 if __name__ == "__main__":
     layout_tests()
     highlight_tests()
+    reveal_line_count_tests()
+    with tempfile.TemporaryDirectory() as t:
+        reveal_tests(t)
     with tempfile.TemporaryDirectory() as t:
         render_tests(t)
     with tempfile.TemporaryDirectory() as t:

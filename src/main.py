@@ -1114,6 +1114,40 @@ def _one_line_summary(story, max_chars=120):
     return s[:max_chars].rstrip() + ("\u2026" if len(s) > max_chars else "")
 
 
+def _render_reveal_reel(video_path, card_path, render_card, n_lines):
+    """Builds a Reel whose headline animates in a line at a time.
+
+    The still card is rendered first and kept as `card_path` because the
+    rest of the pipeline still needs one finished image. If anything in
+    the animation path fails -- ffmpeg, the concat list, a renderer that
+    does not understand reveal_lines -- this falls back to the original
+    held-still Reel rather than losing the post. Motion is an
+    improvement to test, not something worth dropping a post over."""
+    render_card(card_path, None)            # the complete card
+    frames, tmp = [], []
+    try:
+        for k in range(1, n_lines):         # partial frames, in order
+            p = f"{os.path.splitext(card_path)[0]}-r{k}.jpg"
+            render_card(p, k)
+            frames.append(p)
+            tmp.append(p)
+        frames.append(card_path)            # finished card holds last
+        if len(frames) > 1:
+            video.render_reel_reveal(frames, video_path)
+        else:
+            video.render_reel(card_path, video_path)
+    except Exception as e:
+        print("headline reveal failed, using the still Reel instead:", e)
+        video.render_reel(card_path, video_path)
+    finally:
+        for p in tmp + [card_path]:
+            try:
+                os.remove(p)
+            except OSError:
+                pass
+    return video_path
+
+
 def _render_story(story, ist, is_reel, forced_image_path=None,
                    force_no_image=False, consumed_inbox_file=None,
                    allow_text_only=False, ugc_credit=""):
@@ -1359,38 +1393,37 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
             elif has_photo:
                 reel_variant_used = "reel_overlay"
                 reel_card_path = os.path.join(out_dir, f"reel-card-{stamp}.jpg")
-                feed_post.render_overlay_reel(
-                    photo_path=img_path,
-                    category=category_label,
-                    headline=written["headline"],
-                    accent_word=written["accent_word"],
-                    out_path=reel_card_path,
-                    handle=settings.BRAND_HANDLE,
-                )
-                video.render_reel(reel_card_path, video_path)
+                _render_reveal_reel(
+                    video_path, reel_card_path,
+                    lambda path, reveal: feed_post.render_overlay_reel(
+                        photo_path=img_path,
+                        category=category_label,
+                        headline=written["headline"],
+                        accent_word=written["accent_word"],
+                        out_path=path,
+                        handle=settings.BRAND_HANDLE,
+                        reveal_lines=reveal,
+                    ),
+                    feed_post.reel_line_count(written["headline"], photo=True))
                 print(f"Rendered reel ({reel_variant_used}):", video_path)
-                try:
-                    os.remove(reel_card_path)
-                except OSError:
-                    pass
             else:
                 reel_variant_used = "reel_text"
                 reel_card_path = os.path.join(out_dir, f"reel-card-{stamp}.jpg")
-                feed_post.render_text_reel(
-                    category=category_label,
-                    headline=written["headline"],
-                    accent_word=written["accent_word"],
-                    out_path=reel_card_path,
-                    subhead=_one_line_summary(story),
-                    footer=settings.BRAND_FOOTER,
-                    handle=settings.BRAND_HANDLE,
-                )
-                video.render_reel(reel_card_path, video_path)
+                _subhead = _one_line_summary(story)
+                _render_reveal_reel(
+                    video_path, reel_card_path,
+                    lambda path, reveal: feed_post.render_text_reel(
+                        category=category_label,
+                        headline=written["headline"],
+                        accent_word=written["accent_word"],
+                        out_path=path,
+                        subhead=_subhead,
+                        footer=settings.BRAND_FOOTER,
+                        handle=settings.BRAND_HANDLE,
+                        reveal_lines=reveal,
+                    ),
+                    feed_post.reel_line_count(written["headline"], photo=False))
                 print("Rendered reel (text card):", video_path)
-                try:
-                    os.remove(reel_card_path)
-                except OSError:
-                    pass
         except Exception as e:
             print("Reel render failed, falling back to static image post:", e)
             is_reel = False

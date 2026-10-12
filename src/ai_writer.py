@@ -42,7 +42,14 @@ never cut a thought short; never use an abbreviation or insider name the average
 wouldn't know (write "child-safety body" not "NCMEC", "central agency" not "ED", unless the \
 abbreviation is genuinely household-level like BJP, RBI, ISRO, SC). Say plainly WHO did WHAT. \
 Create curiosity through specific real numbers/names/stakes from the story itself, NOT vague \
-teasers ("you won't believe..."), and NEVER a claim that isn't true.
+teasers ("you won't believe..."), and NEVER a claim that isn't true. \
+FRONT-LOAD THE HOOK: the Reel reveals this headline one line at a time, so roughly the first \
+3-5 words sit on screen ALONE for the opening moment and decide whether anyone keeps \
+watching. Those opening words must carry the most arresting concrete thing in the story -- a \
+number, a stake, a surprising noun. Never open on throat-clearing or on a name the reader has \
+no reason to care about yet: "Headconstable Velmurugan of Kovilpalayam police station clung to \
+an SUV" is weak, "Cop clings to SUV roof for 30km to catch gang" is strong -- same facts, the \
+striking part first. Never bend accuracy to do this.
 - "accent_word": the 1-2 word phrase inside the headline that matters most (to highlight). \
 It must appear in the headline EXACTLY as written there.
 - "caption": 3-4 short sentences in simple English that actually EXPLAIN the story to someone \

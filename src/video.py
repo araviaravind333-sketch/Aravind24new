@@ -69,6 +69,62 @@ def render_reel(image_path, out_path, **_ignored):
     return out_path
 
 
+def render_reel_reveal(frame_paths, out_path, step_sec=0.28):
+    """Animates the headline in, a line at a time, then holds the
+    finished card for the rest of REEL_DURATION_SEC.
+
+    Why this and not a Ken Burns push on the photo: that was tried here
+    before and rejected on sight (see render_reel). A slow zoom moves
+    the very thing the viewer is trying to read. This moves only the
+    text, which is also the thing worth watching -- the headline arrives
+    line by line instead of being fully present at frame 0, so there is
+    a reason to still be watching at second two. Instagram ranks on
+    watch time, and a card that is completely readable instantly gives a
+    viewer no reason to stay; the measured symptom was Reels reaching
+    300-800 non-followers and producing no likes, saves or follows.
+
+    Each frame is the same card with one more headline line drawn, and
+    all surrounding geometry is measured from the FULL headline (see
+    feed_post.render_overlay_reel), so nothing reflows between frames --
+    the words simply appear."""
+    if not frame_paths:
+        raise ValueError("render_reel_reveal needs at least one frame")
+    total = settings.REEL_DURATION_SEC
+    # The animation must never eat the whole Reel: the finished headline
+    # has to stay up long enough to actually be read.
+    step = min(step_sec, (total * 0.45) / max(1, len(frame_paths)))
+    hold = max(0.5, total - step * (len(frame_paths) - 1))
+
+    listing = out_path + ".frames.txt"
+    with open(listing, "w", encoding="utf-8") as f:
+        for i, p in enumerate(frame_paths):
+            dur = hold if i == len(frame_paths) - 1 else step
+            f.write(f"file '{os.path.abspath(p)}'\nduration {dur:.3f}\n")
+        # The concat demuxer only applies a duration to a frame that is
+        # followed by another entry, so the last image is repeated.
+        f.write(f"file '{os.path.abspath(frame_paths[-1])}'\n")
+
+    w, h = settings.REEL_WIDTH, settings.REEL_HEIGHT
+    cmd = [
+        "ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", listing,
+        "-vf", f"scale={w}:{h}:force_original_aspect_ratio=increase,"
+               f"crop={w}:{h},fps=30,format=yuv420p",
+        "-c:v", "libx264", "-crf", "18", "-preset", "medium",
+        "-movflags", "+faststart", "-t", str(total),
+        out_path,
+    ]
+    try:
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=240)
+    finally:
+        try:
+            os.remove(listing)
+        except OSError:
+            pass
+    if result.returncode != 0 or not os.path.exists(out_path):
+        raise RuntimeError(f"ffmpeg failed ({result.returncode}): {result.stderr[-2000:]}")
+    return out_path
+
+
 def extract_frame(video_path, out_path, at_sec=0.3):
     """Grabs one still frame from a real video clip (e.g. a video submitted
     in reply to a candidate instead of a photo) to stand in for the normal

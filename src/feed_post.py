@@ -108,18 +108,21 @@ def _photo_layer(photo, lay, plain_bg=False):
 
 
 def render_text_reel(category, headline, accent_word, out_path, subhead="",
-                     footer="For the latest news", handle="@aravindnews24", **_ignored):
+                     footer="For the latest news", handle="@aravindnews24",
+                     reveal_lines=None, **_ignored):
     """The text card at Reel size, clear of Instagram's own top bar and
-    bottom caption area (see REEL_TOP_CLEAR / REEL_BOTTOM_PAD)."""
+    bottom caption area (see REEL_TOP_CLEAR / REEL_BOTTOM_PAD).
+    `reveal_lines` works exactly as in render_overlay_reel."""
     return render_text_post(category, headline, accent_word, out_path, subhead=subhead,
                             footer=footer, handle=handle, size=(REEL_W, REEL_H),
                             top_clear=REEL_TOP_CLEAR + 130, bottom_clear=REEL_BOTTOM_PAD,
-                            chip_y=REEL_TOP_CLEAR)
+                            chip_y=REEL_TOP_CLEAR, reveal_lines=reveal_lines)
 
 
 def render_text_post(category, headline, accent_word, out_path, subhead="",
                      footer="For the latest news", handle="@aravindnews24", size=None,
-                     top_clear=150, bottom_clear=60, chip_y=52, **_ignored):
+                     top_clear=150, bottom_clear=60, chip_y=52, reveal_lines=None,
+                     **_ignored):
     """No legitimately usable photograph exists for this story, so the card
     is typographic rather than illustrated. A designed text card is an
     honest visual -- unlike a stock photo, it never implies it is a picture
@@ -170,7 +173,11 @@ def render_text_post(category, headline, accent_word, out_path, subhead="",
     draw.rectangle([MARGIN, top, MARGIN + 130, top + BAR_H], fill=color)
     y = top + BAR_H + BAR_GAP
     a = (accent_word or "").upper().strip()
-    carousel._draw_highlighted_headline(draw, lines, f_head, size, MARGIN, y,
+    # reveal_lines animates the headline in; `top`/`block` above are sized
+    # from the FULL headline, so the bar, subhead and footer never move.
+    carousel._draw_highlighted_headline(draw,
+                                        lines if reveal_lines is None else lines[:reveal_lines],
+                                        f_head, size, MARGIN, y,
                                         a if a and a in headline.upper() else "")
     y += h + (40 if sub_lines else 0)
     for line in sub_lines:
@@ -221,23 +228,52 @@ def _fit_serif(draw, headline, max_w, max_lines=5, start=76, minimum=40):
 # grid shows a 3:4 centre crop (y 240-1680) -- so all text sits between
 # REEL_TOP_CLEAR and REEL_H - REEL_BOTTOM_PAD.
 REEL_W, REEL_H = 1080, 1920
+
+# Hoisted out of render_overlay_post so reel_line_count() can measure the
+# headline exactly the way that function will draw it -- if these ever
+# drift apart, the reveal animation renders the wrong number of frames.
+OVERLAY_BAR_W, OVERLAY_TEXT_GAP = 7, 27
+OVERLAY_REEL_START_SIZE = 84
 REEL_TOP_CLEAR, REEL_BOTTOM_PAD = 250, 440
 
 
 def render_overlay_reel(photo_path, category, headline, accent_word, out_path,
-                        handle="@aravindnews24", **_ignored):
+                        handle="@aravindnews24", reveal_lines=None, **_ignored):
     """The same premium overlay design, at Reel size. Reels are the only
     format Instagram shows to non-followers in volume -- on this page's own
-    data, image posts reached a median of 3 accounts, Reels up to ~200."""
+    data, image posts reached a median of 3 accounts, Reels up to ~200.
+
+    `reveal_lines` draws only the first N lines of the headline. Every
+    other measurement still comes from the FULL headline, so a sequence
+    of these frames animates the words in without a single pixel of the
+    photo, scrim, accent bar or credit shifting -- see
+    video.render_reel_reveal for why that matters."""
     return render_overlay_post(photo_path, category, headline, accent_word, out_path,
                                handle=handle, size=(REEL_W, REEL_H),
-                               bottom_pad=REEL_BOTTOM_PAD, start_size=84)
+                               bottom_pad=REEL_BOTTOM_PAD,
+                               start_size=OVERLAY_REEL_START_SIZE,
+                               reveal_lines=reveal_lines)
+
+
+def reel_line_count(headline, photo=True):
+    """How many lines the headline will wrap to on a Reel card -- i.e.
+    how many frames the reveal animation needs. Measured with the exact
+    same fit call the matching renderer uses, so the two cannot disagree."""
+    probe = ImageDraw.Draw(Image.new("RGB", (REEL_W, REEL_H)))
+    if photo:
+        tx = MARGIN + OVERLAY_BAR_W + OVERLAY_TEXT_GAP
+        lines, _, _, _ = _fit_serif(probe, headline, REEL_W - tx - MARGIN,
+                                    start=OVERLAY_REEL_START_SIZE)
+    else:
+        lines, _, _, _ = carousel._fit_headline(probe, headline, REEL_W - MARGIN * 2,
+                                                6, 150, 56, REEL_H)
+    return max(1, len(lines))
 
 
 def render_overlay_post(photo_path, category, headline, accent_word, out_path,
                         footer="For the latest news", handle="@aravindnews24",
                         file_photo=False, photo_note="", size=None, bottom_pad=76,
-                        start_size=76, **_ignored):
+                        start_size=76, reveal_lines=None, **_ignored):
     """Full-bleed photo with the headline set directly on it in serif type,
     sentence case, with a thin colour-accent bar -- the "premium newsroom"
     look the owner pointed to as a reference and asked for by name.
@@ -260,7 +296,7 @@ def render_overlay_post(photo_path, category, headline, accent_word, out_path,
     canvas = carousel.cover_crop_biased(photo, fw, fh, 0.15 if is_portrait else 0.35).convert("RGBA")
 
     probe = ImageDraw.Draw(canvas)
-    BAR_W, TEXT_GAP = 7, 27
+    BAR_W, TEXT_GAP = OVERLAY_BAR_W, OVERLAY_TEXT_GAP
     tx = MARGIN + BAR_W + TEXT_GAP
     lines, f_head, fsize, block_h = _fit_serif(probe, headline, fw - tx - MARGIN, start=start_size)
     line_h = int(fsize * 1.18)
@@ -285,7 +321,9 @@ def render_overlay_post(photo_path, category, headline, accent_word, out_path,
     # the one colour accent: a thin bar spanning the headline block
     draw.rectangle([MARGIN, top + 6, MARGIN + BAR_W, top + block_h - 6], fill=color_rgb)
     y = top
-    for line in lines:
+    # reveal_lines animates the headline in; the bar above and the credit
+    # below are already positioned off the FULL block, so nothing moves.
+    for line in (lines if reveal_lines is None else lines[:reveal_lines]):
         draw.text((tx, y), line, font=f_head, fill=WHITE)
         y += line_h
 
