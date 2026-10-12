@@ -131,6 +131,34 @@ def rhetoric_tests():
           chr(8) not in cp._RHETORIC.pattern)
 
 
+def person_centric_tests():
+    """Regression from a real live post: "Eight BJP and two opposition
+    leaders win Rajya Sabha seats unopposed" ran over a Commons photo of
+    three unrelated men at a committee table. The caption said file
+    photo; it does not matter -- faces beside a headline about people
+    read as a claim about WHO those people are. A place photo is only
+    honest when the story's subject is the place/institution/topic
+    itself, so person-centric headlines are refused one entirely."""
+    print("\nPERSON-CENTRIC HEADLINES GET NO PLACE PHOTO")
+    for h in ["Eight BJP and two opposition leaders win Rajya Sabha seats unopposed.",
+              "Rajya Sabha member highlights role of chess in improving concentration",
+              "BJP shares video claiming Rahul Gandhi pushed a woman cop in Delhi",
+              "CBI raids Punjab CM Mann's aide over alleged corruption",
+              "Lawyers detained outside Supreme Court released after CJI's intervention",
+              "Delhi Police Detain Congress Youth Workers Protesting Outside Akashvani"]:
+        check(f"refused for a story about people: {h[:44]!r}", cp.is_person_centric(h))
+    # Institution/topic stories must still be illustrated -- this guard is
+    # meant to cost some photos, not all of them.
+    for h in ["Election Commission Caps Voter Deletion Forms At 10 Per Individual",
+              "RBI hikes key lending rate to 5.5% as inflation rises",
+              "Supreme Court refuses to stay proceedings against Nicobar project",
+              "Railways cite congestion, cancel Delhi-bound trains",
+              "GIDA authorised to develop Queen's Walkway in Kochi"]:
+        check(f"institution/topic story still allowed: {h[:44]!r}", not cp.is_person_centric(h))
+    check("find_context_photo itself enforces it, not just the helper",
+          cp.find_context_photo("Eight BJP leaders win Rajya Sabha seats unopposed") is None)
+
+
 def photo_detection_tests(tmp):
     print("\nPHOTOGRAPH vs DOCUMENT")
     # a scanned table/report: near-white, colourless, thin dark text
@@ -263,6 +291,7 @@ if __name__ == "__main__":
     wrong_match_tests()
     safety_tests()
     rhetoric_tests()
+    person_centric_tests()
     with tempfile.TemporaryDirectory() as t:
         photo_detection_tests(t)
     filename_filter_tests()

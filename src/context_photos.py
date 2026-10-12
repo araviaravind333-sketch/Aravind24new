@@ -136,6 +136,47 @@ def unsafe_for_context(text):
     return True
 
 
+# A context photo of an institution very often HAS people in it -- MPs in
+# a chamber, officials at a table. That is fine when the story is about
+# the institution ("Election Commission caps voter deletion forms"), and
+# actively false when the story is about particular PEOPLE. A real post,
+# "Eight BJP and two opposition leaders win Rajya Sabha seats unopposed",
+# ran over a Commons photo of three unrelated men at a committee table,
+# and every viewer reads those faces as the eight winners. No caption
+# fixes that: faces next to a headline about people ARE a claim about
+# who those people are.
+#
+# So when the headline is about people acting (titled or counted) rather
+# than about a place, institution or topic, context photos are refused.
+# Those stories can still get a verified portrait of the actual named
+# person through subject_photos, which is identity-checked, or they run
+# as a text card. This deliberately costs some illustrated posts.
+_PERSON_CENTRIC = re.compile(
+    r"\b(leaders?|minister|ministers|mp|mps|mla|mlas|cm|pm|chief|"
+    r"president|governor|judge|justice|cji|officer|officers|aide|"
+    r"member|members|activist|activists|candidate|candidates|"
+    r"spokesperson|chairman|secretary|commissioner|worker|workers|"
+    r"cop|cops|constable|lawyer|lawyers|student|students|"
+    r"man|men|woman|women|boy|girl|family|families|victim|victims)\b", re.I)
+
+# Verbs that make a headline about an actor rather than a subject matter.
+_PERSON_ACTION = re.compile(
+    r"\b(win|wins|won|lose|loses|lost|say|says|said|claim|claims|claimed|"
+    r"slam|slams|slammed|promise|promises|promised|demand|demands|demanded|"
+    r"resign|resigns|resigned|quit|quits|join|joins|joined|enter|enters|"
+    r"entered|appoint\w*|elect\w*|detain\w*|arrest\w*|raid|raids|raided|"
+    r"accus\w*|alleg\w*|highlight\w*|urge[sd]?|warn\w*|push\w*|lead|leads|led)\b",
+    re.I)
+
+
+def is_person_centric(headline):
+    """True when the headline's subject is people doing something rather
+    than a place, institution or topic. Such a story must never get a
+    generic place photo -- see the comment above."""
+    text = headline or ""
+    return bool(_PERSON_CENTRIC.search(text) and _PERSON_ACTION.search(text))
+
+
 _CACHE = {}
 _UNUSABLE = object()
 
@@ -402,6 +443,10 @@ def find_context_photo(headline, summary="", dest_dir=None):
     if not settings.CONTEXT_PHOTOS_ENABLED:
         return None
     if unsafe_for_context(headline) or unsafe_for_context(summary):
+        return None
+    if is_person_centric(headline):
+        print("context_photos: headline is about people, not a place -- "
+              "refusing a stock photo that would read as a picture of them")
         return None
 
     for name in candidate_entities(headline):
