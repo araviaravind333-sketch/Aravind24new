@@ -1454,9 +1454,47 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
     return pending
 
 
+PUBLIC_KEEP_DAYS = 7
+
+
+def _prune_published_media(keep_days=PUBLIC_KEEP_DAYS):
+    """Deletes post images/videos in public/ older than `keep_days`.
+
+    These files exist for exactly one reason: Instagram's Graph API
+    fetches them over HTTP at publish time, minutes after the render.
+    Afterwards Instagram and Facebook serve their own copies and
+    nothing ever reads ours again -- but every one was kept forever, so
+    the checkout that EVERY workflow run performs had grown to 259MB
+    (278 images + 142 videos). That cost is paid by every run of every
+    workflow, all day.
+
+    Only files whose own name carries a date stamp older than the
+    cutoff are touched, so a render still waiting to publish is never
+    at risk, and keep_days leaves a week of slack beyond the minutes
+    actually needed."""
+    out_dir = os.path.join(os.path.dirname(__file__), "..", "public")
+    if not os.path.isdir(out_dir):
+        return 0
+    cutoff = (dt.datetime.now() - dt.timedelta(days=keep_days)).strftime("%Y%m%d")
+    removed = 0
+    for name in os.listdir(out_dir):
+        m = re.match(r"^post-(\d{8})-\d{4}\.(jpg|mp4)$", name)
+        if not m or m.group(1) >= cutoff:
+            continue
+        try:
+            os.remove(os.path.join(out_dir, name))
+            removed += 1
+        except OSError as e:
+            print("could not prune", name, e)
+    if removed:
+        print(f"pruned {removed} published media files older than {keep_days}d")
+    return removed
+
+
 def publish():
     if not os.path.exists(PENDING_PATH):
         print("No pending render — nothing to publish.")
+        _prune_published_media()
         return
     with open(PENDING_PATH) as f:
         pending = json.load(f)
@@ -1503,6 +1541,9 @@ def publish():
     inbox_file = pending.get("consumed_inbox_file")
     if inbox_file and os.path.exists(inbox_file):
         os.remove(inbox_file)
+    # Instagram has its own copy now; ours is dead weight in every
+    # future checkout. Runs after publishing, never before.
+    _prune_published_media()
     if inbox_file and os.path.exists(inbox_file + ".notrim"):
         os.remove(inbox_file + ".notrim")
     print("=== Done ===")
