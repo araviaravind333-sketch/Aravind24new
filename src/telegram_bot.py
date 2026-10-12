@@ -217,6 +217,12 @@ def reply_to_message(message_id, text):
     })
 
 
+# Every update type this pipeline acts on. callback_query is the one that
+# matters most here -- it is every inline button on every review card.
+ALLOWED_UPDATES = ["message", "edited_message", "channel_post",
+                   "edited_channel_post", "callback_query"]
+
+
 def get_new_updates(offset):
     """Long-poll isn't needed here -- this runs once per 30-min cycle, so
     a short timeout just drains whatever has queued up since last time.
@@ -231,9 +237,32 @@ def get_new_updates(offset):
     while real button taps and messages piled up unseen. deleteWebhook
     is a no-op when no webhook is set, so calling it before every poll
     costs nothing and makes this failure mode structurally impossible
-    instead of trusting that no one (or nothing) ever re-registers one."""
+    instead of trusting that no one (or nothing) ever re-registers one.
+
+    Second real incident, same silent shape: button taps stopped arriving
+    while pasted links still did. Telegram's getUpdates says of
+    allowed_updates, "If not specified, the previous setting will be
+    used" -- and this pipeline never specified it. So whatever update
+    types the webhook above was registered for became the PERMANENT
+    filter for polling too, and any type left out (callback_query, i.e.
+    every button on every card) was dropped forever with no error. It is
+    listed explicitly here so the set can never be inherited from
+    something else again."""
     _call("deleteWebhook", {"drop_pending_updates": False})
-    result = _call("getUpdates", {"offset": offset, "timeout": 5})
+    result = _call("getUpdates", {
+        "offset": offset,
+        "timeout": 5,
+        "allowed_updates": ALLOWED_UPDATES,
+    })
+    if not result:
+        # Zero updates is normal, but it is also exactly what both of the
+        # outages above looked like from the outside, for days. Printing
+        # what Telegram itself thinks is queued turns "the bot is silent"
+        # into something diagnosable from a workflow log alone.
+        info = _call("getWebhookInfo") or {}
+        pending, hook = info.get("pending_update_count"), info.get("url") or "(none)"
+        print(f"no updates (telegram says pending={pending}, webhook={hook}, "
+              f"allowed={info.get('allowed_updates', 'default')})")
     return result or []
 
 

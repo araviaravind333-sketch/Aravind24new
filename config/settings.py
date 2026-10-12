@@ -182,6 +182,29 @@ DAILY_SCHEDULE = [
 # which is exactly what was happening before this was split out.
 BREAKING_MIN_GAP_HOURS = 0.75   # trending stories go out while they are still trending
 
+# Measured on this account's own 99 mature India/Breaking posts (Sep 20 -
+# Oct 10), controlling for category and giving every post >=2 days to
+# accumulate views:
+#
+#     00:00-05:00   n=14   median 163 views
+#     21:00-23:00   n=10   median 104
+#     06:00-10:00   n=14   median  18
+#     11:00-14:00   n=29   median  24
+#     15:00-20:00   n=32   median   0   <-- half got literally zero views
+#
+# The worst window was also where the most slots were being spent. The
+# likely cause is competition: every other news page floods the evening
+# feed, so there is far less algorithmic test distribution left to win
+# there, while late night is comparatively empty. Routine queue posts are
+# held through this window so those slots land in hours that actually
+# reach people. Breaking/urgent/owner-submitted posts are deliberately
+# NOT gated -- those are time-sensitive and human-chosen, and holding
+# them would defeat the point of having a breaking-news path at all.
+# Revisit against data/performance.csv once a few weeks of post-change
+# numbers exist; if the evening dead zone was an artifact of something
+# else, this will show up as the other windows failing to improve.
+DEAD_HOURS_IST = (15, 21)       # hold routine posts from 15:00 up to 20:59
+
 # Shared safety valve across every posting path (regular queue + breaking
 # fast path): Instagram's Graph API hard-caps content publishing at 25
 # posts/24h -- past that, posts just fail outright.

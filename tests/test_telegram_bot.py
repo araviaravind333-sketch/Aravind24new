@@ -34,8 +34,9 @@ def webhook_guard_tests():
     tb._call = lambda method, params=None: (calls.append((method, params)) or [])
     try:
         tb.get_new_updates(123)
+        methods = [m for m, _ in calls]
         check("deleteWebhook is called before getUpdates",
-              [m for m, _ in calls] == ["deleteWebhook", "getUpdates"], calls)
+              methods.index("deleteWebhook") < methods.index("getUpdates"), methods)
         check("getUpdates is still called with the right offset",
               calls[1][1]["offset"] == 123, calls)
         check("deleteWebhook does not drop already-queued updates",
@@ -44,8 +45,36 @@ def webhook_guard_tests():
         tb._call = real_call
 
 
+def allowed_updates_tests():
+    """Regression: second outage, same silent shape -- pasted links kept
+    arriving but every button tap vanished. Telegram's getUpdates says of
+    allowed_updates "If not specified, the previous setting will be
+    used", and this pipeline never specified it, so a restriction set
+    once (by the webhook registration) silently became permanent and
+    dropped every callback_query. It must always be sent explicitly, and
+    must always include callback_query -- that IS every review button."""
+    print("\nALLOWED UPDATES")
+    calls = []
+    real_call = tb._call
+    tb._call = lambda method, params=None: (calls.append((method, params)) or [])
+    try:
+        tb.get_new_updates(1)
+        params = next(p for m, p in calls if m == "getUpdates")
+        check("getUpdates always states allowed_updates explicitly",
+              "allowed_updates" in params, params)
+        check("button taps (callback_query) are always allowed",
+              "callback_query" in params.get("allowed_updates", []), params)
+        check("plain messages are still allowed",
+              "message" in params.get("allowed_updates", []), params)
+        check("an empty poll asks Telegram what it thinks is queued",
+              any(m == "getWebhookInfo" for m, _ in calls), [m for m, _ in calls])
+    finally:
+        tb._call = real_call
+
+
 if __name__ == "__main__":
     webhook_guard_tests()
+    allowed_updates_tests()
     print(f"\n{'=' * 52}\n{len(PASS)} passed, {len(FAIL)} failed")
     if FAIL:
         print("FAILED:")

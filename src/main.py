@@ -1002,6 +1002,15 @@ def telegram_cycle():
         elif gap_h < settings.TELEGRAM_MIN_POST_GAP_HOURS:
             print(f"Candidate resolved but holding -- last post was {gap_h:.2f}h ago, "
                   f"pacing to ~{settings.TELEGRAM_MIN_POST_GAP_HOURS}h between posts.")
+        elif settings.DEAD_HOURS_IST[0] <= now_ist.hour < settings.DEAD_HOURS_IST[1]:
+            # This account's own numbers: half of everything posted in
+            # this window got zero views, and it was soaking up the most
+            # slots of any window. Held (not dropped) so the candidate
+            # goes out in an hour that actually reaches people -- see
+            # settings.DEAD_HOURS_IST for the measurements.
+            print(f"Candidate resolved but holding -- {now_ist:%H:%M} IST is inside the "
+                  f"{settings.DEAD_HOURS_IST[0]}:00-{settings.DEAD_HOURS_IST[1]}:00 dead "
+                  f"window (median 0 views); it will go out after that.")
         elif resolved_kind == "text_only" and queue[resolved_idx]["story"]["score"] < settings.MIN_AUTO_POST_SCORE:
             # A real competitor that reached 1M followers posts ~4x/day,
             # not hourly -- their evidence is that a few carefully-selected,
