@@ -22,6 +22,11 @@ jobs:
       - name: Refresh insights
         env:
           META_PAGE_ACCESS_TOKEN: ${{ secrets.META_PAGE_ACCESS_TOKEN }}
+          # Needed for the follower snapshot -- the per-post insights
+          # calls address media by id and never needed the account id,
+          # so this was absent and the first snapshot asked the Graph
+          # API for object "None".
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
         run: python -m src.insights
       - name: Commit updated performance.csv
         run: |
