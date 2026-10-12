@@ -14,6 +14,7 @@ growth channel per the growth plan, so it's the one that matters most.
 """
 
 import csv
+import datetime as dt
 import json
 import os
 import urllib.error
@@ -50,6 +51,52 @@ def fetch_media_insights(media_id, is_reel):
         return {}
     return {item["name"]: (item.get("values") or [{}])[0].get("value", 0)
             for item in res.get("data", [])}
+
+
+FOLLOWERS_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "followers.csv")
+
+
+def fetch_follower_count():
+    """Current follower count straight off the IG account object.
+
+    This exists because of a real gap: the whole point of this account
+    is followers, and nothing recorded that number anywhere for over a
+    month. performance.csv has eighteen columns and not one of them is
+    follows, so every "did that change help?" question was being
+    answered with views as a stand-in. Views do not track the goal -- a
+    post can reach 800 people and win nobody."""
+    try:
+        res = _get(f"{BASE}/{settings.IG_USER_ID}",
+                   {"fields": "followers_count,media_count",
+                    "access_token": settings.META_PAGE_ACCESS_TOKEN})
+    except urllib.error.HTTPError as e:
+        print(f"follower count failed: HTTP {e.code} {e.read().decode(errors='replace')}")
+        return None
+    except Exception as e:
+        print(f"follower count failed: {e}")
+        return None
+    return {"followers": res.get("followers_count"), "media": res.get("media_count")}
+
+
+def record_followers(now_ist=None):
+    """Appends one dated row per run -- a log, not a gauge. The useful
+    question is never "how many followers" but "did that change bend the
+    curve", and only history can answer that."""
+    snap = fetch_follower_count()
+    if not snap or snap.get("followers") is None:
+        return None
+    now_ist = now_ist or (dt.datetime.now(dt.timezone.utc) + dt.timedelta(hours=5, minutes=30))
+    row = {"timestamp_ist": now_ist.strftime("%Y-%m-%d %H:%M"),
+           "followers": snap["followers"], "media": snap.get("media") or ""}
+    new = not os.path.exists(FOLLOWERS_PATH)
+    os.makedirs(os.path.dirname(FOLLOWERS_PATH), exist_ok=True)
+    with open(FOLLOWERS_PATH, "a", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=["timestamp_ist", "followers", "media"])
+        if new:
+            w.writeheader()
+        w.writerow(row)
+    print(f"followers: {row['followers']} (logged {row['timestamp_ist']})")
+    return row
 
 
 def refresh():
@@ -96,6 +143,13 @@ def refresh():
 
 if __name__ == "__main__":
     try:
+        # Followers first: it is the number this account actually exists
+        # to grow, and it must get logged even if the per-post insights
+        # refresh below hits a bad row or a rate limit.
+        try:
+            record_followers()
+        except Exception as e:
+            print(f"follower snapshot failed: {e}")
         refresh()
     except Exception as e:
         # This job updates analytics, nothing user-facing -- it must never

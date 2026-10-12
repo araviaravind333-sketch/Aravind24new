@@ -27,7 +27,13 @@ jobs:
         run: |
           git config user.name "aravindnews24-bot"
           git config user.email "bot@users.noreply.github.com"
+          # Separate `git add` calls on purpose: one add with a pathspec
+          # that does not exist yet fails atomically and stages NOTHING,
+          # which has silently swallowed a whole run's data in this repo
+          # before. followers.csv will not exist until the first
+          # successful snapshot.
           git add data/performance.csv || true
+          git add data/followers.csv || true
           git commit -m "auto: daily insights refresh $(date -u +%FT%TZ)" || echo "nothing to commit"
           for i in 1 2 3 4 5; do
             git push && break
