@@ -412,7 +412,36 @@ def storage_tests():
         telegram_bot.send_message, telegram_bot.answer_callback = real_send, real_answer
 
 
+def no_silent_button_tests():
+    """Regression from a real report -- "I tapped the button and it never
+    reached Instagram". _act_on_photo_decision had two bare `return`s:
+    one when the story was no longer in the queue, one when the callback
+    carried no article id. Both recorded the decision in the database,
+    posted nothing, and told the owner NOTHING. The first is hit
+    routinely, because a story's review window expires and it goes out
+    text-only before a late tap is processed. A decision that cannot be
+    acted on must still be explained."""
+    print("\nBUTTON TAPS ARE NEVER SILENT")
+    import datetime as _dt
+    from src import main as _main
+    sent = []
+    real_send, real_queue = _main.telegram_bot.send_message, _main._load_tg_queue
+    _main.telegram_bot.send_message = lambda text, buttons=None, reply_to=None: (sent.append(text) or 1)
+    _main._load_tg_queue = lambda: [{"message_id": 1, "story": {"id": "a-different-story"}}]
+    try:
+        _main._act_on_photo_decision("LICENSED", {"article_id": "already-posted",
+                                                  "image_url": "u"}, _dt.datetime.now())
+        check("a tap on an already-posted story explains itself", len(sent) == 1 and sent[0])
+        check("...and says the story was already posted",
+              "already been posted" in sent[-1].lower(), sent[-1][:80])
+        _main._act_on_photo_decision("LICENSED", {}, _dt.datetime.now())
+        check("a callback with no story id also explains itself", len(sent) == 2 and sent[-1])
+    finally:
+        _main.telegram_bot.send_message, _main._load_tg_queue = real_send, real_queue
+
+
 if __name__ == "__main__":
+    no_silent_button_tests()
     critical_tests()
     licensing_tests()
     age_tests()

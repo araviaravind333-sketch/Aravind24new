@@ -297,11 +297,30 @@ def _act_on_photo_decision(label, info, now_ist):
     an unanswered candidate eventually goes out on its own."""
     article_id = info.get("article_id")
     if not article_id:
+        telegram_bot.send_message(
+            "⚠ I couldn't tell which story that button belonged to, so nothing "
+            "was changed. Please send the photo as a reply to the story instead.")
         return
     queue = _load_tg_queue()
     idx = next((i for i, e in enumerate(queue) if e["story"]["id"] == article_id), None)
     if idx is None:
-        return  # already resolved or dropped from the queue elsewhere
+        # Both of these used to be a bare `return`: the tap was recorded in
+        # the database, nothing posted, and the owner was told NOTHING. A
+        # real report -- "I tapped the button and it never reached
+        # Instagram" -- was exactly this path. It is reached routinely now
+        # because the story's grace period (TELEGRAM_GRACE_MINUTES) expires
+        # long before the next poll actually runs, so by the time a tap is
+        # processed the story has already gone out text-only and left the
+        # queue. The decision is still worth recording for the photo
+        # database, but it cannot change a post that is already published,
+        # and saying so is the only honest thing to do.
+        telegram_bot.send_message(
+            f"⚠ Recorded \"{label}\", but that story has already been posted "
+            f"(it went out text-only once its review window expired), so the photo "
+            f"can't be added to it now.\n\nThe decision is saved, so this image won't "
+            f"be suggested again. To get a photo onto a post, reply to the story's "
+            f"card with it before the story goes out.")
+        return
 
     if label == "LICENSED":
         image_url = info.get("image_url")
