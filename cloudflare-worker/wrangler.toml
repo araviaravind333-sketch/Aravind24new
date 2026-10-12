@@ -1,0 +1,28 @@
+# Deploy config for the scheduler Worker (see scheduler.js for why it
+# exists: GitHub drops ~90% of this repo's scheduled runs).
+#
+# Deploy, from inside this cloudflare-worker/ directory:
+#
+#   npx wrangler login
+#   npx wrangler deploy
+#   npx wrangler secret put GITHUB_TOKEN     # paste the PAT, press enter
+#
+# GITHUB_REPO and GITHUB_REF are plain vars, set below -- they are not
+# secrets. Only the token is.
+#
+# The cron trigger is declared here too, so `wrangler deploy` sets it up
+# and there is nothing to configure in the dashboard afterwards.
+
+name = "aravindnews24-scheduler"
+main = "scheduler.js"
+compatibility_date = "2026-01-01"
+
+[vars]
+GITHUB_REPO = "araviaravind333-sketch/Aravind24new"
+GITHUB_REF = "main"
+
+[triggers]
+# Every five minutes. scheduler.js rotates which workflow each tick
+# dispatches, so this is ~288 requests/day against a 100,000/day free
+# tier.
+crons = ["*/5 * * * *"]
