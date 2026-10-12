@@ -282,6 +282,28 @@ def reveal_tests(tmp):
           all(t == tops[0] for t in tops))
 
 
+def endcard_tests(tmp):
+    """Across 271 published posts nothing ever asked for the follow,
+    while followers are the actual goal. The ask is an END FRAME, never
+    a button on the card -- a boxed FOLLOW button was on this design
+    once and the owner had it removed for a quieter look, and that
+    preference still stands."""
+    print("\nFOLLOW END CARD")
+    p = os.path.join(tmp, "end.jpg")
+    fp.render_follow_endcard(p, category="INDIA NEWS")
+    im = Image.open(p).convert("RGB")
+    check("end card is a full Reel frame", im.size == (fp.REEL_W, fp.REEL_H))
+    check("it is its own dark frame, not an overlay on a photo",
+          im.getpixel((40, 40))[0] < 40 and im.getpixel((fp.REEL_W - 40, 300))[0] < 40)
+    # It must stay quiet: a boxed button would mean a large filled block
+    # of the accent colour. A thin rule is fine; a button is not.
+    accent_px = sum(1 for px in im.getdata() if px[0] > 180 and 60 < px[1] < 190 and px[2] < 90)
+    check("no boxed FOLLOW button -- only a thin accent rule",
+          accent_px < (fp.REEL_W * fp.REEL_H) * 0.004, accent_px)
+    bright = sum(1 for px in im.getdata() if px[0] > 200 and px[1] > 200 and px[2] > 200)
+    check("the handle is actually rendered", bright > 2000, bright)
+
+
 def reveal_line_count_tests():
     """reel_line_count decides how many frames get rendered, so it has to
     agree with what the renderer actually draws."""
@@ -302,6 +324,8 @@ if __name__ == "__main__":
     reveal_line_count_tests()
     with tempfile.TemporaryDirectory() as t:
         reveal_tests(t)
+    with tempfile.TemporaryDirectory() as t:
+        endcard_tests(t)
     with tempfile.TemporaryDirectory() as t:
         render_tests(t)
     with tempfile.TemporaryDirectory() as t:

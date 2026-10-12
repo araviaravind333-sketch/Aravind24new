@@ -69,7 +69,7 @@ def render_reel(image_path, out_path, **_ignored):
     return out_path
 
 
-def render_reel_reveal(frame_paths, out_path, step_sec=0.28):
+def render_reel_reveal(frame_paths, out_path, step_sec=0.28, end_frame=None, end_sec=1.1):
     """Animates the headline in, a line at a time, then holds the
     finished card for the rest of REEL_DURATION_SEC.
 
@@ -93,16 +93,24 @@ def render_reel_reveal(frame_paths, out_path, step_sec=0.28):
     # The animation must never eat the whole Reel: the finished headline
     # has to stay up long enough to actually be read.
     step = min(step_sec, (total * 0.45) / max(1, len(frame_paths)))
-    hold = max(0.5, total - step * (len(frame_paths) - 1))
+    # The end card is carved OUT of the same total, never bolted on: a
+    # longer Reel is a lower completion rate, and completion is the
+    # metric this whole change exists to protect.
+    tail = end_sec if end_frame else 0.0
+    hold = max(0.5, total - tail - step * (len(frame_paths) - 1))
+
+    seq = [(p, step) for p in frame_paths[:-1]]
+    seq.append((frame_paths[-1], hold))
+    if end_frame:
+        seq.append((end_frame, tail))
 
     listing = out_path + ".frames.txt"
     with open(listing, "w", encoding="utf-8") as f:
-        for i, p in enumerate(frame_paths):
-            dur = hold if i == len(frame_paths) - 1 else step
+        for p, dur in seq:
             f.write(f"file '{os.path.abspath(p)}'\nduration {dur:.3f}\n")
         # The concat demuxer only applies a duration to a frame that is
         # followed by another entry, so the last image is repeated.
-        f.write(f"file '{os.path.abspath(frame_paths[-1])}'\n")
+        f.write(f"file '{os.path.abspath(seq[-1][0])}'\n")
 
     w, h = settings.REEL_WIDTH, settings.REEL_HEIGHT
     cmd = [

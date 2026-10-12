@@ -255,6 +255,43 @@ def render_overlay_reel(photo_path, category, headline, accent_word, out_path,
                                reveal_lines=reveal_lines)
 
 
+def render_follow_endcard(out_path, category=None, line="Follow for India news, every day"):
+    """The last beat of a Reel: the handle, one quiet line, nothing else.
+
+    Why this exists: across 271 published posts nothing ever asked for
+    the follow, while the account's actual goal is followers. Reels do
+    reach non-followers -- 300-800 of them per post -- and then never
+    tell any of them what to do next.
+
+    Why it is an END FRAME and not a button on the card: a boxed FOLLOW
+    button was on the design once and the owner had it removed, along
+    with the category pill and tagline, for a quieter and more premium
+    look. That preference stands. This asks once, after the story has
+    been read, on its own frame, in the same type as everything else --
+    it never sits over the headline or the photo."""
+    color = CATEGORY_COLORS.get((category or "").upper(), ACCENT)
+    color_rgb = _hex_to_rgb(color) if isinstance(color, str) else color
+    canvas = Image.new("RGB", (REEL_W, REEL_H), _PANEL)
+    draw = ImageDraw.Draw(canvas)
+
+    f_handle = _font(PT_SERIF, 76)
+    f_line = _font(ARCHIVO, 34)
+    hw = draw.textlength("@aravindnews24", font=f_handle)
+    lw = draw.textlength(line, font=f_line)
+
+    mid = REEL_H // 2
+    # thin accent rule above the handle -- the one piece of colour, same
+    # vocabulary as the headline card's accent bar
+    draw.rectangle([(REEL_W - 130) // 2, mid - 150, (REEL_W + 130) // 2, mid - 143],
+                   fill=color_rgb)
+    draw.text(((REEL_W - hw) // 2, mid - 95), "@aravindnews24", font=f_handle, fill=WHITE)
+    draw.text(((REEL_W - lw) // 2, mid + 20), line, font=f_line, fill=_hex_to_rgb(MUTED))
+
+    os.makedirs(os.path.dirname(out_path) or ".", exist_ok=True)
+    canvas.save(out_path, "JPEG", quality=95, subsampling=0)
+    return out_path
+
+
 def reel_line_count(headline, photo=True):
     """How many lines the headline will wrap to on a Reel card -- i.e.
     how many frames the reveal animation needs. Measured with the exact

@@ -1114,7 +1114,7 @@ def _one_line_summary(story, max_chars=120):
     return s[:max_chars].rstrip() + ("\u2026" if len(s) > max_chars else "")
 
 
-def _render_reveal_reel(video_path, card_path, render_card, n_lines):
+def _render_reveal_reel(video_path, card_path, render_card, n_lines, category_label=None):
     """Builds a Reel whose headline animates in a line at a time.
 
     The still card is rendered first and kept as `card_path` because the
@@ -1132,10 +1132,10 @@ def _render_reveal_reel(video_path, card_path, render_card, n_lines):
             frames.append(p)
             tmp.append(p)
         frames.append(card_path)            # finished card holds last
-        if len(frames) > 1:
-            video.render_reel_reveal(frames, video_path)
-        else:
-            video.render_reel(card_path, video_path)
+        end_card = f"{os.path.splitext(card_path)[0]}-end.jpg"
+        feed_post.render_follow_endcard(end_card, category=category_label)
+        tmp.append(end_card)
+        video.render_reel_reveal(frames, video_path, end_frame=end_card)
     except Exception as e:
         print("headline reveal failed, using the still Reel instead:", e)
         video.render_reel(card_path, video_path)
@@ -1404,7 +1404,8 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
                         handle=settings.BRAND_HANDLE,
                         reveal_lines=reveal,
                     ),
-                    feed_post.reel_line_count(written["headline"], photo=True))
+                    feed_post.reel_line_count(written["headline"], photo=True),
+                    category_label=category_label)
                 print(f"Rendered reel ({reel_variant_used}):", video_path)
             else:
                 reel_variant_used = "reel_text"
@@ -1422,7 +1423,8 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
                         handle=settings.BRAND_HANDLE,
                         reveal_lines=reveal,
                     ),
-                    feed_post.reel_line_count(written["headline"], photo=False))
+                    feed_post.reel_line_count(written["headline"], photo=False),
+                    category_label=category_label)
                 print("Rendered reel (text card):", video_path)
         except Exception as e:
             print("Reel render failed, falling back to static image post:", e)
