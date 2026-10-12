@@ -1,4 +1,29 @@
 /**
+ * DO NOT DEPLOY OR REGISTER THIS. USE scheduler.js INSTEAD.
+ * =========================================================
+ * Registering this webhook took the bot off the air for over a day.
+ *
+ * Telegram allows EITHER getUpdates OR a webhook, never both. This
+ * whole pipeline reads updates by polling, so the moment setWebhook
+ * points at this Worker, getUpdates starts returning an empty list --
+ * no error, indefinitely. Every message and every button tap silently
+ * vanished for 26+ hours before the cause was found, and the setup
+ * instructions further down are what caused it.
+ *
+ * The design was also self-defeating: it wakes the workflow so that
+ * src/main.py can poll for the very update the webhook just consumed.
+ * That cannot work.
+ *
+ * src/telegram_bot.get_new_updates() now calls deleteWebhook before
+ * every poll, so even if this does get registered it is torn down
+ * within one cycle. Kept only as a record of the failure.
+ *
+ * The real problem it was reaching for -- GitHub dropping ~90% of
+ * scheduled runs -- is handled by scheduler.js, which never talks to
+ * Telegram at all.
+ *
+ * Original header follows.
+ *
  * AravindNews24 — Telegram instant-trigger webhook
  * =================================================
  * Fixes a real problem: GitHub Actions' scheduler doesn't reliably honor
