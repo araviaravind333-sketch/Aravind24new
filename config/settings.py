@@ -109,7 +109,16 @@ MIN_AUTO_POST_SCORE = 62      # the image chain now illustrates most stories, so
 # the end hour, in IST (05:00-22:59 -> India only; 23:00-04:59 -> all).
 INDIA_ONLY_START_HOUR_IST = 0    # India news only, around the clock (owner's request)
 INDIA_ONLY_END_HOUR_IST   = 24
-INDIA_ONLY_CATEGORIES     = ("INDIA NEWS",)
+# Found 2026-10-13: with the window above set to the full 24h, this tuple
+# is the ONLY thing that ever decides which categories are even fetched --
+# "overnight" never arrives, so WORLD/SPORTS/BUSINESS correctly never
+# post, but HUMAN INTEREST was silently caught in the same net. That
+# category was added specifically because it measured a 7-9% engagement
+# rate vs ~1-2% on hard news (see its comment in RSS_FEEDS above), and it
+# has not posted once since -- a real, unnoticed cost, not a deliberate
+# choice. Added here along with the new cinema category, which is
+# India content for the same reason INDIA NEWS is.
+INDIA_ONLY_CATEGORIES     = ("INDIA NEWS", "HUMAN INTEREST", "INDIAN CINEMA")
 
 # ============================================================
 # 2. IMAGE PIPELINE
@@ -152,6 +161,20 @@ RSS_FEEDS = {
     "HUMAN INTEREST": [
         "https://feeds.feedburner.com/ndtvnews-offbeat-news",
         "https://thebetterindia.com/rss",
+    ],
+    # Requested 2026-10-13 as a reach lever: Indian cinema news is
+    # inherently shareable, and actors named in these headlines are
+    # exactly the kind of notable person subject_photos.py can find a
+    # real, licensed Commons portrait of -- a genuine fit for the image
+    # chain, not a reason to loosen it. Treated as India content (see
+    # INDIA_ONLY_CATEGORIES and news_engine.detect_geo below), not
+    # time-gated like WORLD/SPORTS/BUSINESS. All four feeds were checked
+    # live before adding; a fifth (Filmfare's RSS) 404s and was dropped.
+    "INDIAN CINEMA": [
+        "https://timesofindia.indiatimes.com/rssfeeds/1081479906.cms",
+        "https://www.hindustantimes.com/feeds/rss/entertainment/bollywood/rssfeed.xml",
+        "https://www.thehindu.com/entertainment/feeder/default.rss",
+        "https://www.bollywoodhungama.com/rss/news.xml",
     ],
 }
 
@@ -241,6 +264,7 @@ HASHTAG_BANK = {
     "SPORTS NEWS":   ["#SportsNews", "#sports", "#news", "#AravindNews24"],
     "BUSINESS NEWS": ["#BusinessNews", "#economy", "#news", "#AravindNews24"],
     "HUMAN INTEREST": ["#GoodNews", "#HumanInterest", "#viral", "#AravindNews24"],
+    "INDIAN CINEMA": ["#Bollywood", "#Entertainment", "#CinemaNews", "#AravindNews24"],
 }
 BRAND_HASHTAG = "#AravindNews24"
 

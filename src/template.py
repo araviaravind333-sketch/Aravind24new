@@ -48,6 +48,7 @@ CATEGORY_COLORS = {
     "BUSINESS NEWS": "#8B5CF6",
     "HOT TOPIC":     "#F5871F",
     "HUMAN INTEREST": "#E0499B",
+    "INDIAN CINEMA": "#D4AF37",
 }
 
 

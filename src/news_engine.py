@@ -345,7 +345,7 @@ COUNTRY_CITIES = {
 
 def detect_geo(title, category):
     t = title.lower()
-    if category == "INDIA NEWS":
+    if category in ("INDIA NEWS", "INDIAN CINEMA"):
         return {"is_india": True, "place": "India"}
     for country, city in COUNTRY_CITIES.items():
         if country in t:

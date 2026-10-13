@@ -93,8 +93,36 @@ def run():
           and attack_hot)
 
 
+def cinema_category_tests():
+    """Regression: adding INDIAN CINEMA surfaced that HUMAN INTEREST --
+    added specifically for its 7-9% engagement rate vs ~1-2% on hard
+    news -- had never actually posted, because INDIA_ONLY_START/END_HOUR
+    span the full 24h, making INDIA_ONLY_CATEGORIES the ONLY thing that
+    decides what is ever fetched. Both must stay listed alongside INDIA
+    NEWS, and the new category must be treated as India content the same
+    way INDIA NEWS is."""
+    print("\nCATEGORY WIRING")
+    from config import settings
+    check("HUMAN INTEREST is eligible to post (was silently never fetched)",
+          "HUMAN INTEREST" in settings.INDIA_ONLY_CATEGORIES)
+    check("INDIAN CINEMA is eligible to post",
+          "INDIAN CINEMA" in settings.INDIA_ONLY_CATEGORIES)
+    check("allowed_categories() returns all three at any hour (24h India-only window)",
+          set(ne.allowed_categories()) == {"INDIA NEWS", "HUMAN INTEREST", "INDIAN CINEMA"},
+          ne.allowed_categories())
+    check("a cinema story is detected as India content",
+          ne.detect_geo("Shah Rukh Khan announces new film", "INDIAN CINEMA") == {"is_india": True, "place": "India"})
+    check("INDIAN CINEMA has its own category colour",
+          "INDIAN CINEMA" in __import__("src.template", fromlist=["CATEGORY_COLORS"]).CATEGORY_COLORS)
+    check("INDIAN CINEMA has its own hashtag set",
+          "INDIAN CINEMA" in settings.HASHTAG_BANK)
+    check("INDIAN CINEMA has at least one RSS feed configured",
+          len(settings.RSS_FEEDS.get("INDIAN CINEMA", [])) > 0)
+
+
 if __name__ == "__main__":
     run()
+    cinema_category_tests()
     print(f"\n{'='*52}\n{len(PASS)} passed, {len(FAIL)} failed")
     if FAIL:
         print("FAILED:")
