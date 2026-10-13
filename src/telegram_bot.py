@@ -261,8 +261,10 @@ def get_new_updates(offset):
         # into something diagnosable from a workflow log alone.
         info = _call("getWebhookInfo") or {}
         pending, hook = info.get("pending_update_count"), info.get("url") or "(none)"
+        me = _call("getMe") or {}
         print(f"no updates (telegram says pending={pending}, webhook={hook}, "
-              f"allowed={info.get('allowed_updates', 'default')})")
+              f"allowed={info.get('allowed_updates', 'default')}, "
+              f"bot=@{me.get('username')} id={me.get('id')})")
     return result or []
 
 
