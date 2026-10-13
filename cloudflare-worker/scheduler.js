@@ -65,6 +65,16 @@ const WORKFLOWS = [
   "breaking-news.yml",
 ];
 
+// insights.yml logs the one number this whole account exists to grow
+// (followers.csv) and was left off GitHub's own cron being the very
+// thing this Worker exists to fix -- it was still on GitHub's native
+// daily schedule, the same unreliable one every other workflow here
+// used to run on. It does not belong in the hot WORKFLOWS rotation
+// above (that would hit the Graph API every few minutes for no
+// reason); it runs once every INSIGHTS_EVERY_N_TICKS instead, as its
+// own independent, de-synced schedule.
+const INSIGHTS_EVERY_N_TICKS = 24;  // every 2h at a 5-min tick rate
+
 async function dispatch(env, workflow) {
   const url = `https://api.github.com/repos/${env.GITHUB_REPO}/actions/workflows/${workflow}/dispatches`;
   const res = await fetch(url, {
@@ -91,8 +101,14 @@ export default {
   async scheduled(event, env, ctx) {
     // Which workflow this tick is responsible for. Derived from the
     // clock rather than stored state so the Worker stays stateless.
-    const slot = Math.floor(event.scheduledTime / 300000) % WORKFLOWS.length;
+    const tick = Math.floor(event.scheduledTime / 300000);
+    const slot = tick % WORKFLOWS.length;
     ctx.waitUntil(dispatch(env, WORKFLOWS[slot]));
+    // Runs alongside the main rotation, not instead of a slot in it --
+    // this is a second, independent dispatch on the same tick.
+    if (tick % INSIGHTS_EVERY_N_TICKS === 0) {
+      ctx.waitUntil(dispatch(env, "insights.yml"));
+    }
   },
 
   // Manual check: visiting the Worker's URL reports what it would do
@@ -100,9 +116,12 @@ export default {
   // Worker has no endpoint that external traffic can use to trigger a
   // run, so its URL leaking cannot cost anything.
   async fetch(request, env) {
-    const slot = Math.floor(Date.now() / 300000) % WORKFLOWS.length;
+    const tick = Math.floor(Date.now() / 300000);
+    const slot = tick % WORKFLOWS.length;
+    const nextInsights = (INSIGHTS_EVERY_N_TICKS - (tick % INSIGHTS_EVERY_N_TICKS)) * 5;
     return new Response(
       `AravindNews24 scheduler. Next tick would dispatch: ${WORKFLOWS[slot]}\n` +
+      `insights.yml next in ~${nextInsights} min\n` +
       `Repo: ${env.GITHUB_REPO || "(GITHUB_REPO not set)"}\n` +
       `This endpoint does not trigger anything.\n`,
       { status: 200, headers: { "content-type": "text/plain" } },
