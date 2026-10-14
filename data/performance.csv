@@ -273,7 +273,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-12 22:26,BREAKING NEWS,"Meet Jannat Bishnoi, Young Face Beside Rahul Gandhi At Supreme Court March",90,False,full_bleed,,17963327868246794,122122266693424069,True,True,2,0,0,0,0,,0
 2026-10-12 23:26,INDIA NEWS,Kochi Mini Cooper crash: Victim's family seeks murder charge against teen driver,70,True,text_card,reel_text,17902142532370577,122122275879424069,True,True,187,1,0,0,,232,1
 2026-10-13 01:16,BREAKING NEWS,"PM Modi in Chennai: Jalakandeswarar Temple Darshan, Roadshow and Metro Launch",93,False,full_bleed,,18154279219524370,122122297713424069,True,True,4,0,0,0,0,,0
-2026-10-13 02:16,BREAKING NEWS,"World seeks your answers, take Tamil culture everywhere: PM Modi to Chennai students",93,False,full_bleed,,18077915225714998,122122309959424069,True,True,3,0,0,0,0,,0
+2026-10-13 02:16,BREAKING NEWS,"World seeks your answers, take Tamil culture everywhere: PM Modi to Chennai students",93,False,full_bleed,,18077915225714998,122122309959424069,True,True,4,0,0,0,0,,0
 2026-10-13 03:36,INDIA NEWS,CM Vijay next PM: TVK supporters hold up placards at PM Modi's Chennai,66,True,text_card,reel_text,17951785848276361,122122321623424069,True,True,145,0,0,0,,177,0
 2026-10-13 03:46,INDIA NEWS,High Court orders Goa fire accused to deposit 20 lakh each,56,True,text_card,reel_text,18136194133642492,122122323291424069,True,True,162,0,0,0,,184,0
 2026-10-13 04:56,INDIA NEWS,"Drone Strike Hits Tanker Off Oman; 2 Indian Sailors Missing, 9 Rescued",64,True,text_card,reel_text,18113175202850105,122122333923424069,True,True,172,1,0,0,,202,1
@@ -281,16 +281,16 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-13 06:06,INDIA NEWS,Congress expels leader for attacking Chief Justice of India online,55,True,text_card,reel_text,18112934237331426,122122342491424069,True,True,187,0,0,0,,268,0
 2026-10-13 07:16,INDIA NEWS,4 Pakistani Terrorists Killed In PoK Blast During Infiltration Attempt,64,True,text_card,reel_text,18115496594467619,122122351785424069,True,True,90,0,0,0,,123,0
 2026-10-13 11:46,INDIA NEWS,Punjab anti-drug activist Parvinder Jhota shot dead by medical store owner on camera,58,True,text_card,reel_text,18636301795023707,122122379949424069,True,True,137,2,0,0,,198,2
-2026-10-13 12:06,INDIA NEWS,"Hanging by a thread, pigeon gets a lifeline from Fire and Rescue Services",70,True,text_card,reel_text,18106209799971734,122122382355424069,True,True,30,0,0,0,,33,0
+2026-10-13 12:06,INDIA NEWS,"Hanging by a thread, pigeon gets a lifeline from Fire and Rescue Services",70,True,text_card,reel_text,18106209799971734,122122382355424069,True,True,31,0,0,0,,34,0
 2026-10-13 12:26,INDIA NEWS,"India grows ‘with the world, not at anyone's cost’, cites strong economic fundamentals",55,True,text_card,reel_text,18147120319572176,122122385037424069,True,True,127,1,0,0,,148,1
-2026-10-13 15:06,INDIA NEWS,"After fatal Nedumbassery accident, Keralam govt to tighten action against bars serving alcohol",56,True,text_card,reel_text,18500382544099809,122122402995424069,True,True,116,0,0,0,,145,0
-2026-10-13 22:46,BREAKING NEWS,Drishyam 3 box office collection day 12,110,True,text_card,reel_text,18087206009298063,122122464081424069,True,True,148,0,0,0,,164,0
-2026-10-13 23:56,INDIA NEWS,Mushroom production facility worth Rs.330-crore to come up at Gollapalli in Nellore-district,56,True,full_bleed,reel_overlay,17909376666559272,122122472799424069,True,True,103,0,0,0,,126,0
-2026-10-14 01:36,INDIA NEWS,"Out On Bail In Fatal Crash Case, Odisha Man Goes On Car Rampage",68,True,text_card,reel_text,17919321387459700,122122487331424069,True,True,113,1,0,0,,141,1
-2026-10-14 03:15,INDIA NEWS,Kerala to crack down on bars serving liquor,68,True,text_card,reel_text,18154277092518748,122122496487424069,True,True,18,0,0,0,,23,0
-2026-10-14 04:56,INDIA NEWS,'I Will Leave Indian Parliament Without Blinking My Eyes': Bimol Akoijam,63,True,full_bleed,reel_overlay,17994170055018831,122122503789424069,True,True,73,0,0,0,,104,0
-2026-10-14 05:56,INDIAN CINEMA,EXCLUSIVE: Shah Rukh Khan's birthday to witness a KING-sized BLAST,73,True,text_card,reel_text,18106537868576893,122122509429424069,True,True,178,1,0,0,,214,1
-2026-10-14 06:04,INDIAN CINEMA,'Baththa' vs 'Sigma' BO: Vijay Sethupathi starrer nears Rs 26 crore,56,True,text_card,reel_text,18372358675243871,122122510275424069,True,True,163,1,0,0,,201,1
-2026-10-14 06:26,INDIAN CINEMA,'Drishyam 3: The Conclusion' day 12: Ajay's film hits Rs 501.80 cr worldwide,56,True,text_card,reel_text,17938981482389349,122122512567424069,True,True,57,0,0,0,,73,0
-2026-10-14 06:46,INDIA NEWS,Why Ambedkar left Hinduism to embrace Buddhism 53 days before his death,56,True,text_card,reel_text,18110803193141501,122122515705424069,True,True,23,0,0,0,,59,0
-2026-10-14 07:26,INDIA NEWS,Himachal Pradesh ministers allege Rs 112 crore Ayushman Bharat dues from Centre,56,True,text_card,reel_text,18127520267480851,122122519785424069,True,True,56,0,0,0,,82,0
+2026-10-13 15:06,INDIA NEWS,"After fatal Nedumbassery accident, Keralam govt to tighten action against bars serving alcohol",56,True,text_card,reel_text,18500382544099809,122122402995424069,True,True,118,0,0,0,,146,0
+2026-10-13 22:46,BREAKING NEWS,Drishyam 3 box office collection day 12,110,True,text_card,reel_text,18087206009298063,122122464081424069,True,True,153,0,0,0,,168,0
+2026-10-13 23:56,INDIA NEWS,Mushroom production facility worth Rs.330-crore to come up at Gollapalli in Nellore-district,56,True,full_bleed,reel_overlay,17909376666559272,122122472799424069,True,True,104,0,0,0,,127,0
+2026-10-14 01:36,INDIA NEWS,"Out On Bail In Fatal Crash Case, Odisha Man Goes On Car Rampage",68,True,text_card,reel_text,17919321387459700,122122487331424069,True,True,142,1,0,0,,168,1
+2026-10-14 03:15,INDIA NEWS,Kerala to crack down on bars serving liquor,68,True,text_card,reel_text,18154277092518748,122122496487424069,True,True,54,0,0,0,,65,0
+2026-10-14 04:56,INDIA NEWS,'I Will Leave Indian Parliament Without Blinking My Eyes': Bimol Akoijam,63,True,full_bleed,reel_overlay,17994170055018831,122122503789424069,True,True,98,0,0,0,,125,0
+2026-10-14 05:56,INDIAN CINEMA,EXCLUSIVE: Shah Rukh Khan's birthday to witness a KING-sized BLAST,73,True,text_card,reel_text,18106537868576893,122122509429424069,True,True,184,1,0,0,,214,1
+2026-10-14 06:04,INDIAN CINEMA,'Baththa' vs 'Sigma' BO: Vijay Sethupathi starrer nears Rs 26 crore,56,True,text_card,reel_text,18372358675243871,122122510275424069,True,True,185,1,0,0,,215,1
+2026-10-14 06:26,INDIAN CINEMA,'Drishyam 3: The Conclusion' day 12: Ajay's film hits Rs 501.80 cr worldwide,56,True,text_card,reel_text,17938981482389349,122122512567424069,True,True,124,0,0,0,,155,0
+2026-10-14 06:46,INDIA NEWS,Why Ambedkar left Hinduism to embrace Buddhism 53 days before his death,56,True,text_card,reel_text,18110803193141501,122122515705424069,True,True,92,0,0,0,,136,0
+2026-10-14 07:26,INDIA NEWS,Himachal Pradesh ministers allege Rs 112 crore Ayushman Bharat dues from Centre,56,True,text_card,reel_text,18127520267480851,122122519785424069,True,True,78,0,0,0,,104,0
