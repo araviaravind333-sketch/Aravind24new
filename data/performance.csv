@@ -284,7 +284,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-13 12:06,INDIA NEWS,"Hanging by a thread, pigeon gets a lifeline from Fire and Rescue Services",70,True,text_card,reel_text,18106209799971734,122122382355424069,True,True,33,0,0,0,,36,0
 2026-10-13 12:26,INDIA NEWS,"India grows ‘with the world, not at anyone's cost’, cites strong economic fundamentals",55,True,text_card,reel_text,18147120319572176,122122385037424069,True,True,127,1,0,0,,148,1
 2026-10-13 15:06,INDIA NEWS,"After fatal Nedumbassery accident, Keralam govt to tighten action against bars serving alcohol",56,True,text_card,reel_text,18500382544099809,122122402995424069,True,True,124,0,0,0,,153,0
-2026-10-13 22:46,BREAKING NEWS,Drishyam 3 box office collection day 12,110,True,text_card,reel_text,18087206009298063,122122464081424069,True,True,174,1,0,0,,193,1
+2026-10-13 22:46,BREAKING NEWS,Drishyam 3 box office collection day 12,110,True,text_card,reel_text,18087206009298063,122122464081424069,True,True,175,1,0,0,,194,1
 2026-10-13 23:56,INDIA NEWS,Mushroom production facility worth Rs.330-crore to come up at Gollapalli in Nellore-district,56,True,full_bleed,reel_overlay,17909376666559272,122122472799424069,True,True,117,0,0,0,,149,0
 2026-10-14 01:36,INDIA NEWS,"Out On Bail In Fatal Crash Case, Odisha Man Goes On Car Rampage",68,True,text_card,reel_text,17919321387459700,122122487331424069,True,True,163,1,0,0,,187,1
 2026-10-14 03:15,INDIA NEWS,Kerala to crack down on bars serving liquor,68,True,text_card,reel_text,18154277092518748,122122496487424069,True,True,125,0,0,0,,130,0
@@ -293,17 +293,17 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-14 06:04,INDIAN CINEMA,'Baththa' vs 'Sigma' BO: Vijay Sethupathi starrer nears Rs 26 crore,56,True,text_card,reel_text,18372358675243871,122122510275424069,True,True,191,1,0,0,,221,1
 2026-10-14 06:26,INDIAN CINEMA,'Drishyam 3: The Conclusion' day 12: Ajay's film hits Rs 501.80 cr worldwide,56,True,text_card,reel_text,17938981482389349,122122512567424069,True,True,158,0,0,0,,192,0
 2026-10-14 06:46,INDIA NEWS,Why Ambedkar left Hinduism to embrace Buddhism 53 days before his death,56,True,text_card,reel_text,18110803193141501,122122515705424069,True,True,131,0,0,0,,188,0
-2026-10-14 07:26,INDIA NEWS,Himachal Pradesh ministers allege Rs 112 crore Ayushman Bharat dues from Centre,56,True,text_card,reel_text,18127520267480851,122122519785424069,True,True,100,0,0,0,,124,0
+2026-10-14 07:26,INDIA NEWS,Himachal Pradesh ministers allege Rs 112 crore Ayushman Bharat dues from Centre,56,True,text_card,reel_text,18127520267480851,122122519785424069,True,True,101,0,0,0,,124,0
 2026-10-14 11:46,INDIA NEWS,CJP Leaders Sent to Tihar Jail for 5 Days Over Jantar Mantar Trespassing,66,True,text_card,reel_text,17875176087583843,122122542603424069,True,True,143,0,0,0,,187,0
-2026-10-14 12:06,INDIAN CINEMA,Anirudh seeks blessings at Tiruvannamalai ahead of 'Jailer 2' release,74,True,full_bleed,reel_overlay,17968448874193370,122122544619424069,True,True,184,2,0,0,,211,2
+2026-10-14 12:06,INDIAN CINEMA,Anirudh seeks blessings at Tiruvannamalai ahead of 'Jailer 2' release,74,True,full_bleed,reel_overlay,17968448874193370,122122544619424069,True,True,185,2,0,0,,211,2
 2026-10-14 12:26,INDIA NEWS,"UP's BC Sakhi Scheme Drives ₹39,000 Crore In Rural Transactions, Empowers Women",56,True,text_card,reel_text,18061807292795735,122122546173424069,True,True,27,0,0,0,,32,0
-2026-10-14 15:06,INDIA NEWS,CBI files supplementary chargesheet in NEET paper leak case,63,True,text_card,reel_text,18123398281907813,122122567515424069,True,True,88,0,0,0,,100,0
+2026-10-14 15:06,INDIA NEWS,CBI files supplementary chargesheet in NEET paper leak case,63,True,text_card,reel_text,18123398281907813,122122567515424069,True,True,90,0,0,0,,102,0
 2026-10-14 22:46,INDIA NEWS,"Rahul Gandhi Meets Ankita's Parents, Amit Shah-Cong Clash Over SIR",65,True,full_bleed,reel_overlay,18199479706388806,122122635945424069,True,True,42,0,0,0,,57,0
-2026-10-14 23:56,INDIA NEWS,DK Shivakumar says ready with documents as JDS seeks CBI sting probe,63,True,full_bleed,reel_overlay,18645477352046942,122122643175424069,True,True,107,0,0,0,,144,0
-2026-10-15 01:36,INDIA NEWS,Bihar man dies in custody hours after arrest,68,True,text_card,reel_text,18191529496394431,122122655379424069,True,True,64,0,0,0,,80,0
-2026-10-15 03:16,INDIA NEWS,"PM Modi Speaks To Canada's Mark Carney, Vows To Build On ""Positive Momentum""",63,True,text_card,reel_text,18142084390716310,122122675953424069,True,True,34,0,0,0,,36,0
-2026-10-15 06:26,INDIAN CINEMA,‘Biopic of my life will never be made’,66,True,text_card,reel_text,17994729021019193,122122694883424069,True,True,17,0,0,0,,31,0
-2026-10-15 06:46,INDIA NEWS,"Padma Shri farmer Cheruvayal Raman, protector of 45 rice varieties, dies at 74",56,True,text_card,reel_text,18101969543452855,122122696887424069,True,True,0,0,0,0,,3,0
-2026-10-15 07:56,INDIA NEWS,IYC Protests Near Parliament Street Police Station Over NSUI Worker Assault,75,True,text_card,reel_text,18127948814477079,122122702875424069,True,True,,,,,,,
-2026-10-15 08:06,INDIA NEWS,"Ankita Bhandari murder: Parents detained during India Gate protest, released around 5 a.m.",74,True,text_card,reel_text,18201381061383822,122122703769424069,True,True,,,,,,,
-2026-10-15 08:26,INDIA NEWS,CBI arrests executive director of defence firm for graft,63,True,text_card,reel_text,18448738081134333,122122705347424069,True,True,,,,,,,
+2026-10-14 23:56,INDIA NEWS,DK Shivakumar says ready with documents as JDS seeks CBI sting probe,63,True,full_bleed,reel_overlay,18645477352046942,122122643175424069,True,True,119,0,0,0,,157,0
+2026-10-15 01:36,INDIA NEWS,Bihar man dies in custody hours after arrest,68,True,text_card,reel_text,18191529496394431,122122655379424069,True,True,103,0,0,0,,128,0
+2026-10-15 03:16,INDIA NEWS,"PM Modi Speaks To Canada's Mark Carney, Vows To Build On ""Positive Momentum""",63,True,text_card,reel_text,18142084390716310,122122675953424069,True,True,41,0,0,0,,44,0
+2026-10-15 06:26,INDIAN CINEMA,‘Biopic of my life will never be made’,66,True,text_card,reel_text,17994729021019193,122122694883424069,True,True,57,0,0,0,,64,0
+2026-10-15 06:46,INDIA NEWS,"Padma Shri farmer Cheruvayal Raman, protector of 45 rice varieties, dies at 74",56,True,text_card,reel_text,18101969543452855,122122696887424069,True,True,9,0,0,0,,10,0
+2026-10-15 07:56,INDIA NEWS,IYC Protests Near Parliament Street Police Station Over NSUI Worker Assault,75,True,text_card,reel_text,18127948814477079,122122702875424069,True,True,1,0,0,0,,1,0
+2026-10-15 08:06,INDIA NEWS,"Ankita Bhandari murder: Parents detained during India Gate protest, released around 5 a.m.",74,True,text_card,reel_text,18201381061383822,122122703769424069,True,True,19,0,0,0,,50,0
+2026-10-15 08:26,INDIA NEWS,CBI arrests executive director of defence firm for graft,63,True,text_card,reel_text,18448738081134333,122122705347424069,True,True,1,0,0,0,,3,0
