@@ -313,16 +313,16 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-15 13:06,BREAKING NEWS,Hrithik Roshan’s surprise cameo in 'Jailer 2' with Rajinikanth sets fire,94,True,text_card,reel_text,18072369665757662,122122746411424069,True,True,160,2,0,0,,196,2
 2026-10-15 15:06,INDIA NEWS,"Supreme Court Proposes Panel on Assault on Women Journalists, Bars Arrest",87,True,text_card,reel_text,17995285422031295,122122769061424069,True,True,60,0,0,0,,72,0
 2026-10-15 22:46,INDIA NEWS,Police take Nedumbassery crash accused to accident spot for evidence,70,True,text_card,reel_text,18432747034195842,122122831245424069,True,True,133,0,0,0,,150,0
-2026-10-15 23:56,INDIA NEWS,"Wife, Lover 'Cried Uncontrollably' After Death Sentence In Blue Drum Murder",65,True,text_card,reel_text,17985327062892365,122122843581424069,True,True,120,0,0,0,,146,0
-2026-10-16 02:16,INDIA NEWS,"Rs 3 crore scam, 2 elderly victims: How Maharashtra Cyber rescued Delhi woman",88,True,text_card,reel_text,18400437370207889,122122860363424069,True,True,87,0,0,0,,118,0
+2026-10-15 23:56,INDIA NEWS,"Wife, Lover 'Cried Uncontrollably' After Death Sentence In Blue Drum Murder",65,True,text_card,reel_text,17985327062892365,122122843581424069,True,True,128,0,0,0,,156,0
+2026-10-16 02:16,INDIA NEWS,"Rs 3 crore scam, 2 elderly victims: How Maharashtra Cyber rescued Delhi woman",88,True,text_card,reel_text,18400437370207889,122122860363424069,True,True,104,0,0,0,,142,0
 2026-10-16 03:32,INDIA NEWS,Experts’ poll: RBI may hike rates,81,False,full_bleed,,18023168663926604,122122871763424069,True,True,2,0,0,0,0,,0
-2026-10-16 07:46,INDIA NEWS,"Journalist, Sanjay Raut face contempt proceedings over remarks against CJI",63,True,text_card,reel_text,18109117711917041,122122902801424069,True,True,122,0,0,0,,136,0
+2026-10-16 07:46,INDIA NEWS,"Journalist, Sanjay Raut face contempt proceedings over remarks against CJI",63,True,text_card,reel_text,18109117711917041,122122902801424069,True,True,126,0,0,0,,140,0
 2026-10-16 08:06,INDIA NEWS,Delhi Traffic Advisory for Connaught Place Stir; CJP Protests Likely to Affect Roads,68,False,full_bleed,,18100467758633383,122122904739424069,True,True,3,0,0,0,0,,0
-2026-10-16 08:46,INDIA NEWS,PM Modi to visit to Canada on December 11 and 12,84,True,text_card,reel_text,18022494119927863,122122908783424069,True,True,22,0,0,0,,27,0
-2026-10-16 09:05,INDIAN CINEMA,"Yash urges fans to unite for 'Ramayana,' praises Ranbir Kapoor’s dedication",68,True,text_card,reel_text,18449801395132760,122122911573424069,True,True,166,2,0,0,,205,2
-2026-10-16 10:05,INDIA NEWS,"Delhi Cops Beef Up Security, Put Traffic Curbs Ahead Of CJP Tiranga Rally",68,True,text_card,reel_text,18208575019369899,122122916889424069,True,True,112,0,0,0,,135,0
-2026-10-16 10:25,INDIA NEWS,Special Parliament Session In October: Delimitation & Women's Quota Bills On Agenda,78,True,full_bleed,reel_overlay,17973395505159789,122122921941424069,True,True,12,0,0,0,,13,0
-2026-10-16 11:56,INDIAN CINEMA,Bollywood actor Nushrratt Bharuccha undergoes successful spine surgery after Bali accident.,68,True,full_bleed,reel_overlay,17978789358131777,122122930479424069,True,True,170,1,0,0,,207,1
-2026-10-16 13:05,INDIAN CINEMA,BREAKING: Jacqueline Fernandez has a hilarious cameo in Yami Gautam Dhar’s Nayyi Navelli,80,True,text_card,reel_text,18170897788497241,122122937463424069,True,True,99,0,0,0,,121,0
-2026-10-16 13:26,INDIA NEWS,Police detain journalists in four major cities despite Supreme Court assurances,72,True,text_card,reel_text,18167299933482347,122122939815424069,True,True,22,0,0,0,,33,0
-2026-10-16 15:25,INDIAN CINEMA,Korean beauty brand Mamonde names actor Nitanshi Goel as India ambassador,65,False,full_bleed,,17987620719117209,122122959915424069,True,True,0,0,0,0,0,,0
+2026-10-16 08:46,INDIA NEWS,PM Modi to visit to Canada on December 11 and 12,84,True,text_card,reel_text,18022494119927863,122122908783424069,True,True,27,0,0,0,,30,0
+2026-10-16 09:05,INDIAN CINEMA,"Yash urges fans to unite for 'Ramayana,' praises Ranbir Kapoor’s dedication",68,True,text_card,reel_text,18449801395132760,122122911573424069,True,True,168,2,0,0,,207,2
+2026-10-16 10:05,INDIA NEWS,"Delhi Cops Beef Up Security, Put Traffic Curbs Ahead Of CJP Tiranga Rally",68,True,text_card,reel_text,18208575019369899,122122916889424069,True,True,120,0,0,0,,142,0
+2026-10-16 10:25,INDIA NEWS,Special Parliament Session In October: Delimitation & Women's Quota Bills On Agenda,78,True,full_bleed,reel_overlay,17973395505159789,122122921941424069,True,True,16,0,0,0,,18,0
+2026-10-16 11:56,INDIAN CINEMA,Bollywood actor Nushrratt Bharuccha undergoes successful spine surgery after Bali accident.,68,True,full_bleed,reel_overlay,17978789358131777,122122930479424069,True,True,191,1,0,0,,227,1
+2026-10-16 13:05,INDIAN CINEMA,BREAKING: Jacqueline Fernandez has a hilarious cameo in Yami Gautam Dhar’s Nayyi Navelli,80,True,text_card,reel_text,18170897788497241,122122937463424069,True,True,132,0,0,0,,154,0
+2026-10-16 13:26,INDIA NEWS,Police detain journalists in four major cities despite Supreme Court assurances,72,True,text_card,reel_text,18167299933482347,122122939815424069,True,True,46,0,0,0,,56,0
+2026-10-16 15:25,INDIAN CINEMA,Korean beauty brand Mamonde names actor Nitanshi Goel as India ambassador,65,False,full_bleed,,17987620719117209,122122959915424069,True,True,2,0,0,0,0,,0
