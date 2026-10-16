@@ -671,7 +671,22 @@ def _sweep_granted_ugc(now_ist):
 
 def _open_ugc_request(video_link, msg):
     """Step 1: read (not download) the link so the owner can see what it is,
-    record the request, and hand them the message to send the creator.
+    record it as already-approved, and post it straight away -- no
+    waiting, no buttons.
+
+    By explicit instruction (2026-10-17): the team only ever pastes a
+    link here after permission has ALREADY been secured elsewhere (a DM,
+    a WhatsApp yes, whatever), so the separate approve-in-Telegram step
+    was pure friction on something already true. Pasting a bare link IS
+    the approval now, credited to nobody (CREDIT_NONE) by default.
+
+    This removes a real safety property -- src/ugc.py's whole reason
+    for existing was that credit is not permission, and this path no
+    longer makes anyone confirm permission inside this system at all.
+    That tradeoff was explained plainly and chosen anyway; it is not a
+    bug to be rediscovered later. If that changes, the two-step flow
+    this replaced is still intact in git history (see _handle_ugc_text_reply /
+    _apply_ugc_decision), not deleted.
 
     Anything typed alongside the video link becomes the headline -- EXCEPT
     when what's left is itself just a news-article URL (pasting the video
@@ -705,48 +720,23 @@ def _open_ugc_request(video_link, msg):
     rec = ugc.open_request(video_link, headline=headline, article_url=article_url,
                            creator=(("@" + info["uploader_id"]) if info and info.get("uploader_id")
                                     else None) or ugc.creator_handle(video_link))
-    creator = rec.get("creator")
-    who = creator or "the person who posted it"
 
     if info:
         mins = f"{int(info['duration'] // 60)}m {int(info['duration'] % 60)}s" if info.get("duration") else "?"
         summary = f"\U0001F3AC {info['title'][:90]}\n⏱ {mins}"
     else:
-        summary = ("⚠ I couldn't read that link (it may be private, deleted, or "
-                   "login-only). If it's approved I may not be able to fetch it either.")
+        summary = "⚠ Couldn't read that link (private, deleted, or login-only) -- trying to post it anyway."
+    source = " (from the article link)" if from_article else ""
+    head_note = f"\nHeadline: \"{headline}\"{source}" if headline else "\nNo headline given -- using the video's own title."
+    telegram_bot.send_message(f"{summary}\n{head_note}\n\n\U0001F44D Posting this now, no credit.")
 
-    buttons = telegram_bot.build_keyboard([
-        [("✅ APPROVED — post with credit", "cb", f"UGCOK|{rec['id']}")],
-        [("✅ Approved — no credit wanted", "cb", f"UGCANON|{rec['id']}")],
-        [("\U0001F6AB They said no", "cb", f"UGCNO|{rec['id']}")],
-    ])
-    if headline:
-        source = " (from the article link)" if from_article else ""
-        head_note = f"\n\nHeadline I'll use{source}: \"{headline}\""
-    else:
-        head_note = "\n\n⚠ No headline given — send one as a reply, or I'll use the video's own title."
-    # A real, repeated report: a button tap intermittently never reaches
-    # Telegram's servers at all (confirmed server-side -- getWebhookInfo
-    # shows zero pending immediately after a tap, for taps that never
-    # register, while plain text messages from the same chat keep
-    # arriving fine in the same window). Rather than chase a platform-
-    # level delivery quirk with no further lever on this end, replying
-    # to THIS message with a word is wired as an equally valid second
-    # path to the same three decisions -- see the reply-handling branch
-    # in _poll_telegram_replies.
-    prompt_id = telegram_bot.send_message(
-        f"{summary}\n\n"
-        f"Ask {who} first — a credit line alone is not permission, and reposting "
-        f"without it is what gets pages struck down.\n\n"
-        f"Send them this:\n\n- - - - -\n{ugc.permission_text(video_link, creator)}\n- - - - -"
-        f"{head_note}\n\n"
-        f"Then press a button below, OR reply to THIS message with "
-        f"\"yes\"/\"approved\" (credited), \"no credit\" (anonymous), or "
-        f"\"no\"/\"declined\" -- either way works, in case a button tap "
-        f"doesn't go through.",
-        buttons=buttons)
-    if prompt_id:
-        ugc.attach_prompt_message(rec["id"], prompt_id)
+    rec = ugc.mark_granted(rec["id"], credit_mode=ugc.CREDIT_NONE)
+    now_ist = (dt.datetime.now(dt.timezone.utc) + dt.timedelta(hours=5, minutes=30)).replace(tzinfo=None)
+    try:
+        _post_permitted_video(rec, now_ist)
+    except Exception as e:
+        print("auto-approved video post failed:", e)
+        telegram_bot.send_message(f"Couldn't post that video: {e}")
 
 
 def _handle_ugc_decision(cb, data):

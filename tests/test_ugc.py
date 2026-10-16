@@ -192,13 +192,19 @@ def article_link_tests(tmp):
     print("\nVIDEO LINK + ARTICLE LINK TOGETHER")
     from src import main
     ugc.LEDGER_PATH = os.path.join(tmp, "al.json")
-    sent = []
-    real = (main.telegram_bot.send_message, main.news_engine.fetch_article_metadata, main.ugc.probe)
+    sent, posted = [], []
+    real = (main.telegram_bot.send_message, main.news_engine.fetch_article_metadata, main.ugc.probe,
+            main._post_permitted_video)
     main.telegram_bot.send_message = lambda text, buttons=None, reply_to=None: (sent.append(text) or 1)
     main.news_engine.fetch_article_metadata = lambda url: {
         "title": "Tamil Nadu cop clings to car roof for 30km to nab gutkha gang", "summary": ""}
     main.ugc.probe = lambda u: {"title": "raw video title", "duration": 42,
                                 "uploader": "Wilson Thomas", "uploader_id": "wilson__thomas"}
+    # Since 2026-10-17, pasting a bare link auto-approves and posts
+    # immediately (no buttons) -- this is now a real, direct call inside
+    # _open_ugc_request, not something a separate test exercises, so it
+    # has to be mocked here too or this test would hit real yt-dlp/network.
+    main._post_permitted_video = lambda r, now: posted.append(r["id"])
     try:
         link = "https://x.com/wilson__thomas/status/2104167814877806848/video/1?s=46"
         article = ("https://www.newindianexpress.com/amp/story/states/tamil-nadu/2026/Sep/28/"
@@ -233,7 +239,43 @@ def article_link_tests(tmp):
         check("a bare video link with nothing else has no headline or article link",
               rec3["headline"] == "" and rec3["article_url"] is None)
     finally:
-        main.telegram_bot.send_message, main.news_engine.fetch_article_metadata, main.ugc.probe = real
+        (main.telegram_bot.send_message, main.news_engine.fetch_article_metadata,
+         main.ugc.probe, main._post_permitted_video) = real
+
+
+def auto_approve_tests(tmp):
+    """By explicit instruction (2026-10-17): the team only ever pastes a
+    video link here after permission was already secured elsewhere, so a
+    bare link now auto-approves and posts immediately -- no buttons, no
+    waiting. This is a deliberate removal of a safety property (nothing
+    inside this system confirms permission for this path any more), not
+    a bug; these tests lock in exactly what was asked for, not more."""
+    print("\nBARE LINK AUTO-APPROVES (2026-10-17 policy)")
+    from src import main
+    ugc.LEDGER_PATH = os.path.join(tmp, "auto.json")
+    sent, buttons_seen, posted = [], [], []
+    real = (main.telegram_bot.send_message, main.ugc.probe, main._post_permitted_video)
+    main.telegram_bot.send_message = lambda text, buttons=None, reply_to=None: (
+        sent.append(text) or buttons_seen.append(buttons) or 1)
+    main.ugc.probe = lambda u: {"title": "a real video", "duration": 30,
+                                "uploader": "Someone", "uploader_id": "someone"}
+    main._post_permitted_video = lambda r, now: posted.append(r)
+    try:
+        link = "https://x.com/someone/status/1111/video/1"
+        main._open_ugc_request(link, {"message_id": 1, "text": link})
+        rec = ugc._load()[-1]
+        check("the record is granted immediately, no awaiting_permission step",
+              rec["status"] == ugc.GRANTED, rec["status"])
+        check("credited to nobody by default (CREDIT_NONE)",
+              rec["credit_mode"] == ugc.CREDIT_NONE, rec["credit_mode"])
+        check("no approve/decline buttons are offered for this path any more",
+              all(b is None for b in buttons_seen), buttons_seen)
+        check("the download+post step is actually triggered, not just recorded",
+              posted and posted[0]["id"] == rec["id"])
+        check("the owner is told it's posting, not asked anything",
+              sent and "posting" in sent[-1].lower(), sent)
+    finally:
+        main.telegram_bot.send_message, main.ugc.probe, main._post_permitted_video = real
 
 
 def id_collision_tests(tmp):
@@ -434,6 +476,8 @@ if __name__ == "__main__":
         headline_tests(t)
     with tempfile.TemporaryDirectory() as t:
         article_link_tests(t)
+    with tempfile.TemporaryDirectory() as t:
+        auto_approve_tests(t)
     with tempfile.TemporaryDirectory() as t:
         id_collision_tests(t)
     byline_tests()
