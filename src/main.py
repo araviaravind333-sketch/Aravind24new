@@ -533,6 +533,16 @@ def _poll_telegram_replies(pending_ids, now_ist=None):
                 except Exception as e:
                     print("carousel reply handling failed:", e)
                 continue
+            ugc_rec = ugc.by_prompt_message(reply_to["message_id"])
+            if ugc_rec:
+                try:
+                    if _handle_ugc_text_reply(msg, ugc_rec):
+                        continue
+                except Exception as e:
+                    print("UGC text-reply handling failed:", e)
+                # Not a recognised word -- e.g. the owner typed a headline
+                # as a reply instead of a decision. Fall through: that is
+                # not this branch's job and nothing here should swallow it.
             if reply_to["message_id"] not in pending_ids:
                 continue
             file_id = _extract_media_file_id(msg)
@@ -715,47 +725,110 @@ def _open_ugc_request(video_link, msg):
         head_note = f"\n\nHeadline I'll use{source}: \"{headline}\""
     else:
         head_note = "\n\n⚠ No headline given — send one as a reply, or I'll use the video's own title."
-    telegram_bot.send_message(
+    # A real, repeated report: a button tap intermittently never reaches
+    # Telegram's servers at all (confirmed server-side -- getWebhookInfo
+    # shows zero pending immediately after a tap, for taps that never
+    # register, while plain text messages from the same chat keep
+    # arriving fine in the same window). Rather than chase a platform-
+    # level delivery quirk with no further lever on this end, replying
+    # to THIS message with a word is wired as an equally valid second
+    # path to the same three decisions -- see the reply-handling branch
+    # in _poll_telegram_replies.
+    prompt_id = telegram_bot.send_message(
         f"{summary}\n\n"
         f"Ask {who} first — a credit line alone is not permission, and reposting "
         f"without it is what gets pages struck down.\n\n"
         f"Send them this:\n\n- - - - -\n{ugc.permission_text(video_link, creator)}\n- - - - -"
         f"{head_note}\n\n"
-        f"Then press a button below. I'll download and post it myself.",
+        f"Then press a button below, OR reply to THIS message with "
+        f"\"yes\"/\"approved\" (credited), \"no credit\" (anonymous), or "
+        f"\"no\"/\"declined\" -- either way works, in case a button tap "
+        f"doesn't go through.",
         buttons=buttons)
+    if prompt_id:
+        ugc.attach_prompt_message(rec["id"], prompt_id)
 
 
 def _handle_ugc_decision(cb, data):
-    """Step 2: the owner reports the creator's answer -- and that is the
-    last thing they have to do. On a yes this downloads the video and
-    posts it straight away."""
+    """Step 2 via a button tap. Parses the callback payload, answers the
+    toast, then shares the actual decision logic with the text-reply
+    path below."""
     action, rec_id = data.split("|", 1)
+    toast = lambda text: telegram_bot.answer_callback(cb["id"], text)
+    _apply_ugc_decision(action, rec_id, toast)
+
+
+# Recognised phrases for the text-reply path -- see _apply_ugc_decision's
+# docstring for why this path exists at all. Checked as a SUBSTRING of
+# the (lowercased, stripped) reply, in order, so "no credit please"
+# still counts and the more specific "no credit" is tried before the
+# bare "no" that would otherwise match it first. An unrelated reply to
+# the same card (e.g. a typed headline) matches nothing here and is
+# left alone rather than misread as a decision.
+_UGC_REPLY_PHRASES = [
+    ("no credit", "UGCANON"), ("nocredit", "UGCANON"), ("anonymous", "UGCANON"), ("anon", "UGCANON"),
+    ("declined", "UGCNO"), ("decline", "UGCNO"), ("rejected", "UGCNO"),
+    ("approved", "UGCOK"), ("approve", "UGCOK"),
+    ("yes", "UGCOK"), ("ok", "UGCOK"),
+    ("no", "UGCNO"),
+]
+
+
+def _parse_ugc_reply(text):
+    text = (text or "").strip().lower()
+    for phrase, action in _UGC_REPLY_PHRASES:
+        if phrase in text:
+            return action
+    return None
+
+
+def _handle_ugc_text_reply(msg, rec):
+    """Step 2 via a plain text reply to the approval card, instead of a
+    button tap. Exists because of a real, repeated report: a tap
+    intermittently never reaches Telegram's servers at all -- confirmed
+    server-side (getWebhookInfo shows zero pending immediately after a
+    tap that never registers), while plain text from the same chat keeps
+    arriving fine in the same window. Rather than chase a platform-level
+    delivery quirk with no further lever on this end, any of the phrases
+    in _UGC_REPLY_PHRASES does exactly what the matching button would."""
+    action = _parse_ugc_reply(msg.get("text") or msg.get("caption") or "")
+    if action is None:
+        return False
+    _apply_ugc_decision(action, rec["id"], lambda text: None)
+    return True
+
+
+def _apply_ugc_decision(action, rec_id, toast):
+    """Shared by the button-tap and text-reply paths. `toast` answers a
+    callback query's spinner when called from a button tap, and is a
+    no-op from a text reply (a plain text message needs no such
+    acknowledgement -- Telegram already shows it as sent/delivered)."""
     rec = ugc.get(rec_id)
     if not rec:
-        telegram_bot.answer_callback(cb["id"], "That request is no longer on file.")
+        toast("That request is no longer on file.")
         return
     # A real report: no visible reply after the first tap led to the same
     # button being pressed several more times, and each tap re-downloaded
-    # and re-posted the SAME video. Once a decision is on file, later taps
-    # on any of its three buttons just confirm what already happened.
+    # and re-posted the SAME video. Once a decision is on file, a later
+    # tap OR reply on it just confirms what already happened.
     if rec.get("status") == ugc.POSTED:
-        telegram_bot.answer_callback(cb["id"], "Already posted — no need to tap again.")
+        toast("Already posted — no need to tap again.")
         telegram_bot.send_message("\U0001F44D Already posted — no need to tap again.")
         return
     if rec.get("status") == ugc.DECLINED:
-        telegram_bot.answer_callback(cb["id"], "Already recorded as declined.")
+        toast("Already recorded as declined.")
         telegram_bot.send_message("\U0001F44D Already recorded as declined.")
         return
     if action == "UGCNO":
         ugc.mark_declined(rec_id)
-        telegram_bot.answer_callback(cb["id"], "Recorded — that video will not be used.")
+        toast("Recorded — that video will not be used.")
         telegram_bot.send_message(
             f"Noted, {rec.get('creator') or 'the creator'} said no. That video stays unused.")
         return
 
     mode = ugc.CREDIT_NONE if action == "UGCANON" else ugc.CREDIT_NAMED
     rec = ugc.mark_granted(rec_id, credit_mode=mode)
-    telegram_bot.answer_callback(cb["id"], "Permission recorded — fetching it now.")
+    toast("Permission recorded — fetching it now.")
     # A toast alone was easy to miss (a real report of a button being
     # tapped several times because nothing else seemed to happen) -- a
     # plain chat message is something the owner can always scroll back

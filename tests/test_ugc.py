@@ -351,6 +351,75 @@ def granted_sweep_tests(tmp):
         main._post_permitted_video = real_post
 
 
+def text_reply_fallback_tests(tmp):
+    """Regression: a repeated, confirmed-server-side report -- a button
+    tap on the approval card intermittently never reaches Telegram's
+    servers at all (getWebhookInfo shows zero pending immediately after
+    a tap that never registers), while plain text messages from the
+    same chat keep arriving fine in the same window. A reply of "yes" /
+    "no credit" / "no" to the card must do exactly what the matching
+    button would, as a second path that doesn't depend on whatever is
+    making callback_query delivery flaky."""
+    print("\nTEXT-REPLY FALLBACK (for when a button tap goes missing)")
+    from src import main
+    ugc.LEDGER_PATH = os.path.join(tmp, "textreply.json")
+
+    posted, sent = [], []
+    real_post, real_send = main._post_permitted_video, main.telegram_bot.send_message
+    main._post_permitted_video = lambda r, now: posted.append(r["id"])
+    main.telegram_bot.send_message = lambda text, buttons=None, reply_to=None: (sent.append(text) or 1)
+    try:
+        # the card is "sent" (mocked) and its message_id attached, exactly
+        # as _open_ugc_request does once send_message returns
+        rec = ugc.open_request("https://x.com/a/status/1", headline="A story")
+        ugc.attach_prompt_message(rec["id"], 555)
+        check("by_prompt_message finds the record from the card's message id",
+              ugc.by_prompt_message(555)["id"] == rec["id"])
+
+        handled = main._handle_ugc_text_reply({"text": "yes", "message_id": 999}, ugc.by_prompt_message(555))
+        check("a plain 'yes' reply is recognised as a decision", handled is True)
+        check("...and it downloads/posts exactly like APPROVED would", posted == [rec["id"]], posted)
+        check("...crediting by name (not anonymous)",
+              ugc.get(rec["id"])["credit_mode"] == ugc.CREDIT_NAMED)
+        # The mock above stands in for the download+post step only -- the
+        # real _post_permitted_video marks the record POSTED itself once
+        # it actually succeeds, so that has to be simulated here too for
+        # the re-tap guard check further down to mean anything.
+        ugc.mark_posted(rec["id"])
+
+        rec2 = ugc.open_request("https://x.com/b/status/2", headline="Another story")
+        ugc.attach_prompt_message(rec2["id"], 556)
+        posted.clear()
+        handled2 = main._handle_ugc_text_reply({"text": "No credit please"}, ugc.by_prompt_message(556))
+        check("'no credit' (with extra words, any case) maps to anonymous credit", handled2 is True)
+        check("...and posts it anonymously", ugc.get(rec2["id"])["credit_mode"] == ugc.CREDIT_NONE)
+
+        rec3 = ugc.open_request("https://x.com/c/status/3", headline="Third story")
+        ugc.attach_prompt_message(rec3["id"], 557)
+        posted.clear()
+        handled3 = main._handle_ugc_text_reply({"text": "no"}, ugc.by_prompt_message(557))
+        check("a plain 'no' reply declines, same as the button", handled3 is True)
+        check("...and never posts it", posted == [])
+        check("...and records it declined", ugc.get(rec3["id"])["status"] == ugc.DECLINED)
+
+        rec4 = ugc.open_request("https://x.com/d/status/4", headline="Fourth story")
+        ugc.attach_prompt_message(rec4["id"], 558)
+        unrelated = main._handle_ugc_text_reply({"text": "here's the headline you asked for"},
+                                                 ugc.by_prompt_message(558))
+        check("an unrecognised reply (e.g. a typed headline) is left alone, not misread as a decision",
+              unrelated is False)
+        check("...and the request is untouched", ugc.get(rec4["id"])["status"] == ugc.AWAITING)
+
+        # The same re-tap guard that protects button taps must protect
+        # replies too -- a second "yes" after it already posted must not
+        # re-download and re-post.
+        posted.clear()
+        again = main._handle_ugc_text_reply({"text": "yes"}, ugc.by_prompt_message(555))
+        check("a repeat reply after posting does not re-post", posted == [])
+    finally:
+        main._post_permitted_video, main.telegram_bot.send_message = real_post, real_send
+
+
 if __name__ == "__main__":
     link_tests()
     permission_text_tests()
@@ -372,6 +441,8 @@ if __name__ == "__main__":
         repost_guard_tests(t)
     with tempfile.TemporaryDirectory() as t:
         granted_sweep_tests(t)
+    with tempfile.TemporaryDirectory() as t:
+        text_reply_fallback_tests(t)
     print(f"\n{'=' * 52}\n{len(PASS)} passed, {len(FAIL)} failed")
     if FAIL:
         print("FAILED:")

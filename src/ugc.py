@@ -173,6 +173,19 @@ def by_prompt_message(message_id):
     return next((r for r in _load() if r.get("prompt_message_id") == message_id), None)
 
 
+def attach_prompt_message(record_id, message_id):
+    """Links a request to the id of the approval card sent for it, taken
+    AFTER the card is actually sent (open_request itself has no message
+    id yet to attach). This is what lets a plain-text reply to that card
+    ("yes" / "no credit" / "no") stand in for a button tap -- a real,
+    repeated report that a tap intermittently never reaches Telegram's
+    servers at all, confirmed server-side, while plain text from the
+    same chat keeps arriving fine. See _poll_telegram_replies' reply
+    handling for the other half of this."""
+    if message_id is not None:
+        _update(record_id, prompt_message_id=message_id)
+
+
 def _update(record_id, **fields):
     records = _load()
     for r in records:
