@@ -326,7 +326,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-16 13:05,INDIAN CINEMA,BREAKING: Jacqueline Fernandez has a hilarious cameo in Yami Gautam Dhar’s Nayyi Navelli,80,True,text_card,reel_text,18170897788497241,122122937463424069,True,True,146,0,0,0,,174,0
 2026-10-16 13:26,INDIA NEWS,Police detain journalists in four major cities despite Supreme Court assurances,72,True,text_card,reel_text,18167299933482347,122122939815424069,True,True,79,0,0,0,,99,0
 2026-10-16 15:25,INDIAN CINEMA,Korean beauty brand Mamonde names actor Nitanshi Goel as India ambassador,65,False,full_bleed,,17987620719117209,122122959915424069,True,True,7,0,0,11,0,,11
-2026-10-16 22:58,INDIAN CINEMA,"Kartik Aaryan and Sreeleela’s Anurag Basu-directed film locks April 30, 2027 release date",62,True,full_bleed,reel_overlay,18098251970334967,122123021157424069,True,True,126,0,0,0,,156,0
+2026-10-16 22:58,INDIAN CINEMA,"Kartik Aaryan and Sreeleela’s Anurag Basu-directed film locks April 30, 2027 release date",62,True,full_bleed,reel_overlay,18098251970334967,122123021157424069,True,True,127,0,0,0,,157,0
 2026-10-17 00:46,INDIA NEWS,Samajwadi Party skips third Rajya Sabha candidate for upcoming Assembly polls.,75,True,text_card,reel_text,18109186337350702,122123035113424069,True,True,20,0,0,0,,29,0
 2026-10-17 02:15,INDIAN CINEMA,Rajinikanth's Jailer 2 collects Rs 125 crore worldwide on opening day.,71,False,full_bleed,,18126511642876463,122123051781424069,True,True,7,0,0,0,0,,0
 2026-10-17 03:45,INDIA NEWS,Top ISRO scientists lead massive space awareness rally in Andhra Pradesh,75,False,full_bleed,,17954572605268185,122123059599424069,True,True,3,0,0,0,0,,0
@@ -343,17 +343,17 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-17 23:06,BREAKING NEWS,Kolkata Durga Puja stampede kills 17 people and injures 25 others,94,True,text_card,reel_text,18376748269240645,122123206479424069,True,True,112,0,0,0,,122,0
 2026-10-18 00:56,INDIA NEWS,Over 76% voters turn out for Nagaon Lok Sabha byelection,69,False,full_bleed,,18082786151717456,122123225325424069,True,True,3,0,0,0,0,,0
 2026-10-18 02:15,INDIA NEWS,Delhi Police detain activists marching with the Indian tricolour.,68,True,text_card,reel_text,18090266468680352,122123233851424069,True,True,124,1,0,0,,142,1
-2026-10-18 03:50,INDIA NEWS,Uttarakhand minister's husband accuses her of amassing ₹210 crore assets,56,True,text_card,reel_text,18114709061028741,122123242149424069,True,True,134,1,0,0,,163,1
+2026-10-18 03:50,INDIA NEWS,Uttarakhand minister's husband accuses her of amassing ₹210 crore assets,56,True,text_card,reel_text,18114709061028741,122123242149424069,True,True,135,1,0,0,,164,1
 2026-10-18 08:06,BREAKING NEWS,13 devotees crushed to death after truck crashes through Gwalior temple wall,91,True,text_card,reel_text,17912287203542490,122123267907424069,True,True,99,0,0,0,,117,0
-2026-10-18 09:46,INDIA NEWS,"Out of 13 crore deleted names, only 70 lakh remain unexplained.",56,True,text_card,reel_text,18119177752990520,122123277159424069,True,True,107,0,0,0,,136,1
-2026-10-18 10:26,INDIA NEWS,Kolkata Pandal Stampede: Seven Arrested After 19 Killed; Organisers Booked,79,True,text_card,reel_text,18101685023055262,122123280399424069,True,True,129,0,0,0,,155,0
-2026-10-18 11:06,INDIAN CINEMA,Actor needs two dedicated ACs on set to survive heavy prosthetics,63,True,text_card,reel_text,18097074692421103,122123284161424069,True,True,80,0,0,0,,96,0
+2026-10-18 09:46,INDIA NEWS,"Out of 13 crore deleted names, only 70 lakh remain unexplained.",56,True,text_card,reel_text,18119177752990520,122123277159424069,True,True,111,0,0,0,,142,1
+2026-10-18 10:26,INDIA NEWS,Kolkata Pandal Stampede: Seven Arrested After 19 Killed; Organisers Booked,79,True,text_card,reel_text,18101685023055262,122123280399424069,True,True,130,0,0,0,,156,0
+2026-10-18 11:06,INDIAN CINEMA,Actor needs two dedicated ACs on set to survive heavy prosthetics,63,True,text_card,reel_text,18097074692421103,122123284161424069,True,True,82,0,0,0,,97,0
 2026-10-18 11:26,INDIA NEWS,Fire at Athani supermarket results in property damage; no casualties,70,True,text_card,reel_text,18140342620619663,122123285847424069,True,True,128,0,0,0,,141,0
 2026-10-18 11:46,INDIA NEWS,First permanent High Court bench opens in Ladakh for local justice,75,False,full_bleed,,17914444176511833,122123287407424069,True,True,4,0,1,0,0,,1
 2026-10-18 12:06,INDIA NEWS,Delhi court convicts man for shooting wife who refused to return home,58,True,text_card,reel_text,18117705776080020,122123289435424069,True,True,143,0,0,0,,151,0
 2026-10-18 13:06,INDIAN CINEMA,Composer Amit Trivedi confesses he understood nothing in film No Smoking.,57,True,text_card,reel_text,18117888566005497,122123295291424069,True,True,110,0,0,0,,134,0
-2026-10-18 15:46,INDIA NEWS,CBI arrests Kerala man over ₹1 crore fake FedEx scam,75,True,text_card,reel_text,17901357177671371,122123315085424069,True,True,31,0,0,0,,36,0
+2026-10-18 15:46,INDIA NEWS,CBI arrests Kerala man over ₹1 crore fake FedEx scam,75,True,text_card,reel_text,17901357177671371,122123315085424069,True,True,33,0,0,0,,38,0
 2026-10-18 16:26,INDIAN CINEMA,Actor Johnny Lever is alive as fake death rumors go viral,62,True,text_card,reel_text,18489788521104372,122123319207424069,True,True,119,0,0,0,,139,0
-2026-10-18 23:06,INDIA NEWS,Two gunmen open fire on actor Tiger Shroff's car and flee.,71,True,text_card,reel_text,18013116107970016,122123365923424069,True,True,118,0,0,0,,138,0
-2026-10-19 01:36,INDIA NEWS,Four workers die after power plant chimney collapses in Bengal.,64,True,text_card,reel_text,17886911019623000,122123388357424069,True,True,,,,,,,
-2026-10-19 02:26,INDIAN CINEMA,Gunmen shoot actor Tiger Shroff's driver outside his Mumbai residence.,65,True,text_card,reel_text,18024727628871112,122123392725424069,True,True,,,,,,,
+2026-10-18 23:06,INDIA NEWS,Two gunmen open fire on actor Tiger Shroff's car and flee.,71,True,text_card,reel_text,18013116107970016,122123365923424069,True,True,119,0,0,0,,139,0
+2026-10-19 01:36,INDIA NEWS,Four workers die after power plant chimney collapses in Bengal.,64,True,text_card,reel_text,17886911019623000,122123388357424069,True,True,4,0,0,0,,7,0
+2026-10-19 02:26,INDIAN CINEMA,Gunmen shoot actor Tiger Shroff's driver outside his Mumbai residence.,65,True,text_card,reel_text,18024727628871112,122123392725424069,True,True,25,0,0,0,,43,0
