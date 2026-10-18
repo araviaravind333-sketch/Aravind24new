@@ -308,7 +308,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-15 08:06,INDIA NEWS,"Ankita Bhandari murder: Parents detained during India Gate protest, released around 5 a.m.",74,True,text_card,reel_text,18201381061383822,122122703769424069,True,True,127,1,0,0,,183,1
 2026-10-15 08:26,INDIA NEWS,CBI arrests executive director of defence firm for graft,63,True,text_card,reel_text,18448738081134333,122122705347424069,True,True,93,0,0,0,,114,0
 2026-10-15 09:36,INDIA NEWS,From RBI Action To Strategic Restructuring: Timeline Of IDBI Bank Stake Sale,75,False,full_bleed,,18103353071013336,122122711959424069,True,True,3,0,0,0,0,,0
-2026-10-15 11:46,BREAKING NEWS,Supreme Court holds that conversion does not automatically grant quota benefits,90,False,full_bleed,,18125179027794854,122122728621424069,True,True,2,0,0,0,0,,0
+2026-10-15 11:46,BREAKING NEWS,Supreme Court holds that conversion does not automatically grant quota benefits,90,False,full_bleed,,18125179027794854,122122728621424069,True,True,3,0,0,0,0,,0
 2026-10-15 12:46,INDIA NEWS,Mumbai Police ask actor Imran Khan to leave India by October 28,74,True,full_bleed,reel_overlay,18102000425646241,122122742271424069,True,True,174,0,0,0,,244,0
 2026-10-15 13:06,BREAKING NEWS,Hrithik Roshan’s surprise cameo in 'Jailer 2' with Rajinikanth sets fire,94,True,text_card,reel_text,18072369665757662,122122746411424069,True,True,162,2,0,0,,198,2
 2026-10-15 15:06,INDIA NEWS,"Supreme Court Proposes Panel on Assault on Women Journalists, Bars Arrest",87,True,text_card,reel_text,17995285422031295,122122769061424069,True,True,60,0,0,0,,72,0
@@ -323,7 +323,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-16 10:05,INDIA NEWS,"Delhi Cops Beef Up Security, Put Traffic Curbs Ahead Of CJP Tiranga Rally",68,True,text_card,reel_text,18208575019369899,122122916889424069,True,True,121,0,0,0,,143,0
 2026-10-16 10:25,INDIA NEWS,Special Parliament Session In October: Delimitation & Women's Quota Bills On Agenda,78,True,full_bleed,reel_overlay,17973395505159789,122122921941424069,True,True,23,0,0,0,,28,0
 2026-10-16 11:56,INDIAN CINEMA,Bollywood actor Nushrratt Bharuccha undergoes successful spine surgery after Bali accident.,68,True,full_bleed,reel_overlay,17978789358131777,122122930479424069,True,True,281,1,0,0,,343,2
-2026-10-16 13:05,INDIAN CINEMA,BREAKING: Jacqueline Fernandez has a hilarious cameo in Yami Gautam Dhar’s Nayyi Navelli,80,True,text_card,reel_text,18170897788497241,122122937463424069,True,True,145,0,0,0,,174,0
+2026-10-16 13:05,INDIAN CINEMA,BREAKING: Jacqueline Fernandez has a hilarious cameo in Yami Gautam Dhar’s Nayyi Navelli,80,True,text_card,reel_text,18170897788497241,122122937463424069,True,True,146,0,0,0,,174,0
 2026-10-16 13:26,INDIA NEWS,Police detain journalists in four major cities despite Supreme Court assurances,72,True,text_card,reel_text,18167299933482347,122122939815424069,True,True,79,0,0,0,,99,0
 2026-10-16 15:25,INDIAN CINEMA,Korean beauty brand Mamonde names actor Nitanshi Goel as India ambassador,65,False,full_bleed,,17987620719117209,122122959915424069,True,True,6,0,0,11,0,,11
 2026-10-16 22:58,INDIAN CINEMA,"Kartik Aaryan and Sreeleela’s Anurag Basu-directed film locks April 30, 2027 release date",62,True,full_bleed,reel_overlay,18098251970334967,122123021157424069,True,True,125,0,0,0,,155,0
@@ -333,22 +333,22 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-17 08:05,INDIA NEWS,Massive drug seizure triggers political storm as party expels leader,62,True,text_card,reel_text,18103853123298088,122123081307424069,True,True,24,0,0,0,,26,0
 2026-10-17 09:35,INDIA NEWS,Supreme Court warns verifying reporters gets tough as everyone claims journalist status.,75,False,full_bleed,,18092610020678511,122123090283424069,True,True,2,0,0,0,0,,0
 2026-10-17 09:45,INDIA NEWS,Karimnagar becomes first Telangana region to monitor power faults in real time,56,False,full_bleed,,18125841335314955,122123091675424069,True,True,3,0,0,0,0,,0
-2026-10-17 10:05,INDIAN CINEMA,Selma Blair makes her first public appearance since arrest,77,True,text_card,reel_text,17885015568512008,122123093577424069,True,True,25,0,0,0,,29,0
+2026-10-17 10:05,INDIAN CINEMA,Selma Blair makes her first public appearance since arrest,77,True,text_card,reel_text,17885015568512008,122123093577424069,True,True,25,0,0,0,,30,0
 2026-10-17 10:25,INDIA NEWS,Karnataka wins award for highest under-construction wind power capacity of 9 GW,56,True,full_bleed,reel_overlay,18371221111209229,122123096001424069,True,True,98,0,0,0,,118,0
-2026-10-17 11:25,INDIA NEWS,India orders compulsory hill training after Kedarnath helicopter crash,76,True,text_card,reel_text,18350384563271991,122123103291424069,True,True,101,0,0,0,,123,0
+2026-10-17 11:25,INDIA NEWS,India orders compulsory hill training after Kedarnath helicopter crash,76,True,text_card,reel_text,18350384563271991,122123103291424069,True,True,101,0,0,0,,124,0
 2026-10-17 12:06,INDIA NEWS,Official probe blames pilot error for 2023 Mumbai jet crash,76,True,text_card,reel_text,17950581594293603,122123109603424069,True,True,104,0,0,0,,135,0
 2026-10-17 13:05,BREAKING NEWS,"Kids have a fundamental right to internet, Supreme Court rules",102,True,text_card,reel_text,18106218941146475,122123121201424069,True,True,9,0,0,0,,10,0
-2026-10-17 14:05,INDIA NEWS,Ensure landslide victory for Sarvotham Reddy in Graduates’ MLC election,62,True,text_card,reel_text,18113395106139377,122123129661424069,True,True,27,0,0,0,,33,0
+2026-10-17 14:05,INDIA NEWS,Ensure landslide victory for Sarvotham Reddy in Graduates’ MLC election,62,True,text_card,reel_text,18113395106139377,122123129661424069,True,True,30,0,0,0,,36,0
 2026-10-17 15:25,INDIA NEWS,Nine-year-old boy dies after 39-hour rescue from Rajasthan borewell.,76,True,text_card,reel_text,18095600201444918,122123139639424069,True,True,119,1,0,0,,146,1
 2026-10-17 23:06,BREAKING NEWS,Kolkata Durga Puja stampede kills 17 people and injures 25 others,94,True,text_card,reel_text,18376748269240645,122123206479424069,True,True,111,0,0,0,,121,0
 2026-10-18 00:56,INDIA NEWS,Over 76% voters turn out for Nagaon Lok Sabha byelection,69,False,full_bleed,,18082786151717456,122123225325424069,True,True,3,0,0,0,0,,0
 2026-10-18 02:15,INDIA NEWS,Delhi Police detain activists marching with the Indian tricolour.,68,True,text_card,reel_text,18090266468680352,122123233851424069,True,True,124,1,0,0,,142,1
-2026-10-18 03:50,INDIA NEWS,Uttarakhand minister's husband accuses her of amassing ₹210 crore assets,56,True,text_card,reel_text,18114709061028741,122123242149424069,True,True,131,1,0,0,,160,1
-2026-10-18 08:06,BREAKING NEWS,13 devotees crushed to death after truck crashes through Gwalior temple wall,91,True,text_card,reel_text,17912287203542490,122123267907424069,True,True,61,0,0,0,,77,0
-2026-10-18 09:46,INDIA NEWS,"Out of 13 crore deleted names, only 70 lakh remain unexplained.",56,True,text_card,reel_text,18119177752990520,122123277159424069,True,True,91,0,0,0,,108,1
-2026-10-18 10:26,INDIA NEWS,Kolkata Pandal Stampede: Seven Arrested After 19 Killed; Organisers Booked,79,True,text_card,reel_text,18101685023055262,122123280399424069,True,True,104,0,0,0,,124,0
-2026-10-18 11:06,INDIAN CINEMA,Actor needs two dedicated ACs on set to survive heavy prosthetics,63,True,text_card,reel_text,18097074692421103,122123284161424069,True,True,22,0,0,0,,33,0
-2026-10-18 11:26,INDIA NEWS,Fire at Athani supermarket results in property damage; no casualties,70,True,text_card,reel_text,18140342620619663,122123285847424069,True,True,115,0,0,0,,130,0
+2026-10-18 03:50,INDIA NEWS,Uttarakhand minister's husband accuses her of amassing ₹210 crore assets,56,True,text_card,reel_text,18114709061028741,122123242149424069,True,True,132,1,0,0,,160,1
+2026-10-18 08:06,BREAKING NEWS,13 devotees crushed to death after truck crashes through Gwalior temple wall,91,True,text_card,reel_text,17912287203542490,122123267907424069,True,True,79,0,0,0,,96,0
+2026-10-18 09:46,INDIA NEWS,"Out of 13 crore deleted names, only 70 lakh remain unexplained.",56,True,text_card,reel_text,18119177752990520,122123277159424069,True,True,93,0,0,0,,109,1
+2026-10-18 10:26,INDIA NEWS,Kolkata Pandal Stampede: Seven Arrested After 19 Killed; Organisers Booked,79,True,text_card,reel_text,18101685023055262,122123280399424069,True,True,123,0,0,0,,150,0
+2026-10-18 11:06,INDIAN CINEMA,Actor needs two dedicated ACs on set to survive heavy prosthetics,63,True,text_card,reel_text,18097074692421103,122123284161424069,True,True,49,0,0,0,,61,0
+2026-10-18 11:26,INDIA NEWS,Fire at Athani supermarket results in property damage; no casualties,70,True,text_card,reel_text,18140342620619663,122123285847424069,True,True,120,0,0,0,,134,0
 2026-10-18 11:46,INDIA NEWS,First permanent High Court bench opens in Ladakh for local justice,75,False,full_bleed,,17914444176511833,122123287407424069,True,True,2,0,1,0,0,,1
-2026-10-18 12:06,INDIA NEWS,Delhi court convicts man for shooting wife who refused to return home,58,True,text_card,reel_text,18117705776080020,122123289435424069,True,True,3,0,0,0,,51,0
-2026-10-18 13:06,INDIAN CINEMA,Composer Amit Trivedi confesses he understood nothing in film No Smoking.,57,True,text_card,reel_text,18117888566005497,122123295291424069,True,True,0,0,0,0,,1,0
+2026-10-18 12:06,INDIA NEWS,Delhi court convicts man for shooting wife who refused to return home,58,True,text_card,reel_text,18117705776080020,122123289435424069,True,True,135,0,0,0,,146,0
+2026-10-18 13:06,INDIAN CINEMA,Composer Amit Trivedi confesses he understood nothing in film No Smoking.,57,True,text_card,reel_text,18117888566005497,122123295291424069,True,True,65,0,0,0,,82,0
