@@ -322,7 +322,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-16 09:05,INDIAN CINEMA,"Yash urges fans to unite for 'Ramayana,' praises Ranbir Kapoor’s dedication",68,True,text_card,reel_text,18449801395132760,122122911573424069,True,True,168,2,0,0,,207,2
 2026-10-16 10:05,INDIA NEWS,"Delhi Cops Beef Up Security, Put Traffic Curbs Ahead Of CJP Tiranga Rally",68,True,text_card,reel_text,18208575019369899,122122916889424069,True,True,121,0,0,0,,143,0
 2026-10-16 10:25,INDIA NEWS,Special Parliament Session In October: Delimitation & Women's Quota Bills On Agenda,78,True,full_bleed,reel_overlay,17973395505159789,122122921941424069,True,True,23,0,0,0,,28,0
-2026-10-16 11:56,INDIAN CINEMA,Bollywood actor Nushrratt Bharuccha undergoes successful spine surgery after Bali accident.,68,True,full_bleed,reel_overlay,17978789358131777,122122930479424069,True,True,280,1,0,0,,343,2
+2026-10-16 11:56,INDIAN CINEMA,Bollywood actor Nushrratt Bharuccha undergoes successful spine surgery after Bali accident.,68,True,full_bleed,reel_overlay,17978789358131777,122122930479424069,True,True,281,1,0,0,,343,2
 2026-10-16 13:05,INDIAN CINEMA,BREAKING: Jacqueline Fernandez has a hilarious cameo in Yami Gautam Dhar’s Nayyi Navelli,80,True,text_card,reel_text,18170897788497241,122122937463424069,True,True,144,0,0,0,,173,0
 2026-10-16 13:26,INDIA NEWS,Police detain journalists in four major cities despite Supreme Court assurances,72,True,text_card,reel_text,18167299933482347,122122939815424069,True,True,79,0,0,0,,99,0
 2026-10-16 15:25,INDIAN CINEMA,Korean beauty brand Mamonde names actor Nitanshi Goel as India ambassador,65,False,full_bleed,,17987620719117209,122122959915424069,True,True,6,0,0,11,0,,11
@@ -330,17 +330,17 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-17 00:46,INDIA NEWS,Samajwadi Party skips third Rajya Sabha candidate for upcoming Assembly polls.,75,True,text_card,reel_text,18109186337350702,122123035113424069,True,True,20,0,0,0,,29,0
 2026-10-17 02:15,INDIAN CINEMA,Rajinikanth's Jailer 2 collects Rs 125 crore worldwide on opening day.,71,False,full_bleed,,18126511642876463,122123051781424069,True,True,7,0,0,0,0,,0
 2026-10-17 03:45,INDIA NEWS,Top ISRO scientists lead massive space awareness rally in Andhra Pradesh,75,False,full_bleed,,17954572605268185,122123059599424069,True,True,3,0,0,0,0,,0
-2026-10-17 08:05,INDIA NEWS,Massive drug seizure triggers political storm as party expels leader,62,True,text_card,reel_text,18103853123298088,122123081307424069,True,True,21,0,0,0,,22,0
+2026-10-17 08:05,INDIA NEWS,Massive drug seizure triggers political storm as party expels leader,62,True,text_card,reel_text,18103853123298088,122123081307424069,True,True,21,0,0,0,,24,0
 2026-10-17 09:35,INDIA NEWS,Supreme Court warns verifying reporters gets tough as everyone claims journalist status.,75,False,full_bleed,,18092610020678511,122123090283424069,True,True,2,0,0,0,0,,0
 2026-10-17 09:45,INDIA NEWS,Karimnagar becomes first Telangana region to monitor power faults in real time,56,False,full_bleed,,18125841335314955,122123091675424069,True,True,2,0,0,0,0,,0
-2026-10-17 10:05,INDIAN CINEMA,Selma Blair makes her first public appearance since arrest,77,True,text_card,reel_text,17885015568512008,122123093577424069,True,True,24,0,0,0,,28,0
-2026-10-17 10:25,INDIA NEWS,Karnataka wins award for highest under-construction wind power capacity of 9 GW,56,True,full_bleed,reel_overlay,18371221111209229,122123096001424069,True,True,90,0,0,0,,108,0
-2026-10-17 11:25,INDIA NEWS,India orders compulsory hill training after Kedarnath helicopter crash,76,True,text_card,reel_text,18350384563271991,122123103291424069,True,True,69,0,0,0,,83,0
-2026-10-17 12:06,INDIA NEWS,Official probe blames pilot error for 2023 Mumbai jet crash,76,True,text_card,reel_text,17950581594293603,122123109603424069,True,True,83,0,0,0,,107,0
+2026-10-17 10:05,INDIAN CINEMA,Selma Blair makes her first public appearance since arrest,77,True,text_card,reel_text,17885015568512008,122123093577424069,True,True,25,0,0,0,,29,0
+2026-10-17 10:25,INDIA NEWS,Karnataka wins award for highest under-construction wind power capacity of 9 GW,56,True,full_bleed,reel_overlay,18371221111209229,122123096001424069,True,True,92,0,0,0,,110,0
+2026-10-17 11:25,INDIA NEWS,India orders compulsory hill training after Kedarnath helicopter crash,76,True,text_card,reel_text,18350384563271991,122123103291424069,True,True,73,0,0,0,,89,0
+2026-10-17 12:06,INDIA NEWS,Official probe blames pilot error for 2023 Mumbai jet crash,76,True,text_card,reel_text,17950581594293603,122123109603424069,True,True,91,0,0,0,,114,0
 2026-10-17 13:05,BREAKING NEWS,"Kids have a fundamental right to internet, Supreme Court rules",102,True,text_card,reel_text,18106218941146475,122123121201424069,True,True,8,0,0,0,,9,0
 2026-10-17 14:05,INDIA NEWS,Ensure landslide victory for Sarvotham Reddy in Graduates’ MLC election,62,True,text_card,reel_text,18113395106139377,122123129661424069,True,True,22,0,0,0,,28,0
 2026-10-17 15:25,INDIA NEWS,Nine-year-old boy dies after 39-hour rescue from Rajasthan borewell.,76,True,text_card,reel_text,18095600201444918,122123139639424069,True,True,118,1,0,0,,145,1
 2026-10-17 23:06,BREAKING NEWS,Kolkata Durga Puja stampede kills 17 people and injures 25 others,94,True,text_card,reel_text,18376748269240645,122123206479424069,True,True,110,0,0,0,,120,0
-2026-10-18 00:56,INDIA NEWS,Over 76% voters turn out for Nagaon Lok Sabha byelection,69,False,full_bleed,,18082786151717456,122123225325424069,True,True,1,0,0,0,0,,0
-2026-10-18 02:15,INDIA NEWS,Delhi Police detain activists marching with the Indian tricolour.,68,True,text_card,reel_text,18090266468680352,122123233851424069,True,True,28,0,0,0,,39,0
-2026-10-18 03:50,INDIA NEWS,Uttarakhand minister's husband accuses her of amassing ₹210 crore assets,56,True,text_card,reel_text,18114709061028741,122123242149424069,True,True,,,,,,,
+2026-10-18 00:56,INDIA NEWS,Over 76% voters turn out for Nagaon Lok Sabha byelection,69,False,full_bleed,,18082786151717456,122123225325424069,True,True,2,0,0,0,0,,0
+2026-10-18 02:15,INDIA NEWS,Delhi Police detain activists marching with the Indian tricolour.,68,True,text_card,reel_text,18090266468680352,122123233851424069,True,True,67,0,0,0,,81,0
+2026-10-18 03:50,INDIA NEWS,Uttarakhand minister's husband accuses her of amassing ₹210 crore assets,56,True,text_card,reel_text,18114709061028741,122123242149424069,True,True,55,0,0,0,,78,0
