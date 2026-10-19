@@ -338,7 +338,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-17 11:25,INDIA NEWS,India orders compulsory hill training after Kedarnath helicopter crash,76,True,text_card,reel_text,18350384563271991,122123103291424069,True,True,102,0,0,0,,124,0
 2026-10-17 12:06,INDIA NEWS,Official probe blames pilot error for 2023 Mumbai jet crash,76,True,text_card,reel_text,17950581594293603,122123109603424069,True,True,104,0,0,0,,135,0
 2026-10-17 13:05,BREAKING NEWS,"Kids have a fundamental right to internet, Supreme Court rules",102,True,text_card,reel_text,18106218941146475,122123121201424069,True,True,9,0,0,0,,10,0
-2026-10-17 14:05,INDIA NEWS,Ensure landslide victory for Sarvotham Reddy in Graduates’ MLC election,62,True,text_card,reel_text,18113395106139377,122123129661424069,True,True,30,0,0,0,,36,0
+2026-10-17 14:05,INDIA NEWS,Ensure landslide victory for Sarvotham Reddy in Graduates’ MLC election,62,True,text_card,reel_text,18113395106139377,122123129661424069,True,True,30,0,0,0,,37,0
 2026-10-17 15:25,INDIA NEWS,Nine-year-old boy dies after 39-hour rescue from Rajasthan borewell.,76,True,text_card,reel_text,18095600201444918,122123139639424069,True,True,119,1,0,0,,146,1
 2026-10-17 23:06,BREAKING NEWS,Kolkata Durga Puja stampede kills 17 people and injures 25 others,94,True,text_card,reel_text,18376748269240645,122123206479424069,True,True,112,0,0,0,,122,0
 2026-10-18 00:56,INDIA NEWS,Over 76% voters turn out for Nagaon Lok Sabha byelection,69,False,full_bleed,,18082786151717456,122123225325424069,True,True,3,0,0,0,0,,0
@@ -352,17 +352,17 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-18 11:46,INDIA NEWS,First permanent High Court bench opens in Ladakh for local justice,75,False,full_bleed,,17914444176511833,122123287407424069,True,True,4,0,1,0,0,,1
 2026-10-18 12:06,INDIA NEWS,Delhi court convicts man for shooting wife who refused to return home,58,True,text_card,reel_text,18117705776080020,122123289435424069,True,True,143,0,0,0,,151,0
 2026-10-18 13:06,INDIAN CINEMA,Composer Amit Trivedi confesses he understood nothing in film No Smoking.,57,True,text_card,reel_text,18117888566005497,122123295291424069,True,True,110,0,0,0,,134,0
-2026-10-18 15:46,INDIA NEWS,CBI arrests Kerala man over ₹1 crore fake FedEx scam,75,True,text_card,reel_text,17901357177671371,122123315085424069,True,True,43,0,0,0,,48,0
+2026-10-18 15:46,INDIA NEWS,CBI arrests Kerala man over ₹1 crore fake FedEx scam,75,True,text_card,reel_text,17901357177671371,122123315085424069,True,True,46,0,0,0,,51,0
 2026-10-18 16:26,INDIAN CINEMA,Actor Johnny Lever is alive as fake death rumors go viral,62,True,text_card,reel_text,18489788521104372,122123319207424069,True,True,120,0,0,0,,140,0
 2026-10-18 23:06,INDIA NEWS,Two gunmen open fire on actor Tiger Shroff's car and flee.,71,True,text_card,reel_text,18013116107970016,122123365923424069,True,True,120,0,0,0,,143,0
-2026-10-19 01:36,INDIA NEWS,Four workers die after power plant chimney collapses in Bengal.,64,True,text_card,reel_text,17886911019623000,122123388357424069,True,True,33,0,0,0,,41,0
+2026-10-19 01:36,INDIA NEWS,Four workers die after power plant chimney collapses in Bengal.,64,True,text_card,reel_text,17886911019623000,122123388357424069,True,True,34,0,0,0,,43,0
 2026-10-19 02:26,INDIAN CINEMA,Gunmen shoot actor Tiger Shroff's driver outside his Mumbai residence.,65,True,text_card,reel_text,18024727628871112,122123392725424069,True,True,117,0,0,0,,141,0
-2026-10-19 04:06,INDIAN CINEMA,"Gunshots target Tiger Shroff's car, film union demands urgent security",68,True,text_card,reel_text,17910625170488972,122123400933424069,True,True,86,0,0,0,,97,0
-2026-10-19 08:06,INDIA NEWS,Five die as car dodging potholes crashes into Maharashtra bus,58,True,text_card,reel_text,18104856617459201,122123420733424069,True,True,115,0,0,0,,136,0
-2026-10-19 09:46,INDIAN CINEMA,Shooters target actor Tiger Shroff in Mumbai as police form 15 teams,71,True,text_card,reel_text,18343557616287016,122123428581424069,True,True,45,0,0,0,,57,0
+2026-10-19 04:06,INDIAN CINEMA,"Gunshots target Tiger Shroff's car, film union demands urgent security",68,True,text_card,reel_text,17910625170488972,122123400933424069,True,True,101,0,0,0,,118,0
+2026-10-19 08:06,INDIA NEWS,Five die as car dodging potholes crashes into Maharashtra bus,58,True,text_card,reel_text,18104856617459201,122123420733424069,True,True,116,0,0,0,,137,0
+2026-10-19 09:46,INDIAN CINEMA,Shooters target actor Tiger Shroff in Mumbai as police form 15 teams,71,True,text_card,reel_text,18343557616287016,122123428581424069,True,True,63,0,0,0,,77,0
 2026-10-19 10:56,INDIA NEWS,ISRO clears crucial test for India's historic Gaganyaan human space mission,87,False,full_bleed,,18140108455627104,122123434059424069,True,True,3,0,0,0,0,,0
-2026-10-19 11:06,INDIAN CINEMA,Massive 160-day shoot wraps for actor Sai Durgha Tej's movie,64,True,text_card,reel_text,18574613563072431,122123434833424069,True,True,110,0,0,0,,138,0
-2026-10-19 11:26,INDIA NEWS,"Muslim women suffer most without nationwide civil code, claims Himanta Sarma",63,True,text_card,reel_text,18096519074451635,122123436447424069,True,True,69,0,0,0,,114,0
-2026-10-19 12:06,INDIAN CINEMA,Rs 2 crore budget film Hanuman Ansh earns Rs 322 crore,72,True,text_card,reel_text,17926482867430608,122123440341424069,True,True,25,0,0,0,,29,0
-2026-10-19 13:06,INDIAN CINEMA,Rakul Preet drapes Rs 2.75 lac tissue saree for Ramayana launch - Exclusive,56,True,text_card,reel_text,18122385239513243,122123445597424069,True,True,1,0,0,0,,6,0
-2026-10-19 14:15,INDIAN CINEMA,Vijay Sethupathi wraps shoot for Puri Jagannadh's new action drama,64,True,text_card,reel_text,17908547418566025,122123457165424069,True,True,,,,,,,
+2026-10-19 11:06,INDIAN CINEMA,Massive 160-day shoot wraps for actor Sai Durgha Tej's movie,64,True,text_card,reel_text,18574613563072431,122123434833424069,True,True,168,0,0,0,,191,0
+2026-10-19 11:26,INDIA NEWS,"Muslim women suffer most without nationwide civil code, claims Himanta Sarma",63,True,text_card,reel_text,18096519074451635,122123436447424069,True,True,140,0,0,0,,168,0
+2026-10-19 12:06,INDIAN CINEMA,Rs 2 crore budget film Hanuman Ansh earns Rs 322 crore,72,True,text_card,reel_text,17926482867430608,122123440341424069,True,True,59,0,0,0,,63,0
+2026-10-19 13:06,INDIAN CINEMA,Rakul Preet drapes Rs 2.75 lac tissue saree for Ramayana launch - Exclusive,56,True,text_card,reel_text,18122385239513243,122123445597424069,True,True,42,0,0,0,,58,0
+2026-10-19 14:15,INDIAN CINEMA,Vijay Sethupathi wraps shoot for Puri Jagannadh's new action drama,64,True,text_card,reel_text,17908547418566025,122123457165424069,True,True,88,1,0,0,,136,1
