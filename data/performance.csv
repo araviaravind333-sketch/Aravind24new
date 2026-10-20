@@ -329,7 +329,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-16 22:58,INDIAN CINEMA,"Kartik Aaryan and Sreeleela’s Anurag Basu-directed film locks April 30, 2027 release date",62,True,full_bleed,reel_overlay,18098251970334967,122123021157424069,True,True,127,0,0,0,,157,0
 2026-10-17 00:46,INDIA NEWS,Samajwadi Party skips third Rajya Sabha candidate for upcoming Assembly polls.,75,True,text_card,reel_text,18109186337350702,122123035113424069,True,True,20,0,0,0,,29,0
 2026-10-17 02:15,INDIAN CINEMA,Rajinikanth's Jailer 2 collects Rs 125 crore worldwide on opening day.,71,False,full_bleed,,18126511642876463,122123051781424069,True,True,7,0,0,0,0,,0
-2026-10-17 03:45,INDIA NEWS,Top ISRO scientists lead massive space awareness rally in Andhra Pradesh,75,False,full_bleed,,17954572605268185,122123059599424069,True,True,3,0,0,0,0,,0
+2026-10-17 03:45,INDIA NEWS,Top ISRO scientists lead massive space awareness rally in Andhra Pradesh,75,False,full_bleed,,17954572605268185,122123059599424069,True,True,4,0,0,0,0,,0
 2026-10-17 08:05,INDIA NEWS,Massive drug seizure triggers political storm as party expels leader,62,True,text_card,reel_text,18103853123298088,122123081307424069,True,True,24,0,0,0,,26,0
 2026-10-17 09:35,INDIA NEWS,Supreme Court warns verifying reporters gets tough as everyone claims journalist status.,75,False,full_bleed,,18092610020678511,122123090283424069,True,True,2,0,0,0,0,,0
 2026-10-17 09:45,INDIA NEWS,Karimnagar becomes first Telangana region to monitor power faults in real time,56,False,full_bleed,,18125841335314955,122123091675424069,True,True,3,0,0,0,0,,0
@@ -360,16 +360,16 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-19 04:06,INDIAN CINEMA,"Gunshots target Tiger Shroff's car, film union demands urgent security",68,True,text_card,reel_text,17910625170488972,122123400933424069,True,True,107,0,0,0,,125,0
 2026-10-19 08:06,INDIA NEWS,Five die as car dodging potholes crashes into Maharashtra bus,58,True,text_card,reel_text,18104856617459201,122123420733424069,True,True,122,0,0,0,,143,0
 2026-10-19 09:46,INDIAN CINEMA,Shooters target actor Tiger Shroff in Mumbai as police form 15 teams,71,True,text_card,reel_text,18343557616287016,122123428581424069,True,True,78,0,0,0,,97,0
-2026-10-19 10:56,INDIA NEWS,ISRO clears crucial test for India's historic Gaganyaan human space mission,87,False,full_bleed,,18140108455627104,122123434059424069,True,True,3,0,0,0,0,,0
+2026-10-19 10:56,INDIA NEWS,ISRO clears crucial test for India's historic Gaganyaan human space mission,87,False,full_bleed,,18140108455627104,122123434059424069,True,True,4,0,0,0,0,,0
 2026-10-19 11:06,INDIAN CINEMA,Massive 160-day shoot wraps for actor Sai Durgha Tej's movie,64,True,text_card,reel_text,18574613563072431,122123434833424069,True,True,177,0,0,0,,203,0
 2026-10-19 11:26,INDIA NEWS,"Muslim women suffer most without nationwide civil code, claims Himanta Sarma",63,True,text_card,reel_text,18096519074451635,122123436447424069,True,True,141,0,0,0,,170,0
-2026-10-19 12:06,INDIAN CINEMA,Rs 2 crore budget film Hanuman Ansh earns Rs 322 crore,72,True,text_card,reel_text,17926482867430608,122123440341424069,True,True,101,0,0,0,,120,1
+2026-10-19 12:06,INDIAN CINEMA,Rs 2 crore budget film Hanuman Ansh earns Rs 322 crore,72,True,text_card,reel_text,17926482867430608,122123440341424069,True,True,102,0,0,0,,121,1
 2026-10-19 13:06,INDIAN CINEMA,Rakul Preet drapes Rs 2.75 lac tissue saree for Ramayana launch - Exclusive,56,True,text_card,reel_text,18122385239513243,122123445597424069,True,True,123,0,0,0,,169,0
-2026-10-19 14:15,INDIAN CINEMA,Vijay Sethupathi wraps shoot for Puri Jagannadh's new action drama,64,True,text_card,reel_text,17908547418566025,122123457165424069,True,True,317,1,0,0,,392,1
-2026-10-19 16:26,INDIA NEWS,Supreme Court says no prior approval needed to probe public servant's bribe demand,75,False,full_bleed,,18053765006813720,122123473425424069,True,True,4,0,0,0,0,,0
-2026-10-19 16:37,INDIA NEWS,"Navy signs Rs 1,900-crore deals to boost indigenous defence technology",56,True,text_card,reel_text,18098711318386246,122123474937424069,True,True,74,0,0,0,,85,0
-2026-10-19 23:06,INDIA NEWS,Allahabad High Court orders statewide verification of UP teachers' certificates,78,True,text_card,reel_text,17914538283522117,122123522403424069,True,True,115,0,0,0,,132,0
-2026-10-20 02:56,INDIA NEWS,"""A Mistake"": Jagan Mohan Reddy Regrets Backing 2023 Election Commission Law",81,True,full_bleed,reel_overlay,18144547663595375,122123547549424069,True,True,19,0,0,0,,25,0
-2026-10-20 04:55,INDIA NEWS,CPI(M) bookstall vandalism at Bengal Durga Puja triggers fierce political row.,68,False,full_bleed,,18147489454492712,122123558511424069,True,True,1,0,0,0,0,,0
-2026-10-20 06:16,INDIA NEWS,High Court pauses murder conviction so convict can contest elections,63,True,text_card,reel_text,17921427132450038,122123567019424069,True,True,1,0,0,0,,3,0
-2026-10-20 08:56,INDIA NEWS,Naveen Patnaik questions Odisha government’s 'silence' on Andhra's poll notification,41,True,full_bleed,reel_overlay,17908994409483967,122123579763424069,True,True,,,,,,,
+2026-10-19 14:15,INDIAN CINEMA,Vijay Sethupathi wraps shoot for Puri Jagannadh's new action drama,64,True,text_card,reel_text,17908547418566025,122123457165424069,True,True,328,1,0,0,,406,1
+2026-10-19 16:26,INDIA NEWS,Supreme Court says no prior approval needed to probe public servant's bribe demand,75,False,full_bleed,,18053765006813720,122123473425424069,True,True,5,0,0,0,0,,0
+2026-10-19 16:37,INDIA NEWS,"Navy signs Rs 1,900-crore deals to boost indigenous defence technology",56,True,text_card,reel_text,18098711318386246,122123474937424069,True,True,75,0,0,0,,85,0
+2026-10-19 23:06,INDIA NEWS,Allahabad High Court orders statewide verification of UP teachers' certificates,78,True,text_card,reel_text,17914538283522117,122123522403424069,True,True,124,0,0,0,,140,0
+2026-10-20 02:56,INDIA NEWS,"""A Mistake"": Jagan Mohan Reddy Regrets Backing 2023 Election Commission Law",81,True,full_bleed,reel_overlay,18144547663595375,122123547549424069,True,True,35,0,0,0,,41,0
+2026-10-20 04:55,INDIA NEWS,CPI(M) bookstall vandalism at Bengal Durga Puja triggers fierce political row.,68,False,full_bleed,,18147489454492712,122123558511424069,True,True,4,0,0,0,0,,0
+2026-10-20 06:16,INDIA NEWS,High Court pauses murder conviction so convict can contest elections,63,True,text_card,reel_text,17921427132450038,122123567019424069,True,True,4,0,0,0,,9,0
+2026-10-20 08:56,INDIA NEWS,Naveen Patnaik questions Odisha government’s 'silence' on Andhra's poll notification,41,True,full_bleed,reel_overlay,17908994409483967,122123579763424069,True,True,1,0,0,0,,2,0
