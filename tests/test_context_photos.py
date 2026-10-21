@@ -266,8 +266,8 @@ def share_alike_tests(tmp):
     src = os.path.join(tmp, "wide.jpg")
     Image.new("RGB", (3000, 1000), (30, 160, 60)).save(src)
     head = "PARLIAMENT PASSES NEW BILL ON DIGITAL DATA PROTECTION"
-    plain = fp.render_post(src, "INDIA NEWS", head, "", os.path.join(tmp, "p.jpg"))
-    sa = fp.render_post(src, "INDIA NEWS", head, "", os.path.join(tmp, "sa.jpg"), share_alike=True)
+    plain = fp.render_post(src, "TAMIL NADU NEWS", head, "", os.path.join(tmp, "p.jpg"))
+    sa = fp.render_post(src, "TAMIL NADU NEWS", head, "", os.path.join(tmp, "sa.jpg"), share_alike=True)
     sa_im = Image.open(sa)
     green = lambda px: px[1] > px[0] + 30 and px[1] > px[2] + 30
     check("share-alike photo is shown whole, letterboxed rather than cropped",

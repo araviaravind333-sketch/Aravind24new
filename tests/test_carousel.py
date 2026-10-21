@@ -231,7 +231,8 @@ def selection_scope_tests():
     all_world = {
         "WORLD NEWS": [_story("w1", "Train derails in France, 44 injured", "WORLD NEWS", 95),
                         _story("w2", "Fuel tanker explodes outside Baltimore", "WORLD NEWS", 92)],
-        "INDIA NEWS": [_story("i1", "Massive fire guts Chennai godown, three dead", "INDIA NEWS", 60)],
+        "TAMIL NADU NEWS": [_story("i1", "Massive fire guts Chennai godown, three dead",
+                                  "TAMIL NADU NEWS", 60)],
         "BUSINESS NEWS": [], "SPORTS NEWS": [], "HUMAN INTEREST": [],
     }
     real_fetch = ne.fetch_candidates
@@ -241,13 +242,13 @@ def selection_scope_tests():
         check("world stories are eligible even though India's score is lower",
               any(p["category"] == "WORLD NEWS" for p in picked), picked)
         check("at least one India story is guaranteed even when it scores lowest",
-              any(p["category"] == "INDIA NEWS" for p in picked), picked)
+              any(p["category"] == "TAMIL NADU NEWS" for p in picked), picked)
 
         # And the reverse: if India already made it on merit, nothing is
         # force-swapped in on top of it.
         picked2 = cr._select_distinct_stories(3)
         check("does not duplicate India once it's already included on merit",
-              sum(1 for p in picked2 if p["category"] == "INDIA NEWS") == 1, picked2)
+              sum(1 for p in picked2 if p["category"] == "TAMIL NADU NEWS") == 1, picked2)
     finally:
         ne.fetch_candidates = real_fetch
 

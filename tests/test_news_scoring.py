@@ -108,7 +108,7 @@ def cinema_category_tests():
     check("INDIAN CINEMA is eligible to post",
           "INDIAN CINEMA" in settings.INDIA_ONLY_CATEGORIES)
     check("allowed_categories() returns all three at any hour (24h India-only window)",
-          set(ne.allowed_categories()) == {"INDIA NEWS", "HUMAN INTEREST", "INDIAN CINEMA"},
+          set(ne.allowed_categories()) == {"TAMIL NADU NEWS", "HUMAN INTEREST", "INDIAN CINEMA"},
           ne.allowed_categories())
     check("a cinema story is detected as India content",
           ne.detect_geo("Shah Rukh Khan announces new film", "INDIAN CINEMA") == {"is_india": True, "place": "India"})
@@ -120,9 +120,52 @@ def cinema_category_tests():
           len(settings.RSS_FEEDS.get("INDIAN CINEMA", [])) > 0)
 
 
+def tamil_nadu_niche_pivot_tests():
+    """Regression for the 2026-10-21 niche pivot: three weeks of generic
+    pan-India headlines plateaued at near-zero follower conversion
+    (9->10 across ~170 posts) while competing head-on, with zero
+    resources, against NDTV/India Today on the exact same national
+    stories. This account's OWN data already showed where real
+    engagement existed unprompted -- Tamil Nadu content averaged 550
+    views vs 214 for generic Delhi/national coverage, on fewer posts.
+    "INDIA NEWS" was replaced outright, not supplemented, with
+    "TAMIL NADU NEWS" as the flagship category. These tests exist so a
+    future "let's also cover general India news" edit doesn't silently
+    recreate the generic-aggregator identity this was a deliberate,
+    data-backed move away from."""
+    print("\nTAMIL NADU NICHE PIVOT (2026-10-21)")
+    from config import settings
+    from src import template
+    check("the old generic pan-India category no longer exists",
+          "INDIA NEWS" not in settings.RSS_FEEDS)
+    check("TAMIL NADU NEWS is the flagship India-hours category",
+          "TAMIL NADU NEWS" in settings.INDIA_ONLY_CATEGORIES)
+    check("it has real RSS feeds configured (not left empty)",
+          len(settings.RSS_FEEDS.get("TAMIL NADU NEWS", [])) >= 2,
+          settings.RSS_FEEDS.get("TAMIL NADU NEWS"))
+    check("every feed URL actually mentions Tamil Nadu in its path -- not a bare national feed relabelled",
+          all("tamil-nadu" in u.lower() or "tamilnadu" in u.lower()
+              for u in settings.RSS_FEEDS["TAMIL NADU NEWS"]),
+          settings.RSS_FEEDS["TAMIL NADU NEWS"])
+    check("it has its own category colour, not falling back to the default accent",
+          "TAMIL NADU NEWS" in template.CATEGORY_COLORS)
+    check("it has its own, on-brand hashtag set",
+          settings.HASHTAG_BANK.get("TAMIL NADU NEWS", []) and
+          any("tamilnadu" in h.lower() or "chennai" in h.lower()
+              for h in settings.HASHTAG_BANK["TAMIL NADU NEWS"]),
+          settings.HASHTAG_BANK.get("TAMIL NADU NEWS"))
+    check("a Tamil Nadu story geo-tags specifically, not just a blanket 'India'",
+          ne.detect_geo("Tamil Nadu cabinet approves new scheme", "TAMIL NADU NEWS")
+          == {"is_india": True, "place": "Tamil Nadu"})
+    check("the fallback hashtag lookup points at the new flagship key, not a dead one",
+          settings.HASHTAG_BANK["TAMIL NADU NEWS"] ==
+          __import__("src.ai_writer", fromlist=["settings"]).settings.HASHTAG_BANK["TAMIL NADU NEWS"])
+
+
 if __name__ == "__main__":
     run()
     cinema_category_tests()
+    tamil_nadu_niche_pivot_tests()
     print(f"\n{'='*52}\n{len(PASS)} passed, {len(FAIL)} failed")
     if FAIL:
         print("FAILED:")

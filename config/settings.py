@@ -117,8 +117,8 @@ INDIA_ONLY_END_HOUR_IST   = 24
 # rate vs ~1-2% on hard news (see its comment in RSS_FEEDS above), and it
 # has not posted once since -- a real, unnoticed cost, not a deliberate
 # choice. Added here along with the new cinema category, which is
-# India content for the same reason INDIA NEWS is.
-INDIA_ONLY_CATEGORIES     = ("INDIA NEWS", "HUMAN INTEREST", "INDIAN CINEMA")
+# India content for the same reason TAMIL NADU NEWS is.
+INDIA_ONLY_CATEGORIES     = ("TAMIL NADU NEWS", "HUMAN INTEREST", "INDIAN CINEMA")
 
 # ============================================================
 # 2. IMAGE PIPELINE
@@ -134,10 +134,23 @@ UNSPLASH_ACCESS_KEY    = _env("UNSPLASH_ACCESS_KEY")# free, 50/hr
 # We read RSS for FACTS, then AI REWRITES headline+caption in our voice.
 # We never copy article text or use publishers' photos.
 RSS_FEEDS = {
-    "INDIA NEWS": [
-        "https://www.thehindu.com/news/national/feeder/default.rss",
-        "https://feeds.feedburner.com/ndtvnews-india-news",
-        "https://www.indiatoday.in/rss/1206578",
+    # The actual niche pivot (2026-10-21): three weeks of pan-India
+    # generic headlines plateaued at near-zero follower conversion
+    # (9->10 across ~170 posts) while competing head-on, with zero
+    # resources, against NDTV/India Today on the exact same stories.
+    # This account's OWN performance data already showed the one place
+    # real engagement showed up unprompted: Tamil Nadu content averaged
+    # 550 views vs 214 for generic Delhi/national coverage, on fewer
+    # posts. This replaces the old pan-India "INDIA NEWS" feeds entirely
+    # -- not one more category added to the mix, the primary identity.
+    # Both feeds checked live before adding (60 and 40 real current
+    # items respectively); a NewIndianExpress TN feed under a different
+    # URL pattern 404s, a ToI Chennai-city feed id resolved to Gujarat
+    # instead, and Deccan Chronicle's "tamil-nadu" feed is actually
+    # Hyderabad-focused -- all three were tried and dropped.
+    "TAMIL NADU NEWS": [
+        "https://www.thehindu.com/news/national/tamil-nadu/feeder/default.rss",
+        "https://www.newindianexpress.com/states/tamil-nadu/rssfeed/?id=170&getXmlFeed=true",
     ],
     "WORLD NEWS": [
         "https://feeds.bbci.co.uk/news/world/rss.xml",
@@ -258,7 +271,7 @@ DEFAULT_INDIA_LOCATION = "India"          # fallback IG location search term
 # ============================================================
 # 4 tags per post, mixed: 1 broad + 1 niche + 1 trending + 1 brand.
 HASHTAG_BANK = {
-    "INDIA NEWS":    ["#IndiaNews", "#BreakingNews", "#news", "#AravindNews24"],
+    "TAMIL NADU NEWS": ["#TamilNadu", "#Chennai", "#TNNews", "#AravindNews24"],
     "WORLD NEWS":    ["#WorldNews", "#GlobalNews", "#news", "#AravindNews24"],
     "BREAKING NEWS": ["#BreakingNews", "#news", "#trending", "#AravindNews24"],
     "SPORTS NEWS":   ["#SportsNews", "#sports", "#news", "#AravindNews24"],

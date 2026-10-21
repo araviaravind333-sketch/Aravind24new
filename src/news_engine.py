@@ -345,7 +345,13 @@ COUNTRY_CITIES = {
 
 def detect_geo(title, category):
     t = title.lower()
-    if category in ("INDIA NEWS", "INDIAN CINEMA"):
+    if category == "TAMIL NADU NEWS":
+        # More specific than the old blanket "India" -- this only affects
+        # the Telegram preview line (main.py's loc_line); the actual
+        # published post's location tag still always says "India" for
+        # any is_india=True story (see publisher.py), unaffected by this.
+        return {"is_india": True, "place": "Tamil Nadu"}
+    if category == "INDIAN CINEMA":
         return {"is_india": True, "place": "India"}
     for country, city in COUNTRY_CITIES.items():
         if country in t:

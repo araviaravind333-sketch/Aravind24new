@@ -65,7 +65,7 @@ def gap_tests(tmp):
     print("\nNO DEAD SPACE (regression)")
     src = os.path.join(tmp, "gap.jpg")
     Image.new("RGB", (1500, 1000), (200, 40, 40)).save(src)
-    out = fp.render_post(src, "INDIA NEWS", SHORT, "", os.path.join(tmp, "gap_out.jpg"),
+    out = fp.render_post(src, "TAMIL NADU NEWS", SHORT, "", os.path.join(tmp, "gap_out.jpg"),
                          footer="For the latest news", handle="@aravindnews24")
     im = Image.open(out)
     lay = fp.layout_for(1.5, SHORT)
@@ -89,7 +89,7 @@ def render_tests(tmp):
         src = os.path.join(tmp, f"{name}.jpg")
         Image.new("RGB", size, (200, 40, 40)).save(src)
         out = os.path.join(tmp, f"post_{name}.jpg")
-        fp.render_post(src, "INDIA NEWS", HEAD, "KERALA RAINS", out, footer="For the latest news",
+        fp.render_post(src, "TAMIL NADU NEWS", HEAD, "KERALA RAINS", out, footer="For the latest news",
                        handle="@aravindnews24", file_photo=True)
         im = Image.open(out)
         lay = fp.layout_for(size[0] / size[1], HEAD)
@@ -125,7 +125,7 @@ def render_tests(tmp):
 
     long_head = ("GOVERNMENT ANNOUNCES A VERY LONG RELIEF PACKAGE FOR FLOOD AFFECTED FAMILIES ACROSS "
                  "SEVERAL DISTRICTS OF ASSAM AND BIHAR TODAY AS WATERS KEEP RISING")
-    o = fp.render_post(src, "INDIA NEWS", long_head, "", os.path.join(tmp, "long.jpg"),
+    o = fp.render_post(src, "TAMIL NADU NEWS", long_head, "", os.path.join(tmp, "long.jpg"),
                        footer="For the latest news", handle="@aravindnews24")
     im = Image.open(o)
     # the credit line follows the content now (no fixed y), so just confirm
@@ -157,7 +157,7 @@ def overlay_tests(tmp):
     src = os.path.join(tmp, "photo.jpg")
     Image.new("RGB", (1000, 1250), (90, 90, 110)).save(src)
     headline = "CM Vijay to launch 1-gram gold ring scheme, a key TVK poll promise, on Monday"
-    out = fp.render_overlay_post(src, "INDIA NEWS", headline, "TVK",
+    out = fp.render_overlay_post(src, "TAMIL NADU NEWS", headline, "TVK",
                                  os.path.join(tmp, "overlay.jpg"),
                                  handle="@aravindnews24", photo_note="")
     im = Image.open(out)
@@ -169,7 +169,7 @@ def overlay_tests(tmp):
     check("_fit_serif preserves casing instead of uppercasing", any(c.islower() for line in lines for c in line))
 
     # thin colour accent bar to the left of the headline block, category colour
-    color = fp.CATEGORY_COLORS.get("INDIA NEWS")
+    color = fp.CATEGORY_COLORS.get("TAMIL NADU NEWS")
     color_rgb = fp._hex_to_rgb(color)
     bar_col = im.getpixel((fp.MARGIN + 3, 1350 - 76 - block_h + 10))
     check("a colour accent bar sits to the left of the headline",
@@ -219,7 +219,7 @@ def reel_tests(tmp):
     src = os.path.join(tmp, "p.jpg")
     Image.new("RGB", (1000, 1250), (200, 200, 205)).save(src)   # bright photo: worst case for legibility
     head = "Suvendu Adhikari blames Mamata Banerjee for deleting 27 lakh voter names"
-    out = fp.render_overlay_reel(src, "INDIA NEWS", head, "", os.path.join(tmp, "r.jpg"))
+    out = fp.render_overlay_reel(src, "TAMIL NADU NEWS", head, "", os.path.join(tmp, "r.jpg"))
     im = Image.open(out)
     check("overlay reel is 1080x1920", im.size == (1080, 1920))
     lines, f, size, block_h = fp._fit_serif(ImageDraw.Draw(im), head, 1080 - fp.MARGIN - 34 - fp.MARGIN, start=84)
@@ -232,7 +232,7 @@ def reel_tests(tmp):
     clear = im.getpixel((540, 200))
     check("the photo stays clear well above the headline", sum(clear[:3]) > 500, clear)
 
-    out2 = fp.render_text_reel("INDIA NEWS", "Karur stampede: first accused arrested a year after the tragedy", "",
+    out2 = fp.render_text_reel("TAMIL NADU NEWS", "Karur stampede: first accused arrested a year after the tragedy", "",
                                os.path.join(tmp, "t.jpg"), subhead="Police said the accused was held in Chennai.")
     im2 = Image.open(out2)
     check("text reel is 1080x1920", im2.size == (1080, 1920))
@@ -261,7 +261,7 @@ def reveal_tests(tmp):
     frames = []
     for k in list(range(1, n)) + [None]:
         p = os.path.join(tmp, f"r{k}.jpg")
-        fp.render_overlay_reel(photo_path=photo, category="INDIA NEWS", headline=head,
+        fp.render_overlay_reel(photo_path=photo, category="TAMIL NADU NEWS", headline=head,
                                accent_word="", out_path=p, reveal_lines=k)
         frames.append(Image.open(p).convert("RGB"))
 
@@ -290,7 +290,7 @@ def endcard_tests(tmp):
     preference still stands."""
     print("\nFOLLOW END CARD")
     p = os.path.join(tmp, "end.jpg")
-    fp.render_follow_endcard(p, category="INDIA NEWS")
+    fp.render_follow_endcard(p, category="TAMIL NADU NEWS")
     im = Image.open(p).convert("RGB")
     check("end card is a full Reel frame", im.size == (fp.REEL_W, fp.REEL_H))
     check("it is its own dark frame, not an overlay on a photo",

@@ -125,8 +125,8 @@ def _select_distinct_stories(n):
     candidates = _all_category_candidates()
     picked = _dedupe_by_event(candidates, n)
 
-    if not any(s["category"] == "INDIA NEWS" for s in picked):
-        india = sorted(news_engine.fetch_candidates("INDIA NEWS"),
+    if not any(s["category"] == "TAMIL NADU NEWS" for s in picked):
+        india = sorted(news_engine.fetch_candidates("TAMIL NADU NEWS"),
                         key=lambda s: s["score"], reverse=True)
         if india:
             top_india = india[0]

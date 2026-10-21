@@ -281,7 +281,7 @@ def storage_tests():
 
     story = {"id": "s1", "title": "Massive fire guts Chennai godown, three dead",
              "summary": "", "link": "https://www.indiatoday.in/story/fire",
-             "category": "INDIA NEWS", "score": 88}
+             "category": "TAMIL NADU NEWS", "score": 88}
     result = {
         "article_id": "s1", "headline": story["title"], "event_id": "IN-CHENNAI-FIRE-2026-09-16-abcd",
         "image_status": ip.VERIFIED_COPYRIGHTED_IMAGE, "decision": ip.MANUAL_REVIEW,

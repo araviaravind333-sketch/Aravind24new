@@ -31,8 +31,12 @@ GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.6-flash")
 ANTHROPIC_KEY = os.environ.get("ANTHROPIC_API_KEY")
 
 
-PROMPT = """You are the editor of AravindNews24, a fast-growing India + world news page \
-on Instagram and Facebook. Your audience is pan-India, mostly men 25-34.
+PROMPT = """You are the editor of AravindNews24, a Tamil Nadu-focused news page on \
+Instagram and Facebook. Your audience is mostly Tamil Nadu / Chennai readers, men 25-34 -- \
+write as someone who already knows the state's politics, geography and culture, not as an \
+outsider explaining India to a generic national audience. (A smaller share of posts are \
+national breaking news, cinema or human-interest stories -- for those, the same direct, \
+no-filler voice still applies.)
 
 Rewrite the raw news below into JSON with these keys:
 - "headline": 7-12 words, simple English, present tense, stop-the-scroll. It MUST be a \
@@ -126,7 +130,7 @@ def _rule_based(story):
     words = title.split()
     accent = " ".join(words[:2])
     cat = story["category"]
-    tags = settings.HASHTAG_BANK.get(cat, settings.HASHTAG_BANK["INDIA NEWS"])
+    tags = settings.HASHTAG_BANK.get(cat, settings.HASHTAG_BANK["TAMIL NADU NEWS"])
     # Shares are one of the most heavily-weighted signals in Instagram's
     # distribution algorithm, more than likes -- but a share nudge on a
     # routine story reads as desperate, so only use it for stories that

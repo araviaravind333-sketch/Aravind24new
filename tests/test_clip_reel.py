@@ -60,7 +60,7 @@ def layout_tests(tmp):
           short_win > long_win, (short_win, long_win))
 
     lay = cr.layout_for(1.5, HEAD)
-    f = Image.open(cr.render_frame_png("INDIA NEWS", HEAD, "SILVER", os.path.join(tmp, "f.png"),
+    f = Image.open(cr.render_frame_png("TAMIL NADU NEWS", HEAD, "SILVER", os.path.join(tmp, "f.png"),
                                        footer="For the latest news → @aravindnews24",
                                        handle="@aravindnews24", layout=lay))
     mid = lay["win_y"] + lay["win_h"] // 2
@@ -93,7 +93,7 @@ def layout_tests(tmp):
                  "SEVERAL DISTRICTS OF ASSAM AND BIHAR TODAY")
     for a in (1.5, 16 / 9, 9 / 16):
         lay2 = cr.layout_for(a, long_head)
-        g = Image.open(cr.render_frame_png("INDIA NEWS", long_head, "", os.path.join(tmp, "g.png"), layout=lay2))
+        g = Image.open(cr.render_frame_png("TAMIL NADU NEWS", long_head, "", os.path.join(tmp, "g.png"), layout=lay2))
         check(f"very long headline stays out of the bottom 350px ({a:.2f})",
               all(g.getpixel((x, y))[:3] == PANEL_RGB for x in range(60, 1020, 30) for y in (1600, 1700, 1800)))
 
@@ -186,7 +186,7 @@ def render_tests(tmp):
                         "-pix_fmt", "yuv420p", clip], capture_output=True)
         a = cr.probe_aspect(clip)
         lay = cr.layout_for(a, HEAD)
-        frame = cr.render_frame_png("INDIA NEWS", HEAD, "", os.path.join(tmp, f"fr_{name}.png"), layout=lay)
+        frame = cr.render_frame_png("TAMIL NADU NEWS", HEAD, "", os.path.join(tmp, f"fr_{name}.png"), layout=lay)
         out = os.path.join(tmp, f"reel_{name}.mp4")
         cr.render_reel_from_clip(clip, frame, out, 1.5, layout=lay)
         log = subprocess.run([ff, "-i", out], capture_output=True, text=True).stderr
