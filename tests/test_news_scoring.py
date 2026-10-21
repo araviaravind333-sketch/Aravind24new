@@ -162,10 +162,35 @@ def tamil_nadu_niche_pivot_tests():
           __import__("src.ai_writer", fromlist=["settings"]).settings.HASHTAG_BANK["TAMIL NADU NEWS"])
 
 
+def tamil_cinema_boost_tests():
+    """Regression for option 1 of the 2026-10-21 pivot: Tamil cinema is
+    the one TN-adjacent content type with genuinely pan-India/diaspora
+    reach, so it should score like a national-impact story, not like
+    ordinary regional content. Deliberately does NOT boost on "Vijay"
+    alone -- that name is currently ALSO Tamil Nadu's sitting CM, and
+    boosting it would just re-score ordinary state politics as cinema
+    content."""
+    print("\nTAMIL CINEMA BOOST (pan-India reach lever)")
+    for title in ["Rajinikanth's next film with Lokesh Kanagaraj announced",
+                  "Dhanush injures hand while shooting fight sequence",
+                  "Kamal Haasan turns 70, fans celebrate across Tamil Nadu",
+                  "Suriya and Jyotika announce new production house"]:
+        s, hot = score(title)
+        check(f"a real Tamil cinema story scores like national-impact content: {title[:40]!r}",
+              s >= 25 and hot, (s, hot))
+    check("bare 'Vijay' (the sitting CM) is NOT boosted as cinema content",
+          not ne._is_tamil_cinema("CM Vijay inaugurates new metro line in Chennai"))
+    check("but an explicit cinema term still catches a Vijay-the-actor headline",
+          ne._is_tamil_cinema("Vijay Sethupathi's new Kollywood thriller gets release date"))
+    check("an unrelated TN political headline is not touched",
+          not ne._is_tamil_cinema("Tamil Nadu cabinet approves new irrigation scheme"))
+
+
 if __name__ == "__main__":
     run()
     cinema_category_tests()
     tamil_nadu_niche_pivot_tests()
+    tamil_cinema_boost_tests()
     print(f"\n{'='*52}\n{len(PASS)} passed, {len(FAIL)} failed")
     if FAIL:
         print("FAILED:")

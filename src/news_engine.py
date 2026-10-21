@@ -114,6 +114,29 @@ HOT_KEYWORDS = [
     "scam", "fraud", "explosive", "sensational", "massive", "huge",
 ]
 
+# Added for the 2026-10-21 niche pivot (option 1 of 3 chosen: lean into
+# Tamil cinema specifically for pan-India reach). Tamil Nadu politics and
+# state news are, by nature, regional -- but Tamil cinema stars
+# (Rajinikanth, Kamal Haasan, Ajith Kumar, Vikram, Suriya, Dhanush...)
+# have fan followings across India and internationally (Bengaluru,
+# Mumbai, the Tamil diaspora in Singapore/Malaysia/the Gulf/Sri Lanka),
+# making this the one TN-adjacent content type that is genuinely NOT
+# geographically limited. Deliberately does NOT include "Vijay" alone --
+# that name is currently ALSO Tamil Nadu's sitting CM, and a bare-name
+# boost would just re-score ordinary state politics as if it were
+# cinema content, defeating the point of a targeted boost.
+TAMIL_CINEMA_KEYWORDS = [
+    "kollywood", "tamil cinema", "tamil film", "tamil movie", "tamil actor",
+    "rajinikanth", "kamal haasan", "ajith kumar", "vikram", "suriya",
+    "dhanush", "vijay sethupathi", "nayanthara", "trisha", "simbu",
+    "silambarasan", "yogi babu", "box office", "kollywood star",
+]
+
+
+def _is_tamil_cinema(title):
+    return _any_kw(TAMIL_CINEMA_KEYWORDS, title.lower())
+
+
 # Stories tied to a pan-India institution/event affect literally everyone,
 # not just one state/city — these get priority over regional news, per
 # explicit request, even over other "hot" stories.
@@ -254,6 +277,13 @@ def _virality(title, published_dt):
             score += 25
             hot_hit = True
             break
+    # 2026-10-21 niche pivot: Tamil cinema is the one TN-adjacent content
+    # type with genuinely pan-India/diaspora reach (see TAMIL_CINEMA_KEYWORDS'
+    # comment), so it gets the same treatment as a national-impact story
+    # rather than being scored as merely regional content.
+    if _is_tamil_cinema(title):
+        score += 25
+        hot_hit = True
     # Fresh incidents (collapse/crash/disaster) were the single biggest
     # reach outlier across every competitor account analyzed -- a building
     # collapse and an animal-cruelty clip each cleared 2M+ views while
