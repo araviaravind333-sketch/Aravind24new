@@ -364,7 +364,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-19 11:06,INDIAN CINEMA,Massive 160-day shoot wraps for actor Sai Durgha Tej's movie,64,True,text_card,reel_text,18574613563072431,122123434833424069,True,True,179,0,0,0,,208,0
 2026-10-19 11:26,INDIA NEWS,"Muslim women suffer most without nationwide civil code, claims Himanta Sarma",63,True,text_card,reel_text,18096519074451635,122123436447424069,True,True,142,0,0,0,,171,0
 2026-10-19 12:06,INDIAN CINEMA,Rs 2 crore budget film Hanuman Ansh earns Rs 322 crore,72,True,text_card,reel_text,17926482867430608,122123440341424069,True,True,102,0,0,0,,123,1
-2026-10-19 13:06,INDIAN CINEMA,Rakul Preet drapes Rs 2.75 lac tissue saree for Ramayana launch - Exclusive,56,True,text_card,reel_text,18122385239513243,122123445597424069,True,True,148,0,0,0,,209,1
+2026-10-19 13:06,INDIAN CINEMA,Rakul Preet drapes Rs 2.75 lac tissue saree for Ramayana launch - Exclusive,56,True,text_card,reel_text,18122385239513243,122123445597424069,True,True,149,0,0,0,,210,1
 2026-10-19 14:15,INDIAN CINEMA,Vijay Sethupathi wraps shoot for Puri Jagannadh's new action drama,64,True,text_card,reel_text,17908547418566025,122123457165424069,True,True,373,1,0,0,,458,1
 2026-10-19 16:26,INDIA NEWS,Supreme Court says no prior approval needed to probe public servant's bribe demand,75,False,full_bleed,,18053765006813720,122123473425424069,True,True,5,0,0,0,0,,0
 2026-10-19 16:37,INDIA NEWS,"Navy signs Rs 1,900-crore deals to boost indigenous defence technology",56,True,text_card,reel_text,18098711318386246,122123474937424069,True,True,76,0,0,0,,87,0
@@ -375,7 +375,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-20 08:56,INDIA NEWS,Naveen Patnaik questions Odisha government’s 'silence' on Andhra's poll notification,41,True,full_bleed,reel_overlay,17908994409483967,122123579763424069,True,True,100,2,0,0,,127,2
 2026-10-20 10:46,INDIA NEWS,"Foreign forces try to weaken India, warns RSS chief Mohan Bhagwat.",63,True,text_card,reel_text,17894796213676207,122123590413424069,True,True,136,3,0,0,,160,3
 2026-10-20 11:06,HUMAN INTEREST,60-year-old Japanese corporate worker goes viral for his breakdancing moves,56,True,text_card,reel_text,18108222377609594,122123592111424069,True,True,65,0,0,0,,77,0
-2026-10-20 11:25,INDIAN CINEMA,Vijay Deverakonda faces backlash for revealing Rashmika asked him for marriage,57,True,text_card,reel_text,17975143992168636,122123593863424069,True,True,1630,1,0,1,,2585,4
+2026-10-20 11:25,INDIAN CINEMA,Vijay Deverakonda faces backlash for revealing Rashmika asked him for marriage,57,True,text_card,reel_text,17975143992168636,122123593863424069,True,True,1631,1,0,1,,2586,4
 2026-10-20 12:26,INDIA NEWS,Top leaders extend Vijayadashmi wishes calling for national unity and peace,63,True,text_card,reel_text,18109324816903411,122123599533424069,True,True,50,0,0,0,,57,0
 2026-10-20 12:46,INDIA NEWS,"Samajwadi Party announces separate UP manifestos for women, youth, and law.",56,False,full_bleed,,17872346124643030,122123601315424069,True,True,5,0,0,0,0,,0
 2026-10-20 13:06,INDIA NEWS,Gujarat proposes disputed plot for Yusuf Pathan after NDA switch,68,True,full_bleed,reel_overlay,17908139394579942,122123603151424069,True,True,128,0,0,0,,164,0
@@ -383,16 +383,16 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-20 16:26,INDIA NEWS,US leader Marco Rubio arrives in Mumbai for key talks with Jaishankar,68,False,full_bleed,,18030757085912635,122123625009424069,True,True,4,0,0,0,0,,0
 2026-10-20 16:46,INDIAN CINEMA,Mika Singh DEFENDS Daler Mehndi amid Uttarakhand event controversy,60,True,full_bleed,reel_overlay,18116133304832849,122123628399424069,True,True,154,0,0,0,,184,0
 2026-10-20 23:06,BREAKING NEWS,PM Modi urges all parties to unite against India's three enemies,93,False,full_bleed,,18117968962944755,122123674467424069,True,True,3,0,0,0,0,,0
-2026-10-21 05:36,INDIA NEWS,US confirms landmark trade deal with India reaches final stage,68,True,text_card,reel_text,18118032328807281,122123717109424069,True,True,66,0,0,0,,76,0
+2026-10-21 05:36,INDIA NEWS,US confirms landmark trade deal with India reaches final stage,68,True,text_card,reel_text,18118032328807281,122123717109424069,True,True,68,0,0,0,,78,0
 2026-10-21 08:26,INDIA NEWS,"Shiv Sena's Dussehra rally sees Eknath Shinde, Thackeray clash over 'vote chori'",68,True,text_card,reel_text,18132710755816627,122123729655424069,True,True,129,0,0,0,,169,0
 2026-10-21 09:06,INDIA NEWS,US advances key trade pact with India while honoring 26/11 victims,74,False,full_bleed,,18075043370576387,122123733243424069,True,True,2,0,0,0,0,,0
-2026-10-21 11:06,INDIA NEWS,US Trade Deal: Opposition Questions Centre Over Lack Of Parliament Disclosure,63,True,full_bleed,reel_overlay,17915996349466751,122123747259424069,True,True,24,0,0,0,,26,0
-2026-10-21 11:26,INDIA NEWS,Maharashtra Political War Escalates Over Regime Change Jibe and Mumbai Shooting Controversy,73,True,text_card,reel_text,18074213003776646,122123749887424069,True,True,30,0,0,0,,38,0
-2026-10-21 12:26,INDIA NEWS,Mystery bag blast injures two in Bengaluru as police probe IED.,64,True,text_card,reel_text,18124182655922686,122123754765424069,True,True,64,0,0,0,,76,0
-2026-10-21 12:46,INDIA NEWS,Blast In Bengaluru: Suspected IED In Abandoned Bag Injures Two Workers,58,True,text_card,reel_text,18633078310007130,122123756997424069,True,True,122,0,0,0,,153,0
+2026-10-21 11:06,INDIA NEWS,US Trade Deal: Opposition Questions Centre Over Lack Of Parliament Disclosure,63,True,full_bleed,reel_overlay,17915996349466751,122123747259424069,True,True,30,0,0,0,,32,0
+2026-10-21 11:26,INDIA NEWS,Maharashtra Political War Escalates Over Regime Change Jibe and Mumbai Shooting Controversy,73,True,text_card,reel_text,18074213003776646,122123749887424069,True,True,38,0,0,0,,44,0
+2026-10-21 12:26,INDIA NEWS,Mystery bag blast injures two in Bengaluru as police probe IED.,64,True,text_card,reel_text,18124182655922686,122123754765424069,True,True,67,0,0,0,,80,0
+2026-10-21 12:46,INDIA NEWS,Blast In Bengaluru: Suspected IED In Abandoned Bag Injures Two Workers,58,True,text_card,reel_text,18633078310007130,122123756997424069,True,True,130,0,0,0,,165,0
 2026-10-21 14:06,INDIAN CINEMA,Was it necessary to go up on stage and humiliate him like that,60,True,text_card,reel_text,18109108604580020,122123766705424069,True,True,116,0,0,0,,147,0
 2026-10-21 14:46,INDIA NEWS,PM Modi reviews Indian economy with Finance Minister to boost growth,63,True,text_card,reel_text,18118183360971846,122123771319424069,True,True,6,0,0,0,,10,0
-2026-10-21 15:06,INDIA NEWS,CA Inter exam results release tomorrow as Foundation candidates wait,65,True,text_card,reel_text,18131246827762403,122123773521424069,True,True,6,0,0,0,,12,0
-2026-10-21 15:26,INDIA NEWS,"Two dead, four injured as massive fire engulfs 60-70 commercial units",68,True,text_card,reel_text,18110005679206206,122123776029424069,True,True,110,0,0,0,,129,0
+2026-10-21 15:06,INDIA NEWS,CA Inter exam results release tomorrow as Foundation candidates wait,65,True,text_card,reel_text,18131246827762403,122123773521424069,True,True,7,0,0,0,,13,0
+2026-10-21 15:26,INDIA NEWS,"Two dead, four injured as massive fire engulfs 60-70 commercial units",68,True,text_card,reel_text,18110005679206206,122123776029424069,True,True,122,0,0,0,,140,0
 2026-10-21 16:26,INDIA NEWS,Patna High Court grants land compensation to former Speaker Meira Kumar,63,True,full_bleed,reel_overlay,18169135198481403,122123783043424069,True,True,140,0,0,0,,172,0
 2026-10-21 17:46,INDIA NEWS,Jio IPO gets oversubscribed in 100 minutes with record bids,56,False,full_bleed,,18154601449537235,122123793105424069,True,True,4,0,0,0,0,,0
