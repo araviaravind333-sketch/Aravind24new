@@ -72,9 +72,47 @@ def allowed_updates_tests():
         tb._call = real_call
 
 
+def trailer_drop_nudge_tests():
+    """Regression for a real, sharp observation (2026-10-22): entertainment
+    is the one news category where a text card is an especially flat
+    substitute for the real thing, since a trailer/teaser/song release
+    genuinely IS a video the studio just put out to be shared. The
+    candidate card must nudge the owner to go find the studio's OWN
+    official link when (and only when) a story is actually that kind of
+    drop -- never auto-fetched, since that would just be scraping at a
+    different layer (see news_engine.is_trailer_drop's docstring)."""
+    print("\nTRAILER-DROP NUDGE (entertainment candidate cards)")
+    calls = []
+    real_call = tb._call
+    tb._call = lambda method, params=None: (calls.append(params) or {"message_id": 1})
+    try:
+        tb.send_candidate({"category": "INDIAN CINEMA", "score": 90,
+                           "title": "Jailer 2 trailer out now, fans go wild",
+                           "summary": "", "link": "https://x"})
+        check("a trailer-drop story gets the nudge to find the official link",
+              "official" in calls[-1]["text"].lower(), calls[-1]["text"])
+
+        calls.clear()
+        tb.send_candidate({"category": "INDIAN CINEMA", "score": 80,
+                           "title": "Dhanush spotted at Chennai airport",
+                           "summary": "", "link": "https://x"})
+        check("an ordinary cinema story (no trailer/teaser) is not nudged",
+              "official" not in calls[-1]["text"].lower(), calls[-1]["text"])
+
+        calls.clear()
+        tb.send_candidate({"category": "TAMIL NADU NEWS", "score": 70,
+                           "title": "Tamil Nadu cabinet approves new scheme",
+                           "summary": "", "link": "https://x"})
+        check("a non-cinema story is never nudged, even at a high score",
+              "official" not in calls[-1]["text"].lower(), calls[-1]["text"])
+    finally:
+        tb._call = real_call
+
+
 if __name__ == "__main__":
     webhook_guard_tests()
     allowed_updates_tests()
+    trailer_drop_nudge_tests()
     print(f"\n{'=' * 52}\n{len(PASS)} passed, {len(FAIL)} failed")
     if FAIL:
         print("FAILED:")

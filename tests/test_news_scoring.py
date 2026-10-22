@@ -209,12 +209,32 @@ def bollywood_boost_tests():
           set(ne.TAMIL_CINEMA_KEYWORDS) & set(ne.BOLLYWOOD_KEYWORDS))
 
 
+def trailer_drop_detection_tests():
+    """Regression: a trailer/song/teaser release genuinely IS a video, so
+    these stories get flagged (not auto-fetched -- see is_trailer_drop's
+    own docstring for why sourcing the real link stays a human call)."""
+    print("\nTRAILER-DROP DETECTION")
+    for title in ["'Jailer 2' trailer out now, fans go wild",
+                  "Coolie teaser crosses 10 million views in a day",
+                  "'Pushpa 3' first look poster unveiled",
+                  "Leo second single song release date announced",
+                  "Vikram motion poster out, release date confirmed"]:
+        check(f"recognised as a trailer/teaser/song drop: {title[:45]!r}",
+              ne.is_trailer_drop(title))
+    for title in ["Dhanush spotted at Chennai airport",
+                  "Rajinikanth turns 75, fans celebrate",
+                  "RBI holds repo rate steady at monetary policy meeting"]:
+        check(f"an ordinary story is not misread as a trailer drop: {title[:45]!r}",
+              not ne.is_trailer_drop(title))
+
+
 if __name__ == "__main__":
     run()
     cinema_category_tests()
     tamil_nadu_niche_pivot_tests()
     tamil_cinema_boost_tests()
     bollywood_boost_tests()
+    trailer_drop_detection_tests()
     print(f"\n{'='*52}\n{len(PASS)} passed, {len(FAIL)} failed")
     if FAIL:
         print("FAILED:")

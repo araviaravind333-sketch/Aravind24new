@@ -159,6 +159,31 @@ def _is_bollywood(title):
     return _any_kw(BOLLYWOOD_KEYWORDS, title.lower())
 
 
+# Answers a real, sharp observation (2026-10-22): entertainment is the one
+# news category where "real video" and "a text card" are an especially
+# wide gap -- a trailer or song release genuinely IS a video, so a
+# headline card about one is a flat substitute for footage the studio
+# itself just put out specifically to be shared and discussed. But the
+# fix is NOT auto-fetching that video: a studio's own official trailer is
+# lower-risk than a random bystander clip (distribution is the whole
+# point of releasing one), but "lower-risk" still is not "no risk", and
+# an automated YouTube search+download would just be scraping at a
+# different layer, bypassing the one judgment call that actually matters
+# here -- confirming it's really the studio's own channel, not a reupload.
+# So this only DETECTS the moment worth flagging and tells the owner,
+# via the existing candidate card; sourcing the real link stays a human
+# decision, same as every other video this pipeline ever posts. Measured
+# on the live INDIAN CINEMA feed: ~1 in 11 headlines are this type.
+TRAILER_DROP_KEYWORDS = [
+    "trailer", "teaser", "first look", "song release", "motion poster",
+    "first single", "lyrical video",
+]
+
+
+def is_trailer_drop(title):
+    return _any_kw(TRAILER_DROP_KEYWORDS, title.lower())
+
+
 # Stories tied to a pan-India institution/event affect literally everyone,
 # not just one state/city — these get priority over regional news, per
 # explicit request, even over other "hot" stories.

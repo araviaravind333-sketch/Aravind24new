@@ -31,6 +31,7 @@ import urllib.error
 import urllib.request
 
 from config import settings
+from src import news_engine
 
 API = f"https://api.telegram.org/bot{settings.TELEGRAM_BOT_TOKEN}"
 FILE_API = f"https://api.telegram.org/file/bot{settings.TELEGRAM_BOT_TOKEN}"
@@ -83,6 +84,17 @@ def send_candidate(story):
         text += f"\n{summary}\n"
     if link:
         text += f"\nSource: {link}\n"
+    if news_engine.is_trailer_drop(story["title"]):
+        # Real, sharp observation: a trailer/song/teaser release IS a
+        # video -- a headline card about one is a flat substitute for
+        # footage the studio itself just put out to be shared. Pointed
+        # at the owner, not auto-fetched: see is_trailer_drop's comment
+        # for why sourcing the actual official link stays a human call.
+        text += (
+            f"\n\U0001F3AC This is a trailer/teaser/song drop -- if you can find "
+            f"the STUDIO'S OWN official YouTube/X post for it, paste that link "
+            f"here and it posts as the real video (same as any other link)."
+        )
     if settings.TEXT_ONLY_MODE:
         # Photos are off entirely right now -- don't ask for one that
         # would just be ignored at render time.
