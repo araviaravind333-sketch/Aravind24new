@@ -40,9 +40,14 @@ jobs:
           git add data/performance.csv || true
           git add data/followers.csv || true
           git commit -m "auto: daily insights refresh $(date -u +%FT%TZ)" || echo "nothing to commit"
+          pushed=false
           for i in 1 2 3 4 5; do
-            git push && break
+            git push && { pushed=true; break; }
             echo "push failed (attempt $i) -- rebasing on remote, retrying"
             git pull --rebase --autostash origin main || true
             sleep 3
           done
+          if [ "$pushed" != true ]; then
+            echo "push failed after 5 attempts -- state from this run was NOT saved" >&2
+            exit 1
+          fi

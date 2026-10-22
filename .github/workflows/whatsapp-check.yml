@@ -58,12 +58,17 @@ jobs:
           git config user.email "bot@users.noreply.github.com"
           git add public/ data/whatsapp_pending.json || true
           git commit -m "auto: whatsapp queue $(date -u +%FT%TZ)" || echo "nothing to commit"
+          pushed=false
           for i in 1 2 3 4 5; do
-            git push && break
+            git push && { pushed=true; break; }
             echo "push failed (attempt $i) -- rebasing on remote, retrying"
             git pull --rebase --autostash origin main || true
             sleep 3
           done
+          if [ "$pushed" != true ]; then
+            echo "push failed after 5 attempts -- state from this run was NOT saved" >&2
+            exit 1
+          fi
 
       - name: Publish to Instagram + Facebook (no-op if nothing pending)
         env:
@@ -79,9 +84,14 @@ jobs:
         run: |
           git add data/ || true
           git commit -m "auto: whatsapp post cycle $(date -u +%FT%TZ)" || echo "nothing to commit"
+          pushed=false
           for i in 1 2 3 4 5; do
-            git push && break
+            git push && { pushed=true; break; }
             echo "push failed (attempt $i) -- rebasing on remote, retrying"
             git pull --rebase --autostash origin main || true
             sleep 3
           done
+          if [ "$pushed" != true ]; then
+            echo "push failed after 5 attempts -- state from this run was NOT saved" >&2
+            exit 1
+          fi

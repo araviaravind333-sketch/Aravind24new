@@ -108,12 +108,17 @@ jobs:
           git add data/carousel_inbox/ || true
           git add data/telegram_offset.json || true
           git commit -m "auto: carousel cycle $(date -u +%FT%TZ)" || echo "nothing to commit"
+          pushed=false
           for i in 1 2 3 4 5; do
-            git push && break
+            git push && { pushed=true; break; }
             echo "push failed (attempt $i) -- rebasing on remote, retrying"
             git pull --rebase --autostash origin main || true
             sleep 3
           done
+          if [ "$pushed" != true ]; then
+            echo "push failed after 5 attempts -- state from this run was NOT saved" >&2
+            exit 1
+          fi
 
       - name: Publish carousel to Instagram + Facebook (no-op unless ready)
         # Separate command, run only after the push above -- this is the
@@ -136,12 +141,17 @@ jobs:
         run: |
           git add data/carousel_pending.json || true
           git commit -m "auto: carousel publish $(date -u +%FT%TZ)" || echo "nothing to commit"
+          pushed=false
           for i in 1 2 3 4 5; do
-            git push && break
+            git push && { pushed=true; break; }
             echo "push failed (attempt $i) -- rebasing on remote, retrying"
             git pull --rebase --autostash origin main || true
             sleep 3
           done
+          if [ "$pushed" != true ]; then
+            echo "push failed after 5 attempts -- state from this run was NOT saved" >&2
+            exit 1
+          fi
 
       # ------------------------------------------------------------------
       # Daily roundup Reel: a voice-over video of the slides that were just
@@ -193,12 +203,17 @@ jobs:
           git add public/carousel/ || true
           git add data/carousel_pending.json || true
           git commit -m "auto: roundup reel $(date -u +%FT%TZ)" || echo "nothing to commit"
+          pushed=false
           for i in 1 2 3 4 5; do
-            git push && break
+            git push && { pushed=true; break; }
             echo "push failed (attempt $i) -- rebasing on remote, retrying"
             git pull --rebase --autostash origin main || true
             sleep 3
           done
+          if [ "$pushed" != true ]; then
+            echo "push failed after 5 attempts -- state from this run was NOT saved" >&2
+            exit 1
+          fi
 
       - name: Publish roundup reel to Instagram (no-op unless one was built)
         continue-on-error: true
@@ -218,9 +233,14 @@ jobs:
         run: |
           git add data/carousel_pending.json || true
           git commit -m "auto: roundup reel state $(date -u +%FT%TZ)" || echo "nothing to commit"
+          pushed=false
           for i in 1 2 3 4 5; do
-            git push && break
+            git push && { pushed=true; break; }
             echo "push failed (attempt $i) -- rebasing on remote, retrying"
             git pull --rebase --autostash origin main || true
             sleep 3
           done
+          if [ "$pushed" != true ]; then
+            echo "push failed after 5 attempts -- state from this run was NOT saved" >&2
+            exit 1
+          fi
