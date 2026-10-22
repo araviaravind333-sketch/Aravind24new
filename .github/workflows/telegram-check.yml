@@ -52,13 +52,19 @@ jobs:
           git config user.name "aravindnews24-bot"
           git config user.email "bot@users.noreply.github.com"
           git add public/ data/telegram_pending.json data/telegram_offset.json data/photo_log.jsonl || true
+          git add data/_pending.json || true
           git commit -m "auto: telegram queue $(date -u +%FT%TZ)" || echo "nothing to commit"
+          pushed=false
           for i in 1 2 3 4 5; do
-            git push && break
+            git push && { pushed=true; break; }
             echo "push failed (attempt $i) -- rebasing on remote, retrying"
             git pull --rebase --autostash origin main || true
             sleep 3
           done
+          if [ "$pushed" != true ]; then
+            echo "push failed after 5 attempts -- state from this run was NOT saved" >&2
+            exit 1
+          fi
 
       - name: Publish to Instagram + Facebook (no-op if nothing pending)
         env:
@@ -71,6 +77,20 @@ jobs:
         run: python -m src.main publish
 
       - name: Commit state (posted log + analytics, if anything changed)
+        # if: always() -- a failed "Publish to Instagram + Facebook" step
+        # above (API hiccup, image never going public in time) used to
+        # skip this step entirely by GitHub Actions' default behaviour.
+        # That is a second, distinct way the same class of bug this
+        # step's own git-add comment describes can happen: data/posted.json
+        # never gets mark_posted()'s entry, AND data/_pending.json (this
+        # story's retry record, already committed in the step above) is
+        # the only thing standing between "next run retries the same
+        # pending post" and "next run re-fetches the same RSS story as if
+        # it were brand new" -- which is exactly the duplicate-candidate
+        # bug a real report described (2026-10-22). Running this step
+        # unconditionally means whatever DID change before the failure is
+        # still captured, every time.
+        if: always()
         run: |
           # Separate `git add` calls, not one combined pathspec list: git
           # add fails ATOMICALLY if any single pathspec matches nothing
@@ -86,9 +106,14 @@ jobs:
           git add data/ || true
           git add public/dashboard/ || true
           git commit -m "auto: telegram post cycle $(date -u +%FT%TZ)" || echo "nothing to commit"
+          pushed=false
           for i in 1 2 3 4 5; do
-            git push && break
+            git push && { pushed=true; break; }
             echo "push failed (attempt $i) -- rebasing on remote, retrying"
             git pull --rebase --autostash origin main || true
             sleep 3
           done
+          if [ "$pushed" != true ]; then
+            echo "push failed after 5 attempts -- state from this run was NOT saved" >&2
+            exit 1
+          fi
