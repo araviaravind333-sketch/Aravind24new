@@ -137,6 +137,28 @@ def _is_tamil_cinema(title):
     return _any_kw(TAMIL_CINEMA_KEYWORDS, title.lower())
 
 
+# Added 2026-10-22: a direct follow-up to the Tamil cinema boost above --
+# asked for by name ("Bollywood") as a second pan-India reach lever
+# within the same INDIAN CINEMA category, not a new state/category of
+# its own. Hindi cinema has, if anything, a WIDER unprompted national
+# reach than Tamil cinema (it is the one entertainment category genuinely
+# followed the same way in every state), which is exactly why it belongs
+# here rather than being treated as regional. Full names only, for the
+# same reason "Vijay" was excluded from the Tamil list: a bare common
+# first name would false-positive on unrelated stories.
+BOLLYWOOD_KEYWORDS = [
+    "bollywood", "hindi cinema", "hindi film", "shah rukh khan", "srk",
+    "salman khan", "aamir khan", "akshay kumar", "ranbir kapoor",
+    "deepika padukone", "alia bhatt", "ranveer singh", "katrina kaif",
+    "hrithik roshan", "priyanka chopra", "kareena kapoor",
+    "amitabh bachchan", "vicky kaushal", "kiara advani",
+]
+
+
+def _is_bollywood(title):
+    return _any_kw(BOLLYWOOD_KEYWORDS, title.lower())
+
+
 # Stories tied to a pan-India institution/event affect literally everyone,
 # not just one state/city — these get priority over regional news, per
 # explicit request, even over other "hot" stories.
@@ -282,6 +304,11 @@ def _virality(title, published_dt):
     # comment), so it gets the same treatment as a national-impact story
     # rather than being scored as merely regional content.
     if _is_tamil_cinema(title):
+        score += 25
+        hot_hit = True
+    # 2026-10-22: Bollywood is the second pan-India reach lever, same
+    # category treatment as Tamil cinema above (see BOLLYWOOD_KEYWORDS).
+    if _is_bollywood(title):
         score += 25
         hot_hit = True
     # Fresh incidents (collapse/crash/disaster) were the single biggest

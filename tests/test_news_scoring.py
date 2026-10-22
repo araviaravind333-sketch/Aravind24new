@@ -186,11 +186,35 @@ def tamil_cinema_boost_tests():
           not ne._is_tamil_cinema("Tamil Nadu cabinet approves new irrigation scheme"))
 
 
+def bollywood_boost_tests():
+    """Regression for the 2026-10-22 follow-up: Bollywood as a second
+    pan-India reach lever in the same INDIAN CINEMA category, asked for
+    by name after the Tamil cinema boost shipped. Hindi cinema is, if
+    anything, followed MORE uniformly nationwide than Tamil cinema, so
+    it gets the identical national-impact-level score treatment. Full
+    names only -- "Shah Rukh Khan" not "Shah" or "Khan" -- for the same
+    reason the Tamil list excludes a bare "Vijay"."""
+    print("\nBOLLYWOOD BOOST (second pan-India reach lever)")
+    for title in ["Shah Rukh Khan's next film wraps shoot in Mumbai",
+                  "Deepika Padukone and Ranveer Singh spotted at airport",
+                  "Alia Bhatt starrer crosses Rs 200 crore at the box office",
+                  "Amitabh Bachchan hospitalised after on-set injury"]:
+        s, hot = score(title)
+        check(f"a real Bollywood story scores like national-impact content: {title[:40]!r}",
+              s >= 25 and hot, (s, hot))
+    check("an unrelated story mentioning neither cinema list is not boosted",
+          not ne._is_bollywood("RBI holds repo rate steady at monetary policy meeting"))
+    check("Tamil and Bollywood keyword lists don't silently overlap",
+          not (set(ne.TAMIL_CINEMA_KEYWORDS) & set(ne.BOLLYWOOD_KEYWORDS)),
+          set(ne.TAMIL_CINEMA_KEYWORDS) & set(ne.BOLLYWOOD_KEYWORDS))
+
+
 if __name__ == "__main__":
     run()
     cinema_category_tests()
     tamil_nadu_niche_pivot_tests()
     tamil_cinema_boost_tests()
+    bollywood_boost_tests()
     print(f"\n{'='*52}\n{len(PASS)} passed, {len(FAIL)} failed")
     if FAIL:
         print("FAILED:")
