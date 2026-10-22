@@ -228,6 +228,73 @@ def trailer_drop_detection_tests():
               not ne.is_trailer_drop(title))
 
 
+class _FakeYoutubeDL:
+    """Stands in for yt_dlp.YoutubeDL so this test never hits the real
+    network or depends on yt-dlp actually being installed -- it only
+    checks that search_trailer_candidates parses whatever yt-dlp hands
+    back and builds a real watch URL from a bare video id."""
+    def __init__(self, opts):
+        pass
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *a):
+        return False
+
+    def extract_info(self, query, download=False):
+        return {"entries": [
+            {"id": "abc123", "title": "Jailer 2 - Official Trailer", "channel": "Sun Pictures"},
+            {"url": "https://youtube.com/watch?v=xyz789", "title": "Reaction video", "uploader": "Some Fan Channel"},
+            {"title": "no id or url at all -- must be skipped"},
+        ]}
+
+
+def trailer_candidate_search_tests():
+    """Regression for the follow-up to trailer-drop detection: the bot
+    looks up possible official matches so the owner doesn't have to
+    search by hand, but posting one is still the owner's call -- this
+    only checks that a yt-dlp search result gets turned into a clean
+    list of {title, channel, url}, with a real watch URL built even when
+    yt-dlp only hands back a bare video id, and that entries with
+    neither an id nor a url are dropped rather than crashing."""
+    print("\nTRAILER CANDIDATE SEARCH (entertainment video lookup)")
+    import types
+    import sys as _sys
+    fake_module = types.SimpleNamespace(YoutubeDL=_FakeYoutubeDL)
+    real_module = _sys.modules.get("yt_dlp")
+    _sys.modules["yt_dlp"] = fake_module
+    try:
+        results = ne.search_trailer_candidates("Jailer 2 trailer out now")
+        check("returns one entry per real search result (junk entry dropped)",
+              len(results) == 2, results)
+        check("a bare video id is turned into a real youtube.com watch URL",
+              results[0]["url"] == "https://www.youtube.com/watch?v=abc123", results)
+        check("channel name is read from the 'channel' field when present",
+              results[0]["channel"] == "Sun Pictures", results)
+        check("a full URL already on the entry is kept as-is",
+              results[1]["url"] == "https://youtube.com/watch?v=xyz789", results)
+        check("channel falls back to 'uploader' when 'channel' is missing",
+              results[1]["channel"] == "Some Fan Channel", results)
+    finally:
+        if real_module is not None:
+            _sys.modules["yt_dlp"] = real_module
+        else:
+            _sys.modules.pop("yt_dlp", None)
+
+    def _boom(*a, **k):
+        raise RuntimeError("network down")
+    _sys.modules["yt_dlp"] = types.SimpleNamespace(YoutubeDL=_boom)
+    try:
+        check("a search failure (network, blocked, etc.) returns [] instead of raising",
+              ne.search_trailer_candidates("Leo song release") == [])
+    finally:
+        if real_module is not None:
+            _sys.modules["yt_dlp"] = real_module
+        else:
+            _sys.modules.pop("yt_dlp", None)
+
+
 if __name__ == "__main__":
     run()
     cinema_category_tests()
@@ -235,6 +302,7 @@ if __name__ == "__main__":
     tamil_cinema_boost_tests()
     bollywood_boost_tests()
     trailer_drop_detection_tests()
+    trailer_candidate_search_tests()
     print(f"\n{'='*52}\n{len(PASS)} passed, {len(FAIL)} failed")
     if FAIL:
         print("FAILED:")

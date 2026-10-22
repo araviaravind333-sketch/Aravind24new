@@ -95,6 +95,20 @@ def send_candidate(story):
             f"the STUDIO'S OWN official YouTube/X post for it, paste that link "
             f"here and it posts as the real video (same as any other link)."
         )
+        # Saves the owner the manual search -- the bot looks these up, but
+        # posting one still means the owner reads the channel name and
+        # pastes the link back themselves (same flow as any other video).
+        # Never auto-posted from here: see search_trailer_candidates' own
+        # docstring for why that confirmation stays a human call.
+        try:
+            candidates = news_engine.search_trailer_candidates(story["title"])
+        except Exception as e:
+            print("trailer candidate search failed:", e)
+            candidates = []
+        if candidates:
+            text += "\n\nPossible matches -- check the channel is the studio's OWN account, then paste the link to post it:\n"
+            for i, c in enumerate(candidates, 1):
+                text += f"{i}. {c['title'][:70]} — {c['channel']}\n{c['url']}\n"
     if settings.TEXT_ONLY_MODE:
         # Photos are off entirely right now -- don't ask for one that
         # would just be ignored at render time.

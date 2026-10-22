@@ -9,6 +9,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+from src import news_engine as ne
 from src import telegram_bot as tb
 
 PASS, FAIL = [], []
@@ -84,13 +85,22 @@ def trailer_drop_nudge_tests():
     print("\nTRAILER-DROP NUDGE (entertainment candidate cards)")
     calls = []
     real_call = tb._call
+    real_search = ne.search_trailer_candidates
     tb._call = lambda method, params=None: (calls.append(params) or {"message_id": 1})
+    # Never hit the real network/yt-dlp in a test run -- this is just
+    # verifying the candidate list gets formatted into the card, not that
+    # YouTube search itself works.
+    ne.search_trailer_candidates = lambda title, max_results=3: [
+        {"title": "Jailer 2 - Official Trailer", "channel": "Sun Pictures", "url": "https://youtube.com/watch?v=abc"},
+    ]
     try:
         tb.send_candidate({"category": "INDIAN CINEMA", "score": 90,
                            "title": "Jailer 2 trailer out now, fans go wild",
                            "summary": "", "link": "https://x"})
         check("a trailer-drop story gets the nudge to find the official link",
               "official" in calls[-1]["text"].lower(), calls[-1]["text"])
+        check("a trailer-drop story's card includes the searched candidate link",
+              "youtube.com/watch?v=abc" in calls[-1]["text"], calls[-1]["text"])
 
         calls.clear()
         tb.send_candidate({"category": "INDIAN CINEMA", "score": 80,
@@ -105,8 +115,17 @@ def trailer_drop_nudge_tests():
                            "summary": "", "link": "https://x"})
         check("a non-cinema story is never nudged, even at a high score",
               "official" not in calls[-1]["text"].lower(), calls[-1]["text"])
+
+        calls.clear()
+        ne.search_trailer_candidates = lambda title, max_results=3: (_ for _ in ()).throw(RuntimeError("network down"))
+        tb.send_candidate({"category": "INDIAN CINEMA", "score": 90,
+                           "title": "Leo second single song release date announced",
+                           "summary": "", "link": "https://x"})
+        check("a failed candidate search never blocks the candidate card itself",
+              "official" in calls[-1]["text"].lower(), calls[-1]["text"])
     finally:
         tb._call = real_call
+        ne.search_trailer_candidates = real_search
 
 
 if __name__ == "__main__":

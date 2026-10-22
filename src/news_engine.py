@@ -184,6 +184,47 @@ def is_trailer_drop(title):
     return _any_kw(TRAILER_DROP_KEYWORDS, title.lower())
 
 
+def search_trailer_candidates(title, max_results=3):
+    """Looks up possible official video matches for a trailer/teaser/song
+    headline -- title, channel name and link only, NEVER downloaded here.
+    This exists so the owner doesn't have to search YouTube by hand: the
+    bot does the lookup, but a human still has to look at the channel
+    name and decide it's really the studio's own account (not a reupload)
+    before pasting that link back to post it. That one decision is never
+    made here -- see is_trailer_drop's docstring for why skipping it would
+    just be scraping at a different layer. Any failure (network, no
+    yt-dlp, YouTube blocking the search) returns an empty list rather
+    than raising, so a flaky search can never freeze candidate posting."""
+    try:
+        import yt_dlp
+    except ImportError:
+        return []
+    query = title if "trailer" in title.lower() or "teaser" in title.lower() else f"{title} official"
+    opts = {
+        "quiet": True, "no_warnings": True, "skip_download": True,
+        "noplaylist": True, "extract_flat": "in_playlist",
+        "socket_timeout": 10,
+    }
+    try:
+        with yt_dlp.YoutubeDL(opts) as y:
+            info = y.extract_info(f"ytsearch{max_results}:{query}", download=False)
+    except Exception as e:
+        print("search_trailer_candidates failed:", str(e)[:160])
+        return []
+    results = []
+    for e in (info or {}).get("entries") or []:
+        vid = e.get("id") or e.get("url")
+        if not vid:
+            continue
+        url = vid if str(vid).startswith("http") else f"https://www.youtube.com/watch?v={vid}"
+        results.append({
+            "title": (e.get("title") or "").strip(),
+            "channel": e.get("channel") or e.get("uploader") or "unknown channel",
+            "url": url,
+        })
+    return results
+
+
 # Stories tied to a pan-India institution/event affect literally everyone,
 # not just one state/city — these get priority over regional news, per
 # explicit request, even over other "hot" stories.
