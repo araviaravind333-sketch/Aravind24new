@@ -368,11 +368,136 @@ def trailer_candidate_search_tests():
             _sys.modules.pop("yt_dlp", None)
 
 
+def cross_platform_trending_tests():
+    """Regression for the 2026-10-23 cross-platform trending signal: a
+    headline that overlaps a currently-trending Google/YouTube search
+    term should score like a strong hot_hit, without ever needing a real
+    network call in a test run -- `terms=` lets is_cross_platform_
+    trending() take a fixed set directly, same role `terms` plays in the
+    real function for the cached live lookup."""
+    print("\nCROSS-PLATFORM TRENDING (Google Trends + YouTube)")
+    terms = {"alia bhatt", "samantha ruth prabhu on vijay", "iit madras"}
+    check("a headline matching a trending multi-word term (as a bigram) is caught",
+          ne.is_cross_platform_trending("Alia Bhatt spotted at Mumbai airport", terms=terms))
+    check("a headline matching a trending name embedded in an odd search phrase is caught",
+          ne.is_cross_platform_trending("Samantha Ruth Prabhu reacts to viral clip", terms=terms))
+    check("an unrelated headline is not falsely matched",
+          not ne.is_cross_platform_trending("Rain expected across coastal Karnataka", terms=terms))
+    check("loose single words from a multi-word term don't match on their own",
+          not ne.is_cross_platform_trending("He arrived on time for the vijay rally", terms={"on vijay"}))
+    check("_trending_term_bigrams splits a phrase into consecutive word pairs",
+          ne._trending_term_bigrams("samantha ruth prabhu")
+          == {"samantha ruth", "ruth prabhu"})
+    check("_trending_term_bigrams keeps a long single word, drops a short one",
+          ne._trending_term_bigrams("bhatt") == {"bhatt"} and
+          ne._trending_term_bigrams("on") == set())
+
+    print("\nGOOGLE TRENDS RSS (mocked, never hits the real network in a test)")
+    import types as _types
+    real_parse = ne.feedparser.parse
+
+    class _Entry(dict):
+        def get(self, k, default=None):
+            return dict.get(self, k, default)
+
+        @property
+        def title(self):
+            return self["title"]
+
+    def fake_parse(url):
+        return _types.SimpleNamespace(entries=[_Entry(title="Alia Bhatt"), _Entry(title="IIT Madras")])
+    ne.feedparser.parse = fake_parse
+    try:
+        terms = ne.google_trending_terms()
+        check("parses real entries into a lowercased set",
+              terms == {"alia bhatt", "iit madras"}, terms)
+    finally:
+        ne.feedparser.parse = real_parse
+
+    def boom_parse(url):
+        raise RuntimeError("network down")
+    ne.feedparser.parse = boom_parse
+    try:
+        check("a Google Trends fetch failure returns an empty set, never raises",
+              ne.google_trending_terms() == set())
+    finally:
+        ne.feedparser.parse = real_parse
+
+    print("\nYOUTUBE TRENDING (official Data API v3, mocked)")
+    from config import settings
+    real_key = settings.YOUTUBE_API_KEY
+    settings.YOUTUBE_API_KEY = None
+    try:
+        check("with no API key configured, returns an empty set and makes no network call",
+              ne.youtube_trending_terms() == set())
+    finally:
+        settings.YOUTUBE_API_KEY = real_key
+
+    settings.YOUTUBE_API_KEY = "fake-test-key"
+    real_urlopen = ne.urllib.request.urlopen
+    import io
+    import json as _json
+
+    def fake_urlopen(url, timeout=15):
+        check("the request is addressed to the real YouTube Data API v3 endpoint",
+              url.startswith("https://www.googleapis.com/youtube/v3/videos"), url)
+        body = _json.dumps({"items": [
+            {"snippet": {"title": "Big Trending Video"}},
+            {"snippet": {"title": "Another One"}},
+        ]}).encode()
+        return io.BytesIO(body)
+    ne.urllib.request.urlopen = fake_urlopen
+    try:
+        terms = ne.youtube_trending_terms()
+        check("parses video titles into a lowercased set",
+              terms == {"big trending video", "another one"}, terms)
+    finally:
+        ne.urllib.request.urlopen = real_urlopen
+        settings.YOUTUBE_API_KEY = real_key
+
+    settings.YOUTUBE_API_KEY = "fake-test-key"
+
+    def boom_urlopen(url, timeout=15):
+        raise RuntimeError("network down")
+    ne.urllib.request.urlopen = boom_urlopen
+    try:
+        check("a YouTube API failure returns an empty set, never raises",
+              ne.youtube_trending_terms() == set())
+    finally:
+        ne.urllib.request.urlopen = real_urlopen
+        settings.YOUTUBE_API_KEY = real_key
+
+
+def category_priority_boost_tests():
+    """Regression for the 2026-10-23 weighted category preference: Tamil
+    Nadu 1st, national India 2nd, cinema 3rd -- a scoring boost, not a
+    strict fill order, so the SAME underlying story scores higher the
+    more "preferred" its category is, while still letting a genuinely
+    strong story in a lower-preference category win on its own merits."""
+    print("\nCATEGORY PRIORITY BOOST (weighted preference)")
+    NOW = dt.datetime.now(dt.timezone.utc)
+    title = "Ordinary headline with no other scoring signal at all here today"
+    s_none, _ = ne._virality(title, NOW, category=None)
+    s_cinema, _ = ne._virality(title, NOW, category="INDIAN CINEMA")
+    s_india, _ = ne._virality(title, NOW, category="INDIA NEWS")
+    s_tn, _ = ne._virality(title, NOW, category="TAMIL NADU NEWS")
+    check("no category means no priority boost",
+          s_none == s_cinema - 4, (s_none, s_cinema))
+    check("Tamil Nadu scores higher than India for the identical story",
+          s_tn > s_india, (s_tn, s_india))
+    check("India scores higher than cinema for the identical story",
+          s_india > s_cinema, (s_india, s_cinema))
+    check("an unrecognised/absent category gets zero boost, not a crash",
+          ne._virality(title, NOW, category="SOME OTHER CATEGORY")[0] == s_none)
+
+
 if __name__ == "__main__":
     run()
     cinema_category_tests()
     three_category_trending_focus_tests()
     trending_only_gate_tests()
+    cross_platform_trending_tests()
+    category_priority_boost_tests()
     tamil_nadu_niche_pivot_tests()
     tamil_cinema_boost_tests()
     bollywood_boost_tests()

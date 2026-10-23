@@ -225,6 +225,113 @@ def search_trailer_candidates(title, max_results=3):
     return results
 
 
+# ---------- cross-platform trending (Google Trends + YouTube) ----------
+# Added 2026-10-23, explicit request: cross-check this pipeline's own
+# hot_hit/score signal against what is ACTUALLY trending right now on
+# Google and YouTube, not just internal keyword heuristics. A match adds
+# a strong score boost -- NOT a hard requirement to post, by explicit
+# choice, so a genuinely early/breaking story that hasn't shown up on
+# Trends/YouTube YET can still post on its own merits ("catch it before
+# it trends" was the actual request).
+#
+# Instagram has no free, ToS-safe way to check "what's trending" at all
+# (no public API for it, and scraping it would be the same kind of
+# fragile/risky move this project has avoided before) -- skipped
+# entirely, by explicit decision, not an oversight.
+GOOGLE_TRENDS_RSS_URL = "https://trends.google.com/trending/rss?geo=IN"
+
+
+def google_trending_terms():
+    """Today's real-time trending search terms in India, straight from
+    Google's own RSS feed -- no API key, no scraping, and deliberately
+    NOT pytrends (its old dailytrends endpoint now 404s; Google replaced
+    it with this RSS feed, confirmed live 2026-10-23). Returns a
+    lowercased set, or an empty set on any failure (network, parsing,
+    Google changing the feed again) -- this is an optional signal, never
+    a blocker, so a failure here must never stop a story from scoring or
+    posting on its own merits."""
+    try:
+        feed = feedparser.parse(GOOGLE_TRENDS_RSS_URL)
+        return {e.title.strip().lower() for e in feed.entries if e.get("title")}
+    except Exception as e:
+        print("google_trending_terms failed:", str(e)[:160])
+        return set()
+
+
+def youtube_trending_terms(region="IN"):
+    """Today's trending YouTube video titles for the given region, via
+    the official YouTube Data API v3. YouTube's own public Trending PAGE
+    now requires a logged-in session (confirmed 2026-10-23 -- the old
+    keyless yt-dlp scrape this project already uses elsewhere no longer
+    works against it), so the API is the only reliable free path left.
+    Needs settings.YOUTUBE_API_KEY; returns an empty set (not an error)
+    when that isn't configured yet, so this stays a harmless no-op until
+    the owner adds the key -- same pattern as every other optional
+    signal in this module."""
+    if not settings.YOUTUBE_API_KEY:
+        return set()
+    url = (
+        "https://www.googleapis.com/youtube/v3/videos"
+        f"?part=snippet&chart=mostPopular&regionCode={region}&maxResults=30"
+        f"&key={settings.YOUTUBE_API_KEY}"
+    )
+    try:
+        with urllib.request.urlopen(url, timeout=15) as r:
+            data = json.load(r)
+        return {item["snippet"]["title"].strip().lower()
+                for item in data.get("items", [])
+                if item.get("snippet", {}).get("title")}
+    except Exception as e:
+        print("youtube_trending_terms failed:", str(e)[:160])
+        return set()
+
+
+# Cached for the lifetime of one process (one workflow run) -- this
+# pipeline fetches up to 3 categories per cycle, each scoring dozens of
+# headlines, and nothing here needs (or should make) a fresh network
+# call per headline.
+_TRENDING_CACHE = {"terms": None, "fetched_at": None}
+TRENDING_CACHE_TTL_MIN = 30
+
+
+def _cross_platform_trending_terms():
+    now = dt.datetime.now(dt.timezone.utc)
+    fetched_at = _TRENDING_CACHE["fetched_at"]
+    if _TRENDING_CACHE["terms"] is not None and fetched_at and \
+            (now - fetched_at).total_seconds() < TRENDING_CACHE_TTL_MIN * 60:
+        return _TRENDING_CACHE["terms"]
+    terms = google_trending_terms() | youtube_trending_terms()
+    _TRENDING_CACHE["terms"] = terms
+    _TRENDING_CACHE["fetched_at"] = now
+    return terms
+
+
+def _trending_term_bigrams(term):
+    """A trending search query is often an awkward multi-word phrase
+    (e.g. "samantha ruth prabhu on vijay") that will almost never appear
+    verbatim in a written headline, while matching on single loose words
+    ("on", "vijay") would false-positive on nearly everything. A
+    consecutive word-pair ("samantha ruth") is specific enough to be a
+    real signal either way, so phrases are decomposed into bigrams; a
+    genuinely single-word trending term is kept whole only if it's long
+    enough not to be noise."""
+    words = term.lower().split()
+    if len(words) == 1:
+        return {words[0]} if len(words[0]) >= 4 else set()
+    return {f"{words[i]} {words[i + 1]}" for i in range(len(words) - 1)}
+
+
+def is_cross_platform_trending(title, terms=None):
+    """Whether this headline overlaps a currently-trending Google/YouTube
+    search term (see _trending_term_bigrams for the matching rule).
+    `terms` lets callers (and tests) pass a fixed set instead of
+    triggering the live, cached lookup."""
+    if terms is None:
+        terms = _cross_platform_trending_terms()
+    t = title.lower()
+    return any(frag in t for term in terms for frag in _trending_term_bigrams(term))
+
+
 # Stories tied to a pan-India institution/event affect literally everyone,
 # not just one state/city — these get priority over regional news, per
 # explicit request, even over other "hot" stories.
@@ -351,7 +458,7 @@ def _apply_corroboration(candidates):
     return candidates
 
 
-def _virality(title, published_dt):
+def _virality(title, published_dt, category=None):
     score = 0
     hot_hit = False
     t = title.lower()
@@ -377,6 +484,22 @@ def _virality(title, published_dt):
     if _is_bollywood(title):
         score += 25
         hot_hit = True
+    # 2026-10-23, explicit request: a real, external confirmation that
+    # this specific headline is trending right now on Google/YouTube is
+    # a stronger signal than any of the keyword heuristics above -- it's
+    # not guessing at what spreads, it's observing that it already is.
+    if is_cross_platform_trending(title):
+        score += 20
+        hot_hit = True
+    # 2026-10-23, explicit preference order: Tamil Nadu 1st, national
+    # India 2nd, cinema 3rd -- weighted, not a strict fill order, so a
+    # strong story in any of the three can still win the queue over a
+    # weak one in a "higher-ranked" category (see settings.CATEGORY_
+    # PRIORITY_BOOST's own comment). This only nudges ranking among
+    # stories that already qualify -- top_candidates()'s TRENDING_ONLY
+    # gate elsewhere decides whether a story is eligible at all.
+    if category:
+        score += settings.CATEGORY_PRIORITY_BOOST.get(category, 0)
     # Fresh incidents (collapse/crash/disaster) were the single biggest
     # reach outlier across every competitor account analyzed -- a building
     # collapse and an animal-cruelty clip each cleared 2M+ views while
@@ -516,7 +639,7 @@ def fetch_candidates(category):
                 pub = dt.datetime(*e.published_parsed[:6], tzinfo=dt.timezone.utc)
             if not pub or pub < cutoff:
                 continue
-            score, hot_hit = _virality(title, pub)
+            score, hot_hit = _virality(title, pub, category=category)
             out.append({
                 "id": sid,
                 "title": title,

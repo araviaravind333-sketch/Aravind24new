@@ -143,6 +143,32 @@ INDIA_ONLY_CATEGORIES     = ("INDIA NEWS", "TAMIL NADU NEWS", "INDIAN CINEMA")
 # fewer posts some days, by design, not a bug.
 TRENDING_ONLY_MIN_SCORE = 55
 
+# Preference order, weighted not strict (2026-10-23, explicit request):
+# Tamil Nadu 1st, national India 2nd, cinema 3rd -- a strong story in any
+# of the three can still beat a weak one in a "higher-ranked" category,
+# rather than one category always filling the queue first. Applied once
+# per candidate in news_engine._virality(), stacking with every other
+# score bonus; it's a thumb on the scale, not a filter -- the TRENDING-
+# ONLY gate above still decides whether a story is eligible to post AT
+# ALL before this ever gets a chance to matter.
+CATEGORY_PRIORITY_BOOST = {
+    "TAMIL NADU NEWS": 15,
+    "INDIA NEWS": 8,
+    "INDIAN CINEMA": 4,
+}
+
+# ============================================================
+# 1f. YOUTUBE DATA API  (trending cross-check only -- src/news_engine.py
+#     youtube_trending_terms())
+# ============================================================
+# Optional. YouTube's own Trending page now requires a logged-in session
+# (confirmed 2026-10-23), so the only free, keyless path (what this
+# project already does for everything else) doesn't work for it -- the
+# official Data API v3 is the one reliable alternative, and it needs this
+# key. Leave unset and youtube_trending_terms() just returns nothing;
+# nothing else here depends on it existing.
+YOUTUBE_API_KEY = _env("YOUTUBE_API_KEY")
+
 # ============================================================
 # 2. IMAGE PIPELINE
 # ============================================================
