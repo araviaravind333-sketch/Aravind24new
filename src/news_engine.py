@@ -476,6 +476,8 @@ def detect_geo(title, category):
         return {"is_india": True, "place": "Tamil Nadu"}
     if category == "INDIAN CINEMA":
         return {"is_india": True, "place": "India"}
+    if category == "INDIA NEWS":
+        return {"is_india": True, "place": "India"}
     for country, city in COUNTRY_CITIES.items():
         if country in t:
             return {"is_india": False, "place": city, "country": country}
@@ -562,17 +564,28 @@ def allowed_categories(now_ist=None):
 
 
 def top_candidates(n, exclude_ids=frozenset()):
-    """Top N distinct stories across every category, for the WhatsApp
+    """Top N distinct stories across every category, for the Telegram
     queue — unlike pick_top_story (one category with fallbacks), this
     scans everything so a handful of genuinely different stories can be
     sent at once. `exclude_ids` keeps it from re-suggesting something
-    already sitting in the queue from an earlier cycle."""
+    already sitting in the queue from an earlier cycle.
+
+    TRENDING-ONLY gate (2026-10-23, explicit request): a story must have
+    hot_hit=True (the scorer's own flag for a real virality/national-
+    impact/incident/cinema-boost signal, not just recency/length filler
+    points) AND clear TRENDING_ONLY_MIN_SCORE. Before this, a quiet news
+    cycle still filled the queue with whatever scored highest among that
+    cycle's candidates, even an otherwise un-notable headline -- there
+    was no floor, only a ranking. Returning fewer than `n` (even zero) is
+    the correct outcome on a quiet cycle now, not a bug to work around."""
     seen, out = set(), []
     all_candidates = []
     for category in allowed_categories():
         all_candidates.extend(fetch_candidates(category))
     for story in sorted(all_candidates, key=lambda s: s["score"], reverse=True):
         if story["id"] in exclude_ids or story["id"] in seen:
+            continue
+        if not story.get("hot_hit") or story["score"] < settings.TRENDING_ONLY_MIN_SCORE:
             continue
         seen.add(story["id"])
         story["geo"] = detect_geo(story["title"], story["category"])

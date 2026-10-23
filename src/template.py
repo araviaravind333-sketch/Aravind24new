@@ -42,6 +42,7 @@ VARIANTS = ("full_bleed", "split_banner", "framed_card", "text_card")
 # category -> pill color
 CATEGORY_COLORS = {
     "BREAKING NEWS": "#E01E1E",
+    "INDIA NEWS":    "#0EA5A5",
     "TAMIL NADU NEWS": "#F5871F",
     "WORLD NEWS":    "#1E6FE0",
     "SPORTS NEWS":   "#12A150",

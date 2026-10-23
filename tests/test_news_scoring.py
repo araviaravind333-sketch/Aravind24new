@@ -94,22 +94,13 @@ def run():
 
 
 def cinema_category_tests():
-    """Regression: adding INDIAN CINEMA surfaced that HUMAN INTEREST --
-    added specifically for its 7-9% engagement rate vs ~1-2% on hard
-    news -- had never actually posted, because INDIA_ONLY_START/END_HOUR
-    span the full 24h, making INDIA_ONLY_CATEGORIES the ONLY thing that
-    decides what is ever fetched. Both must stay listed alongside INDIA
-    NEWS, and the new category must be treated as India content the same
-    way INDIA NEWS is."""
+    """Regression: INDIAN CINEMA must be eligible to post and treated as
+    India content. (HUMAN INTEREST was eligible too until the 2026-10-23
+    three-category narrowing below turned it back off deliberately.)"""
     print("\nCATEGORY WIRING")
     from config import settings
-    check("HUMAN INTEREST is eligible to post (was silently never fetched)",
-          "HUMAN INTEREST" in settings.INDIA_ONLY_CATEGORIES)
     check("INDIAN CINEMA is eligible to post",
           "INDIAN CINEMA" in settings.INDIA_ONLY_CATEGORIES)
-    check("allowed_categories() returns all three at any hour (24h India-only window)",
-          set(ne.allowed_categories()) == {"TAMIL NADU NEWS", "HUMAN INTEREST", "INDIAN CINEMA"},
-          ne.allowed_categories())
     check("a cinema story is detected as India content",
           ne.detect_geo("Shah Rukh Khan announces new film", "INDIAN CINEMA") == {"is_india": True, "place": "India"})
     check("INDIAN CINEMA has its own category colour",
@@ -118,6 +109,86 @@ def cinema_category_tests():
           "INDIAN CINEMA" in settings.HASHTAG_BANK)
     check("INDIAN CINEMA has at least one RSS feed configured",
           len(settings.RSS_FEEDS.get("INDIAN CINEMA", [])) > 0)
+
+
+def three_category_trending_focus_tests():
+    """Regression for an explicit instruction (2026-10-23): post ONLY
+    breaking/trending news, across exactly three verticals -- national
+    India, Tamil Nadu and cinema. Two changes bundled together:
+
+      1. HUMAN INTEREST (which measured well on engagement RATE, see
+         cinema_category_tests' history) is now off -- off-strategy for
+         a page narrowed to these three, not a bug.
+      2. INDIA NEWS is back. The 2026-10-21 pivot (see
+         tamil_nadu_niche_pivot_tests) REPLACED it outright with TAMIL
+         NADU NEWS; this is a deliberate, explicit reversal of that one
+         specific decision -- re-adding it as a third vertical, not
+         silently recreating the old blanket-pan-India identity, because
+         it is now ALSO gated by the trending-only floor (see
+         trending_only_gate_tests below)."""
+    print("\nTHREE-CATEGORY TRENDING FOCUS (2026-10-23)")
+    from config import settings
+    from src import template
+    check("exactly three categories are eligible to post",
+          set(settings.INDIA_ONLY_CATEGORIES) == {"INDIA NEWS", "TAMIL NADU NEWS", "INDIAN CINEMA"},
+          settings.INDIA_ONLY_CATEGORIES)
+    check("HUMAN INTEREST is correctly excluded now (off-strategy, not forgotten)",
+          "HUMAN INTEREST" not in settings.INDIA_ONLY_CATEGORIES)
+    check("allowed_categories() returns exactly these three at any hour (24h window)",
+          set(ne.allowed_categories()) == {"INDIA NEWS", "TAMIL NADU NEWS", "INDIAN CINEMA"},
+          ne.allowed_categories())
+    check("INDIA NEWS has real RSS feeds configured",
+          len(settings.RSS_FEEDS.get("INDIA NEWS", [])) >= 2,
+          settings.RSS_FEEDS.get("INDIA NEWS"))
+    check("INDIA NEWS has its own category colour",
+          "INDIA NEWS" in template.CATEGORY_COLORS)
+    check("INDIA NEWS has its own hashtag set",
+          "INDIA NEWS" in settings.HASHTAG_BANK)
+    check("a national India story geo-tags as India",
+          ne.detect_geo("RBI holds emergency meeting on rupee slide", "INDIA NEWS")
+          == {"is_india": True, "place": "India"})
+
+
+def trending_only_gate_tests():
+    """Regression for the trending-only gate (2026-10-23, explicit
+    request -- "post only breaking trending news"): top_candidates()
+    must refuse anything that isn't hot_hit AND above
+    TRENDING_ONLY_MIN_SCORE, even if it would otherwise be the
+    highest-scoring thing available that cycle. Mocks fetch_candidates so
+    this never depends on real RSS content or network access -- the
+    scoring logic itself (what makes hot_hit True) is covered by the
+    other tests in this file."""
+    print("\nTRENDING-ONLY GATE (top_candidates)")
+    from config import settings
+    real_fetch = ne.fetch_candidates
+
+    def fake_fetch(category):
+        if category != "INDIA NEWS":
+            return []
+        return [
+            {"id": "routine", "title": "Routine ministry statement on roads",
+             "summary": "", "link": "https://x", "category": "INDIA NEWS",
+             "score": 45, "hot_hit": False, "is_incident": False},
+            {"id": "trending", "title": "RBI cuts repo rate in surprise move",
+             "summary": "", "link": "https://x", "category": "INDIA NEWS",
+             "score": 70, "hot_hit": True, "is_incident": False},
+            {"id": "weak_hot_hit", "title": "Minor local event, barely hot",
+             "summary": "", "link": "https://x", "category": "INDIA NEWS",
+             "score": settings.TRENDING_ONLY_MIN_SCORE - 1, "hot_hit": True,
+             "is_incident": False},
+        ]
+    ne.fetch_candidates = fake_fetch
+    try:
+        out = ne.top_candidates(5)
+        ids = {s["id"] for s in out}
+        check("a higher-scoring but non-trending (hot_hit=False) story is excluded",
+              "routine" not in ids, ids)
+        check("a genuinely trending (hot_hit=True, score >= floor) story is included",
+              "trending" in ids, ids)
+        check("hot_hit=True alone is not enough -- it must also clear the score floor",
+              "weak_hot_hit" not in ids, ids)
+    finally:
+        ne.fetch_candidates = real_fetch
 
 
 def tamil_nadu_niche_pivot_tests():
@@ -129,15 +200,17 @@ def tamil_nadu_niche_pivot_tests():
     engagement existed unprompted -- Tamil Nadu content averaged 550
     views vs 214 for generic Delhi/national coverage, on fewer posts.
     "INDIA NEWS" was replaced outright, not supplemented, with
-    "TAMIL NADU NEWS" as the flagship category. These tests exist so a
-    future "let's also cover general India news" edit doesn't silently
-    recreate the generic-aggregator identity this was a deliberate,
-    data-backed move away from."""
+    "TAMIL NADU NEWS" as the flagship category. (INDIA NEWS was later
+    re-added on 2026-10-23 as an explicit, deliberate THIRD vertical
+    alongside this one -- see three_category_trending_focus_tests --
+    which is why there is no "INDIA NEWS no longer exists" assertion
+    here any more; that would now be asserting the wrong thing.) These
+    tests exist so TAMIL NADU NEWS itself stays the flagship category
+    with its own feeds/colour/hashtags, not to forbid INDIA NEWS from
+    ever coming back in a clearly-scoped way."""
     print("\nTAMIL NADU NICHE PIVOT (2026-10-21)")
     from config import settings
     from src import template
-    check("the old generic pan-India category no longer exists",
-          "INDIA NEWS" not in settings.RSS_FEEDS)
     check("TAMIL NADU NEWS is the flagship India-hours category",
           "TAMIL NADU NEWS" in settings.INDIA_ONLY_CATEGORIES)
     check("it has real RSS feeds configured (not left empty)",
@@ -298,6 +371,8 @@ def trailer_candidate_search_tests():
 if __name__ == "__main__":
     run()
     cinema_category_tests()
+    three_category_trending_focus_tests()
+    trending_only_gate_tests()
     tamil_nadu_niche_pivot_tests()
     tamil_cinema_boost_tests()
     bollywood_boost_tests()

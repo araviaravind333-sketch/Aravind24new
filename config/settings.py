@@ -118,7 +118,30 @@ INDIA_ONLY_END_HOUR_IST   = 24
 # has not posted once since -- a real, unnoticed cost, not a deliberate
 # choice. Added here along with the new cinema category, which is
 # India content for the same reason TAMIL NADU NEWS is.
-INDIA_ONLY_CATEGORIES     = ("TAMIL NADU NEWS", "HUMAN INTEREST", "INDIAN CINEMA")
+#
+# Narrowed 2026-10-23, by explicit request, to exactly three verticals:
+# national India, Tamil Nadu, and cinema. HUMAN INTEREST measured well on
+# engagement RATE (see its own comment above) but is off-strategy for a
+# page now deliberately focused on these three -- dropped here, not
+# deleted from RSS_FEEDS/HASHTAG_BANK, so it's a one-line revert if that
+# changes again (same precedent as WORLD/SPORTS/BUSINESS below).
+INDIA_ONLY_CATEGORIES     = ("INDIA NEWS", "TAMIL NADU NEWS", "INDIAN CINEMA")
+
+# ============================================================
+# 1e. TRENDING-ONLY GATE  (src/news_engine.py top_candidates())
+# ============================================================
+# By explicit request (2026-10-23): post ONLY breaking/trending news, not
+# routine day-to-day coverage, across all three categories above. Before
+# this, top_candidates() (which fills the Telegram review queue every
+# ~30 min) took whatever scored highest among that cycle's fetched
+# stories with NO floor at all -- on a quiet news cycle that could be a
+# perfectly ordinary, un-notable headline that simply happened to be the
+# least-bad option that hour. hot_hit is the scorer's own flag for "this
+# matched a real virality/national-impact/incident/cinema-boost signal",
+# so requiring it (plus a score floor) means a quiet cycle now adds NO
+# new candidates to the queue rather than lowering the bar to fill it --
+# fewer posts some days, by design, not a bug.
+TRENDING_ONLY_MIN_SCORE = 55
 
 # ============================================================
 # 2. IMAGE PIPELINE
@@ -134,6 +157,20 @@ UNSPLASH_ACCESS_KEY    = _env("UNSPLASH_ACCESS_KEY")# free, 50/hr
 # We read RSS for FACTS, then AI REWRITES headline+caption in our voice.
 # We never copy article text or use publishers' photos.
 RSS_FEEDS = {
+    # Re-added 2026-10-23, by explicit request, as a third vertical
+    # alongside Tamil Nadu and cinema -- NOT a return to the old blanket
+    # pan-India coverage that caused the 2026-10-21 pivot away from it in
+    # the first place. The difference this time is news_engine.top_candidates()
+    # now requires TRENDING_ONLY (hot_hit + a real score floor) before ANY
+    # story from ANY of these three categories is even offered for review
+    # -- so this feed only ever surfaces the trending/breaking slice of
+    # national news, not routine day-to-day coverage. All three feeds
+    # checked live before re-adding (60/20/20 real current items).
+    "INDIA NEWS": [
+        "https://www.thehindu.com/news/national/feeder/default.rss",
+        "https://feeds.feedburner.com/ndtvnews-india-news",
+        "https://www.indiatoday.in/rss/1206578",
+    ],
     # The actual niche pivot (2026-10-21): three weeks of pan-India
     # generic headlines plateaued at near-zero follower conversion
     # (9->10 across ~170 posts) while competing head-on, with zero
@@ -271,6 +308,7 @@ DEFAULT_INDIA_LOCATION = "India"          # fallback IG location search term
 # ============================================================
 # 4 tags per post, mixed: 1 broad + 1 niche + 1 trending + 1 brand.
 HASHTAG_BANK = {
+    "INDIA NEWS":    ["#IndiaNews", "#BreakingNews", "#news", "#AravindNews24"],
     "TAMIL NADU NEWS": ["#TamilNadu", "#Chennai", "#TNNews", "#AravindNews24"],
     "WORLD NEWS":    ["#WorldNews", "#GlobalNews", "#news", "#AravindNews24"],
     "BREAKING NEWS": ["#BreakingNews", "#news", "#trending", "#AravindNews24"],
