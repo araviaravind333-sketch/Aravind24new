@@ -364,7 +364,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-19 11:06,INDIAN CINEMA,Massive 160-day shoot wraps for actor Sai Durgha Tej's movie,64,True,text_card,reel_text,18574613563072431,122123434833424069,True,True,179,0,0,0,,208,0
 2026-10-19 11:26,INDIA NEWS,"Muslim women suffer most without nationwide civil code, claims Himanta Sarma",63,True,text_card,reel_text,18096519074451635,122123436447424069,True,True,142,0,0,0,,171,0
 2026-10-19 12:06,INDIAN CINEMA,Rs 2 crore budget film Hanuman Ansh earns Rs 322 crore,72,True,text_card,reel_text,17926482867430608,122123440341424069,True,True,102,0,0,0,,123,1
-2026-10-19 13:06,INDIAN CINEMA,Rakul Preet drapes Rs 2.75 lac tissue saree for Ramayana launch - Exclusive,56,True,text_card,reel_text,18122385239513243,122123445597424069,True,True,151,0,0,0,,214,1
+2026-10-19 13:06,INDIAN CINEMA,Rakul Preet drapes Rs 2.75 lac tissue saree for Ramayana launch - Exclusive,56,True,text_card,reel_text,18122385239513243,122123445597424069,True,True,152,0,0,0,,214,1
 2026-10-19 14:15,INDIAN CINEMA,Vijay Sethupathi wraps shoot for Puri Jagannadh's new action drama,64,True,text_card,reel_text,17908547418566025,122123457165424069,True,True,373,1,0,0,,458,1
 2026-10-19 16:26,INDIA NEWS,Supreme Court says no prior approval needed to probe public servant's bribe demand,75,False,full_bleed,,18053765006813720,122123473425424069,True,True,5,0,0,0,0,,0
 2026-10-19 16:37,INDIA NEWS,"Navy signs Rs 1,900-crore deals to boost indigenous defence technology",56,True,text_card,reel_text,18098711318386246,122123474937424069,True,True,76,0,0,0,,87,0
@@ -375,13 +375,13 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-20 08:56,INDIA NEWS,Naveen Patnaik questions Odisha government’s 'silence' on Andhra's poll notification,41,True,full_bleed,reel_overlay,17908994409483967,122123579763424069,True,True,100,2,0,0,,127,2
 2026-10-20 10:46,INDIA NEWS,"Foreign forces try to weaken India, warns RSS chief Mohan Bhagwat.",63,True,text_card,reel_text,17894796213676207,122123590413424069,True,True,136,3,0,0,,160,3
 2026-10-20 11:06,HUMAN INTEREST,60-year-old Japanese corporate worker goes viral for his breakdancing moves,56,True,text_card,reel_text,18108222377609594,122123592111424069,True,True,65,0,0,0,,77,0
-2026-10-20 11:25,INDIAN CINEMA,Vijay Deverakonda faces backlash for revealing Rashmika asked him for marriage,57,True,text_card,reel_text,17975143992168636,122123593863424069,True,True,1644,1,0,1,,2604,5
+2026-10-20 11:25,INDIAN CINEMA,Vijay Deverakonda faces backlash for revealing Rashmika asked him for marriage,57,True,text_card,reel_text,17975143992168636,122123593863424069,True,True,1645,1,0,1,,2605,5
 2026-10-20 12:26,INDIA NEWS,Top leaders extend Vijayadashmi wishes calling for national unity and peace,63,True,text_card,reel_text,18109324816903411,122123599533424069,True,True,50,0,0,0,,57,0
 2026-10-20 12:46,INDIA NEWS,"Samajwadi Party announces separate UP manifestos for women, youth, and law.",56,False,full_bleed,,17872346124643030,122123601315424069,True,True,5,0,0,0,0,,0
 2026-10-20 13:06,INDIA NEWS,Gujarat proposes disputed plot for Yusuf Pathan after NDA switch,68,True,full_bleed,reel_overlay,17908139394579942,122123603151424069,True,True,128,0,0,0,,164,0
 2026-10-20 14:26,INDIA NEWS,Kolkata stampede: Adhikari gives Rs 25 lakh each to victims' families,79,True,text_card,reel_text,18470972029191745,122123612253424069,True,True,109,0,0,0,,141,0
 2026-10-20 16:26,INDIA NEWS,US leader Marco Rubio arrives in Mumbai for key talks with Jaishankar,68,False,full_bleed,,18030757085912635,122123625009424069,True,True,4,0,0,0,0,,0
-2026-10-20 16:46,INDIAN CINEMA,Mika Singh DEFENDS Daler Mehndi amid Uttarakhand event controversy,60,True,full_bleed,reel_overlay,18116133304832849,122123628399424069,True,True,155,0,0,0,,185,0
+2026-10-20 16:46,INDIAN CINEMA,Mika Singh DEFENDS Daler Mehndi amid Uttarakhand event controversy,60,True,full_bleed,reel_overlay,18116133304832849,122123628399424069,True,True,156,0,0,0,,187,0
 2026-10-20 23:06,BREAKING NEWS,PM Modi urges all parties to unite against India's three enemies,93,False,full_bleed,,18117968962944755,122123674467424069,True,True,5,0,0,0,0,,0
 2026-10-21 05:36,INDIA NEWS,US confirms landmark trade deal with India reaches final stage,68,True,text_card,reel_text,18118032328807281,122123717109424069,True,True,70,0,0,0,,80,0
 2026-10-21 08:26,INDIA NEWS,"Shiv Sena's Dussehra rally sees Eknath Shinde, Thackeray clash over 'vote chori'",68,True,text_card,reel_text,18132710755816627,122123729655424069,True,True,130,0,0,0,,170,0
@@ -397,31 +397,31 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-21 16:26,INDIA NEWS,Patna High Court grants land compensation to former Speaker Meira Kumar,63,True,full_bleed,reel_overlay,18169135198481403,122123783043424069,True,True,140,0,0,0,,172,0
 2026-10-21 17:46,INDIA NEWS,Jio IPO gets oversubscribed in 100 minutes with record bids,56,False,full_bleed,,18154601449537235,122123793105424069,True,True,5,0,0,0,0,,0
 2026-10-22 06:01,INDIAN CINEMA,Vijay Deverakonda's Ranabaali hits Rs 59 crore worldwide box office total,56,True,text_card,reel_text,18428479609149144,122123873421424069,True,True,276,0,0,0,,337,0
-2026-10-22 07:46,TAMIL NADU NEWS,Pollachi-Valparai ghat road reopens after major landslide blocks traffic for 15 hours.,64,True,text_card,reel_text,18017617106959803,122123883381424069,True,True,107,0,0,0,,114,0
+2026-10-22 07:46,TAMIL NADU NEWS,Pollachi-Valparai ghat road reopens after major landslide blocks traffic for 15 hours.,64,True,text_card,reel_text,18017617106959803,122123883381424069,True,True,108,0,0,0,,114,0
 2026-10-22 09:36,TAMIL NADU NEWS,Tamil Nadu: Municipality vice-chairperson in Tenkasi booked for rape,53,True,full_bleed,reel_overlay,,122123895855424069,False,True,,,,,,,
-2026-10-22 10:56,TAMIL NADU NEWS,ASI starts final recording of ancient Thanjavur Big Temple inscriptions.,50,True,full_bleed,reel_overlay,17955341589039022,122123902941424069,True,True,157,1,0,0,,221,1
+2026-10-22 10:56,TAMIL NADU NEWS,ASI starts final recording of ancient Thanjavur Big Temple inscriptions.,50,True,full_bleed,reel_overlay,17955341589039022,122123902941424069,True,True,158,1,0,0,,221,1
 2026-10-22 11:24,TAMIL NADU NEWS,Another tiger trapped in cage at O-Valley near Gudalur taluk,58,True,text_card,reel_text,17988686520062262,122123907999424069,True,True,63,0,0,0,,81,0
 2026-10-22 11:26,TAMIL NADU NEWS,Forest department traps second tiger in cage near Gudalur,58,True,text_card,reel_text,18127024099851072,122123908563424069,True,True,51,1,0,89,,65,90
 2026-10-22 12:32,INDIAN CINEMA,"Nani says he chooses films by instinct, not box office results",75,True,text_card,reel_text,18375440824212955,122123915883424069,True,True,128,1,0,0,,144,1
 2026-10-22 14:04,TAMIL NADU NEWS,How Tamil actor M.R. Radha got away,69,True,full_bleed,reel_overlay,17926336896426416,122123927307424069,True,True,130,0,0,0,,180,0
-2026-10-22 15:06,INDIAN CINEMA,"Rajinikanth, Sivakarthikeyan, others attend Anirudh’s Navaratri puja",63,True,text_card,reel_text,18081174779346251,122123934327424069,True,True,154,1,0,0,,197,1
+2026-10-22 15:06,INDIAN CINEMA,"Rajinikanth, Sivakarthikeyan, others attend Anirudh’s Navaratri puja",63,True,text_card,reel_text,18081174779346251,122123934327424069,True,True,155,1,0,0,,201,1
 2026-10-22 15:49,INDIAN CINEMA,Amitabh Bachchan pauses social media activity following medical advice,55,True,text_card,reel_text,17953772505271020,122123943435424069,True,True,173,0,0,0,,196,0
 2026-10-22 16:06,TAMIL NADU NEWS,Heavy rains submerge Tamil Nadu regions as major dams reach full capacity,58,True,text_card,reel_text,17991229071110567,122123946435424069,True,True,85,0,0,0,,94,0
 2026-10-22 16:46,INDIAN CINEMA,Tu Hai Meri Kiran to release in cinemas tomorrow as scheduled,60,True,text_card,reel_text,18130515376799933,122123951391424069,True,True,53,0,0,0,,61,0
 2026-10-22 17:29,INDIAN CINEMA,Rajinikanth's Jailer 2 earns 549 crore rupees in first week,81,True,text_card,reel_text,18151806418540365,122123955987424069,True,True,411,9,0,0,,509,9
 2026-10-22 19:46,INDIAN CINEMA,Suriya unveils Naslen’s first look as Eswaran from ‘Scene’,75,True,text_card,reel_text,18097220684404942,122123971029424069,True,True,147,1,0,0,,171,1
 2026-10-23 08:26,INDIAN CINEMA,Ramayana movie hits Rs 8 crore in opening day advance ticket sales,56,True,text_card,reel_text,18127112428925894,122124050895424069,True,True,138,0,0,0,,166,0
-2026-10-23 09:06,TAMIL NADU NEWS,"Puducherry co-op bank faces RBI curbs, withdrawals capped at Rs 5,000",81,False,full_bleed,,18122752243940904,122124053943424069,True,True,4,0,0,0,0,,0
-2026-10-23 10:46,INDIA NEWS,Massive blackout and water crisis hit Gurugram as workers strike,80,False,full_bleed,,18109668791241217,122124065019424069,True,True,5,0,0,0,0,,0
-2026-10-23 11:06,INDIAN CINEMA,Sonu Sood leases Versova commercial property for Rs 3.52 crore,71,True,full_bleed,reel_overlay,17991469314115787,122124067845424069,True,True,133,0,0,0,,152,0
+2026-10-23 09:06,TAMIL NADU NEWS,"Puducherry co-op bank faces RBI curbs, withdrawals capped at Rs 5,000",81,False,full_bleed,,18122752243940904,122124053943424069,True,True,5,0,0,0,0,,0
+2026-10-23 10:46,INDIA NEWS,Massive blackout and water crisis hit Gurugram as workers strike,80,False,full_bleed,,18109668791241217,122124065019424069,True,True,6,0,0,0,0,,0
+2026-10-23 11:06,INDIAN CINEMA,Sonu Sood leases Versova commercial property for Rs 3.52 crore,71,True,full_bleed,reel_overlay,17991469314115787,122124067845424069,True,True,135,0,0,0,,153,0
 2026-10-23 12:46,INDIA NEWS,Robert Vadra on Son's Bikaner House Row,68,False,full_bleed,,18021725858731858,122124080955424069,True,True,4,0,0,0,0,,0
 2026-10-23 13:06,INDIAN CINEMA,'King': SRK and Deepika to reunite for October 26 song shoot,69,True,text_card,reel_text,18171631549462432,122124085359424069,True,True,101,0,0,0,,119,0
 2026-10-23 14:59,INDIAN CINEMA,Amitabh Bachchan reveals how he manages household chores,63,True,text_card,reel_text,18111429299594033,122124103107424069,True,True,129,0,0,0,,147,0
 2026-10-23 15:45,BREAKING NEWS,Salman Khan dances with Varun Dhawan at IIFA awards press launch,91,True,text_card,reel_text,18087570275702048,122124108069424069,True,True,134,0,0,0,,155,0
 2026-10-23 15:47,BREAKING NEWS,Salman Khan dances with Varun Dhawan at IIFA event,91,True,text_card,reel_text,18078040838412248,122124108423424069,True,True,150,0,0,0,,171,0
-2026-10-23 17:06,INDIAN CINEMA,"3 Idiots sequel script is almost ready, confirms actor Aamir Khan",73,True,text_card,reel_text,18095440349439650,122124115857424069,True,True,153,0,0,0,,185,0
+2026-10-23 17:06,INDIAN CINEMA,"3 Idiots sequel script is almost ready, confirms actor Aamir Khan",73,True,text_card,reel_text,18095440349439650,122124115857424069,True,True,154,0,0,0,,186,0
 2026-10-23 18:46,INDIA NEWS,Food safety officers extort cash from Delhi cloud kitchens.,80,True,text_card,reel_text,17898636951672516,122124129069424069,True,True,42,0,0,0,,42,0
-2026-10-23 19:26,INDIA NEWS,"Several feared dead after firecracker factory explodes in Bihar, rescue underway",78,True,text_card,reel_text,18046528628820570,122124134445424069,True,True,102,0,0,0,,117,0
+2026-10-23 19:26,INDIA NEWS,"Several feared dead after firecracker factory explodes in Bihar, rescue underway",78,True,text_card,reel_text,18046528628820570,122124134445424069,True,True,103,0,0,0,,118,0
 2026-10-23 20:06,BREAKING NEWS,"High inflation acts like a tax on everyone, warns RBI Governor",113,False,full_bleed,,18153595603543035,122124139785424069,True,True,4,0,0,0,0,,0
-2026-10-23 21:06,INDIA NEWS,At least four dead in blast in Bihar’s Siwan district,66,True,text_card,reel_text,18116539298326530,122124147063424069,True,True,32,0,0,0,,36,0
-2026-10-24 08:26,TAMIL NADU NEWS,"Chennai starts construction on massive ₹4,800 crore desalination plant",71,True,text_card,reel_text,18128788483872285,122124216963424069,True,True,,,,,,,
+2026-10-23 21:06,INDIA NEWS,At least four dead in blast in Bihar’s Siwan district,66,True,text_card,reel_text,18116539298326530,122124147063424069,True,True,33,0,0,0,,37,0
+2026-10-24 08:26,TAMIL NADU NEWS,"Chennai starts construction on massive ₹4,800 crore desalination plant",71,True,text_card,reel_text,18128788483872285,122124216963424069,True,True,0,0,0,0,,8,0
