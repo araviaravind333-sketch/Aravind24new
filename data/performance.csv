@@ -349,7 +349,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-18 10:26,INDIA NEWS,Kolkata Pandal Stampede: Seven Arrested After 19 Killed; Organisers Booked,79,True,text_card,reel_text,18101685023055262,122123280399424069,True,True,131,0,0,0,,157,0
 2026-10-18 11:06,INDIAN CINEMA,Actor needs two dedicated ACs on set to survive heavy prosthetics,63,True,text_card,reel_text,18097074692421103,122123284161424069,True,True,85,0,0,0,,104,0
 2026-10-18 11:26,INDIA NEWS,Fire at Athani supermarket results in property damage; no casualties,70,True,text_card,reel_text,18140342620619663,122123285847424069,True,True,133,0,0,0,,147,0
-2026-10-18 11:46,INDIA NEWS,First permanent High Court bench opens in Ladakh for local justice,75,False,full_bleed,,17914444176511833,122123287407424069,True,True,4,0,1,0,0,,1
+2026-10-18 11:46,INDIA NEWS,First permanent High Court bench opens in Ladakh for local justice,75,False,full_bleed,,17914444176511833,122123287407424069,True,True,5,0,1,0,0,,1
 2026-10-18 12:06,INDIA NEWS,Delhi court convicts man for shooting wife who refused to return home,58,True,text_card,reel_text,18117705776080020,122123289435424069,True,True,143,0,0,0,,151,0
 2026-10-18 13:06,INDIAN CINEMA,Composer Amit Trivedi confesses he understood nothing in film No Smoking.,57,True,text_card,reel_text,18117888566005497,122123295291424069,True,True,111,0,0,0,,135,0
 2026-10-18 15:46,INDIA NEWS,CBI arrests Kerala man over ₹1 crore fake FedEx scam,75,True,text_card,reel_text,17901357177671371,122123315085424069,True,True,46,0,0,0,,53,0
@@ -410,21 +410,21 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-22 16:46,INDIAN CINEMA,Tu Hai Meri Kiran to release in cinemas tomorrow as scheduled,60,True,text_card,reel_text,18130515376799933,122123951391424069,True,True,53,0,0,0,,61,0
 2026-10-22 17:29,INDIAN CINEMA,Rajinikanth's Jailer 2 earns 549 crore rupees in first week,81,True,text_card,reel_text,18151806418540365,122123955987424069,True,True,411,9,0,0,,509,9
 2026-10-22 19:46,INDIAN CINEMA,Suriya unveils Naslen’s first look as Eswaran from ‘Scene’,75,True,text_card,reel_text,18097220684404942,122123971029424069,True,True,147,1,0,0,,171,1
-2026-10-23 08:26,INDIAN CINEMA,Ramayana movie hits Rs 8 crore in opening day advance ticket sales,56,True,text_card,reel_text,18127112428925894,122124050895424069,True,True,138,0,0,0,,166,0
+2026-10-23 08:26,INDIAN CINEMA,Ramayana movie hits Rs 8 crore in opening day advance ticket sales,56,True,text_card,reel_text,18127112428925894,122124050895424069,True,True,138,0,0,0,,167,0
 2026-10-23 09:06,TAMIL NADU NEWS,"Puducherry co-op bank faces RBI curbs, withdrawals capped at Rs 5,000",81,False,full_bleed,,18122752243940904,122124053943424069,True,True,5,0,0,0,0,,0
 2026-10-23 10:46,INDIA NEWS,Massive blackout and water crisis hit Gurugram as workers strike,80,False,full_bleed,,18109668791241217,122124065019424069,True,True,6,0,0,0,0,,0
 2026-10-23 11:06,INDIAN CINEMA,Sonu Sood leases Versova commercial property for Rs 3.52 crore,71,True,full_bleed,reel_overlay,17991469314115787,122124067845424069,True,True,135,0,0,0,,153,0
 2026-10-23 12:46,INDIA NEWS,Robert Vadra on Son's Bikaner House Row,68,False,full_bleed,,18021725858731858,122124080955424069,True,True,4,0,0,0,0,,0
 2026-10-23 13:06,INDIAN CINEMA,'King': SRK and Deepika to reunite for October 26 song shoot,69,True,text_card,reel_text,18171631549462432,122124085359424069,True,True,101,0,0,0,,119,0
 2026-10-23 14:59,INDIAN CINEMA,Amitabh Bachchan reveals how he manages household chores,63,True,text_card,reel_text,18111429299594033,122124103107424069,True,True,129,0,0,0,,147,0
-2026-10-23 15:45,BREAKING NEWS,Salman Khan dances with Varun Dhawan at IIFA awards press launch,91,True,text_card,reel_text,18087570275702048,122124108069424069,True,True,134,0,0,0,,155,0
-2026-10-23 15:47,BREAKING NEWS,Salman Khan dances with Varun Dhawan at IIFA event,91,True,text_card,reel_text,18078040838412248,122124108423424069,True,True,150,0,0,0,,171,0
-2026-10-23 17:06,INDIAN CINEMA,"3 Idiots sequel script is almost ready, confirms actor Aamir Khan",73,True,text_card,reel_text,18095440349439650,122124115857424069,True,True,154,0,0,0,,186,0
-2026-10-23 18:46,INDIA NEWS,Food safety officers extort cash from Delhi cloud kitchens.,80,True,text_card,reel_text,17898636951672516,122124129069424069,True,True,42,0,0,0,,42,0
-2026-10-23 19:26,INDIA NEWS,"Several feared dead after firecracker factory explodes in Bihar, rescue underway",78,True,text_card,reel_text,18046528628820570,122124134445424069,True,True,103,0,0,0,,118,0
-2026-10-23 20:06,BREAKING NEWS,"High inflation acts like a tax on everyone, warns RBI Governor",113,False,full_bleed,,18153595603543035,122124139785424069,True,True,4,0,0,0,0,,0
-2026-10-23 21:06,INDIA NEWS,At least four dead in blast in Bihar’s Siwan district,66,True,text_card,reel_text,18116539298326530,122124147063424069,True,True,33,0,0,0,,37,0
-2026-10-24 08:26,TAMIL NADU NEWS,"Chennai starts construction on massive ₹4,800 crore desalination plant",71,True,text_card,reel_text,18128788483872285,122124216963424069,True,True,0,0,0,0,,8,0
-2026-10-24 09:46,INDIA NEWS,FBI arrests wanted Haryana gangster Himanshu Bhau in the US,76,True,text_card,reel_text,18107132975256499,122124231075424069,True,True,,,,,,,
-2026-10-24 10:46,INDIA NEWS,CBI arrests long-wanted fugitive in multi-crore fodder scam case,83,True,text_card,reel_text,18123423506292441,122124236283424069,True,True,,,,,,,
-2026-10-24 11:06,INDIAN CINEMA,Aamir Khan gets special thanks in director Avinash Arun's new film Prahaar.,79,True,text_card,reel_text,18127647106786474,122124238863424069,True,True,,,,,,,
+2026-10-23 15:45,BREAKING NEWS,Salman Khan dances with Varun Dhawan at IIFA awards press launch,91,True,text_card,reel_text,18087570275702048,122124108069424069,True,True,135,0,0,0,,156,0
+2026-10-23 15:47,BREAKING NEWS,Salman Khan dances with Varun Dhawan at IIFA event,91,True,text_card,reel_text,18078040838412248,122124108423424069,True,True,150,0,0,0,,172,0
+2026-10-23 17:06,INDIAN CINEMA,"3 Idiots sequel script is almost ready, confirms actor Aamir Khan",73,True,text_card,reel_text,18095440349439650,122124115857424069,True,True,155,0,0,0,,187,0
+2026-10-23 18:46,INDIA NEWS,Food safety officers extort cash from Delhi cloud kitchens.,80,True,text_card,reel_text,17898636951672516,122124129069424069,True,True,43,0,0,0,,45,0
+2026-10-23 19:26,INDIA NEWS,"Several feared dead after firecracker factory explodes in Bihar, rescue underway",78,True,text_card,reel_text,18046528628820570,122124134445424069,True,True,104,0,0,0,,119,0
+2026-10-23 20:06,BREAKING NEWS,"High inflation acts like a tax on everyone, warns RBI Governor",113,False,full_bleed,,18153595603543035,122124139785424069,True,True,5,0,0,0,0,,0
+2026-10-23 21:06,INDIA NEWS,At least four dead in blast in Bihar’s Siwan district,66,True,text_card,reel_text,18116539298326530,122124147063424069,True,True,34,0,0,0,,39,0
+2026-10-24 08:26,TAMIL NADU NEWS,"Chennai starts construction on massive ₹4,800 crore desalination plant",71,True,text_card,reel_text,18128788483872285,122124216963424069,True,True,17,0,0,0,,21,0
+2026-10-24 09:46,INDIA NEWS,FBI arrests wanted Haryana gangster Himanshu Bhau in the US,76,True,text_card,reel_text,18107132975256499,122124231075424069,True,True,9,0,0,0,,23,0
+2026-10-24 10:46,INDIA NEWS,CBI arrests long-wanted fugitive in multi-crore fodder scam case,83,True,text_card,reel_text,18123423506292441,122124236283424069,True,True,0,0,0,0,,0,0
+2026-10-24 11:06,INDIAN CINEMA,Aamir Khan gets special thanks in director Avinash Arun's new film Prahaar.,79,True,text_card,reel_text,18127647106786474,122124238863424069,True,True,1,0,0,0,,12,0
