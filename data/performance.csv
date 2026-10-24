@@ -375,7 +375,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-20 08:56,INDIA NEWS,Naveen Patnaik questions Odisha government’s 'silence' on Andhra's poll notification,41,True,full_bleed,reel_overlay,17908994409483967,122123579763424069,True,True,100,2,0,0,,127,2
 2026-10-20 10:46,INDIA NEWS,"Foreign forces try to weaken India, warns RSS chief Mohan Bhagwat.",63,True,text_card,reel_text,17894796213676207,122123590413424069,True,True,136,3,0,0,,160,3
 2026-10-20 11:06,HUMAN INTEREST,60-year-old Japanese corporate worker goes viral for his breakdancing moves,56,True,text_card,reel_text,18108222377609594,122123592111424069,True,True,65,0,0,0,,77,0
-2026-10-20 11:25,INDIAN CINEMA,Vijay Deverakonda faces backlash for revealing Rashmika asked him for marriage,57,True,text_card,reel_text,17975143992168636,122123593863424069,True,True,1645,1,0,1,,2605,5
+2026-10-20 11:25,INDIAN CINEMA,Vijay Deverakonda faces backlash for revealing Rashmika asked him for marriage,57,True,text_card,reel_text,17975143992168636,122123593863424069,True,True,1646,1,0,1,,2606,5
 2026-10-20 12:26,INDIA NEWS,Top leaders extend Vijayadashmi wishes calling for national unity and peace,63,True,text_card,reel_text,18109324816903411,122123599533424069,True,True,50,0,0,0,,57,0
 2026-10-20 12:46,INDIA NEWS,"Samajwadi Party announces separate UP manifestos for women, youth, and law.",56,False,full_bleed,,17872346124643030,122123601315424069,True,True,5,0,0,0,0,,0
 2026-10-20 13:06,INDIA NEWS,Gujarat proposes disputed plot for Yusuf Pathan after NDA switch,68,True,full_bleed,reel_overlay,17908139394579942,122123603151424069,True,True,128,0,0,0,,164,0
@@ -404,11 +404,11 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-22 11:26,TAMIL NADU NEWS,Forest department traps second tiger in cage near Gudalur,58,True,text_card,reel_text,18127024099851072,122123908563424069,True,True,51,1,0,89,,65,90
 2026-10-22 12:32,INDIAN CINEMA,"Nani says he chooses films by instinct, not box office results",75,True,text_card,reel_text,18375440824212955,122123915883424069,True,True,128,1,0,0,,144,1
 2026-10-22 14:04,TAMIL NADU NEWS,How Tamil actor M.R. Radha got away,69,True,full_bleed,reel_overlay,17926336896426416,122123927307424069,True,True,130,0,0,0,,180,0
-2026-10-22 15:06,INDIAN CINEMA,"Rajinikanth, Sivakarthikeyan, others attend Anirudh’s Navaratri puja",63,True,text_card,reel_text,18081174779346251,122123934327424069,True,True,155,1,0,0,,201,1
+2026-10-22 15:06,INDIAN CINEMA,"Rajinikanth, Sivakarthikeyan, others attend Anirudh’s Navaratri puja",63,True,text_card,reel_text,18081174779346251,122123934327424069,True,True,157,1,0,0,,204,1
 2026-10-22 15:49,INDIAN CINEMA,Amitabh Bachchan pauses social media activity following medical advice,55,True,text_card,reel_text,17953772505271020,122123943435424069,True,True,173,0,0,0,,196,0
 2026-10-22 16:06,TAMIL NADU NEWS,Heavy rains submerge Tamil Nadu regions as major dams reach full capacity,58,True,text_card,reel_text,17991229071110567,122123946435424069,True,True,85,0,0,0,,94,0
 2026-10-22 16:46,INDIAN CINEMA,Tu Hai Meri Kiran to release in cinemas tomorrow as scheduled,60,True,text_card,reel_text,18130515376799933,122123951391424069,True,True,53,0,0,0,,61,0
-2026-10-22 17:29,INDIAN CINEMA,Rajinikanth's Jailer 2 earns 549 crore rupees in first week,81,True,text_card,reel_text,18151806418540365,122123955987424069,True,True,411,9,0,0,,509,9
+2026-10-22 17:29,INDIAN CINEMA,Rajinikanth's Jailer 2 earns 549 crore rupees in first week,81,True,text_card,reel_text,18151806418540365,122123955987424069,True,True,412,9,0,0,,510,9
 2026-10-22 19:46,INDIAN CINEMA,Suriya unveils Naslen’s first look as Eswaran from ‘Scene’,75,True,text_card,reel_text,18097220684404942,122123971029424069,True,True,147,1,0,0,,171,1
 2026-10-23 08:26,INDIAN CINEMA,Ramayana movie hits Rs 8 crore in opening day advance ticket sales,56,True,text_card,reel_text,18127112428925894,122124050895424069,True,True,139,0,0,0,,167,0
 2026-10-23 09:06,TAMIL NADU NEWS,"Puducherry co-op bank faces RBI curbs, withdrawals capped at Rs 5,000",81,False,full_bleed,,18122752243940904,122124053943424069,True,True,5,0,0,0,0,,0
@@ -420,14 +420,14 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-23 15:45,BREAKING NEWS,Salman Khan dances with Varun Dhawan at IIFA awards press launch,91,True,text_card,reel_text,18087570275702048,122124108069424069,True,True,135,0,0,0,,156,0
 2026-10-23 15:47,BREAKING NEWS,Salman Khan dances with Varun Dhawan at IIFA event,91,True,text_card,reel_text,18078040838412248,122124108423424069,True,True,151,0,0,0,,172,0
 2026-10-23 17:06,INDIAN CINEMA,"3 Idiots sequel script is almost ready, confirms actor Aamir Khan",73,True,text_card,reel_text,18095440349439650,122124115857424069,True,True,155,0,0,0,,187,0
-2026-10-23 18:46,INDIA NEWS,Food safety officers extort cash from Delhi cloud kitchens.,80,True,text_card,reel_text,17898636951672516,122124129069424069,True,True,46,0,0,0,,47,0
+2026-10-23 18:46,INDIA NEWS,Food safety officers extort cash from Delhi cloud kitchens.,80,True,text_card,reel_text,17898636951672516,122124129069424069,True,True,46,0,0,0,,49,0
 2026-10-23 19:26,INDIA NEWS,"Several feared dead after firecracker factory explodes in Bihar, rescue underway",78,True,text_card,reel_text,18046528628820570,122124134445424069,True,True,105,0,0,0,,121,0
 2026-10-23 20:06,BREAKING NEWS,"High inflation acts like a tax on everyone, warns RBI Governor",113,False,full_bleed,,18153595603543035,122124139785424069,True,True,6,0,0,0,0,,0
 2026-10-23 21:06,INDIA NEWS,At least four dead in blast in Bihar’s Siwan district,66,True,text_card,reel_text,18116539298326530,122124147063424069,True,True,34,0,0,0,,39,0
-2026-10-24 08:26,TAMIL NADU NEWS,"Chennai starts construction on massive ₹4,800 crore desalination plant",71,True,text_card,reel_text,18128788483872285,122124216963424069,True,True,18,0,0,0,,23,0
-2026-10-24 09:46,INDIA NEWS,FBI arrests wanted Haryana gangster Himanshu Bhau in the US,76,True,text_card,reel_text,18107132975256499,122124231075424069,True,True,149,0,0,0,,195,0
-2026-10-24 10:46,INDIA NEWS,CBI arrests long-wanted fugitive in multi-crore fodder scam case,83,True,text_card,reel_text,18123423506292441,122124236283424069,True,True,131,0,0,0,,148,0
-2026-10-24 11:06,INDIAN CINEMA,Aamir Khan gets special thanks in director Avinash Arun's new film Prahaar.,79,True,text_card,reel_text,18127647106786474,122124238863424069,True,True,149,0,0,0,,181,0
-2026-10-24 12:53,BREAKING NEWS,New video surfaces showing Indian and Chinese troops near Arunachal border,95,True,full_bleed,,18411379240091875,122124248805424069,True,True,41,0,0,0,,92,1
-2026-10-24 12:56,INDIAN CINEMA,Bollywood actor Saif Ali Khan sells Mumbai flat for 4.11 crore,62,True,full_bleed,reel_overlay,17990759820070272,122124249525424069,True,True,2,0,0,0,,54,0
-2026-10-24 15:06,INDIA NEWS,India and Russia target $100 billion trade by 2030.,69,True,text_card,reel_text,18181489729430594,122124262341424069,True,True,,,,,,,
+2026-10-24 08:26,TAMIL NADU NEWS,"Chennai starts construction on massive ₹4,800 crore desalination plant",71,True,text_card,reel_text,18128788483872285,122124216963424069,True,True,21,0,0,0,,26,0
+2026-10-24 09:46,INDIA NEWS,FBI arrests wanted Haryana gangster Himanshu Bhau in the US,76,True,text_card,reel_text,18107132975256499,122124231075424069,True,True,151,0,0,0,,197,0
+2026-10-24 10:46,INDIA NEWS,CBI arrests long-wanted fugitive in multi-crore fodder scam case,83,True,text_card,reel_text,18123423506292441,122124236283424069,True,True,135,0,0,0,,153,0
+2026-10-24 11:06,INDIAN CINEMA,Aamir Khan gets special thanks in director Avinash Arun's new film Prahaar.,79,True,text_card,reel_text,18127647106786474,122124238863424069,True,True,174,0,0,0,,203,0
+2026-10-24 12:53,BREAKING NEWS,New video surfaces showing Indian and Chinese troops near Arunachal border,95,True,full_bleed,,18411379240091875,122124248805424069,True,True,116,0,0,0,,130,1
+2026-10-24 12:56,INDIAN CINEMA,Bollywood actor Saif Ali Khan sells Mumbai flat for 4.11 crore,62,True,full_bleed,reel_overlay,17990759820070272,122124249525424069,True,True,103,0,0,0,,138,0
+2026-10-24 15:06,INDIA NEWS,India and Russia target $100 billion trade by 2030.,69,True,text_card,reel_text,18181489729430594,122124262341424069,True,True,0,0,0,0,,6,0
