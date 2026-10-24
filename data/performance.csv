@@ -421,18 +421,18 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-23 15:47,BREAKING NEWS,Salman Khan dances with Varun Dhawan at IIFA event,91,True,text_card,reel_text,18078040838412248,122124108423424069,True,True,151,0,0,0,,172,0
 2026-10-23 17:06,INDIAN CINEMA,"3 Idiots sequel script is almost ready, confirms actor Aamir Khan",73,True,text_card,reel_text,18095440349439650,122124115857424069,True,True,155,0,0,0,,187,0
 2026-10-23 18:46,INDIA NEWS,Food safety officers extort cash from Delhi cloud kitchens.,80,True,text_card,reel_text,17898636951672516,122124129069424069,True,True,49,0,0,0,,50,0
-2026-10-23 19:26,INDIA NEWS,"Several feared dead after firecracker factory explodes in Bihar, rescue underway",78,True,text_card,reel_text,18046528628820570,122124134445424069,True,True,107,0,0,0,,124,0
+2026-10-23 19:26,INDIA NEWS,"Several feared dead after firecracker factory explodes in Bihar, rescue underway",78,True,text_card,reel_text,18046528628820570,122124134445424069,True,True,109,0,0,0,,125,0
 2026-10-23 20:06,BREAKING NEWS,"High inflation acts like a tax on everyone, warns RBI Governor",113,False,full_bleed,,18153595603543035,122124139785424069,True,True,6,0,0,0,0,,0
-2026-10-23 21:06,INDIA NEWS,At least four dead in blast in Bihar’s Siwan district,66,True,text_card,reel_text,18116539298326530,122124147063424069,True,True,35,0,0,0,,40,0
-2026-10-24 08:26,TAMIL NADU NEWS,"Chennai starts construction on massive ₹4,800 crore desalination plant",71,True,text_card,reel_text,18128788483872285,122124216963424069,True,True,23,0,0,0,,27,0
-2026-10-24 09:46,INDIA NEWS,FBI arrests wanted Haryana gangster Himanshu Bhau in the US,76,True,text_card,reel_text,18107132975256499,122124231075424069,True,True,152,0,0,0,,200,0
-2026-10-24 10:46,INDIA NEWS,CBI arrests long-wanted fugitive in multi-crore fodder scam case,83,True,text_card,reel_text,18123423506292441,122124236283424069,True,True,135,0,0,0,,153,0
-2026-10-24 11:06,INDIAN CINEMA,Aamir Khan gets special thanks in director Avinash Arun's new film Prahaar.,79,True,text_card,reel_text,18127647106786474,122124238863424069,True,True,177,0,0,0,,204,0
-2026-10-24 12:53,BREAKING NEWS,New video surfaces showing Indian and Chinese troops near Arunachal border,95,True,full_bleed,,18411379240091875,122124248805424069,True,True,124,1,0,0,,142,2
-2026-10-24 12:56,INDIAN CINEMA,Bollywood actor Saif Ali Khan sells Mumbai flat for 4.11 crore,62,True,full_bleed,reel_overlay,17990759820070272,122124249525424069,True,True,118,0,0,0,,151,0
-2026-10-24 15:06,INDIA NEWS,India and Russia target $100 billion trade by 2030.,69,True,text_card,reel_text,18181489729430594,122124262341424069,True,True,6,0,0,0,,10,0
-2026-10-24 15:46,BREAKING NEWS,Ayushmann Khurrana's Udta Teer collects Rs 6.66 crore in two days,92,True,text_card,reel_text,17915321340533651,122124269295424069,True,True,62,0,0,0,,75,0
-2026-10-24 16:46,INDIAN CINEMA,Rajinikanth watches Jailer 2 with fans in theatre after 40 years,73,True,text_card,reel_text,17912647905518528,122124293211424069,True,True,55,2,0,0,,118,2
-2026-10-24 17:46,INDIA NEWS,Gunmen kill seven at Jordan church funeral as India condemns attack,58,True,text_card,reel_text,18653860744028012,122124299757424069,True,True,,,,,,,
-2026-10-24 18:46,INDIA NEWS,JDU expels Bihar MLA Anant Singh and wife for six years,81,True,text_card,reel_text,18128558773891661,122124306861424069,True,True,,,,,,,
-2026-10-24 19:26,INDIA NEWS,Bay of Bengal cyclone threatens farmers days after rain relief.,78,True,text_card,reel_text,17916041373535744,122124314865424069,True,True,,,,,,,
+2026-10-23 21:06,INDIA NEWS,At least four dead in blast in Bihar’s Siwan district,66,True,text_card,reel_text,18116539298326530,122124147063424069,True,True,36,0,0,0,,42,0
+2026-10-24 08:26,TAMIL NADU NEWS,"Chennai starts construction on massive ₹4,800 crore desalination plant",71,True,text_card,reel_text,18128788483872285,122124216963424069,True,True,23,0,0,0,,32,0
+2026-10-24 09:46,INDIA NEWS,FBI arrests wanted Haryana gangster Himanshu Bhau in the US,76,True,text_card,reel_text,18107132975256499,122124231075424069,True,True,156,0,0,0,,203,0
+2026-10-24 10:46,INDIA NEWS,CBI arrests long-wanted fugitive in multi-crore fodder scam case,83,True,text_card,reel_text,18123423506292441,122124236283424069,True,True,137,0,0,0,,155,0
+2026-10-24 11:06,INDIAN CINEMA,Aamir Khan gets special thanks in director Avinash Arun's new film Prahaar.,79,True,text_card,reel_text,18127647106786474,122124238863424069,True,True,178,0,0,0,,205,0
+2026-10-24 12:53,BREAKING NEWS,New video surfaces showing Indian and Chinese troops near Arunachal border,95,True,full_bleed,,18411379240091875,122124248805424069,True,True,174,2,0,0,,199,3
+2026-10-24 12:56,INDIAN CINEMA,Bollywood actor Saif Ali Khan sells Mumbai flat for 4.11 crore,62,True,full_bleed,reel_overlay,17990759820070272,122124249525424069,True,True,121,0,0,0,,156,0
+2026-10-24 15:06,INDIA NEWS,India and Russia target $100 billion trade by 2030.,69,True,text_card,reel_text,18181489729430594,122124262341424069,True,True,18,0,0,0,,22,0
+2026-10-24 15:46,BREAKING NEWS,Ayushmann Khurrana's Udta Teer collects Rs 6.66 crore in two days,92,True,text_card,reel_text,17915321340533651,122124269295424069,True,True,98,0,0,0,,108,0
+2026-10-24 16:46,INDIAN CINEMA,Rajinikanth watches Jailer 2 with fans in theatre after 40 years,73,True,text_card,reel_text,17912647905518528,122124293211424069,True,True,218,7,0,0,,349,8
+2026-10-24 17:46,INDIA NEWS,Gunmen kill seven at Jordan church funeral as India condemns attack,58,True,text_card,reel_text,18653860744028012,122124299757424069,True,True,11,0,0,0,,15,0
+2026-10-24 18:46,INDIA NEWS,JDU expels Bihar MLA Anant Singh and wife for six years,81,True,text_card,reel_text,18128558773891661,122124306861424069,True,True,0,0,0,0,,1,0
+2026-10-24 19:26,INDIA NEWS,Bay of Bengal cyclone threatens farmers days after rain relief.,78,True,text_card,reel_text,17916041373535744,122124314865424069,True,True,0,0,0,0,,2,0
