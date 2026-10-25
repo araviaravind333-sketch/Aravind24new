@@ -404,7 +404,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-22 11:26,TAMIL NADU NEWS,Forest department traps second tiger in cage near Gudalur,58,True,text_card,reel_text,18127024099851072,122123908563424069,True,True,51,1,0,89,,65,90
 2026-10-22 12:32,INDIAN CINEMA,"Nani says he chooses films by instinct, not box office results",75,True,text_card,reel_text,18375440824212955,122123915883424069,True,True,128,1,0,0,,144,1
 2026-10-22 14:04,TAMIL NADU NEWS,How Tamil actor M.R. Radha got away,69,True,full_bleed,reel_overlay,17926336896426416,122123927307424069,True,True,131,0,0,0,,181,0
-2026-10-22 15:06,INDIAN CINEMA,"Rajinikanth, Sivakarthikeyan, others attend Anirudh’s Navaratri puja",63,True,text_card,reel_text,18081174779346251,122123934327424069,True,True,161,1,0,0,,211,1
+2026-10-22 15:06,INDIAN CINEMA,"Rajinikanth, Sivakarthikeyan, others attend Anirudh’s Navaratri puja",63,True,text_card,reel_text,18081174779346251,122123934327424069,True,True,162,1,0,0,,213,1
 2026-10-22 15:49,INDIAN CINEMA,Amitabh Bachchan pauses social media activity following medical advice,55,True,text_card,reel_text,17953772505271020,122123943435424069,True,True,173,0,0,0,,196,0
 2026-10-22 16:06,TAMIL NADU NEWS,Heavy rains submerge Tamil Nadu regions as major dams reach full capacity,58,True,text_card,reel_text,17991229071110567,122123946435424069,True,True,85,0,0,0,,94,0
 2026-10-22 16:46,INDIAN CINEMA,Tu Hai Meri Kiran to release in cinemas tomorrow as scheduled,60,True,text_card,reel_text,18130515376799933,122123951391424069,True,True,53,0,0,0,,61,0
@@ -425,21 +425,21 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-23 20:06,BREAKING NEWS,"High inflation acts like a tax on everyone, warns RBI Governor",113,False,full_bleed,,18153595603543035,122124139785424069,True,True,6,0,0,0,0,,0
 2026-10-23 21:06,INDIA NEWS,At least four dead in blast in Bihar’s Siwan district,66,True,text_card,reel_text,18116539298326530,122124147063424069,True,True,36,0,0,0,,42,0
 2026-10-24 08:26,TAMIL NADU NEWS,"Chennai starts construction on massive ₹4,800 crore desalination plant",71,True,text_card,reel_text,18128788483872285,122124216963424069,True,True,41,0,0,0,,55,0
-2026-10-24 09:46,INDIA NEWS,FBI arrests wanted Haryana gangster Himanshu Bhau in the US,76,True,text_card,reel_text,18107132975256499,122124231075424069,True,True,156,0,0,0,,203,0
+2026-10-24 09:46,INDIA NEWS,FBI arrests wanted Haryana gangster Himanshu Bhau in the US,76,True,text_card,reel_text,18107132975256499,122124231075424069,True,True,157,0,0,0,,204,0
 2026-10-24 10:46,INDIA NEWS,CBI arrests long-wanted fugitive in multi-crore fodder scam case,83,True,text_card,reel_text,18123423506292441,122124236283424069,True,True,158,0,0,0,,184,0
 2026-10-24 11:06,INDIAN CINEMA,Aamir Khan gets special thanks in director Avinash Arun's new film Prahaar.,79,True,text_card,reel_text,18127647106786474,122124238863424069,True,True,184,0,0,0,,209,0
-2026-10-24 12:53,BREAKING NEWS,New video surfaces showing Indian and Chinese troops near Arunachal border,95,True,full_bleed,,18411379240091875,122124248805424069,True,True,299,5,0,0,,350,6
-2026-10-24 12:56,INDIAN CINEMA,Bollywood actor Saif Ali Khan sells Mumbai flat for 4.11 crore,62,True,full_bleed,reel_overlay,17990759820070272,122124249525424069,True,True,164,0,0,0,,217,0
-2026-10-24 15:06,INDIA NEWS,India and Russia target $100 billion trade by 2030.,69,True,text_card,reel_text,18181489729430594,122124262341424069,True,True,37,0,0,0,,45,0
+2026-10-24 12:53,BREAKING NEWS,New video surfaces showing Indian and Chinese troops near Arunachal border,95,True,full_bleed,,18411379240091875,122124248805424069,True,True,300,5,0,0,,351,6
+2026-10-24 12:56,INDIAN CINEMA,Bollywood actor Saif Ali Khan sells Mumbai flat for 4.11 crore,62,True,full_bleed,reel_overlay,17990759820070272,122124249525424069,True,True,167,0,0,0,,220,0
+2026-10-24 15:06,INDIA NEWS,India and Russia target $100 billion trade by 2030.,69,True,text_card,reel_text,18181489729430594,122124262341424069,True,True,38,0,0,0,,45,0
 2026-10-24 15:46,BREAKING NEWS,Ayushmann Khurrana's Udta Teer collects Rs 6.66 crore in two days,92,True,text_card,reel_text,17915321340533651,122124269295424069,True,True,109,0,0,0,,120,0
-2026-10-24 16:46,INDIAN CINEMA,Rajinikanth watches Jailer 2 with fans in theatre after 40 years,73,True,text_card,reel_text,17912647905518528,122124293211424069,True,True,1190,15,0,0,,1619,16
-2026-10-24 17:46,INDIA NEWS,Gunmen kill seven at Jordan church funeral as India condemns attack,58,True,text_card,reel_text,18653860744028012,122124299757424069,True,True,98,0,0,0,,122,0
-2026-10-24 18:46,INDIA NEWS,JDU expels Bihar MLA Anant Singh and wife for six years,81,True,text_card,reel_text,18128558773891661,122124306861424069,True,True,115,0,0,0,,146,0
-2026-10-24 19:26,INDIA NEWS,Bay of Bengal cyclone threatens farmers days after rain relief.,78,True,text_card,reel_text,17916041373535744,122124314865424069,True,True,55,0,0,0,,71,0
+2026-10-24 16:46,INDIAN CINEMA,Rajinikanth watches Jailer 2 with fans in theatre after 40 years,73,True,text_card,reel_text,17912647905518528,122124293211424069,True,True,1192,15,0,0,,1621,16
+2026-10-24 17:46,INDIA NEWS,Gunmen kill seven at Jordan church funeral as India condemns attack,58,True,text_card,reel_text,18653860744028012,122124299757424069,True,True,100,0,0,0,,125,0
+2026-10-24 18:46,INDIA NEWS,JDU expels Bihar MLA Anant Singh and wife for six years,81,True,text_card,reel_text,18128558773891661,122124306861424069,True,True,118,0,0,0,,151,0
+2026-10-24 19:26,INDIA NEWS,Bay of Bengal cyclone threatens farmers days after rain relief.,78,True,text_card,reel_text,17916041373535744,122124314865424069,True,True,65,0,0,0,,85,0
 2026-10-24 20:06,INDIA NEWS,Vijay's TVK targets BJP as box office clash with Dhanush looms,71,True,text_card,reel_text,18107088604973960,122124319047424069,True,True,158,0,0,0,,207,0
-2026-10-24 21:06,INDIA NEWS,Odisha triggers emergency response as severe cyclone threatens coast,84,True,text_card,reel_text,18115591682167481,122124326469424069,True,True,120,0,0,0,,139,0
-2026-10-25 08:26,TAMIL NADU NEWS,"Landslide buries government bus in Nilgiris, killing driver",73,True,text_card,reel_text,18108719114225723,122124389115424069,True,True,39,0,0,0,,48,0
-2026-10-25 09:46,BREAKING NEWS,Free bicycle scheme cost jumps 40% above budget in Tamil Nadu,98,False,full_bleed,,18120263071757213,122124398319424069,True,True,2,0,0,0,0,,0
-2026-10-25 10:46,BREAKING NEWS,PM Modi attends Varanasi air show as opposition questions border row,101,False,full_bleed,,17992474857099697,122124403689424069,True,True,1,0,0,1,0,,1
-2026-10-25 11:46,INDIA NEWS,"ISRO to have four launch pads by 2029, says Narayanan",89,False,full_bleed,,17912009529475642,122124409977424069,True,True,,,,,,,
-2026-10-25 13:06,BREAKING NEWS,Singapore Customs chief recreates Rajinikanth’s Jailer entry in viral video,93,True,text_card,reel_text,18081527696375074,122124417939424069,True,True,,,,,,,
+2026-10-24 21:06,INDIA NEWS,Odisha triggers emergency response as severe cyclone threatens coast,84,True,text_card,reel_text,18115591682167481,122124326469424069,True,True,122,0,0,0,,141,0
+2026-10-25 08:26,TAMIL NADU NEWS,"Landslide buries government bus in Nilgiris, killing driver",73,True,text_card,reel_text,18108719114225723,122124389115424069,True,True,64,0,0,0,,71,0
+2026-10-25 09:46,BREAKING NEWS,Free bicycle scheme cost jumps 40% above budget in Tamil Nadu,98,False,full_bleed,,18120263071757213,122124398319424069,True,True,3,0,0,0,0,,0
+2026-10-25 10:46,BREAKING NEWS,PM Modi attends Varanasi air show as opposition questions border row,101,False,full_bleed,,17992474857099697,122124403689424069,True,True,2,0,0,1,0,,1
+2026-10-25 11:46,INDIA NEWS,"ISRO to have four launch pads by 2029, says Narayanan",89,False,full_bleed,,17912009529475642,122124409977424069,True,True,1,0,0,0,0,,0
+2026-10-25 13:06,BREAKING NEWS,Singapore Customs chief recreates Rajinikanth’s Jailer entry in viral video,93,True,text_card,reel_text,18081527696375074,122124417939424069,True,True,2,0,0,0,,4,0
