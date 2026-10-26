@@ -121,5 +121,18 @@
   "credit_mode": "none",
   "video_path": "/home/runner/work/Aravind24new/Aravind24new/src/../data/telegram_inbox/ugc-1792826593146.mp4",
   "granted_at": "2026-10-24 07:23"
+ },
+ {
+  "id": "1792986064184",
+  "url": "https://x.com/sam51824016070/status/2114365253970722977?s=46",
+  "creator": "@sam51824016070",
+  "status": "posted",
+  "requested_at": "2026-10-26 03:41",
+  "prompt_message_id": null,
+  "headline": "",
+  "article_url": null,
+  "credit_mode": "none",
+  "video_path": "/home/runner/work/Aravind24new/Aravind24new/src/../data/telegram_inbox/ugc-1792986064184.mp4",
+  "granted_at": "2026-10-26 03:41"
  }
 ]
