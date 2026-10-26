@@ -392,7 +392,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-21 12:46,INDIA NEWS,Blast In Bengaluru: Suspected IED In Abandoned Bag Injures Two Workers,58,True,text_card,reel_text,18633078310007130,122123756997424069,True,True,131,0,0,0,,166,0
 2026-10-21 14:06,INDIAN CINEMA,Was it necessary to go up on stage and humiliate him like that,60,True,text_card,reel_text,18109108604580020,122123766705424069,True,True,116,0,0,0,,147,0
 2026-10-21 14:46,INDIA NEWS,PM Modi reviews Indian economy with Finance Minister to boost growth,63,True,text_card,reel_text,18118183360971846,122123771319424069,True,True,18,0,0,0,,25,0
-2026-10-21 15:06,INDIA NEWS,CA Inter exam results release tomorrow as Foundation candidates wait,65,True,text_card,reel_text,18131246827762403,122123773521424069,True,True,10,0,0,0,,16,0
+2026-10-21 15:06,INDIA NEWS,CA Inter exam results release tomorrow as Foundation candidates wait,65,True,text_card,reel_text,18131246827762403,122123773521424069,True,True,11,0,0,0,,16,0
 2026-10-21 15:26,INDIA NEWS,"Two dead, four injured as massive fire engulfs 60-70 commercial units",68,True,text_card,reel_text,18110005679206206,122123776029424069,True,True,133,0,0,0,,152,0
 2026-10-21 16:26,INDIA NEWS,Patna High Court grants land compensation to former Speaker Meira Kumar,63,True,full_bleed,reel_overlay,18169135198481403,122123783043424069,True,True,140,0,0,0,,172,0
 2026-10-21 17:46,INDIA NEWS,Jio IPO gets oversubscribed in 100 minutes with record bids,56,False,full_bleed,,18154601449537235,122123793105424069,True,True,5,0,0,0,0,,0
@@ -445,16 +445,16 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-25 13:06,BREAKING NEWS,Singapore Customs chief recreates Rajinikanth’s Jailer entry in viral video,93,True,text_card,reel_text,18081527696375074,122124417939424069,True,True,127,0,0,0,,144,0
 2026-10-25 14:06,INDIA NEWS,Raj Thackeray deletes Modi-Adani documentary after Mumbai police request,71,False,full_bleed,,18025029059876252,122124425295424069,True,True,5,0,0,0,0,,0
 2026-10-25 15:06,INDIA NEWS,Spurious liquor kills 10 in Madhya Pradesh; government orders probe,76,True,text_card,reel_text,18025702607923866,122124436089424069,True,True,146,1,0,0,,160,1
-2026-10-25 16:26,BREAKING NEWS,Viral set video reveals actor Santhanam was cut from Jailer,93,True,text_card,reel_text,18013854338994781,122124446625424069,True,True,205,0,0,0,,250,0
-2026-10-25 17:26,INDIA NEWS,Karnataka warns private firms against denying jobs to local candidates,88,True,text_card,reel_text,18379463851214026,122124455565424069,True,True,121,0,0,0,,156,0
-2026-10-25 17:46,TAMIL NADU NEWS,Guinness record holder Chef Damu passes away in Tamil Nadu,65,True,text_card,reel_text,17905826313665275,122124457977424069,True,True,126,0,0,0,,146,0
-2026-10-25 18:46,BREAKING NEWS,PM Modi opens Rs 169 crore RBI data centre for payment systems,131,True,text_card,reel_text,17877348882634880,122124468879424069,True,True,37,0,0,0,,44,0
-2026-10-25 19:46,BREAKING NEWS,Kharge's Remarks On PM Modi's Parents Trigger BJP-NDA Outrage; Congress Asked To Apologise,98,True,text_card,reel_text,18181627912436827,122124478269424069,True,True,196,0,0,0,,285,0
-2026-10-25 20:57,BREAKING NEWS,Salman Khan's war drama 'Maatrubhumi' stuck as makers await Defence Ministry NOC,92,True,text_card,reel_text,18152776279573586,122124487833424069,True,True,273,0,0,0,,336,0
-2026-10-25 22:07,BREAKING NEWS,'Baap' Comment Latest In M Kharge's Series Of Jibes At PM Modi,101,True,text_card,reel_text,18097768283122803,122124497433424069,True,True,43,0,0,0,,57,0
-2026-10-26 08:26,BREAKING NEWS,BJP launches nationwide protests over Kharge remark on PM Modi,95,True,text_card,reel_text,18113641349166893,122124560799424069,True,True,143,0,0,0,,181,0
-2026-10-26 09:11,BREAKING NEWS,Indian soldiers thrash Chinese troops attempting border intrusion in old video,95,True,full_bleed,,18120918515065310,122124565467424069,True,True,3955,111,0,7,,5414,137
-2026-10-26 10:46,INDIA NEWS,Student sets mehndi record in Karnataka,58,True,full_bleed,reel_overlay,18016379360991826,122124576219424069,True,True,124,0,0,0,,149,0
-2026-10-26 11:46,BREAKING NEWS,Massive 5-hour fire guts 40 shops near Jammu Railway Station,99,True,text_card,reel_text,18010470197775806,122124581499424069,True,True,53,0,0,0,,79,0
-2026-10-26 13:06,INDIA NEWS,"Andhra deploys 4,000 workers as Cyclone Arnab threatens power supply.",84,True,text_card,reel_text,18185912863421087,122124589329424069,True,True,1,0,0,0,,10,0
-2026-10-26 13:22,INDIA NEWS,"Over 4,000 workers stand ready as Cyclone Arnab hits Andhra.",84,True,text_card,reel_text,17954450004297563,122124591561424069,True,True,0,0,0,0,,0,0
+2026-10-25 16:26,BREAKING NEWS,Viral set video reveals actor Santhanam was cut from Jailer,93,True,text_card,reel_text,18013854338994781,122124446625424069,True,True,206,0,0,0,,251,0
+2026-10-25 17:26,INDIA NEWS,Karnataka warns private firms against denying jobs to local candidates,88,True,text_card,reel_text,18379463851214026,122124455565424069,True,True,121,0,0,0,,157,0
+2026-10-25 17:46,TAMIL NADU NEWS,Guinness record holder Chef Damu passes away in Tamil Nadu,65,True,text_card,reel_text,17905826313665275,122124457977424069,True,True,126,0,0,0,,147,0
+2026-10-25 18:46,BREAKING NEWS,PM Modi opens Rs 169 crore RBI data centre for payment systems,131,True,text_card,reel_text,17877348882634880,122124468879424069,True,True,39,0,0,0,,47,0
+2026-10-25 19:46,BREAKING NEWS,Kharge's Remarks On PM Modi's Parents Trigger BJP-NDA Outrage; Congress Asked To Apologise,98,True,text_card,reel_text,18181627912436827,122124478269424069,True,True,196,0,0,0,,286,0
+2026-10-25 20:57,BREAKING NEWS,Salman Khan's war drama 'Maatrubhumi' stuck as makers await Defence Ministry NOC,92,True,text_card,reel_text,18152776279573586,122124487833424069,True,True,278,0,0,0,,343,0
+2026-10-25 22:07,BREAKING NEWS,'Baap' Comment Latest In M Kharge's Series Of Jibes At PM Modi,101,True,text_card,reel_text,18097768283122803,122124497433424069,True,True,46,0,0,0,,61,0
+2026-10-26 08:26,BREAKING NEWS,BJP launches nationwide protests over Kharge remark on PM Modi,95,True,text_card,reel_text,18113641349166893,122124560799424069,True,True,144,0,0,0,,186,0
+2026-10-26 09:11,BREAKING NEWS,Indian soldiers thrash Chinese troops attempting border intrusion in old video,95,True,full_bleed,,18120918515065310,122124565467424069,True,True,4996,126,0,17,,6298,166
+2026-10-26 10:46,INDIA NEWS,Student sets mehndi record in Karnataka,58,True,full_bleed,reel_overlay,18016379360991826,122124576219424069,True,True,128,0,0,0,,153,0
+2026-10-26 11:46,BREAKING NEWS,Massive 5-hour fire guts 40 shops near Jammu Railway Station,99,True,text_card,reel_text,18010470197775806,122124581499424069,True,True,106,0,0,0,,121,0
+2026-10-26 13:06,INDIA NEWS,"Andhra deploys 4,000 workers as Cyclone Arnab threatens power supply.",84,True,text_card,reel_text,18185912863421087,122124589329424069,True,True,176,3,0,0,,226,3
+2026-10-26 13:22,INDIA NEWS,"Over 4,000 workers stand ready as Cyclone Arnab hits Andhra.",84,True,text_card,reel_text,17954450004297563,122124591561424069,True,True,71,1,0,0,,89,1
