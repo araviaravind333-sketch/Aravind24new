@@ -429,7 +429,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-24 10:46,INDIA NEWS,CBI arrests long-wanted fugitive in multi-crore fodder scam case,83,True,text_card,reel_text,18123423506292441,122124236283424069,True,True,158,0,0,0,,184,0
 2026-10-24 11:06,INDIAN CINEMA,Aamir Khan gets special thanks in director Avinash Arun's new film Prahaar.,79,True,text_card,reel_text,18127647106786474,122124238863424069,True,True,184,0,0,0,,209,0
 2026-10-24 12:53,BREAKING NEWS,New video surfaces showing Indian and Chinese troops near Arunachal border,95,True,full_bleed,,18411379240091875,122124248805424069,True,True,301,5,0,0,,351,6
-2026-10-24 12:56,INDIAN CINEMA,Bollywood actor Saif Ali Khan sells Mumbai flat for 4.11 crore,62,True,full_bleed,reel_overlay,17990759820070272,122124249525424069,True,True,168,0,0,0,,221,0
+2026-10-24 12:56,INDIAN CINEMA,Bollywood actor Saif Ali Khan sells Mumbai flat for 4.11 crore,62,True,full_bleed,reel_overlay,17990759820070272,122124249525424069,True,True,169,0,0,0,,222,0
 2026-10-24 15:06,INDIA NEWS,India and Russia target $100 billion trade by 2030.,69,True,text_card,reel_text,18181489729430594,122124262341424069,True,True,39,0,0,0,,46,0
 2026-10-24 15:46,BREAKING NEWS,Ayushmann Khurrana's Udta Teer collects Rs 6.66 crore in two days,92,True,text_card,reel_text,17915321340533651,122124269295424069,True,True,109,0,0,0,,120,0
 2026-10-24 16:46,INDIAN CINEMA,Rajinikanth watches Jailer 2 with fans in theatre after 40 years,73,True,text_card,reel_text,17912647905518528,122124293211424069,True,True,1205,15,0,0,,1638,16
@@ -438,7 +438,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-24 19:26,INDIA NEWS,Bay of Bengal cyclone threatens farmers days after rain relief.,78,True,text_card,reel_text,17916041373535744,122124314865424069,True,True,92,0,0,0,,114,0
 2026-10-24 20:06,INDIA NEWS,Vijay's TVK targets BJP as box office clash with Dhanush looms,71,True,text_card,reel_text,18107088604973960,122124319047424069,True,True,159,0,0,0,,209,0
 2026-10-24 21:06,INDIA NEWS,Odisha triggers emergency response as severe cyclone threatens coast,84,True,text_card,reel_text,18115591682167481,122124326469424069,True,True,127,0,0,0,,147,0
-2026-10-25 08:26,TAMIL NADU NEWS,"Landslide buries government bus in Nilgiris, killing driver",73,True,text_card,reel_text,18108719114225723,122124389115424069,True,True,94,0,0,0,,103,0
+2026-10-25 08:26,TAMIL NADU NEWS,"Landslide buries government bus in Nilgiris, killing driver",73,True,text_card,reel_text,18108719114225723,122124389115424069,True,True,96,0,0,0,,105,0
 2026-10-25 09:46,BREAKING NEWS,Free bicycle scheme cost jumps 40% above budget in Tamil Nadu,98,False,full_bleed,,18120263071757213,122124398319424069,True,True,5,0,0,0,0,,0
 2026-10-25 10:46,BREAKING NEWS,PM Modi attends Varanasi air show as opposition questions border row,101,False,full_bleed,,17992474857099697,122124403689424069,True,True,4,0,0,1,0,,1
 2026-10-25 11:46,INDIA NEWS,"ISRO to have four launch pads by 2029, says Narayanan",89,False,full_bleed,,17912009529475642,122124409977424069,True,True,5,0,0,0,0,,0
@@ -449,8 +449,8 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-25 17:26,INDIA NEWS,Karnataka warns private firms against denying jobs to local candidates,88,True,text_card,reel_text,18379463851214026,122124455565424069,True,True,120,0,0,0,,155,0
 2026-10-25 17:46,TAMIL NADU NEWS,Guinness record holder Chef Damu passes away in Tamil Nadu,65,True,text_card,reel_text,17905826313665275,122124457977424069,True,True,126,0,0,0,,146,0
 2026-10-25 18:46,BREAKING NEWS,PM Modi opens Rs 169 crore RBI data centre for payment systems,131,True,text_card,reel_text,17877348882634880,122124468879424069,True,True,20,0,0,0,,24,0
-2026-10-25 19:46,BREAKING NEWS,Kharge's Remarks On PM Modi's Parents Trigger BJP-NDA Outrage; Congress Asked To Apologise,98,True,text_card,reel_text,18181627912436827,122124478269424069,True,True,193,0,0,0,,280,0
-2026-10-25 20:57,BREAKING NEWS,Salman Khan's war drama 'Maatrubhumi' stuck as makers await Defence Ministry NOC,92,True,text_card,reel_text,18152776279573586,122124487833424069,True,True,252,0,0,0,,310,0
-2026-10-25 22:07,BREAKING NEWS,'Baap' Comment Latest In M Kharge's Series Of Jibes At PM Modi,101,True,text_card,reel_text,18097768283122803,122124497433424069,True,True,34,0,0,0,,44,0
-2026-10-26 08:26,BREAKING NEWS,BJP launches nationwide protests over Kharge remark on PM Modi,95,True,text_card,reel_text,18113641349166893,122124560799424069,True,True,,,,,,,
-2026-10-26 09:11,BREAKING NEWS,Indian soldiers thrash Chinese troops attempting border intrusion in old video,95,True,full_bleed,,18120918515065310,122124565467424069,True,True,,,,,,,
+2026-10-25 19:46,BREAKING NEWS,Kharge's Remarks On PM Modi's Parents Trigger BJP-NDA Outrage; Congress Asked To Apologise,98,True,text_card,reel_text,18181627912436827,122124478269424069,True,True,194,0,0,0,,283,0
+2026-10-25 20:57,BREAKING NEWS,Salman Khan's war drama 'Maatrubhumi' stuck as makers await Defence Ministry NOC,92,True,text_card,reel_text,18152776279573586,122124487833424069,True,True,262,0,0,0,,323,0
+2026-10-25 22:07,BREAKING NEWS,'Baap' Comment Latest In M Kharge's Series Of Jibes At PM Modi,101,True,text_card,reel_text,18097768283122803,122124497433424069,True,True,38,0,0,0,,47,0
+2026-10-26 08:26,BREAKING NEWS,BJP launches nationwide protests over Kharge remark on PM Modi,95,True,text_card,reel_text,18113641349166893,122124560799424069,True,True,42,0,0,0,,96,0
+2026-10-26 09:11,BREAKING NEWS,Indian soldiers thrash Chinese troops attempting border intrusion in old video,95,True,full_bleed,,18120918515065310,122124565467424069,True,True,3,3,0,0,,66,3
