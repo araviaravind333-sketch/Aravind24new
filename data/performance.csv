@@ -412,7 +412,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-22 19:46,INDIAN CINEMA,Suriya unveils Naslen’s first look as Eswaran from ‘Scene’,75,True,text_card,reel_text,18097220684404942,122123971029424069,True,True,147,1,0,0,,171,1
 2026-10-23 08:26,INDIAN CINEMA,Ramayana movie hits Rs 8 crore in opening day advance ticket sales,56,True,text_card,reel_text,18127112428925894,122124050895424069,True,True,139,0,0,0,,167,0
 2026-10-23 09:06,TAMIL NADU NEWS,"Puducherry co-op bank faces RBI curbs, withdrawals capped at Rs 5,000",81,False,full_bleed,,18122752243940904,122124053943424069,True,True,5,0,0,0,0,,0
-2026-10-23 10:46,INDIA NEWS,Massive blackout and water crisis hit Gurugram as workers strike,80,False,full_bleed,,18109668791241217,122124065019424069,True,True,6,0,0,0,0,,0
+2026-10-23 10:46,INDIA NEWS,Massive blackout and water crisis hit Gurugram as workers strike,80,False,full_bleed,,18109668791241217,122124065019424069,True,True,7,0,0,0,0,,0
 2026-10-23 11:06,INDIAN CINEMA,Sonu Sood leases Versova commercial property for Rs 3.52 crore,71,True,full_bleed,reel_overlay,17991469314115787,122124067845424069,True,True,135,0,0,0,,153,0
 2026-10-23 12:46,INDIA NEWS,Robert Vadra on Son's Bikaner House Row,68,False,full_bleed,,18021725858731858,122124080955424069,True,True,5,0,0,0,0,,0
 2026-10-23 13:06,INDIAN CINEMA,'King': SRK and Deepika to reunite for October 26 song shoot,69,True,text_card,reel_text,18171631549462432,122124085359424069,True,True,102,0,0,0,,120,0
@@ -445,13 +445,13 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-25 13:06,BREAKING NEWS,Singapore Customs chief recreates Rajinikanth’s Jailer entry in viral video,93,True,text_card,reel_text,18081527696375074,122124417939424069,True,True,127,0,0,0,,144,0
 2026-10-25 14:06,INDIA NEWS,Raj Thackeray deletes Modi-Adani documentary after Mumbai police request,71,False,full_bleed,,18025029059876252,122124425295424069,True,True,5,0,0,0,0,,0
 2026-10-25 15:06,INDIA NEWS,Spurious liquor kills 10 in Madhya Pradesh; government orders probe,76,True,text_card,reel_text,18025702607923866,122124436089424069,True,True,146,1,0,0,,160,1
-2026-10-25 16:26,BREAKING NEWS,Viral set video reveals actor Santhanam was cut from Jailer,93,True,text_card,reel_text,18013854338994781,122124446625424069,True,True,203,0,0,0,,248,0
-2026-10-25 17:26,INDIA NEWS,Karnataka warns private firms against denying jobs to local candidates,88,True,text_card,reel_text,18379463851214026,122124455565424069,True,True,120,0,0,0,,155,0
+2026-10-25 16:26,BREAKING NEWS,Viral set video reveals actor Santhanam was cut from Jailer,93,True,text_card,reel_text,18013854338994781,122124446625424069,True,True,204,0,0,0,,249,0
+2026-10-25 17:26,INDIA NEWS,Karnataka warns private firms against denying jobs to local candidates,88,True,text_card,reel_text,18379463851214026,122124455565424069,True,True,121,0,0,0,,156,0
 2026-10-25 17:46,TAMIL NADU NEWS,Guinness record holder Chef Damu passes away in Tamil Nadu,65,True,text_card,reel_text,17905826313665275,122124457977424069,True,True,126,0,0,0,,146,0
-2026-10-25 18:46,BREAKING NEWS,PM Modi opens Rs 169 crore RBI data centre for payment systems,131,True,text_card,reel_text,17877348882634880,122124468879424069,True,True,20,0,0,0,,24,0
-2026-10-25 19:46,BREAKING NEWS,Kharge's Remarks On PM Modi's Parents Trigger BJP-NDA Outrage; Congress Asked To Apologise,98,True,text_card,reel_text,18181627912436827,122124478269424069,True,True,194,0,0,0,,283,0
-2026-10-25 20:57,BREAKING NEWS,Salman Khan's war drama 'Maatrubhumi' stuck as makers await Defence Ministry NOC,92,True,text_card,reel_text,18152776279573586,122124487833424069,True,True,262,0,0,0,,323,0
-2026-10-25 22:07,BREAKING NEWS,'Baap' Comment Latest In M Kharge's Series Of Jibes At PM Modi,101,True,text_card,reel_text,18097768283122803,122124497433424069,True,True,38,0,0,0,,47,0
-2026-10-26 08:26,BREAKING NEWS,BJP launches nationwide protests over Kharge remark on PM Modi,95,True,text_card,reel_text,18113641349166893,122124560799424069,True,True,42,0,0,0,,96,0
-2026-10-26 09:11,BREAKING NEWS,Indian soldiers thrash Chinese troops attempting border intrusion in old video,95,True,full_bleed,,18120918515065310,122124565467424069,True,True,3,3,0,0,,66,3
-2026-10-26 10:46,INDIA NEWS,Student sets mehndi record in Karnataka,58,True,full_bleed,reel_overlay,18016379360991826,122124576219424069,True,True,,,,,,,
+2026-10-25 18:46,BREAKING NEWS,PM Modi opens Rs 169 crore RBI data centre for payment systems,131,True,text_card,reel_text,17877348882634880,122124468879424069,True,True,25,0,0,0,,33,0
+2026-10-25 19:46,BREAKING NEWS,Kharge's Remarks On PM Modi's Parents Trigger BJP-NDA Outrage; Congress Asked To Apologise,98,True,text_card,reel_text,18181627912436827,122124478269424069,True,True,194,0,0,0,,284,0
+2026-10-25 20:57,BREAKING NEWS,Salman Khan's war drama 'Maatrubhumi' stuck as makers await Defence Ministry NOC,92,True,text_card,reel_text,18152776279573586,122124487833424069,True,True,272,0,0,0,,336,0
+2026-10-25 22:07,BREAKING NEWS,'Baap' Comment Latest In M Kharge's Series Of Jibes At PM Modi,101,True,text_card,reel_text,18097768283122803,122124497433424069,True,True,39,0,0,0,,51,0
+2026-10-26 08:26,BREAKING NEWS,BJP launches nationwide protests over Kharge remark on PM Modi,95,True,text_card,reel_text,18113641349166893,122124560799424069,True,True,126,0,0,0,,159,0
+2026-10-26 09:11,BREAKING NEWS,Indian soldiers thrash Chinese troops attempting border intrusion in old video,95,True,full_bleed,,18120918515065310,122124565467424069,True,True,2167,79,0,0,,2851,90
+2026-10-26 10:46,INDIA NEWS,Student sets mehndi record in Karnataka,58,True,full_bleed,reel_overlay,18016379360991826,122124576219424069,True,True,15,0,0,0,,49,0
