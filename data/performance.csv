@@ -440,7 +440,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-24 21:06,INDIA NEWS,Odisha triggers emergency response as severe cyclone threatens coast,84,True,text_card,reel_text,18115591682167481,122124326469424069,True,True,127,0,0,0,,147,0
 2026-10-25 08:26,TAMIL NADU NEWS,"Landslide buries government bus in Nilgiris, killing driver",73,True,text_card,reel_text,18108719114225723,122124389115424069,True,True,96,0,0,0,,105,0
 2026-10-25 09:46,BREAKING NEWS,Free bicycle scheme cost jumps 40% above budget in Tamil Nadu,98,False,full_bleed,,18120263071757213,122124398319424069,True,True,5,0,0,0,0,,0
-2026-10-25 10:46,BREAKING NEWS,PM Modi attends Varanasi air show as opposition questions border row,101,False,full_bleed,,17992474857099697,122124403689424069,True,True,4,0,0,1,0,,1
+2026-10-25 10:46,BREAKING NEWS,PM Modi attends Varanasi air show as opposition questions border row,101,False,full_bleed,,17992474857099697,122124403689424069,True,True,5,0,0,1,0,,1
 2026-10-25 11:46,INDIA NEWS,"ISRO to have four launch pads by 2029, says Narayanan",89,False,full_bleed,,17912009529475642,122124409977424069,True,True,5,0,0,0,0,,0
 2026-10-25 13:06,BREAKING NEWS,Singapore Customs chief recreates Rajinikanth’s Jailer entry in viral video,93,True,text_card,reel_text,18081527696375074,122124417939424069,True,True,128,0,0,0,,145,0
 2026-10-25 14:06,INDIA NEWS,Raj Thackeray deletes Modi-Adani documentary after Mumbai police request,71,False,full_bleed,,18025029059876252,122124425295424069,True,True,5,0,0,0,0,,0
@@ -453,7 +453,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-25 20:57,BREAKING NEWS,Salman Khan's war drama 'Maatrubhumi' stuck as makers await Defence Ministry NOC,92,True,text_card,reel_text,18152776279573586,122124487833424069,True,True,290,0,0,0,,357,0
 2026-10-25 22:07,BREAKING NEWS,'Baap' Comment Latest In M Kharge's Series Of Jibes At PM Modi,101,True,text_card,reel_text,18097768283122803,122124497433424069,True,True,61,0,0,0,,77,0
 2026-10-26 08:26,BREAKING NEWS,BJP launches nationwide protests over Kharge remark on PM Modi,95,True,text_card,reel_text,18113641349166893,122124560799424069,True,True,146,0,0,0,,188,0
-2026-10-26 09:11,BREAKING NEWS,Indian soldiers thrash Chinese troops attempting border intrusion in old video,95,True,full_bleed,,18120918515065310,122124565467424069,True,True,5312,132,0,19,,6677,173
+2026-10-26 09:11,BREAKING NEWS,Indian soldiers thrash Chinese troops attempting border intrusion in old video,95,True,full_bleed,,18120918515065310,122124565467424069,True,True,5322,132,0,19,,6688,173
 2026-10-26 10:46,INDIA NEWS,Student sets mehndi record in Karnataka,58,True,full_bleed,reel_overlay,18016379360991826,122124576219424069,True,True,131,0,0,0,,155,0
 2026-10-26 11:46,BREAKING NEWS,Massive 5-hour fire guts 40 shops near Jammu Railway Station,99,True,text_card,reel_text,18010470197775806,122124581499424069,True,True,111,0,0,0,,126,0
 2026-10-26 13:06,INDIA NEWS,"Andhra deploys 4,000 workers as Cyclone Arnab threatens power supply.",84,True,text_card,reel_text,18185912863421087,122124589329424069,True,True,245,3,0,0,,301,3
@@ -461,11 +461,11 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-26 15:36,INDIA NEWS,Kerala judge booked after minor son causes fatal car crash,70,True,text_card,reel_text,18013496231766423,122124612279424069,True,True,125,0,0,0,,155,0
 2026-10-26 17:04,BREAKING NEWS,Former DMK Minister Anbil Mahesh Poyyamozhi arrested in ₹100 crore private schools fraud,126,True,text_card,reel_text,18107657432206797,122124622803424069,True,True,143,0,0,0,,180,0
 2026-10-26 17:07,BREAKING NEWS,Police arrest former DMK minister in ₹100-crore private school scam,126,True,text_card,reel_text,18119481038067616,122124623169424069,True,True,106,0,0,0,,141,0
-2026-10-26 18:27,BREAKING NEWS,Cyclone Arnab closing in on Andhra coast,126,True,text_card,reel_text,17944865730090186,122124633357424069,True,True,143,0,0,0,,163,0
+2026-10-26 18:27,BREAKING NEWS,Cyclone Arnab closing in on Andhra coast,126,True,text_card,reel_text,17944865730090186,122124633357424069,True,True,144,0,0,0,,164,0
 2026-10-26 18:29,BREAKING NEWS,Cyclone Arnab closing in on Andhra coast,126,True,text_card,reel_text,18140613277616238,122124633813424069,True,True,47,1,0,0,,62,1
-2026-10-26 19:53,BREAKING NEWS,Paragliding crash in Himachal Pradesh kills Bulgarian tourist during overnight rescue,90,True,text_card,reel_text,18114710534171561,122124641205424069,True,True,83,0,0,0,,95,0
-2026-10-26 21:11,BREAKING NEWS,Election Commission tells Supreme Court all three key decisions were unanimous.,109,False,full_bleed,,18172764052460595,122124651207424069,True,True,3,0,0,0,0,,0
-2026-10-26 22:46,BREAKING NEWS,High alert issued for low-lying areas as cyclone approaches coast,90,True,text_card,reel_text,17996571087022912,122124661305424069,True,True,135,0,0,2,,164,2
-2026-10-27 08:45,BREAKING NEWS,Seventeen remand prisoners escape Theni sub-jail as police catch four,93,True,text_card,reel_text,18125931694897432,122124728265424069,True,True,1,0,0,0,,9,0
-2026-10-27 08:47,BREAKING NEWS,"Seventeen prisoners escape Theni sub-jail, police recapture four suspects",93,True,text_card,reel_text,18120380645066438,122124728703424069,True,True,4,0,0,0,,9,0
-2026-10-27 10:59,INDIA NEWS,Four die in midnight crashes as speeding luxury cars hit 100kmph,58,True,text_card,reel_text,18025183004925142,122124742197424069,True,True,,,,,,,
+2026-10-26 19:53,BREAKING NEWS,Paragliding crash in Himachal Pradesh kills Bulgarian tourist during overnight rescue,90,True,text_card,reel_text,18114710534171561,122124641205424069,True,True,84,0,0,0,,96,0
+2026-10-26 21:11,BREAKING NEWS,Election Commission tells Supreme Court all three key decisions were unanimous.,109,False,full_bleed,,18172764052460595,122124651207424069,True,True,4,0,0,0,0,,0
+2026-10-26 22:46,BREAKING NEWS,High alert issued for low-lying areas as cyclone approaches coast,90,True,text_card,reel_text,17996571087022912,122124661305424069,True,True,137,0,0,2,,166,2
+2026-10-27 08:45,BREAKING NEWS,Seventeen remand prisoners escape Theni sub-jail as police catch four,93,True,text_card,reel_text,18125931694897432,122124728265424069,True,True,20,0,0,0,,22,0
+2026-10-27 08:47,BREAKING NEWS,"Seventeen prisoners escape Theni sub-jail, police recapture four suspects",93,True,text_card,reel_text,18120380645066438,122124728703424069,True,True,25,0,0,0,,34,0
+2026-10-27 10:59,INDIA NEWS,Four die in midnight crashes as speeding luxury cars hit 100kmph,58,True,text_card,reel_text,18025183004925142,122124742197424069,True,True,0,0,0,0,,7,0
