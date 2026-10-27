@@ -428,7 +428,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-24 09:46,INDIA NEWS,FBI arrests wanted Haryana gangster Himanshu Bhau in the US,76,True,text_card,reel_text,18107132975256499,122124231075424069,True,True,157,0,0,0,,204,0
 2026-10-24 10:46,INDIA NEWS,CBI arrests long-wanted fugitive in multi-crore fodder scam case,83,True,text_card,reel_text,18123423506292441,122124236283424069,True,True,158,0,0,0,,184,0
 2026-10-24 11:06,INDIAN CINEMA,Aamir Khan gets special thanks in director Avinash Arun's new film Prahaar.,79,True,text_card,reel_text,18127647106786474,122124238863424069,True,True,184,0,0,0,,209,0
-2026-10-24 12:53,BREAKING NEWS,New video surfaces showing Indian and Chinese troops near Arunachal border,95,True,full_bleed,,18411379240091875,122124248805424069,True,True,301,5,0,0,,351,6
+2026-10-24 12:53,BREAKING NEWS,New video surfaces showing Indian and Chinese troops near Arunachal border,95,True,full_bleed,,18411379240091875,122124248805424069,True,True,302,5,0,0,,351,6
 2026-10-24 12:56,INDIAN CINEMA,Bollywood actor Saif Ali Khan sells Mumbai flat for 4.11 crore,62,True,full_bleed,reel_overlay,17990759820070272,122124249525424069,True,True,169,0,0,0,,222,0
 2026-10-24 15:06,INDIA NEWS,India and Russia target $100 billion trade by 2030.,69,True,text_card,reel_text,18181489729430594,122124262341424069,True,True,39,0,0,0,,46,0
 2026-10-24 15:46,BREAKING NEWS,Ayushmann Khurrana's Udta Teer collects Rs 6.66 crore in two days,92,True,text_card,reel_text,17915321340533651,122124269295424069,True,True,109,0,0,0,,120,0
@@ -442,29 +442,29 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-25 09:46,BREAKING NEWS,Free bicycle scheme cost jumps 40% above budget in Tamil Nadu,98,False,full_bleed,,18120263071757213,122124398319424069,True,True,5,0,0,0,0,,0
 2026-10-25 10:46,BREAKING NEWS,PM Modi attends Varanasi air show as opposition questions border row,101,False,full_bleed,,17992474857099697,122124403689424069,True,True,4,0,0,1,0,,1
 2026-10-25 11:46,INDIA NEWS,"ISRO to have four launch pads by 2029, says Narayanan",89,False,full_bleed,,17912009529475642,122124409977424069,True,True,5,0,0,0,0,,0
-2026-10-25 13:06,BREAKING NEWS,Singapore Customs chief recreates Rajinikanth’s Jailer entry in viral video,93,True,text_card,reel_text,18081527696375074,122124417939424069,True,True,127,0,0,0,,145,0
+2026-10-25 13:06,BREAKING NEWS,Singapore Customs chief recreates Rajinikanth’s Jailer entry in viral video,93,True,text_card,reel_text,18081527696375074,122124417939424069,True,True,128,0,0,0,,145,0
 2026-10-25 14:06,INDIA NEWS,Raj Thackeray deletes Modi-Adani documentary after Mumbai police request,71,False,full_bleed,,18025029059876252,122124425295424069,True,True,5,0,0,0,0,,0
 2026-10-25 15:06,INDIA NEWS,Spurious liquor kills 10 in Madhya Pradesh; government orders probe,76,True,text_card,reel_text,18025702607923866,122124436089424069,True,True,146,1,0,0,,160,1
 2026-10-25 16:26,BREAKING NEWS,Viral set video reveals actor Santhanam was cut from Jailer,93,True,text_card,reel_text,18013854338994781,122124446625424069,True,True,211,0,0,0,,257,0
 2026-10-25 17:26,INDIA NEWS,Karnataka warns private firms against denying jobs to local candidates,88,True,text_card,reel_text,18379463851214026,122124455565424069,True,True,122,0,0,0,,157,0
 2026-10-25 17:46,TAMIL NADU NEWS,Guinness record holder Chef Damu passes away in Tamil Nadu,65,True,text_card,reel_text,17905826313665275,122124457977424069,True,True,126,0,0,0,,147,0
-2026-10-25 18:46,BREAKING NEWS,PM Modi opens Rs 169 crore RBI data centre for payment systems,131,True,text_card,reel_text,17877348882634880,122124468879424069,True,True,49,0,0,0,,60,0
+2026-10-25 18:46,BREAKING NEWS,PM Modi opens Rs 169 crore RBI data centre for payment systems,131,True,text_card,reel_text,17877348882634880,122124468879424069,True,True,50,0,0,0,,60,0
 2026-10-25 19:46,BREAKING NEWS,Kharge's Remarks On PM Modi's Parents Trigger BJP-NDA Outrage; Congress Asked To Apologise,98,True,text_card,reel_text,18181627912436827,122124478269424069,True,True,196,0,0,0,,286,0
 2026-10-25 20:57,BREAKING NEWS,Salman Khan's war drama 'Maatrubhumi' stuck as makers await Defence Ministry NOC,92,True,text_card,reel_text,18152776279573586,122124487833424069,True,True,290,0,0,0,,357,0
-2026-10-25 22:07,BREAKING NEWS,'Baap' Comment Latest In M Kharge's Series Of Jibes At PM Modi,101,True,text_card,reel_text,18097768283122803,122124497433424069,True,True,60,0,0,0,,76,0
-2026-10-26 08:26,BREAKING NEWS,BJP launches nationwide protests over Kharge remark on PM Modi,95,True,text_card,reel_text,18113641349166893,122124560799424069,True,True,145,0,0,0,,187,0
-2026-10-26 09:11,BREAKING NEWS,Indian soldiers thrash Chinese troops attempting border intrusion in old video,95,True,full_bleed,,18120918515065310,122124565467424069,True,True,5301,132,0,19,,6660,173
-2026-10-26 10:46,INDIA NEWS,Student sets mehndi record in Karnataka,58,True,full_bleed,reel_overlay,18016379360991826,122124576219424069,True,True,130,0,0,0,,154,0
-2026-10-26 11:46,BREAKING NEWS,Massive 5-hour fire guts 40 shops near Jammu Railway Station,99,True,text_card,reel_text,18010470197775806,122124581499424069,True,True,110,0,0,0,,125,0
-2026-10-26 13:06,INDIA NEWS,"Andhra deploys 4,000 workers as Cyclone Arnab threatens power supply.",84,True,text_card,reel_text,18185912863421087,122124589329424069,True,True,243,3,0,0,,300,3
-2026-10-26 13:22,INDIA NEWS,"Over 4,000 workers stand ready as Cyclone Arnab hits Andhra.",84,True,text_card,reel_text,17954450004297563,122124591561424069,True,True,115,1,0,0,,126,1
-2026-10-26 15:36,INDIA NEWS,Kerala judge booked after minor son causes fatal car crash,70,True,text_card,reel_text,18013496231766423,122124612279424069,True,True,124,0,0,0,,154,0
-2026-10-26 17:04,BREAKING NEWS,Former DMK Minister Anbil Mahesh Poyyamozhi arrested in ₹100 crore private schools fraud,126,True,text_card,reel_text,18107657432206797,122124622803424069,True,True,142,0,0,0,,179,0
-2026-10-26 17:07,BREAKING NEWS,Police arrest former DMK minister in ₹100-crore private school scam,126,True,text_card,reel_text,18119481038067616,122124623169424069,True,True,105,0,0,0,,140,0
-2026-10-26 18:27,BREAKING NEWS,Cyclone Arnab closing in on Andhra coast,126,True,text_card,reel_text,17944865730090186,122124633357424069,True,True,141,0,0,0,,161,0
-2026-10-26 18:29,BREAKING NEWS,Cyclone Arnab closing in on Andhra coast,126,True,text_card,reel_text,18140613277616238,122124633813424069,True,True,46,1,0,0,,61,1
-2026-10-26 19:53,BREAKING NEWS,Paragliding crash in Himachal Pradesh kills Bulgarian tourist during overnight rescue,90,True,text_card,reel_text,18114710534171561,122124641205424069,True,True,76,0,0,0,,88,0
+2026-10-25 22:07,BREAKING NEWS,'Baap' Comment Latest In M Kharge's Series Of Jibes At PM Modi,101,True,text_card,reel_text,18097768283122803,122124497433424069,True,True,61,0,0,0,,77,0
+2026-10-26 08:26,BREAKING NEWS,BJP launches nationwide protests over Kharge remark on PM Modi,95,True,text_card,reel_text,18113641349166893,122124560799424069,True,True,146,0,0,0,,188,0
+2026-10-26 09:11,BREAKING NEWS,Indian soldiers thrash Chinese troops attempting border intrusion in old video,95,True,full_bleed,,18120918515065310,122124565467424069,True,True,5312,132,0,19,,6677,173
+2026-10-26 10:46,INDIA NEWS,Student sets mehndi record in Karnataka,58,True,full_bleed,reel_overlay,18016379360991826,122124576219424069,True,True,131,0,0,0,,155,0
+2026-10-26 11:46,BREAKING NEWS,Massive 5-hour fire guts 40 shops near Jammu Railway Station,99,True,text_card,reel_text,18010470197775806,122124581499424069,True,True,111,0,0,0,,126,0
+2026-10-26 13:06,INDIA NEWS,"Andhra deploys 4,000 workers as Cyclone Arnab threatens power supply.",84,True,text_card,reel_text,18185912863421087,122124589329424069,True,True,245,3,0,0,,301,3
+2026-10-26 13:22,INDIA NEWS,"Over 4,000 workers stand ready as Cyclone Arnab hits Andhra.",84,True,text_card,reel_text,17954450004297563,122124591561424069,True,True,116,1,0,0,,127,1
+2026-10-26 15:36,INDIA NEWS,Kerala judge booked after minor son causes fatal car crash,70,True,text_card,reel_text,18013496231766423,122124612279424069,True,True,125,0,0,0,,155,0
+2026-10-26 17:04,BREAKING NEWS,Former DMK Minister Anbil Mahesh Poyyamozhi arrested in ₹100 crore private schools fraud,126,True,text_card,reel_text,18107657432206797,122124622803424069,True,True,143,0,0,0,,180,0
+2026-10-26 17:07,BREAKING NEWS,Police arrest former DMK minister in ₹100-crore private school scam,126,True,text_card,reel_text,18119481038067616,122124623169424069,True,True,106,0,0,0,,141,0
+2026-10-26 18:27,BREAKING NEWS,Cyclone Arnab closing in on Andhra coast,126,True,text_card,reel_text,17944865730090186,122124633357424069,True,True,143,0,0,0,,163,0
+2026-10-26 18:29,BREAKING NEWS,Cyclone Arnab closing in on Andhra coast,126,True,text_card,reel_text,18140613277616238,122124633813424069,True,True,47,1,0,0,,62,1
+2026-10-26 19:53,BREAKING NEWS,Paragliding crash in Himachal Pradesh kills Bulgarian tourist during overnight rescue,90,True,text_card,reel_text,18114710534171561,122124641205424069,True,True,83,0,0,0,,95,0
 2026-10-26 21:11,BREAKING NEWS,Election Commission tells Supreme Court all three key decisions were unanimous.,109,False,full_bleed,,18172764052460595,122124651207424069,True,True,3,0,0,0,0,,0
-2026-10-26 22:46,BREAKING NEWS,High alert issued for low-lying areas as cyclone approaches coast,90,True,text_card,reel_text,17996571087022912,122124661305424069,True,True,133,0,0,2,,161,2
-2026-10-27 08:45,BREAKING NEWS,Seventeen remand prisoners escape Theni sub-jail as police catch four,93,True,text_card,reel_text,18125931694897432,122124728265424069,True,True,,,,,,,
-2026-10-27 08:47,BREAKING NEWS,"Seventeen prisoners escape Theni sub-jail, police recapture four suspects",93,True,text_card,reel_text,18120380645066438,122124728703424069,True,True,,,,,,,
+2026-10-26 22:46,BREAKING NEWS,High alert issued for low-lying areas as cyclone approaches coast,90,True,text_card,reel_text,17996571087022912,122124661305424069,True,True,135,0,0,2,,164,2
+2026-10-27 08:45,BREAKING NEWS,Seventeen remand prisoners escape Theni sub-jail as police catch four,93,True,text_card,reel_text,18125931694897432,122124728265424069,True,True,1,0,0,0,,9,0
+2026-10-27 08:47,BREAKING NEWS,"Seventeen prisoners escape Theni sub-jail, police recapture four suspects",93,True,text_card,reel_text,18120380645066438,122124728703424069,True,True,4,0,0,0,,9,0
