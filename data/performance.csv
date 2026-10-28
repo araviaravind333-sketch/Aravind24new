@@ -453,7 +453,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-25 20:57,BREAKING NEWS,Salman Khan's war drama 'Maatrubhumi' stuck as makers await Defence Ministry NOC,92,True,text_card,reel_text,18152776279573586,122124487833424069,True,True,291,0,0,0,,358,0
 2026-10-25 22:07,BREAKING NEWS,'Baap' Comment Latest In M Kharge's Series Of Jibes At PM Modi,101,True,text_card,reel_text,18097768283122803,122124497433424069,True,True,61,0,0,0,,77,0
 2026-10-26 08:26,BREAKING NEWS,BJP launches nationwide protests over Kharge remark on PM Modi,95,True,text_card,reel_text,18113641349166893,122124560799424069,True,True,146,0,0,0,,188,0
-2026-10-26 09:11,BREAKING NEWS,Indian soldiers thrash Chinese troops attempting border intrusion in old video,95,True,full_bleed,,18120918515065310,122124565467424069,True,True,5372,132,0,19,,6745,173
+2026-10-26 09:11,BREAKING NEWS,Indian soldiers thrash Chinese troops attempting border intrusion in old video,95,True,full_bleed,,18120918515065310,122124565467424069,True,True,5375,132,0,19,,6752,173
 2026-10-26 10:46,INDIA NEWS,Student sets mehndi record in Karnataka,58,True,full_bleed,reel_overlay,18016379360991826,122124576219424069,True,True,131,0,0,0,,155,0
 2026-10-26 11:46,BREAKING NEWS,Massive 5-hour fire guts 40 shops near Jammu Railway Station,99,True,text_card,reel_text,18010470197775806,122124581499424069,True,True,112,0,0,0,,127,0
 2026-10-26 13:06,INDIA NEWS,"Andhra deploys 4,000 workers as Cyclone Arnab threatens power supply.",84,True,text_card,reel_text,18185912863421087,122124589329424069,True,True,246,3,0,0,,301,3
@@ -476,19 +476,19 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-27 18:06,INDIA NEWS,"Over 32,000 trees face felling for mega power project in Maharashtra.",69,True,text_card,reel_text,18471828349137614,122124797073424069,True,True,33,0,0,0,,37,0
 2026-10-27 19:08,INDIA NEWS,"Andhra Pradesh deploys 6,000 workers to tackle cyclone power outages",84,True,text_card,reel_text,18082209056366967,122124804231424069,True,True,105,0,0,0,,113,0
 2026-10-27 19:09,INDIA NEWS,"Andhra Pradesh deploys 6,000 workers to restore cyclone power cuts.",84,True,text_card,reel_text,18112730645239158,122124804495424069,True,True,80,0,0,0,,92,0
-2026-10-27 21:07,INDIA NEWS,"Science must benefit society directly, PM Modi tells Indian researchers",71,True,text_card,reel_text,17892910668683566,122124816537424069,True,True,53,0,0,0,,65,0
+2026-10-27 21:07,INDIA NEWS,"Science must benefit society directly, PM Modi tells Indian researchers",71,True,text_card,reel_text,17892910668683566,122124816537424069,True,True,55,0,0,0,,66,0
 2026-10-27 21:09,INDIA NEWS,"Lab research must directly benefit society, PM Modi tells Indian scientists",71,True,text_card,reel_text,17973402924189432,122124817017424069,True,True,33,0,0,0,,36,0
 2026-10-27 21:48,BREAKING NEWS,"கரையை கடக்கும் அர்னாப் புயல் - சென்னை திருவொற்றியூர், எண்ணூரில் கடல் சீற்றம்!",95,True,full_bleed,,18079661900413723,122124824649424069,True,True,115,1,0,2,,164,3
 2026-10-27 21:51,INDIA NEWS,Congress stages mock impeachment of Election Chief at Kharge residence,86,True,full_bleed,reel_overlay,18100155494553383,122124825285424069,True,True,113,0,0,0,,141,0
 2026-10-28 08:47,BREAKING NEWS,Supreme Court stops idol smuggler from returning to Germany,90,False,full_bleed,,18010404062995747,122124885231424069,True,True,5,0,0,0,0,,0
-2026-10-28 09:46,INDIAN CINEMA,Amitabh Bachchan adds new bungalow Mansa to his famous Mumbai estate,67,True,text_card,reel_text,18113395976593266,122124893511424069,True,True,143,0,0,0,,173,0
-2026-10-28 11:06,INDIAN CINEMA,Banned Iranian director mocks regime with new revenge thriller,75,True,text_card,reel_text,17986803033115012,122124902061424069,True,True,135,0,0,0,,185,0
+2026-10-28 09:46,INDIAN CINEMA,Amitabh Bachchan adds new bungalow Mansa to his famous Mumbai estate,67,True,text_card,reel_text,18113395976593266,122124893511424069,True,True,145,0,0,0,,175,0
+2026-10-28 11:06,INDIAN CINEMA,Banned Iranian director mocks regime with new revenge thriller,75,True,text_card,reel_text,17986803033115012,122124902061424069,True,True,136,0,0,0,,186,0
 2026-10-28 11:46,INDIAN CINEMA,Scam 1992 memes still flood actor Pratik Gandhi during stock market crashes,80,True,text_card,reel_text,18133267966666079,122124906027424069,True,True,108,0,0,0,,141,0
 2026-10-28 13:06,INDIA NEWS,Cyclone Arnab forces Thoothukudi fishermen to stay off the sea,78,True,text_card,reel_text,17909975598575186,122124913215424069,True,True,101,0,0,0,,134,0
-2026-10-28 13:26,BREAKING NEWS,Opposition faces heavy backlash after council poll defeat and court apology,103,True,text_card,reel_text,18032646533937093,122124915291424069,True,True,27,0,0,0,,30,0
-2026-10-28 17:07,BREAKING NEWS,Cabinet approves 3% pay hike for over one crore central employees,92,True,text_card,reel_text,18113617511580467,122124957489424069,True,True,7,0,0,0,,10,0
-2026-10-28 18:06,INDIAN CINEMA,Bombay High Court cancels film body order against producer Nikhil Dwivedi,79,True,text_card,reel_text,17993320677024266,122124965175424069,True,True,16,0,0,0,,17,0
-2026-10-28 19:26,INDIA NEWS,Congress demands paper ballots back after state council election results,73,True,text_card,reel_text,17889858792479954,122124978177424069,True,True,0,0,0,0,,0,0
-2026-10-28 19:46,INDIAN CINEMA,Hrithik Roshan praises ex-wife Sussanne Khan in emotional birthday post,74,True,text_card,reel_text,18110621939223099,122124981903424069,True,True,,,,,,,
-2026-10-28 21:07,INDIA NEWS,Rain eases over Keralam as cyclone makes landfall; mercury set to climb,78,True,text_card,reel_text,18179951122445171,122124991845424069,True,True,,,,,,,
-2026-10-28 21:26,INDIA NEWS,"Police unveil mine-proof, Vajra vehicles",58,False,full_bleed,,17914615569501201,122124997137424069,True,True,,,,,,,
+2026-10-28 13:26,BREAKING NEWS,Opposition faces heavy backlash after council poll defeat and court apology,103,True,text_card,reel_text,18032646533937093,122124915291424069,True,True,29,0,0,0,,32,0
+2026-10-28 17:07,BREAKING NEWS,Cabinet approves 3% pay hike for over one crore central employees,92,True,text_card,reel_text,18113617511580467,122124957489424069,True,True,10,0,0,0,,12,0
+2026-10-28 18:06,INDIAN CINEMA,Bombay High Court cancels film body order against producer Nikhil Dwivedi,79,True,text_card,reel_text,17993320677024266,122124965175424069,True,True,69,0,0,0,,85,0
+2026-10-28 19:26,INDIA NEWS,Congress demands paper ballots back after state council election results,73,True,text_card,reel_text,17889858792479954,122124978177424069,True,True,9,0,0,0,,16,0
+2026-10-28 19:46,INDIAN CINEMA,Hrithik Roshan praises ex-wife Sussanne Khan in emotional birthday post,74,True,text_card,reel_text,18110621939223099,122124981903424069,True,True,124,1,0,0,,147,1
+2026-10-28 21:07,INDIA NEWS,Rain eases over Keralam as cyclone makes landfall; mercury set to climb,78,True,text_card,reel_text,18179951122445171,122124991845424069,True,True,0,0,0,0,,2,0
+2026-10-28 21:26,INDIA NEWS,"Police unveil mine-proof, Vajra vehicles",58,False,full_bleed,,17914615569501201,122124997137424069,True,True,0,0,0,0,0,,0
