@@ -415,7 +415,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-23 10:46,INDIA NEWS,Massive blackout and water crisis hit Gurugram as workers strike,80,False,full_bleed,,18109668791241217,122124065019424069,True,True,7,0,0,0,0,,0
 2026-10-23 11:06,INDIAN CINEMA,Sonu Sood leases Versova commercial property for Rs 3.52 crore,71,True,full_bleed,reel_overlay,17991469314115787,122124067845424069,True,True,135,0,0,0,,153,0
 2026-10-23 12:46,INDIA NEWS,Robert Vadra on Son's Bikaner House Row,68,False,full_bleed,,18021725858731858,122124080955424069,True,True,5,0,0,0,0,,0
-2026-10-23 13:06,INDIAN CINEMA,'King': SRK and Deepika to reunite for October 26 song shoot,69,True,text_card,reel_text,18171631549462432,122124085359424069,True,True,103,0,0,0,,121,0
+2026-10-23 13:06,INDIAN CINEMA,'King': SRK and Deepika to reunite for October 26 song shoot,69,True,text_card,reel_text,18171631549462432,122124085359424069,True,True,104,0,0,0,,123,0
 2026-10-23 14:59,INDIAN CINEMA,Amitabh Bachchan reveals how he manages household chores,63,True,text_card,reel_text,18111429299594033,122124103107424069,True,True,130,0,0,0,,148,0
 2026-10-23 15:45,BREAKING NEWS,Salman Khan dances with Varun Dhawan at IIFA awards press launch,91,True,text_card,reel_text,18087570275702048,122124108069424069,True,True,136,0,0,0,,157,0
 2026-10-23 15:47,BREAKING NEWS,Salman Khan dances with Varun Dhawan at IIFA event,91,True,text_card,reel_text,18078040838412248,122124108423424069,True,True,151,0,0,0,,172,0
@@ -429,7 +429,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-24 10:46,INDIA NEWS,CBI arrests long-wanted fugitive in multi-crore fodder scam case,83,True,text_card,reel_text,18123423506292441,122124236283424069,True,True,158,0,0,0,,184,0
 2026-10-24 11:06,INDIAN CINEMA,Aamir Khan gets special thanks in director Avinash Arun's new film Prahaar.,79,True,text_card,reel_text,18127647106786474,122124238863424069,True,True,184,0,0,0,,209,0
 2026-10-24 12:53,BREAKING NEWS,New video surfaces showing Indian and Chinese troops near Arunachal border,95,True,full_bleed,,18411379240091875,122124248805424069,True,True,302,5,0,0,,351,6
-2026-10-24 12:56,INDIAN CINEMA,Bollywood actor Saif Ali Khan sells Mumbai flat for 4.11 crore,62,True,full_bleed,reel_overlay,17990759820070272,122124249525424069,True,True,169,0,0,0,,222,0
+2026-10-24 12:56,INDIAN CINEMA,Bollywood actor Saif Ali Khan sells Mumbai flat for 4.11 crore,62,True,full_bleed,reel_overlay,17990759820070272,122124249525424069,True,True,170,0,0,0,,223,0
 2026-10-24 15:06,INDIA NEWS,India and Russia target $100 billion trade by 2030.,69,True,text_card,reel_text,18181489729430594,122124262341424069,True,True,39,0,0,0,,46,0
 2026-10-24 15:46,BREAKING NEWS,Ayushmann Khurrana's Udta Teer collects Rs 6.66 crore in two days,92,True,text_card,reel_text,17915321340533651,122124269295424069,True,True,109,0,0,0,,120,0
 2026-10-24 16:46,INDIAN CINEMA,Rajinikanth watches Jailer 2 with fans in theatre after 40 years,73,True,text_card,reel_text,17912647905518528,122124293211424069,True,True,1207,15,0,0,,1639,16
@@ -453,31 +453,31 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-25 20:57,BREAKING NEWS,Salman Khan's war drama 'Maatrubhumi' stuck as makers await Defence Ministry NOC,92,True,text_card,reel_text,18152776279573586,122124487833424069,True,True,291,0,0,0,,358,0
 2026-10-25 22:07,BREAKING NEWS,'Baap' Comment Latest In M Kharge's Series Of Jibes At PM Modi,101,True,text_card,reel_text,18097768283122803,122124497433424069,True,True,61,0,0,0,,77,0
 2026-10-26 08:26,BREAKING NEWS,BJP launches nationwide protests over Kharge remark on PM Modi,95,True,text_card,reel_text,18113641349166893,122124560799424069,True,True,146,0,0,0,,188,0
-2026-10-26 09:11,BREAKING NEWS,Indian soldiers thrash Chinese troops attempting border intrusion in old video,95,True,full_bleed,,18120918515065310,122124565467424069,True,True,5360,132,0,19,,6729,173
+2026-10-26 09:11,BREAKING NEWS,Indian soldiers thrash Chinese troops attempting border intrusion in old video,95,True,full_bleed,,18120918515065310,122124565467424069,True,True,5361,132,0,19,,6730,173
 2026-10-26 10:46,INDIA NEWS,Student sets mehndi record in Karnataka,58,True,full_bleed,reel_overlay,18016379360991826,122124576219424069,True,True,131,0,0,0,,155,0
 2026-10-26 11:46,BREAKING NEWS,Massive 5-hour fire guts 40 shops near Jammu Railway Station,99,True,text_card,reel_text,18010470197775806,122124581499424069,True,True,112,0,0,0,,127,0
 2026-10-26 13:06,INDIA NEWS,"Andhra deploys 4,000 workers as Cyclone Arnab threatens power supply.",84,True,text_card,reel_text,18185912863421087,122124589329424069,True,True,246,3,0,0,,301,3
 2026-10-26 13:22,INDIA NEWS,"Over 4,000 workers stand ready as Cyclone Arnab hits Andhra.",84,True,text_card,reel_text,17954450004297563,122124591561424069,True,True,117,1,0,0,,128,1
 2026-10-26 15:36,INDIA NEWS,Kerala judge booked after minor son causes fatal car crash,70,True,text_card,reel_text,18013496231766423,122124612279424069,True,True,125,0,0,0,,155,0
-2026-10-26 17:04,BREAKING NEWS,Former DMK Minister Anbil Mahesh Poyyamozhi arrested in ₹100 crore private schools fraud,126,True,text_card,reel_text,18107657432206797,122124622803424069,True,True,144,0,0,0,,182,0
+2026-10-26 17:04,BREAKING NEWS,Former DMK Minister Anbil Mahesh Poyyamozhi arrested in ₹100 crore private schools fraud,126,True,text_card,reel_text,18107657432206797,122124622803424069,True,True,145,0,0,0,,182,0
 2026-10-26 17:07,BREAKING NEWS,Police arrest former DMK minister in ₹100-crore private school scam,126,True,text_card,reel_text,18119481038067616,122124623169424069,True,True,107,0,0,0,,142,0
 2026-10-26 18:27,BREAKING NEWS,Cyclone Arnab closing in on Andhra coast,126,True,text_card,reel_text,17944865730090186,122124633357424069,True,True,150,0,0,0,,171,0
 2026-10-26 18:29,BREAKING NEWS,Cyclone Arnab closing in on Andhra coast,126,True,text_card,reel_text,18140613277616238,122124633813424069,True,True,49,1,0,0,,65,1
 2026-10-26 19:53,BREAKING NEWS,Paragliding crash in Himachal Pradesh kills Bulgarian tourist during overnight rescue,90,True,text_card,reel_text,18114710534171561,122124641205424069,True,True,103,0,0,0,,117,0
 2026-10-26 21:11,BREAKING NEWS,Election Commission tells Supreme Court all three key decisions were unanimous.,109,False,full_bleed,,18172764052460595,122124651207424069,True,True,5,0,0,0,0,,0
 2026-10-26 22:46,BREAKING NEWS,High alert issued for low-lying areas as cyclone approaches coast,90,True,text_card,reel_text,17996571087022912,122124661305424069,True,True,147,0,0,2,,175,2
-2026-10-27 08:45,BREAKING NEWS,Seventeen remand prisoners escape Theni sub-jail as police catch four,93,True,text_card,reel_text,18125931694897432,122124728265424069,True,True,49,0,0,0,,60,0
-2026-10-27 08:47,BREAKING NEWS,"Seventeen prisoners escape Theni sub-jail, police recapture four suspects",93,True,text_card,reel_text,18120380645066438,122124728703424069,True,True,53,0,0,0,,71,0
+2026-10-27 08:45,BREAKING NEWS,Seventeen remand prisoners escape Theni sub-jail as police catch four,93,True,text_card,reel_text,18125931694897432,122124728265424069,True,True,54,0,0,0,,66,0
+2026-10-27 08:47,BREAKING NEWS,"Seventeen prisoners escape Theni sub-jail, police recapture four suspects",93,True,text_card,reel_text,18120380645066438,122124728703424069,True,True,56,0,0,0,,75,0
 2026-10-27 10:59,INDIA NEWS,Four die in midnight crashes as speeding luxury cars hit 100kmph,58,True,text_card,reel_text,18025183004925142,122124742197424069,True,True,103,0,0,0,,119,0
-2026-10-27 11:46,INDIA NEWS,"Political Clash Over CEC & SIR; Rally at Ramlila Maidan, BJP Padayatra",76,True,text_card,reel_text,17984432276898451,122124747549424069,True,True,91,0,0,0,,113,0
-2026-10-27 13:06,INDIAN CINEMA,Ravi Kishan announces new devotional drama for Diwali 2027 theatrical release,82,True,text_card,reel_text,18110900666242867,122124754881424069,True,True,104,0,0,0,,120,0
-2026-10-27 13:26,INDIAN CINEMA,Srinidhi Shetty denies charging 8 crore salary for her films.,60,True,text_card,reel_text,18179236282384826,122124757293424069,True,True,243,0,0,0,,304,0
-2026-10-27 16:51,BREAKING NEWS,"Karnataka Final Voter List Out: 4.55 Cr Names, Over 1.88 Lakh Deleted",91,True,full_bleed,reel_overlay,18116482475023759,122124785985424069,True,True,60,0,0,0,,69,0
+2026-10-27 11:46,INDIA NEWS,"Political Clash Over CEC & SIR; Rally at Ramlila Maidan, BJP Padayatra",76,True,text_card,reel_text,17984432276898451,122124747549424069,True,True,92,0,0,0,,113,0
+2026-10-27 13:06,INDIAN CINEMA,Ravi Kishan announces new devotional drama for Diwali 2027 theatrical release,82,True,text_card,reel_text,18110900666242867,122124754881424069,True,True,106,0,0,0,,123,0
+2026-10-27 13:26,INDIAN CINEMA,Srinidhi Shetty denies charging 8 crore salary for her films.,60,True,text_card,reel_text,18179236282384826,122124757293424069,True,True,246,0,0,0,,311,0
+2026-10-27 16:51,BREAKING NEWS,"Karnataka Final Voter List Out: 4.55 Cr Names, Over 1.88 Lakh Deleted",91,True,full_bleed,reel_overlay,18116482475023759,122124785985424069,True,True,66,0,0,0,,78,0
 2026-10-27 18:06,INDIA NEWS,"Over 32,000 trees face felling for mega power project in Maharashtra.",69,True,text_card,reel_text,18471828349137614,122124797073424069,True,True,21,0,0,0,,23,0
-2026-10-27 19:08,INDIA NEWS,"Andhra Pradesh deploys 6,000 workers to tackle cyclone power outages",84,True,text_card,reel_text,18082209056366967,122124804231424069,True,True,102,0,0,0,,110,0
-2026-10-27 19:09,INDIA NEWS,"Andhra Pradesh deploys 6,000 workers to restore cyclone power cuts.",84,True,text_card,reel_text,18112730645239158,122124804495424069,True,True,46,0,0,0,,56,0
-2026-10-27 21:07,INDIA NEWS,"Science must benefit society directly, PM Modi tells Indian researchers",71,True,text_card,reel_text,17892910668683566,122124816537424069,True,True,32,0,0,0,,38,0
-2026-10-27 21:09,INDIA NEWS,"Lab research must directly benefit society, PM Modi tells Indian scientists",71,True,text_card,reel_text,17973402924189432,122124817017424069,True,True,22,0,0,0,,26,0
-2026-10-27 21:48,BREAKING NEWS,"கரையை கடக்கும் அர்னாப் புயல் - சென்னை திருவொற்றியூர், எண்ணூரில் கடல் சீற்றம்!",95,True,full_bleed,,18079661900413723,122124824649424069,True,True,113,1,0,2,,162,3
-2026-10-27 21:51,INDIA NEWS,Congress stages mock impeachment of Election Chief at Kharge residence,86,True,full_bleed,reel_overlay,18100155494553383,122124825285424069,True,True,98,0,0,0,,118,0
-2026-10-28 08:47,BREAKING NEWS,Supreme Court stops idol smuggler from returning to Germany,90,False,full_bleed,,18010404062995747,122124885231424069,True,True,,,,,,,
+2026-10-27 19:08,INDIA NEWS,"Andhra Pradesh deploys 6,000 workers to tackle cyclone power outages",84,True,text_card,reel_text,18082209056366967,122124804231424069,True,True,103,0,0,0,,111,0
+2026-10-27 19:09,INDIA NEWS,"Andhra Pradesh deploys 6,000 workers to restore cyclone power cuts.",84,True,text_card,reel_text,18112730645239158,122124804495424069,True,True,58,0,0,0,,71,0
+2026-10-27 21:07,INDIA NEWS,"Science must benefit society directly, PM Modi tells Indian researchers",71,True,text_card,reel_text,17892910668683566,122124816537424069,True,True,36,0,0,0,,42,0
+2026-10-27 21:09,INDIA NEWS,"Lab research must directly benefit society, PM Modi tells Indian scientists",71,True,text_card,reel_text,17973402924189432,122124817017424069,True,True,26,0,0,0,,29,0
+2026-10-27 21:48,BREAKING NEWS,"கரையை கடக்கும் அர்னாப் புயல் - சென்னை திருவொற்றியூர், எண்ணூரில் கடல் சீற்றம்!",95,True,full_bleed,,18079661900413723,122124824649424069,True,True,114,1,0,2,,163,3
+2026-10-27 21:51,INDIA NEWS,Congress stages mock impeachment of Election Chief at Kharge residence,86,True,full_bleed,reel_overlay,18100155494553383,122124825285424069,True,True,108,0,0,0,,135,0
+2026-10-28 08:47,BREAKING NEWS,Supreme Court stops idol smuggler from returning to Germany,90,False,full_bleed,,18010404062995747,122124885231424069,True,True,0,0,0,0,0,,0
