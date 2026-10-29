@@ -364,7 +364,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-19 11:06,INDIAN CINEMA,Massive 160-day shoot wraps for actor Sai Durgha Tej's movie,64,True,text_card,reel_text,18574613563072431,122123434833424069,True,True,179,0,0,0,,208,0
 2026-10-19 11:26,INDIA NEWS,"Muslim women suffer most without nationwide civil code, claims Himanta Sarma",63,True,text_card,reel_text,18096519074451635,122123436447424069,True,True,142,0,0,0,,171,0
 2026-10-19 12:06,INDIAN CINEMA,Rs 2 crore budget film Hanuman Ansh earns Rs 322 crore,72,True,text_card,reel_text,17926482867430608,122123440341424069,True,True,102,0,0,0,,123,1
-2026-10-19 13:06,INDIAN CINEMA,Rakul Preet drapes Rs 2.75 lac tissue saree for Ramayana launch - Exclusive,56,True,text_card,reel_text,18122385239513243,122123445597424069,True,True,156,0,0,0,,223,1
+2026-10-19 13:06,INDIAN CINEMA,Rakul Preet drapes Rs 2.75 lac tissue saree for Ramayana launch - Exclusive,56,True,text_card,reel_text,18122385239513243,122123445597424069,True,True,156,0,0,0,,224,1
 2026-10-19 14:15,INDIAN CINEMA,Vijay Sethupathi wraps shoot for Puri Jagannadh's new action drama,64,True,text_card,reel_text,17908547418566025,122123457165424069,True,True,373,1,0,0,,458,1
 2026-10-19 16:26,INDIA NEWS,Supreme Court says no prior approval needed to probe public servant's bribe demand,75,False,full_bleed,,18053765006813720,122123473425424069,True,True,5,0,0,0,0,,0
 2026-10-19 16:37,INDIA NEWS,"Navy signs Rs 1,900-crore deals to boost indigenous defence technology",56,True,text_card,reel_text,18098711318386246,122123474937424069,True,True,76,0,0,0,,87,0
@@ -478,7 +478,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-27 19:09,INDIA NEWS,"Andhra Pradesh deploys 6,000 workers to restore cyclone power cuts.",84,True,text_card,reel_text,18112730645239158,122124804495424069,True,True,80,0,0,0,,92,0
 2026-10-27 21:07,INDIA NEWS,"Science must benefit society directly, PM Modi tells Indian researchers",71,True,text_card,reel_text,17892910668683566,122124816537424069,True,True,55,0,0,0,,66,0
 2026-10-27 21:09,INDIA NEWS,"Lab research must directly benefit society, PM Modi tells Indian scientists",71,True,text_card,reel_text,17973402924189432,122124817017424069,True,True,33,0,0,0,,36,0
-2026-10-27 21:48,BREAKING NEWS,"கரையை கடக்கும் அர்னாப் புயல் - சென்னை திருவொற்றியூர், எண்ணூரில் கடல் சீற்றம்!",95,True,full_bleed,,18079661900413723,122124824649424069,True,True,115,1,0,2,,164,3
+2026-10-27 21:48,BREAKING NEWS,"கரையை கடக்கும் அர்னாப் புயல் - சென்னை திருவொற்றியூர், எண்ணூரில் கடல் சீற்றம்!",95,True,full_bleed,,18079661900413723,122124824649424069,True,True,116,1,0,2,,164,3
 2026-10-27 21:51,INDIA NEWS,Congress stages mock impeachment of Election Chief at Kharge residence,86,True,full_bleed,reel_overlay,18100155494553383,122124825285424069,True,True,114,0,0,0,,141,0
 2026-10-28 08:47,BREAKING NEWS,Supreme Court stops idol smuggler from returning to Germany,90,False,full_bleed,,18010404062995747,122124885231424069,True,True,5,0,0,0,0,,0
 2026-10-28 09:46,INDIAN CINEMA,Amitabh Bachchan adds new bungalow Mansa to his famous Mumbai estate,67,True,text_card,reel_text,18113395976593266,122124893511424069,True,True,164,1,0,0,,198,1
@@ -488,18 +488,18 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-28 13:26,BREAKING NEWS,Opposition faces heavy backlash after council poll defeat and court apology,103,True,text_card,reel_text,18032646533937093,122124915291424069,True,True,50,0,0,0,,59,0
 2026-10-28 17:07,BREAKING NEWS,Cabinet approves 3% pay hike for over one crore central employees,92,True,text_card,reel_text,18113617511580467,122124957489424069,True,True,23,0,0,0,,26,0
 2026-10-28 18:06,INDIAN CINEMA,Bombay High Court cancels film body order against producer Nikhil Dwivedi,79,True,text_card,reel_text,17993320677024266,122124965175424069,True,True,110,0,0,0,,125,0
-2026-10-28 19:26,INDIA NEWS,Congress demands paper ballots back after state council election results,73,True,text_card,reel_text,17889858792479954,122124978177424069,True,True,76,0,0,0,,97,0
+2026-10-28 19:26,INDIA NEWS,Congress demands paper ballots back after state council election results,73,True,text_card,reel_text,17889858792479954,122124978177424069,True,True,77,0,0,0,,98,0
 2026-10-28 19:46,INDIAN CINEMA,Hrithik Roshan praises ex-wife Sussanne Khan in emotional birthday post,74,True,text_card,reel_text,18110621939223099,122124981903424069,True,True,168,1,0,0,,192,1
 2026-10-28 21:07,INDIA NEWS,Rain eases over Keralam as cyclone makes landfall; mercury set to climb,78,True,text_card,reel_text,18179951122445171,122124991845424069,True,True,100,0,0,0,,121,0
 2026-10-28 21:26,INDIA NEWS,"Police unveil mine-proof, Vajra vehicles",58,False,full_bleed,,17914615569501201,122124997137424069,True,True,3,0,0,0,0,,0
-2026-10-28 22:10,BREAKING NEWS,Congress wins zero seats across four states as BJP loses Varanasi,111,True,text_card,reel_text,18080133485720854,122125001403424069,True,True,65,0,0,0,,80,0
-2026-10-28 23:07,INDIA NEWS,Bootlegger uses AI to brew toxic liquor that kills ten people,58,True,text_card,reel_text,17953851864322512,122125007349424069,True,True,30,0,0,0,,31,0
-2026-10-29 08:47,BREAKING NEWS,DMK leader denies role in viral audio alleging bribery against minister,92,True,text_card,reel_text,18035390441903614,122125070025424069,True,True,33,0,0,0,,41,0
+2026-10-28 22:10,BREAKING NEWS,Congress wins zero seats across four states as BJP loses Varanasi,111,True,text_card,reel_text,18080133485720854,122125001403424069,True,True,66,0,0,0,,81,0
+2026-10-28 23:07,INDIA NEWS,Bootlegger uses AI to brew toxic liquor that kills ten people,58,True,text_card,reel_text,17953851864322512,122125007349424069,True,True,37,0,0,0,,40,0
+2026-10-29 08:47,BREAKING NEWS,DMK leader denies role in viral audio alleging bribery against minister,92,True,text_card,reel_text,18035390441903614,122125070025424069,True,True,34,0,0,0,,43,0
 2026-10-29 09:46,BREAKING NEWS,Congress defeats BJP in Nagpur home turf during Maharashtra council polls,101,True,text_card,reel_text,18132784864838199,122125074801424069,True,True,120,0,0,0,,157,0
-2026-10-29 11:06,INDIA NEWS,Karnataka minister backs deleting 1 crore voters from state electoral rolls,64,True,full_bleed,reel_overlay,17881776168547401,122125085013424069,True,True,114,0,0,0,,139,0
-2026-10-29 12:06,BREAKING NEWS,"Varun Dhawan regrets boasting about eight hits, admits he jinxed his career.",95,True,text_card,reel_text,18105452177642172,122125090629424069,True,True,180,0,0,0,,225,0
-2026-10-29 13:16,INDIA NEWS,Indian men held captive in Myanmar prompt urgent rescue demand,70,True,text_card,reel_text,18170478433484042,122125098669424069,True,True,47,0,0,0,,59,1
-2026-10-29 13:47,INDIA NEWS,Congress chief demands paper ballots despite recent election defeat,58,True,text_card,reel_text,18119758022055321,122125102947424069,True,True,123,0,0,0,,154,0
-2026-10-29 17:26,BREAKING NEWS,NTK YouTuber Saattai Duraimurugan seeks anticipatory bail over derogatory video,93,False,full_bleed,,18103299527643268,122125129719424069,True,True,0,0,0,0,0,,0
-2026-10-29 18:26,BREAKING NEWS,Supreme Court reviews RBI bank KYC rules to curb cyber fraud,95,False,full_bleed,,18129426976876681,122125137471424069,True,True,,,,,,,
-2026-10-29 19:26,INDIA NEWS,"PM Modi launches Rs 14,000 crore projects in Gujarat",89,True,full_bleed,reel_overlay,18074942126780709,122125145385424069,True,True,,,,,,,
+2026-10-29 11:06,INDIA NEWS,Karnataka minister backs deleting 1 crore voters from state electoral rolls,64,True,full_bleed,reel_overlay,17881776168547401,122125085013424069,True,True,117,0,0,0,,142,0
+2026-10-29 12:06,BREAKING NEWS,"Varun Dhawan regrets boasting about eight hits, admits he jinxed his career.",95,True,text_card,reel_text,18105452177642172,122125090629424069,True,True,182,0,0,0,,229,0
+2026-10-29 13:16,INDIA NEWS,Indian men held captive in Myanmar prompt urgent rescue demand,70,True,text_card,reel_text,18170478433484042,122125098669424069,True,True,52,0,0,0,,63,1
+2026-10-29 13:47,INDIA NEWS,Congress chief demands paper ballots despite recent election defeat,58,True,text_card,reel_text,18119758022055321,122125102947424069,True,True,131,0,0,0,,162,0
+2026-10-29 17:26,BREAKING NEWS,NTK YouTuber Saattai Duraimurugan seeks anticipatory bail over derogatory video,93,False,full_bleed,,18103299527643268,122125129719424069,True,True,3,0,0,0,0,,0
+2026-10-29 18:26,BREAKING NEWS,Supreme Court reviews RBI bank KYC rules to curb cyber fraud,95,False,full_bleed,,18129426976876681,122125137471424069,True,True,1,0,0,0,0,,0
+2026-10-29 19:26,INDIA NEWS,"PM Modi launches Rs 14,000 crore projects in Gujarat",89,True,full_bleed,reel_overlay,18074942126780709,122125145385424069,True,True,0,0,0,0,,0,0
