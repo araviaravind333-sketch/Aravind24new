@@ -364,7 +364,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-19 11:06,INDIAN CINEMA,Massive 160-day shoot wraps for actor Sai Durgha Tej's movie,64,True,text_card,reel_text,18574613563072431,122123434833424069,True,True,179,0,0,0,,208,0
 2026-10-19 11:26,INDIA NEWS,"Muslim women suffer most without nationwide civil code, claims Himanta Sarma",63,True,text_card,reel_text,18096519074451635,122123436447424069,True,True,142,0,0,0,,171,0
 2026-10-19 12:06,INDIAN CINEMA,Rs 2 crore budget film Hanuman Ansh earns Rs 322 crore,72,True,text_card,reel_text,17926482867430608,122123440341424069,True,True,102,0,0,0,,123,1
-2026-10-19 13:06,INDIAN CINEMA,Rakul Preet drapes Rs 2.75 lac tissue saree for Ramayana launch - Exclusive,56,True,text_card,reel_text,18122385239513243,122123445597424069,True,True,156,0,0,0,,224,1
+2026-10-19 13:06,INDIAN CINEMA,Rakul Preet drapes Rs 2.75 lac tissue saree for Ramayana launch - Exclusive,56,True,text_card,reel_text,18122385239513243,122123445597424069,True,True,157,0,0,0,,225,1
 2026-10-19 14:15,INDIAN CINEMA,Vijay Sethupathi wraps shoot for Puri Jagannadh's new action drama,64,True,text_card,reel_text,17908547418566025,122123457165424069,True,True,373,1,0,0,,458,1
 2026-10-19 16:26,INDIA NEWS,Supreme Court says no prior approval needed to probe public servant's bribe demand,75,False,full_bleed,,18053765006813720,122123473425424069,True,True,5,0,0,0,0,,0
 2026-10-19 16:37,INDIA NEWS,"Navy signs Rs 1,900-crore deals to boost indigenous defence technology",56,True,text_card,reel_text,18098711318386246,122123474937424069,True,True,76,0,0,0,,87,0
@@ -509,16 +509,16 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-29 22:18,INDIA NEWS,College student dies after bike hits pedestrian and crashes into car,66,True,text_card,reel_text,18357745618175628,122125166367424069,True,True,76,0,0,0,,96,0
 2026-10-29 23:26,INDIA NEWS,Andhra CM Naidu claims early disaster prep reduced cyclone damage,70,True,text_card,reel_text,18107845610350848,122125174185424069,True,True,58,0,0,0,,62,0
 2026-10-30 08:56,INDIA NEWS,150 candidates battle for eight legislative council seats in Bihar today,62,False,full_bleed,,17999846406045114,122125223559424069,True,True,4,0,0,0,0,,0
-2026-10-30 09:46,BREAKING NEWS,Election Commission extends voter list revision deadline in six states,104,True,full_bleed,reel_overlay,18119984213080813,122125228413424069,True,True,42,0,0,0,,49,0
-2026-10-30 11:06,INDIA NEWS,Glacial lake burst in Bhutan triggers flood alerts in Assam and Bengal,78,True,text_card,reel_text,17959157970018243,122125236375424069,True,True,97,0,0,0,,122,0
+2026-10-30 09:46,BREAKING NEWS,Election Commission extends voter list revision deadline in six states,104,True,full_bleed,reel_overlay,18119984213080813,122125228413424069,True,True,42,0,0,0,,51,0
+2026-10-30 11:06,INDIA NEWS,Glacial lake burst in Bhutan triggers flood alerts in Assam and Bengal,78,True,text_card,reel_text,17959157970018243,122125236375424069,True,True,104,0,0,0,,125,0
 2026-10-30 12:06,BREAKING NEWS,Why is ISRO’s NVS-03 satellite launch crucial? | Explained,104,False,full_bleed,,18076737821470581,122125242393424069,True,True,5,0,0,0,0,,0
 2026-10-30 13:26,BREAKING NEWS,"Supreme Court cancels bail for Anand Singh, orders December 1 surrender",119,False,full_bleed,,18111709541211736,122125249335424069,True,True,4,0,0,0,0,,0
 2026-10-30 14:27,BREAKING NEWS,Star Trek and X-Men actor Patrick Stewart dies at 86,90,True,text_card,reel_text,18106999072986529,122125256667424069,True,True,104,3,0,0,,119,3
-2026-10-30 17:26,BREAKING NEWS,Uttarakhand Joshimath Helicopter Crash Updates,114,True,text_card,reel_text,18117571121014692,122125287789424069,True,True,65,0,0,0,,72,0
-2026-10-30 18:26,BREAKING NEWS,Uttarakhand helicopter crash kills six people including the pilot,99,True,text_card,reel_text,18010920842778734,122125298739424069,True,True,44,0,0,0,,52,0
-2026-10-30 19:35,BREAKING NEWS,"IIFA 2026 Winners: Dhurandhar dominates with Best Film, Best Director, Best Actor",92,True,text_card,reel_text,18138096754743338,122125308849424069,True,True,85,0,0,0,,99,0
-2026-10-30 20:26,BREAKING NEWS,Shraddha Kapoor reveals she suffered muscle tear while shooting dance sequence for 'Eetha',92,True,full_bleed,reel_overlay,17924121360223989,122125314327424069,True,True,428,4,0,0,,554,4
-2026-10-30 21:26,INDIAN CINEMA,Salman Khan considers joining Sanjay Dutt in Khalnayak action sequel.,74,True,text_card,reel_text,17966660049246573,122125323033424069,True,True,369,0,0,0,,460,0
-2026-10-30 21:46,INDIA NEWS,Andhra CM minimizes cyclone damage with round-the-clock relief operations,78,True,text_card,reel_text,18097602800448818,122125324641424069,True,True,20,0,0,0,,32,0
-2026-10-30 22:26,BREAKING NEWS,"₹22 crore fixed deposits vanish from bank, triggering CBI fraud probe",101,True,text_card,reel_text,18104193131040023,122125328631424069,True,True,65,0,0,0,,81,0
-2026-10-30 23:26,INDIA NEWS,"Over 2,200 police officers deploy for Tirupati local body elections.",64,True,text_card,reel_text,18114687035607327,122125336149424069,True,True,14,0,0,0,,19,0
+2026-10-30 17:26,BREAKING NEWS,Uttarakhand Joshimath Helicopter Crash Updates,114,True,text_card,reel_text,18117571121014692,122125287789424069,True,True,66,0,0,0,,73,0
+2026-10-30 18:26,BREAKING NEWS,Uttarakhand helicopter crash kills six people including the pilot,99,True,text_card,reel_text,18010920842778734,122125298739424069,True,True,46,0,0,0,,57,0
+2026-10-30 19:35,BREAKING NEWS,"IIFA 2026 Winners: Dhurandhar dominates with Best Film, Best Director, Best Actor",92,True,text_card,reel_text,18138096754743338,122125308849424069,True,True,86,0,0,0,,100,0
+2026-10-30 20:26,BREAKING NEWS,Shraddha Kapoor reveals she suffered muscle tear while shooting dance sequence for 'Eetha',92,True,full_bleed,reel_overlay,17924121360223989,122125314327424069,True,True,557,5,0,0,,707,5
+2026-10-30 21:26,INDIAN CINEMA,Salman Khan considers joining Sanjay Dutt in Khalnayak action sequel.,74,True,text_card,reel_text,17966660049246573,122125323033424069,True,True,379,0,0,0,,472,0
+2026-10-30 21:46,INDIA NEWS,Andhra CM minimizes cyclone damage with round-the-clock relief operations,78,True,text_card,reel_text,18097602800448818,122125324641424069,True,True,26,0,0,0,,45,0
+2026-10-30 22:26,BREAKING NEWS,"₹22 crore fixed deposits vanish from bank, triggering CBI fraud probe",101,True,text_card,reel_text,18104193131040023,122125328631424069,True,True,75,0,0,0,,99,0
+2026-10-30 23:26,INDIA NEWS,"Over 2,200 police officers deploy for Tirupati local body elections.",64,True,text_card,reel_text,18114687035607327,122125336149424069,True,True,17,0,0,0,,22,0
