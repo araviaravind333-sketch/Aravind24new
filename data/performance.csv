@@ -437,7 +437,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-24 18:46,INDIA NEWS,JDU expels Bihar MLA Anant Singh and wife for six years,81,True,text_card,reel_text,18128558773891661,122124306861424069,True,True,121,0,0,0,,153,0
 2026-10-24 19:26,INDIA NEWS,Bay of Bengal cyclone threatens farmers days after rain relief.,78,True,text_card,reel_text,17916041373535744,122124314865424069,True,True,92,0,0,0,,114,0
 2026-10-24 20:06,INDIA NEWS,Vijay's TVK targets BJP as box office clash with Dhanush looms,71,True,text_card,reel_text,18107088604973960,122124319047424069,True,True,160,0,0,0,,210,0
-2026-10-24 21:06,INDIA NEWS,Odisha triggers emergency response as severe cyclone threatens coast,84,True,text_card,reel_text,18115591682167481,122124326469424069,True,True,127,0,0,0,,147,0
+2026-10-24 21:06,INDIA NEWS,Odisha triggers emergency response as severe cyclone threatens coast,84,True,text_card,reel_text,18115591682167481,122124326469424069,True,True,128,0,0,0,,147,0
 2026-10-25 08:26,TAMIL NADU NEWS,"Landslide buries government bus in Nilgiris, killing driver",73,True,text_card,reel_text,18108719114225723,122124389115424069,True,True,97,0,0,0,,107,0
 2026-10-25 09:46,BREAKING NEWS,Free bicycle scheme cost jumps 40% above budget in Tamil Nadu,98,False,full_bleed,,18120263071757213,122124398319424069,True,True,5,0,0,0,0,,0
 2026-10-25 10:46,BREAKING NEWS,PM Modi attends Varanasi air show as opposition questions border row,101,False,full_bleed,,17992474857099697,122124403689424069,True,True,5,0,0,1,0,,1
@@ -453,7 +453,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-25 20:57,BREAKING NEWS,Salman Khan's war drama 'Maatrubhumi' stuck as makers await Defence Ministry NOC,92,True,text_card,reel_text,18152776279573586,122124487833424069,True,True,291,0,0,0,,358,0
 2026-10-25 22:07,BREAKING NEWS,'Baap' Comment Latest In M Kharge's Series Of Jibes At PM Modi,101,True,text_card,reel_text,18097768283122803,122124497433424069,True,True,61,0,0,0,,77,0
 2026-10-26 08:26,BREAKING NEWS,BJP launches nationwide protests over Kharge remark on PM Modi,95,True,text_card,reel_text,18113641349166893,122124560799424069,True,True,146,0,0,0,,188,0
-2026-10-26 09:11,BREAKING NEWS,Indian soldiers thrash Chinese troops attempting border intrusion in old video,95,True,full_bleed,,18120918515065310,122124565467424069,True,True,5380,132,0,19,,6758,171
+2026-10-26 09:11,BREAKING NEWS,Indian soldiers thrash Chinese troops attempting border intrusion in old video,95,True,full_bleed,,18120918515065310,122124565467424069,True,True,5380,132,0,19,,6760,171
 2026-10-26 10:46,INDIA NEWS,Student sets mehndi record in Karnataka,58,True,full_bleed,reel_overlay,18016379360991826,122124576219424069,True,True,131,0,0,0,,155,0
 2026-10-26 11:46,BREAKING NEWS,Massive 5-hour fire guts 40 shops near Jammu Railway Station,99,True,text_card,reel_text,18010470197775806,122124581499424069,True,True,112,0,0,0,,127,0
 2026-10-26 13:06,INDIA NEWS,"Andhra deploys 4,000 workers as Cyclone Arnab threatens power supply.",84,True,text_card,reel_text,18185912863421087,122124589329424069,True,True,247,3,0,0,,302,3
@@ -503,7 +503,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-29 17:26,BREAKING NEWS,NTK YouTuber Saattai Duraimurugan seeks anticipatory bail over derogatory video,93,False,full_bleed,,18103299527643268,122125129719424069,True,True,6,0,0,0,0,,0
 2026-10-29 18:26,BREAKING NEWS,Supreme Court reviews RBI bank KYC rules to curb cyber fraud,95,False,full_bleed,,18129426976876681,122125137471424069,True,True,4,0,0,0,0,,0
 2026-10-29 19:26,INDIA NEWS,"PM Modi launches Rs 14,000 crore projects in Gujarat",89,True,full_bleed,reel_overlay,18074942126780709,122125145385424069,True,True,163,0,0,0,,217,0
-2026-10-29 20:07,INDIAN CINEMA,Junglywood trailer out: Shaan R Grover leads,67,True,text_card,reel_text,18020554613949482,122125150047424069,True,True,131,0,0,0,,152,0
+2026-10-29 20:07,INDIAN CINEMA,Junglywood trailer out: Shaan R Grover leads,67,True,text_card,reel_text,18020554613949482,122125150047424069,True,True,132,0,0,0,,153,0
 2026-10-29 21:17,INDIA NEWS,"'Take A Bow, Anand Sir': Hrithik Roshan Applauds Super Infinity Initiative",63,True,text_card,reel_text,17991476043078517,122125159371424069,True,True,129,0,0,0,,154,0
 2026-10-29 21:26,INDIA NEWS,Youth stabbed to death in Kozhikode following fight with acquaintances,78,True,text_card,reel_text,18286656757288548,122125159989424069,True,True,143,0,0,0,,168,0
 2026-10-29 22:18,INDIA NEWS,College student dies after bike hits pedestrian and crashes into car,66,True,text_card,reel_text,18357745618175628,122125166367424069,True,True,76,0,0,0,,96,0
@@ -515,18 +515,18 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-30 13:26,BREAKING NEWS,"Supreme Court cancels bail for Anand Singh, orders December 1 surrender",119,False,full_bleed,,18111709541211736,122125249335424069,True,True,4,0,0,0,0,,0
 2026-10-30 14:27,BREAKING NEWS,Star Trek and X-Men actor Patrick Stewart dies at 86,90,True,text_card,reel_text,18106999072986529,122125256667424069,True,True,104,3,0,0,,119,3
 2026-10-30 17:26,BREAKING NEWS,Uttarakhand Joshimath Helicopter Crash Updates,114,True,text_card,reel_text,18117571121014692,122125287789424069,True,True,79,0,0,0,,88,0
-2026-10-30 18:26,BREAKING NEWS,Uttarakhand helicopter crash kills six people including the pilot,99,True,text_card,reel_text,18010920842778734,122125298739424069,True,True,62,0,0,0,,72,0
+2026-10-30 18:26,BREAKING NEWS,Uttarakhand helicopter crash kills six people including the pilot,99,True,text_card,reel_text,18010920842778734,122125298739424069,True,True,65,0,0,0,,75,0
 2026-10-30 19:35,BREAKING NEWS,"IIFA 2026 Winners: Dhurandhar dominates with Best Film, Best Director, Best Actor",92,True,text_card,reel_text,18138096754743338,122125308849424069,True,True,96,0,0,0,,112,0
-2026-10-30 20:26,BREAKING NEWS,Shraddha Kapoor reveals she suffered muscle tear while shooting dance sequence for 'Eetha',92,True,full_bleed,reel_overlay,17924121360223989,122125314327424069,True,True,1093,13,0,0,,1346,15
-2026-10-30 21:26,INDIAN CINEMA,Salman Khan considers joining Sanjay Dutt in Khalnayak action sequel.,74,True,text_card,reel_text,17966660049246573,122125323033424069,True,True,387,0,0,0,,482,0
-2026-10-30 21:46,INDIA NEWS,Andhra CM minimizes cyclone damage with round-the-clock relief operations,78,True,text_card,reel_text,18097602800448818,122125324641424069,True,True,64,0,0,0,,79,0
+2026-10-30 20:26,BREAKING NEWS,Shraddha Kapoor reveals she suffered muscle tear while shooting dance sequence for 'Eetha',92,True,full_bleed,reel_overlay,17924121360223989,122125314327424069,True,True,1115,13,0,0,,1379,15
+2026-10-30 21:26,INDIAN CINEMA,Salman Khan considers joining Sanjay Dutt in Khalnayak action sequel.,74,True,text_card,reel_text,17966660049246573,122125323033424069,True,True,387,0,0,0,,483,0
+2026-10-30 21:46,INDIA NEWS,Andhra CM minimizes cyclone damage with round-the-clock relief operations,78,True,text_card,reel_text,18097602800448818,122125324641424069,True,True,65,0,0,0,,81,0
 2026-10-30 22:26,BREAKING NEWS,"₹22 crore fixed deposits vanish from bank, triggering CBI fraud probe",101,True,text_card,reel_text,18104193131040023,122125328631424069,True,True,101,0,0,0,,132,0
 2026-10-30 23:26,INDIA NEWS,"Over 2,200 police officers deploy for Tirupati local body elections.",64,True,text_card,reel_text,18114687035607327,122125336149424069,True,True,27,0,0,0,,32,0
-2026-10-31 09:16,BREAKING NEWS,Wanted gangsters use fake passports to flee police and hide abroad,108,True,text_card,reel_text,17987647596084076,122125393215424069,True,True,148,0,0,0,,174,0
+2026-10-31 09:16,BREAKING NEWS,Wanted gangsters use fake passports to flee police and hide abroad,108,True,text_card,reel_text,17987647596084076,122125393215424069,True,True,149,0,0,0,,176,0
 2026-10-31 10:16,INDIA NEWS,"Over 3,000 Indians remain stranded in Saudi Arabia after flight disruptions.",79,False,full_bleed,,18029881820857821,122125399443424069,True,True,5,0,0,0,0,,0
-2026-10-31 11:09,BREAKING NEWS,PM Modi offers floral tributes to Sardar Patel at Statue of Unity,101,True,full_bleed,reel_overlay,18091567124245554,122125404489424069,True,True,13,0,0,0,,20,0
+2026-10-31 11:09,BREAKING NEWS,PM Modi offers floral tributes to Sardar Patel at Statue of Unity,101,True,full_bleed,reel_overlay,18091567124245554,122125404489424069,True,True,39,0,0,0,,49,0
 2026-10-31 12:06,BREAKING NEWS,"Filmmaker Sanjay Gupta dies at 57; industry mourns Kaante, Shootout at Lokhandwala director",110,True,text_card,reel_text,17875785273650110,122125409487424069,True,True,129,0,0,0,,156,0
-2026-10-31 13:26,BREAKING NEWS,SRK movie King sells overseas rights for record 175 crore,97,True,text_card,reel_text,17912447523517423,122125415583424069,True,True,120,1,0,0,,138,1
+2026-10-31 13:26,BREAKING NEWS,SRK movie King sells overseas rights for record 175 crore,97,True,text_card,reel_text,17912447523517423,122125415583424069,True,True,124,1,0,0,,141,1
 2026-10-31 14:36,INDIA NEWS,Supreme Court will hear media challenge against new privacy law,83,False,full_bleed,,18144756649588754,122125422885424069,True,True,2,0,0,0,0,,0
-2026-10-31 17:26,BREAKING NEWS,Kaante director Sanjay Gupta dies at 59 after sudden injury,96,True,text_card,reel_text,18147129802590572,122125446291424069,True,True,0,0,0,0,,0,0
-2026-10-31 18:26,INDIA NEWS,Passengers escape unharmed as Bengaluru bus suddenly catches fire,58,True,text_card,reel_text,18115939955593437,122125454877424069,True,True,,,,,,,
+2026-10-31 17:26,BREAKING NEWS,Kaante director Sanjay Gupta dies at 59 after sudden injury,96,True,text_card,reel_text,18147129802590572,122125446291424069,True,True,46,0,0,0,,64,0
+2026-10-31 18:26,INDIA NEWS,Passengers escape unharmed as Bengaluru bus suddenly catches fire,58,True,text_card,reel_text,18115939955593437,122125454877424069,True,True,10,0,0,0,,47,0
