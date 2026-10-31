@@ -489,7 +489,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-28 17:07,BREAKING NEWS,Cabinet approves 3% pay hike for over one crore central employees,92,True,text_card,reel_text,18113617511580467,122124957489424069,True,True,24,0,0,0,,26,0
 2026-10-28 18:06,INDIAN CINEMA,Bombay High Court cancels film body order against producer Nikhil Dwivedi,79,True,text_card,reel_text,17993320677024266,122124965175424069,True,True,110,0,0,0,,125,0
 2026-10-28 19:26,INDIA NEWS,Congress demands paper ballots back after state council election results,73,True,text_card,reel_text,17889858792479954,122124978177424069,True,True,77,0,0,0,,98,0
-2026-10-28 19:46,INDIAN CINEMA,Hrithik Roshan praises ex-wife Sussanne Khan in emotional birthday post,74,True,text_card,reel_text,18110621939223099,122124981903424069,True,True,168,1,0,0,,192,1
+2026-10-28 19:46,INDIAN CINEMA,Hrithik Roshan praises ex-wife Sussanne Khan in emotional birthday post,74,True,text_card,reel_text,18110621939223099,122124981903424069,True,True,169,1,0,0,,194,1
 2026-10-28 21:07,INDIA NEWS,Rain eases over Keralam as cyclone makes landfall; mercury set to climb,78,True,text_card,reel_text,18179951122445171,122124991845424069,True,True,100,0,0,0,,121,0
 2026-10-28 21:26,INDIA NEWS,"Police unveil mine-proof, Vajra vehicles",58,False,full_bleed,,17914615569501201,122124997137424069,True,True,4,0,0,0,0,,0
 2026-10-28 22:10,BREAKING NEWS,Congress wins zero seats across four states as BJP loses Varanasi,111,True,text_card,reel_text,18080133485720854,122125001403424069,True,True,66,0,0,0,,81,0
@@ -504,22 +504,22 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-29 18:26,BREAKING NEWS,Supreme Court reviews RBI bank KYC rules to curb cyber fraud,95,False,full_bleed,,18129426976876681,122125137471424069,True,True,4,0,0,0,0,,0
 2026-10-29 19:26,INDIA NEWS,"PM Modi launches Rs 14,000 crore projects in Gujarat",89,True,full_bleed,reel_overlay,18074942126780709,122125145385424069,True,True,163,0,0,0,,217,0
 2026-10-29 20:07,INDIAN CINEMA,Junglywood trailer out: Shaan R Grover leads,67,True,text_card,reel_text,18020554613949482,122125150047424069,True,True,131,0,0,0,,152,0
-2026-10-29 21:17,INDIA NEWS,"'Take A Bow, Anand Sir': Hrithik Roshan Applauds Super Infinity Initiative",63,True,text_card,reel_text,17991476043078517,122125159371424069,True,True,128,0,0,0,,153,0
+2026-10-29 21:17,INDIA NEWS,"'Take A Bow, Anand Sir': Hrithik Roshan Applauds Super Infinity Initiative",63,True,text_card,reel_text,17991476043078517,122125159371424069,True,True,129,0,0,0,,154,0
 2026-10-29 21:26,INDIA NEWS,Youth stabbed to death in Kozhikode following fight with acquaintances,78,True,text_card,reel_text,18286656757288548,122125159989424069,True,True,143,0,0,0,,168,0
 2026-10-29 22:18,INDIA NEWS,College student dies after bike hits pedestrian and crashes into car,66,True,text_card,reel_text,18357745618175628,122125166367424069,True,True,76,0,0,0,,96,0
 2026-10-29 23:26,INDIA NEWS,Andhra CM Naidu claims early disaster prep reduced cyclone damage,70,True,text_card,reel_text,18107845610350848,122125174185424069,True,True,58,0,0,0,,62,0
 2026-10-30 08:56,INDIA NEWS,150 candidates battle for eight legislative council seats in Bihar today,62,False,full_bleed,,17999846406045114,122125223559424069,True,True,4,0,0,0,0,,0
 2026-10-30 09:46,BREAKING NEWS,Election Commission extends voter list revision deadline in six states,104,True,full_bleed,reel_overlay,18119984213080813,122125228413424069,True,True,42,0,0,0,,51,0
-2026-10-30 11:06,INDIA NEWS,Glacial lake burst in Bhutan triggers flood alerts in Assam and Bengal,78,True,text_card,reel_text,17959157970018243,122125236375424069,True,True,104,0,0,0,,125,0
+2026-10-30 11:06,INDIA NEWS,Glacial lake burst in Bhutan triggers flood alerts in Assam and Bengal,78,True,text_card,reel_text,17959157970018243,122125236375424069,True,True,105,0,0,0,,126,0
 2026-10-30 12:06,BREAKING NEWS,Why is ISRO’s NVS-03 satellite launch crucial? | Explained,104,False,full_bleed,,18076737821470581,122125242393424069,True,True,5,0,0,0,0,,0
 2026-10-30 13:26,BREAKING NEWS,"Supreme Court cancels bail for Anand Singh, orders December 1 surrender",119,False,full_bleed,,18111709541211736,122125249335424069,True,True,4,0,0,0,0,,0
 2026-10-30 14:27,BREAKING NEWS,Star Trek and X-Men actor Patrick Stewart dies at 86,90,True,text_card,reel_text,18106999072986529,122125256667424069,True,True,104,3,0,0,,119,3
-2026-10-30 17:26,BREAKING NEWS,Uttarakhand Joshimath Helicopter Crash Updates,114,True,text_card,reel_text,18117571121014692,122125287789424069,True,True,66,0,0,0,,73,0
-2026-10-30 18:26,BREAKING NEWS,Uttarakhand helicopter crash kills six people including the pilot,99,True,text_card,reel_text,18010920842778734,122125298739424069,True,True,46,0,0,0,,57,0
-2026-10-30 19:35,BREAKING NEWS,"IIFA 2026 Winners: Dhurandhar dominates with Best Film, Best Director, Best Actor",92,True,text_card,reel_text,18138096754743338,122125308849424069,True,True,86,0,0,0,,100,0
-2026-10-30 20:26,BREAKING NEWS,Shraddha Kapoor reveals she suffered muscle tear while shooting dance sequence for 'Eetha',92,True,full_bleed,reel_overlay,17924121360223989,122125314327424069,True,True,557,5,0,0,,707,5
-2026-10-30 21:26,INDIAN CINEMA,Salman Khan considers joining Sanjay Dutt in Khalnayak action sequel.,74,True,text_card,reel_text,17966660049246573,122125323033424069,True,True,379,0,0,0,,472,0
-2026-10-30 21:46,INDIA NEWS,Andhra CM minimizes cyclone damage with round-the-clock relief operations,78,True,text_card,reel_text,18097602800448818,122125324641424069,True,True,26,0,0,0,,45,0
-2026-10-30 22:26,BREAKING NEWS,"₹22 crore fixed deposits vanish from bank, triggering CBI fraud probe",101,True,text_card,reel_text,18104193131040023,122125328631424069,True,True,75,0,0,0,,99,0
+2026-10-30 17:26,BREAKING NEWS,Uttarakhand Joshimath Helicopter Crash Updates,114,True,text_card,reel_text,18117571121014692,122125287789424069,True,True,69,0,0,0,,76,0
+2026-10-30 18:26,BREAKING NEWS,Uttarakhand helicopter crash kills six people including the pilot,99,True,text_card,reel_text,18010920842778734,122125298739424069,True,True,50,0,0,0,,59,0
+2026-10-30 19:35,BREAKING NEWS,"IIFA 2026 Winners: Dhurandhar dominates with Best Film, Best Director, Best Actor",92,True,text_card,reel_text,18138096754743338,122125308849424069,True,True,89,0,0,0,,103,0
+2026-10-30 20:26,BREAKING NEWS,Shraddha Kapoor reveals she suffered muscle tear while shooting dance sequence for 'Eetha',92,True,full_bleed,reel_overlay,17924121360223989,122125314327424069,True,True,683,8,0,0,,833,8
+2026-10-30 21:26,INDIAN CINEMA,Salman Khan considers joining Sanjay Dutt in Khalnayak action sequel.,74,True,text_card,reel_text,17966660049246573,122125323033424069,True,True,380,0,0,0,,474,0
+2026-10-30 21:46,INDIA NEWS,Andhra CM minimizes cyclone damage with round-the-clock relief operations,78,True,text_card,reel_text,18097602800448818,122125324641424069,True,True,42,0,0,0,,54,0
+2026-10-30 22:26,BREAKING NEWS,"₹22 crore fixed deposits vanish from bank, triggering CBI fraud probe",101,True,text_card,reel_text,18104193131040023,122125328631424069,True,True,92,0,0,0,,127,0
 2026-10-30 23:26,INDIA NEWS,"Over 2,200 police officers deploy for Tirupati local body elections.",64,True,text_card,reel_text,18114687035607327,122125336149424069,True,True,17,0,0,0,,22,0
-2026-10-31 09:16,BREAKING NEWS,Wanted gangsters use fake passports to flee police and hide abroad,108,True,text_card,reel_text,17987647596084076,122125393215424069,True,True,,,,,,,
+2026-10-31 09:16,BREAKING NEWS,Wanted gangsters use fake passports to flee police and hide abroad,108,True,text_card,reel_text,17987647596084076,122125393215424069,True,True,0,0,0,0,,1,0
