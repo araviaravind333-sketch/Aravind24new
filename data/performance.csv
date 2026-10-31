@@ -326,7 +326,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-16 13:05,INDIAN CINEMA,BREAKING: Jacqueline Fernandez has a hilarious cameo in Yami Gautam Dhar’s Nayyi Navelli,80,True,text_card,reel_text,18170897788497241,122122937463424069,True,True,146,0,0,0,,176,0
 2026-10-16 13:26,INDIA NEWS,Police detain journalists in four major cities despite Supreme Court assurances,72,True,text_card,reel_text,18167299933482347,122122939815424069,True,True,79,0,0,0,,99,0
 2026-10-16 15:25,INDIAN CINEMA,Korean beauty brand Mamonde names actor Nitanshi Goel as India ambassador,65,False,full_bleed,,17987620719117209,122122959915424069,True,True,7,0,0,11,0,,11
-2026-10-16 22:58,INDIAN CINEMA,"Kartik Aaryan and Sreeleela’s Anurag Basu-directed film locks April 30, 2027 release date",62,True,full_bleed,reel_overlay,18098251970334967,122123021157424069,True,True,127,0,0,0,,157,0
+2026-10-16 22:58,INDIAN CINEMA,"Kartik Aaryan and Sreeleela’s Anurag Basu-directed film locks April 30, 2027 release date",62,True,full_bleed,reel_overlay,18098251970334967,122123021157424069,True,True,127,1,0,0,,158,1
 2026-10-17 00:46,INDIA NEWS,Samajwadi Party skips third Rajya Sabha candidate for upcoming Assembly polls.,75,True,text_card,reel_text,18109186337350702,122123035113424069,True,True,20,0,0,0,,29,0
 2026-10-17 02:15,INDIAN CINEMA,Rajinikanth's Jailer 2 collects Rs 125 crore worldwide on opening day.,71,False,full_bleed,,18126511642876463,122123051781424069,True,True,7,0,0,0,0,,0
 2026-10-17 03:45,INDIA NEWS,Top ISRO scientists lead massive space awareness rally in Andhra Pradesh,75,False,full_bleed,,17954572605268185,122123059599424069,True,True,4,0,0,0,0,,0
@@ -514,18 +514,18 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-30 12:06,BREAKING NEWS,Why is ISRO’s NVS-03 satellite launch crucial? | Explained,104,False,full_bleed,,18076737821470581,122125242393424069,True,True,5,0,0,0,0,,0
 2026-10-30 13:26,BREAKING NEWS,"Supreme Court cancels bail for Anand Singh, orders December 1 surrender",119,False,full_bleed,,18111709541211736,122125249335424069,True,True,4,0,0,0,0,,0
 2026-10-30 14:27,BREAKING NEWS,Star Trek and X-Men actor Patrick Stewart dies at 86,90,True,text_card,reel_text,18106999072986529,122125256667424069,True,True,104,3,0,0,,119,3
-2026-10-30 17:26,BREAKING NEWS,Uttarakhand Joshimath Helicopter Crash Updates,114,True,text_card,reel_text,18117571121014692,122125287789424069,True,True,78,0,0,0,,88,0
-2026-10-30 18:26,BREAKING NEWS,Uttarakhand helicopter crash kills six people including the pilot,99,True,text_card,reel_text,18010920842778734,122125298739424069,True,True,59,0,0,0,,69,0
-2026-10-30 19:35,BREAKING NEWS,"IIFA 2026 Winners: Dhurandhar dominates with Best Film, Best Director, Best Actor",92,True,text_card,reel_text,18138096754743338,122125308849424069,True,True,95,0,0,0,,111,0
-2026-10-30 20:26,BREAKING NEWS,Shraddha Kapoor reveals she suffered muscle tear while shooting dance sequence for 'Eetha',92,True,full_bleed,reel_overlay,17924121360223989,122125314327424069,True,True,894,11,0,0,,1131,13
-2026-10-30 21:26,INDIAN CINEMA,Salman Khan considers joining Sanjay Dutt in Khalnayak action sequel.,74,True,text_card,reel_text,17966660049246573,122125323033424069,True,True,384,0,0,0,,477,0
-2026-10-30 21:46,INDIA NEWS,Andhra CM minimizes cyclone damage with round-the-clock relief operations,78,True,text_card,reel_text,18097602800448818,122125324641424069,True,True,60,0,0,0,,76,0
+2026-10-30 17:26,BREAKING NEWS,Uttarakhand Joshimath Helicopter Crash Updates,114,True,text_card,reel_text,18117571121014692,122125287789424069,True,True,79,0,0,0,,88,0
+2026-10-30 18:26,BREAKING NEWS,Uttarakhand helicopter crash kills six people including the pilot,99,True,text_card,reel_text,18010920842778734,122125298739424069,True,True,62,0,0,0,,72,0
+2026-10-30 19:35,BREAKING NEWS,"IIFA 2026 Winners: Dhurandhar dominates with Best Film, Best Director, Best Actor",92,True,text_card,reel_text,18138096754743338,122125308849424069,True,True,96,0,0,0,,112,0
+2026-10-30 20:26,BREAKING NEWS,Shraddha Kapoor reveals she suffered muscle tear while shooting dance sequence for 'Eetha',92,True,full_bleed,reel_overlay,17924121360223989,122125314327424069,True,True,1093,13,0,0,,1346,15
+2026-10-30 21:26,INDIAN CINEMA,Salman Khan considers joining Sanjay Dutt in Khalnayak action sequel.,74,True,text_card,reel_text,17966660049246573,122125323033424069,True,True,387,0,0,0,,482,0
+2026-10-30 21:46,INDIA NEWS,Andhra CM minimizes cyclone damage with round-the-clock relief operations,78,True,text_card,reel_text,18097602800448818,122125324641424069,True,True,64,0,0,0,,79,0
 2026-10-30 22:26,BREAKING NEWS,"₹22 crore fixed deposits vanish from bank, triggering CBI fraud probe",101,True,text_card,reel_text,18104193131040023,122125328631424069,True,True,101,0,0,0,,132,0
-2026-10-30 23:26,INDIA NEWS,"Over 2,200 police officers deploy for Tirupati local body elections.",64,True,text_card,reel_text,18114687035607327,122125336149424069,True,True,25,0,0,0,,30,0
-2026-10-31 09:16,BREAKING NEWS,Wanted gangsters use fake passports to flee police and hide abroad,108,True,text_card,reel_text,17987647596084076,122125393215424069,True,True,147,0,0,0,,173,0
-2026-10-31 10:16,INDIA NEWS,"Over 3,000 Indians remain stranded in Saudi Arabia after flight disruptions.",79,False,full_bleed,,18029881820857821,122125399443424069,True,True,4,0,0,0,0,,0
-2026-10-31 11:09,BREAKING NEWS,PM Modi offers floral tributes to Sardar Patel at Statue of Unity,101,True,full_bleed,reel_overlay,18091567124245554,122125404489424069,True,True,9,0,0,0,,13,0
-2026-10-31 12:06,BREAKING NEWS,"Filmmaker Sanjay Gupta dies at 57; industry mourns Kaante, Shootout at Lokhandwala director",110,True,text_card,reel_text,17875785273650110,122125409487424069,True,True,128,0,0,0,,155,0
-2026-10-31 13:26,BREAKING NEWS,SRK movie King sells overseas rights for record 175 crore,97,True,text_card,reel_text,17912447523517423,122125415583424069,True,True,97,0,0,0,,113,0
-2026-10-31 14:36,INDIA NEWS,Supreme Court will hear media challenge against new privacy law,83,False,full_bleed,,18144756649588754,122125422885424069,True,True,1,0,0,0,0,,0
-2026-10-31 17:26,BREAKING NEWS,Kaante director Sanjay Gupta dies at 59 after sudden injury,96,True,text_card,reel_text,18147129802590572,122125446291424069,True,True,,,,,,,
+2026-10-30 23:26,INDIA NEWS,"Over 2,200 police officers deploy for Tirupati local body elections.",64,True,text_card,reel_text,18114687035607327,122125336149424069,True,True,27,0,0,0,,32,0
+2026-10-31 09:16,BREAKING NEWS,Wanted gangsters use fake passports to flee police and hide abroad,108,True,text_card,reel_text,17987647596084076,122125393215424069,True,True,148,0,0,0,,174,0
+2026-10-31 10:16,INDIA NEWS,"Over 3,000 Indians remain stranded in Saudi Arabia after flight disruptions.",79,False,full_bleed,,18029881820857821,122125399443424069,True,True,5,0,0,0,0,,0
+2026-10-31 11:09,BREAKING NEWS,PM Modi offers floral tributes to Sardar Patel at Statue of Unity,101,True,full_bleed,reel_overlay,18091567124245554,122125404489424069,True,True,13,0,0,0,,20,0
+2026-10-31 12:06,BREAKING NEWS,"Filmmaker Sanjay Gupta dies at 57; industry mourns Kaante, Shootout at Lokhandwala director",110,True,text_card,reel_text,17875785273650110,122125409487424069,True,True,129,0,0,0,,156,0
+2026-10-31 13:26,BREAKING NEWS,SRK movie King sells overseas rights for record 175 crore,97,True,text_card,reel_text,17912447523517423,122125415583424069,True,True,120,1,0,0,,138,1
+2026-10-31 14:36,INDIA NEWS,Supreme Court will hear media challenge against new privacy law,83,False,full_bleed,,18144756649588754,122125422885424069,True,True,2,0,0,0,0,,0
+2026-10-31 17:26,BREAKING NEWS,Kaante director Sanjay Gupta dies at 59 after sudden injury,96,True,text_card,reel_text,18147129802590572,122125446291424069,True,True,0,0,0,0,,0,0
