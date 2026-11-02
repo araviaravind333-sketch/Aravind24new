@@ -158,6 +158,33 @@ CATEGORY_PRIORITY_BOOST = {
 }
 
 # ============================================================
+# 1e-bis. MEASURED-PERFORMANCE CATEGORY BOOST  (src/analytics.py
+#     category_avg_reach(), applied in news_engine._virality())
+# ============================================================
+# Added 2026-11-02: followers stayed flat at 10 for 17 days and across
+# 5 straight scoring changes, and the account's OWN real reach data
+# showed CATEGORY_PRIORITY_BOOST above pointing the wrong way -- Tamil
+# Nadu had the biggest static boost while being the worst-performing of
+# the three active categories in the last 7 days (avg reach ~67 vs
+# ~218 for cinema). A guessed preference, however reasonable it sounded,
+# is still a guess; this replaces it with a boost computed from what
+# actually happened, every time there's enough real data to trust.
+#
+# When a category has at least CATEGORY_PERFORMANCE_MIN_SAMPLES reach-
+# rated posts in the lookback window, its boost is its own average reach
+# divided by this many, capped at the max below -- so a category with
+# genuinely higher measured reach always outscores one with lower reach,
+# proportionally, not just by rank order. CATEGORY_PRIORITY_BOOST above
+# becomes the COLD-START FALLBACK ONLY, used only for a category that
+# doesn't have enough real data yet (a brand-new one, or too few
+# reach-filled posts) -- never stacked with this, so there's exactly one
+# active source of the boost at any time, not two disagreeing numbers.
+CATEGORY_PERFORMANCE_LOOKBACK_DAYS = 14
+CATEGORY_PERFORMANCE_MIN_SAMPLES = 5
+CATEGORY_PERFORMANCE_REACH_DIVISOR = 20
+CATEGORY_PERFORMANCE_MAX_BOOST = 30
+
+# ============================================================
 # 1f. YOUTUBE DATA API  (trending cross-check only -- src/news_engine.py
 #     youtube_trending_terms())
 # ============================================================

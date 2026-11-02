@@ -469,26 +469,82 @@ def cross_platform_trending_tests():
 
 
 def category_priority_boost_tests():
-    """Regression for the 2026-10-23 weighted category preference: Tamil
-    Nadu 1st, national India 2nd, cinema 3rd -- a scoring boost, not a
-    strict fill order, so the SAME underlying story scores higher the
-    more "preferred" its category is, while still letting a genuinely
-    strong story in a lower-preference category win on its own merits."""
-    print("\nCATEGORY PRIORITY BOOST (weighted preference)")
+    """Regression for the 2026-10-23 weighted category preference (Tamil
+    Nadu 1st, national India 2nd, cinema 3rd): this is now ONLY the
+    cold-start fallback, used when a category has no real reach data yet
+    (see category_performance_boost_tests for the 2026-11-02 change that
+    made measured reach the primary signal). Forces the performance
+    cache empty so this test exercises the fallback path specifically,
+    regardless of what's actually in data/performance.csv on this
+    machine."""
+    print("\nCATEGORY PRIORITY BOOST (cold-start fallback, weighted preference)")
+    real_cache = ne._CATEGORY_PERFORMANCE_CACHE["reach"]
+    ne._CATEGORY_PERFORMANCE_CACHE["reach"] = {}   # no category has real data
+    try:
+        NOW = dt.datetime.now(dt.timezone.utc)
+        title = "Ordinary headline with no other scoring signal at all here today"
+        s_none, _ = ne._virality(title, NOW, category=None)
+        s_cinema, _ = ne._virality(title, NOW, category="INDIAN CINEMA")
+        s_india, _ = ne._virality(title, NOW, category="INDIA NEWS")
+        s_tn, _ = ne._virality(title, NOW, category="TAMIL NADU NEWS")
+        check("no category means no boost",
+              s_none == s_cinema - 4, (s_none, s_cinema))
+        check("Tamil Nadu scores higher than India for the identical story",
+              s_tn > s_india, (s_tn, s_india))
+        check("India scores higher than cinema for the identical story",
+              s_india > s_cinema, (s_india, s_cinema))
+        check("an unrecognised/absent category gets zero boost, not a crash",
+              ne._virality(title, NOW, category="SOME OTHER CATEGORY")[0] == s_none)
+    finally:
+        ne._CATEGORY_PERFORMANCE_CACHE["reach"] = real_cache
+
+
+def category_performance_boost_tests():
+    """Regression for the 2026-11-02 fix: the account's OWN measured
+    reach replaces the static, guessed preference whenever there's
+    enough real data to trust (settings.CATEGORY_PERFORMANCE_MIN_SAMPLES).
+    This is the actual bug that prompted the change -- the static guess
+    had Tamil Nadu weighted highest while real data showed it as the
+    WORST performer; these tests assert the fix, not the old guess."""
+    print("\nCATEGORY PERFORMANCE BOOST (measured reach, 2026-11-02)")
+    from config import settings
+    real_cache = ne._CATEGORY_PERFORMANCE_CACHE["reach"]
     NOW = dt.datetime.now(dt.timezone.utc)
     title = "Ordinary headline with no other scoring signal at all here today"
-    s_none, _ = ne._virality(title, NOW, category=None)
-    s_cinema, _ = ne._virality(title, NOW, category="INDIAN CINEMA")
-    s_india, _ = ne._virality(title, NOW, category="INDIA NEWS")
-    s_tn, _ = ne._virality(title, NOW, category="TAMIL NADU NEWS")
-    check("no category means no priority boost",
-          s_none == s_cinema - 4, (s_none, s_cinema))
-    check("Tamil Nadu scores higher than India for the identical story",
-          s_tn > s_india, (s_tn, s_india))
-    check("India scores higher than cinema for the identical story",
-          s_india > s_cinema, (s_india, s_cinema))
-    check("an unrecognised/absent category gets zero boost, not a crash",
-          ne._virality(title, NOW, category="SOME OTHER CATEGORY")[0] == s_none)
+    try:
+        # Mirrors the real incident this was built to fix: Tamil Nadu
+        # measured WORSE than cinema, despite the old static guess
+        # ranking it highest.
+        ne._CATEGORY_PERFORMANCE_CACHE["reach"] = {
+            "TAMIL NADU NEWS": 67.0,
+            "INDIAN CINEMA": 218.0,
+        }
+        s_tn, _ = ne._virality(title, NOW, category="TAMIL NADU NEWS")
+        s_cinema, _ = ne._virality(title, NOW, category="INDIAN CINEMA")
+        check("a category that measures WORSE now scores lower, overriding the old static guess",
+              s_cinema > s_tn, (s_tn, s_cinema))
+        check("the boost is proportional to measured reach, not just rank order",
+              abs((s_tn - s_cinema) - (67.0 - 218.0) / settings.CATEGORY_PERFORMANCE_REACH_DIVISOR) < 0.01,
+              (s_tn, s_cinema))
+
+        ne._CATEGORY_PERFORMANCE_CACHE["reach"] = {"INDIA NEWS": 10000.0}
+        s_capped, _ = ne._virality(title, NOW, category="INDIA NEWS")
+        s_baseline, _ = ne._virality(title, NOW, category=None)
+        check("an extreme measured reach is capped at CATEGORY_PERFORMANCE_MAX_BOOST, not unbounded",
+              abs((s_capped - s_baseline) - settings.CATEGORY_PERFORMANCE_MAX_BOOST) < 0.01,
+              (s_capped, s_baseline))
+
+        ne._CATEGORY_PERFORMANCE_CACHE["reach"] = {"TAMIL NADU NEWS": 67.0}
+        s_measured, _ = ne._virality(title, NOW, category="TAMIL NADU NEWS")
+        s_fallback, _ = ne._virality(title, NOW, category="INDIA NEWS")   # not in the cache -> fallback
+        check("a category with enough real data uses measured reach, not the static fallback",
+              abs(s_measured - s_baseline - 67.0 / settings.CATEGORY_PERFORMANCE_REACH_DIVISOR) < 0.01,
+              s_measured)
+        check("a category missing from the performance cache still falls back to the static preference",
+              s_fallback == s_baseline + settings.CATEGORY_PRIORITY_BOOST["INDIA NEWS"],
+              (s_fallback, s_baseline))
+    finally:
+        ne._CATEGORY_PERFORMANCE_CACHE["reach"] = real_cache
 
 
 if __name__ == "__main__":
@@ -498,6 +554,7 @@ if __name__ == "__main__":
     trending_only_gate_tests()
     cross_platform_trending_tests()
     category_priority_boost_tests()
+    category_performance_boost_tests()
     tamil_nadu_niche_pivot_tests()
     tamil_cinema_boost_tests()
     bollywood_boost_tests()

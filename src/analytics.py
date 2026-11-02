@@ -35,7 +35,7 @@ def log_post(story, written, category_label, results, ist, is_reel=False,
               template=None, reel_template=None):
     os.makedirs(DATA, exist_ok=True)
     new = not os.path.exists(CSV_PATH)
-    with open(CSV_PATH, "a", newline="") as f:
+    with open(CSV_PATH, "a", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=FIELDS)
         if new:
             w.writeheader()
@@ -55,15 +55,16 @@ def log_post(story, written, category_label, results, ist, is_reel=False,
     print("Logged to performance.csv")
 
 
-def best_categories(lookback_days=14):
-    """Rank categories by average reach where real insights data exists
-    (filled in daily by src/insights.py); falls back to post-count for
-    categories with no insights yet (e.g. brand new account)."""
-    if not os.path.exists(CSV_PATH):
-        return []
-    cutoff = dt.datetime.now() - dt.timedelta(days=lookback_days)
+def _category_reach_samples(lookback_days):
+    """Shared scan: every logged post's category and reach, filtered to
+    the lookback window. Both best_categories() and category_avg_reach()
+    build on this so the two can never read the CSV with subtly
+    different cutoff/parsing logic."""
     counts, reach_totals = {}, {}
-    with open(CSV_PATH) as f:
+    if not os.path.exists(CSV_PATH):
+        return counts, reach_totals
+    cutoff = dt.datetime.now() - dt.timedelta(days=lookback_days)
+    with open(CSV_PATH, encoding="utf-8") as f:
         for row in csv.DictReader(f):
             try:
                 ts = dt.datetime.strptime(row["timestamp_ist"], "%Y-%m-%d %H:%M")
@@ -79,6 +80,14 @@ def best_categories(lookback_days=14):
                 reach = 0
             if reach:
                 reach_totals.setdefault(cat, []).append(reach)
+    return counts, reach_totals
+
+
+def best_categories(lookback_days=14):
+    """Rank categories by average reach where real insights data exists
+    (filled in daily by src/insights.py); falls back to post-count for
+    categories with no insights yet (e.g. brand new account)."""
+    counts, reach_totals = _category_reach_samples(lookback_days)
 
     def _score(cat):
         reaches = reach_totals.get(cat)
@@ -86,6 +95,25 @@ def best_categories(lookback_days=14):
         return (avg_reach, counts.get(cat, 0))
 
     return sorted(counts, key=_score, reverse=True)
+
+
+def category_avg_reach(lookback_days=14, min_samples=5):
+    """The actual number best_categories() only uses internally to rank --
+    exposed directly so a caller can turn real measured performance into
+    a score adjustment, not just an ordering. Added 2026-11-02: a static,
+    guessed category preference (settings.CATEGORY_PRIORITY_BOOST) had
+    Tamil Nadu weighted highest while it was, in the account's own real
+    reach data, the WORST-performing of the three active categories --
+    a guess that happened to point the wrong way. Returns {category:
+    avg_reach} only for categories with at least `min_samples` reach-
+    rated posts in the window, so a brand-new or sparsely-posted category
+    is never judged off 1-2 noisy data points."""
+    _, reach_totals = _category_reach_samples(lookback_days)
+    return {
+        cat: sum(reaches) / len(reaches)
+        for cat, reaches in reach_totals.items()
+        if len(reaches) >= min_samples
+    }
 
 
 def best_template(category, lookback_days=14, min_samples=3, column="template"):
@@ -100,7 +128,7 @@ def best_template(category, lookback_days=14, min_samples=3, column="template"):
         return []
     cutoff = dt.datetime.now() - dt.timedelta(days=lookback_days)
     reach_by_template = {}
-    with open(CSV_PATH) as f:
+    with open(CSV_PATH, encoding="utf-8") as f:
         for row in csv.DictReader(f):
             if row.get("category") != category or not row.get(column):
                 continue
@@ -135,7 +163,7 @@ def template_counts(category, lookback_days=30, column="template", variants=VARI
     if not os.path.exists(CSV_PATH):
         return counts
     cutoff = dt.datetime.now() - dt.timedelta(days=lookback_days)
-    with open(CSV_PATH) as f:
+    with open(CSV_PATH, encoding="utf-8") as f:
         for row in csv.DictReader(f):
             if row.get("category") != category:
                 continue

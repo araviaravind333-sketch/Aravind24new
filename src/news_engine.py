@@ -19,6 +19,7 @@ import csv
 import urllib.request
 
 from config import settings
+from src import analytics
 
 POSTED_LOG = os.path.join(os.path.dirname(__file__), "..", "data", "posted.json")
 PERFORMANCE_LOG = os.path.join(os.path.dirname(__file__), "..", "data", "performance.csv")
@@ -321,6 +322,33 @@ def _trending_term_bigrams(term):
     return {f"{words[i]} {words[i + 1]}" for i in range(len(words) - 1)}
 
 
+# Cached for the lifetime of one process (one workflow run) -- reading
+# and scanning performance.csv once per cycle is plenty; nothing here
+# needs a fresh re-read per candidate headline.
+_CATEGORY_PERFORMANCE_CACHE = {"reach": None}
+
+
+def _category_boost(category):
+    """2026-11-02: replaces a static, guessed category preference with
+    one computed from the account's own measured reach (see settings.
+    CATEGORY_PERFORMANCE_* for why -- the guess had Tamil Nadu weighted
+    highest while it was actually the worst performer). Falls back to
+    the static settings.CATEGORY_PRIORITY_BOOST only when this category
+    doesn't have enough real reach-rated posts yet to trust."""
+    if not category:
+        return 0
+    if _CATEGORY_PERFORMANCE_CACHE["reach"] is None:
+        _CATEGORY_PERFORMANCE_CACHE["reach"] = analytics.category_avg_reach(
+            lookback_days=settings.CATEGORY_PERFORMANCE_LOOKBACK_DAYS,
+            min_samples=settings.CATEGORY_PERFORMANCE_MIN_SAMPLES,
+        )
+    avg_reach = _CATEGORY_PERFORMANCE_CACHE["reach"].get(category)
+    if avg_reach is not None:
+        return min(settings.CATEGORY_PERFORMANCE_MAX_BOOST,
+                   avg_reach / settings.CATEGORY_PERFORMANCE_REACH_DIVISOR)
+    return settings.CATEGORY_PRIORITY_BOOST.get(category, 0)
+
+
 def is_cross_platform_trending(title, terms=None):
     """Whether this headline overlaps a currently-trending Google/YouTube
     search term (see _trending_term_bigrams for the matching rule).
@@ -491,15 +519,14 @@ def _virality(title, published_dt, category=None):
     if is_cross_platform_trending(title):
         score += 20
         hot_hit = True
-    # 2026-10-23, explicit preference order: Tamil Nadu 1st, national
-    # India 2nd, cinema 3rd -- weighted, not a strict fill order, so a
-    # strong story in any of the three can still win the queue over a
-    # weak one in a "higher-ranked" category (see settings.CATEGORY_
-    # PRIORITY_BOOST's own comment). This only nudges ranking among
-    # stories that already qualify -- top_candidates()'s TRENDING_ONLY
-    # gate elsewhere decides whether a story is eligible at all.
-    if category:
-        score += settings.CATEGORY_PRIORITY_BOOST.get(category, 0)
+    # Category boost: measured performance when there's enough real data
+    # to trust, otherwise the static preference order as a cold-start
+    # fallback (see _category_boost's own docstring and settings.
+    # CATEGORY_PERFORMANCE_* / CATEGORY_PRIORITY_BOOST). Either way, this
+    # only nudges ranking among stories that already qualify --
+    # top_candidates()'s TRENDING_ONLY gate elsewhere decides whether a
+    # story is eligible to post at all.
+    score += _category_boost(category)
     # Fresh incidents (collapse/crash/disaster) were the single biggest
     # reach outlier across every competitor account analyzed -- a building
     # collapse and an animal-cruelty clip each cleared 2M+ views while
