@@ -550,17 +550,17 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-01 22:26,INDIA NEWS,Congress holds massive Delhi rally despite traders requesting Diwali delay,65,False,full_bleed,,18134159014674064,122125647561424069,True,True,3,0,0,0,0,,0
 2026-11-01 22:46,INDIA NEWS,AC explosion kills disabled woman in Korattur apartment fire,78,True,text_card,reel_text,18014748872984139,122125649547424069,True,True,118,0,0,0,,161,0
 2026-11-01 23:45,INDIA NEWS,Schools and colleges get holiday on November 2 as Cyclone Murasu approaches.,84,True,text_card,reel_text,18169564168470750,122125657761424069,True,True,200,0,0,0,,262,0
-2026-11-02 09:25,BREAKING NEWS,Severe Cyclone Murasu intensifies as Chennai shuts schools and colleges,102.00786516853933,True,text_card,reel_text,18136936393749331,122125709271424069,True,True,174,1,0,0,,228,1
-2026-11-02 10:26,INDIAN CINEMA,Actor Amit Sadh admits box office success matters more than ever,79.60882352941177,True,full_bleed,reel_overlay,18126044890897943,122125715079424069,True,True,134,0,0,0,,162,0
+2026-11-02 09:25,BREAKING NEWS,Severe Cyclone Murasu intensifies as Chennai shuts schools and colleges,102.00786516853933,True,text_card,reel_text,18136936393749331,122125709271424069,True,True,177,1,0,0,,233,1
+2026-11-02 10:26,INDIAN CINEMA,Actor Amit Sadh admits box office success matters more than ever,79.60882352941177,True,full_bleed,reel_overlay,18126044890897943,122125715079424069,True,True,138,0,0,0,,165,0
 2026-11-02 11:37,INDIA NEWS,ISRO rocket nicknamed Naughty Boy successfully launches next-generation satellite,83,False,full_bleed,,18022377857933245,122125724193424069,True,True,4,0,0,0,0,,0
 2026-11-02 12:06,BREAKING NEWS,Ten-year-old boy collapses and dies of cardiac arrest during school race,92.06516853932584,True,text_card,reel_text,18078478256734095,122125727307424069,True,True,161,0,0,0,,225,0
 2026-11-02 13:36,TAMIL NADU NEWS,Madurai floats Rs 270 crore tender to handle city waste,71,False,full_bleed,,18133867336682876,122125741791424069,True,True,5,0,0,0,0,,0
-2026-11-02 14:55,INDIA NEWS,ISRO prepares heavy rocket launch to upgrade India's own GPS,67,True,text_card,reel_text,17995356201113317,122125753959424069,True,True,30,0,0,0,,39,0
+2026-11-02 14:55,INDIA NEWS,ISRO prepares heavy rocket launch to upgrade India's own GPS,67,True,text_card,reel_text,17995356201113317,122125753959424069,True,True,38,0,0,0,,46,0
 2026-11-02 17:45,BREAKING NEWS,Supreme Court permits green crackers in Delhi until November 9,93.97556818181818,False,full_bleed,,18117242654036455,122125783383424069,True,True,3,0,0,0,0,,0
-2026-11-02 18:48,BREAKING NEWS,Scam 2010 first look reveals Siddharth Bodke in lead role,96.33709677419355,True,text_card,reel_text,18127002841916344,122125793727424069,True,True,25,0,0,0,,32,0
-2026-11-02 20:26,BREAKING NEWS,Chennai roads remain badly damaged after Cyclone Murasu rainwater recedes.,108.58846153846153,True,text_card,reel_text,17870580375659635,122125804737424069,True,True,46,0,0,0,,60,0
-2026-11-02 21:26,INDIAN CINEMA,Mumbai civic body removes Dia Mirza Diwali video after BJP objection.,81.16499999999999,True,text_card,reel_text,18119889124974429,122125812123424069,True,True,80,0,0,0,,119,0
-2026-11-02 21:45,INDIA NEWS,Fishermen haul 400 boats ashore as Cyclone Murasu approaches Andhra,79.98806818181818,True,text_card,reel_text,17888107557624683,122125814127424069,True,True,51,0,0,0,,55,0
-2026-11-02 22:45,INDIAN CINEMA,Bigg Boss fame Samarth Jurel joins Emraan Hashmi in Gunmaster G9,69.17166666666667,True,text_card,reel_text,18095916506172165,122125819725424069,True,True,67,0,0,0,,85,0
-2026-11-02 23:05,INDIA NEWS,Two arrested over shooting of Indian-born 19-month-old cheetah in Madhya Pradesh,68.03372093023256,True,text_card,reel_text,17919130518516168,122125821411424069,True,True,77,0,0,0,,96,0
-2026-11-02 23:46,INDIA NEWS,Delhi air quality turns very poor as winter pollution spikes,81.96136363636364,True,text_card,reel_text,17915025006287922,122125824267424069,True,True,5,0,0,0,,4,0
+2026-11-02 18:48,BREAKING NEWS,Scam 2010 first look reveals Siddharth Bodke in lead role,96.33709677419355,True,text_card,reel_text,18127002841916344,122125793727424069,True,True,26,0,0,0,,33,0
+2026-11-02 20:26,BREAKING NEWS,Chennai roads remain badly damaged after Cyclone Murasu rainwater recedes.,108.58846153846153,True,text_card,reel_text,17870580375659635,122125804737424069,True,True,59,0,0,0,,79,0
+2026-11-02 21:26,INDIAN CINEMA,Mumbai civic body removes Dia Mirza Diwali video after BJP objection.,81.16499999999999,True,text_card,reel_text,18119889124974429,122125812123424069,True,True,103,0,0,0,,143,0
+2026-11-02 21:45,INDIA NEWS,Fishermen haul 400 boats ashore as Cyclone Murasu approaches Andhra,79.98806818181818,True,text_card,reel_text,17888107557624683,122125814127424069,True,True,53,0,0,0,,57,0
+2026-11-02 22:45,INDIAN CINEMA,Bigg Boss fame Samarth Jurel joins Emraan Hashmi in Gunmaster G9,69.17166666666667,True,text_card,reel_text,18095916506172165,122125819725424069,True,True,98,0,0,0,,119,0
+2026-11-02 23:05,INDIA NEWS,Two arrested over shooting of Indian-born 19-month-old cheetah in Madhya Pradesh,68.03372093023256,True,text_card,reel_text,17919130518516168,122125821411424069,True,True,94,0,0,0,,107,0
+2026-11-02 23:46,INDIA NEWS,Delhi air quality turns very poor as winter pollution spikes,81.96136363636364,True,text_card,reel_text,17915025006287922,122125824267424069,True,True,16,0,0,0,,56,0
