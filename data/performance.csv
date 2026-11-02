@@ -436,8 +436,8 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-24 17:46,INDIA NEWS,Gunmen kill seven at Jordan church funeral as India condemns attack,58,True,text_card,reel_text,18653860744028012,122124299757424069,True,True,101,0,0,0,,126,0
 2026-10-24 18:46,INDIA NEWS,JDU expels Bihar MLA Anant Singh and wife for six years,81,True,text_card,reel_text,18128558773891661,122124306861424069,True,True,121,0,0,0,,153,0
 2026-10-24 19:26,INDIA NEWS,Bay of Bengal cyclone threatens farmers days after rain relief.,78,True,text_card,reel_text,17916041373535744,122124314865424069,True,True,92,0,0,0,,114,0
-2026-10-24 20:06,INDIA NEWS,Vijay's TVK targets BJP as box office clash with Dhanush looms,71,True,text_card,reel_text,18107088604973960,122124319047424069,True,True,160,0,0,0,,210,0
-2026-10-24 21:06,INDIA NEWS,Odisha triggers emergency response as severe cyclone threatens coast,84,True,text_card,reel_text,18115591682167481,122124326469424069,True,True,128,0,0,0,,147,0
+2026-10-24 20:06,INDIA NEWS,Vijay's TVK targets BJP as box office clash with Dhanush looms,71,True,text_card,reel_text,18107088604973960,122124319047424069,True,True,161,0,0,0,,210,0
+2026-10-24 21:06,INDIA NEWS,Odisha triggers emergency response as severe cyclone threatens coast,84,True,text_card,reel_text,18115591682167481,122124326469424069,True,True,129,0,0,0,,148,0
 2026-10-25 08:26,TAMIL NADU NEWS,"Landslide buries government bus in Nilgiris, killing driver",73,True,text_card,reel_text,18108719114225723,122124389115424069,True,True,97,0,0,0,,107,0
 2026-10-25 09:46,BREAKING NEWS,Free bicycle scheme cost jumps 40% above budget in Tamil Nadu,98,False,full_bleed,,18120263071757213,122124398319424069,True,True,5,0,0,0,0,,0
 2026-10-25 10:46,BREAKING NEWS,PM Modi attends Varanasi air show as opposition questions border row,101,False,full_bleed,,17992474857099697,122124403689424069,True,True,5,0,0,1,0,,1
@@ -542,11 +542,11 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-01 12:06,BREAKING NEWS,Delhi to Agra bullet train cuts travel time to 59 minutes.,92,False,full_bleed,,18485155591115348,122125581363424069,True,True,4,0,0,0,0,,0
 2026-11-01 13:26,BREAKING NEWS,Six Indians stranded near remote Nepal lake await urgent helicopter rescue,99,True,text_card,reel_text,18110190926210193,122125589901424069,True,True,104,0,0,0,,121,1
 2026-11-01 14:46,INDIA NEWS,Telangana CM compares PM Modi to Ravana in sharp political attack,71,False,full_bleed,,17876978778584718,122125598133424069,True,True,4,0,0,0,0,,0
-2026-11-01 17:26,INDIAN CINEMA,Leaked videos reveal actor Nani plays chef and outlaw,74,True,text_card,reel_text,18116449784329380,122125614705424069,True,True,343,0,0,0,,477,0
-2026-11-01 18:26,INDIA NEWS,Mamata Banerjee slams central exercise as special relief for the BJP,68,True,text_card,reel_text,17918631369464596,122125622475424069,True,True,64,0,0,0,,80,0
-2026-11-01 20:06,INDIA NEWS,Andhra civic polls spark 275 cases as Jagan demands repoll over clashes,76,True,text_card,reel_text,18132190736306383,122125633389424069,True,True,13,0,0,0,,22,0
+2026-11-01 17:26,INDIAN CINEMA,Leaked videos reveal actor Nani plays chef and outlaw,74,True,text_card,reel_text,18116449784329380,122125614705424069,True,True,355,0,0,0,,502,0
+2026-11-01 18:26,INDIA NEWS,Mamata Banerjee slams central exercise as special relief for the BJP,68,True,text_card,reel_text,17918631369464596,122125622475424069,True,True,67,0,0,0,,83,0
+2026-11-01 20:06,INDIA NEWS,Andhra civic polls spark 275 cases as Jagan demands repoll over clashes,76,True,text_card,reel_text,18132190736306383,122125633389424069,True,True,13,0,0,0,,24,0
 2026-11-01 20:26,INDIAN CINEMA,Ramayana pre-sales cross Rs 36 crore but lag behind Yash's Toxic.,85,True,text_card,reel_text,18218987716353619,122125636533424069,True,True,122,0,0,0,,148,0
-2026-11-01 21:26,BREAKING NEWS,Cyclone Murasu heads toward Nellore as authorities issue high alert,90,True,text_card,reel_text,18074113559773879,122125642917424069,True,True,51,0,0,0,,59,0
+2026-11-01 21:26,BREAKING NEWS,Cyclone Murasu heads toward Nellore as authorities issue high alert,90,True,text_card,reel_text,18074113559773879,122125642917424069,True,True,60,0,0,0,,70,0
 2026-11-01 22:26,INDIA NEWS,Congress holds massive Delhi rally despite traders requesting Diwali delay,65,False,full_bleed,,18134159014674064,122125647561424069,True,True,1,0,0,0,0,,0
-2026-11-01 22:46,INDIA NEWS,AC explosion kills disabled woman in Korattur apartment fire,78,True,text_card,reel_text,18014748872984139,122125649547424069,True,True,67,0,0,0,,110,0
-2026-11-01 23:45,INDIA NEWS,Schools and colleges get holiday on November 2 as Cyclone Murasu approaches.,84,True,text_card,reel_text,18169564168470750,122125657761424069,True,True,7,0,0,0,,7,0
+2026-11-01 22:46,INDIA NEWS,AC explosion kills disabled woman in Korattur apartment fire,78,True,text_card,reel_text,18014748872984139,122125649547424069,True,True,106,0,0,0,,150,0
+2026-11-01 23:45,INDIA NEWS,Schools and colleges get holiday on November 2 as Cyclone Murasu approaches.,84,True,text_card,reel_text,18169564168470750,122125657761424069,True,True,14,0,0,0,,18,0
