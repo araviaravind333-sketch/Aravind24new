@@ -529,7 +529,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-31 13:26,BREAKING NEWS,SRK movie King sells overseas rights for record 175 crore,97,True,text_card,reel_text,17912447523517423,122125415583424069,True,True,134,1,0,0,,157,1
 2026-10-31 14:36,INDIA NEWS,Supreme Court will hear media challenge against new privacy law,83,False,full_bleed,,18144756649588754,122125422885424069,True,True,3,0,0,0,0,,0
 2026-10-31 17:26,BREAKING NEWS,Kaante director Sanjay Gupta dies at 59 after sudden injury,96,True,text_card,reel_text,18147129802590572,122125446291424069,True,True,112,0,0,0,,146,0
-2026-10-31 18:26,INDIA NEWS,Passengers escape unharmed as Bengaluru bus suddenly catches fire,58,True,text_card,reel_text,18115939955593437,122125454877424069,True,True,89,0,0,0,,102,0
+2026-10-31 18:26,INDIA NEWS,Passengers escape unharmed as Bengaluru bus suddenly catches fire,58,True,text_card,reel_text,18115939955593437,122125454877424069,True,True,89,0,0,0,,105,0
 2026-10-31 19:46,INDIA NEWS,Congress calls 2024 elections illegal over 13.2 crore deleted voters,77,True,full_bleed,reel_overlay,17973891591157567,122125464621424069,True,True,104,0,0,0,,138,0
 2026-10-31 20:26,BREAKING NEWS,Rahul Gandhi warns Chief Election Commissioner he cannot escape accountability,95,True,full_bleed,reel_overlay,18080315300400820,122125468671424069,True,True,141,0,0,0,,171,0
 2026-10-31 21:26,INDIA NEWS,Former Lok Sabha Speaker Meira Kumar chairs mock parliament in Delhi,71,True,text_card,reel_text,18240068173319439,122125474329424069,True,True,114,0,0,0,,133,0
@@ -538,19 +538,19 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-31 23:28,INDIA NEWS,36 luxury villas spark massive probe against IAS-IPS couple,64,True,full_bleed,reel_overlay,18043553432834370,122125490943424069,True,True,101,0,0,0,,130,0
 2026-11-01 09:16,TAMIL NADU NEWS,Tamil village cooking channel hits 1 crore YouTube subscribers.,71,False,full_bleed,,18031787459911083,122125562091424069,True,True,7,0,0,0,0,,0
 2026-11-01 10:16,TAMIL NADU NEWS,Anti-graft officers raid ex-Minister KN Nehru's residence in early morning search.,83,True,text_card,reel_text,18347534683254094,122125567971424069,True,True,55,0,0,0,,62,0
-2026-11-01 11:26,INDIA NEWS,PM Modi greets Tamil Nadu and five states on Foundation Day,71,True,text_card,reel_text,17989375677080348,122125576509424069,True,True,23,0,0,0,,29,0
+2026-11-01 11:26,INDIA NEWS,PM Modi greets Tamil Nadu and five states on Foundation Day,71,True,text_card,reel_text,17989375677080348,122125576509424069,True,True,24,0,0,0,,29,0
 2026-11-01 12:06,BREAKING NEWS,Delhi to Agra bullet train cuts travel time to 59 minutes.,92,False,full_bleed,,18485155591115348,122125581363424069,True,True,4,0,0,0,0,,0
 2026-11-01 13:26,BREAKING NEWS,Six Indians stranded near remote Nepal lake await urgent helicopter rescue,99,True,text_card,reel_text,18110190926210193,122125589901424069,True,True,104,0,0,0,,121,1
-2026-11-01 14:46,INDIA NEWS,Telangana CM compares PM Modi to Ravana in sharp political attack,71,False,full_bleed,,17876978778584718,122125598133424069,True,True,5,0,0,0,0,,0
-2026-11-01 17:26,INDIAN CINEMA,Leaked videos reveal actor Nani plays chef and outlaw,74,True,text_card,reel_text,18116449784329380,122125614705424069,True,True,525,1,0,0,,741,1
+2026-11-01 14:46,INDIA NEWS,Telangana CM compares PM Modi to Ravana in sharp political attack,71,False,full_bleed,,17876978778584718,122125598133424069,True,True,6,0,0,0,0,,0
+2026-11-01 17:26,INDIAN CINEMA,Leaked videos reveal actor Nani plays chef and outlaw,74,True,text_card,reel_text,18116449784329380,122125614705424069,True,True,546,1,0,0,,772,1
 2026-11-01 18:26,INDIA NEWS,Mamata Banerjee slams central exercise as special relief for the BJP,68,True,text_card,reel_text,17918631369464596,122125622475424069,True,True,68,0,0,0,,84,0
-2026-11-01 20:06,INDIA NEWS,Andhra civic polls spark 275 cases as Jagan demands repoll over clashes,76,True,text_card,reel_text,18132190736306383,122125633389424069,True,True,21,0,0,0,,34,0
+2026-11-01 20:06,INDIA NEWS,Andhra civic polls spark 275 cases as Jagan demands repoll over clashes,76,True,text_card,reel_text,18132190736306383,122125633389424069,True,True,22,0,0,0,,35,0
 2026-11-01 20:26,INDIAN CINEMA,Ramayana pre-sales cross Rs 36 crore but lag behind Yash's Toxic.,85,True,text_card,reel_text,18218987716353619,122125636533424069,True,True,122,0,0,0,,149,0
-2026-11-01 21:26,BREAKING NEWS,Cyclone Murasu heads toward Nellore as authorities issue high alert,90,True,text_card,reel_text,18074113559773879,122125642917424069,True,True,81,0,0,0,,99,0
+2026-11-01 21:26,BREAKING NEWS,Cyclone Murasu heads toward Nellore as authorities issue high alert,90,True,text_card,reel_text,18074113559773879,122125642917424069,True,True,93,0,0,0,,118,0
 2026-11-01 22:26,INDIA NEWS,Congress holds massive Delhi rally despite traders requesting Diwali delay,65,False,full_bleed,,18134159014674064,122125647561424069,True,True,3,0,0,0,0,,0
 2026-11-01 22:46,INDIA NEWS,AC explosion kills disabled woman in Korattur apartment fire,78,True,text_card,reel_text,18014748872984139,122125649547424069,True,True,118,0,0,0,,160,0
-2026-11-01 23:45,INDIA NEWS,Schools and colleges get holiday on November 2 as Cyclone Murasu approaches.,84,True,text_card,reel_text,18169564168470750,122125657761424069,True,True,173,0,0,0,,228,0
-2026-11-02 09:25,BREAKING NEWS,Severe Cyclone Murasu intensifies as Chennai shuts schools and colleges,102.00786516853933,True,text_card,reel_text,18136936393749331,122125709271424069,True,True,76,0,0,0,,129,0
-2026-11-02 10:26,INDIAN CINEMA,Actor Amit Sadh admits box office success matters more than ever,79.60882352941177,True,full_bleed,reel_overlay,18126044890897943,122125715079424069,True,True,29,0,0,0,,70,0
-2026-11-02 11:37,INDIA NEWS,ISRO rocket nicknamed Naughty Boy successfully launches next-generation satellite,83,False,full_bleed,,18022377857933245,122125724193424069,True,True,,,,,,,
-2026-11-02 12:06,BREAKING NEWS,Ten-year-old boy collapses and dies of cardiac arrest during school race,92.06516853932584,True,text_card,reel_text,18078478256734095,122125727307424069,True,True,,,,,,,
+2026-11-01 23:45,INDIA NEWS,Schools and colleges get holiday on November 2 as Cyclone Murasu approaches.,84,True,text_card,reel_text,18169564168470750,122125657761424069,True,True,175,0,0,0,,230,0
+2026-11-02 09:25,BREAKING NEWS,Severe Cyclone Murasu intensifies as Chennai shuts schools and colleges,102.00786516853933,True,text_card,reel_text,18136936393749331,122125709271424069,True,True,138,0,0,0,,167,0
+2026-11-02 10:26,INDIAN CINEMA,Actor Amit Sadh admits box office success matters more than ever,79.60882352941177,True,full_bleed,reel_overlay,18126044890897943,122125715079424069,True,True,120,0,0,0,,142,0
+2026-11-02 11:37,INDIA NEWS,ISRO rocket nicknamed Naughty Boy successfully launches next-generation satellite,83,False,full_bleed,,18022377857933245,122125724193424069,True,True,2,0,0,0,0,,0
+2026-11-02 12:06,BREAKING NEWS,Ten-year-old boy collapses and dies of cardiac arrest during school race,92.06516853932584,True,text_card,reel_text,18078478256734095,122125727307424069,True,True,104,0,0,0,,151,0
