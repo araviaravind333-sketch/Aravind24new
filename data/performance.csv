@@ -453,7 +453,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-25 20:57,BREAKING NEWS,Salman Khan's war drama 'Maatrubhumi' stuck as makers await Defence Ministry NOC,92,True,text_card,reel_text,18152776279573586,122124487833424069,True,True,291,0,0,0,,358,0
 2026-10-25 22:07,BREAKING NEWS,'Baap' Comment Latest In M Kharge's Series Of Jibes At PM Modi,101,True,text_card,reel_text,18097768283122803,122124497433424069,True,True,61,0,0,0,,77,0
 2026-10-26 08:26,BREAKING NEWS,BJP launches nationwide protests over Kharge remark on PM Modi,95,True,text_card,reel_text,18113641349166893,122124560799424069,True,True,146,0,0,0,,188,0
-2026-10-26 09:11,BREAKING NEWS,Indian soldiers thrash Chinese troops attempting border intrusion in old video,95,True,full_bleed,,18120918515065310,122124565467424069,True,True,5380,132,0,19,,6760,171
+2026-10-26 09:11,BREAKING NEWS,Indian soldiers thrash Chinese troops attempting border intrusion in old video,95,True,full_bleed,,18120918515065310,122124565467424069,True,True,5381,132,0,19,,6761,170
 2026-10-26 10:46,INDIA NEWS,Student sets mehndi record in Karnataka,58,True,full_bleed,reel_overlay,18016379360991826,122124576219424069,True,True,131,0,0,0,,155,0
 2026-10-26 11:46,BREAKING NEWS,Massive 5-hour fire guts 40 shops near Jammu Railway Station,99,True,text_card,reel_text,18010470197775806,122124581499424069,True,True,112,0,0,0,,127,0
 2026-10-26 13:06,INDIA NEWS,"Andhra deploys 4,000 workers as Cyclone Arnab threatens power supply.",84,True,text_card,reel_text,18185912863421087,122124589329424069,True,True,247,3,0,0,,302,3
@@ -550,18 +550,18 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-01 22:26,INDIA NEWS,Congress holds massive Delhi rally despite traders requesting Diwali delay,65,False,full_bleed,,18134159014674064,122125647561424069,True,True,3,0,0,0,0,,0
 2026-11-01 22:46,INDIA NEWS,AC explosion kills disabled woman in Korattur apartment fire,78,True,text_card,reel_text,18014748872984139,122125649547424069,True,True,118,0,0,0,,161,0
 2026-11-01 23:45,INDIA NEWS,Schools and colleges get holiday on November 2 as Cyclone Murasu approaches.,84,True,text_card,reel_text,18169564168470750,122125657761424069,True,True,200,0,0,0,,262,0
-2026-11-02 09:25,BREAKING NEWS,Severe Cyclone Murasu intensifies as Chennai shuts schools and colleges,102.00786516853933,True,text_card,reel_text,18136936393749331,122125709271424069,True,True,182,1,0,0,,239,1
+2026-11-02 09:25,BREAKING NEWS,Severe Cyclone Murasu intensifies as Chennai shuts schools and colleges,102.00786516853933,True,text_card,reel_text,18136936393749331,122125709271424069,True,True,184,1,0,0,,242,1
 2026-11-02 10:26,INDIAN CINEMA,Actor Amit Sadh admits box office success matters more than ever,79.60882352941177,True,full_bleed,reel_overlay,18126044890897943,122125715079424069,True,True,139,0,0,0,,167,0
 2026-11-02 11:37,INDIA NEWS,ISRO rocket nicknamed Naughty Boy successfully launches next-generation satellite,83,False,full_bleed,,18022377857933245,122125724193424069,True,True,4,0,0,0,0,,0
 2026-11-02 12:06,BREAKING NEWS,Ten-year-old boy collapses and dies of cardiac arrest during school race,92.06516853932584,True,text_card,reel_text,18078478256734095,122125727307424069,True,True,161,0,0,0,,225,0
 2026-11-02 13:36,TAMIL NADU NEWS,Madurai floats Rs 270 crore tender to handle city waste,71,False,full_bleed,,18133867336682876,122125741791424069,True,True,5,0,0,0,0,,0
-2026-11-02 14:55,INDIA NEWS,ISRO prepares heavy rocket launch to upgrade India's own GPS,67,True,text_card,reel_text,17995356201113317,122125753959424069,True,True,41,0,0,0,,50,0
+2026-11-02 14:55,INDIA NEWS,ISRO prepares heavy rocket launch to upgrade India's own GPS,67,True,text_card,reel_text,17995356201113317,122125753959424069,True,True,62,1,0,0,,76,1
 2026-11-02 17:45,BREAKING NEWS,Supreme Court permits green crackers in Delhi until November 9,93.97556818181818,False,full_bleed,,18117242654036455,122125783383424069,True,True,3,0,0,0,0,,0
-2026-11-02 18:48,BREAKING NEWS,Scam 2010 first look reveals Siddharth Bodke in lead role,96.33709677419355,True,text_card,reel_text,18127002841916344,122125793727424069,True,True,33,0,0,0,,45,0
-2026-11-02 20:26,BREAKING NEWS,Chennai roads remain badly damaged after Cyclone Murasu rainwater recedes.,108.58846153846153,True,text_card,reel_text,17870580375659635,122125804737424069,True,True,67,0,0,0,,87,0
+2026-11-02 18:48,BREAKING NEWS,Scam 2010 first look reveals Siddharth Bodke in lead role,96.33709677419355,True,text_card,reel_text,18127002841916344,122125793727424069,True,True,35,0,0,0,,47,0
+2026-11-02 20:26,BREAKING NEWS,Chennai roads remain badly damaged after Cyclone Murasu rainwater recedes.,108.58846153846153,True,text_card,reel_text,17870580375659635,122125804737424069,True,True,69,0,0,0,,90,0
 2026-11-02 21:26,INDIAN CINEMA,Mumbai civic body removes Dia Mirza Diwali video after BJP objection.,81.16499999999999,True,text_card,reel_text,18119889124974429,122125812123424069,True,True,104,0,0,0,,146,0
-2026-11-02 21:45,INDIA NEWS,Fishermen haul 400 boats ashore as Cyclone Murasu approaches Andhra,79.98806818181818,True,text_card,reel_text,17888107557624683,122125814127424069,True,True,61,0,0,0,,70,0
-2026-11-02 22:45,INDIAN CINEMA,Bigg Boss fame Samarth Jurel joins Emraan Hashmi in Gunmaster G9,69.17166666666667,True,text_card,reel_text,18095916506172165,122125819725424069,True,True,120,0,0,0,,143,0
-2026-11-02 23:05,INDIA NEWS,Two arrested over shooting of Indian-born 19-month-old cheetah in Madhya Pradesh,68.03372093023256,True,text_card,reel_text,17919130518516168,122125821411424069,True,True,104,0,0,0,,121,0
-2026-11-02 23:46,INDIA NEWS,Delhi air quality turns very poor as winter pollution spikes,81.96136363636364,True,text_card,reel_text,17915025006287922,122125824267424069,True,True,89,0,0,0,,95,0
-2026-11-03 09:25,INDIAN CINEMA,Lenny Kravitz is alive after viral rumors falsely report plane crash death.,82.715625,True,text_card,reel_text,18036167978909994,122125883781424069,True,True,,,,,,,
+2026-11-02 21:45,INDIA NEWS,Fishermen haul 400 boats ashore as Cyclone Murasu approaches Andhra,79.98806818181818,True,text_card,reel_text,17888107557624683,122125814127424069,True,True,66,0,0,0,,75,0
+2026-11-02 22:45,INDIAN CINEMA,Bigg Boss fame Samarth Jurel joins Emraan Hashmi in Gunmaster G9,69.17166666666667,True,text_card,reel_text,18095916506172165,122125819725424069,True,True,121,0,0,0,,143,0
+2026-11-02 23:05,INDIA NEWS,Two arrested over shooting of Indian-born 19-month-old cheetah in Madhya Pradesh,68.03372093023256,True,text_card,reel_text,17919130518516168,122125821411424069,True,True,105,0,0,0,,121,0
+2026-11-02 23:46,INDIA NEWS,Delhi air quality turns very poor as winter pollution spikes,81.96136363636364,True,text_card,reel_text,17915025006287922,122125824267424069,True,True,91,0,0,0,,99,0
+2026-11-03 09:25,INDIAN CINEMA,Lenny Kravitz is alive after viral rumors falsely report plane crash death.,82.715625,True,text_card,reel_text,18036167978909994,122125883781424069,True,True,0,0,0,0,,3,0
