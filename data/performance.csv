@@ -561,7 +561,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-02 20:26,BREAKING NEWS,Chennai roads remain badly damaged after Cyclone Murasu rainwater recedes.,108.58846153846153,True,text_card,reel_text,17870580375659635,122125804737424069,True,True,92,0,0,0,,119,0
 2026-11-02 21:26,INDIAN CINEMA,Mumbai civic body removes Dia Mirza Diwali video after BJP objection.,81.16499999999999,True,text_card,reel_text,18119889124974429,122125812123424069,True,True,105,0,0,0,,147,0
 2026-11-02 21:45,INDIA NEWS,Fishermen haul 400 boats ashore as Cyclone Murasu approaches Andhra,79.98806818181818,True,text_card,reel_text,17888107557624683,122125814127424069,True,True,74,0,0,0,,83,0
-2026-11-02 22:45,INDIAN CINEMA,Bigg Boss fame Samarth Jurel joins Emraan Hashmi in Gunmaster G9,69.17166666666667,True,text_card,reel_text,18095916506172165,122125819725424069,True,True,286,29,6,22,,545,66
+2026-11-02 22:45,INDIAN CINEMA,Bigg Boss fame Samarth Jurel joins Emraan Hashmi in Gunmaster G9,69.17166666666667,True,text_card,reel_text,18095916506172165,122125819725424069,True,True,286,29,6,22,,546,66
 2026-11-02 23:05,INDIA NEWS,Two arrested over shooting of Indian-born 19-month-old cheetah in Madhya Pradesh,68.03372093023256,True,text_card,reel_text,17919130518516168,122125821411424069,True,True,106,0,0,0,,122,0
 2026-11-02 23:46,INDIA NEWS,Delhi air quality turns very poor as winter pollution spikes,81.96136363636364,True,text_card,reel_text,17915025006287922,122125824267424069,True,True,95,0,0,0,,105,0
 2026-11-03 09:25,INDIAN CINEMA,Lenny Kravitz is alive after viral rumors falsely report plane crash death.,82.715625,True,text_card,reel_text,18036167978909994,122125883781424069,True,True,117,0,0,0,,136,0
@@ -597,12 +597,12 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-05 11:46,INDIA NEWS,Supreme Court agrees to urgently hear Tamil Nadu's Cauvery plea,79.02951807228916,False,full_bleed,,18645316006022094,122126251623424069,True,True,3,0,0,0,0,,0
 2026-11-05 12:26,INDIA NEWS,Nandini ghee and butter prices jump in Karnataka before Diwali,72.02951807228916,True,full_bleed,reel_overlay,18088970417312743,122126257317424069,True,True,107,1,0,0,,125,1
 2026-11-05 13:46,INDIA NEWS,Supreme Court orders urgent hearing for politician Azam Khan,78.94235294117647,True,text_card,reel_text,18349467445280189,122126268225424069,True,True,95,0,0,0,,119,0
-2026-11-05 15:06,INDIAN CINEMA,'Ramayana' box office collection day 1 (LIVE),78.83529411764707,True,text_card,reel_text,18181650100437064,122126294937424069,True,True,163,0,0,0,,211,1
-2026-11-05 18:06,BREAKING NEWS,Two dead and many trapped as building collapses in Delhi,97.99825581395349,True,text_card,reel_text,17915869662470904,122126314413424069,True,True,96,0,0,0,,113,0
+2026-11-05 15:06,INDIAN CINEMA,'Ramayana' box office collection day 1 (LIVE),78.83529411764707,True,text_card,reel_text,18181650100437064,122126294937424069,True,True,164,0,0,0,,211,1
+2026-11-05 18:06,BREAKING NEWS,Two dead and many trapped as building collapses in Delhi,97.99825581395349,True,text_card,reel_text,17915869662470904,122126314413424069,True,True,102,0,0,0,,113,0
 2026-11-05 19:06,INDIA NEWS,Punjab exam paper leak triggers major showdown between BJP and AAP,66.99825581395349,True,full_bleed,reel_overlay,17996040864063009,122126322651424069,True,True,98,0,0,0,,121,0
 2026-11-05 20:26,INDIA NEWS,Andhra police rescue 22 people trapped in raging floodwaters,79.95919540229885,True,text_card,reel_text,18455806969123606,122126330691424069,True,True,151,0,0,0,,171,0
-2026-11-05 21:26,INDIA NEWS,Centre extends Agnipath tenure by two years for 75 percent Agniveers,77.95919540229886,True,text_card,reel_text,18182009893427040,122126336469424069,True,True,20,0,0,0,,24,0
-2026-11-05 23:32,BREAKING NEWS,VIT donates ₹1 crore to Andhra Pradesh cyclone relief fund,90.40714285714286,True,text_card,reel_text,18098513567543213,122126350923424069,True,True,63,0,0,0,,71,0
+2026-11-05 21:26,INDIA NEWS,Centre extends Agnipath tenure by two years for 75 percent Agniveers,77.95919540229886,True,text_card,reel_text,18182009893427040,122126336469424069,True,True,22,0,0,0,,26,0
+2026-11-05 23:32,BREAKING NEWS,VIT donates ₹1 crore to Andhra Pradesh cyclone relief fund,90.40714285714286,True,text_card,reel_text,18098513567543213,122126350923424069,True,True,69,0,0,0,,77,0
 2026-11-06 00:26,INDIAN CINEMA,Actor Govinda unveils his opulent home filled with European styled decor,67.87,False,full_bleed,,18138355030635755,122126361399424069,True,True,1,0,0,0,0,,0
-2026-11-06 00:46,INDIA NEWS,Tamil Nadu orders war-footing survey to assess severe cyclone damage,73.95919540229885,True,text_card,reel_text,18098376530236594,122126363463424069,True,True,0,0,0,0,,0,0
-2026-11-06 02:40,INDIA NEWS,Centre plans rank-based system for NEET-PG admissions from 2027.,85.02616279069767,False,full_bleed,,17987141955065088,122126371863424069,True,True,,,,,,,
+2026-11-06 00:46,INDIA NEWS,Tamil Nadu orders war-footing survey to assess severe cyclone damage,73.95919540229885,True,text_card,reel_text,18098376530236594,122126363463424069,True,True,18,0,0,0,,19,0
+2026-11-06 02:40,INDIA NEWS,Centre plans rank-based system for NEET-PG admissions from 2027.,85.02616279069767,False,full_bleed,,17987141955065088,122126371863424069,True,True,0,0,0,0,0,,0
