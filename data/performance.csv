@@ -283,7 +283,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-13 11:46,INDIA NEWS,Punjab anti-drug activist Parvinder Jhota shot dead by medical store owner on camera,58,True,text_card,reel_text,18636301795023707,122122379949424069,True,True,138,2,0,0,,200,2
 2026-10-13 12:06,INDIA NEWS,"Hanging by a thread, pigeon gets a lifeline from Fire and Rescue Services",70,True,text_card,reel_text,18106209799971734,122122382355424069,True,True,33,0,0,0,,36,0
 2026-10-13 12:26,INDIA NEWS,"India grows ‘with the world, not at anyone's cost’, cites strong economic fundamentals",55,True,text_card,reel_text,18147120319572176,122122385037424069,True,True,127,1,0,0,,148,1
-2026-10-13 15:06,INDIA NEWS,"After fatal Nedumbassery accident, Keralam govt to tighten action against bars serving alcohol",56,True,text_card,reel_text,18500382544099809,122122402995424069,True,True,0,0,0,0,,153,0
+2026-10-13 15:06,INDIA NEWS,"After fatal Nedumbassery accident, Keralam govt to tighten action against bars serving alcohol",56,True,text_card,reel_text,18500382544099809,122122402995424069,True,True,124,0,0,0,,153,0
 2026-10-13 22:46,BREAKING NEWS,Drishyam 3 box office collection day 12,110,True,text_card,reel_text,18087206009298063,122122464081424069,True,True,175,1,0,0,,194,1
 2026-10-13 23:56,INDIA NEWS,Mushroom production facility worth Rs.330-crore to come up at Gollapalli in Nellore-district,56,True,full_bleed,reel_overlay,17909376666559272,122122472799424069,True,True,117,0,0,0,,149,0
 2026-10-14 01:36,INDIA NEWS,"Out On Bail In Fatal Crash Case, Odisha Man Goes On Car Rampage",68,True,text_card,reel_text,17919321387459700,122122487331424069,True,True,163,1,0,0,,187,1
@@ -606,17 +606,17 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-06 00:26,INDIAN CINEMA,Actor Govinda unveils his opulent home filled with European styled decor,67.87,False,full_bleed,,18138355030635755,122126361399424069,True,True,5,0,0,0,0,,0
 2026-11-06 00:46,INDIA NEWS,Tamil Nadu orders war-footing survey to assess severe cyclone damage,73.95919540229885,True,text_card,reel_text,18098376530236594,122126363463424069,True,True,62,0,0,0,,65,0
 2026-11-06 02:40,INDIA NEWS,Centre plans rank-based system for NEET-PG admissions from 2027.,85.02616279069767,False,full_bleed,,17987141955065088,122126371863424069,True,True,3,0,0,0,0,,0
-2026-11-06 09:46,INDIAN CINEMA,Vijay Sethupathi becomes first Indian to present at International Emmy Awards.,82.69166666666666,True,text_card,reel_text,18377516479209641,122126414499424069,True,True,203,1,1,0,,285,2
+2026-11-06 09:46,INDIAN CINEMA,Vijay Sethupathi becomes first Indian to present at International Emmy Awards.,82.69166666666666,True,text_card,reel_text,18377516479209641,122126414499424069,True,True,204,1,1,0,,290,2
 2026-11-06 10:59,INDIAN CINEMA,Kareena Kapoor calls herself poster girl for pure talent from nepotism,85.12058823529412,True,full_bleed,reel_overlay,18079462442722892,122126421975424069,True,True,1090,0,0,0,,1285,0
-2026-11-06 12:06,INDIA NEWS,Democrats sweep US midterms as Indian-American lawmakers win re-election,84.0386075949367,True,full_bleed,reel_overlay,17972236487962216,122126427381424069,True,True,230,2,0,0,,313,2
+2026-11-06 12:06,INDIA NEWS,Democrats sweep US midterms as Indian-American lawmakers win re-election,84.0386075949367,True,full_bleed,reel_overlay,17972236487962216,122126427381424069,True,True,233,2,0,0,,317,2
 2026-11-06 12:10,INDIA NEWS,"Farooq Meets Rebel NC MLAs, Omar Stays Firm, Aga Ruhullah Resigns",71.98076923076923,True,text_card,reel_text,18051307601821007,122126427921424069,True,True,94,0,0,0,,125,0
 2026-11-06 14:18,TAMIL NADU NEWS,TN Governor honors Avadi Air Force unit and elite NSG commandos,64.59615384615384,False,full_bleed,,17954862675334537,122126459925424069,True,True,3,0,0,0,0,,0
-2026-11-06 15:07,INDIA NEWS,Massive fire destroys four train coaches in Punjab after short circuit,79.96559139784947,True,text_card,reel_text,17920318353452534,122126474667424069,True,True,82,0,0,1,,93,1
-2026-11-06 18:06,BREAKING NEWS,Bollywood stars attend designer Manish Malhotra's star-studded Mumbai Diwali party,95.90333333333334,True,text_card,reel_text,18137418742647855,122126500917424069,True,True,121,0,0,0,,137,0
-2026-11-06 19:06,BREAKING NEWS,CBI files Rs 904 crore fraud case against Future Retail,97.09782608695653,True,text_card,reel_text,18121347593003396,122126507601424069,True,True,23,0,0,0,,33,0
+2026-11-06 15:07,INDIA NEWS,Massive fire destroys four train coaches in Punjab after short circuit,79.96559139784947,True,text_card,reel_text,17920318353452534,122126474667424069,True,True,82,0,0,1,,94,1
+2026-11-06 18:06,BREAKING NEWS,Bollywood stars attend designer Manish Malhotra's star-studded Mumbai Diwali party,95.90333333333334,True,text_card,reel_text,18137418742647855,122126500917424069,True,True,126,0,0,0,,139,0
+2026-11-06 19:06,BREAKING NEWS,CBI files Rs 904 crore fraud case against Future Retail,97.09782608695653,True,text_card,reel_text,18121347593003396,122126507601424069,True,True,26,0,0,0,,35,0
 2026-11-06 20:28,INDIAN CINEMA,"Shehzad Poonawalla wins reality show, donates Rs 35 lakh to flood relief",79.48793103448276,True,text_card,reel_text,17919155559525055,122126515299424069,True,True,108,0,0,0,,126,0
-2026-11-06 21:26,INDIA NEWS,One worker dies and six suffer injuries in Assam oil plant fire,62.131521739130434,True,text_card,reel_text,18159996208503862,122126520189424069,True,True,59,0,0,0,,68,0
-2026-11-06 23:36,INDIAN CINEMA,Suriya film Scene dominates 6 AM bookings with six daily shows,79.20294117647059,True,text_card,reel_text,17922575679449288,122126538141424069,True,True,241,2,0,0,,275,2
-2026-11-07 00:26,BREAKING NEWS,Salman Khan asks fans to value Ramayana story over massive budget,96.66607142857143,True,text_card,reel_text,18073565813505059,122126543583424069,True,True,117,0,0,0,,143,0
+2026-11-06 21:26,INDIA NEWS,One worker dies and six suffer injuries in Assam oil plant fire,62.131521739130434,True,text_card,reel_text,18159996208503862,122126520189424069,True,True,67,0,0,0,,77,0
+2026-11-06 23:36,INDIAN CINEMA,Suriya film Scene dominates 6 AM bookings with six daily shows,79.20294117647059,True,text_card,reel_text,17922575679449288,122126538141424069,True,True,260,2,0,0,,294,2
+2026-11-07 00:26,BREAKING NEWS,Salman Khan asks fans to value Ramayana story over massive budget,96.66607142857143,True,text_card,reel_text,18073565813505059,122126543583424069,True,True,119,0,0,0,,145,0
 2026-11-07 02:20,BREAKING NEWS,Court bans unauthorized use of Amitabh Bachchan's voice and image,111.59482758620689,False,full_bleed,,18098562737235247,122126562945424069,True,True,2,0,0,0,0,,0
-2026-11-07 03:36,INDIA NEWS,Supreme Court reports very few complaints over July protest police brutality,76.95919540229886,False,full_bleed,,18118291247000264,122126569683424069,True,True,,,,,,,
+2026-11-07 03:36,INDIA NEWS,Supreme Court reports very few complaints over July protest police brutality,76.95919540229886,False,full_bleed,,18118291247000264,122126569683424069,True,True,0,0,0,0,0,,0
