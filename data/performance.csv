@@ -542,7 +542,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-01 12:06,BREAKING NEWS,Delhi to Agra bullet train cuts travel time to 59 minutes.,92,False,full_bleed,,18485155591115348,122125581363424069,True,True,5,0,0,0,0,,0
 2026-11-01 13:26,BREAKING NEWS,Six Indians stranded near remote Nepal lake await urgent helicopter rescue,99,True,text_card,reel_text,18110190926210193,122125589901424069,True,True,104,0,0,0,,122,1
 2026-11-01 14:46,INDIA NEWS,Telangana CM compares PM Modi to Ravana in sharp political attack,71,False,full_bleed,,17876978778584718,122125598133424069,True,True,7,0,0,0,0,,0
-2026-11-01 17:26,INDIAN CINEMA,Leaked videos reveal actor Nani plays chef and outlaw,74,True,text_card,reel_text,18116449784329380,122125614705424069,True,True,626,2,0,0,,915,2
+2026-11-01 17:26,INDIAN CINEMA,Leaked videos reveal actor Nani plays chef and outlaw,74,True,text_card,reel_text,18116449784329380,122125614705424069,True,True,627,2,0,0,,915,2
 2026-11-01 18:26,INDIA NEWS,Mamata Banerjee slams central exercise as special relief for the BJP,68,True,text_card,reel_text,17918631369464596,122125622475424069,True,True,68,0,0,0,,84,0
 2026-11-01 20:06,INDIA NEWS,Andhra civic polls spark 275 cases as Jagan demands repoll over clashes,76,True,text_card,reel_text,18132190736306383,122125633389424069,True,True,23,0,0,0,,36,0
 2026-11-01 20:26,INDIAN CINEMA,Ramayana pre-sales cross Rs 36 crore but lag behind Yash's Toxic.,85,True,text_card,reel_text,18218987716353619,122125636533424069,True,True,123,0,0,0,,150,0
@@ -601,18 +601,18 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-05 18:06,BREAKING NEWS,Two dead and many trapped as building collapses in Delhi,97.99825581395349,True,text_card,reel_text,17915869662470904,122126314413424069,True,True,102,0,0,0,,113,0
 2026-11-05 19:06,INDIA NEWS,Punjab exam paper leak triggers major showdown between BJP and AAP,66.99825581395349,True,full_bleed,reel_overlay,17996040864063009,122126322651424069,True,True,99,0,0,0,,122,0
 2026-11-05 20:26,INDIA NEWS,Andhra police rescue 22 people trapped in raging floodwaters,79.95919540229885,True,text_card,reel_text,18455806969123606,122126330691424069,True,True,152,0,0,0,,172,0
-2026-11-05 21:26,INDIA NEWS,Centre extends Agnipath tenure by two years for 75 percent Agniveers,77.95919540229886,True,text_card,reel_text,18182009893427040,122126336469424069,True,True,50,0,0,0,,60,0
-2026-11-05 23:32,BREAKING NEWS,VIT donates ₹1 crore to Andhra Pradesh cyclone relief fund,90.40714285714286,True,text_card,reel_text,18098513567543213,122126350923424069,True,True,108,0,0,0,,125,0
+2026-11-05 21:26,INDIA NEWS,Centre extends Agnipath tenure by two years for 75 percent Agniveers,77.95919540229886,True,text_card,reel_text,18182009893427040,122126336469424069,True,True,51,0,0,0,,61,0
+2026-11-05 23:32,BREAKING NEWS,VIT donates ₹1 crore to Andhra Pradesh cyclone relief fund,90.40714285714286,True,text_card,reel_text,18098513567543213,122126350923424069,True,True,109,0,0,0,,126,0
 2026-11-06 00:26,INDIAN CINEMA,Actor Govinda unveils his opulent home filled with European styled decor,67.87,False,full_bleed,,18138355030635755,122126361399424069,True,True,4,0,0,0,0,,0
-2026-11-06 00:46,INDIA NEWS,Tamil Nadu orders war-footing survey to assess severe cyclone damage,73.95919540229885,True,text_card,reel_text,18098376530236594,122126363463424069,True,True,46,0,0,0,,48,0
+2026-11-06 00:46,INDIA NEWS,Tamil Nadu orders war-footing survey to assess severe cyclone damage,73.95919540229885,True,text_card,reel_text,18098376530236594,122126363463424069,True,True,49,0,0,0,,52,0
 2026-11-06 02:40,INDIA NEWS,Centre plans rank-based system for NEET-PG admissions from 2027.,85.02616279069767,False,full_bleed,,17987141955065088,122126371863424069,True,True,3,0,0,0,0,,0
-2026-11-06 09:46,INDIAN CINEMA,Vijay Sethupathi becomes first Indian to present at International Emmy Awards.,82.69166666666666,True,text_card,reel_text,18377516479209641,122126414499424069,True,True,171,1,1,0,,245,2
-2026-11-06 10:59,INDIAN CINEMA,Kareena Kapoor calls herself poster girl for pure talent from nepotism,85.12058823529412,True,full_bleed,reel_overlay,18079462442722892,122126421975424069,True,True,1054,0,0,0,,1245,0
-2026-11-06 12:06,INDIA NEWS,Democrats sweep US midterms as Indian-American lawmakers win re-election,84.0386075949367,True,full_bleed,reel_overlay,17972236487962216,122126427381424069,True,True,186,2,0,0,,253,2
-2026-11-06 12:10,INDIA NEWS,"Farooq Meets Rebel NC MLAs, Omar Stays Firm, Aga Ruhullah Resigns",71.98076923076923,True,text_card,reel_text,18051307601821007,122126427921424069,True,True,86,0,0,0,,117,0
+2026-11-06 09:46,INDIAN CINEMA,Vijay Sethupathi becomes first Indian to present at International Emmy Awards.,82.69166666666666,True,text_card,reel_text,18377516479209641,122126414499424069,True,True,179,1,1,0,,255,2
+2026-11-06 10:59,INDIAN CINEMA,Kareena Kapoor calls herself poster girl for pure talent from nepotism,85.12058823529412,True,full_bleed,reel_overlay,18079462442722892,122126421975424069,True,True,1063,0,0,0,,1258,0
+2026-11-06 12:06,INDIA NEWS,Democrats sweep US midterms as Indian-American lawmakers win re-election,84.0386075949367,True,full_bleed,reel_overlay,17972236487962216,122126427381424069,True,True,206,2,0,0,,278,2
+2026-11-06 12:10,INDIA NEWS,"Farooq Meets Rebel NC MLAs, Omar Stays Firm, Aga Ruhullah Resigns",71.98076923076923,True,text_card,reel_text,18051307601821007,122126427921424069,True,True,94,0,0,0,,125,0
 2026-11-06 14:18,TAMIL NADU NEWS,TN Governor honors Avadi Air Force unit and elite NSG commandos,64.59615384615384,False,full_bleed,,17954862675334537,122126459925424069,True,True,3,0,0,0,0,,0
-2026-11-06 15:07,INDIA NEWS,Massive fire destroys four train coaches in Punjab after short circuit,79.96559139784947,True,text_card,reel_text,17920318353452534,122126474667424069,True,True,74,0,0,1,,84,1
-2026-11-06 18:06,BREAKING NEWS,Bollywood stars attend designer Manish Malhotra's star-studded Mumbai Diwali party,95.90333333333334,True,text_card,reel_text,18137418742647855,122126500917424069,True,True,31,0,0,0,,43,0
-2026-11-06 19:06,BREAKING NEWS,CBI files Rs 904 crore fraud case against Future Retail,97.09782608695653,True,text_card,reel_text,18121347593003396,122126507601424069,True,True,0,0,0,0,,3,0
-2026-11-06 20:28,INDIAN CINEMA,"Shehzad Poonawalla wins reality show, donates Rs 35 lakh to flood relief",79.48793103448276,True,text_card,reel_text,17919155559525055,122126515299424069,True,True,,,,,,,
-2026-11-06 21:26,INDIA NEWS,One worker dies and six suffer injuries in Assam oil plant fire,62.131521739130434,True,text_card,reel_text,18159996208503862,122126520189424069,True,True,,,,,,,
+2026-11-06 15:07,INDIA NEWS,Massive fire destroys four train coaches in Punjab after short circuit,79.96559139784947,True,text_card,reel_text,17920318353452534,122126474667424069,True,True,77,0,0,1,,88,1
+2026-11-06 18:06,BREAKING NEWS,Bollywood stars attend designer Manish Malhotra's star-studded Mumbai Diwali party,95.90333333333334,True,text_card,reel_text,18137418742647855,122126500917424069,True,True,75,0,0,0,,84,0
+2026-11-06 19:06,BREAKING NEWS,CBI files Rs 904 crore fraud case against Future Retail,97.09782608695653,True,text_card,reel_text,18121347593003396,122126507601424069,True,True,7,0,0,0,,9,0
+2026-11-06 20:28,INDIAN CINEMA,"Shehzad Poonawalla wins reality show, donates Rs 35 lakh to flood relief",79.48793103448276,True,text_card,reel_text,17919155559525055,122126515299424069,True,True,29,0,0,0,,50,0
+2026-11-06 21:26,INDIA NEWS,One worker dies and six suffer injuries in Assam oil plant fire,62.131521739130434,True,text_card,reel_text,18159996208503862,122126520189424069,True,True,0,0,0,0,,0,0
