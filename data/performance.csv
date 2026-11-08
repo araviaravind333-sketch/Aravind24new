@@ -542,7 +542,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-01 12:06,BREAKING NEWS,Delhi to Agra bullet train cuts travel time to 59 minutes.,92,False,full_bleed,,18485155591115348,122125581363424069,True,True,5,0,0,0,0,,0
 2026-11-01 13:26,BREAKING NEWS,Six Indians stranded near remote Nepal lake await urgent helicopter rescue,99,True,text_card,reel_text,18110190926210193,122125589901424069,True,True,104,0,0,0,,122,1
 2026-11-01 14:46,INDIA NEWS,Telangana CM compares PM Modi to Ravana in sharp political attack,71,False,full_bleed,,17876978778584718,122125598133424069,True,True,7,0,0,0,0,,0
-2026-11-01 17:26,INDIAN CINEMA,Leaked videos reveal actor Nani plays chef and outlaw,74,True,text_card,reel_text,18116449784329380,122125614705424069,True,True,640,2,0,0,,931,3
+2026-11-01 17:26,INDIAN CINEMA,Leaked videos reveal actor Nani plays chef and outlaw,74,True,text_card,reel_text,18116449784329380,122125614705424069,True,True,642,2,0,0,,934,3
 2026-11-01 18:26,INDIA NEWS,Mamata Banerjee slams central exercise as special relief for the BJP,68,True,text_card,reel_text,17918631369464596,122125622475424069,True,True,68,0,0,0,,84,0
 2026-11-01 20:06,INDIA NEWS,Andhra civic polls spark 275 cases as Jagan demands repoll over clashes,76,True,text_card,reel_text,18132190736306383,122125633389424069,True,True,23,0,0,0,,36,0
 2026-11-01 20:26,INDIAN CINEMA,Ramayana pre-sales cross Rs 36 crore but lag behind Yash's Toxic.,85,True,text_card,reel_text,18218987716353619,122125636533424069,True,True,123,0,0,0,,150,0
@@ -630,19 +630,19 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-07 19:06,BREAKING NEWS,Ayodhya lights 30 lakh diyas to set ninth world record,90.01978021978022,False,full_bleed,,18098990561430801,122126678655424069,True,True,4,0,0,0,0,,0
 2026-11-07 20:46,INDIA NEWS,"BJP will rule India for 15 more years, predicts astrologer.",65.07055555555556,True,text_card,reel_text,17998390020020303,122126689779424069,True,True,99,0,0,0,,124,0
 2026-11-07 21:26,INDIA NEWS,Deceased candidate wins local body seat in Andhra Pradesh,66.07055555555556,True,text_card,reel_text,17907070677355149,122126694879424069,True,True,96,0,0,0,,112,0
-2026-11-07 23:36,INDIAN CINEMA,Alia Bhatt shares adorable Ramayana set photos of Ranbir Kapoor and Raha.,72.68333333333334,True,text_card,reel_text,18349321387280682,122126708073424069,True,True,322,1,0,0,,465,2
+2026-11-07 23:36,INDIAN CINEMA,Alia Bhatt shares adorable Ramayana set photos of Ranbir Kapoor and Raha.,72.68333333333334,True,text_card,reel_text,18349321387280682,122126708073424069,True,True,333,1,0,0,,468,2
 2026-11-08 01:06,INDIA NEWS,Sustainable Development Council unveils nationwide citizen driven initiative for sustainable India,66.99157303370787,False,full_bleed,,18132708589871587,122126717193424069,True,True,2,0,0,0,0,,0
 2026-11-08 02:36,INDIAN CINEMA,Simbu's 8-minute Arasan promo faces delay over pending Anirudh score,72.69166666666666,True,text_card,reel_text,17993104883863054,122126728653424069,True,True,167,0,0,0,,201,0
 2026-11-08 03:36,INDIAN CINEMA,Suriya's Scene takes box office lead over Nayanthara's Mookuthi Amman 2.,78.83225806451613,True,text_card,reel_text,17925798894447284,122126734077424069,True,True,208,0,0,0,,264,0
 2026-11-08 09:46,INDIA NEWS,India deports wanted Punjab gangster after ten month global manhunt,77.93352272727273,True,text_card,reel_text,18222415150355845,122126766579424069,True,True,124,0,0,0,,172,0
 2026-11-08 11:06,BREAKING NEWS,PM Modi honors BJP veteran LK Advani on his 99th birthday,94.93352272727273,True,text_card,reel_text,18001938486012927,122126775771424069,True,True,83,0,0,0,,100,0
-2026-11-08 12:06,BREAKING NEWS,PM Modi celebrates Diwali with jawans in former Naxal stronghold Bastar,101.93258426966293,True,text_card,reel_text,18009402900006493,122126780463424069,True,True,85,0,0,0,,109,0
+2026-11-08 12:06,BREAKING NEWS,PM Modi celebrates Diwali with jawans in former Naxal stronghold Bastar,101.93258426966293,True,text_card,reel_text,18009402900006493,122126780463424069,True,True,89,0,0,0,,114,0
 2026-11-08 12:51,INDIA NEWS,Dindigul worker dies in Israel site accident and is laid to rest,61.932584269662925,True,text_card,reel_text,18054345239604416,122126785389424069,True,True,117,0,0,0,,141,0
-2026-11-08 14:26,INDIA NEWS,Naxal terror is eradicated nationwide with all districts declared threat-free.,81.92111111111112,True,text_card,reel_text,18103615064561064,122126794539424069,True,True,59,0,0,0,,72,0
-2026-11-08 15:26,INDIA NEWS,Notorious Maoist commander's village celebrates its first Diwali with security forces,68.92111111111112,True,text_card,reel_text,17899495548610987,122126800011424069,True,True,69,0,0,0,,81,0
-2026-11-08 18:45,INDIA NEWS,False ceiling collapses outside Mumbai airport terminal leaving one injured,61.956593406593406,True,text_card,reel_text,18076150415754535,122126824965424069,True,True,104,0,0,0,,111,0
-2026-11-08 19:25,INDIA NEWS,Ayodhya land disputes spark clash between Yogi Adityanath and Akhilesh Yadav,63.956593406593406,True,text_card,reel_text,18104167058638681,122126831211424069,True,True,118,0,0,0,,132,0
-2026-11-08 21:05,INDIAN CINEMA,Akshay Kumar shares intimate home Diwali aarti video with son Aarav,74.80645161290323,True,text_card,reel_text,18094154054212679,122126844189424069,True,True,68,0,0,0,,112,0
-2026-11-08 21:45,INDIA NEWS,Rajinikanth greets fans outside Poes Garden and advises rain safety,67.01758241758242,True,text_card,reel_text,17896317243434723,122126849091424069,True,True,13,0,0,0,,17,0
-2026-11-08 23:56,INDIAN CINEMA,Priyanka Chopra announces Marathi movie Ventilator 2 for a 2027 release.,80.47321428571428,False,full_bleed,,18422051788159903,122126865615424069,True,True,,,,,,,
-2026-11-09 01:15,INDIAN CINEMA,Suriya stars in quirky investigative drama Scene this Deepavali,67.59482758620689,False,full_bleed,,17973551964187809,122126875113424069,True,True,,,,,,,
+2026-11-08 14:26,INDIA NEWS,Naxal terror is eradicated nationwide with all districts declared threat-free.,81.92111111111112,True,text_card,reel_text,18103615064561064,122126794539424069,True,True,74,0,0,0,,88,0
+2026-11-08 15:26,INDIA NEWS,Notorious Maoist commander's village celebrates its first Diwali with security forces,68.92111111111112,True,text_card,reel_text,17899495548610987,122126800011424069,True,True,73,0,0,0,,85,0
+2026-11-08 18:45,INDIA NEWS,False ceiling collapses outside Mumbai airport terminal leaving one injured,61.956593406593406,True,text_card,reel_text,18076150415754535,122126824965424069,True,True,105,0,0,0,,112,0
+2026-11-08 19:25,INDIA NEWS,Ayodhya land disputes spark clash between Yogi Adityanath and Akhilesh Yadav,63.956593406593406,True,text_card,reel_text,18104167058638681,122126831211424069,True,True,120,0,0,0,,133,0
+2026-11-08 21:05,INDIAN CINEMA,Akshay Kumar shares intimate home Diwali aarti video with son Aarav,74.80645161290323,True,text_card,reel_text,18094154054212679,122126844189424069,True,True,111,0,0,0,,141,0
+2026-11-08 21:45,INDIA NEWS,Rajinikanth greets fans outside Poes Garden and advises rain safety,67.01758241758242,True,text_card,reel_text,17896317243434723,122126849091424069,True,True,71,0,0,0,,84,0
+2026-11-08 23:56,INDIAN CINEMA,Priyanka Chopra announces Marathi movie Ventilator 2 for a 2027 release.,80.47321428571428,False,full_bleed,,18422051788159903,122126865615424069,True,True,1,0,0,0,0,,0
+2026-11-09 01:15,INDIAN CINEMA,Suriya stars in quirky investigative drama Scene this Deepavali,67.59482758620689,False,full_bleed,,17973551964187809,122126875113424069,True,True,0,0,0,0,0,,0
