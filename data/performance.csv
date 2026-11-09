@@ -542,7 +542,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-01 12:06,BREAKING NEWS,Delhi to Agra bullet train cuts travel time to 59 minutes.,92,False,full_bleed,,18485155591115348,122125581363424069,True,True,5,0,0,0,0,,0
 2026-11-01 13:26,BREAKING NEWS,Six Indians stranded near remote Nepal lake await urgent helicopter rescue,99,True,text_card,reel_text,18110190926210193,122125589901424069,True,True,104,0,0,0,,122,1
 2026-11-01 14:46,INDIA NEWS,Telangana CM compares PM Modi to Ravana in sharp political attack,71,False,full_bleed,,17876978778584718,122125598133424069,True,True,7,0,0,0,0,,0
-2026-11-01 17:26,INDIAN CINEMA,Leaked videos reveal actor Nani plays chef and outlaw,74,True,text_card,reel_text,18116449784329380,122125614705424069,True,True,645,2,0,0,,940,3
+2026-11-01 17:26,INDIAN CINEMA,Leaked videos reveal actor Nani plays chef and outlaw,74,True,text_card,reel_text,18116449784329380,122125614705424069,True,True,645,2,0,0,,945,3
 2026-11-01 18:26,INDIA NEWS,Mamata Banerjee slams central exercise as special relief for the BJP,68,True,text_card,reel_text,17918631369464596,122125622475424069,True,True,68,0,0,0,,84,0
 2026-11-01 20:06,INDIA NEWS,Andhra civic polls spark 275 cases as Jagan demands repoll over clashes,76,True,text_card,reel_text,18132190736306383,122125633389424069,True,True,23,0,0,0,,36,0
 2026-11-01 20:26,INDIAN CINEMA,Ramayana pre-sales cross Rs 36 crore but lag behind Yash's Toxic.,85,True,text_card,reel_text,18218987716353619,122125636533424069,True,True,123,0,0,0,,150,0
@@ -561,7 +561,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-02 20:26,BREAKING NEWS,Chennai roads remain badly damaged after Cyclone Murasu rainwater recedes.,108.58846153846153,True,text_card,reel_text,17870580375659635,122125804737424069,True,True,92,0,0,0,,119,0
 2026-11-02 21:26,INDIAN CINEMA,Mumbai civic body removes Dia Mirza Diwali video after BJP objection.,81.16499999999999,True,text_card,reel_text,18119889124974429,122125812123424069,True,True,105,0,0,0,,147,0
 2026-11-02 21:45,INDIA NEWS,Fishermen haul 400 boats ashore as Cyclone Murasu approaches Andhra,79.98806818181818,True,text_card,reel_text,17888107557624683,122125814127424069,True,True,74,0,0,0,,83,0
-2026-11-02 22:45,INDIAN CINEMA,Bigg Boss fame Samarth Jurel joins Emraan Hashmi in Gunmaster G9,69.17166666666667,True,text_card,reel_text,18095916506172165,122125819725424069,True,True,291,29,6,22,,577,66
+2026-11-02 22:45,INDIAN CINEMA,Bigg Boss fame Samarth Jurel joins Emraan Hashmi in Gunmaster G9,69.17166666666667,True,text_card,reel_text,18095916506172165,122125819725424069,True,True,291,29,6,22,,578,66
 2026-11-02 23:05,INDIA NEWS,Two arrested over shooting of Indian-born 19-month-old cheetah in Madhya Pradesh,68.03372093023256,True,text_card,reel_text,17919130518516168,122125821411424069,True,True,107,0,0,0,,123,0
 2026-11-02 23:46,INDIA NEWS,Delhi air quality turns very poor as winter pollution spikes,81.96136363636364,True,text_card,reel_text,17915025006287922,122125824267424069,True,True,95,0,0,0,,105,0
 2026-11-03 09:25,INDIAN CINEMA,Lenny Kravitz is alive after viral rumors falsely report plane crash death.,82.715625,True,text_card,reel_text,18036167978909994,122125883781424069,True,True,117,0,0,0,,136,0
@@ -646,13 +646,13 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-08 21:45,INDIA NEWS,Rajinikanth greets fans outside Poes Garden and advises rain safety,67.01758241758242,True,text_card,reel_text,17896317243434723,122126849091424069,True,True,123,0,0,0,,138,0
 2026-11-08 23:56,INDIAN CINEMA,Priyanka Chopra announces Marathi movie Ventilator 2 for a 2027 release.,80.47321428571428,False,full_bleed,,18422051788159903,122126865615424069,True,True,6,0,0,0,0,,0
 2026-11-09 01:15,INDIAN CINEMA,Suriya stars in quirky investigative drama Scene this Deepavali,67.59482758620689,False,full_bleed,,17973551964187809,122126875113424069,True,True,7,1,0,0,0,,1
-2026-11-09 02:55,INDIA NEWS,Supreme Court settles decades-old hydro power dispute for Himachal Pradesh,79.17833333333334,True,text_card,reel_text,18388132084232544,122126885931424069,True,True,56,0,0,0,,66,0
-2026-11-09 03:55,INDIAN CINEMA,"Bollywood makes people feel insecure, director Farah Khan admits.",71.81071428571428,True,full_bleed,reel_overlay,18073585223781106,122126893035424069,True,True,190,0,0,0,,221,0
-2026-11-09 09:55,INDIAN CINEMA,Dhanush defends Sai Pallavi over backlash against her Ramayana casting.,89.8607142857143,True,full_bleed,reel_overlay,18214962196365883,122126922417424069,True,True,555,4,0,0,,880,6
+2026-11-09 02:55,INDIA NEWS,Supreme Court settles decades-old hydro power dispute for Himachal Pradesh,79.17833333333334,True,text_card,reel_text,18388132084232544,122126885931424069,True,True,71,0,0,0,,81,0
+2026-11-09 03:55,INDIAN CINEMA,"Bollywood makes people feel insecure, director Farah Khan admits.",71.81071428571428,True,full_bleed,reel_overlay,18073585223781106,122126893035424069,True,True,192,0,0,0,,223,0
+2026-11-09 09:55,INDIAN CINEMA,Dhanush defends Sai Pallavi over backlash against her Ramayana casting.,89.8607142857143,True,full_bleed,reel_overlay,18214962196365883,122126922417424069,True,True,1049,13,0,0,,1612,17
 2026-11-09 11:15,INDIA NEWS,RBI denies viral reports claiming new cheque book rules from January,78.99157303370787,False,full_bleed,,18122051912038852,122126928975424069,True,True,3,0,0,0,0,,0
 2026-11-09 12:26,BREAKING NEWS,Record 88 days pass without Parliament formally closing Monsoon session,100.05489130434782,True,full_bleed,reel_overlay,18221088481343519,122126936535424069,True,True,95,0,0,0,,114,0
-2026-11-09 13:25,INDIA NEWS,Police find five bodies near Mysuru in Bengaluru family murder case,72.05489130434782,True,text_card,reel_text,17914197738481776,122126944743424069,True,True,75,0,0,0,,90,1
-2026-11-09 14:36,INDIAN CINEMA,Vivek Oberoi reveals underworld calls forced Bollywood to boycott him,64.47833333333332,True,full_bleed,reel_overlay,18106179686344003,122126963523424069,True,True,219,0,0,0,,305,0
-2026-11-09 15:45,TAMIL NADU NEWS,TN Deputy Speaker accused of assaulting man and forcing video denial,77,True,text_card,reel_text,17901807417673893,122126973447424069,True,True,16,0,0,0,,19,0
-2026-11-09 18:45,INDIA NEWS,Delhi pollution monitors go dark on Deepavali night as smog peaks.,63.916304347826085,True,text_card,reel_text,18640853815041218,122126996757424069,True,True,,,,,,,
-2026-11-09 19:26,INDIA NEWS,Karnataka petrol samples contain ethanol blend beyond the mandated limit,71.89505494505494,True,full_bleed,reel_overlay,18119287522999184,122127001353424069,True,True,,,,,,,
+2026-11-09 13:25,INDIA NEWS,Police find five bodies near Mysuru in Bengaluru family murder case,72.05489130434782,True,text_card,reel_text,17914197738481776,122126944743424069,True,True,95,0,0,0,,115,1
+2026-11-09 14:36,INDIAN CINEMA,Vivek Oberoi reveals underworld calls forced Bollywood to boycott him,64.47833333333332,True,full_bleed,reel_overlay,18106179686344003,122126963523424069,True,True,338,1,0,0,,452,1
+2026-11-09 15:45,TAMIL NADU NEWS,TN Deputy Speaker accused of assaulting man and forcing video denial,77,True,text_card,reel_text,17901807417673893,122126973447424069,True,True,57,0,0,0,,64,0
+2026-11-09 18:45,INDIA NEWS,Delhi pollution monitors go dark on Deepavali night as smog peaks.,63.916304347826085,True,text_card,reel_text,18640853815041218,122126996757424069,True,True,3,0,0,0,,5,0
+2026-11-09 19:26,INDIA NEWS,Karnataka petrol samples contain ethanol blend beyond the mandated limit,71.89505494505494,True,full_bleed,reel_overlay,18119287522999184,122127001353424069,True,True,0,0,0,0,,0,0
