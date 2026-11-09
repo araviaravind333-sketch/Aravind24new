@@ -620,7 +620,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-07 00:26,BREAKING NEWS,Salman Khan asks fans to value Ramayana story over massive budget,96.66607142857143,True,text_card,reel_text,18073565813505059,122126543583424069,True,True,132,0,0,0,,166,0
 2026-11-07 02:20,BREAKING NEWS,Court bans unauthorized use of Amitabh Bachchan's voice and image,111.59482758620689,False,full_bleed,,18098562737235247,122126562945424069,True,True,6,0,0,0,0,,0
 2026-11-07 03:36,INDIA NEWS,Supreme Court reports very few complaints over July protest police brutality,76.95919540229886,False,full_bleed,,18118291247000264,122126569683424069,True,True,2,0,0,0,0,,0
-2026-11-07 09:46,INDIAN CINEMA,Dhanush apologises after fans,74.80689655172414,True,text_card,reel_text,18145403227590254,122126608485424069,True,True,1221,2,0,0,,1775,3
+2026-11-07 09:46,INDIAN CINEMA,Dhanush apologises after fans,74.80689655172414,True,text_card,reel_text,18145403227590254,122126608485424069,True,True,1222,2,0,0,,1775,3
 2026-11-07 11:06,BREAKING NEWS,Blast hits police outpost in UP as terror group claims responsibility,104.16153846153847,True,text_card,reel_text,18111652502225601,122126616387424069,True,True,117,0,0,1,,135,1
 2026-11-07 12:06,INDIAN CINEMA,'My fans are operating me'; Dhanush clarifies at 'OM' event,76.07833333333333,True,text_card,reel_text,18105709088569620,122126624751424069,True,True,106,0,0,0,,128,0
 2026-11-07 12:46,INDIA NEWS,How did Telangana get back land worth,89.16978021978022,False,full_bleed,,18139003159638384,122126629149424069,True,True,4,0,0,0,0,,0
@@ -634,17 +634,17 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-08 01:06,INDIA NEWS,Sustainable Development Council unveils nationwide citizen driven initiative for sustainable India,66.99157303370787,False,full_bleed,,18132708589871587,122126717193424069,True,True,2,0,0,0,0,,0
 2026-11-08 02:36,INDIAN CINEMA,Simbu's 8-minute Arasan promo faces delay over pending Anirudh score,72.69166666666666,True,text_card,reel_text,17993104883863054,122126728653424069,True,True,168,0,0,0,,202,0
 2026-11-08 03:36,INDIAN CINEMA,Suriya's Scene takes box office lead over Nayanthara's Mookuthi Amman 2.,78.83225806451613,True,text_card,reel_text,17925798894447284,122126734077424069,True,True,214,1,0,0,,271,1
-2026-11-08 09:46,INDIA NEWS,India deports wanted Punjab gangster after ten month global manhunt,77.93352272727273,True,text_card,reel_text,18222415150355845,122126766579424069,True,True,124,0,0,0,,172,0
+2026-11-08 09:46,INDIA NEWS,India deports wanted Punjab gangster after ten month global manhunt,77.93352272727273,True,text_card,reel_text,18222415150355845,122126766579424069,True,True,125,0,0,0,,173,0
 2026-11-08 11:06,BREAKING NEWS,PM Modi honors BJP veteran LK Advani on his 99th birthday,94.93352272727273,True,text_card,reel_text,18001938486012927,122126775771424069,True,True,83,0,0,0,,100,0
-2026-11-08 12:06,BREAKING NEWS,PM Modi celebrates Diwali with jawans in former Naxal stronghold Bastar,101.93258426966293,True,text_card,reel_text,18009402900006493,122126780463424069,True,True,98,0,0,0,,126,0
+2026-11-08 12:06,BREAKING NEWS,PM Modi celebrates Diwali with jawans in former Naxal stronghold Bastar,101.93258426966293,True,text_card,reel_text,18009402900006493,122126780463424069,True,True,100,0,0,0,,130,0
 2026-11-08 12:51,INDIA NEWS,Dindigul worker dies in Israel site accident and is laid to rest,61.932584269662925,True,text_card,reel_text,18054345239604416,122126785389424069,True,True,117,0,0,0,,141,0
-2026-11-08 14:26,INDIA NEWS,Naxal terror is eradicated nationwide with all districts declared threat-free.,81.92111111111112,True,text_card,reel_text,18103615064561064,122126794539424069,True,True,82,0,0,0,,97,0
-2026-11-08 15:26,INDIA NEWS,Notorious Maoist commander's village celebrates its first Diwali with security forces,68.92111111111112,True,text_card,reel_text,17899495548610987,122126800011424069,True,True,76,0,0,0,,87,0
+2026-11-08 14:26,INDIA NEWS,Naxal terror is eradicated nationwide with all districts declared threat-free.,81.92111111111112,True,text_card,reel_text,18103615064561064,122126794539424069,True,True,93,0,0,0,,122,0
+2026-11-08 15:26,INDIA NEWS,Notorious Maoist commander's village celebrates its first Diwali with security forces,68.92111111111112,True,text_card,reel_text,17899495548610987,122126800011424069,True,True,77,0,0,0,,88,0
 2026-11-08 18:45,INDIA NEWS,False ceiling collapses outside Mumbai airport terminal leaving one injured,61.956593406593406,True,text_card,reel_text,18076150415754535,122126824965424069,True,True,105,0,0,0,,112,0
 2026-11-08 19:25,INDIA NEWS,Ayodhya land disputes spark clash between Yogi Adityanath and Akhilesh Yadav,63.956593406593406,True,text_card,reel_text,18104167058638681,122126831211424069,True,True,120,0,0,0,,133,0
 2026-11-08 21:05,INDIAN CINEMA,Akshay Kumar shares intimate home Diwali aarti video with son Aarav,74.80645161290323,True,text_card,reel_text,18094154054212679,122126844189424069,True,True,112,0,0,0,,142,0
-2026-11-08 21:45,INDIA NEWS,Rajinikanth greets fans outside Poes Garden and advises rain safety,67.01758241758242,True,text_card,reel_text,17896317243434723,122126849091424069,True,True,107,0,0,0,,119,0
-2026-11-08 23:56,INDIAN CINEMA,Priyanka Chopra announces Marathi movie Ventilator 2 for a 2027 release.,80.47321428571428,False,full_bleed,,18422051788159903,122126865615424069,True,True,2,0,0,0,0,,0
-2026-11-09 01:15,INDIAN CINEMA,Suriya stars in quirky investigative drama Scene this Deepavali,67.59482758620689,False,full_bleed,,17973551964187809,122126875113424069,True,True,1,0,0,0,0,,0
-2026-11-09 02:55,INDIA NEWS,Supreme Court settles decades-old hydro power dispute for Himachal Pradesh,79.17833333333334,True,text_card,reel_text,18388132084232544,122126885931424069,True,True,9,0,0,0,,9,0
-2026-11-09 03:55,INDIAN CINEMA,"Bollywood makes people feel insecure, director Farah Khan admits.",71.81071428571428,True,full_bleed,reel_overlay,18073585223781106,122126893035424069,True,True,93,0,0,0,,132,0
+2026-11-08 21:45,INDIA NEWS,Rajinikanth greets fans outside Poes Garden and advises rain safety,67.01758241758242,True,text_card,reel_text,17896317243434723,122126849091424069,True,True,118,0,0,0,,136,0
+2026-11-08 23:56,INDIAN CINEMA,Priyanka Chopra announces Marathi movie Ventilator 2 for a 2027 release.,80.47321428571428,False,full_bleed,,18422051788159903,122126865615424069,True,True,4,0,0,0,0,,0
+2026-11-09 01:15,INDIAN CINEMA,Suriya stars in quirky investigative drama Scene this Deepavali,67.59482758620689,False,full_bleed,,17973551964187809,122126875113424069,True,True,2,0,0,0,0,,0
+2026-11-09 02:55,INDIA NEWS,Supreme Court settles decades-old hydro power dispute for Himachal Pradesh,79.17833333333334,True,text_card,reel_text,18388132084232544,122126885931424069,True,True,16,0,0,0,,18,0
+2026-11-09 03:55,INDIAN CINEMA,"Bollywood makes people feel insecure, director Farah Khan admits.",71.81071428571428,True,full_bleed,reel_overlay,18073585223781106,122126893035424069,True,True,166,0,0,0,,200,0
