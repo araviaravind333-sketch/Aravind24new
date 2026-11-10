@@ -620,7 +620,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-07 00:26,BREAKING NEWS,Salman Khan asks fans to value Ramayana story over massive budget,96.66607142857143,True,text_card,reel_text,18073565813505059,122126543583424069,True,True,132,0,0,0,,166,0
 2026-11-07 02:20,BREAKING NEWS,Court bans unauthorized use of Amitabh Bachchan's voice and image,111.59482758620689,False,full_bleed,,18098562737235247,122126562945424069,True,True,6,0,0,0,0,,0
 2026-11-07 03:36,INDIA NEWS,Supreme Court reports very few complaints over July protest police brutality,76.95919540229886,False,full_bleed,,18118291247000264,122126569683424069,True,True,2,0,0,0,0,,0
-2026-11-07 09:46,INDIAN CINEMA,Dhanush apologises after fans,74.80689655172414,True,text_card,reel_text,18145403227590254,122126608485424069,True,True,1222,2,0,0,,1775,3
+2026-11-07 09:46,INDIAN CINEMA,Dhanush apologises after fans,74.80689655172414,True,text_card,reel_text,18145403227590254,122126608485424069,True,True,1223,2,0,0,,1780,3
 2026-11-07 11:06,BREAKING NEWS,Blast hits police outpost in UP as terror group claims responsibility,104.16153846153847,True,text_card,reel_text,18111652502225601,122126616387424069,True,True,117,0,0,1,,135,1
 2026-11-07 12:06,INDIAN CINEMA,'My fans are operating me'; Dhanush clarifies at 'OM' event,76.07833333333333,True,text_card,reel_text,18105709088569620,122126624751424069,True,True,106,0,0,0,,128,0
 2026-11-07 12:46,INDIA NEWS,How did Telangana get back land worth,89.16978021978022,False,full_bleed,,18139003159638384,122126629149424069,True,True,4,0,0,0,0,,0
@@ -648,17 +648,17 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-09 01:15,INDIAN CINEMA,Suriya stars in quirky investigative drama Scene this Deepavali,67.59482758620689,False,full_bleed,,17973551964187809,122126875113424069,True,True,7,1,0,0,0,,1
 2026-11-09 02:55,INDIA NEWS,Supreme Court settles decades-old hydro power dispute for Himachal Pradesh,79.17833333333334,True,text_card,reel_text,18388132084232544,122126885931424069,True,True,95,0,0,0,,110,0
 2026-11-09 03:55,INDIAN CINEMA,"Bollywood makes people feel insecure, director Farah Khan admits.",71.81071428571428,True,full_bleed,reel_overlay,18073585223781106,122126893035424069,True,True,198,0,0,0,,229,0
-2026-11-09 09:55,INDIAN CINEMA,Dhanush defends Sai Pallavi over backlash against her Ramayana casting.,89.8607142857143,True,full_bleed,reel_overlay,18214962196365883,122126922417424069,True,True,1584,19,0,0,,2382,26
+2026-11-09 09:55,INDIAN CINEMA,Dhanush defends Sai Pallavi over backlash against her Ramayana casting.,89.8607142857143,True,full_bleed,reel_overlay,18214962196365883,122126922417424069,True,True,1584,19,0,0,,2384,26
 2026-11-09 11:15,INDIA NEWS,RBI denies viral reports claiming new cheque book rules from January,78.99157303370787,False,full_bleed,,18122051912038852,122126928975424069,True,True,4,0,0,0,0,,0
 2026-11-09 12:26,BREAKING NEWS,Record 88 days pass without Parliament formally closing Monsoon session,100.05489130434782,True,full_bleed,reel_overlay,18221088481343519,122126936535424069,True,True,95,0,0,0,,114,0
 2026-11-09 13:25,INDIA NEWS,Police find five bodies near Mysuru in Bengaluru family murder case,72.05489130434782,True,text_card,reel_text,17914197738481776,122126944743424069,True,True,105,0,0,0,,126,1
-2026-11-09 14:36,INDIAN CINEMA,Vivek Oberoi reveals underworld calls forced Bollywood to boycott him,64.47833333333332,True,full_bleed,reel_overlay,18106179686344003,122126963523424069,True,True,515,2,0,0,,660,2
-2026-11-09 15:45,TAMIL NADU NEWS,TN Deputy Speaker accused of assaulting man and forcing video denial,77,True,text_card,reel_text,17901807417673893,122126973447424069,True,True,84,0,0,0,,114,0
-2026-11-09 18:45,INDIA NEWS,Delhi pollution monitors go dark on Deepavali night as smog peaks.,63.916304347826085,True,text_card,reel_text,18640853815041218,122126996757424069,True,True,14,0,0,0,,15,0
+2026-11-09 14:36,INDIAN CINEMA,Vivek Oberoi reveals underworld calls forced Bollywood to boycott him,64.47833333333332,True,full_bleed,reel_overlay,18106179686344003,122126963523424069,True,True,539,2,0,0,,696,2
+2026-11-09 15:45,TAMIL NADU NEWS,TN Deputy Speaker accused of assaulting man and forcing video denial,77,True,text_card,reel_text,17901807417673893,122126973447424069,True,True,93,0,0,0,,126,0
+2026-11-09 18:45,INDIA NEWS,Delhi pollution monitors go dark on Deepavali night as smog peaks.,63.916304347826085,True,text_card,reel_text,18640853815041218,122126996757424069,True,True,17,0,0,0,,17,0
 2026-11-09 19:26,INDIA NEWS,Karnataka petrol samples contain ethanol blend beyond the mandated limit,71.89505494505494,True,full_bleed,reel_overlay,18119287522999184,122127001353424069,True,True,49,0,0,0,,60,0
 2026-11-09 21:06,INDIA NEWS,Yogi Adityanath warns BJP about missing Hindu voters in Uttar Pradesh,77.84725274725275,True,text_card,reel_text,18350287486253565,122127013677424069,True,True,111,0,0,0,,140,0
-2026-11-09 21:46,INDIA NEWS,PM Modi visits Bihar as NDA government completes one year,64.82717391304348,False,full_bleed,,18047519822831091,122127017673424069,True,True,3,0,0,0,0,,0
-2026-11-10 00:15,INDIA NEWS,Food safety body seizes ₹82 crore banned items in nationwide drive,72.99285714285713,True,text_card,reel_text,17991663882118586,122127036489424069,True,True,38,0,0,0,,40,0
-2026-11-10 01:15,INDIAN CINEMA,Ram Pothineni joins Rajinikanth in director Ashwath Marimuthu’s Dharman,62.64375,True,text_card,reel_text,18176148316415120,122127043341424069,True,True,135,0,0,0,,183,0
-2026-11-10 02:56,INDIAN CINEMA,Amitabh Bachchan pauses Kaun Banega Crorepati shoot over hand health issues,72.37727272727273,True,text_card,reel_text,18119848589471123,122127050631424069,True,True,144,0,0,0,,180,0
-2026-11-10 03:56,INDIAN CINEMA,Amitabh Bachchan struggles to write fan letters as doctors advise rest,64.38484848484848,True,text_card,reel_text,18117878582057738,122127055275424069,True,True,125,0,0,0,,161,0
+2026-11-09 21:46,INDIA NEWS,PM Modi visits Bihar as NDA government completes one year,64.82717391304348,False,full_bleed,,18047519822831091,122127017673424069,True,True,4,0,0,0,0,,0
+2026-11-10 00:15,INDIA NEWS,Food safety body seizes ₹82 crore banned items in nationwide drive,72.99285714285713,True,text_card,reel_text,17991663882118586,122127036489424069,True,True,43,0,0,0,,45,0
+2026-11-10 01:15,INDIAN CINEMA,Ram Pothineni joins Rajinikanth in director Ashwath Marimuthu’s Dharman,62.64375,True,text_card,reel_text,18176148316415120,122127043341424069,True,True,141,0,0,0,,192,0
+2026-11-10 02:56,INDIAN CINEMA,Amitabh Bachchan pauses Kaun Banega Crorepati shoot over hand health issues,72.37727272727273,True,text_card,reel_text,18119848589471123,122127050631424069,True,True,145,0,0,0,,182,0
+2026-11-10 03:56,INDIAN CINEMA,Amitabh Bachchan struggles to write fan letters as doctors advise rest,64.38484848484848,True,text_card,reel_text,18117878582057738,122127055275424069,True,True,126,0,0,0,,162,0
