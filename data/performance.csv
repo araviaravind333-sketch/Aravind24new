@@ -542,7 +542,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-01 12:06,BREAKING NEWS,Delhi to Agra bullet train cuts travel time to 59 minutes.,92,False,full_bleed,,18485155591115348,122125581363424069,True,True,5,0,0,0,0,,0
 2026-11-01 13:26,BREAKING NEWS,Six Indians stranded near remote Nepal lake await urgent helicopter rescue,99,True,text_card,reel_text,18110190926210193,122125589901424069,True,True,104,0,0,0,,122,1
 2026-11-01 14:46,INDIA NEWS,Telangana CM compares PM Modi to Ravana in sharp political attack,71,False,full_bleed,,17876978778584718,122125598133424069,True,True,7,0,0,0,0,,0
-2026-11-01 17:26,INDIAN CINEMA,Leaked videos reveal actor Nani plays chef and outlaw,74,True,text_card,reel_text,18116449784329380,122125614705424069,True,True,650,3,0,0,,959,4
+2026-11-01 17:26,INDIAN CINEMA,Leaked videos reveal actor Nani plays chef and outlaw,74,True,text_card,reel_text,18116449784329380,122125614705424069,True,True,650,3,0,0,,963,4
 2026-11-01 18:26,INDIA NEWS,Mamata Banerjee slams central exercise as special relief for the BJP,68,True,text_card,reel_text,17918631369464596,122125622475424069,True,True,68,0,0,0,,84,0
 2026-11-01 20:06,INDIA NEWS,Andhra civic polls spark 275 cases as Jagan demands repoll over clashes,76,True,text_card,reel_text,18132190736306383,122125633389424069,True,True,23,0,0,0,,36,0
 2026-11-01 20:26,INDIAN CINEMA,Ramayana pre-sales cross Rs 36 crore but lag behind Yash's Toxic.,85,True,text_card,reel_text,18218987716353619,122125636533424069,True,True,123,0,0,0,,150,0
@@ -594,7 +594,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-05 01:58,INDIAN CINEMA,Actor Dhanush faces viral rumors after Mumbai airport appearance,83.50571428571429,False,full_bleed,,18116849525113693,122126187111424069,True,True,9,0,0,0,0,,0
 2026-11-05 09:36,BREAKING NEWS,Supreme Court closes Ayodhya temple donation theft case,94.00056179775281,False,full_bleed,,18082556654714892,122126235591424069,True,True,3,0,0,0,0,,0
 2026-11-05 10:46,INDIA NEWS,Delhi air quality turns severe as Punjab farm fires spike,72.06524390243902,False,full_bleed,,18066956795519148,122126242617424069,True,True,6,0,0,0,0,,0
-2026-11-05 11:46,INDIA NEWS,Supreme Court agrees to urgently hear Tamil Nadu's Cauvery plea,79.02951807228916,False,full_bleed,,18645316006022094,122126251623424069,True,True,3,0,0,0,0,,0
+2026-11-05 11:46,INDIA NEWS,Supreme Court agrees to urgently hear Tamil Nadu's Cauvery plea,79.02951807228916,False,full_bleed,,18645316006022094,122126251623424069,True,True,4,0,0,0,0,,0
 2026-11-05 12:26,INDIA NEWS,Nandini ghee and butter prices jump in Karnataka before Diwali,72.02951807228916,True,full_bleed,reel_overlay,18088970417312743,122126257317424069,True,True,108,1,0,0,,125,1
 2026-11-05 13:46,INDIA NEWS,Supreme Court orders urgent hearing for politician Azam Khan,78.94235294117647,True,text_card,reel_text,18349467445280189,122126268225424069,True,True,95,0,0,0,,119,0
 2026-11-05 15:06,INDIAN CINEMA,'Ramayana' box office collection day 1 (LIVE),78.83529411764707,True,text_card,reel_text,18181650100437064,122126294937424069,True,True,164,0,0,0,,212,1
@@ -633,7 +633,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-07 23:36,INDIAN CINEMA,Alia Bhatt shares adorable Ramayana set photos of Ranbir Kapoor and Raha.,72.68333333333334,True,text_card,reel_text,18349321387280682,122126708073424069,True,True,333,1,0,0,,468,2
 2026-11-08 01:06,INDIA NEWS,Sustainable Development Council unveils nationwide citizen driven initiative for sustainable India,66.99157303370787,False,full_bleed,,18132708589871587,122126717193424069,True,True,2,0,0,0,0,,0
 2026-11-08 02:36,INDIAN CINEMA,Simbu's 8-minute Arasan promo faces delay over pending Anirudh score,72.69166666666666,True,text_card,reel_text,17993104883863054,122126728653424069,True,True,168,0,0,0,,202,0
-2026-11-08 03:36,INDIAN CINEMA,Suriya's Scene takes box office lead over Nayanthara's Mookuthi Amman 2.,78.83225806451613,True,text_card,reel_text,17925798894447284,122126734077424069,True,True,216,1,0,0,,275,1
+2026-11-08 03:36,INDIAN CINEMA,Suriya's Scene takes box office lead over Nayanthara's Mookuthi Amman 2.,78.83225806451613,True,text_card,reel_text,17925798894447284,122126734077424069,True,True,216,1,0,0,,276,1
 2026-11-08 09:46,INDIA NEWS,India deports wanted Punjab gangster after ten month global manhunt,77.93352272727273,True,text_card,reel_text,18222415150355845,122126766579424069,True,True,126,0,0,0,,174,0
 2026-11-08 11:06,BREAKING NEWS,PM Modi honors BJP veteran LK Advani on his 99th birthday,94.93352272727273,True,text_card,reel_text,18001938486012927,122126775771424069,True,True,83,0,0,0,,100,0
 2026-11-08 12:06,BREAKING NEWS,PM Modi celebrates Diwali with jawans in former Naxal stronghold Bastar,101.93258426966293,True,text_card,reel_text,18009402900006493,122126780463424069,True,True,100,0,0,0,,130,0
@@ -645,29 +645,29 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-08 21:05,INDIAN CINEMA,Akshay Kumar shares intimate home Diwali aarti video with son Aarav,74.80645161290323,True,text_card,reel_text,18094154054212679,122126844189424069,True,True,117,0,0,0,,148,0
 2026-11-08 21:45,INDIA NEWS,Rajinikanth greets fans outside Poes Garden and advises rain safety,67.01758241758242,True,text_card,reel_text,17896317243434723,122126849091424069,True,True,124,0,0,0,,141,0
 2026-11-08 23:56,INDIAN CINEMA,Priyanka Chopra announces Marathi movie Ventilator 2 for a 2027 release.,80.47321428571428,False,full_bleed,,18422051788159903,122126865615424069,True,True,7,0,0,0,0,,0
-2026-11-09 01:15,INDIAN CINEMA,Suriya stars in quirky investigative drama Scene this Deepavali,67.59482758620689,False,full_bleed,,17973551964187809,122126875113424069,True,True,7,1,0,0,0,,1
-2026-11-09 02:55,INDIA NEWS,Supreme Court settles decades-old hydro power dispute for Himachal Pradesh,79.17833333333334,True,text_card,reel_text,18388132084232544,122126885931424069,True,True,95,0,0,0,,110,0
+2026-11-09 01:15,INDIAN CINEMA,Suriya stars in quirky investigative drama Scene this Deepavali,67.59482758620689,False,full_bleed,,17973551964187809,122126875113424069,True,True,8,1,0,0,0,,1
+2026-11-09 02:55,INDIA NEWS,Supreme Court settles decades-old hydro power dispute for Himachal Pradesh,79.17833333333334,True,text_card,reel_text,18388132084232544,122126885931424069,True,True,96,0,0,0,,112,0
 2026-11-09 03:55,INDIAN CINEMA,"Bollywood makes people feel insecure, director Farah Khan admits.",71.81071428571428,True,full_bleed,reel_overlay,18073585223781106,122126893035424069,True,True,199,0,0,0,,230,0
-2026-11-09 09:55,INDIAN CINEMA,Dhanush defends Sai Pallavi over backlash against her Ramayana casting.,89.8607142857143,True,full_bleed,reel_overlay,18214962196365883,122126922417424069,True,True,1591,19,0,0,,2391,26
+2026-11-09 09:55,INDIAN CINEMA,Dhanush defends Sai Pallavi over backlash against her Ramayana casting.,89.8607142857143,True,full_bleed,reel_overlay,18214962196365883,122126922417424069,True,True,1591,19,0,0,,2392,26
 2026-11-09 11:15,INDIA NEWS,RBI denies viral reports claiming new cheque book rules from January,78.99157303370787,False,full_bleed,,18122051912038852,122126928975424069,True,True,4,0,0,0,0,,0
 2026-11-09 12:26,BREAKING NEWS,Record 88 days pass without Parliament formally closing Monsoon session,100.05489130434782,True,full_bleed,reel_overlay,18221088481343519,122126936535424069,True,True,96,0,0,0,,115,0
 2026-11-09 13:25,INDIA NEWS,Police find five bodies near Mysuru in Bengaluru family murder case,72.05489130434782,True,text_card,reel_text,17914197738481776,122126944743424069,True,True,106,0,0,0,,127,1
-2026-11-09 14:36,INDIAN CINEMA,Vivek Oberoi reveals underworld calls forced Bollywood to boycott him,64.47833333333332,True,full_bleed,reel_overlay,18106179686344003,122126963523424069,True,True,663,2,0,0,,846,2
+2026-11-09 14:36,INDIAN CINEMA,Vivek Oberoi reveals underworld calls forced Bollywood to boycott him,64.47833333333332,True,full_bleed,reel_overlay,18106179686344003,122126963523424069,True,True,666,3,0,0,,850,3
 2026-11-09 15:45,TAMIL NADU NEWS,TN Deputy Speaker accused of assaulting man and forcing video denial,77,True,text_card,reel_text,17901807417673893,122126973447424069,True,True,99,0,0,0,,137,0
 2026-11-09 18:45,INDIA NEWS,Delhi pollution monitors go dark on Deepavali night as smog peaks.,63.916304347826085,True,text_card,reel_text,18640853815041218,122126996757424069,True,True,29,0,0,0,,30,0
 2026-11-09 19:26,INDIA NEWS,Karnataka petrol samples contain ethanol blend beyond the mandated limit,71.89505494505494,True,full_bleed,reel_overlay,18119287522999184,122127001353424069,True,True,50,0,0,0,,61,0
 2026-11-09 21:06,INDIA NEWS,Yogi Adityanath warns BJP about missing Hindu voters in Uttar Pradesh,77.84725274725275,True,text_card,reel_text,18350287486253565,122127013677424069,True,True,112,0,0,0,,143,0
-2026-11-09 21:46,INDIA NEWS,PM Modi visits Bihar as NDA government completes one year,64.82717391304348,False,full_bleed,,18047519822831091,122127017673424069,True,True,5,0,0,0,0,,0
-2026-11-10 00:15,INDIA NEWS,Food safety body seizes ₹82 crore banned items in nationwide drive,72.99285714285713,True,text_card,reel_text,17991663882118586,122127036489424069,True,True,56,0,0,0,,59,0
-2026-11-10 01:15,INDIAN CINEMA,Ram Pothineni joins Rajinikanth in director Ashwath Marimuthu’s Dharman,62.64375,True,text_card,reel_text,18176148316415120,122127043341424069,True,True,194,0,0,0,,260,0
-2026-11-10 02:56,INDIAN CINEMA,Amitabh Bachchan pauses Kaun Banega Crorepati shoot over hand health issues,72.37727272727273,True,text_card,reel_text,18119848589471123,122127050631424069,True,True,151,0,0,0,,194,0
-2026-11-10 03:56,INDIAN CINEMA,Amitabh Bachchan struggles to write fan letters as doctors advise rest,64.38484848484848,True,text_card,reel_text,18117878582057738,122127055275424069,True,True,129,0,0,0,,167,0
-2026-11-10 10:36,INDIA NEWS,Six family members die in house fire in Madhya Pradesh,83.05489130434782,True,text_card,reel_text,18212574706373208,122127095751424069,True,True,85,0,0,0,,94,0
-2026-11-10 11:26,INDIA NEWS,Barefoot College founder and social activist Sanjit Bunker Roy passes away,88.82,True,text_card,reel_text,18164273809545237,122127100179424069,True,True,30,0,0,0,,35,0
-2026-11-10 12:33,BREAKING NEWS,Sonia Gandhi reveals Pranab Mukherjee wanted Prime Minister seat,97.78385416666667,True,full_bleed,reel_overlay,18121562887949679,122127110289424069,True,True,134,0,0,0,,183,0
-2026-11-10 13:32,INDIA NEWS,Bengaluru to Goa Vande Bharat Express launches on November 13,64.78385416666667,True,full_bleed,reel_overlay,18169639753470421,122127121917424069,True,True,135,0,0,0,,164,0
-2026-11-10 14:35,INDIAN CINEMA,Farah Khan debunks fake video claiming fire at her home,83.97916666666667,True,text_card,reel_text,18222882127349745,122127128301424069,True,True,104,0,0,0,,123,0
-2026-11-10 15:45,INDIA NEWS,Publisher denies political pressure behind Sonia Gandhi memoir delay,71.83571428571429,True,full_bleed,reel_overlay,17914227510472134,122127136851424069,True,True,20,0,0,0,,34,0
-2026-11-10 19:10,INDIA NEWS,JNTU Anantapur hosts national Youth Parliament event on November 12,87.79484536082474,True,full_bleed,reel_overlay,18221813431356780,122127163149424069,True,True,,,,,,,
-2026-11-10 19:31,INDIA NEWS,Special startup vehicle visits Kerala colleges to collect student ideas,66.79484536082474,False,full_bleed,,18049057271821264,122127166467424069,True,True,,,,,,,
-2026-11-10 21:06,INDIA NEWS,Barefoot College founder Sanjit Bunker Roy dies at 81,59.79484536082474,True,text_card,reel_text,18119342266799265,122127177873424069,True,True,,,,,,,
+2026-11-09 21:46,INDIA NEWS,PM Modi visits Bihar as NDA government completes one year,64.82717391304348,False,full_bleed,,18047519822831091,122127017673424069,True,True,6,0,0,0,0,,0
+2026-11-10 00:15,INDIA NEWS,Food safety body seizes ₹82 crore banned items in nationwide drive,72.99285714285713,True,text_card,reel_text,17991663882118586,122127036489424069,True,True,61,0,0,0,,65,0
+2026-11-10 01:15,INDIAN CINEMA,Ram Pothineni joins Rajinikanth in director Ashwath Marimuthu’s Dharman,62.64375,True,text_card,reel_text,18176148316415120,122127043341424069,True,True,233,1,0,0,,313,1
+2026-11-10 02:56,INDIAN CINEMA,Amitabh Bachchan pauses Kaun Banega Crorepati shoot over hand health issues,72.37727272727273,True,text_card,reel_text,18119848589471123,122127050631424069,True,True,151,0,0,0,,195,0
+2026-11-10 03:56,INDIAN CINEMA,Amitabh Bachchan struggles to write fan letters as doctors advise rest,64.38484848484848,True,text_card,reel_text,18117878582057738,122127055275424069,True,True,131,0,0,0,,169,0
+2026-11-10 10:36,INDIA NEWS,Six family members die in house fire in Madhya Pradesh,83.05489130434782,True,text_card,reel_text,18212574706373208,122127095751424069,True,True,87,0,0,0,,97,0
+2026-11-10 11:26,INDIA NEWS,Barefoot College founder and social activist Sanjit Bunker Roy passes away,88.82,True,text_card,reel_text,18164273809545237,122127100179424069,True,True,40,0,0,0,,48,0
+2026-11-10 12:33,BREAKING NEWS,Sonia Gandhi reveals Pranab Mukherjee wanted Prime Minister seat,97.78385416666667,True,full_bleed,reel_overlay,18121562887949679,122127110289424069,True,True,151,0,0,0,,209,0
+2026-11-10 13:32,INDIA NEWS,Bengaluru to Goa Vande Bharat Express launches on November 13,64.78385416666667,True,full_bleed,reel_overlay,18169639753470421,122127121917424069,True,True,137,0,0,0,,167,0
+2026-11-10 14:35,INDIAN CINEMA,Farah Khan debunks fake video claiming fire at her home,83.97916666666667,True,text_card,reel_text,18222882127349745,122127128301424069,True,True,105,0,0,0,,124,0
+2026-11-10 15:45,INDIA NEWS,Publisher denies political pressure behind Sonia Gandhi memoir delay,71.83571428571429,True,full_bleed,reel_overlay,17914227510472134,122127136851424069,True,True,56,0,0,0,,59,0
+2026-11-10 19:10,INDIA NEWS,JNTU Anantapur hosts national Youth Parliament event on November 12,87.79484536082474,True,full_bleed,reel_overlay,18221813431356780,122127163149424069,True,True,2,0,0,0,,3,0
+2026-11-10 19:31,INDIA NEWS,Special startup vehicle visits Kerala colleges to collect student ideas,66.79484536082474,False,full_bleed,,18049057271821264,122127166467424069,True,True,3,0,0,0,0,,0
+2026-11-10 21:06,INDIA NEWS,Barefoot College founder Sanjit Bunker Roy dies at 81,59.79484536082474,True,text_card,reel_text,18119342266799265,122127177873424069,True,True,0,0,0,0,,1,0
