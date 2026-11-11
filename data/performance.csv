@@ -606,7 +606,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-06 00:26,INDIAN CINEMA,Actor Govinda unveils his opulent home filled with European styled decor,67.87,False,full_bleed,,18138355030635755,122126361399424069,True,True,5,0,0,0,0,,0
 2026-11-06 00:46,INDIA NEWS,Tamil Nadu orders war-footing survey to assess severe cyclone damage,73.95919540229885,True,text_card,reel_text,18098376530236594,122126363463424069,True,True,62,0,0,0,,65,0
 2026-11-06 02:40,INDIA NEWS,Centre plans rank-based system for NEET-PG admissions from 2027.,85.02616279069767,False,full_bleed,,17987141955065088,122126371863424069,True,True,4,0,0,0,0,,0
-2026-11-06 09:46,INDIAN CINEMA,Vijay Sethupathi becomes first Indian to present at International Emmy Awards.,82.69166666666666,True,text_card,reel_text,18377516479209641,122126414499424069,True,True,222,1,1,0,,314,2
+2026-11-06 09:46,INDIAN CINEMA,Vijay Sethupathi becomes first Indian to present at International Emmy Awards.,82.69166666666666,True,text_card,reel_text,18377516479209641,122126414499424069,True,True,222,1,1,0,,315,2
 2026-11-06 10:59,INDIAN CINEMA,Kareena Kapoor calls herself poster girl for pure talent from nepotism,85.12058823529412,True,full_bleed,reel_overlay,18079462442722892,122126421975424069,True,True,1102,0,0,0,,1302,0
 2026-11-06 12:06,INDIA NEWS,Democrats sweep US midterms as Indian-American lawmakers win re-election,84.0386075949367,True,full_bleed,reel_overlay,17972236487962216,122126427381424069,True,True,253,2,0,0,,349,2
 2026-11-06 12:10,INDIA NEWS,"Farooq Meets Rebel NC MLAs, Omar Stays Firm, Aga Ruhullah Resigns",71.98076923076923,True,text_card,reel_text,18051307601821007,122126427921424069,True,True,94,0,0,0,,125,0
@@ -663,17 +663,17 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-10 02:56,INDIAN CINEMA,Amitabh Bachchan pauses Kaun Banega Crorepati shoot over hand health issues,72.37727272727273,True,text_card,reel_text,18119848589471123,122127050631424069,True,True,152,0,0,0,,195,0
 2026-11-10 03:56,INDIAN CINEMA,Amitabh Bachchan struggles to write fan letters as doctors advise rest,64.38484848484848,True,text_card,reel_text,18117878582057738,122127055275424069,True,True,132,0,0,0,,170,0
 2026-11-10 10:36,INDIA NEWS,Six family members die in house fire in Madhya Pradesh,83.05489130434782,True,text_card,reel_text,18212574706373208,122127095751424069,True,True,90,0,0,0,,99,0
-2026-11-10 11:26,INDIA NEWS,Barefoot College founder and social activist Sanjit Bunker Roy passes away,88.82,True,text_card,reel_text,18164273809545237,122127100179424069,True,True,45,0,0,0,,55,0
-2026-11-10 12:33,BREAKING NEWS,Sonia Gandhi reveals Pranab Mukherjee wanted Prime Minister seat,97.78385416666667,True,full_bleed,reel_overlay,18121562887949679,122127110289424069,True,True,161,0,0,0,,219,0
+2026-11-10 11:26,INDIA NEWS,Barefoot College founder and social activist Sanjit Bunker Roy passes away,88.82,True,text_card,reel_text,18164273809545237,122127100179424069,True,True,49,0,0,0,,62,0
+2026-11-10 12:33,BREAKING NEWS,Sonia Gandhi reveals Pranab Mukherjee wanted Prime Minister seat,97.78385416666667,True,full_bleed,reel_overlay,18121562887949679,122127110289424069,True,True,161,0,0,0,,221,0
 2026-11-10 13:32,INDIA NEWS,Bengaluru to Goa Vande Bharat Express launches on November 13,64.78385416666667,True,full_bleed,reel_overlay,18169639753470421,122127121917424069,True,True,138,0,0,0,,169,0
 2026-11-10 14:35,INDIAN CINEMA,Farah Khan debunks fake video claiming fire at her home,83.97916666666667,True,text_card,reel_text,18222882127349745,122127128301424069,True,True,107,0,0,0,,126,0
 2026-11-10 15:45,INDIA NEWS,Publisher denies political pressure behind Sonia Gandhi memoir delay,71.83571428571429,True,full_bleed,reel_overlay,17914227510472134,122127136851424069,True,True,101,0,0,0,,115,0
-2026-11-10 19:10,INDIA NEWS,JNTU Anantapur hosts national Youth Parliament event on November 12,87.79484536082474,True,full_bleed,reel_overlay,18221813431356780,122127163149424069,True,True,29,0,0,0,,34,0
+2026-11-10 19:10,INDIA NEWS,JNTU Anantapur hosts national Youth Parliament event on November 12,87.79484536082474,True,full_bleed,reel_overlay,18221813431356780,122127163149424069,True,True,35,0,0,0,,40,0
 2026-11-10 19:31,INDIA NEWS,Special startup vehicle visits Kerala colleges to collect student ideas,66.79484536082474,False,full_bleed,,18049057271821264,122127166467424069,True,True,3,0,0,0,0,,0
 2026-11-10 21:06,INDIA NEWS,Barefoot College founder Sanjit Bunker Roy dies at 81,59.79484536082474,True,text_card,reel_text,18119342266799265,122127177873424069,True,True,70,0,0,0,,74,0
-2026-11-10 21:46,INDIA NEWS,Villagers pay ₹10 to charge phones after cyclone cuts power,73.75,True,text_card,reel_text,17948019288357801,122127181221424069,True,True,73,0,0,0,,86,0
-2026-11-11 00:16,INDIA NEWS,"Indian Railways beats scrap disposal target, earns Rs 628 crore in one month",84.82659574468084,False,full_bleed,,18230680567333117,122127196719424069,True,True,4,0,0,0,0,,0
-2026-11-11 01:16,INDIA NEWS,"13 years on, Delhi Police serve notice",77.82659574468084,True,full_bleed,reel_overlay,18138801367658570,122127202437424069,True,True,102,0,0,0,,120,0
-2026-11-11 02:55,INDIA NEWS,Delhi man beats boy to death for bursting crackers near son,68.79368421052632,True,text_card,reel_text,17993811971856600,122127213183424069,True,True,52,0,0,0,,62,0
-2026-11-11 04:06,BREAKING NEWS,Hemant Soren recommends CBI probe into Nisha Bhagat’s death case,93.75773195876289,True,text_card,reel_text,18141526495643877,122127220275424069,True,True,104,0,0,0,,129,0
-2026-11-11 10:46,BREAKING NEWS,"5 Coaches, Engine Of Kolkata-Sairang Express Derail In Assam, Rescue Ops On",129.77142857142857,True,text_card,reel_text,17910746457327153,122127256869424069,True,True,,,,,,,
+2026-11-10 21:46,INDIA NEWS,Villagers pay ₹10 to charge phones after cyclone cuts power,73.75,True,text_card,reel_text,17948019288357801,122127181221424069,True,True,74,0,0,0,,86,0
+2026-11-11 00:16,INDIA NEWS,"Indian Railways beats scrap disposal target, earns Rs 628 crore in one month",84.82659574468084,False,full_bleed,,18230680567333117,122127196719424069,True,True,5,0,0,0,0,,0
+2026-11-11 01:16,INDIA NEWS,"13 years on, Delhi Police serve notice",77.82659574468084,True,full_bleed,reel_overlay,18138801367658570,122127202437424069,True,True,104,0,0,0,,121,0
+2026-11-11 02:55,INDIA NEWS,Delhi man beats boy to death for bursting crackers near son,68.79368421052632,True,text_card,reel_text,17993811971856600,122127213183424069,True,True,57,0,0,0,,66,0
+2026-11-11 04:06,BREAKING NEWS,Hemant Soren recommends CBI probe into Nisha Bhagat’s death case,93.75773195876289,True,text_card,reel_text,18141526495643877,122127220275424069,True,True,107,0,0,0,,133,0
+2026-11-11 10:46,BREAKING NEWS,"5 Coaches, Engine Of Kolkata-Sairang Express Derail In Assam, Rescue Ops On",129.77142857142857,True,text_card,reel_text,17910746457327153,122127256869424069,True,True,4,0,0,0,,20,0
