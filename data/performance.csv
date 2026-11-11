@@ -542,7 +542,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-01 12:06,BREAKING NEWS,Delhi to Agra bullet train cuts travel time to 59 minutes.,92,False,full_bleed,,18485155591115348,122125581363424069,True,True,5,0,0,0,0,,0
 2026-11-01 13:26,BREAKING NEWS,Six Indians stranded near remote Nepal lake await urgent helicopter rescue,99,True,text_card,reel_text,18110190926210193,122125589901424069,True,True,104,0,0,0,,122,1
 2026-11-01 14:46,INDIA NEWS,Telangana CM compares PM Modi to Ravana in sharp political attack,71,False,full_bleed,,17876978778584718,122125598133424069,True,True,7,0,0,0,0,,0
-2026-11-01 17:26,INDIAN CINEMA,Leaked videos reveal actor Nani plays chef and outlaw,74,True,text_card,reel_text,18116449784329380,122125614705424069,True,True,653,3,0,0,,968,4
+2026-11-01 17:26,INDIAN CINEMA,Leaked videos reveal actor Nani plays chef and outlaw,74,True,text_card,reel_text,18116449784329380,122125614705424069,True,True,653,3,0,0,,969,4
 2026-11-01 18:26,INDIA NEWS,Mamata Banerjee slams central exercise as special relief for the BJP,68,True,text_card,reel_text,17918631369464596,122125622475424069,True,True,68,0,0,0,,84,0
 2026-11-01 20:06,INDIA NEWS,Andhra civic polls spark 275 cases as Jagan demands repoll over clashes,76,True,text_card,reel_text,18132190736306383,122125633389424069,True,True,23,0,0,0,,36,0
 2026-11-01 20:26,INDIAN CINEMA,Ramayana pre-sales cross Rs 36 crore but lag behind Yash's Toxic.,85,True,text_card,reel_text,18218987716353619,122125636533424069,True,True,123,0,0,0,,150,0
@@ -646,7 +646,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-08 21:45,INDIA NEWS,Rajinikanth greets fans outside Poes Garden and advises rain safety,67.01758241758242,True,text_card,reel_text,17896317243434723,122126849091424069,True,True,124,0,0,0,,141,0
 2026-11-08 23:56,INDIAN CINEMA,Priyanka Chopra announces Marathi movie Ventilator 2 for a 2027 release.,80.47321428571428,False,full_bleed,,18422051788159903,122126865615424069,True,True,7,0,0,0,0,,0
 2026-11-09 01:15,INDIAN CINEMA,Suriya stars in quirky investigative drama Scene this Deepavali,67.59482758620689,False,full_bleed,,17973551964187809,122126875113424069,True,True,8,1,0,0,0,,1
-2026-11-09 02:55,INDIA NEWS,Supreme Court settles decades-old hydro power dispute for Himachal Pradesh,79.17833333333334,True,text_card,reel_text,18388132084232544,122126885931424069,True,True,96,0,0,0,,113,0
+2026-11-09 02:55,INDIA NEWS,Supreme Court settles decades-old hydro power dispute for Himachal Pradesh,79.17833333333334,True,text_card,reel_text,18388132084232544,122126885931424069,True,True,97,0,0,0,,113,0
 2026-11-09 03:55,INDIAN CINEMA,"Bollywood makes people feel insecure, director Farah Khan admits.",71.81071428571428,True,full_bleed,reel_overlay,18073585223781106,122126893035424069,True,True,199,0,0,0,,230,0
 2026-11-09 09:55,INDIAN CINEMA,Dhanush defends Sai Pallavi over backlash against her Ramayana casting.,89.8607142857143,True,full_bleed,reel_overlay,18214962196365883,122126922417424069,True,True,1591,19,0,0,,2392,26
 2026-11-09 11:15,INDIA NEWS,RBI denies viral reports claiming new cheque book rules from January,78.99157303370787,False,full_bleed,,18122051912038852,122126928975424069,True,True,4,0,0,0,0,,0
@@ -668,16 +668,16 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-10 13:32,INDIA NEWS,Bengaluru to Goa Vande Bharat Express launches on November 13,64.78385416666667,True,full_bleed,reel_overlay,18169639753470421,122127121917424069,True,True,138,0,0,0,,169,0
 2026-11-10 14:35,INDIAN CINEMA,Farah Khan debunks fake video claiming fire at her home,83.97916666666667,True,text_card,reel_text,18222882127349745,122127128301424069,True,True,107,0,0,0,,126,0
 2026-11-10 15:45,INDIA NEWS,Publisher denies political pressure behind Sonia Gandhi memoir delay,71.83571428571429,True,full_bleed,reel_overlay,17914227510472134,122127136851424069,True,True,101,0,0,0,,115,0
-2026-11-10 19:10,INDIA NEWS,JNTU Anantapur hosts national Youth Parliament event on November 12,87.79484536082474,True,full_bleed,reel_overlay,18221813431356780,122127163149424069,True,True,38,0,0,0,,46,0
+2026-11-10 19:10,INDIA NEWS,JNTU Anantapur hosts national Youth Parliament event on November 12,87.79484536082474,True,full_bleed,reel_overlay,18221813431356780,122127163149424069,True,True,39,0,0,0,,47,0
 2026-11-10 19:31,INDIA NEWS,Special startup vehicle visits Kerala colleges to collect student ideas,66.79484536082474,False,full_bleed,,18049057271821264,122127166467424069,True,True,3,0,0,0,0,,0
-2026-11-10 21:06,INDIA NEWS,Barefoot College founder Sanjit Bunker Roy dies at 81,59.79484536082474,True,text_card,reel_text,18119342266799265,122127177873424069,True,True,71,0,0,0,,76,0
+2026-11-10 21:06,INDIA NEWS,Barefoot College founder Sanjit Bunker Roy dies at 81,59.79484536082474,True,text_card,reel_text,18119342266799265,122127177873424069,True,True,72,0,0,0,,76,0
 2026-11-10 21:46,INDIA NEWS,Villagers pay ₹10 to charge phones after cyclone cuts power,73.75,True,text_card,reel_text,17948019288357801,122127181221424069,True,True,74,0,0,0,,86,0
 2026-11-11 00:16,INDIA NEWS,"Indian Railways beats scrap disposal target, earns Rs 628 crore in one month",84.82659574468084,False,full_bleed,,18230680567333117,122127196719424069,True,True,6,0,0,0,0,,0
 2026-11-11 01:16,INDIA NEWS,"13 years on, Delhi Police serve notice",77.82659574468084,True,full_bleed,reel_overlay,18138801367658570,122127202437424069,True,True,104,0,0,0,,121,0
 2026-11-11 02:55,INDIA NEWS,Delhi man beats boy to death for bursting crackers near son,68.79368421052632,True,text_card,reel_text,17993811971856600,122127213183424069,True,True,61,0,0,0,,72,0
 2026-11-11 04:06,BREAKING NEWS,Hemant Soren recommends CBI probe into Nisha Bhagat’s death case,93.75773195876289,True,text_card,reel_text,18141526495643877,122127220275424069,True,True,110,0,0,0,,135,0
-2026-11-11 10:46,BREAKING NEWS,"5 Coaches, Engine Of Kolkata-Sairang Express Derail In Assam, Rescue Ops On",129.77142857142857,True,text_card,reel_text,17910746457327153,122127256869424069,True,True,78,0,0,0,,89,0
-2026-11-11 11:46,INDIAN CINEMA,"Donkey named after Chunky Panday sells for ₹72,000 at fair",55.22179487179487,True,text_card,reel_text,18016016102986504,122127262509424069,True,True,141,0,0,0,,171,0
-2026-11-11 12:46,INDIA NEWS,Gang hijacks car carrying ₹1.5 crore Tasmac cash in Kancheepuram,59.78112244897959,False,full_bleed,,18084978629549609,122127273303424069,True,True,2,0,0,0,0,,0
-2026-11-11 13:45,INDIA NEWS,Terror attack convict is shot dead in Uttar Pradesh,73.74848484848485,True,text_card,reel_text,18378613900214598,122127280851424069,True,True,,,,,,,
-2026-11-11 14:46,INDIAN CINEMA,Actor Ranveer Singh’s maternal grandfather passes away at age 96,89.07,True,text_card,reel_text,18036130400896592,122127287373424069,True,True,,,,,,,
+2026-11-11 10:46,BREAKING NEWS,"5 Coaches, Engine Of Kolkata-Sairang Express Derail In Assam, Rescue Ops On",129.77142857142857,True,text_card,reel_text,17910746457327153,122127256869424069,True,True,81,0,0,0,,92,0
+2026-11-11 11:46,INDIAN CINEMA,"Donkey named after Chunky Panday sells for ₹72,000 at fair",55.22179487179487,True,text_card,reel_text,18016016102986504,122127262509424069,True,True,144,0,0,0,,174,0
+2026-11-11 12:46,INDIA NEWS,Gang hijacks car carrying ₹1.5 crore Tasmac cash in Kancheepuram,59.78112244897959,False,full_bleed,,18084978629549609,122127273303424069,True,True,4,0,0,0,0,,0
+2026-11-11 13:45,INDIA NEWS,Terror attack convict is shot dead in Uttar Pradesh,73.74848484848485,True,text_card,reel_text,18378613900214598,122127280851424069,True,True,3,0,0,0,,3,0
+2026-11-11 14:46,INDIAN CINEMA,Actor Ranveer Singh’s maternal grandfather passes away at age 96,89.07,True,text_card,reel_text,18036130400896592,122127287373424069,True,True,28,0,0,0,,51,0
