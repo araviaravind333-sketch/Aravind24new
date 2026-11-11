@@ -561,7 +561,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-02 20:26,BREAKING NEWS,Chennai roads remain badly damaged after Cyclone Murasu rainwater recedes.,108.58846153846153,True,text_card,reel_text,17870580375659635,122125804737424069,True,True,92,0,0,0,,119,0
 2026-11-02 21:26,INDIAN CINEMA,Mumbai civic body removes Dia Mirza Diwali video after BJP objection.,81.16499999999999,True,text_card,reel_text,18119889124974429,122125812123424069,True,True,105,0,0,0,,147,0
 2026-11-02 21:45,INDIA NEWS,Fishermen haul 400 boats ashore as Cyclone Murasu approaches Andhra,79.98806818181818,True,text_card,reel_text,17888107557624683,122125814127424069,True,True,74,0,0,0,,83,0
-2026-11-02 22:45,INDIAN CINEMA,Bigg Boss fame Samarth Jurel joins Emraan Hashmi in Gunmaster G9,69.17166666666667,True,text_card,reel_text,18095916506172165,122125819725424069,True,True,292,29,6,22,,581,66
+2026-11-02 22:45,INDIAN CINEMA,Bigg Boss fame Samarth Jurel joins Emraan Hashmi in Gunmaster G9,69.17166666666667,True,text_card,reel_text,18095916506172165,122125819725424069,True,True,292,29,6,22,,582,66
 2026-11-02 23:05,INDIA NEWS,Two arrested over shooting of Indian-born 19-month-old cheetah in Madhya Pradesh,68.03372093023256,True,text_card,reel_text,17919130518516168,122125821411424069,True,True,107,0,0,0,,123,0
 2026-11-02 23:46,INDIA NEWS,Delhi air quality turns very poor as winter pollution spikes,81.96136363636364,True,text_card,reel_text,17915025006287922,122125824267424069,True,True,95,0,0,0,,105,0
 2026-11-03 09:25,INDIAN CINEMA,Lenny Kravitz is alive after viral rumors falsely report plane crash death.,82.715625,True,text_card,reel_text,18036167978909994,122125883781424069,True,True,117,0,0,0,,136,0
@@ -659,7 +659,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-09 21:06,INDIA NEWS,Yogi Adityanath warns BJP about missing Hindu voters in Uttar Pradesh,77.84725274725275,True,text_card,reel_text,18350287486253565,122127013677424069,True,True,113,0,0,0,,144,0
 2026-11-09 21:46,INDIA NEWS,PM Modi visits Bihar as NDA government completes one year,64.82717391304348,False,full_bleed,,18047519822831091,122127017673424069,True,True,6,0,0,0,0,,0
 2026-11-10 00:15,INDIA NEWS,Food safety body seizes ₹82 crore banned items in nationwide drive,72.99285714285713,True,text_card,reel_text,17991663882118586,122127036489424069,True,True,65,0,0,0,,69,0
-2026-11-10 01:15,INDIAN CINEMA,Ram Pothineni joins Rajinikanth in director Ashwath Marimuthu’s Dharman,62.64375,True,text_card,reel_text,18176148316415120,122127043341424069,True,True,272,2,0,0,,341,2
+2026-11-10 01:15,INDIAN CINEMA,Ram Pothineni joins Rajinikanth in director Ashwath Marimuthu’s Dharman,62.64375,True,text_card,reel_text,18176148316415120,122127043341424069,True,True,273,2,0,0,,341,2
 2026-11-10 02:56,INDIAN CINEMA,Amitabh Bachchan pauses Kaun Banega Crorepati shoot over hand health issues,72.37727272727273,True,text_card,reel_text,18119848589471123,122127050631424069,True,True,152,0,0,0,,195,0
 2026-11-10 03:56,INDIAN CINEMA,Amitabh Bachchan struggles to write fan letters as doctors advise rest,64.38484848484848,True,text_card,reel_text,18117878582057738,122127055275424069,True,True,132,0,0,0,,170,0
 2026-11-10 10:36,INDIA NEWS,Six family members die in house fire in Madhya Pradesh,83.05489130434782,True,text_card,reel_text,18212574706373208,122127095751424069,True,True,90,0,0,0,,99,0
@@ -670,15 +670,15 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-10 15:45,INDIA NEWS,Publisher denies political pressure behind Sonia Gandhi memoir delay,71.83571428571429,True,full_bleed,reel_overlay,17914227510472134,122127136851424069,True,True,101,0,0,0,,115,0
 2026-11-10 19:10,INDIA NEWS,JNTU Anantapur hosts national Youth Parliament event on November 12,87.79484536082474,True,full_bleed,reel_overlay,18221813431356780,122127163149424069,True,True,40,0,0,0,,48,0
 2026-11-10 19:31,INDIA NEWS,Special startup vehicle visits Kerala colleges to collect student ideas,66.79484536082474,False,full_bleed,,18049057271821264,122127166467424069,True,True,3,0,0,0,0,,0
-2026-11-10 21:06,INDIA NEWS,Barefoot College founder Sanjit Bunker Roy dies at 81,59.79484536082474,True,text_card,reel_text,18119342266799265,122127177873424069,True,True,73,0,0,0,,79,0
-2026-11-10 21:46,INDIA NEWS,Villagers pay ₹10 to charge phones after cyclone cuts power,73.75,True,text_card,reel_text,17948019288357801,122127181221424069,True,True,74,0,0,0,,86,0
-2026-11-11 00:16,INDIA NEWS,"Indian Railways beats scrap disposal target, earns Rs 628 crore in one month",84.82659574468084,False,full_bleed,,18230680567333117,122127196719424069,True,True,6,0,0,0,0,,0
+2026-11-10 21:06,INDIA NEWS,Barefoot College founder Sanjit Bunker Roy dies at 81,59.79484536082474,True,text_card,reel_text,18119342266799265,122127177873424069,True,True,74,0,0,0,,80,0
+2026-11-10 21:46,INDIA NEWS,Villagers pay ₹10 to charge phones after cyclone cuts power,73.75,True,text_card,reel_text,17948019288357801,122127181221424069,True,True,75,0,0,0,,88,0
+2026-11-11 00:16,INDIA NEWS,"Indian Railways beats scrap disposal target, earns Rs 628 crore in one month",84.82659574468084,False,full_bleed,,18230680567333117,122127196719424069,True,True,7,0,0,0,0,,0
 2026-11-11 01:16,INDIA NEWS,"13 years on, Delhi Police serve notice",77.82659574468084,True,full_bleed,reel_overlay,18138801367658570,122127202437424069,True,True,104,0,0,0,,121,0
 2026-11-11 02:55,INDIA NEWS,Delhi man beats boy to death for bursting crackers near son,68.79368421052632,True,text_card,reel_text,17993811971856600,122127213183424069,True,True,62,0,0,0,,73,0
 2026-11-11 04:06,BREAKING NEWS,Hemant Soren recommends CBI probe into Nisha Bhagat’s death case,93.75773195876289,True,text_card,reel_text,18141526495643877,122127220275424069,True,True,110,0,0,0,,135,0
-2026-11-11 10:46,BREAKING NEWS,"5 Coaches, Engine Of Kolkata-Sairang Express Derail In Assam, Rescue Ops On",129.77142857142857,True,text_card,reel_text,17910746457327153,122127256869424069,True,True,88,0,0,0,,100,0
-2026-11-11 11:46,INDIAN CINEMA,"Donkey named after Chunky Panday sells for ₹72,000 at fair",55.22179487179487,True,text_card,reel_text,18016016102986504,122127262509424069,True,True,146,0,0,0,,175,0
+2026-11-11 10:46,BREAKING NEWS,"5 Coaches, Engine Of Kolkata-Sairang Express Derail In Assam, Rescue Ops On",129.77142857142857,True,text_card,reel_text,17910746457327153,122127256869424069,True,True,92,0,0,0,,105,0
+2026-11-11 11:46,INDIAN CINEMA,"Donkey named after Chunky Panday sells for ₹72,000 at fair",55.22179487179487,True,text_card,reel_text,18016016102986504,122127262509424069,True,True,148,0,0,0,,177,0
 2026-11-11 12:46,INDIA NEWS,Gang hijacks car carrying ₹1.5 crore Tasmac cash in Kancheepuram,59.78112244897959,False,full_bleed,,18084978629549609,122127273303424069,True,True,4,0,0,0,0,,0
-2026-11-11 13:45,INDIA NEWS,Terror attack convict is shot dead in Uttar Pradesh,73.74848484848485,True,text_card,reel_text,18378613900214598,122127280851424069,True,True,12,0,0,0,,15,0
-2026-11-11 14:46,INDIAN CINEMA,Actor Ranveer Singh’s maternal grandfather passes away at age 96,89.07,True,text_card,reel_text,18036130400896592,122127287373424069,True,True,108,0,0,0,,147,0
-2026-11-11 15:46,BREAKING NEWS,Three CRPF jawans injured as bike militants open fire in Kashmir,96.715,True,text_card,reel_text,18039170867894689,122127294561424069,True,True,31,0,0,0,,44,0
+2026-11-11 13:45,INDIA NEWS,Terror attack convict is shot dead in Uttar Pradesh,73.74848484848485,True,text_card,reel_text,18378613900214598,122127280851424069,True,True,23,0,0,0,,29,0
+2026-11-11 14:46,INDIAN CINEMA,Actor Ranveer Singh’s maternal grandfather passes away at age 96,89.07,True,text_card,reel_text,18036130400896592,122127287373424069,True,True,115,0,0,0,,153,0
+2026-11-11 15:46,BREAKING NEWS,Three CRPF jawans injured as bike militants open fire in Kashmir,96.715,True,text_card,reel_text,18039170867894689,122127294561424069,True,True,48,0,0,0,,60,0
