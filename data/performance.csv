@@ -606,7 +606,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-06 00:26,INDIAN CINEMA,Actor Govinda unveils his opulent home filled with European styled decor,67.87,False,full_bleed,,18138355030635755,122126361399424069,True,True,6,0,0,0,0,,0
 2026-11-06 00:46,INDIA NEWS,Tamil Nadu orders war-footing survey to assess severe cyclone damage,73.95919540229885,True,text_card,reel_text,18098376530236594,122126363463424069,True,True,62,0,0,0,,65,0
 2026-11-06 02:40,INDIA NEWS,Centre plans rank-based system for NEET-PG admissions from 2027.,85.02616279069767,False,full_bleed,,17987141955065088,122126371863424069,True,True,4,0,0,0,0,,0
-2026-11-06 09:46,INDIAN CINEMA,Vijay Sethupathi becomes first Indian to present at International Emmy Awards.,82.69166666666666,True,text_card,reel_text,18377516479209641,122126414499424069,True,True,223,1,1,0,,315,2
+2026-11-06 09:46,INDIAN CINEMA,Vijay Sethupathi becomes first Indian to present at International Emmy Awards.,82.69166666666666,True,text_card,reel_text,18377516479209641,122126414499424069,True,True,224,1,1,0,,316,2
 2026-11-06 10:59,INDIAN CINEMA,Kareena Kapoor calls herself poster girl for pure talent from nepotism,85.12058823529412,True,full_bleed,reel_overlay,18079462442722892,122126421975424069,True,True,1102,0,0,0,,1302,0
 2026-11-06 12:06,INDIA NEWS,Democrats sweep US midterms as Indian-American lawmakers win re-election,84.0386075949367,True,full_bleed,reel_overlay,17972236487962216,122126427381424069,True,True,253,2,0,0,,349,2
 2026-11-06 12:10,INDIA NEWS,"Farooq Meets Rebel NC MLAs, Omar Stays Firm, Aga Ruhullah Resigns",71.98076923076923,True,text_card,reel_text,18051307601821007,122126427921424069,True,True,94,0,0,0,,125,0
@@ -677,19 +677,19 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-11 02:55,INDIA NEWS,Delhi man beats boy to death for bursting crackers near son,68.79368421052632,True,text_card,reel_text,17993811971856600,122127213183424069,True,True,72,0,0,0,,83,0
 2026-11-11 04:06,BREAKING NEWS,Hemant Soren recommends CBI probe into Nisha Bhagat’s death case,93.75773195876289,True,text_card,reel_text,18141526495643877,122127220275424069,True,True,110,0,0,0,,135,0
 2026-11-11 10:46,BREAKING NEWS,"5 Coaches, Engine Of Kolkata-Sairang Express Derail In Assam, Rescue Ops On",129.77142857142857,True,text_card,reel_text,17910746457327153,122127256869424069,True,True,99,0,0,0,,117,0
-2026-11-11 11:46,INDIAN CINEMA,"Donkey named after Chunky Panday sells for ₹72,000 at fair",55.22179487179487,True,text_card,reel_text,18016016102986504,122127262509424069,True,True,149,0,0,0,,183,0
+2026-11-11 11:46,INDIAN CINEMA,"Donkey named after Chunky Panday sells for ₹72,000 at fair",55.22179487179487,True,text_card,reel_text,18016016102986504,122127262509424069,True,True,150,0,0,0,,183,0
 2026-11-11 12:46,INDIA NEWS,Gang hijacks car carrying ₹1.5 crore Tasmac cash in Kancheepuram,59.78112244897959,False,full_bleed,,18084978629549609,122127273303424069,True,True,5,0,0,0,0,,0
-2026-11-11 13:45,INDIA NEWS,Terror attack convict is shot dead in Uttar Pradesh,73.74848484848485,True,text_card,reel_text,18378613900214598,122127280851424069,True,True,105,0,0,0,,136,0
-2026-11-11 14:46,INDIAN CINEMA,Actor Ranveer Singh’s maternal grandfather passes away at age 96,89.07,True,text_card,reel_text,18036130400896592,122127287373424069,True,True,123,0,0,0,,164,0
+2026-11-11 13:45,INDIA NEWS,Terror attack convict is shot dead in Uttar Pradesh,73.74848484848485,True,text_card,reel_text,18378613900214598,122127280851424069,True,True,106,0,0,0,,137,0
+2026-11-11 14:46,INDIAN CINEMA,Actor Ranveer Singh’s maternal grandfather passes away at age 96,89.07,True,text_card,reel_text,18036130400896592,122127287373424069,True,True,124,0,0,0,,165,0
 2026-11-11 15:46,BREAKING NEWS,Three CRPF jawans injured as bike militants open fire in Kashmir,96.715,True,text_card,reel_text,18039170867894689,122127294561424069,True,True,101,0,0,0,,120,0
-2026-11-11 22:25,INDIA NEWS,Congress accuses BJP of bulldozing laws in record 88-day Parliament session,72.82,True,full_bleed,reel_overlay,18118750937087093,122127343299424069,True,True,114,0,0,0,,142,0
+2026-11-11 22:25,INDIA NEWS,Congress accuses BJP of bulldozing laws in record 88-day Parliament session,72.82,True,full_bleed,reel_overlay,18118750937087093,122127343299424069,True,True,115,0,0,0,,143,0
 2026-11-11 22:30,BREAKING NEWS,Anirudh marries Kavya in grand Greece ceremony; shares first wedding pictures,93.38026315789475,True,text_card,reel_text,17928056979203692,122127344181424069,True,True,111,2,0,0,,148,2
 2026-11-11 23:36,INDIA NEWS,"Indian Air Force sets world record landing aircraft at 13,629 feet",71.82,False,full_bleed,,18361767316218511,122127351225424069,True,True,5,0,0,0,0,,0
-2026-11-11 23:46,INDIA NEWS,Over 800 student teams compete in massive nationwide semiconductor challenge,66.70400000000001,True,text_card,reel_text,18647552716062081,122127352155424069,True,True,11,0,0,0,,11,0
-2026-11-12 00:25,INDIA NEWS,3.9 magnitude earthquake strikes Shimla with zero damage reported,79.70400000000001,True,text_card,reel_text,18457043746133142,122127358965424069,True,True,100,0,0,0,,120,0
+2026-11-11 23:46,INDIA NEWS,Over 800 student teams compete in massive nationwide semiconductor challenge,66.70400000000001,True,text_card,reel_text,18647552716062081,122127352155424069,True,True,17,0,0,0,,16,0
+2026-11-12 00:25,INDIA NEWS,3.9 magnitude earthquake strikes Shimla with zero damage reported,79.70400000000001,True,text_card,reel_text,18457043746133142,122127358965424069,True,True,100,0,0,0,,121,0
 2026-11-12 01:25,INDIA NEWS,"Delhi's historic North and South Blocks become a Rs 3,230-crore museum.",59.70252525252525,False,full_bleed,,18145038241589260,122127365289424069,True,True,5,0,0,0,0,,0
 2026-11-12 03:00,INDIAN CINEMA,Ramayana hits Rs 663 crore worldwide in five days,69.84625,False,full_bleed,,18117801884323265,122127376659424069,True,True,7,0,0,0,0,,0
-2026-11-12 04:25,BREAKING NEWS,Accident victim's daughter files review petition in Kerala High Court,116.75101010101011,True,text_card,reel_text,18380517019241405,122127385275424069,True,True,51,0,0,0,,61,0
-2026-11-12 10:55,INDIA NEWS,CM directs officials to strengthen arguments in Supreme Court on Krishna waters,78.74549999999999,False,full_bleed,,18193545550414656,122127425463424069,True,True,1,0,0,0,0,,0
-2026-11-12 12:05,INDIAN CINEMA,SHOCKING: Amitabh Bachchan's Jalsa at centre of family DISPUTE,80.39324324324323,True,full_bleed,reel_overlay,17916793377497808,122127433299424069,True,True,,,,,,,
-2026-11-12 13:05,BREAKING NEWS,From Kismet to Dhurandhar and Ramayana,111.39324324324325,True,text_card,reel_text,18081895994394868,122127444159424069,True,True,,,,,,,
+2026-11-12 04:25,BREAKING NEWS,Accident victim's daughter files review petition in Kerala High Court,116.75101010101011,True,text_card,reel_text,18380517019241405,122127385275424069,True,True,70,0,0,0,,88,0
+2026-11-12 10:55,INDIA NEWS,CM directs officials to strengthen arguments in Supreme Court on Krishna waters,78.74549999999999,False,full_bleed,,18193545550414656,122127425463424069,True,True,3,0,0,0,0,,0
+2026-11-12 12:05,INDIAN CINEMA,SHOCKING: Amitabh Bachchan's Jalsa at centre of family DISPUTE,80.39324324324323,True,full_bleed,reel_overlay,17916793377497808,122127433299424069,True,True,167,2,0,0,,565,2
+2026-11-12 13:05,BREAKING NEWS,From Kismet to Dhurandhar and Ramayana,111.39324324324325,True,text_card,reel_text,18081895994394868,122127444159424069,True,True,1,0,0,0,,4,0
