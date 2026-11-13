@@ -128,10 +128,34 @@ def trailer_drop_nudge_tests():
         ne.search_trailer_candidates = real_search
 
 
+def no_reply_card_wording_tests():
+    """Regression for 2026-11-13: an automated photo/context lookup is
+    now off (settings.SUBJECT_PHOTOS_ENABLED / CONTEXT_PHOTOS_ENABLED),
+    so a candidate that gets no reply within the grace period ALWAYS
+    posts text-only now -- the card's own wording must say so plainly,
+    not imply an automated image search might still happen."""
+    print("\nNO-REPLY CARD WORDING (text-only, no automated photo search)")
+    calls = []
+    real_call = tb._call
+    tb._call = lambda method, params=None: (calls.append(params) or {"message_id": 1})
+    try:
+        tb.send_candidate({"category": "TAMIL NADU NEWS", "score": 70,
+                           "title": "Tamil Nadu cabinet approves new scheme",
+                           "summary": "", "link": "https://x"})
+        text = calls[-1]["text"].lower()
+        check("the card tells the owner it posts text-only, not just 'automatically'",
+              "text-only" in text, calls[-1]["text"])
+        check("the card explains images only ever come from what the owner sends here",
+              "you send here" in text or "you send" in text, calls[-1]["text"])
+    finally:
+        tb._call = real_call
+
+
 if __name__ == "__main__":
     webhook_guard_tests()
     allowed_updates_tests()
     trailer_drop_nudge_tests()
+    no_reply_card_wording_tests()
     print(f"\n{'=' * 52}\n{len(PASS)} passed, {len(FAIL)} failed")
     if FAIL:
         print("FAILED:")

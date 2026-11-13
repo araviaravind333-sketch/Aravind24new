@@ -286,6 +286,19 @@ def share_alike_tests(tmp):
           list(Image.open(plain).getdata()) != list(sa_im.getdata()))
 
 
+def ships_disabled_tests():
+    """Regression for an explicit decision (2026-11-13): a generic photo
+    of the place/institution a headline happens to name is still not a
+    photo OF the story -- the same "image doesn't match the news"
+    problem src/subject_photos.py's own version of this test documents.
+    The only images this pipeline attaches now are ones the owner sends
+    via Telegram, so this must ship OFF by default."""
+    print("\nSHIPS DISABLED BY DEFAULT")
+    from config import settings
+    check("CONTEXT_PHOTOS_ENABLED defaults to False",
+          settings.CONTEXT_PHOTOS_ENABLED is False)
+
+
 if __name__ == "__main__":
     entity_tests()
     wrong_match_tests()
@@ -300,6 +313,7 @@ if __name__ == "__main__":
         reuse_tests(t)
     with tempfile.TemporaryDirectory() as t:
         share_alike_tests(t)
+    ships_disabled_tests()
     print(f"\n{'=' * 52}\n{len(PASS)} passed, {len(FAIL)} failed")
     if FAIL:
         print("FAILED:")

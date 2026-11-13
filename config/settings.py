@@ -489,7 +489,20 @@ CAROUSEL_COUNTS_AS_AUTOMATED_SLOT = True
 # photo, fetch that person's lead portrait from Wikimedia Commons --
 # labelled FILE PHOTO on the image and credited in the caption.
 # Event photographs are NOT touched by this (see incident_photos.py).
-SUBJECT_PHOTOS_ENABLED = True
+#
+# Turned off 2026-11-13, by explicit request: a portrait automatically
+# picked for whoever the headline happens to name is still a picture the
+# owner never looked at before it went out -- exactly the "image doesn't
+# match the news" complaint this setting existed to work around, not
+# fix. From now on the only images this pipeline ever attaches are ones
+# the owner personally sent via Telegram; every automated-fallback post
+# (no human reply) goes out as a text-card Reel instead, no photo at
+# all. This was also measurably hurting reach: the last 10 days showed
+# posts that got an auto photo but weren't a Reel (this flag's own
+# share_alike case, in main.py's _render_story, forces that) averaging
+# ~5 reach vs ~209 for a Reel -- 29 of those dead-weight posts in just
+# that window.
+SUBJECT_PHOTOS_ENABLED = False
 # Wikipedia-language-page count a person needs to count as notable enough
 # to resolve by name alone. Higher = fewer wrong-namesake risks, fewer
 # matches. Tuned on live headlines; see tests/test_subject_photos.py.
@@ -541,7 +554,13 @@ REEL_CLONE_ENABLED = False   # paused until the owner has approved a generation 
 # name no notable person. Always captioned on the post as a file photo of
 # that place -- never presented as a picture of the event. Sensitive
 # headlines (crime, death, victims) are excluded entirely.
-CONTEXT_PHOTOS_ENABLED = True
+#
+# Turned off 2026-11-13, same decision and same reasoning as
+# SUBJECT_PHOTOS_ENABLED just above -- a generic photo of the place a
+# story happens to name is still not a photo OF the story, and it was
+# the other half of the auto-attached-photo-but-not-a-Reel reach problem
+# documented there. Only Telegram-submitted media gets attached now.
+CONTEXT_PHOTOS_ENABLED = False
 # Notability bar: how many Wikipedia language editions the place/institution
 # needs, so an obscure same-named entity is never picked.
 CONTEXT_PHOTO_MIN_SITELINKS = 20

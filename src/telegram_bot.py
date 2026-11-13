@@ -119,8 +119,10 @@ def send_candidate(story):
     else:
         text += (
             f"\nReply to this message with a photo or video to use it for this "
-            f"post — otherwise it posts automatically after "
-            f"{settings.TELEGRAM_GRACE_MINUTES} min.\n\n"
+            f"post — otherwise it posts text-only after "
+            f"{settings.TELEGRAM_GRACE_MINUTES} min (no automated photo search "
+            f"any more, by request -- the only images that ever get attached "
+            f"are ones you send here).\n\n"
             f"For best quality, send it as a FILE, not a photo: attach \U0001F4CE "
             f"→ File → pick from gallery. A normal photo attachment gets "
             f"compressed by Telegram before it reaches us.\n\n"

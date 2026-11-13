@@ -157,6 +157,12 @@ def substitution_tests():
     sp.resolve_person = lambda name, *a, **k: (*people[name], "d", "ok") if name in people else (None, None, None, "no")
     sp.commons_file_info = lambda f: files.get(f)
     sp._download = lambda url, path: None
+    # This exercises the substitution logic itself, independent of
+    # whether the feature is switched on in production config (off by
+    # default since 2026-11-13 -- see settings.SUBJECT_PHOTOS_ENABLED).
+    from config import settings
+    old_enabled = settings.SUBJECT_PHOTOS_ENABLED
+    settings.SUBJECT_PHOTOS_ENABLED = True
     try:
         r = sp.find_subject_photo("Narendra Modi meets Putin in Moscow", dest_dir=tempfile.mkdtemp())
         check("first-named person's photo unusable -> NO photo (not the second person's)", r is None, r)
@@ -165,6 +171,7 @@ def substitution_tests():
         check("first-named person usable -> that person's photo", r and r["subject"] == "Vladimir Putin", r)
     finally:
         sp.resolve_person, sp.commons_file_info, sp._download = saved[:3]
+        settings.SUBJECT_PHOTOS_ENABLED = old_enabled
         sp._CACHE.clear(); sp._CACHE.update(saved[3])
 
 
@@ -179,6 +186,20 @@ def disabled_tests():
         settings.SUBJECT_PHOTOS_ENABLED = old
 
 
+def ships_disabled_tests():
+    """Regression for an explicit decision (2026-11-13): an automatically
+    picked portrait is still a photo the owner never looked at before it
+    posted -- the exact "image doesn't match the news" complaint this
+    feature existed to work around, not fix. The only images this
+    pipeline attaches now are ones the owner sends via Telegram, so this
+    must ship OFF by default; a future edit flipping it back on without
+    a human decision would silently reintroduce the problem."""
+    print("\nSHIPS DISABLED BY DEFAULT")
+    from config import settings
+    check("SUBJECT_PHOTOS_ENABLED defaults to False",
+          settings.SUBJECT_PHOTOS_ENABLED is False)
+
+
 if __name__ == "__main__":
     name_tests()
     licence_tests()
@@ -187,6 +208,7 @@ if __name__ == "__main__":
     framing_tests()
     substitution_tests()
     disabled_tests()
+    ships_disabled_tests()
     print(f"\n{'=' * 52}\n{len(PASS)} passed, {len(FAIL)} failed")
     if FAIL:
         print("FAILED:")
