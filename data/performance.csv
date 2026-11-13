@@ -561,7 +561,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-02 20:26,BREAKING NEWS,Chennai roads remain badly damaged after Cyclone Murasu rainwater recedes.,108.58846153846153,True,text_card,reel_text,17870580375659635,122125804737424069,True,True,92,0,0,0,,119,0
 2026-11-02 21:26,INDIAN CINEMA,Mumbai civic body removes Dia Mirza Diwali video after BJP objection.,81.16499999999999,True,text_card,reel_text,18119889124974429,122125812123424069,True,True,105,0,0,0,,147,0
 2026-11-02 21:45,INDIA NEWS,Fishermen haul 400 boats ashore as Cyclone Murasu approaches Andhra,79.98806818181818,True,text_card,reel_text,17888107557624683,122125814127424069,True,True,74,0,0,0,,83,0
-2026-11-02 22:45,INDIAN CINEMA,Bigg Boss fame Samarth Jurel joins Emraan Hashmi in Gunmaster G9,69.17166666666667,True,text_card,reel_text,18095916506172165,122125819725424069,True,True,301,30,6,22,,654,67
+2026-11-02 22:45,INDIAN CINEMA,Bigg Boss fame Samarth Jurel joins Emraan Hashmi in Gunmaster G9,69.17166666666667,True,text_card,reel_text,18095916506172165,122125819725424069,True,True,302,30,6,22,,667,67
 2026-11-02 23:05,INDIA NEWS,Two arrested over shooting of Indian-born 19-month-old cheetah in Madhya Pradesh,68.03372093023256,True,text_card,reel_text,17919130518516168,122125821411424069,True,True,107,0,0,0,,123,0
 2026-11-02 23:46,INDIA NEWS,Delhi air quality turns very poor as winter pollution spikes,81.96136363636364,True,text_card,reel_text,17915025006287922,122125824267424069,True,True,95,0,0,0,,105,0
 2026-11-03 09:25,INDIAN CINEMA,Lenny Kravitz is alive after viral rumors falsely report plane crash death.,82.715625,True,text_card,reel_text,18036167978909994,122125883781424069,True,True,117,0,0,0,,136,0
@@ -691,24 +691,24 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-12 03:00,INDIAN CINEMA,Ramayana hits Rs 663 crore worldwide in five days,69.84625,False,full_bleed,,18117801884323265,122127376659424069,True,True,8,0,0,0,0,,0
 2026-11-12 04:25,BREAKING NEWS,Accident victim's daughter files review petition in Kerala High Court,116.75101010101011,True,text_card,reel_text,18380517019241405,122127385275424069,True,True,100,0,0,0,,125,0
 2026-11-12 10:55,INDIA NEWS,CM directs officials to strengthen arguments in Supreme Court on Krishna waters,78.74549999999999,False,full_bleed,,18193545550414656,122127425463424069,True,True,4,0,0,0,0,,0
-2026-11-12 12:05,INDIAN CINEMA,SHOCKING: Amitabh Bachchan's Jalsa at centre of family DISPUTE,80.39324324324323,True,full_bleed,reel_overlay,17916793377497808,122127433299424069,True,True,2501,6,0,4,,4728,10
+2026-11-12 12:05,INDIAN CINEMA,SHOCKING: Amitabh Bachchan's Jalsa at centre of family DISPUTE,80.39324324324323,True,full_bleed,reel_overlay,17916793377497808,122127433299424069,True,True,2514,6,0,4,,4766,10
 2026-11-12 13:05,BREAKING NEWS,From Kismet to Dhurandhar and Ramayana,111.39324324324325,True,text_card,reel_text,18081895994394868,122127444159424069,True,True,144,0,0,0,,173,1
 2026-11-12 14:05,BREAKING NEWS,Alia Bhatt guides Kiara Advani on returning to work after motherhood,106.26447368421053,True,full_bleed,reel_overlay,18081599204710195,122127452151424069,True,True,1472,9,0,0,,1926,10
 2026-11-12 15:06,INDIA NEWS,Dubai NRI loses ₹2.11 crore to fake Telegram investment scam,86.6891089108911,True,text_card,reel_text,18131821741827305,122127457923424069,True,True,103,0,0,0,,112,0
-2026-11-12 16:05,BREAKING NEWS,Karan Johar slams Bollywood stars for demanding VFX budgets over acting.,97.125,True,text_card,reel_text,18111555983179248,122127464637424069,True,True,1318,1,0,1,,1831,2
-2026-11-12 22:25,BREAKING NEWS,Shah Rukh Khan's Rs 300 crore home includes a cryotherapy chamber.,96.47105263157894,True,text_card,reel_text,17967041052233684,122127505803424069,True,True,248,0,0,0,,340,0
+2026-11-12 16:05,BREAKING NEWS,Karan Johar slams Bollywood stars for demanding VFX budgets over acting.,97.125,True,text_card,reel_text,18111555983179248,122127464637424069,True,True,1324,1,0,1,,1836,2
+2026-11-12 22:25,BREAKING NEWS,Shah Rukh Khan's Rs 300 crore home includes a cryotherapy chamber.,96.47105263157894,True,text_card,reel_text,17967041052233684,122127505803424069,True,True,252,0,0,0,,342,0
 2026-11-12 23:25,INDIA NEWS,"After Sam Pitroda's 'Gujarati friend' remark, PM Modi sends Diwali greetings",81.64545454545454,False,full_bleed,,18123668456066163,122127511425424069,True,True,6,0,0,0,0,,0
 2026-11-12 23:45,INDIA NEWS,PM Modi urges Indian farmers to switch away from wheat and rice,66.66262626262626,True,text_card,reel_text,18106114439028973,122127514737424069,True,True,100,0,0,1,,142,1
-2026-11-13 00:01,INDIAN CINEMA,Actress Divya Dutta says OTT projects finally gave her overdue recognition,63.70131578947368,True,full_bleed,reel_overlay,17957039463275703,122127516087424069,True,True,332,1,0,0,,390,2
-2026-11-13 00:30,INDIA NEWS,"Brazilian giant invests ₹2,000 crore in Dharmapuri to create 3,000 jobs.",59.66262626262626,True,text_card,reel_text,18043915694837549,122127519573424069,True,True,95,0,0,0,,112,0
+2026-11-13 00:01,INDIAN CINEMA,Actress Divya Dutta says OTT projects finally gave her overdue recognition,63.70131578947368,True,full_bleed,reel_overlay,17957039463275703,122127516087424069,True,True,338,1,0,0,,403,2
+2026-11-13 00:30,INDIA NEWS,"Brazilian giant invests ₹2,000 crore in Dharmapuri to create 3,000 jobs.",59.66262626262626,True,text_card,reel_text,18043915694837549,122127519573424069,True,True,96,0,0,0,,113,0
 2026-11-13 01:26,INDIA NEWS,"SIR: Draft electoral roll released in Vellore, nearby districts",71.61683673469388,False,full_bleed,,18082970261385120,122127529467424069,True,True,3,0,0,0,0,,0
-2026-11-13 04:15,INDIA NEWS,63 fire personnel felicitated for Bethupalli Lake rescue operation,79.72626262626262,True,text_card,reel_text,18114907523153618,122127548787424069,True,True,79,0,0,0,,86,0
+2026-11-13 04:15,INDIA NEWS,63 fire personnel felicitated for Bethupalli Lake rescue operation,79.72626262626262,True,text_card,reel_text,18114907523153618,122127548787424069,True,True,80,0,0,0,,87,0
 2026-11-13 05:35,INDIA NEWS,Former Bengal minister Ujjal Biswas passes away after long illness,83.718,True,full_bleed,reel_overlay,18020779685953691,122127561591424069,True,True,105,0,0,0,,132,0
-2026-11-13 10:55,INDIA NEWS,Two missing police officers are found dead in Kashmir forest,89.68415841584158,True,text_card,reel_text,18121898284757999,122127590661424069,True,True,88,0,0,0,,110,0
-2026-11-13 11:01,INDIAN CINEMA,Jayasudha breaks silence on old marriage rumours with Kamal Haasan,79.35526315789474,True,text_card,reel_text,18352371616267422,122127591141424069,True,True,132,0,0,0,,157,0
-2026-11-13 13:05,INDIA NEWS,Centre Extends Ban On Hate Preacher Zakir Naik's Islamic Research Foundation,83.48316831683168,True,text_card,reel_text,17936635536145802,122127610353424069,True,True,133,0,0,0,,159,0
-2026-11-13 14:05,INDIA NEWS,"C.S. Karnan, controversial former High Court judge, passes away in Chennai",66.47892156862746,True,text_card,reel_text,17954845854340034,122127616917424069,True,True,109,0,0,0,,134,0
+2026-11-13 10:55,INDIA NEWS,Two missing police officers are found dead in Kashmir forest,89.68415841584158,True,text_card,reel_text,18121898284757999,122127590661424069,True,True,90,0,0,0,,112,0
+2026-11-13 11:01,INDIAN CINEMA,Jayasudha breaks silence on old marriage rumours with Kamal Haasan,79.35526315789474,True,text_card,reel_text,18352371616267422,122127591141424069,True,True,133,0,0,0,,158,0
+2026-11-13 13:05,INDIA NEWS,Centre Extends Ban On Hate Preacher Zakir Naik's Islamic Research Foundation,83.48316831683168,True,text_card,reel_text,17936635536145802,122127610353424069,True,True,134,0,0,0,,160,0
+2026-11-13 14:05,INDIA NEWS,"C.S. Karnan, controversial former High Court judge, passes away in Chennai",66.47892156862746,True,text_card,reel_text,17954845854340034,122127616917424069,True,True,116,0,0,0,,139,0
 2026-11-13 15:26,BREAKING NEWS,"Rahul Gandhi claims PM Modi taps his phone, dares him to debate.",96.51138613861386,True,text_card,reel_text,17982102639139030,122127625857424069,True,True,146,0,0,0,,191,0
-2026-11-13 16:25,BREAKING NEWS,"Producer Jayanta Mukherjee, husband of actress Moushumi Chatterjee, dies",96.27564102564102,True,text_card,reel_text,18027690950870123,122127635847424069,True,True,73,0,0,0,,89,0
-2026-11-13 22:26,BREAKING NEWS,Dhurandhar and Ramayana secure top opening slots at IFFI 2026,94.3474358974359,True,text_card,reel_text,18130597222644342,122127673989424069,True,True,,,,,,,
-2026-11-13 23:26,INDIAN CINEMA,Akshay Kumar's comedy Mauja Hi Mauja locks February 2027 release.,77.3474358974359,True,text_card,reel_text,18216252265316848,122127680139424069,True,True,,,,,,,
+2026-11-13 16:25,BREAKING NEWS,"Producer Jayanta Mukherjee, husband of actress Moushumi Chatterjee, dies",96.27564102564102,True,text_card,reel_text,18027690950870123,122127635847424069,True,True,106,0,0,0,,124,0
+2026-11-13 22:26,BREAKING NEWS,Dhurandhar and Ramayana secure top opening slots at IFFI 2026,94.3474358974359,True,text_card,reel_text,18130597222644342,122127673989424069,True,True,15,0,0,0,,29,0
+2026-11-13 23:26,INDIAN CINEMA,Akshay Kumar's comedy Mauja Hi Mauja locks February 2027 release.,77.3474358974359,True,text_card,reel_text,18216252265316848,122127680139424069,True,True,0,0,0,0,,1,0
