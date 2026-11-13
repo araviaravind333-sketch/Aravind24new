@@ -24,6 +24,7 @@ import json
 import os
 import re
 import sys
+import tempfile
 import time
 import datetime as dt
 import urllib.request
@@ -1196,7 +1197,32 @@ def _one_line_summary(story, max_chars=120):
     return s[:max_chars].rstrip() + ("\u2026" if len(s) > max_chars else "")
 
 
-def _render_reveal_reel(video_path, card_path, render_card, n_lines, category_label=None):
+def _narrate(headline, subhead=None):
+    """Synthesizes narration audio for a Reel in the owner's cloned voice
+    (2026-11-13, by explicit request: a silent still card gives a non-
+    follower no reason to stay past the first second). Returns a wav
+    path, or None if the clone isn't set up (settings.REEL_CLONE_ENABLED
+    / data/voice/owner_voice.pt -- see src/voice_clone.py) or synthesis
+    fails for any reason -- narration is a bonus, never something worth
+    losing a post over, so every failure here just falls back to the
+    existing silent Reel, same as every other image/video step in this
+    pipeline that degrades rather than drops a post."""
+    from src import voice_clone
+    if not voice_clone.clone_available():
+        return None
+    text = f"{headline}. {subhead}" if subhead else headline
+    try:
+        synth = voice_clone.make_clone_synth()
+        wav_path = os.path.join(tempfile.mkdtemp(prefix="narration_"), "narration.wav")
+        synth(text, wav_path)
+        return wav_path
+    except Exception as e:
+        print("voice narration failed, posting the silent Reel instead:", e)
+        return None
+
+
+def _render_reveal_reel(video_path, card_path, render_card, n_lines, category_label=None,
+                         audio_path=None):
     """Builds a Reel whose headline animates in a line at a time.
 
     The still card is rendered first and kept as `card_path` because the
@@ -1204,7 +1230,11 @@ def _render_reveal_reel(video_path, card_path, render_card, n_lines, category_la
     the animation path fails -- ffmpeg, the concat list, a renderer that
     does not understand reveal_lines -- this falls back to the original
     held-still Reel rather than losing the post. Motion is an
-    improvement to test, not something worth dropping a post over."""
+    improvement to test, not something worth dropping a post over.
+
+    `audio_path` (2026-11-13, owner's cloned voice) is passed straight
+    through to both the reveal animation and its still-Reel fallback, so
+    a narration failure in the fallback path still carries the voice."""
     render_card(card_path, None)            # the complete card
     frames, tmp = [], []
     try:
@@ -1217,10 +1247,10 @@ def _render_reveal_reel(video_path, card_path, render_card, n_lines, category_la
         end_card = f"{os.path.splitext(card_path)[0]}-end.jpg"
         feed_post.render_follow_endcard(end_card, category=category_label)
         tmp.append(end_card)
-        video.render_reel_reveal(frames, video_path, end_frame=end_card)
+        video.render_reel_reveal(frames, video_path, end_frame=end_card, audio_path=audio_path)
     except Exception as e:
         print("headline reveal failed, using the still Reel instead:", e)
-        video.render_reel(card_path, video_path)
+        video.render_reel(card_path, video_path, audio_path=audio_path)
     finally:
         for p in tmp + [card_path]:
             try:
@@ -1475,38 +1505,54 @@ def _render_story(story, ist, is_reel, forced_image_path=None,
             elif has_photo:
                 reel_variant_used = "reel_overlay"
                 reel_card_path = os.path.join(out_dir, f"reel-card-{stamp}.jpg")
-                _render_reveal_reel(
-                    video_path, reel_card_path,
-                    lambda path, reveal: feed_post.render_overlay_reel(
-                        photo_path=img_path,
-                        category=category_label,
-                        headline=written["headline"],
-                        accent_word=written["accent_word"],
-                        out_path=path,
-                        handle=settings.BRAND_HANDLE,
-                        reveal_lines=reveal,
-                    ),
-                    feed_post.reel_line_count(written["headline"], photo=True),
-                    category_label=category_label)
+                narration_path = _narrate(written["headline"])
+                try:
+                    _render_reveal_reel(
+                        video_path, reel_card_path,
+                        lambda path, reveal: feed_post.render_overlay_reel(
+                            photo_path=img_path,
+                            category=category_label,
+                            headline=written["headline"],
+                            accent_word=written["accent_word"],
+                            out_path=path,
+                            handle=settings.BRAND_HANDLE,
+                            reveal_lines=reveal,
+                        ),
+                        feed_post.reel_line_count(written["headline"], photo=True),
+                        category_label=category_label, audio_path=narration_path)
+                finally:
+                    if narration_path:
+                        try:
+                            os.remove(narration_path)
+                        except OSError:
+                            pass
                 print(f"Rendered reel ({reel_variant_used}):", video_path)
             else:
                 reel_variant_used = "reel_text"
                 reel_card_path = os.path.join(out_dir, f"reel-card-{stamp}.jpg")
                 _subhead = _one_line_summary(story)
-                _render_reveal_reel(
-                    video_path, reel_card_path,
-                    lambda path, reveal: feed_post.render_text_reel(
-                        category=category_label,
-                        headline=written["headline"],
-                        accent_word=written["accent_word"],
-                        out_path=path,
-                        subhead=_subhead,
-                        footer=settings.BRAND_FOOTER,
-                        handle=settings.BRAND_HANDLE,
-                        reveal_lines=reveal,
-                    ),
-                    feed_post.reel_line_count(written["headline"], photo=False),
-                    category_label=category_label)
+                narration_path = _narrate(written["headline"], _subhead)
+                try:
+                    _render_reveal_reel(
+                        video_path, reel_card_path,
+                        lambda path, reveal: feed_post.render_text_reel(
+                            category=category_label,
+                            headline=written["headline"],
+                            accent_word=written["accent_word"],
+                            out_path=path,
+                            subhead=_subhead,
+                            footer=settings.BRAND_FOOTER,
+                            handle=settings.BRAND_HANDLE,
+                            reveal_lines=reveal,
+                        ),
+                        feed_post.reel_line_count(written["headline"], photo=False),
+                        category_label=category_label, audio_path=narration_path)
+                finally:
+                    if narration_path:
+                        try:
+                            os.remove(narration_path)
+                        except OSError:
+                            pass
                 print("Rendered reel (text card):", video_path)
         except Exception as e:
             print("Reel render failed, falling back to static image post:", e)

@@ -45,11 +45,25 @@ def clone_available():
 
 
 def ensure_deps():
+    """Self-sufficient regardless of caller (2026-11-13: narration now
+    also fires from the regular per-story Reel pipeline, which has no
+    equivalent of daily-carousel.yml's own manual CPU-torch-first
+    workflow step): installs CPU-only torch BEFORE chatterbox-tts when
+    torch isn't already present, so a caller that skips that manual
+    step never silently pulls in the default (multi-GB CUDA) wheel."""
     try:
         import chatterbox  # noqa: F401
+        return
     except ImportError:
-        print("voice_clone: installing chatterbox-tts (first use)...")
-        subprocess.run([sys.executable, "-m", "pip", "install", "-q", "chatterbox-tts"], check=True)
+        pass
+    print("voice_clone: installing chatterbox-tts (first use)...")
+    try:
+        import torch  # noqa: F401
+    except ImportError:
+        subprocess.run([sys.executable, "-m", "pip", "install", "-q",
+                        "torch==2.6.0", "torchaudio==2.6.0",
+                        "--index-url", "https://download.pytorch.org/whl/cpu"], check=True)
+    subprocess.run([sys.executable, "-m", "pip", "install", "-q", "chatterbox-tts"], check=True)
 
 
 def _load_model():

@@ -37,6 +37,15 @@ jobs:
       - name: Ensure ffmpeg (for Reels rendering)
         run: command -v ffmpeg || (sudo apt-get update && sudo apt-get install -y ffmpeg)
 
+      - name: Cache the voice model (owner-narrated Reels, 2026-11-13)
+        # Unconditional -- see the same step's comment in telegram-check.yml
+        # for why: whether this run renders a Reel is only decided deep
+        # inside render_breaking(), so there's no cheap way to pre-check.
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: chatterbox-model-v1
+
       - name: Check for breaking news and render if found
         env:
           ANTHROPIC_API_KEY:      ${{ secrets.ANTHROPIC_API_KEY }}

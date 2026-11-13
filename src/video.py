@@ -2,10 +2,13 @@
 Reel Video Renderer
 ====================
 Turns the finished branded post image into a Reel: the static card held
-still for a few seconds, silent, no zoom/pan/audio — by request.
+still, optionally narrated in the owner's own cloned voice (2026-11-13,
+by explicit request -- a silent still card gives a non-follower no
+reason to stay past the first second). No zoom/pan, still -- that was
+tried and rejected on sight regardless of narration.
 
 No paid service: ffmpeg (preinstalled on GitHub Actions runners) encodes
-the still image as a short silent video.
+the still image as a video, muxed with narration audio when given.
 """
 
 import os
@@ -33,23 +36,31 @@ def probe_duration(video_path):
         return None
 
 
-def render_reel(image_path, out_path, **_ignored):
-    """Holds the branded card as a Reel, completely still, silent -- the
-    Ken Burns zoom effect tried here was reverted by request; it didn't
-    look good in practice regardless of the algorithmic theory behind it.
+def render_reel(image_path, out_path, audio_path=None, **_ignored):
+    """Holds the branded card as a Reel -- completely still (the Ken Burns
+    zoom effect tried here was reverted by request; it didn't look good
+    in practice regardless of the algorithmic theory behind it), narrated
+    when `audio_path` is given (the owner's cloned voice -- see
+    src/voice_clone.py), otherwise silent exactly as before.
 
-    Keeps one real fix made alongside that experiment: this is sometimes
-    called with the 4:5 (1080x1350) static feed card as the source (the
-    no-photo text_card/alert_card fallback, which has no dedicated 9:16
-    reel design) -- a plain scale=w:h used to stretch that 4:5 image
-    vertically to fit the 9:16 reel frame instead of fitting it properly.
-    Cover-fit (scale + center-crop) first, matching how every photo
-    elsewhere in this pipeline is fit into its frame."""
+    Keeps one real fix made alongside the zoom experiment: this is
+    sometimes called with the 4:5 (1080x1350) static feed card as the
+    source (the no-photo text_card/alert_card fallback, which has no
+    dedicated 9:16 reel design) -- a plain scale=w:h used to stretch that
+    4:5 image vertically to fit the 9:16 reel frame instead of fitting it
+    properly. Cover-fit (scale + center-crop) first, matching how every
+    photo elsewhere in this pipeline is fit into its frame.
+
+    With narration, the image is looped (infinite) against the audio
+    track and `-shortest` stops the output exactly when the narration
+    ends -- so REEL_DURATION_SEC only governs the silent case; a spoken
+    headline is almost always longer than 6s on its own."""
     w, h = settings.REEL_WIDTH, settings.REEL_HEIGHT
     vf = f"scale={w}:{h}:force_original_aspect_ratio=increase,crop={w}:{h}"
-    cmd = [
-        "ffmpeg", "-y",
-        "-loop", "1", "-i", image_path,
+    cmd = ["ffmpeg", "-y", "-loop", "1", "-i", image_path]
+    if audio_path:
+        cmd += ["-i", audio_path]
+    cmd += [
         "-vf", vf,
         # No -crf here used to mean libx264's default (23), which on a
         # single still frame held for several seconds produced a visibly
@@ -60,18 +71,22 @@ def render_reel(image_path, out_path, **_ignored):
         # frame that matters sharp.
         "-c:v", "libx264", "-tune", "stillimage", "-crf", "16",
         "-pix_fmt", "yuv420p", "-movflags", "+faststart",
-        "-t", str(settings.REEL_DURATION_SEC),
-        out_path,
     ]
+    if audio_path:
+        cmd += ["-c:a", "aac", "-b:a", "128k", "-shortest"]
+    else:
+        cmd += ["-t", str(settings.REEL_DURATION_SEC)]
+    cmd += [out_path]
     result = subprocess.run(cmd, capture_output=True, text=True, timeout=180)
     if result.returncode != 0 or not os.path.exists(out_path):
         raise RuntimeError(f"ffmpeg failed ({result.returncode}): {result.stderr[-2000:]}")
     return out_path
 
 
-def render_reel_reveal(frame_paths, out_path, step_sec=0.28, end_frame=None, end_sec=1.1):
+def render_reel_reveal(frame_paths, out_path, step_sec=0.28, end_frame=None, end_sec=1.1,
+                        audio_path=None):
     """Animates the headline in, a line at a time, then holds the
-    finished card for the rest of REEL_DURATION_SEC.
+    finished card for the rest of the Reel's total length.
 
     Why this and not a Ken Burns push on the photo: that was tried here
     before and rejected on sight (see render_reel). A slow zoom moves
@@ -86,10 +101,22 @@ def render_reel_reveal(frame_paths, out_path, step_sec=0.28, end_frame=None, end
     Each frame is the same card with one more headline line drawn, and
     all surrounding geometry is measured from the FULL headline (see
     feed_post.render_overlay_reel), so nothing reflows between frames --
-    the words simply appear."""
+    the words simply appear.
+
+    `audio_path` (2026-11-13, owner's cloned voice -- see
+    src/voice_clone.py): when given, the total length is whichever is
+    LONGER of REEL_DURATION_SEC or the narration's own duration (plus a
+    short buffer) -- a spoken headline is almost always longer than the
+    6s silent default, and the reveal/hold timing below is computed from
+    that stretched total so the finished card still holds for a real,
+    readable stretch instead of being swallowed by a sudden cut once the
+    narration ends."""
     if not frame_paths:
         raise ValueError("render_reel_reveal needs at least one frame")
     total = settings.REEL_DURATION_SEC
+    if audio_path:
+        narration_sec = probe_duration(audio_path) or total
+        total = max(total, narration_sec + 0.3)
     # The animation must never eat the whole Reel: the finished headline
     # has to stay up long enough to actually be read.
     step = min(step_sec, (total * 0.45) / max(1, len(frame_paths)))
@@ -113,14 +140,18 @@ def render_reel_reveal(frame_paths, out_path, step_sec=0.28, end_frame=None, end
         f.write(f"file '{os.path.abspath(seq[-1][0])}'\n")
 
     w, h = settings.REEL_WIDTH, settings.REEL_HEIGHT
-    cmd = [
-        "ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", listing,
+    cmd = ["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", listing]
+    if audio_path:
+        cmd += ["-i", audio_path]
+    cmd += [
         "-vf", f"scale={w}:{h}:force_original_aspect_ratio=increase,"
                f"crop={w}:{h},fps=30,format=yuv420p",
         "-c:v", "libx264", "-crf", "18", "-preset", "medium",
         "-movflags", "+faststart", "-t", str(total),
-        out_path,
     ]
+    if audio_path:
+        cmd += ["-c:a", "aac", "-b:a", "128k"]
+    cmd += [out_path]
     try:
         result = subprocess.run(cmd, capture_output=True, text=True, timeout=240)
     finally:

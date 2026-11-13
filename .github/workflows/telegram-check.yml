@@ -37,6 +37,24 @@ jobs:
       - name: Ensure ffmpeg (for Reels rendering)
         run: command -v ffmpeg || (sudo apt-get update && sudo apt-get install -y ffmpeg)
 
+      - name: Cache the voice model (owner-narrated Reels, 2026-11-13)
+        # Unconditional, unlike daily-carousel.yml's version of this step --
+        # whether THIS cycle resolves a candidate into a new Reel is only
+        # decided deep inside telegram-check (it polls Telegram, waits out
+        # grace periods, etc.), so there is no cheap way to know in advance
+        # whether the ~3GB voice model will be needed this run. The cache
+        # step itself is fast even as a no-op; without it, every run that
+        # DOES render a Reel would redownload the full model from Hugging
+        # Face from scratch (this repo is public, so the extra Actions
+        # minutes cost nothing, but the redownload time and bandwidth
+        # still would). src/voice_clone.py's own ensure_deps()/clone_
+        # available() stay the gate for whether synthesis is actually
+        # attempted at all -- this just makes it cheap when it is.
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: chatterbox-model-v1
+
       - name: Check Telegram queue, send/resolve candidates
         env:
           ANTHROPIC_API_KEY:        ${{ secrets.ANTHROPIC_API_KEY }}
