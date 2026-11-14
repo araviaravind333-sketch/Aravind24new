@@ -561,7 +561,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-02 20:26,BREAKING NEWS,Chennai roads remain badly damaged after Cyclone Murasu rainwater recedes.,108.58846153846153,True,text_card,reel_text,17870580375659635,122125804737424069,True,True,92,0,0,0,,119,0
 2026-11-02 21:26,INDIAN CINEMA,Mumbai civic body removes Dia Mirza Diwali video after BJP objection.,81.16499999999999,True,text_card,reel_text,18119889124974429,122125812123424069,True,True,105,0,0,0,,147,0
 2026-11-02 21:45,INDIA NEWS,Fishermen haul 400 boats ashore as Cyclone Murasu approaches Andhra,79.98806818181818,True,text_card,reel_text,17888107557624683,122125814127424069,True,True,74,0,0,0,,83,0
-2026-11-02 22:45,INDIAN CINEMA,Bigg Boss fame Samarth Jurel joins Emraan Hashmi in Gunmaster G9,69.17166666666667,True,text_card,reel_text,18095916506172165,122125819725424069,True,True,309,30,6,22,,692,67
+2026-11-02 22:45,INDIAN CINEMA,Bigg Boss fame Samarth Jurel joins Emraan Hashmi in Gunmaster G9,69.17166666666667,True,text_card,reel_text,18095916506172165,122125819725424069,True,True,309,30,6,22,,693,67
 2026-11-02 23:05,INDIA NEWS,Two arrested over shooting of Indian-born 19-month-old cheetah in Madhya Pradesh,68.03372093023256,True,text_card,reel_text,17919130518516168,122125821411424069,True,True,107,0,0,0,,123,0
 2026-11-02 23:46,INDIA NEWS,Delhi air quality turns very poor as winter pollution spikes,81.96136363636364,True,text_card,reel_text,17915025006287922,122125824267424069,True,True,95,0,0,0,,105,0
 2026-11-03 09:25,INDIAN CINEMA,Lenny Kravitz is alive after viral rumors falsely report plane crash death.,82.715625,True,text_card,reel_text,18036167978909994,122125883781424069,True,True,117,0,0,0,,136,0
@@ -709,24 +709,24 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-13 13:05,INDIA NEWS,Centre Extends Ban On Hate Preacher Zakir Naik's Islamic Research Foundation,83.48316831683168,True,text_card,reel_text,17936635536145802,122127610353424069,True,True,134,0,0,0,,160,0
 2026-11-13 14:05,INDIA NEWS,"C.S. Karnan, controversial former High Court judge, passes away in Chennai",66.47892156862746,True,text_card,reel_text,17954845854340034,122127616917424069,True,True,117,0,0,0,,140,0
 2026-11-13 15:26,BREAKING NEWS,"Rahul Gandhi claims PM Modi taps his phone, dares him to debate.",96.51138613861386,True,text_card,reel_text,17982102639139030,122127625857424069,True,True,148,0,0,0,,193,0
-2026-11-13 16:25,BREAKING NEWS,"Producer Jayanta Mukherjee, husband of actress Moushumi Chatterjee, dies",96.27564102564102,True,text_card,reel_text,18027690950870123,122127635847424069,True,True,109,0,0,0,,127,0
+2026-11-13 16:25,BREAKING NEWS,"Producer Jayanta Mukherjee, husband of actress Moushumi Chatterjee, dies",96.27564102564102,True,text_card,reel_text,18027690950870123,122127635847424069,True,True,110,0,0,0,,128,0
 2026-11-13 22:26,BREAKING NEWS,Dhurandhar and Ramayana secure top opening slots at IFFI 2026,94.3474358974359,True,text_card,reel_text,18130597222644342,122127673989424069,True,True,127,0,0,0,,152,0
 2026-11-13 23:26,INDIAN CINEMA,Akshay Kumar's comedy Mauja Hi Mauja locks February 2027 release.,77.3474358974359,True,text_card,reel_text,18216252265316848,122127680139424069,True,True,149,0,0,0,,176,0
 2026-11-14 00:36,INDIA NEWS,Three Malappuram family members die in UAE road crash,73.4510101010101,True,text_card,reel_text,17971227287964104,122127689751424069,True,True,114,0,0,0,,136,0
 2026-11-14 00:46,INDIA NEWS,Parliamentary panel inspects ISRO and HAL facilities in Bengaluru,78.61683168316831,True,text_card,reel_text,18150897469563376,122127690771424069,True,True,97,0,0,0,,107,0
 2026-11-14 01:06,INDIA NEWS,Police arrest man for setting house on fire in Vellore.,61.616831683168314,True,text_card,reel_text,18135159476499962,122127692493424069,True,True,101,0,0,0,,118,0
-2026-11-14 01:26,INDIA NEWS,Andhra Pradesh bags ₹9.88 lakh crore investment deal in Vizag,59.616831683168314,True,text_card,reel_text,17992535565069764,122127694815424069,True,True,92,0,0,0,,105,0
+2026-11-14 01:26,INDIA NEWS,Andhra Pradesh bags ₹9.88 lakh crore investment deal in Vizag,59.616831683168314,True,text_card,reel_text,17992535565069764,122127694815424069,True,True,95,0,0,0,,105,0
 2026-11-14 04:16,INDIA NEWS,PM Modi aims to power every Indian farm with solar energy,73.4510101010101,True,text_card,reel_text,18114363059324498,122127710343424069,True,True,38,0,0,0,,43,0
-2026-11-14 05:46,BREAKING NEWS,Central agency arrests Mahadev betting app promoter over money laundering,93.61456310679611,True,text_card,reel_text,18183629212432138,122127719007424069,True,True,148,0,0,0,,169,0
+2026-11-14 05:46,BREAKING NEWS,Central agency arrests Mahadev betting app promoter over money laundering,93.61456310679611,True,text_card,reel_text,18183629212432138,122127719007424069,True,True,149,0,0,0,,169,0
 2026-11-14 11:06,BREAKING NEWS,Suriya crime thriller Scene locks massive Rs 88 crore OTT deal,97.11794871794872,True,text_card,reel_text,18034166909680909,122127752793424069,True,True,173,1,0,0,,211,1
-2026-11-14 12:06,BREAKING NEWS,"Rana Daggubati on his first-ever horror movie, led by Kangana Ranaut",96.12948717948717,True,text_card,reel_text,18144146350618002,122127758301424069,True,True,296,1,0,0,,376,1
-2026-11-14 13:06,BREAKING NEWS,CBI raids six states in illegal Mahadev betting app scam,94.63653846153846,True,text_card,reel_text,18647037295017205,122127764889424069,True,True,79,0,0,0,,85,0
+2026-11-14 12:06,BREAKING NEWS,"Rana Daggubati on his first-ever horror movie, led by Kangana Ranaut",96.12948717948717,True,text_card,reel_text,18144146350618002,122127758301424069,True,True,305,1,0,0,,387,1
+2026-11-14 13:06,BREAKING NEWS,CBI raids six states in illegal Mahadev betting app scam,94.63653846153846,True,text_card,reel_text,18647037295017205,122127764889424069,True,True,80,0,0,0,,86,0
 2026-11-14 14:06,INDIAN CINEMA,Varun Dhawan leads Yash Raj Films' first ever horror movie.,64.14358974358974,True,text_card,reel_text,18118191617090840,122127770175424069,True,True,130,1,0,0,,152,1
 2026-11-14 15:26,INDIAN CINEMA,Student lands Vijay Sethupathi movie role after tagging along for sister's audition,79.14358974358974,True,text_card,reel_text,17884793217629670,122127776883424069,True,True,155,1,0,0,,188,1
 2026-11-14 16:26,INDIAN CINEMA,Bollywood stars double personal security following gunfire near actor residence,76.85875,True,text_card,reel_text,18133135738810552,122127799911424069,True,True,120,0,0,0,,132,0
-2026-11-14 22:26,BREAKING NEWS,Tiger Shroff car attack in Mumbai sparks safety fears for Bollywood stars,118.49047619047619,True,text_card,reel_text,18118262732591985,122127855657424069,True,True,169,0,0,0,,201,0
-2026-11-14 23:26,BREAKING NEWS,Delhi police arrest shooter who also targeted famous Bollywood actor,93.73872549019609,True,text_card,reel_text,18138809842568569,122127861909424069,True,True,53,0,0,0,,75,0
-2026-11-15 00:36,INDIA NEWS,Three children among four killed in massive Arunachal Pradesh fire.,67.46134020618557,True,text_card,reel_text,17893079436653524,122127869619424069,True,True,6,0,0,0,,9,0
-2026-11-15 02:16,INDIA NEWS,Thief steals Rs 50-crore jewellery in Madurai and escapes through lift shaft,74.5025,True,text_card,reel_text,18671651119058079,122127878859424069,True,True,,,,,,,
-2026-11-15 02:26,INDIA NEWS,Elite anti-Maoist commandos in Telangana get advanced new shooting range,61.71386138613862,True,text_card,reel_text,18139973686651758,122127880491424069,True,True,,,,,,,
-2026-11-15 03:06,INDIA NEWS,Magnitude 4.5 earthquake hits Maharashtra's Jalgaon with zero damage reported,79.6935,True,text_card,reel_text,18120225902083076,122127888387424069,True,True,,,,,,,
+2026-11-14 22:26,BREAKING NEWS,Tiger Shroff car attack in Mumbai sparks safety fears for Bollywood stars,118.49047619047619,True,text_card,reel_text,18118262732591985,122127855657424069,True,True,186,0,0,0,,209,0
+2026-11-14 23:26,BREAKING NEWS,Delhi police arrest shooter who also targeted famous Bollywood actor,93.73872549019609,True,text_card,reel_text,18138809842568569,122127861909424069,True,True,105,0,0,0,,130,0
+2026-11-15 00:36,INDIA NEWS,Three children among four killed in massive Arunachal Pradesh fire.,67.46134020618557,True,text_card,reel_text,17893079436653524,122127869619424069,True,True,47,0,0,0,,73,0
+2026-11-15 02:16,INDIA NEWS,Thief steals Rs 50-crore jewellery in Madurai and escapes through lift shaft,74.5025,True,text_card,reel_text,18671651119058079,122127878859424069,True,True,6,0,0,0,,8,0
+2026-11-15 02:26,INDIA NEWS,Elite anti-Maoist commandos in Telangana get advanced new shooting range,61.71386138613862,True,text_card,reel_text,18139973686651758,122127880491424069,True,True,0,0,0,0,,0,0
+2026-11-15 03:06,INDIA NEWS,Magnitude 4.5 earthquake hits Maharashtra's Jalgaon with zero damage reported,79.6935,True,text_card,reel_text,18120225902083076,122127888387424069,True,True,0,0,0,0,,0,0
