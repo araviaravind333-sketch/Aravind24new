@@ -561,7 +561,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-02 20:26,BREAKING NEWS,Chennai roads remain badly damaged after Cyclone Murasu rainwater recedes.,108.58846153846153,True,text_card,reel_text,17870580375659635,122125804737424069,True,True,92,0,0,0,,119,0
 2026-11-02 21:26,INDIAN CINEMA,Mumbai civic body removes Dia Mirza Diwali video after BJP objection.,81.16499999999999,True,text_card,reel_text,18119889124974429,122125812123424069,True,True,105,0,0,0,,147,0
 2026-11-02 21:45,INDIA NEWS,Fishermen haul 400 boats ashore as Cyclone Murasu approaches Andhra,79.98806818181818,True,text_card,reel_text,17888107557624683,122125814127424069,True,True,74,0,0,0,,83,0
-2026-11-02 22:45,INDIAN CINEMA,Bigg Boss fame Samarth Jurel joins Emraan Hashmi in Gunmaster G9,69.17166666666667,True,text_card,reel_text,18095916506172165,122125819725424069,True,True,306,30,6,22,,688,67
+2026-11-02 22:45,INDIAN CINEMA,Bigg Boss fame Samarth Jurel joins Emraan Hashmi in Gunmaster G9,69.17166666666667,True,text_card,reel_text,18095916506172165,122125819725424069,True,True,306,30,6,22,,689,67
 2026-11-02 23:05,INDIA NEWS,Two arrested over shooting of Indian-born 19-month-old cheetah in Madhya Pradesh,68.03372093023256,True,text_card,reel_text,17919130518516168,122125821411424069,True,True,107,0,0,0,,123,0
 2026-11-02 23:46,INDIA NEWS,Delhi air quality turns very poor as winter pollution spikes,81.96136363636364,True,text_card,reel_text,17915025006287922,122125824267424069,True,True,95,0,0,0,,105,0
 2026-11-03 09:25,INDIAN CINEMA,Lenny Kravitz is alive after viral rumors falsely report plane crash death.,82.715625,True,text_card,reel_text,18036167978909994,122125883781424069,True,True,117,0,0,0,,136,0
@@ -648,7 +648,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-09 01:15,INDIAN CINEMA,Suriya stars in quirky investigative drama Scene this Deepavali,67.59482758620689,False,full_bleed,,17973551964187809,122126875113424069,True,True,8,1,0,0,0,,1
 2026-11-09 02:55,INDIA NEWS,Supreme Court settles decades-old hydro power dispute for Himachal Pradesh,79.17833333333334,True,text_card,reel_text,18388132084232544,122126885931424069,True,True,97,0,0,0,,113,0
 2026-11-09 03:55,INDIAN CINEMA,"Bollywood makes people feel insecure, director Farah Khan admits.",71.81071428571428,True,full_bleed,reel_overlay,18073585223781106,122126893035424069,True,True,201,0,0,0,,232,0
-2026-11-09 09:55,INDIAN CINEMA,Dhanush defends Sai Pallavi over backlash against her Ramayana casting.,89.8607142857143,True,full_bleed,reel_overlay,18214962196365883,122126922417424069,True,True,1591,19,0,0,,2394,26
+2026-11-09 09:55,INDIAN CINEMA,Dhanush defends Sai Pallavi over backlash against her Ramayana casting.,89.8607142857143,True,full_bleed,reel_overlay,18214962196365883,122126922417424069,True,True,1591,19,0,0,,2396,26
 2026-11-09 11:15,INDIA NEWS,RBI denies viral reports claiming new cheque book rules from January,78.99157303370787,False,full_bleed,,18122051912038852,122126928975424069,True,True,4,0,0,0,0,,0
 2026-11-09 12:26,BREAKING NEWS,Record 88 days pass without Parliament formally closing Monsoon session,100.05489130434782,True,full_bleed,reel_overlay,18221088481343519,122126936535424069,True,True,96,0,0,0,,115,0
 2026-11-09 13:25,INDIA NEWS,Police find five bodies near Mysuru in Bengaluru family murder case,72.05489130434782,True,text_card,reel_text,17914197738481776,122126944743424069,True,True,106,0,0,0,,127,1
@@ -680,7 +680,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-11 11:46,INDIAN CINEMA,"Donkey named after Chunky Panday sells for ₹72,000 at fair",55.22179487179487,True,text_card,reel_text,18016016102986504,122127262509424069,True,True,151,0,0,0,,184,0
 2026-11-11 12:46,INDIA NEWS,Gang hijacks car carrying ₹1.5 crore Tasmac cash in Kancheepuram,59.78112244897959,False,full_bleed,,18084978629549609,122127273303424069,True,True,5,0,0,0,0,,0
 2026-11-11 13:45,INDIA NEWS,Terror attack convict is shot dead in Uttar Pradesh,73.74848484848485,True,text_card,reel_text,18378613900214598,122127280851424069,True,True,107,0,0,0,,138,0
-2026-11-11 14:46,INDIAN CINEMA,Actor Ranveer Singh’s maternal grandfather passes away at age 96,89.07,True,text_card,reel_text,18036130400896592,122127287373424069,True,True,127,0,0,0,,168,0
+2026-11-11 14:46,INDIAN CINEMA,Actor Ranveer Singh’s maternal grandfather passes away at age 96,89.07,True,text_card,reel_text,18036130400896592,122127287373424069,True,True,128,0,0,0,,170,0
 2026-11-11 15:46,BREAKING NEWS,Three CRPF jawans injured as bike militants open fire in Kashmir,96.715,True,text_card,reel_text,18039170867894689,122127294561424069,True,True,103,0,0,0,,125,0
 2026-11-11 22:25,INDIA NEWS,Congress accuses BJP of bulldozing laws in record 88-day Parliament session,72.82,True,full_bleed,reel_overlay,18118750937087093,122127343299424069,True,True,117,0,0,0,,145,0
 2026-11-11 22:30,BREAKING NEWS,Anirudh marries Kavya in grand Greece ceremony; shares first wedding pictures,93.38026315789475,True,text_card,reel_text,17928056979203692,122127344181424069,True,True,114,2,0,0,,153,2
@@ -689,17 +689,17 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-12 00:25,INDIA NEWS,3.9 magnitude earthquake strikes Shimla with zero damage reported,79.70400000000001,True,text_card,reel_text,18457043746133142,122127358965424069,True,True,103,0,0,0,,123,0
 2026-11-12 01:25,INDIA NEWS,"Delhi's historic North and South Blocks become a Rs 3,230-crore museum.",59.70252525252525,False,full_bleed,,18145038241589260,122127365289424069,True,True,6,0,0,0,0,,0
 2026-11-12 03:00,INDIAN CINEMA,Ramayana hits Rs 663 crore worldwide in five days,69.84625,False,full_bleed,,18117801884323265,122127376659424069,True,True,8,0,0,0,0,,0
-2026-11-12 04:25,BREAKING NEWS,Accident victim's daughter files review petition in Kerala High Court,116.75101010101011,True,text_card,reel_text,18380517019241405,122127385275424069,True,True,100,0,0,0,,125,0
+2026-11-12 04:25,BREAKING NEWS,Accident victim's daughter files review petition in Kerala High Court,116.75101010101011,True,text_card,reel_text,18380517019241405,122127385275424069,True,True,100,0,0,0,,126,0
 2026-11-12 10:55,INDIA NEWS,CM directs officials to strengthen arguments in Supreme Court on Krishna waters,78.74549999999999,False,full_bleed,,18193545550414656,122127425463424069,True,True,5,0,0,0,0,,0
 2026-11-12 12:05,INDIAN CINEMA,SHOCKING: Amitabh Bachchan's Jalsa at centre of family DISPUTE,80.39324324324323,True,full_bleed,reel_overlay,17916793377497808,122127433299424069,True,True,2566,6,0,4,,4842,10
 2026-11-12 13:05,BREAKING NEWS,From Kismet to Dhurandhar and Ramayana,111.39324324324325,True,text_card,reel_text,18081895994394868,122127444159424069,True,True,144,0,0,0,,173,1
-2026-11-12 14:05,BREAKING NEWS,Alia Bhatt guides Kiara Advani on returning to work after motherhood,106.26447368421053,True,full_bleed,reel_overlay,18081599204710195,122127452151424069,True,True,1472,9,0,0,,1928,10
+2026-11-12 14:05,BREAKING NEWS,Alia Bhatt guides Kiara Advani on returning to work after motherhood,106.26447368421053,True,full_bleed,reel_overlay,18081599204710195,122127452151424069,True,True,1472,9,0,0,,1929,10
 2026-11-12 15:06,INDIA NEWS,Dubai NRI loses ₹2.11 crore to fake Telegram investment scam,86.6891089108911,True,text_card,reel_text,18131821741827305,122127457923424069,True,True,103,0,0,0,,112,0
 2026-11-12 16:05,BREAKING NEWS,Karan Johar slams Bollywood stars for demanding VFX budgets over acting.,97.125,True,text_card,reel_text,18111555983179248,122127464637424069,True,True,1330,1,0,1,,1842,2
 2026-11-12 22:25,BREAKING NEWS,Shah Rukh Khan's Rs 300 crore home includes a cryotherapy chamber.,96.47105263157894,True,text_card,reel_text,17967041052233684,122127505803424069,True,True,252,0,0,0,,342,0
 2026-11-12 23:25,INDIA NEWS,"After Sam Pitroda's 'Gujarati friend' remark, PM Modi sends Diwali greetings",81.64545454545454,False,full_bleed,,18123668456066163,122127511425424069,True,True,7,0,0,0,0,,0
 2026-11-12 23:45,INDIA NEWS,PM Modi urges Indian farmers to switch away from wheat and rice,66.66262626262626,True,text_card,reel_text,18106114439028973,122127514737424069,True,True,101,0,0,1,,145,1
-2026-11-13 00:01,INDIAN CINEMA,Actress Divya Dutta says OTT projects finally gave her overdue recognition,63.70131578947368,True,full_bleed,reel_overlay,17957039463275703,122127516087424069,True,True,348,1,0,0,,413,2
+2026-11-13 00:01,INDIAN CINEMA,Actress Divya Dutta says OTT projects finally gave her overdue recognition,63.70131578947368,True,full_bleed,reel_overlay,17957039463275703,122127516087424069,True,True,349,1,0,0,,414,2
 2026-11-13 00:30,INDIA NEWS,"Brazilian giant invests ₹2,000 crore in Dharmapuri to create 3,000 jobs.",59.66262626262626,True,text_card,reel_text,18043915694837549,122127519573424069,True,True,96,0,0,0,,113,0
 2026-11-13 01:26,INDIA NEWS,"SIR: Draft electoral roll released in Vellore, nearby districts",71.61683673469388,False,full_bleed,,18082970261385120,122127529467424069,True,True,4,0,0,0,0,,0
 2026-11-13 04:15,INDIA NEWS,63 fire personnel felicitated for Bethupalli Lake rescue operation,79.72626262626262,True,text_card,reel_text,18114907523153618,122127548787424069,True,True,106,0,0,0,,113,0
@@ -710,17 +710,17 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-13 14:05,INDIA NEWS,"C.S. Karnan, controversial former High Court judge, passes away in Chennai",66.47892156862746,True,text_card,reel_text,17954845854340034,122127616917424069,True,True,117,0,0,0,,140,0
 2026-11-13 15:26,BREAKING NEWS,"Rahul Gandhi claims PM Modi taps his phone, dares him to debate.",96.51138613861386,True,text_card,reel_text,17982102639139030,122127625857424069,True,True,148,0,0,0,,193,0
 2026-11-13 16:25,BREAKING NEWS,"Producer Jayanta Mukherjee, husband of actress Moushumi Chatterjee, dies",96.27564102564102,True,text_card,reel_text,18027690950870123,122127635847424069,True,True,109,0,0,0,,127,0
-2026-11-13 22:26,BREAKING NEWS,Dhurandhar and Ramayana secure top opening slots at IFFI 2026,94.3474358974359,True,text_card,reel_text,18130597222644342,122127673989424069,True,True,108,0,0,0,,133,0
+2026-11-13 22:26,BREAKING NEWS,Dhurandhar and Ramayana secure top opening slots at IFFI 2026,94.3474358974359,True,text_card,reel_text,18130597222644342,122127673989424069,True,True,114,0,0,0,,139,0
 2026-11-13 23:26,INDIAN CINEMA,Akshay Kumar's comedy Mauja Hi Mauja locks February 2027 release.,77.3474358974359,True,text_card,reel_text,18216252265316848,122127680139424069,True,True,148,0,0,0,,175,0
-2026-11-14 00:36,INDIA NEWS,Three Malappuram family members die in UAE road crash,73.4510101010101,True,text_card,reel_text,17971227287964104,122127689751424069,True,True,112,0,0,0,,133,0
-2026-11-14 00:46,INDIA NEWS,Parliamentary panel inspects ISRO and HAL facilities in Bengaluru,78.61683168316831,True,text_card,reel_text,18150897469563376,122127690771424069,True,True,63,0,0,0,,70,0
-2026-11-14 01:06,INDIA NEWS,Police arrest man for setting house on fire in Vellore.,61.616831683168314,True,text_card,reel_text,18135159476499962,122127692493424069,True,True,92,0,0,0,,108,0
-2026-11-14 01:26,INDIA NEWS,Andhra Pradesh bags ₹9.88 lakh crore investment deal in Vizag,59.616831683168314,True,text_card,reel_text,17992535565069764,122127694815424069,True,True,69,0,0,0,,77,0
-2026-11-14 04:16,INDIA NEWS,PM Modi aims to power every Indian farm with solar energy,73.4510101010101,True,text_card,reel_text,18114363059324498,122127710343424069,True,True,30,0,0,0,,33,0
-2026-11-14 05:46,BREAKING NEWS,Central agency arrests Mahadev betting app promoter over money laundering,93.61456310679611,True,text_card,reel_text,18183629212432138,122127719007424069,True,True,145,0,0,0,,165,0
-2026-11-14 11:06,BREAKING NEWS,Suriya crime thriller Scene locks massive Rs 88 crore OTT deal,97.11794871794872,True,text_card,reel_text,18034166909680909,122127752793424069,True,True,171,1,0,0,,209,1
-2026-11-14 12:06,BREAKING NEWS,"Rana Daggubati on his first-ever horror movie, led by Kangana Ranaut",96.12948717948717,True,text_card,reel_text,18144146350618002,122127758301424069,True,True,261,1,0,0,,331,1
-2026-11-14 13:06,BREAKING NEWS,CBI raids six states in illegal Mahadev betting app scam,94.63653846153846,True,text_card,reel_text,18647037295017205,122127764889424069,True,True,35,0,0,0,,49,0
-2026-11-14 14:06,INDIAN CINEMA,Varun Dhawan leads Yash Raj Films' first ever horror movie.,64.14358974358974,True,text_card,reel_text,18118191617090840,122127770175424069,True,True,128,1,0,0,,148,1
-2026-11-14 15:26,INDIAN CINEMA,Student lands Vijay Sethupathi movie role after tagging along for sister's audition,79.14358974358974,True,text_card,reel_text,17884793217629670,122127776883424069,True,True,152,1,0,0,,183,1
-2026-11-14 16:26,INDIAN CINEMA,Bollywood stars double personal security following gunfire near actor residence,76.85875,True,text_card,reel_text,18133135738810552,122127799911424069,True,True,119,0,0,0,,131,0
+2026-11-14 00:36,INDIA NEWS,Three Malappuram family members die in UAE road crash,73.4510101010101,True,text_card,reel_text,17971227287964104,122127689751424069,True,True,114,0,0,0,,135,0
+2026-11-14 00:46,INDIA NEWS,Parliamentary panel inspects ISRO and HAL facilities in Bengaluru,78.61683168316831,True,text_card,reel_text,18150897469563376,122127690771424069,True,True,65,0,0,0,,72,0
+2026-11-14 01:06,INDIA NEWS,Police arrest man for setting house on fire in Vellore.,61.616831683168314,True,text_card,reel_text,18135159476499962,122127692493424069,True,True,96,0,0,0,,111,0
+2026-11-14 01:26,INDIA NEWS,Andhra Pradesh bags ₹9.88 lakh crore investment deal in Vizag,59.616831683168314,True,text_card,reel_text,17992535565069764,122127694815424069,True,True,72,0,0,0,,82,0
+2026-11-14 04:16,INDIA NEWS,PM Modi aims to power every Indian farm with solar energy,73.4510101010101,True,text_card,reel_text,18114363059324498,122127710343424069,True,True,33,0,0,0,,36,0
+2026-11-14 05:46,BREAKING NEWS,Central agency arrests Mahadev betting app promoter over money laundering,93.61456310679611,True,text_card,reel_text,18183629212432138,122127719007424069,True,True,146,0,0,0,,165,0
+2026-11-14 11:06,BREAKING NEWS,Suriya crime thriller Scene locks massive Rs 88 crore OTT deal,97.11794871794872,True,text_card,reel_text,18034166909680909,122127752793424069,True,True,172,1,0,0,,210,1
+2026-11-14 12:06,BREAKING NEWS,"Rana Daggubati on his first-ever horror movie, led by Kangana Ranaut",96.12948717948717,True,text_card,reel_text,18144146350618002,122127758301424069,True,True,265,1,0,0,,337,1
+2026-11-14 13:06,BREAKING NEWS,CBI raids six states in illegal Mahadev betting app scam,94.63653846153846,True,text_card,reel_text,18647037295017205,122127764889424069,True,True,64,0,0,0,,66,0
+2026-11-14 14:06,INDIAN CINEMA,Varun Dhawan leads Yash Raj Films' first ever horror movie.,64.14358974358974,True,text_card,reel_text,18118191617090840,122127770175424069,True,True,129,1,0,0,,149,1
+2026-11-14 15:26,INDIAN CINEMA,Student lands Vijay Sethupathi movie role after tagging along for sister's audition,79.14358974358974,True,text_card,reel_text,17884793217629670,122127776883424069,True,True,153,1,0,0,,184,1
+2026-11-14 16:26,INDIAN CINEMA,Bollywood stars double personal security following gunfire near actor residence,76.85875,True,text_card,reel_text,18133135738810552,122127799911424069,True,True,120,0,0,0,,132,0
