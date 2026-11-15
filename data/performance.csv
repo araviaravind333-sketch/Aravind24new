@@ -691,7 +691,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-12 03:00,INDIAN CINEMA,Ramayana hits Rs 663 crore worldwide in five days,69.84625,False,full_bleed,,18117801884323265,122127376659424069,True,True,8,0,0,0,0,,0
 2026-11-12 04:25,BREAKING NEWS,Accident victim's daughter files review petition in Kerala High Court,116.75101010101011,True,text_card,reel_text,18380517019241405,122127385275424069,True,True,100,0,0,0,,126,0
 2026-11-12 10:55,INDIA NEWS,CM directs officials to strengthen arguments in Supreme Court on Krishna waters,78.74549999999999,False,full_bleed,,18193545550414656,122127425463424069,True,True,5,0,0,0,0,,0
-2026-11-12 12:05,INDIAN CINEMA,SHOCKING: Amitabh Bachchan's Jalsa at centre of family DISPUTE,80.39324324324323,True,full_bleed,reel_overlay,17916793377497808,122127433299424069,True,True,2571,6,0,4,,4846,10
+2026-11-12 12:05,INDIAN CINEMA,SHOCKING: Amitabh Bachchan's Jalsa at centre of family DISPUTE,80.39324324324323,True,full_bleed,reel_overlay,17916793377497808,122127433299424069,True,True,2573,6,0,4,,4848,10
 2026-11-12 13:05,BREAKING NEWS,From Kismet to Dhurandhar and Ramayana,111.39324324324325,True,text_card,reel_text,18081895994394868,122127444159424069,True,True,144,0,0,0,,173,1
 2026-11-12 14:05,BREAKING NEWS,Alia Bhatt guides Kiara Advani on returning to work after motherhood,106.26447368421053,True,full_bleed,reel_overlay,18081599204710195,122127452151424069,True,True,1472,9,0,0,,1929,10
 2026-11-12 15:06,INDIA NEWS,Dubai NRI loses ₹2.11 crore to fake Telegram investment scam,86.6891089108911,True,text_card,reel_text,18131821741827305,122127457923424069,True,True,103,0,0,0,,112,0
@@ -719,16 +719,16 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-14 04:16,INDIA NEWS,PM Modi aims to power every Indian farm with solar energy,73.4510101010101,True,text_card,reel_text,18114363059324498,122127710343424069,True,True,38,0,0,0,,43,0
 2026-11-14 05:46,BREAKING NEWS,Central agency arrests Mahadev betting app promoter over money laundering,93.61456310679611,True,text_card,reel_text,18183629212432138,122127719007424069,True,True,149,0,0,0,,169,0
 2026-11-14 11:06,BREAKING NEWS,Suriya crime thriller Scene locks massive Rs 88 crore OTT deal,97.11794871794872,True,text_card,reel_text,18034166909680909,122127752793424069,True,True,173,1,0,0,,211,1
-2026-11-14 12:06,BREAKING NEWS,"Rana Daggubati on his first-ever horror movie, led by Kangana Ranaut",96.12948717948717,True,text_card,reel_text,18144146350618002,122127758301424069,True,True,312,1,0,0,,396,1
-2026-11-14 13:06,BREAKING NEWS,CBI raids six states in illegal Mahadev betting app scam,94.63653846153846,True,text_card,reel_text,18647037295017205,122127764889424069,True,True,83,0,0,0,,90,0
-2026-11-14 14:06,INDIAN CINEMA,Varun Dhawan leads Yash Raj Films' first ever horror movie.,64.14358974358974,True,text_card,reel_text,18118191617090840,122127770175424069,True,True,130,1,0,0,,152,1
-2026-11-14 15:26,INDIAN CINEMA,Student lands Vijay Sethupathi movie role after tagging along for sister's audition,79.14358974358974,True,text_card,reel_text,17884793217629670,122127776883424069,True,True,157,1,0,0,,192,1
-2026-11-14 16:26,INDIAN CINEMA,Bollywood stars double personal security following gunfire near actor residence,76.85875,True,text_card,reel_text,18133135738810552,122127799911424069,True,True,120,0,0,0,,132,0
-2026-11-14 22:26,BREAKING NEWS,Tiger Shroff car attack in Mumbai sparks safety fears for Bollywood stars,118.49047619047619,True,text_card,reel_text,18118262732591985,122127855657424069,True,True,187,0,0,0,,210,0
-2026-11-14 23:26,BREAKING NEWS,Delhi police arrest shooter who also targeted famous Bollywood actor,93.73872549019609,True,text_card,reel_text,18138809842568569,122127861909424069,True,True,116,0,0,0,,143,0
-2026-11-15 00:36,INDIA NEWS,Three children among four killed in massive Arunachal Pradesh fire.,67.46134020618557,True,text_card,reel_text,17893079436653524,122127869619424069,True,True,81,0,0,0,,92,0
-2026-11-15 02:16,INDIA NEWS,Thief steals Rs 50-crore jewellery in Madurai and escapes through lift shaft,74.5025,True,text_card,reel_text,18671651119058079,122127878859424069,True,True,90,0,0,0,,114,0
-2026-11-15 02:26,INDIA NEWS,Elite anti-Maoist commandos in Telangana get advanced new shooting range,61.71386138613862,True,text_card,reel_text,18139973686651758,122127880491424069,True,True,51,0,0,0,,71,0
-2026-11-15 03:06,INDIA NEWS,Magnitude 4.5 earthquake hits Maharashtra's Jalgaon with zero damage reported,79.6935,True,text_card,reel_text,18120225902083076,122127888387424069,True,True,70,0,0,0,,85,0
-2026-11-15 04:16,INDIA NEWS,Goa Chief Minister Pramod Sawant reveals new state development roadmap,83.61683168316831,True,text_card,reel_text,18053913629818405,122127894003424069,True,True,28,0,0,0,,32,0
-2026-11-15 06:46,TAMIL NADU NEWS,Ex-civil servants ask TVK chief Vijay to push Centre-State panel,69.71000000000001,True,text_card,reel_text,18019433987957687,122127905871424069,True,True,0,0,0,0,,0,0
+2026-11-14 12:06,BREAKING NEWS,"Rana Daggubati on his first-ever horror movie, led by Kangana Ranaut",96.12948717948717,True,text_card,reel_text,18144146350618002,122127758301424069,True,True,315,1,0,0,,400,1
+2026-11-14 13:06,BREAKING NEWS,CBI raids six states in illegal Mahadev betting app scam,94.63653846153846,True,text_card,reel_text,18647037295017205,122127764889424069,True,True,83,0,0,0,,96,0
+2026-11-14 14:06,INDIAN CINEMA,Varun Dhawan leads Yash Raj Films' first ever horror movie.,64.14358974358974,True,text_card,reel_text,18118191617090840,122127770175424069,True,True,131,1,0,0,,153,1
+2026-11-14 15:26,INDIAN CINEMA,Student lands Vijay Sethupathi movie role after tagging along for sister's audition,79.14358974358974,True,text_card,reel_text,17884793217629670,122127776883424069,True,True,158,1,0,0,,194,1
+2026-11-14 16:26,INDIAN CINEMA,Bollywood stars double personal security following gunfire near actor residence,76.85875,True,text_card,reel_text,18133135738810552,122127799911424069,True,True,121,0,0,0,,136,0
+2026-11-14 22:26,BREAKING NEWS,Tiger Shroff car attack in Mumbai sparks safety fears for Bollywood stars,118.49047619047619,True,text_card,reel_text,18118262732591985,122127855657424069,True,True,187,0,0,0,,211,0
+2026-11-14 23:26,BREAKING NEWS,Delhi police arrest shooter who also targeted famous Bollywood actor,93.73872549019609,True,text_card,reel_text,18138809842568569,122127861909424069,True,True,118,0,0,0,,148,0
+2026-11-15 00:36,INDIA NEWS,Three children among four killed in massive Arunachal Pradesh fire.,67.46134020618557,True,text_card,reel_text,17893079436653524,122127869619424069,True,True,93,0,0,0,,105,0
+2026-11-15 02:16,INDIA NEWS,Thief steals Rs 50-crore jewellery in Madurai and escapes through lift shaft,74.5025,True,text_card,reel_text,18671651119058079,122127878859424069,True,True,96,0,0,0,,119,0
+2026-11-15 02:26,INDIA NEWS,Elite anti-Maoist commandos in Telangana get advanced new shooting range,61.71386138613862,True,text_card,reel_text,18139973686651758,122127880491424069,True,True,60,0,0,0,,83,0
+2026-11-15 03:06,INDIA NEWS,Magnitude 4.5 earthquake hits Maharashtra's Jalgaon with zero damage reported,79.6935,True,text_card,reel_text,18120225902083076,122127888387424069,True,True,75,0,0,0,,89,0
+2026-11-15 04:16,INDIA NEWS,Goa Chief Minister Pramod Sawant reveals new state development roadmap,83.61683168316831,True,text_card,reel_text,18053913629818405,122127894003424069,True,True,31,0,0,0,,35,0
+2026-11-15 06:46,TAMIL NADU NEWS,Ex-civil servants ask TVK chief Vijay to push Centre-State panel,69.71000000000001,True,text_card,reel_text,18019433987957687,122127905871424069,True,True,54,0,0,0,,66,0
