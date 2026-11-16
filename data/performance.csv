@@ -652,7 +652,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-09 11:15,INDIA NEWS,RBI denies viral reports claiming new cheque book rules from January,78.99157303370787,False,full_bleed,,18122051912038852,122126928975424069,True,True,4,0,0,0,0,,0
 2026-11-09 12:26,BREAKING NEWS,Record 88 days pass without Parliament formally closing Monsoon session,100.05489130434782,True,full_bleed,reel_overlay,18221088481343519,122126936535424069,True,True,96,0,0,0,,115,0
 2026-11-09 13:25,INDIA NEWS,Police find five bodies near Mysuru in Bengaluru family murder case,72.05489130434782,True,text_card,reel_text,17914197738481776,122126944743424069,True,True,107,0,0,0,,128,1
-2026-11-09 14:36,INDIAN CINEMA,Vivek Oberoi reveals underworld calls forced Bollywood to boycott him,64.47833333333332,True,full_bleed,reel_overlay,18106179686344003,122126963523424069,True,True,675,3,0,0,,861,3
+2026-11-09 14:36,INDIAN CINEMA,Vivek Oberoi reveals underworld calls forced Bollywood to boycott him,64.47833333333332,True,full_bleed,reel_overlay,18106179686344003,122126963523424069,True,True,675,3,0,0,,862,3
 2026-11-09 15:45,TAMIL NADU NEWS,TN Deputy Speaker accused of assaulting man and forcing video denial,77,True,text_card,reel_text,17901807417673893,122126973447424069,True,True,99,0,0,0,,137,0
 2026-11-09 18:45,INDIA NEWS,Delhi pollution monitors go dark on Deepavali night as smog peaks.,63.916304347826085,True,text_card,reel_text,18640853815041218,122126996757424069,True,True,29,0,0,0,,30,0
 2026-11-09 19:26,INDIA NEWS,Karnataka petrol samples contain ethanol blend beyond the mandated limit,71.89505494505494,True,full_bleed,reel_overlay,18119287522999184,122127001353424069,True,True,50,0,0,0,,61,0
@@ -693,7 +693,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-12 10:55,INDIA NEWS,CM directs officials to strengthen arguments in Supreme Court on Krishna waters,78.74549999999999,False,full_bleed,,18193545550414656,122127425463424069,True,True,6,0,0,0,0,,0
 2026-11-12 12:05,INDIAN CINEMA,SHOCKING: Amitabh Bachchan's Jalsa at centre of family DISPUTE,80.39324324324323,True,full_bleed,reel_overlay,17916793377497808,122127433299424069,True,True,2577,6,0,4,,4852,10
 2026-11-12 13:05,BREAKING NEWS,From Kismet to Dhurandhar and Ramayana,111.39324324324325,True,text_card,reel_text,18081895994394868,122127444159424069,True,True,144,0,0,0,,173,1
-2026-11-12 14:05,BREAKING NEWS,Alia Bhatt guides Kiara Advani on returning to work after motherhood,106.26447368421053,True,full_bleed,reel_overlay,18081599204710195,122127452151424069,True,True,1472,9,0,0,,1930,9
+2026-11-12 14:05,BREAKING NEWS,Alia Bhatt guides Kiara Advani on returning to work after motherhood,106.26447368421053,True,full_bleed,reel_overlay,18081599204710195,122127452151424069,True,True,1472,9,0,0,,1931,9
 2026-11-12 15:06,INDIA NEWS,Dubai NRI loses ₹2.11 crore to fake Telegram investment scam,86.6891089108911,True,text_card,reel_text,18131821741827305,122127457923424069,True,True,103,0,0,0,,112,0
 2026-11-12 16:05,BREAKING NEWS,Karan Johar slams Bollywood stars for demanding VFX budgets over acting.,97.125,True,text_card,reel_text,18111555983179248,122127464637424069,True,True,1331,1,0,1,,1844,2
 2026-11-12 22:25,BREAKING NEWS,Shah Rukh Khan's Rs 300 crore home includes a cryotherapy chamber.,96.47105263157894,True,text_card,reel_text,17967041052233684,122127505803424069,True,True,253,0,0,0,,343,0
@@ -737,17 +737,17 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-15 13:16,INDIA NEWS,"Voters moving within state need no extra form, Election Commission tells court",70.73811881188118,True,text_card,reel_text,18116959982148837,122127943131424069,True,True,101,0,0,0,,127,0
 2026-11-15 14:06,BREAKING NEWS,Telugu cinema veteran Giri Babu dies at age 80 after 600 films,101.28720930232558,True,text_card,reel_text,18116677657862871,122127949065424069,True,True,116,0,0,0,,134,0
 2026-11-15 15:26,INDIA NEWS,"Car drags homeless man for 2 km in Kerala, killing him",71.6257281553398,True,text_card,reel_text,18117183044034836,122127958113424069,True,True,106,0,0,0,,139,0
-2026-11-15 16:26,INDIA NEWS,Teacher survives 14 days trapped inside landslide ditch in Odisha,67.6616504854369,True,text_card,reel_text,18093084371686297,122127968247424069,True,True,62,0,0,0,,68,0
+2026-11-15 16:26,INDIA NEWS,Teacher survives 14 days trapped inside landslide ditch in Odisha,67.6616504854369,True,text_card,reel_text,18093084371686297,122127968247424069,True,True,68,0,0,0,,78,0
 2026-11-15 22:26,INDIA NEWS,Alert cops save man from falling under moving train at station,73.73349514563107,True,text_card,reel_text,18123260566972387,122128053339424069,True,True,149,0,0,0,,167,0
-2026-11-15 23:36,INDIA NEWS,NCP merger talks end after Maharashtra leader Ajit Pawar dies,68.7235,True,text_card,reel_text,17888336913691045,122128059873424069,True,True,129,0,0,0,,175,0
+2026-11-15 23:36,INDIA NEWS,NCP merger talks end after Maharashtra leader Ajit Pawar dies,68.7235,True,text_card,reel_text,17888336913691045,122128059873424069,True,True,136,0,0,0,,187,0
 2026-11-16 02:16,INDIA NEWS,Police arrest two youths with Pakistan links for Rajasthan train blast,82.66683168316831,True,text_card,reel_text,17913281421312487,122128075851424069,True,True,108,0,0,0,,122,0
 2026-11-16 03:06,INDIA NEWS,Prince William and Kate Middleton visit India to meet PM Modi.,66.7859223300971,True,text_card,reel_text,18137043517740987,122128080009424069,True,True,104,0,0,0,,127,0
-2026-11-16 04:16,INDIA NEWS,"Man sets scrap godowns on fire after wife leaves, killing one",73.76634615384616,True,text_card,reel_text,18165466102495835,122128084737424069,True,True,111,0,0,0,,132,0
-2026-11-16 04:46,INDIA NEWS,13-year-old Indian boy dies in massive 23-vehicle UAE crash,67.77864077669904,True,text_card,reel_text,18126401920906204,122128088055424069,True,True,114,0,0,0,,149,0
-2026-11-16 05:56,INDIAN CINEMA,Caretaker booked for stealing late actress Nimmi's Rs 2 crore assets,70.96071428571429,True,text_card,reel_text,18649076074040511,122128096377424069,True,True,127,0,0,0,,164,0
-2026-11-16 06:46,INDIAN CINEMA,Sylvester Stallone biopic earns 1.7 million dollars worldwide in three days,84.17682926829269,True,text_card,reel_text,17918678622522256,122128100733424069,True,True,113,3,0,0,,131,3
-2026-11-16 11:06,BREAKING NEWS,PM Modi visits Philippines for major ASEAN summit in November,96.84615384615384,True,text_card,reel_text,18102012137087669,122128128843424069,True,True,23,0,0,0,,28,0
-2026-11-16 12:06,BREAKING NEWS,Soni Razdan reveals smoking 100 cigarettes daily while pregnant with Alia,95.74883720930232,True,text_card,reel_text,17989319574089622,122128134537424069,True,True,28,0,0,0,,113,0
-2026-11-16 13:16,TAMIL NADU NEWS,"Severe cyclone forms in Bay of Bengal, placing Chennai on rainfall alert",70,True,text_card,reel_text,18451289074135820,122128142877424069,True,True,0,0,0,0,,1,0
-2026-11-16 13:20,INDIA NEWS,BJP files complaint over foreign delegate remarks at summit,77.8889423076923,True,text_card,reel_text,18108754784306492,122128143387424069,True,True,0,0,0,0,,0,0
-2026-11-16 15:26,BREAKING NEWS,Akshay Kumar unveils dark sci-fi thriller Samuk for 2027 release,97.75697674418605,True,text_card,reel_text,18115524419230297,122128159329424069,True,True,,,,,,,
+2026-11-16 04:16,INDIA NEWS,"Man sets scrap godowns on fire after wife leaves, killing one",73.76634615384616,True,text_card,reel_text,18165466102495835,122128084737424069,True,True,115,0,0,0,,138,0
+2026-11-16 04:46,INDIA NEWS,13-year-old Indian boy dies in massive 23-vehicle UAE crash,67.77864077669904,True,text_card,reel_text,18126401920906204,122128088055424069,True,True,115,0,0,0,,152,0
+2026-11-16 05:56,INDIAN CINEMA,Caretaker booked for stealing late actress Nimmi's Rs 2 crore assets,70.96071428571429,True,text_card,reel_text,18649076074040511,122128096377424069,True,True,130,0,0,0,,168,0
+2026-11-16 06:46,INDIAN CINEMA,Sylvester Stallone biopic earns 1.7 million dollars worldwide in three days,84.17682926829269,True,text_card,reel_text,17918678622522256,122128100733424069,True,True,114,3,0,0,,132,3
+2026-11-16 11:06,BREAKING NEWS,PM Modi visits Philippines for major ASEAN summit in November,96.84615384615384,True,text_card,reel_text,18102012137087669,122128128843424069,True,True,38,0,0,0,,41,0
+2026-11-16 12:06,BREAKING NEWS,Soni Razdan reveals smoking 100 cigarettes daily while pregnant with Alia,95.74883720930232,True,text_card,reel_text,17989319574089622,122128134537424069,True,True,109,0,0,0,,167,0
+2026-11-16 13:16,TAMIL NADU NEWS,"Severe cyclone forms in Bay of Bengal, placing Chennai on rainfall alert",70,True,text_card,reel_text,18451289074135820,122128142877424069,True,True,14,0,0,0,,19,0
+2026-11-16 13:20,INDIA NEWS,BJP files complaint over foreign delegate remarks at summit,77.8889423076923,True,text_card,reel_text,18108754784306492,122128143387424069,True,True,11,0,0,0,,16,0
+2026-11-16 15:26,BREAKING NEWS,Akshay Kumar unveils dark sci-fi thriller Samuk for 2027 release,97.75697674418605,True,text_card,reel_text,18115524419230297,122128159329424069,True,True,0,0,0,0,,1,0
