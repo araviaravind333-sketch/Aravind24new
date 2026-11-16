@@ -542,7 +542,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-01 12:06,BREAKING NEWS,Delhi to Agra bullet train cuts travel time to 59 minutes.,92,False,full_bleed,,18485155591115348,122125581363424069,True,True,5,0,0,0,0,,0
 2026-11-01 13:26,BREAKING NEWS,Six Indians stranded near remote Nepal lake await urgent helicopter rescue,99,True,text_card,reel_text,18110190926210193,122125589901424069,True,True,104,0,0,0,,122,1
 2026-11-01 14:46,INDIA NEWS,Telangana CM compares PM Modi to Ravana in sharp political attack,71,False,full_bleed,,17876978778584718,122125598133424069,True,True,7,0,0,0,0,,0
-2026-11-01 17:26,INDIAN CINEMA,Leaked videos reveal actor Nani plays chef and outlaw,74,True,text_card,reel_text,18116449784329380,122125614705424069,True,True,674,3,0,0,,1008,4
+2026-11-01 17:26,INDIAN CINEMA,Leaked videos reveal actor Nani plays chef and outlaw,74,True,text_card,reel_text,18116449784329380,122125614705424069,True,True,675,3,0,0,,1010,4
 2026-11-01 18:26,INDIA NEWS,Mamata Banerjee slams central exercise as special relief for the BJP,68,True,text_card,reel_text,17918631369464596,122125622475424069,True,True,68,0,0,0,,84,0
 2026-11-01 20:06,INDIA NEWS,Andhra civic polls spark 275 cases as Jagan demands repoll over clashes,76,True,text_card,reel_text,18132190736306383,122125633389424069,True,True,23,0,0,0,,36,0
 2026-11-01 20:26,INDIAN CINEMA,Ramayana pre-sales cross Rs 36 crore but lag behind Yash's Toxic.,85,True,text_card,reel_text,18218987716353619,122125636533424069,True,True,123,0,0,0,,150,0
@@ -739,17 +739,17 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-15 15:26,INDIA NEWS,"Car drags homeless man for 2 km in Kerala, killing him",71.6257281553398,True,text_card,reel_text,18117183044034836,122127958113424069,True,True,106,0,0,0,,139,0
 2026-11-15 16:26,INDIA NEWS,Teacher survives 14 days trapped inside landslide ditch in Odisha,67.6616504854369,True,text_card,reel_text,18093084371686297,122127968247424069,True,True,102,0,0,0,,112,0
 2026-11-15 22:26,INDIA NEWS,Alert cops save man from falling under moving train at station,73.73349514563107,True,text_card,reel_text,18123260566972387,122128053339424069,True,True,149,0,0,0,,167,0
-2026-11-15 23:36,INDIA NEWS,NCP merger talks end after Maharashtra leader Ajit Pawar dies,68.7235,True,text_card,reel_text,17888336913691045,122128059873424069,True,True,139,0,0,0,,191,0
+2026-11-15 23:36,INDIA NEWS,NCP merger talks end after Maharashtra leader Ajit Pawar dies,68.7235,True,text_card,reel_text,17888336913691045,122128059873424069,True,True,141,0,0,0,,193,0
 2026-11-16 02:16,INDIA NEWS,Police arrest two youths with Pakistan links for Rajasthan train blast,82.66683168316831,True,text_card,reel_text,17913281421312487,122128075851424069,True,True,109,0,0,0,,123,0
 2026-11-16 03:06,INDIA NEWS,Prince William and Kate Middleton visit India to meet PM Modi.,66.7859223300971,True,text_card,reel_text,18137043517740987,122128080009424069,True,True,107,0,0,0,,130,0
-2026-11-16 04:16,INDIA NEWS,"Man sets scrap godowns on fire after wife leaves, killing one",73.76634615384616,True,text_card,reel_text,18165466102495835,122128084737424069,True,True,127,0,0,0,,153,0
-2026-11-16 04:46,INDIA NEWS,13-year-old Indian boy dies in massive 23-vehicle UAE crash,67.77864077669904,True,text_card,reel_text,18126401920906204,122128088055424069,True,True,118,0,0,0,,154,0
-2026-11-16 05:56,INDIAN CINEMA,Caretaker booked for stealing late actress Nimmi's Rs 2 crore assets,70.96071428571429,True,text_card,reel_text,18649076074040511,122128096377424069,True,True,131,0,0,0,,171,0
+2026-11-16 04:16,INDIA NEWS,"Man sets scrap godowns on fire after wife leaves, killing one",73.76634615384616,True,text_card,reel_text,18165466102495835,122128084737424069,True,True,129,0,0,0,,155,0
+2026-11-16 04:46,INDIA NEWS,13-year-old Indian boy dies in massive 23-vehicle UAE crash,67.77864077669904,True,text_card,reel_text,18126401920906204,122128088055424069,True,True,119,0,0,0,,156,0
+2026-11-16 05:56,INDIAN CINEMA,Caretaker booked for stealing late actress Nimmi's Rs 2 crore assets,70.96071428571429,True,text_card,reel_text,18649076074040511,122128096377424069,True,True,131,0,0,0,,174,0
 2026-11-16 06:46,INDIAN CINEMA,Sylvester Stallone biopic earns 1.7 million dollars worldwide in three days,84.17682926829269,True,text_card,reel_text,17918678622522256,122128100733424069,True,True,118,3,0,0,,135,3
-2026-11-16 11:06,BREAKING NEWS,PM Modi visits Philippines for major ASEAN summit in November,96.84615384615384,True,text_card,reel_text,18102012137087669,122128128843424069,True,True,51,0,0,0,,58,0
-2026-11-16 12:06,BREAKING NEWS,Soni Razdan reveals smoking 100 cigarettes daily while pregnant with Alia,95.74883720930232,True,text_card,reel_text,17989319574089622,122128134537424069,True,True,119,0,0,0,,187,0
-2026-11-16 13:16,TAMIL NADU NEWS,"Severe cyclone forms in Bay of Bengal, placing Chennai on rainfall alert",70,True,text_card,reel_text,18451289074135820,122128142877424069,True,True,60,0,0,0,,75,0
+2026-11-16 11:06,BREAKING NEWS,PM Modi visits Philippines for major ASEAN summit in November,96.84615384615384,True,text_card,reel_text,18102012137087669,122128128843424069,True,True,54,0,0,0,,61,0
+2026-11-16 12:06,BREAKING NEWS,Soni Razdan reveals smoking 100 cigarettes daily while pregnant with Alia,95.74883720930232,True,text_card,reel_text,17989319574089622,122128134537424069,True,True,122,0,0,0,,192,0
+2026-11-16 13:16,TAMIL NADU NEWS,"Severe cyclone forms in Bay of Bengal, placing Chennai on rainfall alert",70,True,text_card,reel_text,18451289074135820,122128142877424069,True,True,79,0,0,0,,96,0
 2026-11-16 13:20,INDIA NEWS,BJP files complaint over foreign delegate remarks at summit,77.8889423076923,True,text_card,reel_text,18108754784306492,122128143387424069,True,True,132,0,0,0,,167,0
-2026-11-16 15:26,BREAKING NEWS,Akshay Kumar unveils dark sci-fi thriller Samuk for 2027 release,97.75697674418605,True,text_card,reel_text,18115524419230297,122128159329424069,True,True,117,0,0,0,,129,0
-2026-11-16 16:27,INDIA NEWS,Cyclone Akvan triggers heavy rainfall warning for four Telangana districts,79.89047619047619,True,text_card,reel_text,18400898038161117,122128166421424069,True,True,51,0,0,0,,64,0
-2026-11-16 22:26,BREAKING NEWS,"Amitabh Bachchan, Abhishek Bachchan receive death threats from gangster Goldy Dhillon",102.95714285714286,True,text_card,reel_text,18180660847432667,122128204755424069,True,True,,,,,,,
+2026-11-16 15:26,BREAKING NEWS,Akshay Kumar unveils dark sci-fi thriller Samuk for 2027 release,97.75697674418605,True,text_card,reel_text,18115524419230297,122128159329424069,True,True,118,0,0,0,,130,0
+2026-11-16 16:27,INDIA NEWS,Cyclone Akvan triggers heavy rainfall warning for four Telangana districts,79.89047619047619,True,text_card,reel_text,18400898038161117,122128166421424069,True,True,62,0,0,0,,79,0
+2026-11-16 22:26,BREAKING NEWS,"Amitabh Bachchan, Abhishek Bachchan receive death threats from gangster Goldy Dhillon",102.95714285714286,True,text_card,reel_text,18180660847432667,122128204755424069,True,True,114,0,0,0,,159,0
