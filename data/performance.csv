@@ -703,7 +703,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-13 00:30,INDIA NEWS,"Brazilian giant invests ₹2,000 crore in Dharmapuri to create 3,000 jobs.",59.66262626262626,True,text_card,reel_text,18043915694837549,122127519573424069,True,True,96,0,0,0,,113,0
 2026-11-13 01:26,INDIA NEWS,"SIR: Draft electoral roll released in Vellore, nearby districts",71.61683673469388,False,full_bleed,,18082970261385120,122127529467424069,True,True,4,0,0,0,0,,0
 2026-11-13 04:15,INDIA NEWS,63 fire personnel felicitated for Bethupalli Lake rescue operation,79.72626262626262,True,text_card,reel_text,18114907523153618,122127548787424069,True,True,106,0,0,0,,113,0
-2026-11-13 05:35,INDIA NEWS,Former Bengal minister Ujjal Biswas passes away after long illness,83.718,True,full_bleed,reel_overlay,18020779685953691,122127561591424069,True,True,105,0,0,0,,132,0
+2026-11-13 05:35,INDIA NEWS,Former Bengal minister Ujjal Biswas passes away after long illness,83.718,True,full_bleed,reel_overlay,18020779685953691,122127561591424069,True,True,105,0,0,0,,134,0
 2026-11-13 10:55,INDIA NEWS,Two missing police officers are found dead in Kashmir forest,89.68415841584158,True,text_card,reel_text,18121898284757999,122127590661424069,True,True,99,0,0,0,,121,0
 2026-11-13 11:01,INDIAN CINEMA,Jayasudha breaks silence on old marriage rumours with Kamal Haasan,79.35526315789474,True,text_card,reel_text,18352371616267422,122127591141424069,True,True,136,0,0,0,,166,0
 2026-11-13 13:05,INDIA NEWS,Centre Extends Ban On Hate Preacher Zakir Naik's Islamic Research Foundation,83.48316831683168,True,text_card,reel_text,17936635536145802,122127610353424069,True,True,134,0,0,0,,160,0
@@ -744,17 +744,17 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-16 03:06,INDIA NEWS,Prince William and Kate Middleton visit India to meet PM Modi.,66.7859223300971,True,text_card,reel_text,18137043517740987,122128080009424069,True,True,107,0,0,0,,130,0
 2026-11-16 04:16,INDIA NEWS,"Man sets scrap godowns on fire after wife leaves, killing one",73.76634615384616,True,text_card,reel_text,18165466102495835,122128084737424069,True,True,132,0,0,0,,159,0
 2026-11-16 04:46,INDIA NEWS,13-year-old Indian boy dies in massive 23-vehicle UAE crash,67.77864077669904,True,text_card,reel_text,18126401920906204,122128088055424069,True,True,119,0,0,0,,156,0
-2026-11-16 05:56,INDIAN CINEMA,Caretaker booked for stealing late actress Nimmi's Rs 2 crore assets,70.96071428571429,True,text_card,reel_text,18649076074040511,122128096377424069,True,True,133,0,0,0,,176,0
-2026-11-16 06:46,INDIAN CINEMA,Sylvester Stallone biopic earns 1.7 million dollars worldwide in three days,84.17682926829269,True,text_card,reel_text,17918678622522256,122128100733424069,True,True,118,3,0,0,,136,3
+2026-11-16 05:56,INDIAN CINEMA,Caretaker booked for stealing late actress Nimmi's Rs 2 crore assets,70.96071428571429,True,text_card,reel_text,18649076074040511,122128096377424069,True,True,134,0,0,0,,177,0
+2026-11-16 06:46,INDIAN CINEMA,Sylvester Stallone biopic earns 1.7 million dollars worldwide in three days,84.17682926829269,True,text_card,reel_text,17918678622522256,122128100733424069,True,True,119,3,0,0,,136,3
 2026-11-16 11:06,BREAKING NEWS,PM Modi visits Philippines for major ASEAN summit in November,96.84615384615384,True,text_card,reel_text,18102012137087669,122128128843424069,True,True,58,0,0,0,,64,0
-2026-11-16 12:06,BREAKING NEWS,Soni Razdan reveals smoking 100 cigarettes daily while pregnant with Alia,95.74883720930232,True,text_card,reel_text,17989319574089622,122128134537424069,True,True,123,0,0,0,,193,0
-2026-11-16 13:16,TAMIL NADU NEWS,"Severe cyclone forms in Bay of Bengal, placing Chennai on rainfall alert",70,True,text_card,reel_text,18451289074135820,122128142877424069,True,True,95,0,0,0,,114,0
+2026-11-16 12:06,BREAKING NEWS,Soni Razdan reveals smoking 100 cigarettes daily while pregnant with Alia,95.74883720930232,True,text_card,reel_text,17989319574089622,122128134537424069,True,True,124,0,0,0,,194,0
+2026-11-16 13:16,TAMIL NADU NEWS,"Severe cyclone forms in Bay of Bengal, placing Chennai on rainfall alert",70,True,text_card,reel_text,18451289074135820,122128142877424069,True,True,100,0,0,0,,122,0
 2026-11-16 13:20,INDIA NEWS,BJP files complaint over foreign delegate remarks at summit,77.8889423076923,True,text_card,reel_text,18108754784306492,122128143387424069,True,True,132,0,0,0,,167,0
 2026-11-16 15:26,BREAKING NEWS,Akshay Kumar unveils dark sci-fi thriller Samuk for 2027 release,97.75697674418605,True,text_card,reel_text,18115524419230297,122128159329424069,True,True,119,0,0,0,,132,0
-2026-11-16 16:27,INDIA NEWS,Cyclone Akvan triggers heavy rainfall warning for four Telangana districts,79.89047619047619,True,text_card,reel_text,18400898038161117,122128166421424069,True,True,71,0,0,0,,86,0
-2026-11-16 22:26,BREAKING NEWS,"Amitabh Bachchan, Abhishek Bachchan receive death threats from gangster Goldy Dhillon",102.95714285714286,True,text_card,reel_text,18180660847432667,122128204755424069,True,True,209,0,0,0,,277,0
-2026-11-16 23:36,INDIA NEWS,Bengal police gun down cop killer in fifth encounter within six months.,67.76990291262136,True,text_card,reel_text,18207895423373150,122128212801424069,True,True,28,0,0,0,,32,0
-2026-11-17 02:16,INDIA NEWS,Medical bills paid by households drop to 42% as health spending triples,66.79558823529412,True,text_card,reel_text,18079268522565590,122128228875424069,True,True,1,0,0,0,,5,0
-2026-11-17 03:06,INDIAN CINEMA,"Reality TV star wins $175,000 after boss steals her nude photos",71.19756097560975,True,text_card,reel_text,18087147464704191,122128232337424069,True,True,0,0,0,0,,0,0
-2026-11-17 04:17,INDIA NEWS,Security forces launch massive search in Kashmir after weapon snatch,65.7859223300971,True,text_card,reel_text,17978424624148981,122128239729424069,True,True,,,,,,,
-2026-11-17 04:46,INDIAN CINEMA,Twilight predicted Robert Pattinson's James Bond casting? - WATCH,83.185,True,text_card,reel_text,18030860237870836,122128242891424069,True,True,,,,,,,
+2026-11-16 16:27,INDIA NEWS,Cyclone Akvan triggers heavy rainfall warning for four Telangana districts,79.89047619047619,True,text_card,reel_text,18400898038161117,122128166421424069,True,True,88,0,0,0,,107,0
+2026-11-16 22:26,BREAKING NEWS,"Amitabh Bachchan, Abhishek Bachchan receive death threats from gangster Goldy Dhillon",102.95714285714286,True,text_card,reel_text,18180660847432667,122128204755424069,True,True,229,0,0,0,,309,0
+2026-11-16 23:36,INDIA NEWS,Bengal police gun down cop killer in fifth encounter within six months.,67.76990291262136,True,text_card,reel_text,18207895423373150,122128212801424069,True,True,32,0,0,0,,34,0
+2026-11-17 02:16,INDIA NEWS,Medical bills paid by households drop to 42% as health spending triples,66.79558823529412,True,text_card,reel_text,18079268522565590,122128228875424069,True,True,12,0,0,0,,13,0
+2026-11-17 03:06,INDIAN CINEMA,"Reality TV star wins $175,000 after boss steals her nude photos",71.19756097560975,True,text_card,reel_text,18087147464704191,122128232337424069,True,True,19,0,0,0,,22,0
+2026-11-17 04:17,INDIA NEWS,Security forces launch massive search in Kashmir after weapon snatch,65.7859223300971,True,text_card,reel_text,17978424624148981,122128239729424069,True,True,20,1,0,0,,39,1
+2026-11-17 04:46,INDIAN CINEMA,Twilight predicted Robert Pattinson's James Bond casting? - WATCH,83.185,True,text_card,reel_text,18030860237870836,122128242891424069,True,True,4,0,0,0,,13,0
