@@ -542,7 +542,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-01 12:06,BREAKING NEWS,Delhi to Agra bullet train cuts travel time to 59 minutes.,92,False,full_bleed,,18485155591115348,122125581363424069,True,True,5,0,0,0,0,,0
 2026-11-01 13:26,BREAKING NEWS,Six Indians stranded near remote Nepal lake await urgent helicopter rescue,99,True,text_card,reel_text,18110190926210193,122125589901424069,True,True,104,0,0,0,,122,1
 2026-11-01 14:46,INDIA NEWS,Telangana CM compares PM Modi to Ravana in sharp political attack,71,False,full_bleed,,17876978778584718,122125598133424069,True,True,7,0,0,0,0,,0
-2026-11-01 17:26,INDIAN CINEMA,Leaked videos reveal actor Nani plays chef and outlaw,74,True,text_card,reel_text,18116449784329380,122125614705424069,True,True,675,3,0,0,,1018,4
+2026-11-01 17:26,INDIAN CINEMA,Leaked videos reveal actor Nani plays chef and outlaw,74,True,text_card,reel_text,18116449784329380,122125614705424069,True,True,676,3,0,0,,1018,4
 2026-11-01 18:26,INDIA NEWS,Mamata Banerjee slams central exercise as special relief for the BJP,68,True,text_card,reel_text,17918631369464596,122125622475424069,True,True,68,0,0,0,,84,0
 2026-11-01 20:06,INDIA NEWS,Andhra civic polls spark 275 cases as Jagan demands repoll over clashes,76,True,text_card,reel_text,18132190736306383,122125633389424069,True,True,23,0,0,0,,36,0
 2026-11-01 20:26,INDIAN CINEMA,Ramayana pre-sales cross Rs 36 crore but lag behind Yash's Toxic.,85,True,text_card,reel_text,18218987716353619,122125636533424069,True,True,123,0,0,0,,150,0
@@ -568,7 +568,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-03 10:35,INDIA NEWS,Rahul Gandhi shares childhood Sanskrit lesson to remember Indira Gandhi,88,True,full_bleed,reel_overlay,18009468998784009,122125890705424069,True,True,127,1,0,0,,161,1
 2026-11-03 11:45,INDIA NEWS,Cyclone Murasu threatens Andhra Pradesh as Chief Minister orders high alert,74.06954022988506,True,text_card,reel_text,17915133963503120,122125896729424069,True,True,107,1,0,0,,130,1
 2026-11-03 12:26,INDIA NEWS,Indian Navy rescues 20 crew members from hijacked vessel,78.05523255813954,False,full_bleed,,18053402702604397,122125900047424069,True,True,4,0,0,0,0,,0
-2026-11-03 13:45,INDIAN CINEMA,Hit Indian paranormal series Bhay returns for Season Two this March.,68.51212121212122,True,text_card,reel_text,18100024547419717,122125912503424069,True,True,196,3,0,2,,245,5
+2026-11-03 13:45,INDIAN CINEMA,Hit Indian paranormal series Bhay returns for Season Two this March.,68.51212121212122,True,text_card,reel_text,18100024547419717,122125912503424069,True,True,201,3,0,2,,249,5
 2026-11-03 15:05,BREAKING NEWS,Ramayana crosses ₹25 crore in advance bookings before Diwali release,96.51212121212122,True,text_card,reel_text,18092500763234538,122125924371424069,True,True,110,0,0,0,,122,0
 2026-11-03 17:47,INDIA NEWS,PM Modi inaugurates Pune Metro Line 3 linking Shivajinagar and Hinjawadi,73.05813953488372,True,full_bleed,reel_overlay,17960405508015493,122125947183424069,True,True,82,0,0,0,,105,1
 2026-11-03 19:05,BREAKING NEWS,Cyclone Arnab costs APSRTC ₹13.10 crore in revenue loss,92.09457831325301,True,text_card,reel_text,17913320520558182,122125956591424069,True,True,104,0,0,0,,128,0
@@ -743,7 +743,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-16 02:16,INDIA NEWS,Police arrest two youths with Pakistan links for Rajasthan train blast,82.66683168316831,True,text_card,reel_text,17913281421312487,122128075851424069,True,True,109,0,0,0,,123,0
 2026-11-16 03:06,INDIA NEWS,Prince William and Kate Middleton visit India to meet PM Modi.,66.7859223300971,True,text_card,reel_text,18137043517740987,122128080009424069,True,True,107,0,0,0,,130,0
 2026-11-16 04:16,INDIA NEWS,"Man sets scrap godowns on fire after wife leaves, killing one",73.76634615384616,True,text_card,reel_text,18165466102495835,122128084737424069,True,True,133,0,0,0,,160,0
-2026-11-16 04:46,INDIA NEWS,13-year-old Indian boy dies in massive 23-vehicle UAE crash,67.77864077669904,True,text_card,reel_text,18126401920906204,122128088055424069,True,True,120,0,0,0,,158,0
+2026-11-16 04:46,INDIA NEWS,13-year-old Indian boy dies in massive 23-vehicle UAE crash,67.77864077669904,True,text_card,reel_text,18126401920906204,122128088055424069,True,True,121,0,0,0,,159,0
 2026-11-16 05:56,INDIAN CINEMA,Caretaker booked for stealing late actress Nimmi's Rs 2 crore assets,70.96071428571429,True,text_card,reel_text,18649076074040511,122128096377424069,True,True,134,0,0,0,,177,0
 2026-11-16 06:46,INDIAN CINEMA,Sylvester Stallone biopic earns 1.7 million dollars worldwide in three days,84.17682926829269,True,text_card,reel_text,17918678622522256,122128100733424069,True,True,120,3,0,0,,137,3
 2026-11-16 11:06,BREAKING NEWS,PM Modi visits Philippines for major ASEAN summit in November,96.84615384615384,True,text_card,reel_text,18102012137087669,122128128843424069,True,True,82,0,0,0,,97,0
@@ -760,18 +760,18 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-17 04:46,INDIAN CINEMA,Twilight predicted Robert Pattinson's James Bond casting? - WATCH,83.185,True,text_card,reel_text,18030860237870836,122128242891424069,True,True,116,0,0,0,,132,0
 2026-11-17 06:46,INDIAN CINEMA,Rs 800 crore box office milestone nears for epic movie Ramayana,70.49166666666667,True,text_card,reel_text,18345455458259361,122128254717424069,True,True,191,0,0,0,,220,0
 2026-11-17 07:06,INDIA NEWS,Severe Cyclone Akvan forms in Bay of Bengal and intensifies this week,73.91923076923077,True,text_card,reel_text,18379389205301013,122128256739424069,True,True,95,0,0,0,,109,0
-2026-11-17 11:06,INDIA NEWS,Autopsy finds five bruises on Madurai driver who died in custody,60.00857142857143,True,text_card,reel_text,18644242549013745,122128280871424069,True,True,105,0,0,1,,133,1
+2026-11-17 11:06,INDIA NEWS,Autopsy finds five bruises on Madurai driver who died in custody,60.00857142857143,True,text_card,reel_text,18644242549013745,122128280871424069,True,True,111,0,0,1,,139,1
 2026-11-17 12:06,BREAKING NEWS,Massive gas leak from ONGC well sparks panic in Andhra Pradesh's Konaseema district,104.02333333333334,True,text_card,reel_text,18054936584812773,122128290081424069,True,True,111,0,0,0,,121,0
-2026-11-17 13:26,BREAKING NEWS,Salman Khan begins 10-day shoot schedule in Pune for Monster co-starring Nayanthara,100.55,True,text_card,reel_text,17875454154640566,122128298835424069,True,True,188,2,0,0,,239,2
+2026-11-17 13:26,BREAKING NEWS,Salman Khan begins 10-day shoot schedule in Pune for Monster co-starring Nayanthara,100.55,True,text_card,reel_text,17875454154640566,122128298835424069,True,True,200,2,0,0,,259,2
 2026-11-17 14:25,BREAKING NEWS,"3,478 pregnant women identified for shifting to hospitals amid cyclone alert",91.99855769230768,True,text_card,reel_text,18119495624119447,122128313043424069,True,True,125,0,0,0,,146,0
 2026-11-17 14:31,INDIA NEWS,Calcutta High Court issues criminal contempt proceedings against Abhishek Banerjee,82.01556603773585,True,text_card,reel_text,18117652397024919,122128313343424069,True,True,107,0,0,0,,134,0
 2026-11-17 15:16,BREAKING NEWS,MS Dhoni retires from IPL as player,95,True,full_bleed,reel_overlay,17916521577505446,122128319181424069,True,True,105,7,0,0,,125,7
-2026-11-17 22:36,INDIAN CINEMA,Shah Rukh Khan joins Karan Johar's kids for Koffee With Karan finale,78.96071428571429,True,text_card,reel_text,17958216474290493,122128364079424069,True,True,222,0,0,0,,286,0
-2026-11-17 23:36,INDIAN CINEMA,"Grammy Awards 2027 nominations: Raye leads, full list of nominees",77.185,True,text_card,reel_text,18081904184396867,122128371297424069,True,True,69,0,0,0,,79,0
+2026-11-17 22:36,INDIAN CINEMA,Shah Rukh Khan joins Karan Johar's kids for Koffee With Karan finale,78.96071428571429,True,text_card,reel_text,17958216474290493,122128364079424069,True,True,223,0,0,0,,287,0
+2026-11-17 23:36,INDIAN CINEMA,"Grammy Awards 2027 nominations: Raye leads, full list of nominees",77.185,True,text_card,reel_text,18081904184396867,122128371297424069,True,True,72,0,0,0,,83,0
 2026-11-18 02:16,INDIAN CINEMA,"Exclusive| Where did the OG Bollywood rom-coms go, asks Taapsee Pannu",67.49166666666667,True,text_card,reel_text,17918691882500233,122128396641424069,True,True,110,0,0,0,,122,0
-2026-11-18 03:16,INDIA NEWS,"Parliament panel to examine India-Pakistan ties, India's UN Security Council bid",66.91923076923077,True,text_card,reel_text,17956548861331666,122128402131424069,True,True,30,0,0,0,,34,0
-2026-11-18 04:36,INDIAN CINEMA,The Vvaan 2 officially announced,65.49166666666667,True,text_card,reel_text,17999014416020727,122128409475424069,True,True,74,0,0,0,,93,0
-2026-11-18 04:46,INDIAN CINEMA,'Avengers: Doomsday' advance bookings crosses Rs 10 crore in India,85.34886363636363,True,text_card,reel_text,18050423651819712,122128411125424069,True,True,136,0,0,0,,165,0
-2026-11-18 06:46,INDIAN CINEMA,'Bouma' BO day 6: Sagar Surya's horror thriller crosses Rs 5.68 cr,69.83913043478262,True,text_card,reel_text,18014400566978744,122128422519424069,True,True,129,0,0,0,,173,0
-2026-11-18 07:06,INDIA NEWS,"Cyclone 'Akvan' updates: Akvan stationary, likely to move slowly north-northwestwards",74.1165,True,text_card,reel_text,18102394517398127,122128425609424069,True,True,103,0,0,0,,139,0
-2026-11-18 11:06,BREAKING NEWS,Bodhan to provide AI training to 10L teachers across India,99,True,text_card,reel_text,18035034365914596,122128447101424069,True,True,,,,,,,
+2026-11-18 03:16,INDIA NEWS,"Parliament panel to examine India-Pakistan ties, India's UN Security Council bid",66.91923076923077,True,text_card,reel_text,17956548861331666,122128402131424069,True,True,35,0,0,0,,42,0
+2026-11-18 04:36,INDIAN CINEMA,The Vvaan 2 officially announced,65.49166666666667,True,text_card,reel_text,17999014416020727,122128409475424069,True,True,100,0,0,0,,128,0
+2026-11-18 04:46,INDIAN CINEMA,'Avengers: Doomsday' advance bookings crosses Rs 10 crore in India,85.34886363636363,True,text_card,reel_text,18050423651819712,122128411125424069,True,True,138,0,0,0,,167,0
+2026-11-18 06:46,INDIAN CINEMA,'Bouma' BO day 6: Sagar Surya's horror thriller crosses Rs 5.68 cr,69.83913043478262,True,text_card,reel_text,18014400566978744,122128422519424069,True,True,138,0,0,0,,180,0
+2026-11-18 07:06,INDIA NEWS,"Cyclone 'Akvan' updates: Akvan stationary, likely to move slowly north-northwestwards",74.1165,True,text_card,reel_text,18102394517398127,122128425609424069,True,True,131,0,0,0,,165,0
+2026-11-18 11:06,BREAKING NEWS,Bodhan to provide AI training to 10L teachers across India,99,True,text_card,reel_text,18035034365914596,122128447101424069,True,True,0,0,0,0,,5,0
