@@ -648,7 +648,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-09 01:15,INDIAN CINEMA,Suriya stars in quirky investigative drama Scene this Deepavali,67.59482758620689,False,full_bleed,,17973551964187809,122126875113424069,True,True,9,1,0,0,0,,1
 2026-11-09 02:55,INDIA NEWS,Supreme Court settles decades-old hydro power dispute for Himachal Pradesh,79.17833333333334,True,text_card,reel_text,18388132084232544,122126885931424069,True,True,97,0,0,0,,113,0
 2026-11-09 03:55,INDIAN CINEMA,"Bollywood makes people feel insecure, director Farah Khan admits.",71.81071428571428,True,full_bleed,reel_overlay,18073585223781106,122126893035424069,True,True,201,0,0,0,,232,0
-2026-11-09 09:55,INDIAN CINEMA,Dhanush defends Sai Pallavi over backlash against her Ramayana casting.,89.8607142857143,True,full_bleed,reel_overlay,18214962196365883,122126922417424069,True,True,1591,19,0,0,,2397,26
+2026-11-09 09:55,INDIAN CINEMA,Dhanush defends Sai Pallavi over backlash against her Ramayana casting.,89.8607142857143,True,full_bleed,reel_overlay,18214962196365883,122126922417424069,True,True,1593,19,0,0,,2398,26
 2026-11-09 11:15,INDIA NEWS,RBI denies viral reports claiming new cheque book rules from January,78.99157303370787,False,full_bleed,,18122051912038852,122126928975424069,True,True,4,0,0,0,0,,0
 2026-11-09 12:26,BREAKING NEWS,Record 88 days pass without Parliament formally closing Monsoon session,100.05489130434782,True,full_bleed,reel_overlay,18221088481343519,122126936535424069,True,True,96,0,0,0,,115,0
 2026-11-09 13:25,INDIA NEWS,Police find five bodies near Mysuru in Bengaluru family murder case,72.05489130434782,True,text_card,reel_text,17914197738481776,122126944743424069,True,True,107,0,0,0,,128,1
@@ -772,19 +772,19 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-18 03:16,INDIA NEWS,"Parliament panel to examine India-Pakistan ties, India's UN Security Council bid",66.91923076923077,True,text_card,reel_text,17956548861331666,122128402131424069,True,True,72,0,0,0,,89,0
 2026-11-18 04:36,INDIAN CINEMA,The Vvaan 2 officially announced,65.49166666666667,True,text_card,reel_text,17999014416020727,122128409475424069,True,True,110,0,0,0,,136,0
 2026-11-18 04:46,INDIAN CINEMA,'Avengers: Doomsday' advance bookings crosses Rs 10 crore in India,85.34886363636363,True,text_card,reel_text,18050423651819712,122128411125424069,True,True,140,0,0,0,,169,0
-2026-11-18 06:46,INDIAN CINEMA,'Bouma' BO day 6: Sagar Surya's horror thriller crosses Rs 5.68 cr,69.83913043478262,True,text_card,reel_text,18014400566978744,122128422519424069,True,True,152,0,0,0,,200,0
+2026-11-18 06:46,INDIAN CINEMA,'Bouma' BO day 6: Sagar Surya's horror thriller crosses Rs 5.68 cr,69.83913043478262,True,text_card,reel_text,18014400566978744,122128422519424069,True,True,153,0,0,0,,201,0
 2026-11-18 07:06,INDIA NEWS,"Cyclone 'Akvan' updates: Akvan stationary, likely to move slowly north-northwestwards",74.1165,True,text_card,reel_text,18102394517398127,122128425609424069,True,True,135,0,0,0,,169,0
-2026-11-18 11:06,BREAKING NEWS,Bodhan to provide AI training to 10L teachers across India,99,True,text_card,reel_text,18035034365914596,122128447101424069,True,True,33,0,0,0,,43,0
+2026-11-18 11:06,BREAKING NEWS,Bodhan to provide AI training to 10L teachers across India,99,True,text_card,reel_text,18035034365914596,122128447101424069,True,True,35,0,0,0,,45,0
 2026-11-18 12:15,BREAKING NEWS,Actress Sreeleela calls working with Dhanush a massive privilege,91.88723404255319,True,text_card,reel_text,18127529147517600,122128461003424069,True,True,122,1,0,0,,148,1
-2026-11-18 13:26,BREAKING NEWS,When does the 24-hour countdown begin after arrest? Supreme Court answers,97.15594059405942,True,text_card,reel_text,17940654756126856,122128469943424069,True,True,70,0,0,0,,83,0
+2026-11-18 13:26,BREAKING NEWS,When does the 24-hour countdown begin after arrest? Supreme Court answers,97.15594059405942,True,text_card,reel_text,17940654756126856,122128469943424069,True,True,71,0,0,0,,84,0
 2026-11-18 14:37,INDIAN CINEMA,Rajinikanth to Dhanush: South Indian stars who frequently visit famous temples,77.56395348837209,True,text_card,reel_text,18113470538184124,122128476435424069,True,True,131,0,0,0,,166,0
 2026-11-18 14:46,BREAKING NEWS,Mission Mirchi: Technician dies in truck crash,110.89787234042552,True,text_card,reel_text,18132857662769818,122128477095424069,True,True,73,0,0,0,,87,0
 2026-11-18 16:04,BREAKING NEWS,Dulquer Salmaan confirms Tamil film 'Goli' with Karthikeyan Velappan,91.69791666666666,True,text_card,reel_text,18288070840289587,122128486689424069,True,True,108,0,0,0,,137,0
 2026-11-18 16:06,BREAKING NEWS,Dulquer Salmaan announces new Tamil film Goli before clash with father,91.69791666666666,True,text_card,reel_text,18119827421070626,122128487133424069,True,True,115,0,0,0,,139,0
-2026-11-18 23:36,INDIAN CINEMA,Rajinikanth's million-dollar PIC with grandsons from Greece goes viral,89.95121951219512,True,text_card,reel_text,18459383542192128,122128545351424069,True,True,201,0,0,0,,283,0
-2026-11-19 02:16,INDIAN CINEMA,First Tamil song at Grammys,84.95121951219512,True,text_card,reel_text,18133205324487290,122128561077424069,True,True,56,1,0,0,,76,2
-2026-11-19 03:17,INDIA NEWS,Supreme Court To Hear Plea Against Lawyer Over Remarks Targeting Chief Justice,67.06941747572816,True,text_card,reel_text,17914681821588343,122128565829424069,True,True,38,0,0,0,,49,0
-2026-11-19 04:56,INDIA NEWS,Messi row: Kerala HC directs Reporter TV to appear before Kollam GST intelligence,67.11666666666667,True,text_card,reel_text,18120027320022156,122128577361424069,True,True,13,0,0,0,,20,0
-2026-11-19 06:02,BREAKING NEWS,Suriya starrer Scene nears Rs 300 crore at global box office,95.01914893617021,True,text_card,reel_text,17960212623270062,122128583583424069,True,True,81,0,0,0,,108,0
-2026-11-19 07:06,BREAKING NEWS,Ayushmann Khurrana takes over as the new Prem in Sooraj Barjatya film,99.02872340425532,True,text_card,reel_text,18079279646475415,122128590513424069,True,True,0,0,0,0,,22,0
-2026-11-19 08:16,INDIA NEWS,"Man Dies After Allegedly Eating Sweet Near Mumbai, Food Poisoning Suspected",62.11862745098039,True,text_card,reel_text,18116661229888183,122128596585424069,True,True,,,,,,,
+2026-11-18 23:36,INDIAN CINEMA,Rajinikanth's million-dollar PIC with grandsons from Greece goes viral,89.95121951219512,True,text_card,reel_text,18459383542192128,122128545351424069,True,True,206,0,0,0,,290,0
+2026-11-19 02:16,INDIAN CINEMA,First Tamil song at Grammys,84.95121951219512,True,text_card,reel_text,18133205324487290,122128561077424069,True,True,92,1,0,0,,138,2
+2026-11-19 03:17,INDIA NEWS,Supreme Court To Hear Plea Against Lawyer Over Remarks Targeting Chief Justice,67.06941747572816,True,text_card,reel_text,17914681821588343,122128565829424069,True,True,51,0,0,0,,57,0
+2026-11-19 04:56,INDIA NEWS,Messi row: Kerala HC directs Reporter TV to appear before Kollam GST intelligence,67.11666666666667,True,text_card,reel_text,18120027320022156,122128577361424069,True,True,34,0,0,0,,47,0
+2026-11-19 06:02,BREAKING NEWS,Suriya starrer Scene nears Rs 300 crore at global box office,95.01914893617021,True,text_card,reel_text,17960212623270062,122128583583424069,True,True,113,0,0,0,,130,0
+2026-11-19 07:06,BREAKING NEWS,Ayushmann Khurrana takes over as the new Prem in Sooraj Barjatya film,99.02872340425532,True,text_card,reel_text,18079279646475415,122128590513424069,True,True,121,0,0,0,,138,0
+2026-11-19 08:16,INDIA NEWS,"Man Dies After Allegedly Eating Sweet Near Mumbai, Food Poisoning Suspected",62.11862745098039,True,text_card,reel_text,18116661229888183,122128596585424069,True,True,82,0,0,0,,107,0
