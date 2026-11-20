@@ -568,7 +568,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-03 10:35,INDIA NEWS,Rahul Gandhi shares childhood Sanskrit lesson to remember Indira Gandhi,88,True,full_bleed,reel_overlay,18009468998784009,122125890705424069,True,True,127,1,0,0,,161,1
 2026-11-03 11:45,INDIA NEWS,Cyclone Murasu threatens Andhra Pradesh as Chief Minister orders high alert,74.06954022988506,True,text_card,reel_text,17915133963503120,122125896729424069,True,True,107,1,0,0,,130,1
 2026-11-03 12:26,INDIA NEWS,Indian Navy rescues 20 crew members from hijacked vessel,78.05523255813954,False,full_bleed,,18053402702604397,122125900047424069,True,True,4,0,0,0,0,,0
-2026-11-03 13:45,INDIAN CINEMA,Hit Indian paranormal series Bhay returns for Season Two this March.,68.51212121212122,True,text_card,reel_text,18100024547419717,122125912503424069,True,True,210,3,0,2,,259,5
+2026-11-03 13:45,INDIAN CINEMA,Hit Indian paranormal series Bhay returns for Season Two this March.,68.51212121212122,True,text_card,reel_text,18100024547419717,122125912503424069,True,True,211,2,0,2,,261,4
 2026-11-03 15:05,BREAKING NEWS,Ramayana crosses ₹25 crore in advance bookings before Diwali release,96.51212121212122,True,text_card,reel_text,18092500763234538,122125924371424069,True,True,110,0,0,0,,122,0
 2026-11-03 17:47,INDIA NEWS,PM Modi inaugurates Pune Metro Line 3 linking Shivajinagar and Hinjawadi,73.05813953488372,True,full_bleed,reel_overlay,17960405508015493,122125947183424069,True,True,82,0,0,0,,105,1
 2026-11-03 19:05,BREAKING NEWS,Cyclone Arnab costs APSRTC ₹13.10 crore in revenue loss,92.09457831325301,True,text_card,reel_text,17913320520558182,122125956591424069,True,True,104,0,0,0,,128,0
@@ -781,31 +781,31 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-18 14:46,BREAKING NEWS,Mission Mirchi: Technician dies in truck crash,110.89787234042552,True,text_card,reel_text,18132857662769818,122128477095424069,True,True,85,0,0,0,,99,0
 2026-11-18 16:04,BREAKING NEWS,Dulquer Salmaan confirms Tamil film 'Goli' with Karthikeyan Velappan,91.69791666666666,True,text_card,reel_text,18288070840289587,122128486689424069,True,True,108,0,0,0,,137,0
 2026-11-18 16:06,BREAKING NEWS,Dulquer Salmaan announces new Tamil film Goli before clash with father,91.69791666666666,True,text_card,reel_text,18119827421070626,122128487133424069,True,True,119,0,0,0,,145,0
-2026-11-18 23:36,INDIAN CINEMA,Rajinikanth's million-dollar PIC with grandsons from Greece goes viral,89.95121951219512,True,text_card,reel_text,18459383542192128,122128545351424069,True,True,228,0,0,0,,323,0
+2026-11-18 23:36,INDIAN CINEMA,Rajinikanth's million-dollar PIC with grandsons from Greece goes viral,89.95121951219512,True,text_card,reel_text,18459383542192128,122128545351424069,True,True,228,0,0,0,,325,0
 2026-11-19 02:16,INDIAN CINEMA,First Tamil song at Grammys,84.95121951219512,True,text_card,reel_text,18133205324487290,122128561077424069,True,True,101,1,0,0,,141,2
 2026-11-19 03:17,INDIA NEWS,Supreme Court To Hear Plea Against Lawyer Over Remarks Targeting Chief Justice,67.06941747572816,True,text_card,reel_text,17914681821588343,122128565829424069,True,True,101,1,0,0,,117,1
 2026-11-19 04:56,INDIA NEWS,Messi row: Kerala HC directs Reporter TV to appear before Kollam GST intelligence,67.11666666666667,True,text_card,reel_text,18120027320022156,122128577361424069,True,True,97,0,0,0,,112,0
 2026-11-19 06:02,BREAKING NEWS,Suriya starrer Scene nears Rs 300 crore at global box office,95.01914893617021,True,text_card,reel_text,17960212623270062,122128583583424069,True,True,133,0,0,0,,152,0
 2026-11-19 07:06,BREAKING NEWS,Ayushmann Khurrana takes over as the new Prem in Sooraj Barjatya film,99.02872340425532,True,text_card,reel_text,18079279646475415,122128590513424069,True,True,135,0,0,0,,152,0
-2026-11-19 08:16,INDIA NEWS,"Man Dies After Allegedly Eating Sweet Near Mumbai, Food Poisoning Suspected",62.11862745098039,True,text_card,reel_text,18116661229888183,122128596585424069,True,True,107,0,0,0,,117,0
+2026-11-19 08:16,INDIA NEWS,"Man Dies After Allegedly Eating Sweet Near Mumbai, Food Poisoning Suspected",62.11862745098039,True,text_card,reel_text,18116661229888183,122128596585424069,True,True,108,0,0,0,,119,0
 2026-11-19 11:26,INDIA NEWS,Why has the INDIA bloc posed 48 questions,85.1953125,True,text_card,reel_text,18173674576466940,122128613781424069,True,True,38,0,0,0,,40,0
 2026-11-19 12:27,INDIA NEWS,CBI Special Court acquits CPI(M) leaders P. Jayarajan,67.21979166666667,True,text_card,reel_text,17998911207012809,122128620597424069,True,True,80,0,0,0,,90,0
 2026-11-19 13:53,INDIA NEWS,Cyclone ‘Akvan’ heads for Odisha; over one lakh people evacuated,74.17397959183674,True,text_card,reel_text,18200342146399243,122128634055424069,True,True,110,0,0,0,,128,0
 2026-11-19 14:46,INDIA NEWS,PM Modi jumps on GTA VI craze,59.17397959183673,True,text_card,reel_text,18133273639770518,122128644519424069,True,True,75,0,0,0,,95,0
 2026-11-19 14:49,INDIAN CINEMA,Saif Ali Khan gets death threat from accused in Baba Siddiqui's murder case,64.42717391304348,True,text_card,reel_text,18122884049517135,122128644873424069,True,True,119,0,0,0,,164,0
-2026-11-19 16:06,BREAKING NEWS,"Alia Bhatt, Aryan Khan, Theja Rio",98.15,True,text_card,reel_text,17878224858585231,122128655115424069,True,True,107,1,0,0,,126,1
-2026-11-19 17:15,BREAKING NEWS,Aamir Khan's new Rs 4.56 crore-a-year rental: Actor leases three luxury apartments,110.15,True,text_card,reel_text,18098275511666991,122128662873424069,True,True,203,0,0,0,,262,1
-2026-11-19 17:17,BREAKING NEWS,Politician V.S. Babu who defeated Stalin dies at 75,95,True,full_bleed,reel_overlay,18012875648780006,122128663281424069,True,True,283,1,0,0,,378,1
-2026-11-20 02:17,INDIAN CINEMA,Ayushmann Khurrana's new film trailer explores chaotic joint family drama.,82.38888888888889,True,text_card,reel_text,18176875711486399,122128723029424069,True,True,114,1,0,0,,149,1
-2026-11-20 03:36,INDIAN CINEMA,"Sharad Kapoor reveals SRK, Salman, Javed Akhtar reached out to him",80.2641304347826,True,text_card,reel_text,18142876342620557,122128731465424069,True,True,131,1,0,0,,163,1
+2026-11-19 16:06,BREAKING NEWS,"Alia Bhatt, Aryan Khan, Theja Rio",98.15,True,text_card,reel_text,17878224858585231,122128655115424069,True,True,109,1,0,0,,128,1
+2026-11-19 17:15,BREAKING NEWS,Aamir Khan's new Rs 4.56 crore-a-year rental: Actor leases three luxury apartments,110.15,True,text_card,reel_text,18098275511666991,122128662873424069,True,True,212,0,0,0,,270,1
+2026-11-19 17:17,BREAKING NEWS,Politician V.S. Babu who defeated Stalin dies at 75,95,True,full_bleed,reel_overlay,18012875648780006,122128663281424069,True,True,286,1,0,0,,380,1
+2026-11-20 02:17,INDIAN CINEMA,Ayushmann Khurrana's new film trailer explores chaotic joint family drama.,82.38888888888889,True,text_card,reel_text,18176875711486399,122128723029424069,True,True,115,1,0,0,,150,1
+2026-11-20 03:36,INDIAN CINEMA,"Sharad Kapoor reveals SRK, Salman, Javed Akhtar reached out to him",80.2641304347826,True,text_card,reel_text,18142876342620557,122128731465424069,True,True,132,1,0,0,,164,1
 2026-11-20 05:36,INDIA NEWS,Baby Separated From Parents After Kaziranga Crash Reunited With Family,62.24734042553192,True,text_card,reel_text,18113560865625721,122128739817424069,True,True,103,0,0,0,,117,0
 2026-11-20 06:06,BREAKING NEWS,Resigned judge tells Parliament his removal process is invalid,97.26827956989247,True,text_card,reel_text,18037307480900144,122128742403424069,True,True,102,2,0,0,,133,2
-2026-11-20 07:16,INDIAN CINEMA,"'Ramayana' hits Rs 1,500 crore globally in record time",82.3608695652174,True,text_card,reel_text,18395192983161850,122128748013424069,True,True,118,0,0,0,,136,0
-2026-11-20 08:32,BREAKING NEWS,Avengers Doomsday crosses Rs 42 crore in Indian advance ticket sales,95.30425531914894,True,text_card,reel_text,18080446808437907,122128761729424069,True,True,108,0,0,0,,126,0
-2026-11-20 11:27,INDIA NEWS,"Built in 2016, given to us in 2018",60.33804347826087,True,text_card,reel_text,18355350064269977,122128778487424069,True,True,51,0,0,0,,69,0
-2026-11-20 12:36,INDIA NEWS,PM Modi invites suggestions from India Inc on further reforms,82.17397959183674,True,text_card,reel_text,18099471179444924,122128787019424069,True,True,78,0,0,0,,97,0
-2026-11-20 13:56,INDIA NEWS,300 Diwali fires prompt court to consider Mumbai firecracker ban,73.2404255319149,True,text_card,reel_text,17884315242541758,122128810905424069,True,True,11,0,0,0,,12,0
-2026-11-20 14:46,BREAKING NEWS,Supreme Court permits lighting Karthigai Deepam lamp at Tiruparakundram hill on November 24,100.29202127659575,True,text_card,reel_text,18140047657630200,122128821099424069,True,True,2,0,0,0,,8,0
-2026-11-20 16:01,BREAKING NEWS,'O.M' BO Day 1 [Live]: Dhanush starrer eyes 30 crore opening,95.23936170212767,True,text_card,reel_text,18116638001173954,122128829469424069,True,True,,,,,,,
-2026-11-20 16:46,INDIA NEWS,"Supreme Court rejects bike taxi ban, says regulation is better",79.29473684210527,True,text_card,reel_text,17883286509546655,122128834155424069,True,True,,,,,,,
-2026-11-20 17:26,INDIAN CINEMA,"EXCLUSIVE: Sanjay Kapoor, Prashant Narayanan",67.35108695652174,True,text_card,reel_text,18113987564161043,122128838937424069,True,True,,,,,,,
+2026-11-20 07:16,INDIAN CINEMA,"'Ramayana' hits Rs 1,500 crore globally in record time",82.3608695652174,True,text_card,reel_text,18395192983161850,122128748013424069,True,True,119,0,0,0,,137,0
+2026-11-20 08:32,BREAKING NEWS,Avengers Doomsday crosses Rs 42 crore in Indian advance ticket sales,95.30425531914894,True,text_card,reel_text,18080446808437907,122128761729424069,True,True,109,0,0,0,,127,0
+2026-11-20 11:27,INDIA NEWS,"Built in 2016, given to us in 2018",60.33804347826087,True,text_card,reel_text,18355350064269977,122128778487424069,True,True,76,0,0,0,,98,0
+2026-11-20 12:36,INDIA NEWS,PM Modi invites suggestions from India Inc on further reforms,82.17397959183674,True,text_card,reel_text,18099471179444924,122128787019424069,True,True,84,0,0,0,,107,0
+2026-11-20 13:56,INDIA NEWS,300 Diwali fires prompt court to consider Mumbai firecracker ban,73.2404255319149,True,text_card,reel_text,17884315242541758,122128810905424069,True,True,13,0,0,0,,14,0
+2026-11-20 14:46,BREAKING NEWS,Supreme Court permits lighting Karthigai Deepam lamp at Tiruparakundram hill on November 24,100.29202127659575,True,text_card,reel_text,18140047657630200,122128821099424069,True,True,107,1,0,0,,133,1
+2026-11-20 16:01,BREAKING NEWS,'O.M' BO Day 1 [Live]: Dhanush starrer eyes 30 crore opening,95.23936170212767,True,text_card,reel_text,18116638001173954,122128829469424069,True,True,83,2,0,0,,103,2
+2026-11-20 16:46,INDIA NEWS,"Supreme Court rejects bike taxi ban, says regulation is better",79.29473684210527,True,text_card,reel_text,17883286509546655,122128834155424069,True,True,0,0,0,0,,1,0
+2026-11-20 17:26,INDIAN CINEMA,"EXCLUSIVE: Sanjay Kapoor, Prashant Narayanan",67.35108695652174,True,text_card,reel_text,18113987564161043,122128838937424069,True,True,0,0,0,0,,0,0
