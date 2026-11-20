@@ -793,7 +793,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-19 13:53,INDIA NEWS,Cyclone ‘Akvan’ heads for Odisha; over one lakh people evacuated,74.17397959183674,True,text_card,reel_text,18200342146399243,122128634055424069,True,True,110,0,0,0,,128,0
 2026-11-19 14:46,INDIA NEWS,PM Modi jumps on GTA VI craze,59.17397959183673,True,text_card,reel_text,18133273639770518,122128644519424069,True,True,75,0,0,0,,95,0
 2026-11-19 14:49,INDIAN CINEMA,Saif Ali Khan gets death threat from accused in Baba Siddiqui's murder case,64.42717391304348,True,text_card,reel_text,18122884049517135,122128644873424069,True,True,119,0,0,0,,164,0
-2026-11-19 16:06,BREAKING NEWS,"Alia Bhatt, Aryan Khan, Theja Rio",98.15,True,text_card,reel_text,17878224858585231,122128655115424069,True,True,109,1,0,0,,129,1
+2026-11-19 16:06,BREAKING NEWS,"Alia Bhatt, Aryan Khan, Theja Rio",98.15,True,text_card,reel_text,17878224858585231,122128655115424069,True,True,110,1,0,0,,130,1
 2026-11-19 17:15,BREAKING NEWS,Aamir Khan's new Rs 4.56 crore-a-year rental: Actor leases three luxury apartments,110.15,True,text_card,reel_text,18098275511666991,122128662873424069,True,True,215,0,0,0,,271,1
 2026-11-19 17:17,BREAKING NEWS,Politician V.S. Babu who defeated Stalin dies at 75,95,True,full_bleed,reel_overlay,18012875648780006,122128663281424069,True,True,286,1,0,0,,380,1
 2026-11-20 02:17,INDIAN CINEMA,Ayushmann Khurrana's new film trailer explores chaotic joint family drama.,82.38888888888889,True,text_card,reel_text,18176875711486399,122128723029424069,True,True,116,1,0,0,,153,1
@@ -804,11 +804,11 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-20 08:32,BREAKING NEWS,Avengers Doomsday crosses Rs 42 crore in Indian advance ticket sales,95.30425531914894,True,text_card,reel_text,18080446808437907,122128761729424069,True,True,110,0,0,0,,128,0
 2026-11-20 11:27,INDIA NEWS,"Built in 2016, given to us in 2018",60.33804347826087,True,text_card,reel_text,18355350064269977,122128778487424069,True,True,86,0,0,0,,113,0
 2026-11-20 12:36,INDIA NEWS,PM Modi invites suggestions from India Inc on further reforms,82.17397959183674,True,text_card,reel_text,18099471179444924,122128787019424069,True,True,89,0,0,0,,112,0
-2026-11-20 13:56,INDIA NEWS,300 Diwali fires prompt court to consider Mumbai firecracker ban,73.2404255319149,True,text_card,reel_text,17884315242541758,122128810905424069,True,True,16,0,0,0,,17,0
+2026-11-20 13:56,INDIA NEWS,300 Diwali fires prompt court to consider Mumbai firecracker ban,73.2404255319149,True,text_card,reel_text,17884315242541758,122128810905424069,True,True,18,0,0,0,,19,0
 2026-11-20 14:46,BREAKING NEWS,Supreme Court permits lighting Karthigai Deepam lamp at Tiruparakundram hill on November 24,100.29202127659575,True,text_card,reel_text,18140047657630200,122128821099424069,True,True,110,1,0,0,,140,1
 2026-11-20 16:01,BREAKING NEWS,'O.M' BO Day 1 [Live]: Dhanush starrer eyes 30 crore opening,95.23936170212767,True,text_card,reel_text,18116638001173954,122128829469424069,True,True,114,2,0,0,,130,2
 2026-11-20 16:46,INDIA NEWS,"Supreme Court rejects bike taxi ban, says regulation is better",79.29473684210527,True,text_card,reel_text,17883286509546655,122128834155424069,True,True,71,0,0,0,,92,0
-2026-11-20 17:26,INDIAN CINEMA,"EXCLUSIVE: Sanjay Kapoor, Prashant Narayanan",67.35108695652174,True,text_card,reel_text,18113987564161043,122128838937424069,True,True,50,0,0,0,,55,0
-2026-11-20 17:59,INDIA NEWS,Rahul Gandhi says India is a side player in global affairs during University,64.21881720430108,True,text_card,reel_text,18419548657092820,122128843917424069,True,True,99,0,0,0,,128,0
-2026-11-21 02:26,INDIAN CINEMA,Veteran actor Larry Poindexter dies at 66 after car hits him,70.40108695652174,True,text_card,reel_text,18123607363975336,122128902459424069,True,True,,,,,,,
-2026-11-21 02:30,BREAKING NEWS,Builders challenge 1km construction ban around Chennai's Pallikaranai marshland,96,True,text_card,reel_text,18020960594958487,122128902693424069,True,True,,,,,,,
+2026-11-20 17:26,INDIAN CINEMA,"EXCLUSIVE: Sanjay Kapoor, Prashant Narayanan",67.35108695652174,True,text_card,reel_text,18113987564161043,122128838937424069,True,True,53,0,0,0,,60,0
+2026-11-20 17:59,INDIA NEWS,Rahul Gandhi says India is a side player in global affairs during University,64.21881720430108,True,text_card,reel_text,18419548657092820,122128843917424069,True,True,101,0,0,0,,130,0
+2026-11-21 02:26,INDIAN CINEMA,Veteran actor Larry Poindexter dies at 66 after car hits him,70.40108695652174,True,text_card,reel_text,18123607363975336,122128902459424069,True,True,105,0,0,0,,131,0
+2026-11-21 02:30,BREAKING NEWS,Builders challenge 1km construction ban around Chennai's Pallikaranai marshland,96,True,text_card,reel_text,18020960594958487,122128902693424069,True,True,4,0,0,0,,4,0
