@@ -691,7 +691,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-12 03:00,INDIAN CINEMA,Ramayana hits Rs 663 crore worldwide in five days,69.84625,False,full_bleed,,18117801884323265,122127376659424069,True,True,8,0,0,0,0,,0
 2026-11-12 04:25,BREAKING NEWS,Accident victim's daughter files review petition in Kerala High Court,116.75101010101011,True,text_card,reel_text,18380517019241405,122127385275424069,True,True,100,0,0,0,,126,0
 2026-11-12 10:55,INDIA NEWS,CM directs officials to strengthen arguments in Supreme Court on Krishna waters,78.74549999999999,False,full_bleed,,18193545550414656,122127425463424069,True,True,6,0,0,0,0,,0
-2026-11-12 12:05,INDIAN CINEMA,SHOCKING: Amitabh Bachchan's Jalsa at centre of family DISPUTE,80.39324324324323,True,full_bleed,reel_overlay,17916793377497808,122127433299424069,True,True,2582,6,0,4,,4862,10
+2026-11-12 12:05,INDIAN CINEMA,SHOCKING: Amitabh Bachchan's Jalsa at centre of family DISPUTE,80.39324324324323,True,full_bleed,reel_overlay,17916793377497808,122127433299424069,True,True,2583,6,0,4,,4863,10
 2026-11-12 13:05,BREAKING NEWS,From Kismet to Dhurandhar and Ramayana,111.39324324324325,True,text_card,reel_text,18081895994394868,122127444159424069,True,True,144,0,0,0,,173,1
 2026-11-12 14:05,BREAKING NEWS,Alia Bhatt guides Kiara Advani on returning to work after motherhood,106.26447368421053,True,full_bleed,reel_overlay,18081599204710195,122127452151424069,True,True,1472,9,0,0,,1932,9
 2026-11-12 15:06,INDIA NEWS,Dubai NRI loses ₹2.11 crore to fake Telegram investment scam,86.6891089108911,True,text_card,reel_text,18131821741827305,122127457923424069,True,True,103,0,0,0,,112,0
@@ -803,18 +803,18 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-20 07:16,INDIAN CINEMA,"'Ramayana' hits Rs 1,500 crore globally in record time",82.3608695652174,True,text_card,reel_text,18395192983161850,122128748013424069,True,True,120,0,0,0,,138,0
 2026-11-20 08:32,BREAKING NEWS,Avengers Doomsday crosses Rs 42 crore in Indian advance ticket sales,95.30425531914894,True,text_card,reel_text,18080446808437907,122128761729424069,True,True,110,0,0,0,,128,0
 2026-11-20 11:27,INDIA NEWS,"Built in 2016, given to us in 2018",60.33804347826087,True,text_card,reel_text,18355350064269977,122128778487424069,True,True,95,0,0,0,,126,0
-2026-11-20 12:36,INDIA NEWS,PM Modi invites suggestions from India Inc on further reforms,82.17397959183674,True,text_card,reel_text,18099471179444924,122128787019424069,True,True,96,0,0,0,,119,0
-2026-11-20 13:56,INDIA NEWS,300 Diwali fires prompt court to consider Mumbai firecracker ban,73.2404255319149,True,text_card,reel_text,17884315242541758,122128810905424069,True,True,22,0,0,0,,25,0
+2026-11-20 12:36,INDIA NEWS,PM Modi invites suggestions from India Inc on further reforms,82.17397959183674,True,text_card,reel_text,18099471179444924,122128787019424069,True,True,100,0,0,0,,123,0
+2026-11-20 13:56,INDIA NEWS,300 Diwali fires prompt court to consider Mumbai firecracker ban,73.2404255319149,True,text_card,reel_text,17884315242541758,122128810905424069,True,True,23,0,0,0,,25,0
 2026-11-20 14:46,BREAKING NEWS,Supreme Court permits lighting Karthigai Deepam lamp at Tiruparakundram hill on November 24,100.29202127659575,True,text_card,reel_text,18140047657630200,122128821099424069,True,True,111,1,0,0,,141,1
 2026-11-20 16:01,BREAKING NEWS,'O.M' BO Day 1 [Live]: Dhanush starrer eyes 30 crore opening,95.23936170212767,True,text_card,reel_text,18116638001173954,122128829469424069,True,True,114,2,0,0,,131,2
-2026-11-20 16:46,INDIA NEWS,"Supreme Court rejects bike taxi ban, says regulation is better",79.29473684210527,True,text_card,reel_text,17883286509546655,122128834155424069,True,True,84,0,0,0,,113,0
-2026-11-20 17:26,INDIAN CINEMA,"EXCLUSIVE: Sanjay Kapoor, Prashant Narayanan",67.35108695652174,True,text_card,reel_text,18113987564161043,122128838937424069,True,True,57,0,0,0,,67,0
-2026-11-20 17:59,INDIA NEWS,Rahul Gandhi says India is a side player in global affairs during University,64.21881720430108,True,text_card,reel_text,18419548657092820,122128843917424069,True,True,108,0,0,0,,138,0
+2026-11-20 16:46,INDIA NEWS,"Supreme Court rejects bike taxi ban, says regulation is better",79.29473684210527,True,text_card,reel_text,17883286509546655,122128834155424069,True,True,98,0,0,0,,137,0
+2026-11-20 17:26,INDIAN CINEMA,"EXCLUSIVE: Sanjay Kapoor, Prashant Narayanan",67.35108695652174,True,text_card,reel_text,18113987564161043,122128838937424069,True,True,58,0,0,0,,67,0
+2026-11-20 17:59,INDIA NEWS,Rahul Gandhi says India is a side player in global affairs during University,64.21881720430108,True,text_card,reel_text,18419548657092820,122128843917424069,True,True,111,0,0,0,,141,0
 2026-11-21 02:26,INDIAN CINEMA,Veteran actor Larry Poindexter dies at 66 after car hits him,70.40108695652174,True,text_card,reel_text,18123607363975336,122128902459424069,True,True,114,0,0,0,,142,0
-2026-11-21 02:30,BREAKING NEWS,Builders challenge 1km construction ban around Chennai's Pallikaranai marshland,96,True,text_card,reel_text,18020960594958487,122128902693424069,True,True,48,0,0,0,,68,0
-2026-11-21 05:56,INDIA NEWS,High Court refuses to stay corruption probe against IAS officer,67.26236559139785,True,text_card,reel_text,18131616925645949,122128922619424069,True,True,17,0,0,0,,21,1
-2026-11-21 07:07,INDIA NEWS,PM Modi claims cultural ties can guarantee global peace at summit,67.2247311827957,True,text_card,reel_text,18064783598795772,122128928649424069,True,True,74,0,0,0,,80,0
-2026-11-21 07:26,INDIA NEWS,"Cyclone 'Akvan' weakens into depression; no major damage, flood threat | LIVE",74.2247311827957,True,text_card,reel_text,18121955587785905,122128930371424069,True,True,22,0,0,0,,28,0
-2026-11-21 08:46,INDIA NEWS,Toxic liquor kills 14 people and hospitalises 200 in Manipur,68.22956989247312,True,text_card,reel_text,18480399067143355,122128937181424069,True,True,76,0,0,0,,95,0
-2026-11-21 11:36,TAMIL NADU NEWS,Rs 22 crore government bank loot leads to two fresh arrests,71,True,text_card,reel_text,18077209028487586,122128954527424069,True,True,,,,,,,
-2026-11-21 12:47,INDIA NEWS,Over 1 crore girls get HPV vaccine in nine months across India,60.208333333333336,True,text_card,reel_text,18121091690092858,122128963407424069,True,True,,,,,,,
+2026-11-21 02:30,BREAKING NEWS,Builders challenge 1km construction ban around Chennai's Pallikaranai marshland,96,True,text_card,reel_text,18020960594958487,122128902693424069,True,True,56,0,0,0,,76,0
+2026-11-21 05:56,INDIA NEWS,High Court refuses to stay corruption probe against IAS officer,67.26236559139785,True,text_card,reel_text,18131616925645949,122128922619424069,True,True,25,0,0,0,,28,1
+2026-11-21 07:07,INDIA NEWS,PM Modi claims cultural ties can guarantee global peace at summit,67.2247311827957,True,text_card,reel_text,18064783598795772,122128928649424069,True,True,85,0,0,0,,95,0
+2026-11-21 07:26,INDIA NEWS,"Cyclone 'Akvan' weakens into depression; no major damage, flood threat | LIVE",74.2247311827957,True,text_card,reel_text,18121955587785905,122128930371424069,True,True,26,0,0,0,,33,0
+2026-11-21 08:46,INDIA NEWS,Toxic liquor kills 14 people and hospitalises 200 in Manipur,68.22956989247312,True,text_card,reel_text,18480399067143355,122128937181424069,True,True,102,0,0,0,,118,0
+2026-11-21 11:36,TAMIL NADU NEWS,Rs 22 crore government bank loot leads to two fresh arrests,71,True,text_card,reel_text,18077209028487586,122128954527424069,True,True,67,0,0,0,,78,0
+2026-11-21 12:47,INDIA NEWS,Over 1 crore girls get HPV vaccine in nine months across India,60.208333333333336,True,text_card,reel_text,18121091690092858,122128963407424069,True,True,0,0,0,0,,0,0
