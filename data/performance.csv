@@ -78,7 +78,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-09-10 21:45,HUMAN INTEREST,"At -20°C, Ladakh’s first female gynaecologist delivers babies door-to-door",56,True,full_bleed,reel_full_bleed,18088368212391263,122114998317424069,True,True,5,0,0,0,,13,0
 2026-09-10 23:47,WORLD NEWS,Sri Lanka Court Revokes Monk's Pardon Over Disappeared Cartoonist,75,True,split_banner,reel_full_bleed,18087592256417196,122115010191424069,True,True,2,0,0,0,,5,0
 2026-09-11 01:08,HUMAN INTEREST,Get an iPhone 18 photo using 5 AI prompts,74,True,split_banner,reel_full_bleed,18160332547484804,122115018585424069,True,True,3,0,0,0,,11,0
-2026-09-11 02:12,BREAKING NEWS,"Only 1,071 TN police stations store 18-month CCTV footage",91,True,split_banner,reel_full_bleed,18117694753987771,122115023919424069,True,True,11,0,0,1,,21,1
+2026-09-11 02:12,BREAKING NEWS,"Only 1,071 TN police stations store 18-month CCTV footage",91,True,split_banner,reel_full_bleed,18117694753987771,122115023919424069,True,True,12,0,0,1,,26,2
 2026-09-11 03:40,INDIA NEWS,SC calls officer Dilip Ghumare's outburst gross indiscipline,75,True,text_card,,17873476134576475,122115032373424069,True,True,8,0,0,0,,15,0
 2026-09-11 05:45,BUSINESS NEWS,SEBI and RBI launch Demat 2.0 for your investments,81,True,split_banner,reel_full_bleed,18143387326571753,122115041151424069,True,True,2,0,0,0,,4,0
 2026-09-11 06:43,WORLD NEWS,Bus Carrying Dozens Of Dutch Tourists Overturns In Alps,70,True,alert_card,,18184775791411613,122115046083424069,True,True,2,0,0,0,,3,0
@@ -762,7 +762,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-17 07:06,INDIA NEWS,Severe Cyclone Akvan forms in Bay of Bengal and intensifies this week,73.91923076923077,True,text_card,reel_text,18379389205301013,122128256739424069,True,True,95,0,0,0,,109,0
 2026-11-17 11:06,INDIA NEWS,Autopsy finds five bruises on Madurai driver who died in custody,60.00857142857143,True,text_card,reel_text,18644242549013745,122128280871424069,True,True,111,0,0,1,,140,1
 2026-11-17 12:06,BREAKING NEWS,Massive gas leak from ONGC well sparks panic in Andhra Pradesh's Konaseema district,104.02333333333334,True,text_card,reel_text,18054936584812773,122128290081424069,True,True,112,0,0,0,,124,0
-2026-11-17 13:26,BREAKING NEWS,Salman Khan begins 10-day shoot schedule in Pune for Monster co-starring Nayanthara,100.55,True,text_card,reel_text,17875454154640566,122128298835424069,True,True,223,2,0,0,,289,2
+2026-11-17 13:26,BREAKING NEWS,Salman Khan begins 10-day shoot schedule in Pune for Monster co-starring Nayanthara,100.55,True,text_card,reel_text,17875454154640566,122128298835424069,True,True,224,2,0,0,,290,2
 2026-11-17 14:25,BREAKING NEWS,"3,478 pregnant women identified for shifting to hospitals amid cyclone alert",91.99855769230768,True,text_card,reel_text,18119495624119447,122128313043424069,True,True,126,0,0,0,,147,0
 2026-11-17 14:31,INDIA NEWS,Calcutta High Court issues criminal contempt proceedings against Abhishek Banerjee,82.01556603773585,True,text_card,reel_text,18117652397024919,122128313343424069,True,True,107,0,0,0,,134,0
 2026-11-17 15:16,BREAKING NEWS,MS Dhoni retires from IPL as player,95,True,full_bleed,reel_overlay,17916521577505446,122128319181424069,True,True,106,7,0,0,,126,7
@@ -776,7 +776,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-18 07:06,INDIA NEWS,"Cyclone 'Akvan' updates: Akvan stationary, likely to move slowly north-northwestwards",74.1165,True,text_card,reel_text,18102394517398127,122128425609424069,True,True,135,0,0,0,,169,0
 2026-11-18 11:06,BREAKING NEWS,Bodhan to provide AI training to 10L teachers across India,99,True,text_card,reel_text,18035034365914596,122128447101424069,True,True,37,0,0,0,,46,0
 2026-11-18 12:15,BREAKING NEWS,Actress Sreeleela calls working with Dhanush a massive privilege,91.88723404255319,True,text_card,reel_text,18127529147517600,122128461003424069,True,True,125,1,0,0,,152,1
-2026-11-18 13:26,BREAKING NEWS,When does the 24-hour countdown begin after arrest? Supreme Court answers,97.15594059405942,True,text_card,reel_text,17940654756126856,122128469943424069,True,True,78,0,0,0,,94,0
+2026-11-18 13:26,BREAKING NEWS,When does the 24-hour countdown begin after arrest? Supreme Court answers,97.15594059405942,True,text_card,reel_text,17940654756126856,122128469943424069,True,True,78,0,0,0,,95,0
 2026-11-18 14:37,INDIAN CINEMA,Rajinikanth to Dhanush: South Indian stars who frequently visit famous temples,77.56395348837209,True,text_card,reel_text,18113470538184124,122128476435424069,True,True,133,0,0,0,,169,0
 2026-11-18 14:46,BREAKING NEWS,Mission Mirchi: Technician dies in truck crash,110.89787234042552,True,text_card,reel_text,18132857662769818,122128477095424069,True,True,85,0,0,0,,99,0
 2026-11-18 16:04,BREAKING NEWS,Dulquer Salmaan confirms Tamil film 'Goli' with Karthikeyan Velappan,91.69791666666666,True,text_card,reel_text,18288070840289587,122128486689424069,True,True,108,0,0,0,,137,0
@@ -807,20 +807,20 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-20 13:56,INDIA NEWS,300 Diwali fires prompt court to consider Mumbai firecracker ban,73.2404255319149,True,text_card,reel_text,17884315242541758,122128810905424069,True,True,23,0,0,0,,25,0
 2026-11-20 14:46,BREAKING NEWS,Supreme Court permits lighting Karthigai Deepam lamp at Tiruparakundram hill on November 24,100.29202127659575,True,text_card,reel_text,18140047657630200,122128821099424069,True,True,111,1,0,0,,141,1
 2026-11-20 16:01,BREAKING NEWS,'O.M' BO Day 1 [Live]: Dhanush starrer eyes 30 crore opening,95.23936170212767,True,text_card,reel_text,18116638001173954,122128829469424069,True,True,117,2,0,0,,137,2
-2026-11-20 16:46,INDIA NEWS,"Supreme Court rejects bike taxi ban, says regulation is better",79.29473684210527,True,text_card,reel_text,17883286509546655,122128834155424069,True,True,108,0,0,0,,149,0
-2026-11-20 17:26,INDIAN CINEMA,"EXCLUSIVE: Sanjay Kapoor, Prashant Narayanan",67.35108695652174,True,text_card,reel_text,18113987564161043,122128838937424069,True,True,74,0,0,0,,91,0
+2026-11-20 16:46,INDIA NEWS,"Supreme Court rejects bike taxi ban, says regulation is better",79.29473684210527,True,text_card,reel_text,17883286509546655,122128834155424069,True,True,109,0,0,0,,149,0
+2026-11-20 17:26,INDIAN CINEMA,"EXCLUSIVE: Sanjay Kapoor, Prashant Narayanan",67.35108695652174,True,text_card,reel_text,18113987564161043,122128838937424069,True,True,79,0,0,0,,91,0
 2026-11-20 17:59,INDIA NEWS,Rahul Gandhi says India is a side player in global affairs during University,64.21881720430108,True,text_card,reel_text,18419548657092820,122128843917424069,True,True,111,0,0,0,,141,0
 2026-11-21 02:26,INDIAN CINEMA,Veteran actor Larry Poindexter dies at 66 after car hits him,70.40108695652174,True,text_card,reel_text,18123607363975336,122128902459424069,True,True,116,0,0,0,,144,0
-2026-11-21 02:30,BREAKING NEWS,Builders challenge 1km construction ban around Chennai's Pallikaranai marshland,96,True,text_card,reel_text,18020960594958487,122128902693424069,True,True,62,0,0,0,,84,0
-2026-11-21 05:56,INDIA NEWS,High Court refuses to stay corruption probe against IAS officer,67.26236559139785,True,text_card,reel_text,18131616925645949,122128922619424069,True,True,27,0,0,0,,31,1
+2026-11-21 02:30,BREAKING NEWS,Builders challenge 1km construction ban around Chennai's Pallikaranai marshland,96,True,text_card,reel_text,18020960594958487,122128902693424069,True,True,64,0,0,0,,90,0
+2026-11-21 05:56,INDIA NEWS,High Court refuses to stay corruption probe against IAS officer,67.26236559139785,True,text_card,reel_text,18131616925645949,122128922619424069,True,True,27,0,0,0,,32,1
 2026-11-21 07:07,INDIA NEWS,PM Modi claims cultural ties can guarantee global peace at summit,67.2247311827957,True,text_card,reel_text,18064783598795772,122128928649424069,True,True,102,0,0,0,,114,0
-2026-11-21 07:26,INDIA NEWS,"Cyclone 'Akvan' weakens into depression; no major damage, flood threat | LIVE",74.2247311827957,True,text_card,reel_text,18121955587785905,122128930371424069,True,True,64,0,0,0,,73,0
-2026-11-21 08:46,INDIA NEWS,Toxic liquor kills 14 people and hospitalises 200 in Manipur,68.22956989247312,True,text_card,reel_text,18480399067143355,122128937181424069,True,True,103,0,0,0,,120,0
-2026-11-21 11:36,TAMIL NADU NEWS,Rs 22 crore government bank loot leads to two fresh arrests,71,True,text_card,reel_text,18077209028487586,122128954527424069,True,True,75,0,0,0,,87,0
-2026-11-21 12:47,INDIA NEWS,Over 1 crore girls get HPV vaccine in nine months across India,60.208333333333336,True,text_card,reel_text,18121091690092858,122128963407424069,True,True,20,0,0,0,,25,0
-2026-11-21 13:56,BREAKING NEWS,Rs 90 crore folklore hit The Vvaan begins streaming on Prime Video,107.17083333333333,True,text_card,reel_text,18134141623743637,122128970625424069,True,True,100,0,0,0,,118,0
-2026-11-21 14:46,BREAKING NEWS,"Watch: PM Modi to inaugurate ₹5,500-crore Nitish Setu in Bihar",100.2453125,True,text_card,reel_text,18135661441703049,122128976109424069,True,True,34,0,0,0,,43,0
-2026-11-21 16:06,INDIAN CINEMA,Salman Khan confirms Dabangg sequel is in the works,73.02888888888889,True,text_card,reel_text,18147843493581992,122128984755424069,True,True,108,0,0,0,,122,0
-2026-11-21 16:46,INDIAN CINEMA,Kajal Aggarwal recalls narrow escape from 'Indian 2' crane accident,76.02888888888889,True,text_card,reel_text,17907315258604112,122128989633424069,True,True,65,0,0,0,,129,0
-2026-11-21 17:46,INDIA NEWS,Driver shoots intelligence officer in Haridwar before getting arrested,62.24690721649485,True,text_card,reel_text,18119231396148107,122128996575424069,True,True,,,,,,,
-2026-11-21 18:06,BREAKING NEWS,'Brad Pitt of Bihar' Ravi Kishan teaches Akshay Kumar,107.8554347826087,True,text_card,reel_text,18120783818035676,122128998855424069,True,True,,,,,,,
+2026-11-21 07:26,INDIA NEWS,"Cyclone 'Akvan' weakens into depression; no major damage, flood threat | LIVE",74.2247311827957,True,text_card,reel_text,18121955587785905,122128930371424069,True,True,76,0,0,0,,85,0
+2026-11-21 08:46,INDIA NEWS,Toxic liquor kills 14 people and hospitalises 200 in Manipur,68.22956989247312,True,text_card,reel_text,18480399067143355,122128937181424069,True,True,104,0,0,0,,121,0
+2026-11-21 11:36,TAMIL NADU NEWS,Rs 22 crore government bank loot leads to two fresh arrests,71,True,text_card,reel_text,18077209028487586,122128954527424069,True,True,79,0,0,0,,91,0
+2026-11-21 12:47,INDIA NEWS,Over 1 crore girls get HPV vaccine in nine months across India,60.208333333333336,True,text_card,reel_text,18121091690092858,122128963407424069,True,True,33,0,0,0,,37,0
+2026-11-21 13:56,BREAKING NEWS,Rs 90 crore folklore hit The Vvaan begins streaming on Prime Video,107.17083333333333,True,text_card,reel_text,18134141623743637,122128970625424069,True,True,105,0,0,0,,123,0
+2026-11-21 14:46,BREAKING NEWS,"Watch: PM Modi to inaugurate ₹5,500-crore Nitish Setu in Bihar",100.2453125,True,text_card,reel_text,18135661441703049,122128976109424069,True,True,46,0,0,0,,51,0
+2026-11-21 16:06,INDIAN CINEMA,Salman Khan confirms Dabangg sequel is in the works,73.02888888888889,True,text_card,reel_text,18147843493581992,122128984755424069,True,True,111,0,0,0,,127,0
+2026-11-21 16:46,INDIAN CINEMA,Kajal Aggarwal recalls narrow escape from 'Indian 2' crane accident,76.02888888888889,True,text_card,reel_text,17907315258604112,122128989633424069,True,True,117,0,0,0,,134,0
+2026-11-21 17:46,INDIA NEWS,Driver shoots intelligence officer in Haridwar before getting arrested,62.24690721649485,True,text_card,reel_text,18119231396148107,122128996575424069,True,True,44,0,0,0,,52,0
+2026-11-21 18:06,BREAKING NEWS,'Brad Pitt of Bihar' Ravi Kishan teaches Akshay Kumar,107.8554347826087,True,text_card,reel_text,18120783818035676,122128998855424069,True,True,96,0,0,0,,117,0
