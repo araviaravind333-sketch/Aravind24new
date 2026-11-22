@@ -503,7 +503,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-29 17:26,BREAKING NEWS,NTK YouTuber Saattai Duraimurugan seeks anticipatory bail over derogatory video,93,False,full_bleed,,18103299527643268,122125129719424069,True,True,6,0,0,0,0,,0
 2026-10-29 18:26,BREAKING NEWS,Supreme Court reviews RBI bank KYC rules to curb cyber fraud,95,False,full_bleed,,18129426976876681,122125137471424069,True,True,5,0,0,0,0,,0
 2026-10-29 19:26,INDIA NEWS,"PM Modi launches Rs 14,000 crore projects in Gujarat",89,True,full_bleed,reel_overlay,18074942126780709,122125145385424069,True,True,163,0,0,0,,217,0
-2026-10-29 20:07,INDIAN CINEMA,Junglywood trailer out: Shaan R Grover leads,67,True,text_card,reel_text,18020554613949482,122125150047424069,True,True,146,52,1,0,,1652,53
+2026-10-29 20:07,INDIAN CINEMA,Junglywood trailer out: Shaan R Grover leads,67,True,text_card,reel_text,18020554613949482,122125150047424069,True,True,146,51,1,0,,1652,52
 2026-10-29 21:17,INDIA NEWS,"'Take A Bow, Anand Sir': Hrithik Roshan Applauds Super Infinity Initiative",63,True,text_card,reel_text,17991476043078517,122125159371424069,True,True,129,0,0,0,,154,0
 2026-10-29 21:26,INDIA NEWS,Youth stabbed to death in Kozhikode following fight with acquaintances,78,True,text_card,reel_text,18286656757288548,122125159989424069,True,True,143,0,0,0,,168,0
 2026-10-29 22:18,INDIA NEWS,College student dies after bike hits pedestrian and crashes into car,66,True,text_card,reel_text,18357745618175628,122125166367424069,True,True,76,0,0,0,,96,0
@@ -755,7 +755,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-16 22:26,BREAKING NEWS,"Amitabh Bachchan, Abhishek Bachchan receive death threats from gangster Goldy Dhillon",102.95714285714286,True,text_card,reel_text,18180660847432667,122128204755424069,True,True,385,0,0,0,,502,0
 2026-11-16 23:36,INDIA NEWS,Bengal police gun down cop killer in fifth encounter within six months.,67.76990291262136,True,text_card,reel_text,18207895423373150,122128212801424069,True,True,137,0,0,0,,184,0
 2026-11-17 02:16,INDIA NEWS,Medical bills paid by households drop to 42% as health spending triples,66.79558823529412,True,text_card,reel_text,18079268522565590,122128228875424069,True,True,47,0,0,0,,56,0
-2026-11-17 03:06,INDIAN CINEMA,"Reality TV star wins $175,000 after boss steals her nude photos",71.19756097560975,True,text_card,reel_text,18087147464704191,122128232337424069,True,True,89,0,0,0,,107,0
+2026-11-17 03:06,INDIAN CINEMA,"Reality TV star wins $175,000 after boss steals her nude photos",71.19756097560975,True,text_card,reel_text,18087147464704191,122128232337424069,True,True,90,0,0,0,,108,0
 2026-11-17 04:17,INDIA NEWS,Security forces launch massive search in Kashmir after weapon snatch,65.7859223300971,True,text_card,reel_text,17978424624148981,122128239729424069,True,True,124,1,0,0,,148,1
 2026-11-17 04:46,INDIAN CINEMA,Twilight predicted Robert Pattinson's James Bond casting? - WATCH,83.185,True,text_card,reel_text,18030860237870836,122128242891424069,True,True,116,0,0,0,,132,0
 2026-11-17 06:46,INDIAN CINEMA,Rs 800 crore box office milestone nears for epic movie Ramayana,70.49166666666667,True,text_card,reel_text,18345455458259361,122128254717424069,True,True,191,0,0,0,,220,0
@@ -824,14 +824,14 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-21 16:46,INDIAN CINEMA,Kajal Aggarwal recalls narrow escape from 'Indian 2' crane accident,76.02888888888889,True,text_card,reel_text,17907315258604112,122128989633424069,True,True,120,0,0,0,,137,0
 2026-11-21 17:46,INDIA NEWS,Driver shoots intelligence officer in Haridwar before getting arrested,62.24690721649485,True,text_card,reel_text,18119231396148107,122128996575424069,True,True,78,0,0,0,,89,0
 2026-11-21 18:06,BREAKING NEWS,'Brad Pitt of Bihar' Ravi Kishan teaches Akshay Kumar,107.8554347826087,True,text_card,reel_text,18120783818035676,122128998855424069,True,True,106,0,0,0,,121,0
-2026-11-22 02:36,BREAKING NEWS,Yogi Adityanath's mother Savitri Devi passes away at age 91,110.29202127659575,True,text_card,reel_text,18181655557390994,122129060253424069,True,True,83,0,0,0,,95,0
-2026-11-22 03:47,INDIA NEWS,"Thick stubble smoke causes fatal crash in Punjab, killing woman",80.22204301075269,True,text_card,reel_text,18121961419978004,122129066583424069,True,True,68,0,0,0,,75,0
-2026-11-22 05:56,TAMIL NADU NEWS,Monsoon rains return to coastal Tamil Nadu from tomorrow,73,True,text_card,reel_text,17891910279652931,122129081505424069,True,True,68,0,0,0,,77,0
+2026-11-22 02:36,BREAKING NEWS,Yogi Adityanath's mother Savitri Devi passes away at age 91,110.29202127659575,True,text_card,reel_text,18181655557390994,122129060253424069,True,True,86,0,0,0,,99,0
+2026-11-22 03:47,INDIA NEWS,"Thick stubble smoke causes fatal crash in Punjab, killing woman",80.22204301075269,True,text_card,reel_text,18121961419978004,122129066583424069,True,True,70,0,0,0,,77,0
+2026-11-22 05:56,TAMIL NADU NEWS,Monsoon rains return to coastal Tamil Nadu from tomorrow,73,True,text_card,reel_text,17891910279652931,122129081505424069,True,True,73,0,0,0,,79,0
 2026-11-22 07:07,TAMIL NADU NEWS,"Dengue claims 22-year-old in Puducherry as total cases touch 1,300",71,True,text_card,reel_text,18102272279431758,122129088093424069,True,True,116,0,0,0,,136,0
-2026-11-22 08:06,INDIA NEWS,Cricketer Yuzvendra Chahal joins BJP as national OBC wing invitee,72.32659574468084,True,text_card,reel_text,18095239670290933,122129094501424069,True,True,120,1,0,0,,145,1
-2026-11-22 08:47,INDIA NEWS,Nine pilgrims die as vehicle rams into truck in Rajasthan.,64.32659574468084,True,text_card,reel_text,17998543179024610,122129098629424069,True,True,67,0,0,0,,86,0
-2026-11-22 11:36,INDIAN CINEMA,Actor Anupam Kher dismisses ₹500 crore net worth claims,69.07717391304348,True,text_card,reel_text,17972300784190167,122129115507424069,True,True,259,0,0,0,,299,0
-2026-11-22 12:57,INDIAN CINEMA,Salman Khan avoids clash with Shah Rukh Khan this December.,68.0804347826087,True,text_card,reel_text,18005568251809520,122129122557424069,True,True,148,1,0,0,,177,1
-2026-11-22 13:57,INDIA NEWS,IIT Kharagpur marks 75 years with nation-first innovation goals,75.20833333333334,True,text_card,reel_text,17871796929661853,122129127957424069,True,True,14,0,0,0,,20,0
-2026-11-22 14:46,INDIAN CINEMA,Sachin Tendulkar invites Ranveer Singh to bowl to him in nets,74.89090909090909,True,text_card,reel_text,18076407203770749,122129133873424069,True,True,41,0,0,0,,75,0
-2026-11-22 16:06,BREAKING NEWS,Nepal Prime Minister Balendra Shah selects India for his first trip,121.29739583333333,True,text_card,reel_text,18096075386194744,122129142129424069,True,True,,,,,,,
+2026-11-22 08:06,INDIA NEWS,Cricketer Yuzvendra Chahal joins BJP as national OBC wing invitee,72.32659574468084,True,text_card,reel_text,18095239670290933,122129094501424069,True,True,121,1,0,0,,147,1
+2026-11-22 08:47,INDIA NEWS,Nine pilgrims die as vehicle rams into truck in Rajasthan.,64.32659574468084,True,text_card,reel_text,17998543179024610,122129098629424069,True,True,83,0,0,0,,97,0
+2026-11-22 11:36,INDIAN CINEMA,Actor Anupam Kher dismisses ₹500 crore net worth claims,69.07717391304348,True,text_card,reel_text,17972300784190167,122129115507424069,True,True,262,0,0,0,,301,0
+2026-11-22 12:57,INDIAN CINEMA,Salman Khan avoids clash with Shah Rukh Khan this December.,68.0804347826087,True,text_card,reel_text,18005568251809520,122129122557424069,True,True,185,1,0,0,,218,1
+2026-11-22 13:57,INDIA NEWS,IIT Kharagpur marks 75 years with nation-first innovation goals,75.20833333333334,True,text_card,reel_text,17871796929661853,122129127957424069,True,True,44,0,0,0,,48,0
+2026-11-22 14:46,INDIAN CINEMA,Sachin Tendulkar invites Ranveer Singh to bowl to him in nets,74.89090909090909,True,text_card,reel_text,18076407203770749,122129133873424069,True,True,115,0,0,0,,139,0
+2026-11-22 16:06,BREAKING NEWS,Nepal Prime Minister Balendra Shah selects India for his first trip,121.29739583333333,True,text_card,reel_text,18096075386194744,122129142129424069,True,True,67,0,0,0,,85,0
