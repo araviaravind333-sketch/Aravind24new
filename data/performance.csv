@@ -762,7 +762,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-17 07:06,INDIA NEWS,Severe Cyclone Akvan forms in Bay of Bengal and intensifies this week,73.91923076923077,True,text_card,reel_text,18379389205301013,122128256739424069,True,True,95,0,0,0,,109,0
 2026-11-17 11:06,INDIA NEWS,Autopsy finds five bruises on Madurai driver who died in custody,60.00857142857143,True,text_card,reel_text,18644242549013745,122128280871424069,True,True,111,0,0,1,,140,1
 2026-11-17 12:06,BREAKING NEWS,Massive gas leak from ONGC well sparks panic in Andhra Pradesh's Konaseema district,104.02333333333334,True,text_card,reel_text,18054936584812773,122128290081424069,True,True,112,0,0,0,,124,0
-2026-11-17 13:26,BREAKING NEWS,Salman Khan begins 10-day shoot schedule in Pune for Monster co-starring Nayanthara,100.55,True,text_card,reel_text,17875454154640566,122128298835424069,True,True,226,2,0,0,,291,2
+2026-11-17 13:26,BREAKING NEWS,Salman Khan begins 10-day shoot schedule in Pune for Monster co-starring Nayanthara,100.55,True,text_card,reel_text,17875454154640566,122128298835424069,True,True,227,2,0,0,,292,2
 2026-11-17 14:25,BREAKING NEWS,"3,478 pregnant women identified for shifting to hospitals amid cyclone alert",91.99855769230768,True,text_card,reel_text,18119495624119447,122128313043424069,True,True,127,0,0,0,,148,0
 2026-11-17 14:31,INDIA NEWS,Calcutta High Court issues criminal contempt proceedings against Abhishek Banerjee,82.01556603773585,True,text_card,reel_text,18117652397024919,122128313343424069,True,True,107,0,0,0,,134,0
 2026-11-17 15:16,BREAKING NEWS,MS Dhoni retires from IPL as player,95,True,full_bleed,reel_overlay,17916521577505446,122128319181424069,True,True,107,7,0,0,,128,7
@@ -844,19 +844,19 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-23 07:16,INDIAN CINEMA,Dhanush's Operation Mole collects 33 crore rupees in two days,80.82222222222222,True,text_card,reel_text,18160728889517558,122129239113424069,True,True,353,6,0,0,,433,6
 2026-11-23 08:16,INDIAN CINEMA,Big-budget spy thriller starring Ajay Devgn targets 2028 release,76.9267441860465,True,text_card,reel_text,18083569046549849,122129245215424069,True,True,104,0,0,0,,118,0
 2026-11-23 09:06,BREAKING NEWS,Akshay Kumar sets his clothes on fire during live Mumbai stunt,132.3625,True,text_card,reel_text,18458668216123976,122129249631424069,True,True,280,0,0,0,,331,0
-2026-11-23 11:36,INDIAN CINEMA,Ajith Kumar and Shalini go viral after romantic Chennai car drive,86.9267441860465,True,text_card,reel_text,18100661729440253,122129262405424069,True,True,1305,8,0,0,,1699,9
-2026-11-23 13:06,INDIA NEWS,Sixteen suspended university students stage victory march after High Court win.,65.22234042553191,True,text_card,reel_text,18120799399790016,122129269155424069,True,True,80,0,0,0,,92,0
+2026-11-23 11:36,INDIAN CINEMA,Ajith Kumar and Shalini go viral after romantic Chennai car drive,86.9267441860465,True,text_card,reel_text,18100661729440253,122129262405424069,True,True,1307,9,0,0,,1704,10
+2026-11-23 13:06,INDIA NEWS,Sixteen suspended university students stage victory march after High Court win.,65.22234042553191,True,text_card,reel_text,18120799399790016,122129269155424069,True,True,80,0,0,0,,93,0
 2026-11-23 14:06,BREAKING NEWS,Deepika Padukone struggled to play a maid during her acting class,91.28260869565217,True,text_card,reel_text,17883202566629768,122129281077424069,True,True,346,0,0,0,,516,0
 2026-11-23 15:15,BREAKING NEWS,India becomes Asia’s third strongest power in new global report,100.22925531914893,True,text_card,reel_text,18162364762508237,122129287935424069,True,True,99,0,0,0,,116,0
-2026-11-23 16:06,INDIAN CINEMA,Leg injury forces actor Manish Goel out of Bigg Boss 20,80.93333333333334,True,text_card,reel_text,17941621554404917,122129292687424069,True,True,551,0,0,0,,604,0
-2026-11-23 18:06,BREAKING NEWS,West Bengal cabinet approves renaming,92.29361702127659,True,text_card,reel_text,18089348087706077,122129308749424069,True,True,64,0,0,0,,77,0
-2026-11-23 19:02,INDIA NEWS,COP31 ends without a deal,60.28225806451613,True,text_card,reel_text,17972428143206405,122129314377424069,True,True,38,0,0,0,,37,0
-2026-11-23 19:26,INDIA NEWS,Child rights panel steps in after 9-year-old injured in scooter accident in Keralam,68.28225806451613,True,text_card,reel_text,18135770998824160,122129317515424069,True,True,74,0,0,0,,81,0
-2026-11-24 02:57,INDIA NEWS,Nine pilgrims die in midnight road crash in Rajasthan,74.34791666666666,True,text_card,reel_text,18027325283931472,122129368965424069,True,True,63,0,0,0,,82,0
-2026-11-24 04:16,BREAKING NEWS,Hyderabad police hunt sender of hoax email threatening 26/11 attack,90.24680851063829,True,text_card,reel_text,18181310299464535,122129375757424069,True,True,101,0,0,0,,138,1
+2026-11-23 16:06,INDIAN CINEMA,Leg injury forces actor Manish Goel out of Bigg Boss 20,80.93333333333334,True,text_card,reel_text,17941621554404917,122129292687424069,True,True,552,0,0,0,,605,0
+2026-11-23 18:06,BREAKING NEWS,West Bengal cabinet approves renaming,92.29361702127659,True,text_card,reel_text,18089348087706077,122129308749424069,True,True,65,0,0,0,,78,0
+2026-11-23 19:02,INDIA NEWS,COP31 ends without a deal,60.28225806451613,True,text_card,reel_text,17972428143206405,122129314377424069,True,True,40,0,0,0,,40,0
+2026-11-23 19:26,INDIA NEWS,Child rights panel steps in after 9-year-old injured in scooter accident in Keralam,68.28225806451613,True,text_card,reel_text,18135770998824160,122129317515424069,True,True,79,0,0,0,,85,0
+2026-11-24 02:57,INDIA NEWS,Nine pilgrims die in midnight road crash in Rajasthan,74.34791666666666,True,text_card,reel_text,18027325283931472,122129368965424069,True,True,72,0,0,0,,87,0
+2026-11-24 04:16,BREAKING NEWS,Hyderabad police hunt sender of hoax email threatening 26/11 attack,90.24680851063829,True,text_card,reel_text,18181310299464535,122129375757424069,True,True,103,0,0,0,,138,1
 2026-11-24 05:58,INDIA NEWS,"8 killed, 2 critical after car crashes into tree in Tamil Nadu's Tiruchirappalli",71.23494623655914,True,text_card,reel_text,18113306195248130,122129384997424069,True,True,102,0,0,0,,134,0
-2026-11-24 07:20,BREAKING NEWS,Director Ayan Mukerji addresses War 2 box office failure,90.875,True,text_card,reel_text,18104753822655215,122129394435424069,True,True,95,0,0,0,,122,0
-2026-11-24 08:29,BREAKING NEWS,CBI deports wanted Haryana murder suspect back from Kazakhstan,97.31793478260869,True,text_card,reel_text,18022546106957097,122129401233424069,True,True,33,0,0,0,,49,0
-2026-11-24 09:26,INDIA NEWS,Blast victims' families receive only fraction of promised 1 crore payout,80.31793478260869,True,text_card,reel_text,18568903351075620,122129406693424069,True,True,12,0,0,0,,17,0
-2026-11-24 11:48,INDIAN CINEMA,Shahid Kapoor adds Rs. 3 crore Land Rover Defender 110 OCTA,75.11666666666667,True,text_card,reel_text,18113308838353916,122129421489424069,True,True,,,,,,,
-2026-11-24 13:06,BREAKING NEWS,Director Anil Sharma honors late actor Dharmendra on first death anniversary,104.11666666666667,True,text_card,reel_text,17897567160434728,122129434809424069,True,True,,,,,,,
+2026-11-24 07:20,BREAKING NEWS,Director Ayan Mukerji addresses War 2 box office failure,90.875,True,text_card,reel_text,18104753822655215,122129394435424069,True,True,99,0,0,0,,126,0
+2026-11-24 08:29,BREAKING NEWS,CBI deports wanted Haryana murder suspect back from Kazakhstan,97.31793478260869,True,text_card,reel_text,18022546106957097,122129401233424069,True,True,54,0,0,0,,65,0
+2026-11-24 09:26,INDIA NEWS,Blast victims' families receive only fraction of promised 1 crore payout,80.31793478260869,True,text_card,reel_text,18568903351075620,122129406693424069,True,True,40,0,0,0,,52,0
+2026-11-24 11:48,INDIAN CINEMA,Shahid Kapoor adds Rs. 3 crore Land Rover Defender 110 OCTA,75.11666666666667,True,text_card,reel_text,18113308838353916,122129421489424069,True,True,106,1,0,0,,130,1
+2026-11-24 13:06,BREAKING NEWS,Director Anil Sharma honors late actor Dharmendra on first death anniversary,104.11666666666667,True,text_card,reel_text,17897567160434728,122129434809424069,True,True,1,0,0,0,,24,0
