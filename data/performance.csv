@@ -810,7 +810,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-20 16:46,INDIA NEWS,"Supreme Court rejects bike taxi ban, says regulation is better",79.29473684210527,True,text_card,reel_text,17883286509546655,122128834155424069,True,True,109,0,0,0,,149,0
 2026-11-20 17:26,INDIAN CINEMA,"EXCLUSIVE: Sanjay Kapoor, Prashant Narayanan",67.35108695652174,True,text_card,reel_text,18113987564161043,122128838937424069,True,True,80,0,0,0,,94,0
 2026-11-20 17:59,INDIA NEWS,Rahul Gandhi says India is a side player in global affairs during University,64.21881720430108,True,text_card,reel_text,18419548657092820,122128843917424069,True,True,111,0,0,0,,141,0
-2026-11-21 02:26,INDIAN CINEMA,Veteran actor Larry Poindexter dies at 66 after car hits him,70.40108695652174,True,text_card,reel_text,18123607363975336,122128902459424069,True,True,118,0,0,0,,147,0
+2026-11-21 02:26,INDIAN CINEMA,Veteran actor Larry Poindexter dies at 66 after car hits him,70.40108695652174,True,text_card,reel_text,18123607363975336,122128902459424069,True,True,118,0,0,0,,149,0
 2026-11-21 02:30,BREAKING NEWS,Builders challenge 1km construction ban around Chennai's Pallikaranai marshland,96,True,text_card,reel_text,18020960594958487,122128902693424069,True,True,70,0,0,0,,97,0
 2026-11-21 05:56,INDIA NEWS,High Court refuses to stay corruption probe against IAS officer,67.26236559139785,True,text_card,reel_text,18131616925645949,122128922619424069,True,True,39,0,0,0,,44,1
 2026-11-21 07:07,INDIA NEWS,PM Modi claims cultural ties can guarantee global peace at summit,67.2247311827957,True,text_card,reel_text,18064783598795772,122128928649424069,True,True,102,0,0,0,,114,0
@@ -852,18 +852,18 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-23 18:06,BREAKING NEWS,West Bengal cabinet approves renaming,92.29361702127659,True,text_card,reel_text,18089348087706077,122129308749424069,True,True,67,0,0,0,,80,0
 2026-11-23 19:02,INDIA NEWS,COP31 ends without a deal,60.28225806451613,True,text_card,reel_text,17972428143206405,122129314377424069,True,True,45,0,0,0,,45,0
 2026-11-23 19:26,INDIA NEWS,Child rights panel steps in after 9-year-old injured in scooter accident in Keralam,68.28225806451613,True,text_card,reel_text,18135770998824160,122129317515424069,True,True,96,0,0,0,,102,0
-2026-11-24 02:57,INDIA NEWS,Nine pilgrims die in midnight road crash in Rajasthan,74.34791666666666,True,text_card,reel_text,18027325283931472,122129368965424069,True,True,85,0,0,0,,106,0
+2026-11-24 02:57,INDIA NEWS,Nine pilgrims die in midnight road crash in Rajasthan,74.34791666666666,True,text_card,reel_text,18027325283931472,122129368965424069,True,True,87,0,0,0,,108,0
 2026-11-24 04:16,BREAKING NEWS,Hyderabad police hunt sender of hoax email threatening 26/11 attack,90.24680851063829,True,text_card,reel_text,18181310299464535,122129375757424069,True,True,109,0,0,0,,148,1
 2026-11-24 05:58,INDIA NEWS,"8 killed, 2 critical after car crashes into tree in Tamil Nadu's Tiruchirappalli",71.23494623655914,True,text_card,reel_text,18113306195248130,122129384997424069,True,True,103,0,0,0,,135,0
-2026-11-24 07:20,BREAKING NEWS,Director Ayan Mukerji addresses War 2 box office failure,90.875,True,text_card,reel_text,18104753822655215,122129394435424069,True,True,112,0,0,0,,142,0
+2026-11-24 07:20,BREAKING NEWS,Director Ayan Mukerji addresses War 2 box office failure,90.875,True,text_card,reel_text,18104753822655215,122129394435424069,True,True,112,0,0,0,,143,0
 2026-11-24 08:29,BREAKING NEWS,CBI deports wanted Haryana murder suspect back from Kazakhstan,97.31793478260869,True,text_card,reel_text,18022546106957097,122129401233424069,True,True,98,0,0,0,,118,0
 2026-11-24 09:26,INDIA NEWS,Blast victims' families receive only fraction of promised 1 crore payout,80.31793478260869,True,text_card,reel_text,18568903351075620,122129406693424069,True,True,112,0,0,0,,170,0
 2026-11-24 11:48,INDIAN CINEMA,Shahid Kapoor adds Rs. 3 crore Land Rover Defender 110 OCTA,75.11666666666667,True,text_card,reel_text,18113308838353916,122129421489424069,True,True,110,1,0,0,,138,1
-2026-11-24 13:06,BREAKING NEWS,Director Anil Sharma honors late actor Dharmendra on first death anniversary,104.11666666666667,True,text_card,reel_text,17897567160434728,122129434809424069,True,True,101,0,0,0,,131,0
+2026-11-24 13:06,BREAKING NEWS,Director Anil Sharma honors late actor Dharmendra on first death anniversary,104.11666666666667,True,text_card,reel_text,17897567160434728,122129434809424069,True,True,102,0,0,0,,132,0
 2026-11-24 14:16,INDIAN CINEMA,Shabana shares 2017 party video; Sridevi and Satish appear,68.96777777777777,True,text_card,reel_text,18133316908799827,122129448297424069,True,True,105,0,0,0,,127,0
 2026-11-24 15:26,BREAKING NEWS,Inappropriate messages to Kallakurichi Collector: DMK demands TVK MLA's arrest,110.14,True,text_card,reel_text,18459086380126489,122129454765424069,True,True,53,0,0,0,,64,0
 2026-11-24 16:26,BREAKING NEWS,Deepika Padukone's 8-hour work shift demand gets support from Karan Johar.,95.79772727272727,True,text_card,reel_text,18082697054390047,122129462877424069,True,True,106,0,0,0,,131,0
-2026-11-24 18:07,BREAKING NEWS,"10,000 cops deployed against Hindu activists, claims TN BJP leader.",90.39120879120878,True,text_card,reel_text,18148085422599858,122129480337424069,True,True,71,0,0,0,,98,0
-2026-11-24 19:06,INDIA NEWS,Teen visits three bars before crash that killed three youths,74.36333333333333,True,text_card,reel_text,18215054065326294,122129486187424069,True,True,64,0,0,0,,72,0
+2026-11-24 18:07,BREAKING NEWS,"10,000 cops deployed against Hindu activists, claims TN BJP leader.",90.39120879120878,True,text_card,reel_text,18148085422599858,122129480337424069,True,True,72,0,0,0,,102,0
+2026-11-24 19:06,INDIA NEWS,Teen visits three bars before crash that killed three youths,74.36333333333333,True,text_card,reel_text,18215054065326294,122129486187424069,True,True,65,0,0,0,,72,0
 2026-11-24 19:26,INDIA NEWS,Last rites of Rajya Sabha MP Ramrao Wadkute performed,67.36333333333333,True,text_card,reel_text,18101818346402422,122129487813424069,True,True,102,0,0,0,,112,0
-2026-11-25 03:16,INDIAN CINEMA,New Hunger Games film grosses 120 million dollars in massive opening.,68.23409090909091,True,text_card,reel_text,17899857270416554,122129541597424069,True,True,,,,,,,
+2026-11-25 03:16,INDIAN CINEMA,New Hunger Games film grosses 120 million dollars in massive opening.,68.23409090909091,True,text_card,reel_text,17899857270416554,122129541597424069,True,True,0,0,0,0,,0,0
