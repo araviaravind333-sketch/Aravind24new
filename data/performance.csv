@@ -568,7 +568,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-03 10:35,INDIA NEWS,Rahul Gandhi shares childhood Sanskrit lesson to remember Indira Gandhi,88,True,full_bleed,reel_overlay,18009468998784009,122125890705424069,True,True,127,1,0,0,,161,1
 2026-11-03 11:45,INDIA NEWS,Cyclone Murasu threatens Andhra Pradesh as Chief Minister orders high alert,74.06954022988506,True,text_card,reel_text,17915133963503120,122125896729424069,True,True,107,1,0,0,,130,1
 2026-11-03 12:26,INDIA NEWS,Indian Navy rescues 20 crew members from hijacked vessel,78.05523255813954,False,full_bleed,,18053402702604397,122125900047424069,True,True,4,0,0,0,0,,0
-2026-11-03 13:45,INDIAN CINEMA,Hit Indian paranormal series Bhay returns for Season Two this March.,68.51212121212122,True,text_card,reel_text,18100024547419717,122125912503424069,True,True,221,2,0,2,,273,4
+2026-11-03 13:45,INDIAN CINEMA,Hit Indian paranormal series Bhay returns for Season Two this March.,68.51212121212122,True,text_card,reel_text,18100024547419717,122125912503424069,True,True,222,2,0,2,,274,4
 2026-11-03 15:05,BREAKING NEWS,Ramayana crosses ₹25 crore in advance bookings before Diwali release,96.51212121212122,True,text_card,reel_text,18092500763234538,122125924371424069,True,True,110,0,0,0,,122,0
 2026-11-03 17:47,INDIA NEWS,PM Modi inaugurates Pune Metro Line 3 linking Shivajinagar and Hinjawadi,73.05813953488372,True,full_bleed,reel_overlay,17960405508015493,122125947183424069,True,True,82,0,0,0,,105,1
 2026-11-03 19:05,BREAKING NEWS,Cyclone Arnab costs APSRTC ₹13.10 crore in revenue loss,92.09457831325301,True,text_card,reel_text,17913320520558182,122125956591424069,True,True,104,0,0,0,,128,0
@@ -811,9 +811,9 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-20 17:26,INDIAN CINEMA,"EXCLUSIVE: Sanjay Kapoor, Prashant Narayanan",67.35108695652174,True,text_card,reel_text,18113987564161043,122128838937424069,True,True,80,0,0,0,,94,0
 2026-11-20 17:59,INDIA NEWS,Rahul Gandhi says India is a side player in global affairs during University,64.21881720430108,True,text_card,reel_text,18419548657092820,122128843917424069,True,True,111,0,0,0,,141,0
 2026-11-21 02:26,INDIAN CINEMA,Veteran actor Larry Poindexter dies at 66 after car hits him,70.40108695652174,True,text_card,reel_text,18123607363975336,122128902459424069,True,True,119,0,0,0,,149,0
-2026-11-21 02:30,BREAKING NEWS,Builders challenge 1km construction ban around Chennai's Pallikaranai marshland,96,True,text_card,reel_text,18020960594958487,122128902693424069,True,True,70,0,0,0,,98,0
+2026-11-21 02:30,BREAKING NEWS,Builders challenge 1km construction ban around Chennai's Pallikaranai marshland,96,True,text_card,reel_text,18020960594958487,122128902693424069,True,True,71,0,0,0,,102,0
 2026-11-21 05:56,INDIA NEWS,High Court refuses to stay corruption probe against IAS officer,67.26236559139785,True,text_card,reel_text,18131616925645949,122128922619424069,True,True,39,0,0,0,,44,1
-2026-11-21 07:07,INDIA NEWS,PM Modi claims cultural ties can guarantee global peace at summit,67.2247311827957,True,text_card,reel_text,18064783598795772,122128928649424069,True,True,102,0,0,0,,114,0
+2026-11-21 07:07,INDIA NEWS,PM Modi claims cultural ties can guarantee global peace at summit,67.2247311827957,True,text_card,reel_text,18064783598795772,122128928649424069,True,True,103,0,0,0,,115,0
 2026-11-21 07:26,INDIA NEWS,"Cyclone 'Akvan' weakens into depression; no major damage, flood threat | LIVE",74.2247311827957,True,text_card,reel_text,18121955587785905,122128930371424069,True,True,88,0,0,0,,98,0
 2026-11-21 08:46,INDIA NEWS,Toxic liquor kills 14 people and hospitalises 200 in Manipur,68.22956989247312,True,text_card,reel_text,18480399067143355,122128937181424069,True,True,107,0,0,0,,123,0
 2026-11-21 11:36,TAMIL NADU NEWS,Rs 22 crore government bank loot leads to two fresh arrests,71,True,text_card,reel_text,18077209028487586,122128954527424069,True,True,89,0,0,0,,101,0
@@ -828,13 +828,13 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-22 03:47,INDIA NEWS,"Thick stubble smoke causes fatal crash in Punjab, killing woman",80.22204301075269,True,text_card,reel_text,18121961419978004,122129066583424069,True,True,77,0,0,0,,83,0
 2026-11-22 05:56,TAMIL NADU NEWS,Monsoon rains return to coastal Tamil Nadu from tomorrow,73,True,text_card,reel_text,17891910279652931,122129081505424069,True,True,91,0,0,0,,98,0
 2026-11-22 07:07,TAMIL NADU NEWS,"Dengue claims 22-year-old in Puducherry as total cases touch 1,300",71,True,text_card,reel_text,18102272279431758,122129088093424069,True,True,117,0,0,0,,137,0
-2026-11-22 08:06,INDIA NEWS,Cricketer Yuzvendra Chahal joins BJP as national OBC wing invitee,72.32659574468084,True,text_card,reel_text,18095239670290933,122129094501424069,True,True,122,1,0,0,,148,1
+2026-11-22 08:06,INDIA NEWS,Cricketer Yuzvendra Chahal joins BJP as national OBC wing invitee,72.32659574468084,True,text_card,reel_text,18095239670290933,122129094501424069,True,True,123,1,0,0,,149,1
 2026-11-22 08:47,INDIA NEWS,Nine pilgrims die as vehicle rams into truck in Rajasthan.,64.32659574468084,True,text_card,reel_text,17998543179024610,122129098629424069,True,True,106,0,0,0,,125,0
 2026-11-22 11:36,INDIAN CINEMA,Actor Anupam Kher dismisses ₹500 crore net worth claims,69.07717391304348,True,text_card,reel_text,17972300784190167,122129115507424069,True,True,263,0,0,0,,304,0
 2026-11-22 12:57,INDIAN CINEMA,Salman Khan avoids clash with Shah Rukh Khan this December.,68.0804347826087,True,text_card,reel_text,18005568251809520,122129122557424069,True,True,267,1,0,0,,310,1
 2026-11-22 13:57,INDIA NEWS,IIT Kharagpur marks 75 years with nation-first innovation goals,75.20833333333334,True,text_card,reel_text,17871796929661853,122129127957424069,True,True,108,0,0,0,,118,0
 2026-11-22 14:46,INDIAN CINEMA,Sachin Tendulkar invites Ranveer Singh to bowl to him in nets,74.89090909090909,True,text_card,reel_text,18076407203770749,122129133873424069,True,True,128,1,0,0,,157,1
-2026-11-22 16:06,BREAKING NEWS,Nepal Prime Minister Balendra Shah selects India for his first trip,121.29739583333333,True,text_card,reel_text,18096075386194744,122129142129424069,True,True,100,0,0,0,,121,0
+2026-11-22 16:06,BREAKING NEWS,Nepal Prime Minister Balendra Shah selects India for his first trip,121.29739583333333,True,text_card,reel_text,18096075386194744,122129142129424069,True,True,101,0,0,0,,122,0
 2026-11-22 17:47,INDIA NEWS,Nationwide youth club uses comedy and film to spark political debates,67.32291666666666,True,text_card,reel_text,18121620098088553,122129153409424069,True,True,36,0,0,0,,36,0
 2026-11-22 18:07,INDIA NEWS,"Congress hopeful of U.P. alliance with SP, seeks ‘respectable’ seat-sharing",72.32291666666666,True,text_card,reel_text,18152168251601574,122129155767424069,True,True,68,0,0,0,,80,0
 2026-11-22 18:26,INDIA NEWS,Suspected food poisoning sends Bengal BJP leader Rekha Patra to hospital,77.30684210526316,True,text_card,reel_text,18047219558831914,122129158725424069,True,True,82,0,0,0,,92,0
@@ -854,7 +854,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-23 19:26,INDIA NEWS,Child rights panel steps in after 9-year-old injured in scooter accident in Keralam,68.28225806451613,True,text_card,reel_text,18135770998824160,122129317515424069,True,True,96,0,0,0,,102,0
 2026-11-24 02:57,INDIA NEWS,Nine pilgrims die in midnight road crash in Rajasthan,74.34791666666666,True,text_card,reel_text,18027325283931472,122129368965424069,True,True,87,0,0,0,,108,0
 2026-11-24 04:16,BREAKING NEWS,Hyderabad police hunt sender of hoax email threatening 26/11 attack,90.24680851063829,True,text_card,reel_text,18181310299464535,122129375757424069,True,True,109,0,0,0,,148,1
-2026-11-24 05:58,INDIA NEWS,"8 killed, 2 critical after car crashes into tree in Tamil Nadu's Tiruchirappalli",71.23494623655914,True,text_card,reel_text,18113306195248130,122129384997424069,True,True,103,0,0,0,,135,0
+2026-11-24 05:58,INDIA NEWS,"8 killed, 2 critical after car crashes into tree in Tamil Nadu's Tiruchirappalli",71.23494623655914,True,text_card,reel_text,18113306195248130,122129384997424069,True,True,104,0,0,0,,136,0
 2026-11-24 07:20,BREAKING NEWS,Director Ayan Mukerji addresses War 2 box office failure,90.875,True,text_card,reel_text,18104753822655215,122129394435424069,True,True,114,0,0,0,,145,0
 2026-11-24 08:29,BREAKING NEWS,CBI deports wanted Haryana murder suspect back from Kazakhstan,97.31793478260869,True,text_card,reel_text,18022546106957097,122129401233424069,True,True,98,0,0,0,,118,0
 2026-11-24 09:26,INDIA NEWS,Blast victims' families receive only fraction of promised 1 crore payout,80.31793478260869,True,text_card,reel_text,18568903351075620,122129406693424069,True,True,113,0,0,0,,171,0
@@ -866,17 +866,17 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-24 18:07,BREAKING NEWS,"10,000 cops deployed against Hindu activists, claims TN BJP leader.",90.39120879120878,True,text_card,reel_text,18148085422599858,122129480337424069,True,True,98,0,0,0,,137,0
 2026-11-24 19:06,INDIA NEWS,Teen visits three bars before crash that killed three youths,74.36333333333333,True,text_card,reel_text,18215054065326294,122129486187424069,True,True,102,0,0,0,,112,0
 2026-11-24 19:26,INDIA NEWS,Last rites of Rajya Sabha MP Ramrao Wadkute performed,67.36333333333333,True,text_card,reel_text,18101818346402422,122129487813424069,True,True,102,0,0,0,,112,0
-2026-11-25 03:16,INDIAN CINEMA,New Hunger Games film grosses 120 million dollars in massive opening.,68.23409090909091,True,text_card,reel_text,17899857270416554,122129541597424069,True,True,57,0,0,0,,63,0
+2026-11-25 03:16,INDIAN CINEMA,New Hunger Games film grosses 120 million dollars in massive opening.,68.23409090909091,True,text_card,reel_text,17899857270416554,122129541597424069,True,True,58,0,0,0,,64,0
 2026-11-25 04:37,TAMIL NADU NEWS,Eight die as car carrying brick kiln workers crashes in Tiruchy,75.1,True,text_card,reel_text,18112278119247072,122129547975424069,True,True,82,0,0,0,,102,0
-2026-11-25 06:07,INDIAN CINEMA,Dhanush starrer Operation Mole crosses 100 crore globally in five days,67.71704545454546,True,text_card,reel_text,18134515099764567,122129555241424069,True,True,112,0,0,0,,142,0
+2026-11-25 06:07,INDIAN CINEMA,Dhanush starrer Operation Mole crosses 100 crore globally in five days,67.71704545454546,True,text_card,reel_text,18134515099764567,122129555241424069,True,True,113,0,0,0,,143,0
 2026-11-25 07:26,TAMIL NADU NEWS,Police arrest Chennai man for cheating finance firm of Rs 6 crore,60.34166666666667,True,text_card,reel_text,17939149014413811,122129563611424069,True,True,107,0,0,0,,125,1
-2026-11-25 08:36,INDIA NEWS,Shashi Tharoor backs PM Modi over low salaries in corporate India.,82.21542553191489,True,text_card,reel_text,18133799629832563,122129570211424069,True,True,87,0,0,0,,117,0
-2026-11-25 09:56,INDIA NEWS,Parliament winter session skipped only four times in Indian history,67.33461538461538,True,text_card,reel_text,18052103171819769,122129577123424069,True,True,66,0,0,0,,87,0
+2026-11-25 08:36,INDIA NEWS,Shashi Tharoor backs PM Modi over low salaries in corporate India.,82.21542553191489,True,text_card,reel_text,18133799629832563,122129570211424069,True,True,90,0,0,0,,123,0
+2026-11-25 09:56,INDIA NEWS,Parliament winter session skipped only four times in Indian history,67.33461538461538,True,text_card,reel_text,18052103171819769,122129577123424069,True,True,67,0,0,0,,88,0
 2026-11-25 12:36,INDIAN CINEMA,Film association demands ban on Pakistani Netflix show starring Fawad Khan,89.98255813953489,True,text_card,reel_text,18176738071415840,122129592453424069,True,True,2,0,0,0,,3,0
-2026-11-25 13:06,INDIAN CINEMA,Aamir Khan begins cricket training to play legend Lala Amarnath.,74.61333333333333,True,text_card,reel_text,17969577669226914,122129595153424069,True,True,139,0,0,0,,180,0
-2026-11-25 14:16,INDIAN CINEMA,Kareena Kapoor calls sister Karisma better than Kim Kardashian,69.98255813953489,True,text_card,reel_text,18133568393488798,122129603247424069,True,True,121,0,0,0,,135,0
-2026-11-25 15:46,INDIA NEWS,"Samajwadi Party names five UP candidates, demands serious alliance talks from Congress.",78.50988372093023,True,text_card,reel_text,18004949141816462,122129618865424069,True,True,63,0,0,0,,84,0
-2026-11-25 16:26,INDIA NEWS,"Cabinet clears construction of new airport at Silchar for ₹2,014 crore",75.50988372093023,True,text_card,reel_text,18217196338363448,122129622999424069,True,True,13,0,0,0,,15,0
-2026-11-25 18:26,INDIAN CINEMA,Rights of 17 hit movies face legal dispute over 8 crore guarantee,59.259574468085106,True,text_card,reel_text,18122691803055737,122129640069424069,True,True,16,0,0,0,,20,0
-2026-11-25 19:06,INDIAN CINEMA,Indian film bodies demand total ban on Pakistani Netflix series,68.2595744680851,True,text_card,reel_text,18134414743793552,122129644677424069,True,True,1,0,0,0,,2,0
-2026-11-25 19:26,TAMIL NADU NEWS,Supreme Court examines contempt over Madurai temple lamp lighting row,71.9857142857143,True,text_card,reel_text,18397115167226326,122129647659424069,True,True,0,0,0,0,,0,0
+2026-11-25 13:06,INDIAN CINEMA,Aamir Khan begins cricket training to play legend Lala Amarnath.,74.61333333333333,True,text_card,reel_text,17969577669226914,122129595153424069,True,True,146,0,0,0,,186,0
+2026-11-25 14:16,INDIAN CINEMA,Kareena Kapoor calls sister Karisma better than Kim Kardashian,69.98255813953489,True,text_card,reel_text,18133568393488798,122129603247424069,True,True,123,0,0,0,,137,0
+2026-11-25 15:46,INDIA NEWS,"Samajwadi Party names five UP candidates, demands serious alliance talks from Congress.",78.50988372093023,True,text_card,reel_text,18004949141816462,122129618865424069,True,True,69,0,0,0,,88,0
+2026-11-25 16:26,INDIA NEWS,"Cabinet clears construction of new airport at Silchar for ₹2,014 crore",75.50988372093023,True,text_card,reel_text,18217196338363448,122129622999424069,True,True,16,0,0,0,,17,0
+2026-11-25 18:26,INDIAN CINEMA,Rights of 17 hit movies face legal dispute over 8 crore guarantee,59.259574468085106,True,text_card,reel_text,18122691803055737,122129640069424069,True,True,41,0,0,0,,51,0
+2026-11-25 19:06,INDIAN CINEMA,Indian film bodies demand total ban on Pakistani Netflix series,68.2595744680851,True,text_card,reel_text,18134414743793552,122129644677424069,True,True,41,0,0,0,,61,0
+2026-11-25 19:26,TAMIL NADU NEWS,Supreme Court examines contempt over Madurai temple lamp lighting row,71.9857142857143,True,text_card,reel_text,18397115167226326,122129647659424069,True,True,72,0,0,0,,121,0
