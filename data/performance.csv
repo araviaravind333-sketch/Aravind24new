@@ -339,7 +339,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-10-17 12:06,INDIA NEWS,Official probe blames pilot error for 2023 Mumbai jet crash,76,True,text_card,reel_text,17950581594293603,122123109603424069,True,True,104,0,0,0,,135,0
 2026-10-17 13:05,BREAKING NEWS,"Kids have a fundamental right to internet, Supreme Court rules",102,True,text_card,reel_text,18106218941146475,122123121201424069,True,True,9,0,0,0,,10,0
 2026-10-17 14:05,INDIA NEWS,Ensure landslide victory for Sarvotham Reddy in Graduates’ MLC election,62,True,text_card,reel_text,18113395106139377,122123129661424069,True,True,31,0,0,0,,37,0
-2026-10-17 15:25,INDIA NEWS,Nine-year-old boy dies after 39-hour rescue from Rajasthan borewell.,76,True,text_card,reel_text,18095600201444918,122123139639424069,True,True,119,1,0,0,,146,1
+2026-10-17 15:25,INDIA NEWS,Nine-year-old boy dies after 39-hour rescue from Rajasthan borewell.,76,True,text_card,reel_text,18095600201444918,122123139639424069,True,True,119,0,0,0,,146,0
 2026-10-17 23:06,BREAKING NEWS,Kolkata Durga Puja stampede kills 17 people and injures 25 others,94,True,text_card,reel_text,18376748269240645,122123206479424069,True,True,112,0,0,0,,122,0
 2026-10-18 00:56,INDIA NEWS,Over 76% voters turn out for Nagaon Lok Sabha byelection,69,False,full_bleed,,18082786151717456,122123225325424069,True,True,4,0,0,0,0,,0
 2026-10-18 02:15,INDIA NEWS,Delhi Police detain activists marching with the Indian tricolour.,68,True,text_card,reel_text,18090266468680352,122123233851424069,True,True,124,1,0,0,,142,1
@@ -867,16 +867,16 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-24 19:06,INDIA NEWS,Teen visits three bars before crash that killed three youths,74.36333333333333,True,text_card,reel_text,18215054065326294,122129486187424069,True,True,102,0,0,0,,112,0
 2026-11-24 19:26,INDIA NEWS,Last rites of Rajya Sabha MP Ramrao Wadkute performed,67.36333333333333,True,text_card,reel_text,18101818346402422,122129487813424069,True,True,102,0,0,0,,112,0
 2026-11-25 03:16,INDIAN CINEMA,New Hunger Games film grosses 120 million dollars in massive opening.,68.23409090909091,True,text_card,reel_text,17899857270416554,122129541597424069,True,True,62,0,0,0,,67,0
-2026-11-25 04:37,TAMIL NADU NEWS,Eight die as car carrying brick kiln workers crashes in Tiruchy,75.1,True,text_card,reel_text,18112278119247072,122129547975424069,True,True,84,0,0,0,,106,0
+2026-11-25 04:37,TAMIL NADU NEWS,Eight die as car carrying brick kiln workers crashes in Tiruchy,75.1,True,text_card,reel_text,18112278119247072,122129547975424069,True,True,86,0,0,0,,106,0
 2026-11-25 06:07,INDIAN CINEMA,Dhanush starrer Operation Mole crosses 100 crore globally in five days,67.71704545454546,True,text_card,reel_text,18134515099764567,122129555241424069,True,True,114,0,0,0,,144,0
 2026-11-25 07:26,TAMIL NADU NEWS,Police arrest Chennai man for cheating finance firm of Rs 6 crore,60.34166666666667,True,text_card,reel_text,17939149014413811,122129563611424069,True,True,112,0,0,0,,135,1
 2026-11-25 08:36,INDIA NEWS,Shashi Tharoor backs PM Modi over low salaries in corporate India.,82.21542553191489,True,text_card,reel_text,18133799629832563,122129570211424069,True,True,96,0,0,0,,129,0
-2026-11-25 09:56,INDIA NEWS,Parliament winter session skipped only four times in Indian history,67.33461538461538,True,text_card,reel_text,18052103171819769,122129577123424069,True,True,75,0,0,0,,102,0
+2026-11-25 09:56,INDIA NEWS,Parliament winter session skipped only four times in Indian history,67.33461538461538,True,text_card,reel_text,18052103171819769,122129577123424069,True,True,76,0,0,0,,103,0
 2026-11-25 12:36,INDIAN CINEMA,Film association demands ban on Pakistani Netflix show starring Fawad Khan,89.98255813953489,True,text_card,reel_text,18176738071415840,122129592453424069,True,True,2,0,0,0,,3,0
-2026-11-25 13:06,INDIAN CINEMA,Aamir Khan begins cricket training to play legend Lala Amarnath.,74.61333333333333,True,text_card,reel_text,17969577669226914,122129595153424069,True,True,165,0,0,0,,207,0
+2026-11-25 13:06,INDIAN CINEMA,Aamir Khan begins cricket training to play legend Lala Amarnath.,74.61333333333333,True,text_card,reel_text,17969577669226914,122129595153424069,True,True,168,0,0,0,,211,0
 2026-11-25 14:16,INDIAN CINEMA,Kareena Kapoor calls sister Karisma better than Kim Kardashian,69.98255813953489,True,text_card,reel_text,18133568393488798,122129603247424069,True,True,125,0,0,0,,139,0
-2026-11-25 15:46,INDIA NEWS,"Samajwadi Party names five UP candidates, demands serious alliance talks from Congress.",78.50988372093023,True,text_card,reel_text,18004949141816462,122129618865424069,True,True,82,0,0,0,,107,0
-2026-11-25 16:26,INDIA NEWS,"Cabinet clears construction of new airport at Silchar for ₹2,014 crore",75.50988372093023,True,text_card,reel_text,18217196338363448,122129622999424069,True,True,43,1,0,0,,47,1
-2026-11-25 18:26,INDIAN CINEMA,Rights of 17 hit movies face legal dispute over 8 crore guarantee,59.259574468085106,True,text_card,reel_text,18122691803055737,122129640069424069,True,True,71,1,0,0,,89,1
-2026-11-25 19:06,INDIAN CINEMA,Indian film bodies demand total ban on Pakistani Netflix series,68.2595744680851,True,text_card,reel_text,18134414743793552,122129644677424069,True,True,74,0,0,0,,101,0
+2026-11-25 15:46,INDIA NEWS,"Samajwadi Party names five UP candidates, demands serious alliance talks from Congress.",78.50988372093023,True,text_card,reel_text,18004949141816462,122129618865424069,True,True,85,0,0,0,,108,0
+2026-11-25 16:26,INDIA NEWS,"Cabinet clears construction of new airport at Silchar for ₹2,014 crore",75.50988372093023,True,text_card,reel_text,18217196338363448,122129622999424069,True,True,48,1,0,0,,53,1
+2026-11-25 18:26,INDIAN CINEMA,Rights of 17 hit movies face legal dispute over 8 crore guarantee,59.259574468085106,True,text_card,reel_text,18122691803055737,122129640069424069,True,True,73,1,0,0,,90,1
+2026-11-25 19:06,INDIAN CINEMA,Indian film bodies demand total ban on Pakistani Netflix series,68.2595744680851,True,text_card,reel_text,18134414743793552,122129644677424069,True,True,79,0,0,0,,107,0
 2026-11-25 19:26,TAMIL NADU NEWS,Supreme Court examines contempt over Madurai temple lamp lighting row,71.9857142857143,True,text_card,reel_text,18397115167226326,122129647659424069,True,True,127,1,0,0,,182,1
