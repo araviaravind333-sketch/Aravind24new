@@ -691,7 +691,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-12 03:00,INDIAN CINEMA,Ramayana hits Rs 663 crore worldwide in five days,69.84625,False,full_bleed,,18117801884323265,122127376659424069,True,True,8,0,0,0,0,,0
 2026-11-12 04:25,BREAKING NEWS,Accident victim's daughter files review petition in Kerala High Court,116.75101010101011,True,text_card,reel_text,18380517019241405,122127385275424069,True,True,100,0,0,0,,126,0
 2026-11-12 10:55,INDIA NEWS,CM directs officials to strengthen arguments in Supreme Court on Krishna waters,78.74549999999999,False,full_bleed,,18193545550414656,122127425463424069,True,True,6,0,0,0,0,,0
-2026-11-12 12:05,INDIAN CINEMA,SHOCKING: Amitabh Bachchan's Jalsa at centre of family DISPUTE,80.39324324324323,True,full_bleed,reel_overlay,17916793377497808,122127433299424069,True,True,2585,7,0,4,,4869,11
+2026-11-12 12:05,INDIAN CINEMA,SHOCKING: Amitabh Bachchan's Jalsa at centre of family DISPUTE,80.39324324324323,True,full_bleed,reel_overlay,17916793377497808,122127433299424069,True,True,2586,7,0,4,,4870,11
 2026-11-12 13:05,BREAKING NEWS,From Kismet to Dhurandhar and Ramayana,111.39324324324325,True,text_card,reel_text,18081895994394868,122127444159424069,True,True,144,0,0,0,,173,1
 2026-11-12 14:05,BREAKING NEWS,Alia Bhatt guides Kiara Advani on returning to work after motherhood,106.26447368421053,True,full_bleed,reel_overlay,18081599204710195,122127452151424069,True,True,1472,9,0,0,,1932,9
 2026-11-12 15:06,INDIA NEWS,Dubai NRI loses ₹2.11 crore to fake Telegram investment scam,86.6891089108911,True,text_card,reel_text,18131821741827305,122127457923424069,True,True,103,0,0,0,,112,0
@@ -811,7 +811,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-20 17:26,INDIAN CINEMA,"EXCLUSIVE: Sanjay Kapoor, Prashant Narayanan",67.35108695652174,True,text_card,reel_text,18113987564161043,122128838937424069,True,True,80,0,0,0,,94,0
 2026-11-20 17:59,INDIA NEWS,Rahul Gandhi says India is a side player in global affairs during University,64.21881720430108,True,text_card,reel_text,18419548657092820,122128843917424069,True,True,111,0,0,0,,141,0
 2026-11-21 02:26,INDIAN CINEMA,Veteran actor Larry Poindexter dies at 66 after car hits him,70.40108695652174,True,text_card,reel_text,18123607363975336,122128902459424069,True,True,119,0,0,0,,149,0
-2026-11-21 02:30,BREAKING NEWS,Builders challenge 1km construction ban around Chennai's Pallikaranai marshland,96,True,text_card,reel_text,18020960594958487,122128902693424069,True,True,70,0,0,0,,97,0
+2026-11-21 02:30,BREAKING NEWS,Builders challenge 1km construction ban around Chennai's Pallikaranai marshland,96,True,text_card,reel_text,18020960594958487,122128902693424069,True,True,70,0,0,0,,98,0
 2026-11-21 05:56,INDIA NEWS,High Court refuses to stay corruption probe against IAS officer,67.26236559139785,True,text_card,reel_text,18131616925645949,122128922619424069,True,True,39,0,0,0,,44,1
 2026-11-21 07:07,INDIA NEWS,PM Modi claims cultural ties can guarantee global peace at summit,67.2247311827957,True,text_card,reel_text,18064783598795772,122128928649424069,True,True,102,0,0,0,,114,0
 2026-11-21 07:26,INDIA NEWS,"Cyclone 'Akvan' weakens into depression; no major damage, flood threat | LIVE",74.2247311827957,True,text_card,reel_text,18121955587785905,122128930371424069,True,True,88,0,0,0,,98,0
@@ -862,11 +862,11 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-24 13:06,BREAKING NEWS,Director Anil Sharma honors late actor Dharmendra on first death anniversary,104.11666666666667,True,text_card,reel_text,17897567160434728,122129434809424069,True,True,102,0,0,0,,132,0
 2026-11-24 14:16,INDIAN CINEMA,Shabana shares 2017 party video; Sridevi and Satish appear,68.96777777777777,True,text_card,reel_text,18133316908799827,122129448297424069,True,True,105,0,0,0,,127,0
 2026-11-24 15:26,BREAKING NEWS,Inappropriate messages to Kallakurichi Collector: DMK demands TVK MLA's arrest,110.14,True,text_card,reel_text,18459086380126489,122129454765424069,True,True,53,0,0,0,,64,0
-2026-11-24 16:26,BREAKING NEWS,Deepika Padukone's 8-hour work shift demand gets support from Karan Johar.,95.79772727272727,True,text_card,reel_text,18082697054390047,122129462877424069,True,True,106,0,0,0,,131,0
-2026-11-24 18:07,BREAKING NEWS,"10,000 cops deployed against Hindu activists, claims TN BJP leader.",90.39120879120878,True,text_card,reel_text,18148085422599858,122129480337424069,True,True,73,0,0,0,,108,0
-2026-11-24 19:06,INDIA NEWS,Teen visits three bars before crash that killed three youths,74.36333333333333,True,text_card,reel_text,18215054065326294,122129486187424069,True,True,65,0,0,0,,72,0
+2026-11-24 16:26,BREAKING NEWS,Deepika Padukone's 8-hour work shift demand gets support from Karan Johar.,95.79772727272727,True,text_card,reel_text,18082697054390047,122129462877424069,True,True,107,0,0,0,,132,0
+2026-11-24 18:07,BREAKING NEWS,"10,000 cops deployed against Hindu activists, claims TN BJP leader.",90.39120879120878,True,text_card,reel_text,18148085422599858,122129480337424069,True,True,86,0,0,0,,136,0
+2026-11-24 19:06,INDIA NEWS,Teen visits three bars before crash that killed three youths,74.36333333333333,True,text_card,reel_text,18215054065326294,122129486187424069,True,True,69,0,0,0,,78,0
 2026-11-24 19:26,INDIA NEWS,Last rites of Rajya Sabha MP Ramrao Wadkute performed,67.36333333333333,True,text_card,reel_text,18101818346402422,122129487813424069,True,True,102,0,0,0,,112,0
-2026-11-25 03:16,INDIAN CINEMA,New Hunger Games film grosses 120 million dollars in massive opening.,68.23409090909091,True,text_card,reel_text,17899857270416554,122129541597424069,True,True,5,0,0,0,,5,0
-2026-11-25 04:37,TAMIL NADU NEWS,Eight die as car carrying brick kiln workers crashes in Tiruchy,75.1,True,text_card,reel_text,18112278119247072,122129547975424069,True,True,7,0,0,0,,9,0
-2026-11-25 06:07,INDIAN CINEMA,Dhanush starrer Operation Mole crosses 100 crore globally in five days,67.71704545454546,True,text_card,reel_text,18134515099764567,122129555241424069,True,True,,,,,,,
-2026-11-25 07:26,TAMIL NADU NEWS,Police arrest Chennai man for cheating finance firm of Rs 6 crore,60.34166666666667,True,text_card,reel_text,17939149014413811,122129563611424069,True,True,,,,,,,
+2026-11-25 03:16,INDIAN CINEMA,New Hunger Games film grosses 120 million dollars in massive opening.,68.23409090909091,True,text_card,reel_text,17899857270416554,122129541597424069,True,True,7,0,0,0,,8,0
+2026-11-25 04:37,TAMIL NADU NEWS,Eight die as car carrying brick kiln workers crashes in Tiruchy,75.1,True,text_card,reel_text,18112278119247072,122129547975424069,True,True,26,0,0,0,,42,0
+2026-11-25 06:07,INDIAN CINEMA,Dhanush starrer Operation Mole crosses 100 crore globally in five days,67.71704545454546,True,text_card,reel_text,18134515099764567,122129555241424069,True,True,13,0,0,0,,52,0
+2026-11-25 07:26,TAMIL NADU NEWS,Police arrest Chennai man for cheating finance firm of Rs 6 crore,60.34166666666667,True,text_card,reel_text,17939149014413811,122129563611424069,True,True,0,0,0,0,,0,0
