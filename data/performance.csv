@@ -542,7 +542,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-01 12:06,BREAKING NEWS,Delhi to Agra bullet train cuts travel time to 59 minutes.,92,False,full_bleed,,18485155591115348,122125581363424069,True,True,5,0,0,0,0,,0
 2026-11-01 13:26,BREAKING NEWS,Six Indians stranded near remote Nepal lake await urgent helicopter rescue,99,True,text_card,reel_text,18110190926210193,122125589901424069,True,True,104,0,0,0,,122,1
 2026-11-01 14:46,INDIA NEWS,Telangana CM compares PM Modi to Ravana in sharp political attack,71,False,full_bleed,,17876978778584718,122125598133424069,True,True,7,0,0,0,0,,0
-2026-11-01 17:26,INDIAN CINEMA,Leaked videos reveal actor Nani plays chef and outlaw,74,True,text_card,reel_text,18116449784329380,122125614705424069,True,True,686,4,0,0,,1056,5
+2026-11-01 17:26,INDIAN CINEMA,Leaked videos reveal actor Nani plays chef and outlaw,74,True,text_card,reel_text,18116449784329380,122125614705424069,True,True,686,4,0,0,,1057,5
 2026-11-01 18:26,INDIA NEWS,Mamata Banerjee slams central exercise as special relief for the BJP,68,True,text_card,reel_text,17918631369464596,122125622475424069,True,True,68,0,0,0,,84,0
 2026-11-01 20:06,INDIA NEWS,Andhra civic polls spark 275 cases as Jagan demands repoll over clashes,76,True,text_card,reel_text,18132190736306383,122125633389424069,True,True,23,0,0,0,,36,0
 2026-11-01 20:26,INDIAN CINEMA,Ramayana pre-sales cross Rs 36 crore but lag behind Yash's Toxic.,85,True,text_card,reel_text,18218987716353619,122125636533424069,True,True,123,0,0,0,,150,0
@@ -894,6 +894,6 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-26 18:45,BREAKING NEWS,Meet Vardhman Jain: The Entrepreneur Behind Rs 206 Crore Gold Donation To Tirupati,90.64512195121951,True,text_card,reel_text,18644840641057227,122129826945424069,True,True,17,0,0,0,,22,0
 2026-11-26 19:45,BREAKING NEWS,India's Gold Comes Home: RBI Now Stores Record Reserves,91.65487804878049,True,text_card,reel_text,18150259318565462,122129833311424069,True,True,27,0,0,0,,33,0
 2026-11-26 20:45,BREAKING NEWS,Parliament convenes special session on delimitation bill and women's reservation ahead,123.64876543209877,True,text_card,reel_text,18110455202316551,122129838657424069,True,True,36,0,0,0,,42,0
-2026-11-27 03:45,BREAKING NEWS,Priyanka Chopra pays tribute to martyrs of 26/11 terror attack in Mumbai,99.468,True,text_card,reel_text,18487749775114385,122129881821424069,True,True,137,0,0,0,,177,0
-2026-11-27 04:55,INDIA NEWS,"Couple gets Rs 63,000 after 4-hour train delay causes missed flight",73.46860465116279,True,text_card,reel_text,18114127931526240,122129886993424069,True,True,6,0,0,0,,17,0
-2026-11-27 06:35,INDIA NEWS,Congress to mark Constitution Day with nationwide marches against 'vote theft',67.46860465116279,True,text_card,reel_text,18109919528287473,122129895405424069,True,True,0,0,0,0,,3,0
+2026-11-27 03:45,BREAKING NEWS,Priyanka Chopra pays tribute to martyrs of 26/11 terror attack in Mumbai,99.468,True,text_card,reel_text,18487749775114385,122129881821424069,True,True,141,0,0,0,,177,0
+2026-11-27 04:55,INDIA NEWS,"Couple gets Rs 63,000 after 4-hour train delay causes missed flight",73.46860465116279,True,text_card,reel_text,18114127931526240,122129886993424069,True,True,6,0,0,0,,21,0
+2026-11-27 06:35,INDIA NEWS,Congress to mark Constitution Day with nationwide marches against 'vote theft',67.46860465116279,True,text_card,reel_text,18109919528287473,122129895405424069,True,True,2,0,0,0,,3,0
