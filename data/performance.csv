@@ -869,7 +869,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-25 03:16,INDIAN CINEMA,New Hunger Games film grosses 120 million dollars in massive opening.,68.23409090909091,True,text_card,reel_text,17899857270416554,122129541597424069,True,True,62,0,0,0,,67,0
 2026-11-25 04:37,TAMIL NADU NEWS,Eight die as car carrying brick kiln workers crashes in Tiruchy,75.1,True,text_card,reel_text,18112278119247072,122129547975424069,True,True,87,0,0,0,,107,0
 2026-11-25 06:07,INDIAN CINEMA,Dhanush starrer Operation Mole crosses 100 crore globally in five days,67.71704545454546,True,text_card,reel_text,18134515099764567,122129555241424069,True,True,115,0,0,0,,145,0
-2026-11-25 07:26,TAMIL NADU NEWS,Police arrest Chennai man for cheating finance firm of Rs 6 crore,60.34166666666667,True,text_card,reel_text,17939149014413811,122129563611424069,True,True,114,0,0,0,,138,1
+2026-11-25 07:26,TAMIL NADU NEWS,Police arrest Chennai man for cheating finance firm of Rs 6 crore,60.34166666666667,True,text_card,reel_text,17939149014413811,122129563611424069,True,True,115,0,0,0,,143,1
 2026-11-25 08:36,INDIA NEWS,Shashi Tharoor backs PM Modi over low salaries in corporate India.,82.21542553191489,True,text_card,reel_text,18133799629832563,122129570211424069,True,True,96,0,0,0,,129,0
 2026-11-25 09:56,INDIA NEWS,Parliament winter session skipped only four times in Indian history,67.33461538461538,True,text_card,reel_text,18052103171819769,122129577123424069,True,True,93,0,0,0,,131,0
 2026-11-25 12:36,INDIAN CINEMA,Film association demands ban on Pakistani Netflix show starring Fawad Khan,89.98255813953489,True,text_card,reel_text,18176738071415840,122129592453424069,True,True,2,0,0,0,,3,0
@@ -891,17 +891,17 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-26 14:28,INDIA NEWS,Gunmen shoot four men dead inside a Haryana eatery.,68.61951219512196,True,text_card,reel_text,18102768308427413,122129783061424069,True,True,106,0,0,0,,137,0
 2026-11-26 14:32,INDIAN CINEMA,Naga Chaitanya starrer ‘Vrushakarma’ trailer gets positive response from fans,78.99081632653062,True,text_card,reel_text,18123820681992358,122129783775424069,True,True,110,1,0,0,,130,1
 2026-11-26 16:26,TAMIL NADU NEWS,AIADMK announces protests across Tamil Nadu against TVK government on December 2,79.03,True,text_card,reel_text,18122338472036554,122129803311424069,True,True,101,1,1,0,,129,2
-2026-11-26 18:45,BREAKING NEWS,Meet Vardhman Jain: The Entrepreneur Behind Rs 206 Crore Gold Donation To Tirupati,90.64512195121951,True,text_card,reel_text,18644840641057227,122129826945424069,True,True,27,0,0,0,,39,0
-2026-11-26 19:45,BREAKING NEWS,India's Gold Comes Home: RBI Now Stores Record Reserves,91.65487804878049,True,text_card,reel_text,18150259318565462,122129833311424069,True,True,59,0,0,0,,72,0
-2026-11-26 20:45,BREAKING NEWS,Parliament convenes special session on delimitation bill and women's reservation ahead,123.64876543209877,True,text_card,reel_text,18110455202316551,122129838657424069,True,True,40,0,0,0,,48,0
+2026-11-26 18:45,BREAKING NEWS,Meet Vardhman Jain: The Entrepreneur Behind Rs 206 Crore Gold Donation To Tirupati,90.64512195121951,True,text_card,reel_text,18644840641057227,122129826945424069,True,True,41,0,0,0,,60,0
+2026-11-26 19:45,BREAKING NEWS,India's Gold Comes Home: RBI Now Stores Record Reserves,91.65487804878049,True,text_card,reel_text,18150259318565462,122129833311424069,True,True,60,0,0,0,,74,0
+2026-11-26 20:45,BREAKING NEWS,Parliament convenes special session on delimitation bill and women's reservation ahead,123.64876543209877,True,text_card,reel_text,18110455202316551,122129838657424069,True,True,42,0,0,0,,50,0
 2026-11-27 03:45,BREAKING NEWS,Priyanka Chopra pays tribute to martyrs of 26/11 terror attack in Mumbai,99.468,True,text_card,reel_text,18487749775114385,122129881821424069,True,True,143,0,0,0,,179,0
-2026-11-27 04:55,INDIA NEWS,"Couple gets Rs 63,000 after 4-hour train delay causes missed flight",73.46860465116279,True,text_card,reel_text,18114127931526240,122129886993424069,True,True,73,0,0,0,,92,0
-2026-11-27 06:35,INDIA NEWS,Congress to mark Constitution Day with nationwide marches against 'vote theft',67.46860465116279,True,text_card,reel_text,18109919528287473,122129895405424069,True,True,25,0,0,0,,26,0
-2026-11-27 07:45,TAMIL NADU NEWS,"DVAC arrests TN minister's aide in Rs 1,020-crore tender scam",88.29090909090908,True,text_card,reel_text,18232011493338243,122129900973424069,True,True,24,0,0,0,,31,0
-2026-11-27 08:45,TAMIL NADU NEWS,Madras High Court demands urgent report on lorry driver's death,55.29090909090909,True,text_card,reel_text,18023039552950390,122129905473424069,True,True,58,0,0,0,,71,0
+2026-11-27 04:55,INDIA NEWS,"Couple gets Rs 63,000 after 4-hour train delay causes missed flight",73.46860465116279,True,text_card,reel_text,18114127931526240,122129886993424069,True,True,82,0,0,0,,100,0
+2026-11-27 06:35,INDIA NEWS,Congress to mark Constitution Day with nationwide marches against 'vote theft',67.46860465116279,True,text_card,reel_text,18109919528287473,122129895405424069,True,True,27,0,0,0,,29,0
+2026-11-27 07:45,TAMIL NADU NEWS,"DVAC arrests TN minister's aide in Rs 1,020-crore tender scam",88.29090909090908,True,text_card,reel_text,18232011493338243,122129900973424069,True,True,36,0,0,0,,47,0
+2026-11-27 08:45,TAMIL NADU NEWS,Madras High Court demands urgent report on lorry driver's death,55.29090909090909,True,text_card,reel_text,18023039552950390,122129905473424069,True,True,63,0,0,0,,77,0
 2026-11-27 10:15,INDIAN CINEMA,Dhanush's Operation Mole sees weekday collection drop after Rs 62 crore,80.37717391304348,True,text_card,reel_text,17968141773234973,122129916273424069,True,True,122,0,0,0,,145,0
-2026-11-27 12:45,BREAKING NEWS,Hrithik Roshan recalls Rajinikanth taking blame for his film mistakes,96.223,True,text_card,reel_text,18113586704612292,122129930043424069,True,True,227,0,0,0,,326,0
-2026-11-27 13:55,INDIA NEWS,CBI arrests fugitive in UP for illegally sending people to China,67.53662790697675,True,text_card,reel_text,18027028016931081,122129942487424069,True,True,49,0,0,0,,64,0
-2026-11-27 14:46,BREAKING NEWS,"DMK, YSRCP, and NCP show growing support for union government's delimitation bill",97.73961038961039,True,text_card,reel_text,17960743638267090,122129958609424069,True,True,1,0,0,0,,6,0
-2026-11-27 15:46,INDIAN CINEMA,Conman Sukesh Chandrashekhar sends legal notice to block upcoming Netflix documentary,80.249,True,text_card,reel_text,17998302657020590,122129970969424069,True,True,,,,,,,
-2026-11-27 16:26,INDIA NEWS,"Shiv Sena issues whip, directing",85.72662337662338,True,text_card,reel_text,17923421745467133,122129978595424069,True,True,,,,,,,
+2026-11-27 12:45,BREAKING NEWS,Hrithik Roshan recalls Rajinikanth taking blame for his film mistakes,96.223,True,text_card,reel_text,18113586704612292,122129930043424069,True,True,273,1,0,0,,374,1
+2026-11-27 13:55,INDIA NEWS,CBI arrests fugitive in UP for illegally sending people to China,67.53662790697675,True,text_card,reel_text,18027028016931081,122129942487424069,True,True,80,0,0,0,,95,0
+2026-11-27 14:46,BREAKING NEWS,"DMK, YSRCP, and NCP show growing support for union government's delimitation bill",97.73961038961039,True,text_card,reel_text,17960743638267090,122129958609424069,True,True,64,0,0,0,,106,0
+2026-11-27 15:46,INDIAN CINEMA,Conman Sukesh Chandrashekhar sends legal notice to block upcoming Netflix documentary,80.249,True,text_card,reel_text,17998302657020590,122129970969424069,True,True,24,0,0,0,,34,0
+2026-11-27 16:26,INDIA NEWS,"Shiv Sena issues whip, directing",85.72662337662338,True,text_card,reel_text,17923421745467133,122129978595424069,True,True,1,0,0,0,,2,0
