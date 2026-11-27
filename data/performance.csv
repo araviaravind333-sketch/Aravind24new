@@ -811,7 +811,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-20 17:26,INDIAN CINEMA,"EXCLUSIVE: Sanjay Kapoor, Prashant Narayanan",67.35108695652174,True,text_card,reel_text,18113987564161043,122128838937424069,True,True,80,0,0,0,,94,0
 2026-11-20 17:59,INDIA NEWS,Rahul Gandhi says India is a side player in global affairs during University,64.21881720430108,True,text_card,reel_text,18419548657092820,122128843917424069,True,True,111,0,0,0,,141,0
 2026-11-21 02:26,INDIAN CINEMA,Veteran actor Larry Poindexter dies at 66 after car hits him,70.40108695652174,True,text_card,reel_text,18123607363975336,122128902459424069,True,True,119,0,0,0,,149,0
-2026-11-21 02:30,BREAKING NEWS,Builders challenge 1km construction ban around Chennai's Pallikaranai marshland,96,True,text_card,reel_text,18020960594958487,122128902693424069,True,True,72,0,0,0,,103,0
+2026-11-21 02:30,BREAKING NEWS,Builders challenge 1km construction ban around Chennai's Pallikaranai marshland,96,True,text_card,reel_text,18020960594958487,122128902693424069,True,True,73,0,0,0,,103,0
 2026-11-21 05:56,INDIA NEWS,High Court refuses to stay corruption probe against IAS officer,67.26236559139785,True,text_card,reel_text,18131616925645949,122128922619424069,True,True,39,0,0,0,,44,1
 2026-11-21 07:07,INDIA NEWS,PM Modi claims cultural ties can guarantee global peace at summit,67.2247311827957,True,text_card,reel_text,18064783598795772,122128928649424069,True,True,103,0,0,0,,115,0
 2026-11-21 07:26,INDIA NEWS,"Cyclone 'Akvan' weakens into depression; no major damage, flood threat | LIVE",74.2247311827957,True,text_card,reel_text,18121955587785905,122128930371424069,True,True,88,0,0,0,,98,0
@@ -891,20 +891,20 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-26 14:28,INDIA NEWS,Gunmen shoot four men dead inside a Haryana eatery.,68.61951219512196,True,text_card,reel_text,18102768308427413,122129783061424069,True,True,106,0,0,0,,137,0
 2026-11-26 14:32,INDIAN CINEMA,Naga Chaitanya starrer ‘Vrushakarma’ trailer gets positive response from fans,78.99081632653062,True,text_card,reel_text,18123820681992358,122129783775424069,True,True,110,1,0,0,,130,1
 2026-11-26 16:26,TAMIL NADU NEWS,AIADMK announces protests across Tamil Nadu against TVK government on December 2,79.03,True,text_card,reel_text,18122338472036554,122129803311424069,True,True,101,1,1,0,,129,2
-2026-11-26 18:45,BREAKING NEWS,Meet Vardhman Jain: The Entrepreneur Behind Rs 206 Crore Gold Donation To Tirupati,90.64512195121951,True,text_card,reel_text,18644840641057227,122129826945424069,True,True,46,0,0,0,,64,0
+2026-11-26 18:45,BREAKING NEWS,Meet Vardhman Jain: The Entrepreneur Behind Rs 206 Crore Gold Donation To Tirupati,90.64512195121951,True,text_card,reel_text,18644840641057227,122129826945424069,True,True,46,0,0,0,,65,0
 2026-11-26 19:45,BREAKING NEWS,India's Gold Comes Home: RBI Now Stores Record Reserves,91.65487804878049,True,text_card,reel_text,18150259318565462,122129833311424069,True,True,61,0,0,0,,74,0
 2026-11-26 20:45,BREAKING NEWS,Parliament convenes special session on delimitation bill and women's reservation ahead,123.64876543209877,True,text_card,reel_text,18110455202316551,122129838657424069,True,True,45,0,0,0,,53,0
 2026-11-27 03:45,BREAKING NEWS,Priyanka Chopra pays tribute to martyrs of 26/11 terror attack in Mumbai,99.468,True,text_card,reel_text,18487749775114385,122129881821424069,True,True,143,0,0,0,,180,0
 2026-11-27 04:55,INDIA NEWS,"Couple gets Rs 63,000 after 4-hour train delay causes missed flight",73.46860465116279,True,text_card,reel_text,18114127931526240,122129886993424069,True,True,102,0,0,0,,123,0
-2026-11-27 06:35,INDIA NEWS,Congress to mark Constitution Day with nationwide marches against 'vote theft',67.46860465116279,True,text_card,reel_text,18109919528287473,122129895405424069,True,True,47,1,0,0,,66,1
-2026-11-27 07:45,TAMIL NADU NEWS,"DVAC arrests TN minister's aide in Rs 1,020-crore tender scam",88.29090909090908,True,text_card,reel_text,18232011493338243,122129900973424069,True,True,54,0,0,0,,75,0
-2026-11-27 08:45,TAMIL NADU NEWS,Madras High Court demands urgent report on lorry driver's death,55.29090909090909,True,text_card,reel_text,18023039552950390,122129905473424069,True,True,71,0,0,0,,92,0
-2026-11-27 10:15,INDIAN CINEMA,Dhanush's Operation Mole sees weekday collection drop after Rs 62 crore,80.37717391304348,True,text_card,reel_text,17968141773234973,122129916273424069,True,True,124,0,0,0,,153,0
-2026-11-27 12:45,BREAKING NEWS,Hrithik Roshan recalls Rajinikanth taking blame for his film mistakes,96.223,True,text_card,reel_text,18113586704612292,122129930043424069,True,True,297,1,0,0,,405,1
-2026-11-27 13:55,INDIA NEWS,CBI arrests fugitive in UP for illegally sending people to China,67.53662790697675,True,text_card,reel_text,18027028016931081,122129942487424069,True,True,86,0,0,0,,104,0
-2026-11-27 14:46,BREAKING NEWS,"DMK, YSRCP, and NCP show growing support for union government's delimitation bill",97.73961038961039,True,text_card,reel_text,17960743638267090,122129958609424069,True,True,102,0,0,0,,149,0
-2026-11-27 15:46,INDIAN CINEMA,Conman Sukesh Chandrashekhar sends legal notice to block upcoming Netflix documentary,80.249,True,text_card,reel_text,17998302657020590,122129970969424069,True,True,34,0,0,0,,46,0
-2026-11-27 16:26,INDIA NEWS,"Shiv Sena issues whip, directing",85.72662337662338,True,text_card,reel_text,17923421745467133,122129978595424069,True,True,13,0,0,0,,21,0
-2026-11-27 18:46,INDIA NEWS,Discussions on increasing Lok Sabha seats by 50 percent before census and delimitation,88.66753246753247,True,text_card,reel_text,18100155287145136,122129996061424069,True,True,6,0,0,0,,10,0
-2026-11-27 19:46,BREAKING NEWS,Police arrest Kallakurichi TVK MLA for harassing IAS officer,92.67105263157895,True,text_card,reel_text,18115584794185735,122130002967424069,True,True,37,1,0,0,,69,1
-2026-11-27 20:46,INDIA NEWS,High Court rejects plea to stop crucial Tata Sons board meeting,67.67105263157895,True,text_card,reel_text,18121824803056747,122130010857424069,True,True,2,0,0,0,,3,0
+2026-11-27 06:35,INDIA NEWS,Congress to mark Constitution Day with nationwide marches against 'vote theft',67.46860465116279,True,text_card,reel_text,18109919528287473,122129895405424069,True,True,62,1,0,0,,84,1
+2026-11-27 07:45,TAMIL NADU NEWS,"DVAC arrests TN minister's aide in Rs 1,020-crore tender scam",88.29090909090908,True,text_card,reel_text,18232011493338243,122129900973424069,True,True,62,0,0,0,,83,0
+2026-11-27 08:45,TAMIL NADU NEWS,Madras High Court demands urgent report on lorry driver's death,55.29090909090909,True,text_card,reel_text,18023039552950390,122129905473424069,True,True,76,0,0,0,,96,0
+2026-11-27 10:15,INDIAN CINEMA,Dhanush's Operation Mole sees weekday collection drop after Rs 62 crore,80.37717391304348,True,text_card,reel_text,17968141773234973,122129916273424069,True,True,128,0,0,0,,163,0
+2026-11-27 12:45,BREAKING NEWS,Hrithik Roshan recalls Rajinikanth taking blame for his film mistakes,96.223,True,text_card,reel_text,18113586704612292,122129930043424069,True,True,331,1,0,0,,448,1
+2026-11-27 13:55,INDIA NEWS,CBI arrests fugitive in UP for illegally sending people to China,67.53662790697675,True,text_card,reel_text,18027028016931081,122129942487424069,True,True,95,0,0,0,,112,0
+2026-11-27 14:46,BREAKING NEWS,"DMK, YSRCP, and NCP show growing support for union government's delimitation bill",97.73961038961039,True,text_card,reel_text,17960743638267090,122129958609424069,True,True,103,0,0,0,,149,0
+2026-11-27 15:46,INDIAN CINEMA,Conman Sukesh Chandrashekhar sends legal notice to block upcoming Netflix documentary,80.249,True,text_card,reel_text,17998302657020590,122129970969424069,True,True,41,0,0,0,,53,0
+2026-11-27 16:26,INDIA NEWS,"Shiv Sena issues whip, directing",85.72662337662338,True,text_card,reel_text,17923421745467133,122129978595424069,True,True,22,0,0,0,,32,0
+2026-11-27 18:46,INDIA NEWS,Discussions on increasing Lok Sabha seats by 50 percent before census and delimitation,88.66753246753247,True,text_card,reel_text,18100155287145136,122129996061424069,True,True,16,0,0,0,,19,0
+2026-11-27 19:46,BREAKING NEWS,Police arrest Kallakurichi TVK MLA for harassing IAS officer,92.67105263157895,True,text_card,reel_text,18115584794185735,122130002967424069,True,True,71,1,0,0,,100,1
+2026-11-27 20:46,INDIA NEWS,High Court rejects plea to stop crucial Tata Sons board meeting,67.67105263157895,True,text_card,reel_text,18121824803056747,122130010857424069,True,True,35,0,0,0,,51,0
