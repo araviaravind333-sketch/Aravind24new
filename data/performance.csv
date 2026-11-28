@@ -542,7 +542,7 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-01 12:06,BREAKING NEWS,Delhi to Agra bullet train cuts travel time to 59 minutes.,92,False,full_bleed,,18485155591115348,122125581363424069,True,True,5,0,0,0,0,,0
 2026-11-01 13:26,BREAKING NEWS,Six Indians stranded near remote Nepal lake await urgent helicopter rescue,99,True,text_card,reel_text,18110190926210193,122125589901424069,True,True,104,0,0,0,,122,1
 2026-11-01 14:46,INDIA NEWS,Telangana CM compares PM Modi to Ravana in sharp political attack,71,False,full_bleed,,17876978778584718,122125598133424069,True,True,7,0,0,0,0,,0
-2026-11-01 17:26,INDIAN CINEMA,Leaked videos reveal actor Nani plays chef and outlaw,74,True,text_card,reel_text,18116449784329380,122125614705424069,True,True,686,4,0,0,,1057,5
+2026-11-01 17:26,INDIAN CINEMA,Leaked videos reveal actor Nani plays chef and outlaw,74,True,text_card,reel_text,18116449784329380,122125614705424069,True,True,686,4,0,0,,1059,5
 2026-11-01 18:26,INDIA NEWS,Mamata Banerjee slams central exercise as special relief for the BJP,68,True,text_card,reel_text,17918631369464596,122125622475424069,True,True,68,0,0,0,,84,0
 2026-11-01 20:06,INDIA NEWS,Andhra civic polls spark 275 cases as Jagan demands repoll over clashes,76,True,text_card,reel_text,18132190736306383,122125633389424069,True,True,23,0,0,0,,36,0
 2026-11-01 20:26,INDIAN CINEMA,Ramayana pre-sales cross Rs 36 crore but lag behind Yash's Toxic.,85,True,text_card,reel_text,18218987716353619,122125636533424069,True,True,123,0,0,0,,150,0
@@ -900,17 +900,17 @@ timestamp_ist,category,headline,score,is_reel,template,reel_template,ig_id,fb_id
 2026-11-27 07:45,TAMIL NADU NEWS,"DVAC arrests TN minister's aide in Rs 1,020-crore tender scam",88.29090909090908,True,text_card,reel_text,18232011493338243,122129900973424069,True,True,90,0,0,0,,116,0
 2026-11-27 08:45,TAMIL NADU NEWS,Madras High Court demands urgent report on lorry driver's death,55.29090909090909,True,text_card,reel_text,18023039552950390,122129905473424069,True,True,81,0,0,0,,102,0
 2026-11-27 10:15,INDIAN CINEMA,Dhanush's Operation Mole sees weekday collection drop after Rs 62 crore,80.37717391304348,True,text_card,reel_text,17968141773234973,122129916273424069,True,True,130,0,0,0,,163,0
-2026-11-27 12:45,BREAKING NEWS,Hrithik Roshan recalls Rajinikanth taking blame for his film mistakes,96.223,True,text_card,reel_text,18113586704612292,122129930043424069,True,True,385,2,0,0,,515,3
+2026-11-27 12:45,BREAKING NEWS,Hrithik Roshan recalls Rajinikanth taking blame for his film mistakes,96.223,True,text_card,reel_text,18113586704612292,122129930043424069,True,True,390,2,0,0,,521,3
 2026-11-27 13:55,INDIA NEWS,CBI arrests fugitive in UP for illegally sending people to China,67.53662790697675,True,text_card,reel_text,18027028016931081,122129942487424069,True,True,97,0,0,0,,113,0
 2026-11-27 14:46,BREAKING NEWS,"DMK, YSRCP, and NCP show growing support for union government's delimitation bill",97.73961038961039,True,text_card,reel_text,17960743638267090,122129958609424069,True,True,103,0,0,0,,149,0
 2026-11-27 15:46,INDIAN CINEMA,Conman Sukesh Chandrashekhar sends legal notice to block upcoming Netflix documentary,80.249,True,text_card,reel_text,17998302657020590,122129970969424069,True,True,52,0,0,0,,66,0
 2026-11-27 16:26,INDIA NEWS,"Shiv Sena issues whip, directing",85.72662337662338,True,text_card,reel_text,17923421745467133,122129978595424069,True,True,105,0,0,0,,140,0
-2026-11-27 18:46,INDIA NEWS,Discussions on increasing Lok Sabha seats by 50 percent before census and delimitation,88.66753246753247,True,text_card,reel_text,18100155287145136,122129996061424069,True,True,57,0,0,0,,72,0
-2026-11-27 19:46,BREAKING NEWS,Police arrest Kallakurichi TVK MLA for harassing IAS officer,92.67105263157895,True,text_card,reel_text,18115584794185735,122130002967424069,True,True,95,1,0,0,,124,1
-2026-11-27 20:46,INDIA NEWS,High Court rejects plea to stop crucial Tata Sons board meeting,67.67105263157895,True,text_card,reel_text,18121824803056747,122130010857424069,True,True,80,0,0,0,,90,0
-2026-11-28 03:56,INDIA NEWS,Shah Rukh Khan sends defamation notice to influencer over viral reel,67.59024390243903,True,text_card,reel_text,18085126790360826,122130059577424069,True,True,1147,4,0,0,,1801,4
-2026-11-28 05:36,INDIAN CINEMA,PVR INOX wins 100 crore bidding war for Golmaal 5 rights,81.468,True,text_card,reel_text,18110573371977399,122130072729424069,True,True,87,0,0,0,,101,0
-2026-11-28 06:36,INDIA NEWS,Parliament reconvenes on November 30 to start major delimitation move,76.72564102564102,True,text_card,reel_text,18111729278260673,122130083955424069,True,True,19,0,0,0,,26,0
-2026-11-28 07:47,INDIA NEWS,Delimitation threat to South brings INDIA bloc leaders together today,71.15131578947368,True,text_card,reel_text,18291473116290252,122130090573424069,True,True,67,0,0,0,,82,0
-2026-11-28 08:46,INDIA NEWS,Union cabinet approves delimitation changes with 50% seat increase and 25-year freeze,89.15131578947368,True,text_card,reel_text,18203242162386738,122130098757424069,True,True,4,0,0,0,,23,0
-2026-11-28 10:16,TAMIL NADU NEWS,Private school scam sparks plea for CBI probe in Madras High Court,80.29090909090908,True,text_card,reel_text,18118797044334842,122130108213424069,True,True,,,,,,,
+2026-11-27 18:46,INDIA NEWS,Discussions on increasing Lok Sabha seats by 50 percent before census and delimitation,88.66753246753247,True,text_card,reel_text,18100155287145136,122129996061424069,True,True,59,0,0,0,,74,0
+2026-11-27 19:46,BREAKING NEWS,Police arrest Kallakurichi TVK MLA for harassing IAS officer,92.67105263157895,True,text_card,reel_text,18115584794185735,122130002967424069,True,True,98,1,0,0,,129,1
+2026-11-27 20:46,INDIA NEWS,High Court rejects plea to stop crucial Tata Sons board meeting,67.67105263157895,True,text_card,reel_text,18121824803056747,122130010857424069,True,True,84,0,0,0,,94,0
+2026-11-28 03:56,INDIA NEWS,Shah Rukh Khan sends defamation notice to influencer over viral reel,67.59024390243903,True,text_card,reel_text,18085126790360826,122130059577424069,True,True,1168,5,0,0,,1816,5
+2026-11-28 05:36,INDIAN CINEMA,PVR INOX wins 100 crore bidding war for Golmaal 5 rights,81.468,True,text_card,reel_text,18110573371977399,122130072729424069,True,True,105,0,0,0,,118,0
+2026-11-28 06:36,INDIA NEWS,Parliament reconvenes on November 30 to start major delimitation move,76.72564102564102,True,text_card,reel_text,18111729278260673,122130083955424069,True,True,25,0,0,0,,31,0
+2026-11-28 07:47,INDIA NEWS,Delimitation threat to South brings INDIA bloc leaders together today,71.15131578947368,True,text_card,reel_text,18291473116290252,122130090573424069,True,True,75,0,0,0,,89,0
+2026-11-28 08:46,INDIA NEWS,Union cabinet approves delimitation changes with 50% seat increase and 25-year freeze,89.15131578947368,True,text_card,reel_text,18203242162386738,122130098757424069,True,True,48,0,0,0,,63,0
+2026-11-28 10:16,TAMIL NADU NEWS,Private school scam sparks plea for CBI probe in Madras High Court,80.29090909090908,True,text_card,reel_text,18118797044334842,122130108213424069,True,True,1,0,0,0,,1,0
